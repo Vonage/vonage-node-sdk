@@ -1,4 +1,5 @@
 var nexmo = require('./lib/nexmo');
+nexmo.initialize(<KEY>,<SECRET>);
 nexmo.sendTextMessage(<FROM_NUMBER>,<TO_NUMBER>,'testing');
 nexmo.sendMessage({from:<FROM_NUMBER>,to:<TO_NUMBER>,text:'testing'},consolelog);
 function consolelog (messageResponse) {

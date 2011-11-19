@@ -11,3 +11,11 @@ nexmo.sendTextMessage(fromnumber,tonumber,message);
 
 nexmo.sendMessage(jsondata ,callback); 
 
+nexmo.checkBalance(callback);
+nexmo.getPricing('US',callback);
+nexmo.getNumbers(callback);
+nexmo.searchNumbers('US',callback);
+nexmo.searchNumbers('US',303,callback);
+nexmo.changePassword(<NEW_PASSWORD>,callback);
+nexmo.changeMoCallbackUrl(<NEW_CALLBACK_URL>,callback);
+nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
