@@ -1,0 +1,13 @@
+A nodejs wrapper for nexmo API to send SMS
+
+usage install lib/nexmo.js in your lib. coming soon to npm
+
+var nexmo = require('./lib/nexmo');
+nexmo.initialize(<KEY>,<SECRET>);
+//A simple api to send text message
+nexmo.sendTextMessage(fromnumber,tonumber,message);
+
+// This API takes json as a parameter and send the message. Look for valid attributes  in data json here http://www.nexmo.com/documentation/#txt
+
+nexmo.sendMessage(jsondata ,callback); 
+
