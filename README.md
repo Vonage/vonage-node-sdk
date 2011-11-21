@@ -14,11 +14,14 @@ Usage :
 
 var nexmo = require('./lib/nexmo');
 
-nexmo.initialize(<KEY>,<SECRET>,<API_PROTOCOL>,<DEBUG>);
+nexmo.initialize(KEY,SECRET,API_PROTOCOL,DEBUG);
 
 KEY - API Key from Nexmo
+
 SECRET - API SECRET from Nexmo
+
 API_PROTOCOL - http or https
+
 DEBUG - set this to true to debug library calls
 
 List of API's supported by the library.
