@@ -1,4 +1,4 @@
-A nodejs wrapper for nexmo API to send SMS
+A nodejs wrapper for nexmo (http://nexmo.com/) API to send SMS
 
 Installation Instructions : 
 ===========================
@@ -75,6 +75,23 @@ pattern is optional, pass numbers to match in the search
 
 	nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
 
+
+Callback
+========
+
+Callback from all API calls returns 2 parameters - error and a json object.
+
+An example callback function :
+
+	function consolelog (err,messageResponse) {
+           if (err) {
+                console.log(err);
+           } else {
+                console.dir(messageResponse);
+           }
+	}
+
+Refer here http://nexmo.com/documentation/ to get the schema for the returned message response object.
 
 The MIT License (MIT)
 =====================
