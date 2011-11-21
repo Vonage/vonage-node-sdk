@@ -24,53 +24,55 @@ DEBUG - set this to true to debug library calls
 List of API's supported by the library.
 =======================================
 
-*Send a text message*
+###Send a text message
 
-nexmo.sendTextMessage(fromnumber,tonumber,message, callback);
+	nexmo.sendTextMessage(fromnumber,tonumber,message, callback);
 
-*Send a Binary Message*
+###Send a Binary Message
 
-nexmo.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
+	nexmo.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
 
 body - Hex encoded binary data
 udh - Hex encoded udh
 
-*Send a WAP Push Message*
+###Send a WAP Push Message
 
-nexmo.sendWapPushMessage(fromnumber,tonumber,title,url,validity,callback);
+	nexmo.sendWapPushMessage(fromnumber,tonumber,title,url,validity,callback);
 
 validity is optional if given should be in milliseconds.
 
 Other API's supported in the library are :
 
-*Check Account Balance *
-nexmo.checkBalance(callback);
+###Check Account Balance 
+	nexmo.checkBalance(callback);
 
-*Get Pricing for sending message to a country.*
+###Get Pricing for sending message to a country.
 
-nexmo.getPricing(countryCode,callback);
+	nexmo.getPricing(countryCode,callback);
+
 countryCode - 2 letter ISO Country Code
 
-*Get all numbers associated to the account.*
+###Get all numbers associated to the account.
 
-nexmo.getNumbers(callback);
+	nexmo.getNumbers(callback);
 
-*Search for MSISDN's available to purchase.*
+###Search for MSISDN's available to purchase.
 
-nexmo.searchNumbers(countryCode,pattern,callback);
+	nexmo.searchNumbers(countryCode,pattern,callback);
 
 pattern is optional, pass numbers to match in the search
 
-*Account Management API's*
+###Change Password (API Secret)
 
-*Change Password (API Secret)*
-nexmo.changePassword(<NEW_PASSWORD>,callback);
+	nexmo.changePassword(<NEW_PASSWORD>,callback);
 
-*Change Callback URL associated to the account*
-nexmo.changeMoCallbackUrl(<NEW_CALLBACK_URL>,callback);
+###Change Callback URL associated to the account
 
-*Change Delivery Receipt URL associated to the account*
-nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
+	nexmo.changeMoCallbackUrl(<NEW_CALLBACK_URL>,callback);
+
+###Change Delivery Receipt URL associated to the account
+
+	nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
 
 
 The MIT License (MIT)
