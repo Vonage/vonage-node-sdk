@@ -41,8 +41,6 @@ udh - Hex encoded udh
 
 validity is optional if given should be in milliseconds.
 
-Other API's supported in the library are :
-
 ###Check Account Balance 
 	nexmo.checkBalance(callback);
 
