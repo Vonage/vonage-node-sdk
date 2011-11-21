@@ -1,8 +1,17 @@
 A nodejs wrapper for nexmo API to send SMS
 
-usage download and install lib/nexmo.js in your lib or use "npm easynexmo"
+Installation Instructions : 
+
+Download and Install lib/nexmo.js in your lib 
+
+or 
+
+use "npm install easynexmo -g"
+
+Usage :
 
 var nexmo = require('./lib/nexmo');
+
 nexmo.initialize(<KEY>,<SECRET>,<API_PROTOCOL>,<DEBUG>);
 
 KEY - API Key from Nexmo
