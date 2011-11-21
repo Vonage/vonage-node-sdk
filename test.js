@@ -1,9 +1,13 @@
 var nexmo = require('./lib/nexmo');
 nexmo.initialize(<KEY>,<SECRET>);
-nexmo.sendTextMessage(<FROM_NUMBER>,<TO_NUMBER>,'testing');
+nexmo.sendTextMessage(<FROM_NUMBER>,<TO_NUMBER>,'testing',consolelog);
 nexmo.sendMessage({from:<FROM_NUMBER>,to:<TO_NUMBER>,text:'testing'},consolelog);
-function consolelog (messageResponse) {
-        console.dir(messageResponse);
+function consolelog (err,messageResponse) {
+	if (err) {
+                console.log(err);
+        } else {
+                console.dir(messageResponse);
+        }
 }
 nexmo.checkBalance(consolelog);
 nexmo.getPricing('US',consolelog);

@@ -1,11 +1,17 @@
 A nodejs wrapper for nexmo API to send SMS
 
-usage install lib/nexmo.js in your lib. coming soon to npm
+usage download and install lib/nexmo.js in your lib or use "npm easynexmo"
 
 var nexmo = require('./lib/nexmo');
-nexmo.initialize(<KEY>,<SECRET>);
+nexmo.initialize(<KEY>,<SECRET>,<API_PROTOCOL>,<DEBUG>);
+
+KEY - API Key from Nexmo
+SECRET - API SECRET from Nexmo
+API_PROTOCOL - http or https
+DEBUG - set this to true to debug library calls
+
 //A simple api to send text message
-nexmo.sendTextMessage(fromnumber,tonumber,message);
+nexmo.sendTextMessage(fromnumber,tonumber,message, callback);
 
 // This API takes json as a parameter and send the message. Look for valid attributes  in data json here http://www.nexmo.com/documentation/#txt
 
@@ -19,3 +25,14 @@ nexmo.searchNumbers('US',303,callback);
 nexmo.changePassword(<NEW_PASSWORD>,callback);
 nexmo.changeMoCallbackUrl(<NEW_CALLBACK_URL>,callback);
 nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
+
+
+The MIT License (MIT)
+
+Copyright (c) 2011 Prabhu Velayutham
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
