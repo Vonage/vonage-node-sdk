@@ -1,6 +1,7 @@
 A nodejs wrapper for nexmo API to send SMS
 
 Installation Instructions : 
+===========================
 
 Download and Install lib/nexmo.js in your lib 
 
@@ -9,6 +10,7 @@ or
 use "npm install easynexmo -g"
 
 Usage :
+=======
 
 var nexmo = require('./lib/nexmo');
 
@@ -19,24 +21,60 @@ SECRET - API SECRET from Nexmo
 API_PROTOCOL - http or https
 DEBUG - set this to true to debug library calls
 
-//A simple api to send text message
+List of API's supported by the library.
+=======================================
+
+*Send a text message*
+
 nexmo.sendTextMessage(fromnumber,tonumber,message, callback);
 
-// This API takes json as a parameter and send the message. Look for valid attributes  in data json here http://www.nexmo.com/documentation/#txt
+*Send a Binary Message*
 
-nexmo.sendMessage(jsondata ,callback); 
+nexmo.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
 
+body - Hex encoded binary data
+udh - Hex encoded udh
+
+*Send a WAP Push Message*
+
+nexmo.sendWapPushMessage(fromnumber,tonumber,title,url,validity,callback);
+
+validity is optional if given should be in milliseconds.
+
+Other API's supported in the library are :
+
+*Check Account Balance *
 nexmo.checkBalance(callback);
-nexmo.getPricing('US',callback);
+
+*Get Pricing for sending message to a country.*
+
+nexmo.getPricing(countryCode,callback);
+countryCode - 2 letter ISO Country Code
+
+*Get all numbers associated to the account.*
+
 nexmo.getNumbers(callback);
-nexmo.searchNumbers('US',callback);
-nexmo.searchNumbers('US',303,callback);
+
+*Search for MSISDN's available to purchase.*
+
+nexmo.searchNumbers(countryCode,pattern,callback);
+
+pattern is optional, pass numbers to match in the search
+
+*Account Management API's*
+
+*Change Password (API Secret)*
 nexmo.changePassword(<NEW_PASSWORD>,callback);
+
+*Change Callback URL associated to the account*
 nexmo.changeMoCallbackUrl(<NEW_CALLBACK_URL>,callback);
+
+*Change Delivery Receipt URL associated to the account*
 nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
 
 
 The MIT License (MIT)
+=====================
 
 Copyright (c) 2011 Prabhu Velayutham
 
