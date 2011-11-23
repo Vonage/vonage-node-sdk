@@ -1,7 +1,7 @@
 {
     "name" : "easynexmo",
     "author" : "Prabhu Velayutham",
-    "version" : "0.3.0",
+    "version" : "0.3.1",
     "keywords" : ["sms", "nexmo"],
     "homepage" : "https://github.com/pvela/nexmo",
     "repository" : {"type": "git", "url": "git://github.com/pvela/nexmo.git"},
