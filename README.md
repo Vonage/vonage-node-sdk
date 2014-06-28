@@ -30,7 +30,7 @@ List of API's supported by the library.
 
 ###Send a text message
 
-	nexmo.sendTextMessage(fromnumber,tonumber,message, callback);
+	nexmo.sendTextMessage(sender,recipient,message,opts,callback)
 
 ###Send a Binary Message
 
