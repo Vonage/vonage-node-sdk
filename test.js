@@ -19,3 +19,4 @@ nexmo.changePassword('nexmoapi',consolelog);
 nexmo.sendTTSMessage = function(<TO_NUMBER>,'testing',{},consolelog);
 nexmo.sendTTSPromptWithCapture(<TO_NUMBER>,'testing',<MAX_DIGITS>,'Goodbye',{},consolelog);
 nexmo.sendTTSPromptWithConfirm(<TO_NUMBER>,'Enter your pin',<MAX_DIGITS>,'<PIN_CODE>','Goodbye','Wrong pin',{},consolelog);
+nexmo.call(<TO_NUMBER>,<ANSWER_URL>,{},consolelog);
