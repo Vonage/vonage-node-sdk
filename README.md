@@ -76,6 +76,22 @@ pattern is optional, pass numbers to match in the search
 
 	nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
 
+###Send TTS Message
+	
+	nexmo.sendTTSMessage = function(<TO_NUMBER>,message,options,callback);
+
+###Send TTS Prompt With Capture	
+
+	nexmo.sendTTSPromptWithCapture(<TO_NUMBER>,message,<MAX_DIGITS>, <BYE_TEXT>,options,callback);
+
+###Send TTS Prompt With Confirm
+
+	nexmo.sendTTSPromptWithConfirm(<TO_NUMBER>, message ,<MAX_DIGITS>,'<PIN_CODE>',<BYE_TEXT>,<FAILED_TEXT>,options,callback);
+
+###Make a voice call
+
+	nexmo.call(<TO_NUMBER>,<ANSWER_URL>,options,callback);
+
 
 Callback
 ========
