@@ -62,7 +62,7 @@ countryCode - 2 letter ISO Country Code
 
 	nexmo.searchNumbers(countryCode,pattern,callback);
 
-pattern is optional, pass numbers to match in the search
+pattern is optional, pass numbers to match in the search (eg. 1408) or a dictionary of parameters per [documentation](https://docs.nexmo.com/index.php/developer-api/number-search)
 
 ###Change Password (API Secret)
 
