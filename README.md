@@ -64,6 +64,20 @@ countryCode - 2 letter ISO Country Code
 
 pattern is optional, pass numbers to match in the search (eg. 1408) or a dictionary of parameters per [documentation](https://docs.nexmo.com/index.php/developer-api/number-search)
 
+###Purchase number
+
+	nexmo.buyNumber(countryCode, msisdn, callback);
+
+###Cancel Number
+
+	nexmo.cancelNumber(countryCode, msisdn, callback);
+
+###Update Number
+
+	nexmo.updateNumber(countryCode, msisdn, params, callback)
+
+params is a dictionary of parameters per [documentation](https://docs.nexmo.com/index.php/developer-api/number-update)
+
 ###Change Password (API Secret)
 
 	nexmo.changePassword(<NEW_PASSWORD>,callback);
