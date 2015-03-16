@@ -1,6 +1,8 @@
 [![build status](https://secure.travis-ci.org/pvela/nexmo.png)](http://travis-ci.org/pvela/nexmo)
 A nodejs wrapper for nexmo (http://nexmo.com/) API to send SMS
 
+For full API documentation refer to https://docs.nexmo.com/
+
 Installation Instructions : 
 ===========================
 
@@ -106,6 +108,25 @@ params is a dictionary of parameters per [documentation](https://docs.nexmo.com/
 
 	nexmo.call(<TO_NUMBER>,<ANSWER_URL>,options,callback);
 
+###Submit a Verification Request
+
+	nexmo.verifyNumber({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},callback);
+For more information check the documentation at https://docs.nexmo.com/index.php/verify/verify
+
+###Validate the response of a Verification Request
+
+	nexmo.checkVerifyRequest({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,code:<CODE_TO_CHECK>},callback);
+For more information check the documentation at https://docs.nexmo.com/index.php/verify/check
+
+###Search one or more Verification Request
+
+	nexmo.searchVerifyRequest(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
+For more information check the documentation at https://docs.nexmo.com/index.php/verify/search
+
+###Number Insight
+
+	nexmo.numberInsight({number:'<NUMBER_TO_GET_INSIGHT>',callback:<URL_TO_SUBMIT_THE_RESPONSE>},callback);
+For more information check the documentation at https://docs.nexmo.com/index.php/number-insight
 
 Callback
 ========
@@ -127,7 +148,7 @@ Refer here http://nexmo.com/documentation/ to get the schema for the returned me
 The MIT License (MIT)
 =====================
 
-Copyright (c) 2011 Prabhu Velayutham
+Copyright (c) 2015 Prabhu Velayutham
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
