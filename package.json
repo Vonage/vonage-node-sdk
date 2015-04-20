@@ -1,14 +1,23 @@
 {
-    "name": "easynexmo",
-    "author": "Prabhu Velayutham",
-    "version": "0.6.2",
-    "main": "lib/nexmo",
-    "keywords": ["sms", "nexmo"],
-    "homepage": "https://github.com/pvela/nexmo",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/pvela/nexmo.git"
-    },
-    "description": "A nodejs wrapper for nexmo API to send SMS",
-    "contributors": ["pvela", "akuzi", "bpilot", "justinfreitag","ecwyne"]
+  "name": "easynexmo",
+  "author": "Prabhu Velayutham",
+  "version": "0.6.3",
+  "main": "lib/nexmo",
+  "keywords": [
+    "sms",
+    "nexmo"
+  ],
+  "homepage": "https://github.com/pvela/nexmo",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pvela/nexmo.git"
+  },
+  "description": "A nodejs wrapper for nexmo API to send SMS",
+  "contributors": [
+    "pvela",
+    "akuzi",
+    "bpilot",
+    "justinfreitag",
+    "ecwyne"
+  ]
 }
