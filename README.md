@@ -15,7 +15,7 @@ use "npm install easynexmo -g"
 Usage :
 =======
 
-var nexmo = require('./lib/nexmo');
+var nexmo = require('easynexmo');
 
 nexmo.initialize(KEY,SECRET,API_PROTOCOL,DEBUG);
 
