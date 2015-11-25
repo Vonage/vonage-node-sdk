@@ -3,27 +3,29 @@ A nodejs wrapper for nexmo (http://nexmo.com/) API to send SMS
 
 For full API documentation refer to https://docs.nexmo.com/
 
-Installation Instructions : 
+Installation Instructions :
 ===========================
 
-Download and Install lib/nexmo.js in your lib 
+Download and Install lib/nexmo.js in your lib
 
-or 
+or use
 
-use "npm install easynexmo -g"
+```
+npm install easynexmo
+```
 
 Usage :
 =======
 
+```js
 var nexmo = require('easynexmo');
 
-nexmo.initialize(KEY,SECRET,API_PROTOCOL,DEBUG);
+nexmo.initialize(KEY, SECRET, DEBUG);
+```
 
 KEY - API Key from Nexmo
 
 SECRET - API SECRET from Nexmo
-
-API_PROTOCOL - http or https
 
 DEBUG - set this to true to debug library calls
 
@@ -47,7 +49,7 @@ udh - Hex encoded udh
 
 validity is optional if given should be in milliseconds.
 
-###Check Account Balance 
+###Check Account Balance
 	nexmo.checkBalance(callback);
 
 ###Get Pricing for sending message to a country.
@@ -93,10 +95,10 @@ params is a dictionary of parameters per [documentation](https://docs.nexmo.com/
 	nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
 
 ###Send TTS Message
-	
+
 	nexmo.sendTTSMessage = function(<TO_NUMBER>,message,options,callback);
 
-###Send TTS Prompt With Capture	
+###Send TTS Prompt With Capture
 
 	nexmo.sendTTSPromptWithCapture(<TO_NUMBER>,message,<MAX_DIGITS>, <BYE_TEXT>,options,callback);
 
@@ -149,6 +151,27 @@ An example callback function :
 	}
 
 Refer here http://nexmo.com/documentation/ to get the schema for the returned message response object.
+
+Testing
+=======
+
+There is a basic test suite which will test the functionality. It uses environment variables for settings for the tests. The environment variables are:
+
+* KEY = The API key provided by Nexmo for your account
+* SECRET = The secret provided by NExmo for your account
+* FROM_NUMBER = The phone number to send messages and make calls from.
+* TO_NUMBER = The phone number to send messages and make calls to.
+* MAX_DIGITS = The maximum number of digits for the pin code.
+* ANSWER_URL = The URL which has the VoiceXML file to control the call functionality
+* PIN_CODE = The digits you must enter to confirm the message
+
+You run the test suite using:
+
+```
+KEY=<your key> SECRET=<your secret> FROM_NUMBER=<from number> TO_NUMBER=<to number> MAX_DIGITS=<max digits> ANSWER_URL=<your answer url> PIN_CODE=<your pin code> node test/nexmo_test.js
+```
+
+Please remeber to substitute the values!
 
 The MIT License (MIT)
 =====================
