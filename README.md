@@ -171,7 +171,7 @@ You run the test suite using:
 KEY=<your key> SECRET=<your secret> FROM_NUMBER=<from number> TO_NUMBER=<to number> MAX_DIGITS=<max digits> ANSWER_URL=<your answer url> PIN_CODE=<your pin code> node test/nexmo_test.js
 ```
 
-Please remeber to substitute the values!
+Please remember to substitute the values!
 
 The MIT License (MIT)
 =====================
