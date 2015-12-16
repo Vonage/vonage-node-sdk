@@ -49,6 +49,10 @@ udh - Hex encoded udh
 
 validity is optional if given should be in milliseconds.
 
+###Send a Short Code alert
+
+	nexmo.shortcodeAlert(recipient, messageParams, opts, callback);
+
 ###Check Account Balance
 	nexmo.checkBalance(callback);
 
