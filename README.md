@@ -177,6 +177,14 @@ KEY=<your key> SECRET=<your secret> FROM_NUMBER=<from number> TO_NUMBER=<to numb
 
 Please remember to substitute the values!
 
+For testing purposes you can also use setHost function to make the library send requests to another place like localhost instead of real Nexmo. Feel free to catch and process those requests the way you need. A usage example:
+
+	nexmo.setHost('localhost');
+
+Note that default port is 443 and easynexmo does https calls in such a case. You can use setPort function to make it proper for your testing environment. When port is not 443 it will make requests via http protocol. Have a look at an example:
+
+	nexmo.setPort('8080');
+
 The MIT License (MIT)
 =====================
 
