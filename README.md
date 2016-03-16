@@ -126,12 +126,12 @@ For more information check the documentation at https://docs.nexmo.com/index.php
 
 ###Search one or more Verification Request
 
-	nexmo.searchVerifyRequest(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
+	nexmo.searchVerifyRequest({<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>},callback);
 For more information check the documentation at https://docs.nexmo.com/index.php/verify/search
 
 ###Verification Control API
 
-	nexmo.controlVerifyRequest(request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>,callback);
+	nexmo.controlVerifyRequest({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>},callback);
 For more information check the documentation at https://docs.nexmo.com/index.php/verify/control
 
 ###Number Insight
