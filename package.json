@@ -1,7 +1,7 @@
 {
   "name": "easynexmo",
   "author": "Prabhu Velayutham",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "lib/nexmo",
   "keywords": [
     "sms",
