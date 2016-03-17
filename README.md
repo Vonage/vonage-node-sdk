@@ -131,7 +131,7 @@ For more information check the documentation at https://docs.nexmo.com/index.php
 
 ###Verification Control API
 
-	nexmo.controlVerifyRequest(request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>,callback);
+	nexmo.controlVerifyRequest({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>},callback);
 For more information check the documentation at https://docs.nexmo.com/index.php/verify/control
 
 ###Number Insight
