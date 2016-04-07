@@ -1,7 +1,11 @@
-[![build status](https://secure.travis-ci.org/pvela/nexmo.png)](http://travis-ci.org/pvela/nexmo)
-A nodejs wrapper for nexmo (http://nexmo.com/) API to send SMS
+Nexmo Client Library for Node.js [![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node)
+===================================
+
+A Node.JS REST API Wrapper library for Nexmo (http://nexmo.com/)
 
 For full API documentation refer to https://docs.nexmo.com/
+
+[![NPM](https://nodei.co/npm/easynexmo.png)](https://nodei.co/npm/easynexmo/)
 
 Installation Instructions :
 ===========================
