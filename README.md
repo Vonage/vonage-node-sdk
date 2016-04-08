@@ -39,6 +39,7 @@ List of API's supported by the library.
 ###Send a text message
 
 	nexmo.sendTextMessage(sender,recipient,message,opts,callback)
+opts parameter is optional
 
 ###Send a Binary Message
 
