@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config({path:__dirname + '/.env'});
+
 var KEY = process.env.KEY || '';
 var SECRET = process.env.SECRET || '';
 var FROM_NUMBER = process.env.FROM_NUMBER || '';
