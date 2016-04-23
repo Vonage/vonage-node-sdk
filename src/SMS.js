@@ -1,6 +1,6 @@
 "use strict";
 
-import nexmo from '../lib/nexmo';
+import nexmo from './index';
 
 class SMS {
   /**

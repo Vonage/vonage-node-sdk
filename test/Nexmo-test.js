@@ -1,4 +1,4 @@
-import Nexmo from '../src/Nexmo';
+import Nexmo from '../lib/Nexmo';
 import expect from 'expect.js'
 
 describe('Nexmo Object instance', function () {

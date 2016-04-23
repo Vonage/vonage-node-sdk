@@ -1,4 +1,4 @@
-import SMS from '../src/SMS';
+import SMS from '../lib/SMS';
 import expect from 'expect.js'
 
 describe('SMS Object', function () {
