@@ -46,13 +46,14 @@ opts parameter is optional
 	nexmo.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
 
 body - Hex encoded binary data
+
 udh - Hex encoded udh
 
 ###Send a WAP Push Message
 
 	nexmo.sendWapPushMessage(fromnumber,tonumber,title,url,validity,callback);
 
-validity is optional if given should be in milliseconds.
+validity is optional (if given should be in milliseconds)
 
 ###Send a Short Code alert
 
@@ -71,11 +72,17 @@ countryCode - 2 letter ISO Country Code
 
 	nexmo.getNumbers(options,callback);
 options parameter is optional. 
-options parameter should be a Dictionary Object optionally containing the following parameters :
+
+options parameter should be a Dictionary Object containing any of the following parameters :
+
 pattern
+
 search_pattern
+
 index
+
 size
+
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/account-numbers)
 
 Example : nexmo.getNumbers({pattern:714,index:1,size:50,search_pattern:2},consolelog);
@@ -85,13 +92,21 @@ Example : nexmo.getNumbers({pattern:714,index:1,size:50,search_pattern:2},consol
 	nexmo.searchNumbers(countryCode,options,callback);
 
 options parameter is optional. They can be one of the following :
+
 number pattern to match the search (eg. 1408)
+
 Dictionary Object optionally containing the following parameters :
+
 pattern
+
 search_pattern
+
 features
+
 index
+
 size
+
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/number-search)
 
 Ex : nexmo.searchNumbers('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2},consolelog);
