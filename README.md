@@ -69,13 +69,32 @@ countryCode - 2 letter ISO Country Code
 
 ###Get all numbers associated to the account.
 
-	nexmo.getNumbers(callback);
+	nexmo.getNumbers(options,callback);
+options parameter is optional. 
+options parameter should be a Dictionary Object optionally containing the following parameters :
+pattern
+search_pattern
+index
+size
+For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/account-numbers)
+
+Example : nexmo.getNumbers({pattern:714,index:1,size:50,search_pattern:2},consolelog);
 
 ###Search for MSISDN's available to purchase.
 
-	nexmo.searchNumbers(countryCode,pattern,callback);
+	nexmo.searchNumbers(countryCode,options,callback);
 
-pattern is optional, pass numbers to match in the search (eg. 1408) or a dictionary of parameters per [documentation](https://docs.nexmo.com/index.php/developer-api/number-search)
+options parameter is optional. They can be one of the following :
+number pattern to match the search (eg. 1408)
+Dictionary Object optionally containing the following parameters :
+pattern
+search_pattern
+features
+index
+size
+For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/number-search)
+
+Ex : nexmo.searchNumbers('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2},consolelog);
 
 ###Purchase number
 
@@ -118,31 +137,46 @@ params is a dictionary of parameters per [documentation](https://docs.nexmo.com/
 ###Make a voice call
 
 	nexmo.call(<TO_NUMBER>,<ANSWER_URL>,options,callback);
+	For more information check the documentation at https://docs.nexmo.com/voice/call
 
 ###Submit a Verification Request
 
 	nexmo.verifyNumber({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},callback);
-For more information check the documentation at https://docs.nexmo.com/index.php/verify/verify
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#vrequest
 
 ###Validate the response of a Verification Request
 
 	nexmo.checkVerifyRequest({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,code:<CODE_TO_CHECK>},callback);
-For more information check the documentation at https://docs.nexmo.com/index.php/verify/check
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#check
 
 ###Search one or more Verification Request
 
 	nexmo.searchVerifyRequest(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
-For more information check the documentation at https://docs.nexmo.com/index.php/verify/search
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#search
 
 ###Verification Control API
 
 	nexmo.controlVerifyRequest({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>},callback);
-For more information check the documentation at https://docs.nexmo.com/index.php/verify/control
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
 
-###Number Insight
+###Number Insight - Basic
+
+	nexmo.numberInsightBasic(numberToGetInsight,callback);
+For more information check the documentation at https://docs.nexmo.com/number-insight/basic
+
+Example : nexmo.numberInsightBasic('1-234-567-8900',consolelog);
+
+###Number Insight - Standard
+
+	nexmo.numberInsightStandard(numberToGetInsight,callback);
+For more information check the documentation at https://docs.nexmo.com/number-insight/standard
+
+Example : Example : nexmo.numberInsightStandard('1-234-567-8900',consolelog);
+
+###Number Insight - Advanced
 
 	nexmo.numberInsight({number:'<NUMBER_TO_GET_INSIGHT>',callback:<URL_TO_SUBMIT_THE_RESPONSE>},callback);
-For more information check the documentation at https://docs.nexmo.com/index.php/number-insight
+For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
 
 Callback
 ========
@@ -159,7 +193,7 @@ An example callback function :
            }
 	}
 
-Refer here http://nexmo.com/documentation/ to get the schema for the returned message response object.
+Refer here https://docs.nexmo.com/ to get the schema for the returned message response object.
 
 Testing
 =======
