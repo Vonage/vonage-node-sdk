@@ -68,10 +68,17 @@ validity is optional (if given should be in milliseconds)
 
 countryCode - 2 letter ISO Country Code
 
+###Get Pricing for sending message or making a call to a number.
+
+	nexmo.getPhonePricing(product,countryCode,callback);
+
+product - either `voice` or `sms`
+countryCode - 2 letter ISO Country Code
+
 ###Get all numbers associated to the account.
 
 	nexmo.getNumbers(options,callback);
-options parameter is optional. 
+options parameter is optional.
 
 options parameter should be a Dictionary Object containing any of the following parameters :
 
