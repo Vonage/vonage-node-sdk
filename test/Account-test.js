@@ -2,12 +2,12 @@ import Account from '../lib/Account';
 
 import NexmoStub from './NexmoStub';
 
-var accountAPIs = [
-  'checkBalance',
-  'changePassword',
-  'changeMoCallbackUrl',
-  'changeDrCallbackUrl'
-];
+var accountAPIs = {
+  'checkBalance': 'checkBalance',
+  'changePassword': 'updatePassword',
+  'changeMoCallbackUrl': 'updateSMSCallback',
+  'changeDrCallbackUrl': 'updateDeliveryReceiptCallback'
+};
 
 describe('Account Object', function () {
   

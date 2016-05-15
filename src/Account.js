@@ -30,21 +30,21 @@ class Account {
   /**
    * TODO: document
    */
-  changePassword() {
+  updatePassword() {
     this._nexmo.changePassword.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  changeMoCallbackUrl() {
+  updateSMSCallback() {
     this._nexmo.changeMoCallbackUrl.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  changeDrCallbackUrl() {
+  updateDeliveryReceiptCallback() {
     this._nexmo.changeDrCallbackUrl.apply(this._nexmo, arguments);
   }
   
