@@ -2,12 +2,12 @@ import Voice from '../lib/Voice';
 
 import NexmoStub from './NexmoStub';
 
-var voiceAPIs = [
-  'sendTTSMessage',
-  'sendTTSPromptWithCapture',
-  'sendTTSPromptWithConfirm',
-  'call'  
-];
+var voiceAPIs = {
+  'sendTTSMessage': 'sendTTSMessage',
+  'sendTTSPromptWithCapture': 'sendTTSPromptWithCapture',
+  'sendTTSPromptWithConfirm': 'sendTTSPromptWithConfirm',
+  'call': 'call'  
+};
 
 describe('Voice Object', function () {
   
