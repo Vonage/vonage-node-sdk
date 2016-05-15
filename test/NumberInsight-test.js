@@ -2,11 +2,11 @@ import NumberInsight from '../lib/NumberInsight';
 
 import NexmoStub from './NexmoStub';
 
-var numberInsightAPIs = [
-  'numberInsight',
-  'numberInsightBasic',
-  'numberInsightStandard'
-];
+var numberInsightAPIs = {
+  'numberInsight': 'get|{"level":"advanced"}',
+  'numberInsightBasic': 'get|{"level":"basic"}',
+  'numberInsightStandard': 'get|{"level":"standard"}'
+};
 
 describe('NumberInsight Object', function () {
   
