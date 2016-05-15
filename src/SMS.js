@@ -29,13 +29,6 @@ class SMS {
   /**
    * TODO: document
    */
-  sendMessage() {
-    this._nexmo.sendMessage.apply(this._nexmo, arguments);
-  }
-  
-  /**
-   * TODO: document
-   */
   sendBinaryMessage() {
     this._nexmo.sendBinaryMessage.apply(this._nexmo, arguments);
   }
