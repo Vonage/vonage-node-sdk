@@ -24,9 +24,16 @@ var nexmo = new Nexmo({
   secret: SECRET
 });
 
+console.log('Sending Text Message');
 nexmo.sms.sendTextMessage(
   FROM_NUMBER,
   TO_NUMBER, 
   'testing', 
   logToConsole
 );
+
+console.log('Getting Basic Number Insight');
+nexmo.numberInsight.get({level:'basic', number: TO_NUMBER}, logToConsole);
+
+console.log('Checking Balance');
+nexmo.account.checkBalance(logToConsole);
