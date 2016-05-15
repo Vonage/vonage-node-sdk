@@ -31,7 +31,7 @@ class App {
    * TODO: document
    */
   get(appId) {
-    if(appId) {
+    if(typeof(appId) !== 'object') {
       this._nexmo.getApplication.apply(this._nexmo, arguments);
     }
     else {
