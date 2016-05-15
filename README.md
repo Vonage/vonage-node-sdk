@@ -1,5 +1,4 @@
-Nexmo Client Library for Node.js [![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node)
-===================================
+# Nexmo Client Library for Node.js [![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node)
 
 A Node.JS REST API Wrapper library for Nexmo (http://nexmo.com/)
 
@@ -7,220 +6,296 @@ For full API documentation refer to https://docs.nexmo.com/
 
 [![NPM](https://nodei.co/npm/easynexmo.png)](https://nodei.co/npm/easynexmo/)
 
-Installation Instructions :
-===========================
+## Installation Instructions
 
-Download and Install lib/nexmo.js in your lib
-
-or use
-
-```
+```bash
 npm install easynexmo
 ```
 
-Usage :
-=======
+## Usage
 
 ```js
-var nexmo = require('easynexmo');
+var Nexmo = require('easynexmo');
 
-nexmo.initialize(KEY, SECRET, DEBUG);
+var nexmo = new Nexmo({key: KEY, secret: SECRET}, {debug: DEBUG});
 ```
 
-KEY - API Key from Nexmo
+* `KEY` - API Key from Nexmo
+* `SECRET` - API SECRET from Nexmo
+* `DEBUG` - set this to true to debug library calls
 
-SECRET - API SECRET from Nexmo
+## List of API's supported by the library
 
-DEBUG - set this to true to debug library calls
+### Send a text message
 
-List of API's supported by the library.
-=======================================
+```js
+nexmo.sms.sendTextMessage(sender, recipient, message, opts, callback);
+```
 
-###Send a text message
+* `opts` - parameter is optional
 
-	nexmo.sendTextMessage(sender,recipient,message,opts,callback)
-opts parameter is optional
+### Send a Binary Message
 
-###Send a Binary Message
+```js
+nexmo.sms.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
+```
 
-	nexmo.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
+* `body` - Hex encoded binary data
+* `udh` - Hex encoded udh
 
-body - Hex encoded binary data
+### Send a WAP Push Message
 
-udh - Hex encoded udh
+```js
+nexmo.sms.sendWapPushMessage(fromnumber, tonumber, title, url, validity, callback);
+```
 
-###Send a WAP Push Message
+* `validity` - is optional (if given should be in milliseconds)
 
-	nexmo.sendWapPushMessage(fromnumber,tonumber,title,url,validity,callback);
+### Send a Short Code alert
 
-validity is optional (if given should be in milliseconds)
+```js
+nexmo.sms.shortcodeAlert(recipient, messageParams, opts, callback);
+```
 
-###Send a Short Code alert
+### Check Account Balance
 
-	nexmo.shortcodeAlert(recipient, messageParams, opts, callback);
+```js
+nexmo.account.checkBalance(callback);
+```
 
-###Check Account Balance
-	nexmo.checkBalance(callback);
+### Get Pricing for sending message to a country.
 
-###Get Pricing for sending message to a country.
+```js
+nexmo.number.getPricing(countryCode, callback);
+```
 
-	nexmo.getPricing(countryCode,callback);
+* `countryCode` - 2 letter ISO Country Code
 
-countryCode - 2 letter ISO Country Code
+### Get Pricing for sending message or making a call to a number.
 
-###Get Pricing for sending message or making a call to a number.
+```js
+nexmo.number.getPhonePricing(product, countryCode, callback);
+```
 
-	nexmo.getPhonePricing(product,countryCode,callback);
+* `product` - either `voice` or `sms`
+* `countryCode` - 2 letter ISO Country Code
 
-product - either `voice` or `sms`
-countryCode - 2 letter ISO Country Code
+### Get all numbers associated to the account.
 
-###Get all numbers associated to the account.
+```js
+nexmo.number.get(options, callback);
+```
 
-	nexmo.getNumbers(options,callback);
-options parameter is optional.
-
-options parameter should be a Dictionary Object containing any of the following parameters :
-
-pattern
-
-search_pattern
-
-index
-
-size
+* `options` parameter is an optional Dictionary Object containing any of the following parameters
+	* `pattern`
+	* `search_pattern`
+	* `index`
+	* `size`
 
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/account-numbers)
 
-Example : nexmo.getNumbers({pattern:714,index:1,size:50,search_pattern:2},consolelog);
+Example:
 
-###Search for MSISDN's available to purchase.
+```js
+nexmo.number.get({pattern:714,index:1,size:50,search_pattern:2},consolelog);
+```
 
-	nexmo.searchNumbers(countryCode,options,callback);
+### Search for MSISDN's available to purchase.
 
-options parameter is optional. They can be one of the following :
+```js
+nexmo.number.search(countryCode,options,callback);
+```
 
-number pattern to match the search (eg. 1408)
+`options` parameter is optional. They can be one of the following :
 
-Dictionary Object optionally containing the following parameters :
-
-pattern
-
-search_pattern
-
-features
-
-index
-
-size
+1. number pattern to match the search (eg. 1408)
+2. Dictionary Object optionally containing the following parameters :
+	* `pattern`
+	* `search_pattern`
+	* `features`
+	* `index`
+	* `size`
 
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/number-search)
 
-Ex : nexmo.searchNumbers('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2},consolelog);
+Example:
 
-###Purchase number
+```js nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2},consolelog);
+```
 
-	nexmo.buyNumber(countryCode, msisdn, callback);
+### Purchase number
 
-###Cancel Number
+```js
+nexmo.number.buy(countryCode, msisdn, callback);
+```
 
-	nexmo.cancelNumber(countryCode, msisdn, callback);
+### Cancel Number
 
-###Update Number
+```js
+nexmo.number.cancel(countryCode, msisdn, callback);
+```
 
-	nexmo.updateNumber(countryCode, msisdn, params, callback)
+### Update Number
+
+```js
+nexmo.number.update(countryCode, msisdn, params, callback);
+```
 
 params is a dictionary of parameters per [documentation](https://docs.nexmo.com/index.php/developer-api/number-update)
 
-###Change Password (API Secret)
+### Update Password (API Secret)
 
-	nexmo.changePassword(<NEW_PASSWORD>,callback);
+```js
+nexmo.account.updatePassword(<NEW_PASSWORD>,callback);
+```
 
-###Change Callback URL associated to the account
+### Update Callback URL associated to the account
 
-	nexmo.changeMoCallbackUrl(<NEW_CALLBACK_URL>,callback);
+```js
+nexmo.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
+```
 
-###Change Delivery Receipt URL associated to the account
+### Change Delivery Receipt URL associated to the account
 
-	nexmo.changeDrCallbackUrl(<NEW_DR_CALLBACK_URL>,callback);
+```js
+nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
+```
 
-###Send TTS Message
+### Send TTS Message
 
-	nexmo.sendTTSMessage = function(<TO_NUMBER>,message,options,callback);
+```js
+nexmo.voice.sendTTSMessage = function(<TO_NUMBER>,message,options,callback);
+```
 
-###Send TTS Prompt With Capture
+### Send TTS Prompt With Capture
 
-	nexmo.sendTTSPromptWithCapture(<TO_NUMBER>,message,<MAX_DIGITS>, <BYE_TEXT>,options,callback);
+```js
+nexmo.sendTTSPromptWithCapture(<TO_NUMBER>,message,<MAX_DIGITS>, <BYE_TEXT>,options,callback);
+```
 
-###Send TTS Prompt With Confirm
+### Send TTS Prompt With Confirm
 
-	nexmo.sendTTSPromptWithConfirm(<TO_NUMBER>, message ,<MAX_DIGITS>,'<PIN_CODE>',<BYE_TEXT>,<FAILED_TEXT>,options,callback);
+```js
+nexmo.voice.sendTTSPromptWithConfirm(<TO_NUMBER>, message ,<MAX_DIGITS>,'<PIN_CODE>',<BYE_TEXT>,<FAILED_TEXT>,options,callback);
+```
 
-###Make a voice call
+### Make a voice call
 
-	nexmo.call(<TO_NUMBER>,<ANSWER_URL>,options,callback);
-	For more information check the documentation at https://docs.nexmo.com/voice/call
+```js
+nexmo.voice.call(<TO_NUMBER>,<ANSWER_URL>,options,callback);
+```
 
-###Submit a Verification Request
+For more information check the documentation at https://docs.nexmo.com/voice/call
 
-	nexmo.verifyNumber({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},callback);
+### Submit a Verification Request
+
+```js
+nexmo.verify.request({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},callback);
+```
+
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#vrequest
 
-###Validate the response of a Verification Request
+### Validate the response of a Verification Request
 
-	nexmo.checkVerifyRequest({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,code:<CODE_TO_CHECK>},callback);
+```js
+nexmo.verify.check({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,code:<CODE_TO_CHECK>},callback);
+```
+
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#check
 
-###Search one or more Verification Request
+### Search one or more Verification Request
 
-	nexmo.searchVerifyRequest(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
+```js
+nexmo.verify.search(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
+```
+
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#search
 
-###Verification Control API
+### Verification Control API
 
-	nexmo.controlVerifyRequest({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>},callback);
+```js
+nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>},callback);
+```
+
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
 
-###Number Insight - Basic
+### Number Insight - Basic
 
-	nexmo.numberInsightBasic(numberToGetInsight,callback);
+```js
+nexmo.numberInsight.get({level: 'basic', number: NUMBER}, callback);
+```
+
 For more information check the documentation at https://docs.nexmo.com/number-insight/basic
 
-Example : nexmo.numberInsightBasic('1-234-567-8900',consolelog);
+Example:
 
-###Number Insight - Standard
+```js
+nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, consolelog);
+```
 
-	nexmo.numberInsightStandard(numberToGetInsight,callback);
+### Number Insight - Standard
+
+```js
+nexmo.numberInsight.get({level: 'standard', number: NUMBER}, callback);
+```
+	
 For more information check the documentation at https://docs.nexmo.com/number-insight/standard
 
-Example : Example : nexmo.numberInsightStandard('1-234-567-8900',consolelog);
+Example:
 
-###Number Insight - Advanced
+```js
+nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, consolelog);
+```
 
-	nexmo.numberInsight({number:'<NUMBER_TO_GET_INSIGHT>',callback:<URL_TO_SUBMIT_THE_RESPONSE>},callback);
+### Number Insight - Advanced
+
+```js
+nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
+```
+
 For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
 
-Callback
-========
+## Callbacks
 
 Callback from all API calls returns 2 parameters - error and a json object.
 
-An example callback function :
+An example callback function:
 
-	function consolelog (err,messageResponse) {
-           if (err) {
-                console.log(err);
-           } else {
-                console.dir(messageResponse);
-           }
+```js
+function consolelog (err,messageResponse) {
+	if (err) {
+		console.log(err);
+	} else {
+		console.dir(messageResponse);
 	}
+}
+```
 
 Refer here https://docs.nexmo.com/ to get the schema for the returned message response object.
 
-Testing
-=======
+## Testing
 
-There is a basic test suite which will test the functionality. It uses environment variables for settings for the tests. The environment variables are:
+Run the
+
+```bash
+npm test
+```
+
+For testing purposes you can also use setHost function to make the library send requests to another place like localhost instead of real Nexmo. Feel free to catch and process those requests the way you need. A usage example:
+
+```js
+nexmo.setHost('localhost');
+```
+
+Note that default port is 443 and easynexmo does https calls in such a case. You can use setPort function to make it proper for your testing environment. When port is not 443 it will make requests via http protocol. Have a look at an example:
+
+```js
+nexmo.setPort('8080');
+```
+
+## Examples
+
+There are some basic examples which will test the functionality. They uses environment variables for settings for the tests. The environment variables are:
 
 * KEY = The API key provided by Nexmo for your account
 * SECRET = The secret provided by NExmo for your account
@@ -230,29 +305,30 @@ There is a basic test suite which will test the functionality. It uses environme
 * ANSWER_URL = The URL which has the VoiceXML file to control the call functionality
 * PIN_CODE = The digits you must enter to confirm the message
 
-You run the test suite using:
+The simplest way to run the examples is to create a `.env` file in the `examples` directory with the following:
 
 ```
-KEY=<your key> SECRET=<your secret> FROM_NUMBER=<from number> TO_NUMBER=<to number> MAX_DIGITS=<max digits> ANSWER_URL=<your answer url> PIN_CODE=<your pin code> node test/nexmo_test.js
+KEY={value}
+SECRET={value}
+FROM_NUMBER={value}
+TO_NUMBER={value}
+MAX_DIGITS={value}
+ANSWER_URL={value}
+PIN_CODE={value}
 ```
 
-Please remember to substitute the values!
+Then run:
 
-For testing purposes you can also use setHost function to make the library send requests to another place like localhost instead of real Nexmo. Feel free to catch and process those requests the way you need. A usage example:
+```bash
+node examples/pre-v1.js
+```
 
-	nexmo.setHost('localhost');
+And
 
-Note that default port is 443 and easynexmo does https calls in such a case. You can use setPort function to make it proper for your testing environment. When port is not 443 it will make requests via http protocol. Have a look at an example:
+```bash
+node examples/v1-beta.js
+```
 
-	nexmo.setPort('8080');
+## License
 
-The MIT License (MIT)
-=====================
-
-Copyright (c) 2015 Prabhu Velayutham
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+MIT - see [LICENSE](LICENSE.txt)
