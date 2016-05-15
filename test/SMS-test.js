@@ -2,15 +2,14 @@ import SMS from '../lib/SMS';
 
 import NexmoStub from './NexmoStub';
 
-var smsAPIs = [
-  'sendBinaryMessage',
-  'sendWapPushMessage',
-  'sendTextMessage',
-  'sendMessage',
-  'shortcodeAlert',
-  'shortcode2FA',
-  'shortcodeMarketing'
-];
+var smsAPIs = {
+  'sendBinaryMessage': 'sendBinaryMessage',
+  'sendWapPushMessage': 'sendWapPushMessage',
+  'sendTextMessage': 'sendTextMessage',
+  'shortcodeAlert': 'shortcodeAlert',
+  'shortcode2FA': 'shortcode2FA',
+  'shortcodeMarketing': 'shortcodeMarketing'
+};
 
 describe('SMS Object', function () {
   
