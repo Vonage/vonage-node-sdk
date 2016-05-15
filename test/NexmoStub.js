@@ -2,7 +2,7 @@ import expect from 'expect.js';
 
 class NexmoStub {
   
-  static create(apis) {
+  static create(functions) {
         
     var stub = {
       initialize: function() {},
@@ -10,30 +10,46 @@ class NexmoStub {
         return this[name + '_called'] === true;
       }
     };
-    apis.forEach(function(functionName) {
-      stub[functionName + '_called'] = false;
-      stub[functionName] = function() {
-        this[functionName + '_called'] = true;
+    functions.forEach(function(name) {
+      stub[name + '_called'] = false;
+      stub[name] = function() {
+        this[name + '_called'] = true;
       };
     });
+    
     return stub;
     
   }
   
-  static checkAllFunctionsAreDefined(functions, obj) {
-    functions.forEach(function(functionName) {
-      expect(obj.prototype[functionName]).to.be.a('function');
+  static checkAllFunctionsAreDefined(mappings, obj) {
+    Object.keys(mappings).forEach(function(originalName) {
+      var newName = mappings[originalName].split('|')[0];
+      expect(obj.prototype[newName]).to.be.a('function');
     });
   }
   
-  static checkAllFunctionsAreCalled(functions, objDef) {
-    functions.forEach(function(functionName) {
-      var stub = NexmoStub.create(functions);
+  static checkAllFunctionsAreCalled(mappings, objDef) {
+    Object.keys(mappings).forEach(function(originalName) {
+      var nameAndParams = mappings[originalName].split('|');
+      var newName = nameAndParams[0];
+      var params = nameAndParams[1]?nameAndParams[1].split(','):[];
+      params.forEach(function(paramValue, index) {
+        try {
+          params[index] = JSON.parse(paramValue)
+        }
+        catch (e) {
+          // couldn't be parsed, which is fine.
+          // console.log('could not parse', paramValue);
+        }
+      });
+      
+      var stub = NexmoStub.create(Object.keys(mappings));
       var obj = new objDef({key:'test', secret:'test'}, {nexmoOverride: stub});
       
-      obj[functionName]();
+      console.log('calling', newName, '(' + params + ')', 'expecting', originalName);
+      obj[newName].apply(obj, params);
       
-      expect( stub.hasBeenCalled(functionName) ).to.be(true);
+      expect( stub.hasBeenCalled(originalName) ).to.be(true);
     });
   }
     

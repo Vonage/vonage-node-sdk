@@ -21,59 +21,35 @@ class App {
   }
   
   /**
-   * base_url='https://rest.nexmo.com'
-   * version='/beta'
-   * action='/account/applications/?'
-   * key='API_KEY'
-   * secret='API_SECRET'
-   * name='MyFirstApplication'
-   * type='voice'
-   * answer_url='http://example.com/ncco'
-   * event_url='http://example.com/call_status'
-   *
-   * curl $base_url$version$action \
-   * -d api_key=$key \
-   * -d api_secret=$secret \
-   * -d name=$name \
-   * -d type=$type \
-   * -d answer_url=$answer_url \
-   * -d event_url=$event_url
-   *
-   * @param {string} name
-   *    The name of the application to be created.
-   * @param {string} type
-   *    The type of application to be created. Presently only `voice`
-   *    is supported.
+   * TODO: document
    */ 
-  createApplication() {
+  create() {
     this._nexmo.createApplication.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  getApplications() {
-    this._nexmo.getApplications.apply(this._nexmo, arguments);
+  get(appId) {
+    if(appId) {
+      this._nexmo.getApplication.apply(this._nexmo, arguments);
+    }
+    else {
+      this._nexmo.getApplications.apply(this._nexmo, arguments);
+    }
   }
   
   /**
    * TODO: document
    */
-  getApplication() {
-    this._nexmo.getApplication.apply(this._nexmo, arguments);
-  }
-  
-  /**
-   * TODO: document
-   */
-  updateApplication() {
+  update() {
     this._nexmo.updateApplication.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  deleteApplication() {
+  delete() {
     this._nexmo.deleteApplication.apply(this._nexmo, arguments);
   }
   
