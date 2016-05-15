@@ -1,7 +1,7 @@
 {
   "name": "easynexmo",
-  "author": "Prabhu Velayutham",
-  "version": "0.7.2",
+  "author": "nexmo",
+  "version": "0.8.5",
   "main": "lib/nexmo",
   "keywords": [
     "sms",
@@ -14,7 +14,9 @@
   },
   "description": "A nodejs wrapper for nexmo API to send SMS",
   "contributors": [
+    "nexmo",
     "pvela",
+    "leggetter",
     "akuzi",
     "bpilot",
     "justinfreitag",
