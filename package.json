@@ -1,10 +1,11 @@
 {
   "name": "easynexmo",
   "author": "nexmo",
-  "version": "0.8.5",
+  "version": "1.0.0-beta-1",
   "main": "lib/nexmo",
   "keywords": [
     "sms",
+    "voice",
     "nexmo"
   ],
   "homepage": "https://github.com/nexmo/nexmo-node",
