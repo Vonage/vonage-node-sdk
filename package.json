@@ -1,8 +1,8 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "1.0.0-beta-3",
-  "main": "lib/nexmo",
+  "version": "1.0.0-beta-4",
+  "main": "lib/Nexmo",
   "keywords": [
     "sms",
     "voice",
