@@ -4,18 +4,18 @@ A Node.JS REST API Wrapper library for Nexmo (http://nexmo.com/)
 
 For full API documentation refer to https://docs.nexmo.com/
 
-[![NPM](https://nodei.co/npm/easynexmo.png)](https://nodei.co/npm/easynexmo/)
+[![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
 ## Installation Instructions
 
 ```bash
-npm install easynexmo
+npm install nexmo
 ```
 
 ## Usage
 
 ```js
-var Nexmo = require('easynexmo');
+var Nexmo = require('nexmo');
 
 var nexmo = new Nexmo({key: KEY, secret: SECRET}, {debug: DEBUG});
 ```
@@ -287,7 +287,7 @@ For testing purposes you can also use setHost function to make the library send 
 nexmo.setHost('localhost');
 ```
 
-Note that default port is 443 and easynexmo does https calls in such a case. You can use setPort function to make it proper for your testing environment. When port is not 443 it will make requests via http protocol. Have a look at an example:
+Note that default port is 443 and nexmo does https calls in such a case. You can use setPort function to make it proper for your testing environment. When port is not 443 it will make requests via http protocol. Have a look at an example:
 
 ```js
 nexmo.setPort('8080');
