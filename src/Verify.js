@@ -23,28 +23,28 @@ class Verify {
   /**
    * TODO: document
    */
-  verifyNumber() {
+  request() {
     this._nexmo.verifyNumber.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  checkVerifyRequest() {
+  check() {
     this._nexmo.checkVerifyRequest.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  controlVerifyRequest() {
+  control() {
     this._nexmo.controlVerifyRequest.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  searchVerifyRequest() {
+  search() {
     this._nexmo.searchVerifyRequest.apply(this._nexmo, arguments);
   }
   

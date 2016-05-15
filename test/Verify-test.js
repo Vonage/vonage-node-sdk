@@ -2,12 +2,12 @@ import Verify from '../lib/Verify';
 
 import NexmoStub from './NexmoStub';
 
-var verifyAPIs = [
-  'verifyNumber',
-  'checkVerifyRequest',
-  'controlVerifyRequest',
-  'searchVerifyRequest'  
-];
+var verifyAPIs = {
+  'verifyNumber': 'request',
+  'checkVerifyRequest': 'check',
+  'controlVerifyRequest': 'control',
+  'searchVerifyRequest': 'search'  
+};
 
 describe('Verify Object', function () {
   
