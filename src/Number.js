@@ -37,35 +37,35 @@ class Number {
   /**
    * TODO: document
    */
-  getNumbers() {
+  get() {
     this._nexmo.getNumbers.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  searchNumbers() {
+  search() {
     this._nexmo.searchNumbers.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  buyNumber() {
+  buy() {
     this._nexmo.buyNumber.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  cancelNumber() {
+  cancel() {
     this._nexmo.cancelNumber.apply(this._nexmo, arguments);
   }
   
   /**
    * TODO: document
    */
-  updateNumber() {
+  update() {
     this._nexmo.updateNumber.apply(this._nexmo, arguments);
   }
   

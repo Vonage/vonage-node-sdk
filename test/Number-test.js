@@ -2,15 +2,15 @@ import Number from '../lib/Number';
 
 import NexmoStub from './NexmoStub';
 
-var numberAPIs = [
-  'getPricing',
-  'getPhonePricing',
-  'getNumbers',
-  'searchNumbers',
-  'buyNumber',
-  'cancelNumber',
-  'updateNumber'
-];
+var numberAPIs = {
+  'getPricing': 'getPricing',
+  'getPhonePricing': 'getPhonePricing',
+  'getNumbers': 'get',
+  'searchNumbers': 'search',
+  'buyNumber': 'buy',
+  'cancelNumber': 'cancel',
+  'updateNumber': 'update'
+};
 
 describe('Number Object', function () {
   
