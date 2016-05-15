@@ -8,7 +8,7 @@ class App {
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
    * @param {Object} options
-   *    Addition SMS options.
+   *    Addition App options.
    */
   constructor(credentials, options = {}) {
     this.creds = credentials;

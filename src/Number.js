@@ -2,13 +2,13 @@
 
 import nexmo from './index';
 
-class Account {
+class Number {
   
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
    * @param {Object} options
-   *    Addition SMS options.
+   *    Addition Number options.
    */
   constructor(credentials, options = {}) {
     this.creds = credentials;
@@ -71,4 +71,4 @@ class Account {
   
 }
 
-export default Account;
+export default Number;
