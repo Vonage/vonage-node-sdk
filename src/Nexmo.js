@@ -1,5 +1,11 @@
 import Credentials from './Credentials';
 import SMS from './SMS';
+import Voice from './Voice';
+import Number from './Number';
+import Verify from './Verify';
+import NumberInsight from './NumberInsight';
+import App from './App';
+import Account from './Account';
 
 class Nexmo {
   /**
@@ -11,7 +17,13 @@ class Nexmo {
     this._credentials = Credentials.parse(credentials);
     this._options = options;
     
-    this.sms = new SMS(this._credentials);
+    this.sms = new SMS(this._credentials, this._options);
+    this.voice = new Voice(this._credentials, this._options);
+    this.number = new Number(this._credentials, this._options);
+    this.verify = new Verify(this._credentials, this._options);
+    this.numberInsight = new NumberInsight(this._credentials, this._options);
+    this.app = new App(this._credentials, this._options);
+    this.account = new Account(this._credentials, this._options);
   }
 }
 
