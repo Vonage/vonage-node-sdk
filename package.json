@@ -1,5 +1,5 @@
 {
-  "name": "easynexmo",
+  "name": "nexmo",
   "author": "nexmo",
   "version": "1.0.0-beta-1",
   "main": "lib/nexmo",
