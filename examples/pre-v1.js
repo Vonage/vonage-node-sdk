@@ -2,8 +2,8 @@
 
 require('dotenv').config({path:__dirname + '/.env'});
 
-var KEY = process.env.KEY || '';
-var SECRET = process.env.SECRET || '';
+var API_KEY = process.env.API_KEY || '';
+var API_SECRET = process.env.API_SECRET || '';
 var FROM_NUMBER = process.env.FROM_NUMBER || '';
 var TO_NUMBER = process.env.TO_NUMBER || '';
 var MAX_DIGITS = process.env.MAX_DIGITS || 4;
@@ -18,8 +18,8 @@ function consolelog (err,messageResponse) {
         }
 }
 
-var nexmo = require('../lib/nexmo');
-nexmo.initialize(KEY, SECRET);
+var nexmo = require('../lib/index');
+nexmo.initialize(API_KEY, API_SECRET);
 
 nexmo.sendTextMessage(FROM_NUMBER, TO_NUMBER, 'testing', consolelog);
 nexmo.sendMessage({from:FROM_NUMBER,to: TO_NUMBER, text:'testing'}, consolelog);

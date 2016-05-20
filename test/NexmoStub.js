@@ -44,7 +44,7 @@ class NexmoStub {
       });
       
       var stub = NexmoStub.create(Object.keys(mappings));
-      var obj = new objDef({key:'test', secret:'test'}, {nexmoOverride: stub});
+      var obj = new objDef({apiKey:'test', apiSecret:'test'}, {nexmoOverride: stub});
       
       console.log('calling', newName, '(' + params + ')', 'expecting', originalName);
       obj[newName].apply(obj, params);

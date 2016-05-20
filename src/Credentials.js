@@ -4,9 +4,9 @@
  * The `Credentials` object provides an abstraction to this.
  */
 class Credentials {
-  constructor(key, secret) {
-    this.key = key;
-    this.secret = secret;
+  constructor(apiKey, apiSecret) {
+    this.apiKey = apiKey;
+    this.apiSecret = apiSecret;
   }
   
   /**
@@ -19,7 +19,7 @@ class Credentials {
       return obj;
     }
     else {
-      return new Credentials(obj.key, obj.secret);
+      return new Credentials(obj.apiKey, obj.apiSecret);
     }
   }
 }

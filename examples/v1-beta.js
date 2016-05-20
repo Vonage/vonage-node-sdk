@@ -3,8 +3,8 @@
 
 require('dotenv').config({path:__dirname + '/.env'});
 
-var KEY = process.env.KEY || '';
-var SECRET = process.env.SECRET || '';
+var API_KEY = process.env.API_KEY || '';
+var API_SECRET = process.env.API_SECRET || '';
 var FROM_NUMBER = process.env.FROM_NUMBER || '';
 var TO_NUMBER = process.env.TO_NUMBER || '';
 
@@ -20,8 +20,8 @@ function logToConsole (err,messageResponse) {
 var Nexmo = require('../lib/Nexmo');
 
 var nexmo = new Nexmo({
-  key: KEY, 
-  secret: SECRET
+  apiKey: API_KEY, 
+  apiSecret: API_SECRET
 });
 
 console.log('Sending Text Message');
