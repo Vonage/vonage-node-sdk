@@ -17,11 +17,11 @@ npm install nexmo
 ```js
 var Nexmo = require('nexmo');
 
-var nexmo = new Nexmo({key: KEY, secret: SECRET}, {debug: DEBUG});
+var nexmo = new Nexmo({apiKey: API_KEY, apiSecret: API_SECRET}, {debug: DEBUG});
 ```
 
-* `KEY` - API Key from Nexmo
-* `SECRET` - API SECRET from Nexmo
+* `API_KEY` - API Key from Nexmo
+* `API_SECRET` - API SECRET from Nexmo
 * `DEBUG` - set this to true to debug library calls
 
 ## List of API's supported by the library
@@ -100,7 +100,7 @@ Example:
 nexmo.number.get({pattern:714,index:1,size:50,search_pattern:2},consolelog);
 ```
 
-### Search for MSISDN's available to purchase.
+### Search for MSISDN's available to purchase
 
 ```js
 nexmo.number.search(countryCode,options,callback);
@@ -120,7 +120,8 @@ For more details on what the above options mean refer to the Nexmo API  [documen
 
 Example:
 
-```js nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2},consolelog);
+```js
+nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2},consolelog);
 ```
 
 ### Purchase number
@@ -297,8 +298,8 @@ nexmo.setPort('8080');
 
 There are some basic examples which will test the functionality. They uses environment variables for settings for the tests. The environment variables are:
 
-* KEY = The API key provided by Nexmo for your account
-* SECRET = The secret provided by NExmo for your account
+* API_KEY = The API key provided by Nexmo for your account
+* API_SECRET = The secret provided by NExmo for your account
 * FROM_NUMBER = The phone number to send messages and make calls from.
 * TO_NUMBER = The phone number to send messages and make calls to.
 * MAX_DIGITS = The maximum number of digits for the pin code.
@@ -308,8 +309,8 @@ There are some basic examples which will test the functionality. They uses envir
 The simplest way to run the examples is to create a `.env` file in the `examples` directory with the following:
 
 ```
-KEY={value}
-SECRET={value}
+API_KEY={value}
+API_SECRET={value}
 FROM_NUMBER={value}
 TO_NUMBER={value}
 MAX_DIGITS={value}

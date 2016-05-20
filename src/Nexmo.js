@@ -10,8 +10,8 @@ import Account from './Account';
 class Nexmo {
   /**
    * @param {Credentials} credentials - Nexmo API credentials
-   * @param {string} credentials.key - the Nexmo API key
-   * @param {string} credentials.secret - the Nexmo API secret
+   * @param {string} credentials.apiKey - the Nexmo API key
+   * @param {string} credentials.apiSecret - the Nexmo API secret
    * @param {object} options Additional options
    */
   constructor(credentials, options) {

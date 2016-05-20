@@ -27,7 +27,7 @@ describe('App Object', function () {
     var mock = sinon.mock(nexmo);
     mock.expects('getApplications').once();
     
-    var app = new App({key:'test', secret:'test'}, {nexmoOverride: nexmo});
+    var app = new App({apiKey:'test', apiSecret:'test'}, {nexmoOverride: nexmo});
     app.get({});
   });
   
@@ -35,7 +35,7 @@ describe('App Object', function () {
     var mock = sinon.mock(nexmo);
     mock.expects('getApplication').once();
     
-    var app = new App({key:'test', secret:'test'}, {nexmoOverride: nexmo});
+    var app = new App({apiKey:'test', apiSecret:'test'}, {nexmoOverride: nexmo});
     app.get('some-app-id');
   });
   
