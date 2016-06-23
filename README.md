@@ -29,7 +29,7 @@ var nexmo = new Nexmo({apiKey: API_KEY, apiSecret: API_SECRET}, {debug: DEBUG});
 ### Send a text message
 
 ```js
-nexmo.sms.sendTextMessage(sender, recipient, message, opts, callback);
+nexmo.message.sendSms(sender, recipient, message, opts, callback);
 ```
 
 * `opts` - parameter is optional
@@ -37,7 +37,7 @@ nexmo.sms.sendTextMessage(sender, recipient, message, opts, callback);
 ### Send a Binary Message
 
 ```js
-nexmo.sms.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
+nexmo.message.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
 ```
 
 * `body` - Hex encoded binary data
@@ -46,7 +46,7 @@ nexmo.sms.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
 ### Send a WAP Push Message
 
 ```js
-nexmo.sms.sendWapPushMessage(fromnumber, tonumber, title, url, validity, callback);
+nexmo.message.sendWapPushMessage(fromnumber, tonumber, title, url, validity, callback);
 ```
 
 * `validity` - is optional (if given should be in milliseconds)
@@ -54,7 +54,7 @@ nexmo.sms.sendWapPushMessage(fromnumber, tonumber, title, url, validity, callbac
 ### Send a Short Code alert
 
 ```js
-nexmo.sms.shortcodeAlert(recipient, messageParams, opts, callback);
+nexmo.message.shortcodeAlert(recipient, messageParams, opts, callback);
 ```
 
 ### Check Account Balance

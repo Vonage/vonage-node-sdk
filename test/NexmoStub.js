@@ -21,6 +21,10 @@ class NexmoStub {
     
   }
   
+  /**
+   * @param {Object} mappings - a mapping from legacy global function to
+   *                  new non-global name.
+   */
   static checkAllFunctionsAreDefined(mappings, obj) {
     Object.keys(mappings).forEach(function(originalName) {
       var newName = mappings[originalName].split('|')[0];
@@ -28,6 +32,10 @@ class NexmoStub {
     });
   }
   
+  /**
+   * @param {Object} mappings - a mapping from legacy global function to
+   *                  new non-global name.
+   */
   static checkAllFunctionsAreCalled(mappings, objDef) {
     Object.keys(mappings).forEach(function(originalName) {
       var nameAndParams = mappings[originalName].split('|');

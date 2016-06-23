@@ -3,9 +3,9 @@ import expect from 'expect.js'
 
 describe('Nexmo Object instance', function () {
   
-  it('should expose a sms object', function () {
+  it('should expose a message object', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
-    expect(nexmo.sms).to.be.a('object');
+    expect(nexmo.message).to.be.a('object');
   });
   
   it('should expose a voice object', function () {
