@@ -1,19 +1,22 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "1.0.0-beta-4",
+  "version": "1.0.0-beta-5",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
     "voice",
-    "nexmo"
+    "nexmo",
+    "verify",
+    "2fa",
+    "phone numbers"
   ],
   "homepage": "https://github.com/nexmo/nexmo-node",
   "repository": {
     "type": "git",
     "url": "git://github.com/nexmo/nexmo-node.git"
   },
-  "description": "A nodejs wrapper for nexmo API to send SMS",
+  "description": "Nexmo REST API client for Node.js. API support for SMS, Voice, Text-to-Speech, Numbers, Verify (2FA) and more.",
   "contributors": [
     "nexmo",
     "pvela",
