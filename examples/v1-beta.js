@@ -20,9 +20,11 @@ function logToConsole (err,messageResponse) {
 var Nexmo = require('../lib/Nexmo');
 
 var nexmo = new Nexmo({
-  apiKey: API_KEY, 
-  apiSecret: API_SECRET
-});
+    apiKey: API_KEY, 
+    apiSecret: API_SECRET
+  },
+  {debug: true}
+);
 
 console.log('Sending Text Message');
 nexmo.message.sendSms(
