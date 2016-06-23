@@ -2,7 +2,7 @@
 
 import nexmo from './index';
 
-class SMS {
+class Message {
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -22,7 +22,7 @@ class SMS {
   /**
    * TODO: document
    */
-  sendTextMessage() {
+  sendSms() {
     this._nexmo.sendTextMessage.apply(this._nexmo, arguments);
   }
   
@@ -63,4 +63,4 @@ class SMS {
   
 }
 
-export default SMS;
+export default Message;

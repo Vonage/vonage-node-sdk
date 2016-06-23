@@ -25,7 +25,7 @@ var nexmo = new Nexmo({
 });
 
 console.log('Sending Text Message');
-nexmo.sms.sendTextMessage(
+nexmo.message.sendSms(
   FROM_NUMBER,
   TO_NUMBER, 
   'testing', 

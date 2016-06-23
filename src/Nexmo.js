@@ -1,5 +1,5 @@
 import Credentials from './Credentials';
-import SMS from './SMS';
+import Message from './Message';
 import Voice from './Voice';
 import Number from './Number';
 import Verify from './Verify';
@@ -18,7 +18,7 @@ class Nexmo {
     this._credentials = Credentials.parse(credentials);
     this._options = options;
     
-    this.sms = new SMS(this._credentials, this._options);
+    this.message = new Message(this._credentials, this._options);
     this.voice = new Voice(this._credentials, this._options);
     this.number = new Number(this._credentials, this._options);
     this.verify = new Verify(this._credentials, this._options);
