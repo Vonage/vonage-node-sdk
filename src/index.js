@@ -413,7 +413,7 @@ exports.getApplication = function(appId, callback) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
       var showEndpoint = applicationsEndpoint;
-	  showEndpoint.path += "/" + appId);
+	  showEndpoint.path += "/" + appId;
       sendRequest(showEndpoint, callback);
   }
 }
@@ -431,7 +431,7 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
       var updateEndpoint = applicationsEndpoint;
-	  updateEndpoint.path += "/" + appId); 
+	  updateEndpoint.path += "/" + appId; 
       updateEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl;
       for (var key in options){
           updateEndpoint.path = updateEndpoint.path + key + '=' + options[key] + '&'
@@ -445,7 +445,7 @@ exports.deleteApplication = function(appId, callback) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
       var deleteEndpoint = applicationsEndpoint;
-	  deleteEndpoint.path += "/" + appId);
+	  deleteEndpoint.path += "/" + appId;
       sendRequest(deleteEndpoint, 'DELETE', callback);
   }
 }
