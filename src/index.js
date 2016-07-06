@@ -375,18 +375,19 @@ exports.updateNumber = function(countryCode, msisdn, params, callback){
 }
 
 exports.getApplications = function(options, callback) {
+    var endpoint = getEndpoint(applicationsEndpoint.path);
     if (typeof options == 'function') {
         callback = options;
     } else if (typeof options == 'object'){
-        applicationsEndpoint.path = applicationsEndpoint.path + '?';
+        var endpoint.path += '?';
         for (var key in options){
-            applicationsEndpoint.path = applicationsEndpoint.path + key + '=' + options[key] + '&'
+            endpoint.path += (key + '=' + options[key] + '&')
         }
     } else {
         sendError(callback, new Error(ERROR_MESSAGES.optionsNotAnObject));
   	    return;
     }
-  sendRequest(applicationsEndpoint, callback);
+  sendRequest(endpoint, callback);
 }
 
 exports.createApplication = function(name, type, answerUrl, eventUrl, options, callback) {
@@ -399,10 +400,9 @@ exports.createApplication = function(name, type, answerUrl, eventUrl, options, c
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var createEndpoint = applicationsEndpoint;
-      createEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl;
+      var createEndpoint = (applicationsEndpoint.path + '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       for (var key in options){
-          createEndpoint.path = createEndpoint.path + key + '=' + options[key] + '&'
+          createEndpoint.path += (key + '=' + options[key] + '&')
       }
       sendRequest(createEndpoint, 'POST', callback);
   }
@@ -412,8 +412,7 @@ exports.getApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var showEndpoint = applicationsEndpoint;
-	  showEndpoint.path += "/" + appId;
+      var showEndpoint = applicationsEndpoint.path + "/" + appId;
       sendRequest(showEndpoint, callback);
   }
 }
@@ -430,9 +429,8 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var updateEndpoint = applicationsEndpoint;
-	  updateEndpoint.path += "/" + appId; 
-      updateEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl;
+      var updateEndpoint = (applicationsEndpoint.path + "/" + appId; 
+      updateEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       for (var key in options){
           updateEndpoint.path = updateEndpoint.path + key + '=' + options[key] + '&'
       }
@@ -444,8 +442,7 @@ exports.deleteApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var deleteEndpoint = applicationsEndpoint;
-	  deleteEndpoint.path += "/" + appId;
+      var deleteEndpoint = (applicationsEndpoint.path + "/" + appId);
       sendRequest(deleteEndpoint, 'DELETE', callback);
   }
 }
