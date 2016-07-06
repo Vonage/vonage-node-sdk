@@ -23,6 +23,7 @@ var searchVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/search/json'};
 var niEndpoint = {host:'rest.nexmo.com',path:'/ni/json'};
 var niBasicEndpoint = {host:'api.nexmo.com',path:'/number/format/json'};
 var niStandardEndpoint = {host:'api.nexmo.com',path:'/number/lookup/json'};
+var applicationsEndpoint = {host:'api.nexmo.com',path:'/beta/account/applications'};
 var up = {};
 var debugOn = false;
 var port = 443;
@@ -374,19 +375,20 @@ exports.updateNumber = function(countryCode, msisdn, params, callback){
 }
 
 exports.getApplications = function(options, callback) {
-    var applicationsEndpoint = getEndpoint('/beta/account/applications');
+    var endpoint = getEndpoint(applicationsEndpoint.path);
+    endpoint.host = applicationsEndpoint.host;
     if (typeof options == 'function') {
         callback = options;
     } else if (typeof options == 'object'){
-        applicationsEndpoint.path = applicationsEndpoint.path + '?';
+        endpoint.path += '?';
         for (var key in options){
-            applicationsEndpoint.path = applicationsEndpoint.path + key + '=' + options[key] + '&'
+            endpoint.path += (key + '=' + options[key] + '&');
         }
     } else {
         sendError(callback, new Error(ERROR_MESSAGES.optionsNotAnObject));
   	    return;
     }
-  sendRequest(applicationsEndpoint, callback);
+  sendRequest(endpoint, callback);
 }
 
 exports.createApplication = function(name, type, answerUrl, eventUrl, options, callback) {
@@ -399,10 +401,11 @@ exports.createApplication = function(name, type, answerUrl, eventUrl, options, c
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var createEndpoint = getEndpoint('/beta/account/applications');
-      createEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl;
+      var createEndpoint = getEndpoint(applicationsEndpoint.path);
+      createEndpoint.host = applicationsEndpoint.host;
+      createEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       for (var key in options){
-          createEndpoint.path = createEndpoint.path + key + '=' + options[key] + '&'
+          createEndpoint.path += (key + '=' + options[key] + '&')
       }
       sendRequest(createEndpoint, 'POST', callback);
   }
@@ -412,7 +415,8 @@ exports.getApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var showEndpoint = getEndpoint('/beta/account/applications/' + appId);
+      var showEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
+      showEndpoint.host = applicationsEndpoint.host;
       sendRequest(showEndpoint, callback);
   }
 }
@@ -429,8 +433,9 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var updateEndpoint = getEndpoint('/beta/account/applications/'+appId);
-      updateEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl;
+      var updateEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId); 
+      updateEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
+      updateEndpoint.host = applicationsEndpoint.host;
       for (var key in options){
           updateEndpoint.path = updateEndpoint.path + key + '=' + options[key] + '&'
       }
@@ -442,7 +447,8 @@ exports.deleteApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var deleteEndpoint = getEndpoint('/beta/account/applications/' + appId);
+      var deleteEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
+      deleteEndpoint.host = applicationsEndpoint.host;
       sendRequest(deleteEndpoint, 'DELETE', callback);
   }
 }
@@ -682,6 +688,7 @@ exports.setHost = function(aHost) {
     niEndpoint.host = aHost;
 	niBasicEndpoint.host = aHost;
 	niStandardEndpoint.host = aHost;
+  applicationsEndpoint.host = aHost;
 }
 
 exports.setPort = function(aPort) {
