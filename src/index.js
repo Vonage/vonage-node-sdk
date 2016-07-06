@@ -23,6 +23,7 @@ var searchVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/search/json'};
 var niEndpoint = {host:'rest.nexmo.com',path:'/ni/json'};
 var niBasicEndpoint = {host:'api.nexmo.com',path:'/number/format/json'};
 var niStandardEndpoint = {host:'api.nexmo.com',path:'/number/lookup/json'};
+var applicationsEndpoint = {host:'api.nexmo.com',path:'/beta/account/applications'};
 var up = {};
 var debugOn = false;
 var port = 443;
@@ -374,7 +375,6 @@ exports.updateNumber = function(countryCode, msisdn, params, callback){
 }
 
 exports.getApplications = function(options, callback) {
-    var applicationsEndpoint = getEndpoint('/beta/account/applications');
     if (typeof options == 'function') {
         callback = options;
     } else if (typeof options == 'object'){
@@ -399,7 +399,7 @@ exports.createApplication = function(name, type, answerUrl, eventUrl, options, c
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var createEndpoint = getEndpoint('/beta/account/applications');
+      var createEndpoint = applicationsEndpoint;
       createEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl;
       for (var key in options){
           createEndpoint.path = createEndpoint.path + key + '=' + options[key] + '&'
@@ -412,7 +412,8 @@ exports.getApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var showEndpoint = getEndpoint('/beta/account/applications/' + appId);
+      var showEndpoint = applicationsEndpoint;
+	  showEndpoint.path += "/" + appId;
       sendRequest(showEndpoint, callback);
   }
 }
@@ -429,7 +430,8 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var updateEndpoint = getEndpoint('/beta/account/applications/'+appId);
+      var updateEndpoint = applicationsEndpoint;
+	  updateEndpoint.path += "/" + appId; 
       updateEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl;
       for (var key in options){
           updateEndpoint.path = updateEndpoint.path + key + '=' + options[key] + '&'
@@ -442,7 +444,8 @@ exports.deleteApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var deleteEndpoint = getEndpoint('/beta/account/applications/' + appId);
+      var deleteEndpoint = applicationsEndpoint;
+	  deleteEndpoint.path += "/" + appId;
       sendRequest(deleteEndpoint, 'DELETE', callback);
   }
 }
