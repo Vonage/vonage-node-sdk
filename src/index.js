@@ -688,6 +688,7 @@ exports.setHost = function(aHost) {
     niEndpoint.host = aHost;
 	niBasicEndpoint.host = aHost;
 	niStandardEndpoint.host = aHost;
+  applicationsEndpoint.host = aHost;
 }
 
 exports.setPort = function(aPort) {
