@@ -379,9 +379,9 @@ exports.getApplications = function(options, callback) {
     if (typeof options == 'function') {
         callback = options;
     } else if (typeof options == 'object'){
-        var endpoint.path += '?';
+        endpoint.path += '?';
         for (var key in options){
-            endpoint.path += (key + '=' + options[key] + '&')
+            endpoint.path += (key + '=' + options[key] + '&');
         }
     } else {
         sendError(callback, new Error(ERROR_MESSAGES.optionsNotAnObject));
@@ -400,7 +400,8 @@ exports.createApplication = function(name, type, answerUrl, eventUrl, options, c
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var createEndpoint = (applicationsEndpoint.path + '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
+      var createEndpoint = getEndpoint(applicationsEndpoint.path);
+      createEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       for (var key in options){
           createEndpoint.path += (key + '=' + options[key] + '&')
       }
@@ -429,8 +430,8 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var updateEndpoint = (applicationsEndpoint.path + "/" + appId; 
-      updateEndpoint.path += '?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
+      var updateEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId); 
+      updateEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       for (var key in options){
           updateEndpoint.path = updateEndpoint.path + key + '=' + options[key] + '&'
       }
@@ -442,7 +443,7 @@ exports.deleteApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var deleteEndpoint = (applicationsEndpoint.path + "/" + appId);
+      var deleteEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
       sendRequest(deleteEndpoint, 'DELETE', callback);
   }
 }
