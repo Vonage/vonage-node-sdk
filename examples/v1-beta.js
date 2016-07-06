@@ -39,3 +39,16 @@ nexmo.numberInsight.get({level:'basic', number: TO_NUMBER}, logToConsole);
 
 console.log('Checking Balance');
 nexmo.account.checkBalance(logToConsole);
+
+console.log('Getting Apps List');
+nexmo.app.get({}, logToConsole);
+
+var tempAppName = new Date().getTime(); 
+console.log('Creating App', tempAppName);
+
+nexmo.app.create(tempAppName, 'voice', 'http://requestb.in/s8yhpcs8', 'http://requestb.in/s8yhpcs8', null, function(err, resp) {
+  logToConsole(resp);
+    
+  console.log('Deleting App', tempAppName);
+  nexmo.app.delete(resp.id, logToConsole);
+});
