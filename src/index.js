@@ -376,6 +376,7 @@ exports.updateNumber = function(countryCode, msisdn, params, callback){
 
 exports.getApplications = function(options, callback) {
     var endpoint = getEndpoint(applicationsEndpoint.path);
+    endpoint.host = applicationsEndpoint.host;
     if (typeof options == 'function') {
         callback = options;
     } else if (typeof options == 'object'){
@@ -401,6 +402,7 @@ exports.createApplication = function(name, type, answerUrl, eventUrl, options, c
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
       var createEndpoint = getEndpoint(applicationsEndpoint.path);
+      createEndpoint.host = applicationsEndpoint.host;
       createEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       for (var key in options){
           createEndpoint.path += (key + '=' + options[key] + '&')
@@ -413,7 +415,8 @@ exports.getApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var showEndpoint = applicationsEndpoint.path + "/" + appId;
+      var showEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
+      showEndpoint.host = applicationsEndpoint.host;
       sendRequest(showEndpoint, callback);
   }
 }
@@ -432,6 +435,7 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
   } else {
       var updateEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId); 
       updateEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
+      updateEndpoint.host = applicationsEndpoint.host;
       for (var key in options){
           updateEndpoint.path = updateEndpoint.path + key + '=' + options[key] + '&'
       }
@@ -444,6 +448,7 @@ exports.deleteApplication = function(appId, callback) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
       var deleteEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
+      deleteEndpoint.host = applicationsEndpoint.host;
       sendRequest(deleteEndpoint, 'DELETE', callback);
   }
 }
