@@ -405,7 +405,7 @@ exports.createApplication = function(name, type, answerUrl, eventUrl, options, c
       createEndpoint.host = applicationsEndpoint.host;
       createEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       for (var key in options){
-          createEndpoint.path += (key + '=' + options[key] + '&')
+          createEndpoint.path += ('&' + key + '=' + options[key]);
       }
       sendRequest(createEndpoint, 'POST', callback);
   }
@@ -433,11 +433,11 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var updateEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId); 
+      var updateEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
       updateEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       updateEndpoint.host = applicationsEndpoint.host;
       for (var key in options){
-          updateEndpoint.path = updateEndpoint.path + key + '=' + options[key] + '&'
+          updateEndpoint.path = updateEndpoint.path + '&' + key + '=' + options[key];
       }
       sendRequest(updateEndpoint, 'PUT', callback);
   }
