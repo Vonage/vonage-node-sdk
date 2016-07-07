@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "1.0.0-beta-6",
+  "version": "1.0.0-beta-7",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
