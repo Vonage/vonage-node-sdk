@@ -23,7 +23,7 @@ describe('HttpClient Object', function () {
     fakeHttp.request.restore();
   });
   
-  it('should support GET requests over https', function() {
+  it('should support requests over https', function() {
     var mock = sinon.mock(fakeHttp);
     mock.expects('request')
       .once()
@@ -41,7 +41,7 @@ describe('HttpClient Object', function () {
     client.request({host:'api.nexmo.com', path: '/api'}, 'GET', {some: 'data'});
   });
   
-  it('should support GET requests over http', function() {
+  it('should support requests over http', function() {
     var mock = sinon.mock(fakeHttp);
     mock.expects('request')
       .once()
