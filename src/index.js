@@ -208,7 +208,7 @@ function sendRequest(endpoint, method, callback) {
   endpoint.path = endpoint.path +
                   (endpoint.path.indexOf('?')>0?'&':'?') + 
                   querystring.stringify(up);
-  var client = new HttpClient({log: log}, {userAgent: USER_AGENT});
+  var client = new HttpClient({log: log, userAgent: USER_AGENT});
   client.request(endpoint, method, callback);
 }
 
