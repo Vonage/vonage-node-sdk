@@ -12,7 +12,10 @@ class Nexmo {
    * @param {Credentials} credentials - Nexmo API credentials
    * @param {string} credentials.apiKey - the Nexmo API key
    * @param {string} credentials.apiSecret - the Nexmo API secret
-   * @param {object} options Additional options
+   * @param {Object} options Additional options
+   * @param {boolean} options.debug `true` to turn on debug logging
+   * @param {string} options.appendToUserAgent A value to append to the user agent.
+   *                    The value will be prefixed with a `/`
    */
   constructor(credentials, options) {
     this._credentials = Credentials.parse(credentials);

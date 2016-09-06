@@ -2,6 +2,16 @@
 
 var HttpClient = require('./HttpClient');
 var querystring = require('querystring');
+var fs = require('fs');
+
+var USER_AGENT = 'nexmo-node/UNKNOWN/UNKNOWN';
+try {
+  var packageDetails = require(__dirname + '/../package.json');
+  USER_AGENT = `nexmo-node/${packageDetails.version}/${process.version}`;
+}
+catch(e) {
+  console.warn('Could not load package details');
+}
 
 var initialized = false;
 var msgpath = {host:'rest.nexmo.com',path:'/sms/json'};
@@ -55,7 +65,7 @@ var ERROR_MESSAGES = {
 };
 
 // debugon is optional
-exports.initialize = function(pkey, psecret, debugon) {
+exports.initialize = function(pkey, psecret, options) {
     if (!pkey || !psecret) {
         throw 'key and secret cannot be empty, set valid values';
     }
@@ -63,9 +73,20 @@ exports.initialize = function(pkey, psecret, debugon) {
         api_key: pkey,
         api_secret: psecret
     }
-    debugOn = !debugon ? false : (String(debugon) === "false" ? false : true);
+    debugOn = options.debug === true;
+    if(options.appendToUserAgent) {
+      USER_AGENT += `/${options.appendToUserAgent}`;
+    }
     initialized = true;
 }
+
+exports._getUserAgent = function() {
+  return USER_AGENT;
+};
+
+exports._getDebug = function() {
+  return debugOn;
+};
 
 exports.sendBinaryMessage = function(sender, recipient, body, udh, callback) {
     if (!body) {
@@ -187,7 +208,7 @@ function sendRequest(endpoint, method, callback) {
   endpoint.path = endpoint.path +
                   (endpoint.path.indexOf('?')>0?'&':'?') + 
                   querystring.stringify(up);
-  var client = new HttpClient({log: log});
+  var client = new HttpClient({log: log}, {userAgent: USER_AGENT});
   client.request(endpoint, method, callback);
 }
 
