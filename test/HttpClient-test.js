@@ -14,7 +14,7 @@ var fakeRequest = {
 
 var defaultHeaders = {
   "Content-Type": "application/x-www-form-urlencoded",
-  "accept": "application/json"
+  "Accept": "application/json"
 };
 
 describe('HttpClient Object', function () {
@@ -137,7 +137,7 @@ describe('HttpClient Object', function () {
       .withArgs({
         headers:{
           "Content-Type": "application/x-www-form-urlencoded",
-          "accept": "application/json",
+          "Accept": "application/json",
           "User-Agent": expectedUserAgent
         },
         host: "api.nexmo.com",

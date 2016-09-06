@@ -3,7 +3,7 @@ var http = require('http');
 
 var headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'accept': 'application/json'
+    'Accept': 'application/json'
 };
 
 class HttpClient {
