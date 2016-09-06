@@ -129,7 +129,7 @@ describe('HttpClient Object', function () {
   });
   
   it('should allow User-Agent header to be set via options', function() {
-    var expectedUserAgeint = 'nexmo-node/1.0.0/v4.4.7';
+    var expectedUserAgent = 'nexmo-node/1.0.0/v4.4.7';
     
     var mock = sinon.mock(fakeHttp);
     mock.expects('request')
@@ -138,7 +138,7 @@ describe('HttpClient Object', function () {
         headers:{
           "Content-Type": "application/x-www-form-urlencoded",
           "accept": "application/json",
-          "User-Agent": expectedUserAgeint
+          "User-Agent": expectedUserAgent
         },
         host: "api.nexmo.com",
         method: "POST",
@@ -147,7 +147,7 @@ describe('HttpClient Object', function () {
       })
       .returns(fakeRequest);
     
-    var client = new HttpClient({https:fakeHttp, userAgent: expectedUserAgeint});
+    var client = new HttpClient({https:fakeHttp, userAgent: expectedUserAgent});
     
     client.request({host:'api.nexmo.com', path: '/api'}, 'POST', {some: 'data'});
   });
