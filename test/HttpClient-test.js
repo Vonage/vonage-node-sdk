@@ -127,5 +127,29 @@ describe('HttpClient Object', function () {
     
     expect(logged).to.be(true);
   });
+  
+  it('should allow User-Agent header to be set via options', function() {
+    var expectedUserAgeint = 'nexmo-node/1.0.0/v4.4.7';
+    
+    var mock = sinon.mock(fakeHttp);
+    mock.expects('request')
+      .once()
+      .withArgs({
+        headers:{
+          "Content-Type": "application/x-www-form-urlencoded",
+          "accept": "application/json",
+          "User-Agent": expectedUserAgeint
+        },
+        host: "api.nexmo.com",
+        method: "POST",
+        path: "/api",
+        port: 443
+      })
+      .returns(fakeRequest);
+    
+    var client = new HttpClient({https:fakeHttp, userAgent: expectedUserAgeint});
+    
+    client.request({host:'api.nexmo.com', path: '/api'}, 'POST', {some: 'data'});
+  });
 
 });

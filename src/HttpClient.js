@@ -12,6 +12,11 @@ class HttpClient {
     this.https = options.https || https;
     this.http =  options.http || http;
     this.log = options.log || function() {};
+    this.headers = headers;
+    
+    if(options.userAgent) {
+      this.headers['User-Agent'] = options.userAgent;
+    }
   }
   
   request(endpoint, method, callback) {
@@ -30,7 +35,7 @@ class HttpClient {
         port: this.port,
         path: endpoint.path,
         method: method,
-        headers: headers
+        headers: this.headers
     };
     this.log(options);
     var request;
