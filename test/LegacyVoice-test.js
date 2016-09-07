@@ -1,4 +1,4 @@
-import Voice from '../lib/Voice';
+import LegacyVoice from '../lib/LegacyVoice';
 
 import NexmoStub from './NexmoStub';
 
@@ -9,14 +9,14 @@ var voiceAPIs = {
   'call': 'call'  
 };
 
-describe('Voice Object', function () {
+describe('LegacyVoice Object', function () {
   
   it('should implement all v1 APIs', function() {
-    NexmoStub.checkAllFunctionsAreDefined(voiceAPIs, Voice);
+    NexmoStub.checkAllFunctionsAreDefined(voiceAPIs, LegacyVoice);
   });
 
   it('should proxy the function call to the underlying `nexmo` object', function() {
-    NexmoStub.checkAllFunctionsAreCalled(voiceAPIs, Voice);
+    NexmoStub.checkAllFunctionsAreCalled(voiceAPIs, LegacyVoice);
   });
   
 });
