@@ -2,7 +2,7 @@
 
 import nexmo from './index';
 
-class Voice {
+class LegacyVoice {
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -49,4 +49,4 @@ class Voice {
     
 }
 
-export default Voice;
+export default LegacyVoice;
