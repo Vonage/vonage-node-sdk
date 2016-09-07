@@ -4,7 +4,7 @@ import sinonChai        from 'sinon-chai';
 
 chai.use(sinonChai);
 
-import Jwt from '../lib/Jwt';
+import JwtGenerator from '../lib/JwtGenerator';
 
 import Credentials from '../lib/Credentials';
 
@@ -43,10 +43,10 @@ describe('Credentials Object', function () {
   });
   
   it('should allow a JWT to be generated using supplied application ID', function() {
-    var stub = sinon.createStubInstance(Jwt)
+    var stub = sinon.createStubInstance(JwtGenerator)
     
     var cred = new Credentials('KEY', 'SECRET', __dirname + '/private-test.key', 'app-id');
-    cred._setJwt(stub);
+    cred._setJwtGenerator(stub);
     
     var token = cred.generateJwt();
     
@@ -54,10 +54,10 @@ describe('Credentials Object', function () {
   });
   
   it('should allow a JWT to be generated using an alternative application ID', function() {
-    var stub = sinon.createStubInstance(Jwt)
+    var stub = sinon.createStubInstance(JwtGenerator)
     
     var cred = new Credentials('KEY', 'SECRET', __dirname + '/private-test.key', 'app-id');
-    cred._setJwt(stub);
+    cred._setJwtGenerator(stub);
     
     var altAppId = 'another-app-id';
     var token = cred.generateJwt(altAppId);

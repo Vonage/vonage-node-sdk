@@ -1,7 +1,7 @@
 "use strict";
 
 import fs from 'fs';
-import Jwt from './Jwt';
+import JwtGenerator from './JwtGenerator';
 
 /**
  * Right now only key/secret credentials are supported.
@@ -30,7 +30,7 @@ class Credentials {
     }
     
     /** @private */
-    this._jwt = new Jwt();
+    this._jwtGenerator = new JwtGenerator();
   }
   
   /**
@@ -44,7 +44,7 @@ class Credentials {
    * @returns {string} The generated JWT
    */
   generateJwt(applicationId = this.applicationId) {
-    var token = this._jwt.generate(this.privateKey, applicationId);
+    var token = this._jwtGenerator.generate(this.privateKey, applicationId);
     return token;
   }
   
@@ -52,8 +52,8 @@ class Credentials {
    * @private
    * Used for testing purposes only.
    */
-  _setJwt(jwt) {
-    this._jwt = jwt;
+  _setJwtGenerator(generator) {
+    this._jwtGenerator = generator;
   }
   
   /**

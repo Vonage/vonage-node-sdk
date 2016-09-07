@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import jwt from 'jsonwebtoken';
 
-class Jwt {
+class JwtGenerator {
 	/**
 	 * Generate a JSON Web Token (JWT) for the application with the given
 	 * `applicationId`.
@@ -24,4 +24,4 @@ class Jwt {
 	}
 }
 
-module.exports = Jwt;
+module.exports = JwtGenerator;
