@@ -3,6 +3,11 @@ import expect from 'expect.js'
 import sinon from 'sinon';
 
 describe('Nexmo Object instance', function () {
+
+  it('should expose a credentials object', function () {
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
+    expect(nexmo.credentials).to.be.a('object');
+  });
   
   it('should expose a message object', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});

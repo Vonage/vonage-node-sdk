@@ -16,7 +16,7 @@ class Jwt {
 		var toSign = {
 			'iat': issuedAt,
 			'application_id': applicationId,
-			 "jti": jwtIdClaim
+			'jti': jwtIdClaim
 		};
 		
 		var token = jwt.sign(toSign, cert, {algorithm: 'RS256'});

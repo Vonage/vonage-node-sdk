@@ -1,12 +1,59 @@
+"use strict";
+
+import fs from 'fs';
+import Jwt from './Jwt';
+
 /**
  * Right now only key/secret credentials are supported.
  * However, in time JWT will also be supported.
  * The `Credentials` object provides an abstraction to this.
+ *
+ * @param {string} apiKey - A Nexmo API Key
+ * @param {string} apiSecret - A Nexmo API Secret
+ * @param {string|Buffer} [privateKey] -  When a string value is passed it should
+ *                        represent the path to the private key. If a Buffer is
+ *                        passed then it should be the key read from the file system.
  */
 class Credentials {
-  constructor(apiKey, apiSecret) {
+  constructor(apiKey, apiSecret, privateKey, applicationId) {
     this.apiKey = apiKey;
     this.apiSecret = apiSecret;
+    
+    this.privateKey = null;
+    this.applicationId = applicationId;
+    
+    if(privateKey instanceof Buffer) {
+      this.privateKey = privateKey;
+    }
+    else if(privateKey !== undefined) {
+      this.privateKey = fs.readFileSync(privateKey);
+    }
+    
+    /** @private */
+    this._jwt = new Jwt();
+  }
+  
+  /**
+   * Generate a Jwt using the Private Key in the Credentials.
+   * By default the credentials.applicationId will be used when creating the token.
+   * However, this can be overwritten.
+   *
+   * @param {string} [applicationId] an application ID to be used instead of the
+   *                default Credentials.applicationId value.
+   *
+   * @returns {string} The generated JWT
+   */
+  generateJwt(applicationId = this.applicationId) {
+    var token = this._jwt.generate(this.privateKey, applicationId);
+    return token;
+  }
+  
+  /**
+   * @private
+   * Used for testing purposes only.
+   */
+  _setJwt(jwt) {
+    this._jwt = jwt;
   }
   
   /**
