@@ -40,51 +40,51 @@ class HttpClient {
 
     this.logger.info(options);
     var request;
-  	if (true) { // set to false to verify the request without sending the actual request
-        if (options.port == 443) {
-            request = this.https.request(options);
-        } else {
-            request = http.request(options);
-        }
-  	    request.end();
-  	    var responseReturn = '';
-  	    request.on('response', (response) => {
-  	        response.setEncoding('utf8');
-  	        response.on('data', (chunk) => {
-  	            responseReturn += chunk;
-  	        });
-  	        response.on('end', () => {
-  	            this.logger.info('response ended');
-  	            if (callback) {
-  	                var retJson = responseReturn;
-  	                var err = null;
-                    if (method !== 'DELETE') {
-                      try {
-    	                    retJson = JSON.parse(responseReturn);
-    	                } catch (parsererr) {
-    	                    // ignore parser error for now and send raw response to client
-    	                    this.logger.error(parsererr);
-    	                    this.logger.error('could not convert API response to JSON, above error is ignored and raw API response is returned to client');
-    						          this.logger.error('Raw Error message from API ');
-    						          this.logger.error(responseReturn);
-    	                    err = parsererr;
-    	                }
-                    }
-                    callback(err, retJson);
-  	            }
-  	        })
-  	        response.on('close', (e) => {
-  	            this.logger.error('problem with API request detailed stacktrace below ');
-  	            this.logger.error(e);
-  	            callback(e);
-  	        });
-  	    });
-  	    request.on('error', (e) => {
-  	        this.logger.error('problem with API request detailed stacktrace below ');
-  	        this.logger.error(e);
-  	        callback(e);
-  	    });
-  	}
+
+    if (options.port == 443) {
+        request = this.https.request(options);
+    } else {
+        request = http.request(options);
+    }
+    request.end();
+    var responseReturn = '';
+    request.on('response', (response) => {
+        response.setEncoding('utf8');
+        response.on('data', (chunk) => {
+            responseReturn += chunk;
+        });
+        response.on('end', () => {
+            this.logger.info('response ended');
+            if (callback) {
+                var retJson = responseReturn;
+                var err = null;
+                if (method !== 'DELETE') {
+                  try {
+	                    retJson = JSON.parse(responseReturn);
+	                } catch (parsererr) {
+	                    // ignore parser error for now and send raw response to client
+	                    this.logger.error(parsererr);
+	                    this.logger.error('could not convert API response to JSON, above error is ignored and raw API response is returned to client');
+						          this.logger.error('Raw Error message from API ');
+						          this.logger.error(responseReturn);
+	                    err = parsererr;
+	                }
+                }
+                callback(err, retJson);
+            }
+        })
+        response.on('close', (e) => {
+            this.logger.error('problem with API request detailed stacktrace below ');
+            this.logger.error(e);
+            callback(e);
+        });
+    });
+    request.on('error', (e) => {
+        this.logger.error('problem with API request detailed stacktrace below ');
+        this.logger.error(e);
+        callback(e);
+    });
+
   }
 }
 
