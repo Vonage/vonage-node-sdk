@@ -1,16 +1,19 @@
 'use strict';
 
-var https = require('https');
-var http = require('http');
+var HttpClient = require('./HttpClient');
 var querystring = require('querystring');
+var fs = require('fs');
 
-var headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'accept': 'application/json'
-};
+var USER_AGENT = 'nexmo-node/UNKNOWN/UNKNOWN';
+try {
+  var packageDetails = require(__dirname + '/../package.json');
+  USER_AGENT = `nexmo-node/${packageDetails.version}/${process.version}`;
+}
+catch(e) {
+  console.warn('Could not load package details');
+}
+
 var initialized = false;
-var username = '';
-var password = '';
 var msgpath = {host:'rest.nexmo.com',path:'/sms/json'};
 var shortcodePath = {host:'rest.nexmo.com',path:'/sc/us/${type}/json'};
 var ttsEndpoint = {host:'api.nexmo.com',path:'/tts/json'};
@@ -26,7 +29,6 @@ var niStandardEndpoint = {host:'api.nexmo.com',path:'/number/lookup/json'};
 var applicationsEndpoint = {host:'api.nexmo.com',path:'/beta/account/applications'};
 var up = {};
 var debugOn = false;
-var port = 443;
 var numberPattern = new RegExp("^[0-9 +()-]*$");
 
 //Error message resources are maintained globally in one place for easy management
@@ -63,19 +65,28 @@ var ERROR_MESSAGES = {
 };
 
 // debugon is optional
-exports.initialize = function(pkey, psecret, debugon) {
+exports.initialize = function(pkey, psecret, options) {
     if (!pkey || !psecret) {
         throw 'key and secret cannot be empty, set valid values';
     }
-    username = pkey;
-    password = psecret;
     up = {
         api_key: pkey,
         api_secret: psecret
     }
-    debugOn = !debugon ? false : (String(debugon) === "false" ? false : true);
+    debugOn = options.debug === true;
+    if(options.appendToUserAgent) {
+      USER_AGENT += `/${options.appendToUserAgent}`;
+    }
     initialized = true;
 }
+
+exports._getUserAgent = function() {
+  return USER_AGENT;
+};
+
+exports._getDebug = function() {
+  return debugOn;
+};
 
 exports.sendBinaryMessage = function(sender, recipient, body, udh, callback) {
     if (!body) {
@@ -194,69 +205,11 @@ function getEndpoint(action) {
 }
 
 function sendRequest(endpoint, method, callback) {
-    if (!initialized) {
-        throw 'nexmo not initialized, call nexmo.initialize(username, password) first before calling any nexmo API';
-    }
-    if (typeof method == 'function') {
-        callback = method;
-        method = 'GET';
-    }
-    if (method == 'POST' || method == 'DELETE')
-        headers['Content-Length'] = 0; // Fix broken due ot 411 Content-Length error now sent by Nexmo API
-    var options = {
-        host: endpoint.host?endpoint.host:'rest.nexmo.com',
-        port: port,
-        path: endpoint.path + (endpoint.path.indexOf('?')>0?'&':'?') + querystring.stringify(up),
-        method: method,
-        headers: headers
-    };
-    log(options);
-    var request;
-	if (true) { // set to false to verify the request without sending the actual request
-      if (options.port == 443) {
-          request = https.request(options);
-      } else {
-          request = http.request(options);
-      }
-	    request.end();
-	    var responseReturn = '';
-	    request.on('response', function(response) {
-	        response.setEncoding('utf8');
-	        response.on('data', function(chunk) {
-	            responseReturn += chunk;
-	        });
-	        response.on('end', function() {
-	            log('response ended');
-	            if (callback) {
-	                var retJson = responseReturn;
-	                var err = null;
-                  if (method !== 'DELETE') {
-                    try {
-  	                    retJson = JSON.parse(responseReturn);
-  	                } catch (parsererr) {
-  	                    // ignore parser error for now and send raw response to client
-  	                    log(parsererr);
-  	                    log('could not convert API response to JSON, above error is ignored and raw API response is returned to client');
-  						          log('Raw Error message from API ');
-  						          log(responseReturn);
-  	                    err = parsererr;
-  	                }
-                  }
-                  callback(err, retJson);
-	            }
-	        })
-	        response.on('close', function(e) {
-	            log('problem with API request detailed stacktrace below ');
-	            log(e);
-	            callback(e);
-	        });
-	    });
-	    request.on('error', function(e) {
-	        log('problem with API request detailed stacktrace below ');
-	        log(e);
-	        callback(e);
-	    });
-	}
+  endpoint.path = endpoint.path +
+                  (endpoint.path.indexOf('?')>0?'&':'?') + 
+                  querystring.stringify(up);
+  var client = new HttpClient({log: log, userAgent: USER_AGENT});
+  client.request(endpoint, method, callback);
 }
 
 exports.checkBalance = function(callback) {
