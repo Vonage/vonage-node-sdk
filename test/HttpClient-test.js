@@ -1,9 +1,6 @@
 import sinon from 'sinon';
 import expect from 'expect.js';
 
-import https from 'https';
-import http from 'http';
-
 import HttpClient from '../lib/HttpClient';
 
 var fakeHttp = {request: function() {}};
