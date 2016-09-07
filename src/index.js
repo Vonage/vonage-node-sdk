@@ -1,17 +1,6 @@
 'use strict';
 
-var HttpClient = require('./HttpClient');
 var querystring = require('querystring');
-var fs = require('fs');
-
-var USER_AGENT = 'nexmo-node/UNKNOWN/UNKNOWN';
-try {
-  var packageDetails = require(__dirname + '/../package.json');
-  USER_AGENT = `nexmo-node/${packageDetails.version}/${process.version}`;
-}
-catch(e) {
-  console.warn('Could not load package details');
-}
 
 var initialized = false;
 var msgpath = {host:'rest.nexmo.com',path:'/sms/json'};
@@ -28,8 +17,8 @@ var niBasicEndpoint = {host:'api.nexmo.com',path:'/number/format/json'};
 var niStandardEndpoint = {host:'api.nexmo.com',path:'/number/lookup/json'};
 var applicationsEndpoint = {host:'api.nexmo.com',path:'/beta/account/applications'};
 var up = {};
-var debugOn = false;
 var numberPattern = new RegExp("^[0-9 +()-]*$");
+var _options = null;
 
 //Error message resources are maintained globally in one place for easy management
 var ERROR_MESSAGES = {
@@ -64,7 +53,6 @@ var ERROR_MESSAGES = {
     product: 'Invalid product. Should be one of [voice, sms]'
 };
 
-// debugon is optional
 exports.initialize = function(pkey, psecret, options) {
     if (!pkey || !psecret) {
         throw 'key and secret cannot be empty, set valid values';
@@ -73,20 +61,9 @@ exports.initialize = function(pkey, psecret, options) {
         api_key: pkey,
         api_secret: psecret
     }
-    debugOn = options.debug === true;
-    if(options.appendToUserAgent) {
-      USER_AGENT += `/${options.appendToUserAgent}`;
-    }
+    _options = options;
     initialized = true;
 }
-
-exports._getUserAgent = function() {
-  return USER_AGENT;
-};
-
-exports._getDebug = function() {
-  return debugOn;
-};
 
 exports.sendBinaryMessage = function(sender, recipient, body, udh, callback) {
     if (!body) {
@@ -151,7 +128,7 @@ function sendMessage(data, callback) {
     } else {
         var path = clone(msgpath);
 		path.path+= '?' + querystring.stringify(data);
-        log('sending message from ' + data.from + ' to ' + data.to + ' with message ' + data.text);
+        _options.logger.info('sending message from ' + data.from + ' to ' + data.to + ' with message ' + data.text);
         sendRequest(path, 'POST', function(err, apiResponse) {
             if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
                 sendError(callback, new Error(apiResponse.messages[0]['error-text']), apiResponse);
@@ -177,7 +154,7 @@ function sendViaShortcode(type, recipient, messageParams, opts, callback) {
     });
     opts.to = recipient;
     path.path+= '?' + querystring.stringify(opts);
-    log('sending message from shortcode ' + type + ' to ' + recipient + ' with parameters ' + JSON.stringify(messageParams));
+    _options.logger.info('sending message from shortcode ' + type + ' to ' + recipient + ' with parameters ' + JSON.stringify(messageParams));
     sendRequest(path, 'POST', function(err, apiResponse) {
         if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
             sendError(callback, new Error(apiResponse.messages[0]['error-text']), apiResponse);
@@ -208,8 +185,7 @@ function sendRequest(endpoint, method, callback) {
   endpoint.path = endpoint.path +
                   (endpoint.path.indexOf('?')>0?'&':'?') + 
                   querystring.stringify(up);
-  var client = new HttpClient({log: log, userAgent: USER_AGENT});
-  client.request(endpoint, method, callback);
+  _options.httpClient.request(endpoint, method, callback);
 }
 
 exports.checkBalance = function(callback) {
@@ -526,7 +502,7 @@ function sendVoiceMessage(voiceEndpoint, data, callback) {
     } else {
         var endpoint = clone(voiceEndpoint);
 		endpoint.path += '?' + querystring.stringify(data);
-        log('sending TTS message to ' + data.to + ' with message ' + data.text);
+        _options.logger.info('sending TTS message to ' + data.to + ' with message ' + data.text);
         sendRequest(endpoint, 'POST', function(err, apiResponse) {
             if (!err && apiResponse.status && apiResponse.status > 0) {
                 sendError(callback, new Error(apiResponse['error-text']), apiResponse);
@@ -613,18 +589,6 @@ function sendError(callback, err, returnData) {
         callback(err, returnData);
     } else {
         throw err;
-    }
-}
-
-//Logging in one place to make it east to move to logging library like winston later.
-function log(logMsg) {
-    if (logMsg instanceof Error) console.log(logMsg.stack);
-    if (debugOn) {
-        if (typeof logMsg == 'object') {
-            console.dir(logMsg);
-        } else {
-            console.log(logMsg);
-        }
     }
 }
 
