@@ -18,16 +18,16 @@ class Nexmo {
    *                    The value will be prefixed with a `/`
    */
   constructor(credentials, options) {
-    this._credentials = Credentials.parse(credentials);
+    this.credentials = Credentials.parse(credentials);
     this._options = options;
     
-    this.message = new Message(this._credentials, this._options);
-    this.voice = new Voice(this._credentials, this._options);
-    this.number = new Number(this._credentials, this._options);
-    this.verify = new Verify(this._credentials, this._options);
-    this.numberInsight = new NumberInsight(this._credentials, this._options);
-    this.app = new App(this._credentials, this._options);
-    this.account = new Account(this._credentials, this._options);
+    this.message = new Message(this.credentials, this._options);
+    this.voice = new Voice(this.credentials, this._options);
+    this.number = new Number(this.credentials, this._options);
+    this.verify = new Verify(this.credentials, this._options);
+    this.numberInsight = new NumberInsight(this.credentials, this._options);
+    this.app = new App(this.credentials, this._options);
+    this.account = new Account(this.credentials, this._options);
   }
 }
 
