@@ -2,7 +2,9 @@ import sinon from 'sinon';
 import expect from 'expect.js';
 
 import HttpClient from '../lib/HttpClient';
+import NullLogger from '../lib/NullLogger';
 
+var logger = new NullLogger();
 var fakeHttp = {request: function() {}};
 var fakeRequest = {
   end: function(){},
@@ -33,7 +35,7 @@ describe('HttpClient Object', function () {
       })
       .returns(fakeRequest);
     
-    var client = new HttpClient({https:fakeHttp, port:443});
+    var client = new HttpClient({https:fakeHttp, port:443, logger: logger});
     
     client.request({host:'api.nexmo.com', path: '/api'}, 'GET', {some: 'data'});
   });
@@ -51,7 +53,7 @@ describe('HttpClient Object', function () {
       })
       .returns(fakeRequest);
     
-    var client = new HttpClient({http:fakeHttp, port:80});
+    var client = new HttpClient({http:fakeHttp, port:80, logger: logger});
     
     client.request({host:'api.nexmo.com', path: '/api'}, 'GET', {some: 'data'});
   });
@@ -69,7 +71,7 @@ describe('HttpClient Object', function () {
       })
       .returns(fakeRequest);
     
-    var client = new HttpClient({http:fakeHttp, port:80});
+    var client = new HttpClient({http:fakeHttp, port:80, logger: logger});
     
     client.request({host:'rest.nexmo.com', path: '/api'}, 'GET', {some: 'data'});
   });
@@ -87,7 +89,7 @@ describe('HttpClient Object', function () {
       })
       .returns(fakeRequest);
     
-    var client = new HttpClient({http:fakeHttp, port:80});
+    var client = new HttpClient({http:fakeHttp, port:80, logger: logger});
     
     client.request({host:'api.nexmo.com', path: '/some_path'}, 'GET', {some: 'data'});
   });
@@ -105,7 +107,7 @@ describe('HttpClient Object', function () {
       })
       .returns(fakeRequest);
     
-    var client = new HttpClient({https:fakeHttp});
+    var client = new HttpClient({https:fakeHttp, logger: logger});
     
     client.request({host:'api.nexmo.com', path: '/api'}, 'POST', {some: 'data'});
   });
@@ -115,10 +117,12 @@ describe('HttpClient Object', function () {
     mock.expects('request').returns(fakeRequest);
     
     var logged = false;
-    var log = function() {
-      logged = true;
-    }
-    var client = new HttpClient({https:fakeHttp, log:log});
+    var testLogger = {
+      info: function() {
+        logged = true;
+      }
+    };
+    var client = new HttpClient({https:fakeHttp, logger: testLogger});
     
     client.request({host:'api.nexmo.com', path: '/api'}, 'GET', {some: 'data'});
     
@@ -144,7 +148,11 @@ describe('HttpClient Object', function () {
       })
       .returns(fakeRequest);
     
-    var client = new HttpClient({https:fakeHttp, userAgent: expectedUserAgent});
+    var client = new HttpClient({
+      https:fakeHttp,
+      logger: logger,
+      userAgent: expectedUserAgent
+    });
     
     client.request({host:'api.nexmo.com', path: '/api'}, 'POST', {some: 'data'});
   });

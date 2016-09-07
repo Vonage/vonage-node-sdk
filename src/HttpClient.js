@@ -11,8 +11,8 @@ class HttpClient {
     this.port = 443 || options.port;
     this.https = options.https || https;
     this.http =  options.http || http;
-    this.log = options.log || function() {};
     this.headers = headers;
+    this.logger = options.logger;
     
     if(options.userAgent) {
       this.headers['User-Agent'] = options.userAgent;
@@ -37,7 +37,8 @@ class HttpClient {
         method: method,
         headers: this.headers
     };
-    this.log(options);
+
+    this.logger.info(options);
     var request;
   	if (true) { // set to false to verify the request without sending the actual request
         if (options.port == 443) {
@@ -53,7 +54,7 @@ class HttpClient {
   	            responseReturn += chunk;
   	        });
   	        response.on('end', () => {
-  	            this.log('response ended');
+  	            this.logger.info('response ended');
   	            if (callback) {
   	                var retJson = responseReturn;
   	                var err = null;
@@ -62,10 +63,10 @@ class HttpClient {
     	                    retJson = JSON.parse(responseReturn);
     	                } catch (parsererr) {
     	                    // ignore parser error for now and send raw response to client
-    	                    this.log(parsererr);
-    	                    this.log('could not convert API response to JSON, above error is ignored and raw API response is returned to client');
-    						          this.log('Raw Error message from API ');
-    						          this.log(responseReturn);
+    	                    this.logger.error(parsererr);
+    	                    this.logger.error('could not convert API response to JSON, above error is ignored and raw API response is returned to client');
+    						          this.logger.error('Raw Error message from API ');
+    						          this.logger.error(responseReturn);
     	                    err = parsererr;
     	                }
                     }
@@ -73,14 +74,14 @@ class HttpClient {
   	            }
   	        })
   	        response.on('close', (e) => {
-  	            this.log('problem with API request detailed stacktrace below ');
-  	            this.log(e);
+  	            this.logger.error('problem with API request detailed stacktrace below ');
+  	            this.logger.error(e);
   	            callback(e);
   	        });
   	    });
   	    request.on('error', (e) => {
-  	        this.log('problem with API request detailed stacktrace below ');
-  	        this.log(e);
+  	        this.logger.error('problem with API request detailed stacktrace below ');
+  	        this.logger.error(e);
   	        callback(e);
   	    });
   	}

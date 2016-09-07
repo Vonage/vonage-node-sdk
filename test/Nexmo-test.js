@@ -59,17 +59,17 @@ describe('Nexmo Object instance', function () {
 
   it('should have debug turned off by default', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
-    expect( nexmo.message._nexmo._getDebug() ).to.be(false);
+    expect( nexmo.options.debug ).to.be(false);
   });
 
   it('should allow a debug option to be set', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, { debug: true });
-    expect( nexmo.message._nexmo._getDebug() ).to.be(true);
+    expect( nexmo.options.debug ).to.be(true);
   });
   
   it('should have a default user agent in the form LIBRARY-NAME/LIBRARY-VERSION/LANGUAGE-VERSION', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
-    expect( nexmo.message._nexmo._getUserAgent() ).to.match(/.*\/.*\/.*$/);
+    expect( nexmo.options.userAgent ).to.match(/.*\/.*\/.*$/);
   });
 
   it('should append to the user agent when a appendToUserAgent option is passed', function () {
@@ -77,7 +77,7 @@ describe('Nexmo Object instance', function () {
       appendToUserAgent: 'EXT'
     };
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, options);
-    expect( nexmo.message._nexmo._getUserAgent() ).to.match(/\/EXT$/);
+    expect( nexmo.options.userAgent ).to.match(/\/EXT$/);
   });
   
 });
