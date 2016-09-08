@@ -1,4 +1,5 @@
 {
   "node": true,
-  "white": true
+  "white": true,
+  "esversion": 6
 }
