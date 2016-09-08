@@ -1,6 +1,11 @@
+import chai, { expect } from 'chai';
+import sinon            from 'sinon';
+import sinonChai        from 'sinon-chai';
+
+chai.use(sinonChai);
+
 import Nexmo from '../lib/Nexmo';
-import expect from 'expect.js'
-import sinon from 'sinon';
+import CallsResource from '../lib/CallsResource';
 
 describe('Nexmo Object instance', function () {
 
@@ -44,6 +49,11 @@ describe('Nexmo Object instance', function () {
     expect(nexmo.account).to.be.a('object');
   });
   
+  it('should expose a calls object', function () {
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
+    expect(nexmo.calls).to.be.an.instanceOf(CallsResource);
+  });
+  
   it('should allow options to be passed', function () {
     var initializedSpy = sinon.spy();
     var options = {
@@ -54,17 +64,17 @@ describe('Nexmo Object instance', function () {
       debug: true
     };
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, options);
-    expect( initializedSpy.calledWith('test', 'test', options) ).to.be.ok();
+    expect( initializedSpy.calledWith('test', 'test', options) ).to.be.true;
   });
 
   it('should have debug turned off by default', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
-    expect( nexmo.options.debug ).to.be(false);
+    expect( nexmo.options.debug ).to.be.false;
   });
 
   it('should allow a debug option to be set', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, { debug: true });
-    expect( nexmo.options.debug ).to.be(true);
+    expect( nexmo.options.debug ).to.be.true;
   });
   
   it('should have a default user agent in the form LIBRARY-NAME/LIBRARY-VERSION/LANGUAGE-VERSION', function () {

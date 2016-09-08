@@ -8,6 +8,7 @@ import Verify from './Verify';
 import NumberInsight from './NumberInsight';
 import App from './App';
 import Account from './Account';
+import CallsResource from './CallsResource';
 import HttpClient from './HttpClient';
 import NullLogger from './NullLogger';
 import ConsoleLogger from './ConsoleLogger';
@@ -56,6 +57,7 @@ class Nexmo {
     this.numberInsight = new NumberInsight(this.credentials, this.options);
     this.app = new App(this.credentials, this.options);
     this.account = new Account(this.credentials, this.options);
+    this.calls = new CallsResource(this.credentials, this.options);
   }
 }
 
