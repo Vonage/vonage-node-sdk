@@ -1,6 +1,7 @@
 import querystring from 'querystring';
 
 import StreamResource from './StreamResource';
+import TalkResource from './TalkResource';
 
 /**
  * Provides access to the `calls` resource.
@@ -28,6 +29,11 @@ class CallsResource {
      * @type StreamController
      */
     this.stream = new StreamResource(this.creds, this.options);
+    
+    /**
+     * @type TalkResource
+     */
+    this.talk = new TalkResource(this.creds, this.options);
   }
   
   /**
