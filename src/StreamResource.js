@@ -1,7 +1,7 @@
 import querystring from 'querystring';
 
 /**
- * Provides access to the `calls` resource.
+ * Provides access to the `stream` resource.
  */
 class StreamResource {
   
