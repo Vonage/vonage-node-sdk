@@ -30,37 +30,37 @@ var nexmo = new Nexmo({
   {debug: true}
 );
 
-// console.log('Sending Text Message');
-// nexmo.message.sendSms(
-//   FROM_NUMBER,
-//   TO_NUMBER, 
-//   'testing', 
-//   logToConsole
-// );
-// 
-// console.log('Getting Basic Number Insight');
-// nexmo.numberInsight.get({level:'basic', number: TO_NUMBER}, logToConsole);
-// 
-// console.log('Checking Balance');
-// nexmo.account.checkBalance(logToConsole);
-// 
-// console.log('Getting Apps List');
-// nexmo.app.get({}, logToConsole);
-// 
-// var tempAppName = new Date().getTime(); 
-// console.log('Creating App', tempAppName);
-// 
-// nexmo.app.create(tempAppName, 'voice', 'http://requestb.in/s8yhpcs8', 'http://requestb.in/s8yhpcs8', null, function(err, resp) {
-//   logToConsole(resp);
-//   
-//   console.log('Updating App', tempAppName);
-//   nexmo.app.update(resp.id, tempAppName, 'voice', 'http://requestb.in/s8yhpcs8', 'http://requestb.in/s8yhpcs8', null, function(err, resp) {
-//     
-//     console.log('Deleting App', tempAppName);
-//     nexmo.app.delete(resp.id, logToConsole);
-//     
-//   });
-// });
+console.log('Sending Text Message');
+nexmo.message.sendSms(
+  FROM_NUMBER,
+  TO_NUMBER, 
+  'testing', 
+  logToConsole
+);
+
+console.log('Getting Basic Number Insight');
+nexmo.numberInsight.get({level:'basic', number: TO_NUMBER}, logToConsole);
+
+console.log('Checking Balance');
+nexmo.account.checkBalance(logToConsole);
+
+console.log('Getting Apps List');
+nexmo.app.get({}, logToConsole);
+
+var tempAppName = new Date().getTime(); 
+console.log('Creating App', tempAppName);
+
+nexmo.app.create(tempAppName, 'voice', 'http://requestb.in/s8yhpcs8', 'http://requestb.in/s8yhpcs8', null, function(err, resp) {
+  logToConsole(resp);
+  
+  console.log('Updating App', tempAppName);
+  nexmo.app.update(resp.id, tempAppName, 'voice', 'http://requestb.in/s8yhpcs8', 'http://requestb.in/s8yhpcs8', null, function(err, resp) {
+    
+    console.log('Deleting App', tempAppName);
+    nexmo.app.delete(resp.id, logToConsole);
+    
+  });
+});
 
 nexmo.voice.call({
   to: [{
