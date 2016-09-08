@@ -22,9 +22,13 @@ class HttpClient {
   request(endpoint, method, callback) {
     if (typeof method == 'function') {
         callback = method;
-        method = 'GET';
+        endpoint.method = endpoint.method || 'GET';
     }
-    if (method == 'POST' || method == 'DELETE') {
+    else {
+      endpoint.method = method;
+    }
+    
+    if (endpoint.method == 'POST' || endpoint.method == 'DELETE') {
         // TODO: verify the following fix is required
         // Fix broken due ot 411 Content-Length error now sent by Nexmo API
         // PL 2016-Sept-6 - commented out Content-Length 0
@@ -34,9 +38,17 @@ class HttpClient {
         host: endpoint.host?endpoint.host:'rest.nexmo.com',
         port: this.port,
         path: endpoint.path,
-        method: method,
+        method: endpoint.method,
         headers: this.headers
     };
+    
+    // Allow existing headers to be overridden
+    // Allow new headers to be added
+    if(endpoint.headers) {
+      Object.keys(endpoint.headers).forEach(function(key) {
+        options.headers[key] = endpoint.headers[key];
+      });
+    }
 
     this.logger.info(options);
     var request;
@@ -46,7 +58,9 @@ class HttpClient {
     } else {
         request = http.request(options);
     }
-    request.end();
+    
+    request.end(endpoint.body);
+    
     var responseReturn = '';
     request.on('response', (response) => {
         response.setEncoding('utf8');
@@ -88,4 +102,4 @@ class HttpClient {
   }
 }
 
-module.exports = HttpClient;
+export default HttpClient;
