@@ -8,7 +8,7 @@ class ConsoleLogger extends NullLogger {
   }
   
   log(level, ...args) {
-    this.out.log(level, ...args);
+    this.out.log(`${level}:`, ...args);
   }
 
   warn(...args) {
@@ -16,7 +16,7 @@ class ConsoleLogger extends NullLogger {
   }
   
   error(...args) {
-    this.out.error('error', ...args);
+    this.out.error('error:', ...args);
   }
 }
 

@@ -1,5 +1,7 @@
 import querystring from 'querystring';
 
+import StreamResource from './StreamResource';
+
 /**
  * Provides access to the `calls` resource.
  */
@@ -21,6 +23,11 @@ class CallsResource {
   constructor(creds, options) {
     this.creds = creds;
     this.options = options;
+    
+    /**
+     * @type StreamController
+     */
+    this.stream = new StreamResource(this.creds, this.options);
   }
   
   /**
