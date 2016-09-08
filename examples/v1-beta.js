@@ -110,6 +110,29 @@ function getCalls(callback) {
     .catch(callback);
 }
 
+function startStream(callback) {
+  var calls = Promise.promisifyAll(nexmo.calls);
+  var stream = Promise.promisifyAll(nexmo.calls.stream);
+  var callId = null;
+  nexmo.calls.getAsync()
+    .then(function(resp) {
+      callId = resp._embedded.calls[0].uuid;
+      return stream.startAsync(
+        callId,
+        {
+          stream_url: 'https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3'
+        });
+    })
+    .then(function(resp) {
+      console.log('stream.start response', resp);
+      console.log(SPACER, 'Stopping Stream');
+      
+      return stream.stopAsync(callId)
+    })
+    .then(callback)
+    .catch(callback)
+}
+
 var examples = [
   {
     title: 'Send an SMS',
@@ -143,11 +166,24 @@ var examples = [
   {
     title: 'Get all Calls and then get a single Call',
     example: getCalls
+  },
+  
+  {
+    title: 'Starting a stream on a call',
+    example: startStream
   }
 ];
 
-var exampleIndex = 0;
+// var exampleIndex = 0;
+var exampleIndex = examples.length-1;
 function runExample(err, resp) {
+  if(err) {
+    console.error('The last example errored', err, resp);
+  }
+  else if(resp) {
+    console.log('The last example succeeded', resp);
+  }
+  
   var toRun = examples[exampleIndex];
   if(toRun) {
     exampleIndex++;
