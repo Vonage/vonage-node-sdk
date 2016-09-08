@@ -26,6 +26,9 @@ class Credentials {
       this.privateKey = privateKey;
     }
     else if(privateKey !== undefined) {
+      if(!fs.existsSync(privateKey)) {
+        throw new Error(`File "${privateKey}" not found.`)
+      }
       this.privateKey = fs.readFileSync(privateKey);
     }
     
@@ -66,7 +69,7 @@ class Credentials {
       return obj;
     }
     else {
-      return new Credentials(obj.apiKey, obj.apiSecret);
+      return new Credentials(obj.apiKey, obj.apiSecret, obj.privateKey, obj.applicationId);
     }
   }
 }
