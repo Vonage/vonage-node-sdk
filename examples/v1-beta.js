@@ -10,6 +10,10 @@ var TO_NUMBER = process.env.TO_NUMBER || '';
 var APP_ID = process.env.APP_ID || '';
 var PRIVATE_KEY = process.env.PRIVATE_KEY || '';
 
+var Promise = require('bluebird');
+
+var SPACER = '\n-------------------------------------\n\n';
+
 function logToConsole (err,messageResponse) {
   if (err) {
     console.log(err);
@@ -30,53 +34,131 @@ var nexmo = new Nexmo({
   {debug: true}
 );
 
-console.log('Sending Text Message');
-nexmo.message.sendSms(
-  FROM_NUMBER,
-  TO_NUMBER, 
-  'testing', 
-  logToConsole
-);
+function sendSms(callback) {
+  var sendSms = nexmo.message.sendSms(
+    FROM_NUMBER,
+    TO_NUMBER, 
+    'testing',
+    callback
+  );
+}
 
-console.log('Getting Basic Number Insight');
-nexmo.numberInsight.get({level:'basic', number: TO_NUMBER}, logToConsole);
+function numberInsightBasic(callback) {
+  nexmo.numberInsight.get({level:'basic', number: TO_NUMBER}, callback);
+}
 
-console.log('Checking Balance');
-nexmo.account.checkBalance(logToConsole);
+function checkBalance(callback) {
+  nexmo.account.checkBalance(callback);
+}
 
-console.log('Getting Apps List');
-nexmo.app.get({}, logToConsole);
+function getApps(callback) {
+  nexmo.app.get({}, callback);
+}
 
-var tempAppName = new Date().getTime(); 
-console.log('Creating App', tempAppName);
-
-nexmo.app.create(tempAppName, 'voice', 'http://requestb.in/s8yhpcs8', 'http://requestb.in/s8yhpcs8', null, function(err, resp) {
-  logToConsole(resp);
+function crudApp(callback) {
   
-  console.log('Updating App', tempAppName);
-  nexmo.app.update(resp.id, tempAppName, 'voice', 'http://requestb.in/s8yhpcs8', 'http://requestb.in/s8yhpcs8', null, function(err, resp) {
-    
-    console.log('Deleting App', tempAppName);
-    nexmo.app.delete(resp.id, logToConsole);
-    
-  });
-});
+  var app = Promise.promisifyAll(nexmo.app);
+  
+  var tempAppName = new Date().getTime(); 
+  console.log('Creating App', tempAppName);
 
-nexmo.voice.call({
-  to: [{
-    type: 'phone',
-    number: TO_NUMBER
-  }],
-  from: {
-    type: 'phone',
-    number: FROM_NUMBER
+  app.createAsync(tempAppName, 'voice', 'https://v1uxw2scimhr.runscope.net', 'https://v1uxw2scimhr.runscope.net', null)
+    .then(function(createResp) {
+      console.log('Updating App', tempAppName);
+      return app.updateAsync(createResp.id, tempAppName, 'voice', 'https://v1uxw2scimhr.runscope.net', 'https://v1uxw2scimhr.runscope.net', null);
+    })
+    .then(function(updateResp) {
+      console.log('Deleting App', tempAppName);
+      return app.deleteAsync(updateResp.id);
+    })
+    .then(function(deleteResp) {
+      console.log('App Deleted');
+      callback(null, deleteResp);
+    })
+    .catch(callback);
+}
+
+function makeCall(callback) {
+  nexmo.calls.create({
+    to: [{
+      type: 'phone',
+      number: TO_NUMBER
+    }],
+    from: {
+      type: 'phone',
+      number: FROM_NUMBER
+    },
+    answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
+  }, callback);
+}
+
+function getCalls(callback) {
+  var calls = Promise.promisifyAll(nexmo.calls);
+  var callId = null;
+  nexmo.calls.getAsync()
+    .then(function(resp) {
+      console.log(resp._embedded.calls);
+      
+      callId = resp._embedded.calls[0].uuid;
+      console.log(SPACER, 'Getting single call details', callId);
+      return calls.getAsync(callId);
+    })
+    .then(function(resp) {
+      console.log(SPACER, 'Updating a call', callId);
+      return calls.updateAsync(callId, {action: 'hangup'});
+    })
+    .catch(callback);
+}
+
+var examples = [
+  {
+    title: 'Send an SMS',
+    example: sendSms
   },
-  answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
-}, function(err, resp) {
-  if(err) {
-    console.error(err);
+  
+  {
+    title: 'Get Basic Number Insight',
+    example: numberInsightBasic
+  },
+  {
+    title: 'Check Balance',
+    example: checkBalance
+  },
+  
+  {
+    title: 'Get List of Apps',
+    example: getApps
+  },
+  
+  {
+    title: 'Create, Update and Delete an App',
+    example: crudApp
+  },
+    
+  {
+    title: 'Make a call',
+    example: makeCall
+  },
+    
+  {
+    title: 'Get all Calls and then get a single Call',
+    example: getCalls
+  }
+];
+
+var exampleIndex = 0;
+function runExample(err, resp) {
+  var toRun = examples[exampleIndex];
+  if(toRun) {
+    exampleIndex++;
+    
+    console.log(SPACER, 'Starting', toRun.title);
+    toRun.example(runExample);
   }
   else {
-    console.log(resp)
+    console.log('All examples complete');
   }
-})
+}
+
+console.log('Starting to run the examples');
+runExample();
