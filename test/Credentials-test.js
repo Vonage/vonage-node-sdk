@@ -17,10 +17,18 @@ describe('Credentials Object', function () {
   });
   
   it('should parse object literal into a Credential object', function() {
-    var obj = {apiKey: 'KEY', apiSecret: 'SECRET'};
+    var key = 'KEY';
+    var secret = 'SECRET';
+    var appId = 'app-id';
+    var privateKey = __dirname + '/private-test.key';
+    var obj = {apiKey: key, apiSecret: secret, applicationId: appId, privateKey: privateKey};
     var parsed = Credentials.parse(obj);
     
     expect(parsed).to.be.an.instanceof(Credentials);
+    expect(parsed.apiKey).to.be.equal(key);
+    expect(parsed.apiSecret).to.be.equal(secret);
+    expect(parsed.applicationId).to.be.equal(appId);
+    expect(parsed.privateKey).to.be.ok;
   });
   
   it('should throw an error when a privateKey is provided and the file does not exist', function() {
