@@ -20,4 +20,4 @@ class ConsoleLogger extends NullLogger {
   }
 }
 
-module.exports = ConsoleLogger;
+export default ConsoleLogger;
