@@ -11,6 +11,7 @@ import querystring from 'querystring';
 import CallsResource from '../lib/CallsResource';
 import StreamResource from '../lib/StreamResource';
 import TalkResource from '../lib/TalkResource';
+import DtmfResource from '../lib/DtmfResource';
 import HttpClient from '../lib/HttpClient';
 import Credentials from '../lib/Credentials';
 
@@ -102,6 +103,10 @@ describe('CallsResource', () => {
   
   it('should expose a talk property', () => {
     expect(calls.talk).to.be.an.instanceOf(TalkResource);
+  });
+  
+  it('should expose a dtmf property', () => {
+    expect(calls.dtmf).to.be.an.instanceOf(DtmfResource);
   });
   
 });

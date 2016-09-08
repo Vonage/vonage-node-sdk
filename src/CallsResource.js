@@ -2,6 +2,7 @@ import querystring from 'querystring';
 
 import StreamResource from './StreamResource';
 import TalkResource from './TalkResource';
+import DtmfResource from './DtmfResource';
 
 /**
  * Provides access to the `calls` resource.
@@ -34,6 +35,11 @@ class CallsResource {
      * @type TalkResource
      */
     this.talk = new TalkResource(this.creds, this.options);
+    
+    /**
+     * @type DtmfResource
+     */
+    this.dtmf = new DtmfResource(this.creds, this.options);
   }
   
   /**
