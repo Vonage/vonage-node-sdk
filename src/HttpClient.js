@@ -1,17 +1,15 @@
 var https = require('https');
 var http = require('http');
 
-var headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Accept': 'application/json'
-};
-
 class HttpClient {
   constructor(options) {
     this.port = 443 || options.port;
     this.https = options.https || https;
     this.http =  options.http || http;
-    this.headers = headers;
+    this.headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json'
+    };
     this.logger = options.logger;
     
     if(options.userAgent) {
