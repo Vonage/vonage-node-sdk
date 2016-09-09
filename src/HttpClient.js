@@ -50,7 +50,7 @@ class HttpClient {
       });
     }
 
-    this.logger.info(options);
+    this.logger.info('Request:', options, '\nBody:', endpoint.body);
     var request;
 
     if (options.port == 443) {
