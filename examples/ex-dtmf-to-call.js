@@ -22,11 +22,8 @@ module.exports = function(callback, config) {
       callId = resp._embedded.calls[0].uuid;
       return dtmf.sendAsync(
           callId,
-          {digits: [1, 2, 3, 4]}
+          {digits: '1234'}
         );
-    })
-    .then(function(resp) {
-      callback(null, resp);
     })
     .then(function(resp) {
       callback(null, resp);
