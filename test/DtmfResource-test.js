@@ -31,7 +31,7 @@ describe('DtmfResource', () => {
   
   it('should be able to send DTMF to a call', () => {
     const callId = '2342342-lkjhlkjh-32423';
-    var params = [1,2,3,4];
+    var params = {digits: [1,2,3,4]};
     dtmf.send(callId, params, emptyCallback);
     
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
