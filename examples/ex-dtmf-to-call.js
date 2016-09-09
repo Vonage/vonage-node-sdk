@@ -73,15 +73,22 @@ module.exports = function(callback, config) {
   }
   
   function sendDtmf(callId) {
-    dtmf.sendAsync(
-        callId,
-        {digits: '1234'}
-      )
+    dtmf.sendAsync(callId, {digits: '1234'})
       .then(function(res) {
+        console.log('dtmf.send res', res);
+        
+        return calls.updateAsync(callId, {action: 'hangup'});
+      })
+      .then(function(res) {
+        console.log('calls.update', res);
+        
         server.close();
         ngrok.kill();
         
-        callback(null, res);
+        return Promise.delay(2000);
+      })
+      .then(function() {
+        callback(null, null);
       })
       .catch(function(err) {
         if(server) server.close();
