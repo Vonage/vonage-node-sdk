@@ -87,10 +87,20 @@ module.exports = function(callback, config) {
         loop: 1
       })
       .then(function(res) {
+        console.log('stream.stop res', res);
+        
+        return calls.updateAsync(callId, {action: 'hangup'});
+      })
+      .then(function(res) {
+        console.log('calls.update', res);
+        
         server.close();
         ngrok.kill();
         
-        callback(null, res);
+        return Promise.delay(2000);
+      })
+      .then(function() {
+        callback(null, null);
       })
       .catch(function(err) {
         if(server) server.close();
