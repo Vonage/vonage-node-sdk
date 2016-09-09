@@ -52,15 +52,15 @@ function runExample(exampleFile, callback) {
 // By default all examples are run.
 // Use this array to run a select number of examples.
 exampleFiles = [
-  'ex-check-balance.js',
-  'ex-create-update-delete-app.js',
+  // 'ex-check-balance.js',
+  // 'ex-create-update-delete-app.js',
   // 'ex-dtmf-to-call.js',
-  'ex-get-apps.js',
-  'ex-get-calls.js',
+  // 'ex-get-apps.js',
+  'ex-get-calls.js'
   // 'ex-make-call.js',
-  'ex-number-insight-basic.js',
+  // 'ex-number-insight-basic.js',
   // 'ex-send-sms.js',
-  'ex-stream-to-call.js',
+  // 'ex-stream-to-call.js',
   // 'ex-talk-to-call.js'
 ];
 
