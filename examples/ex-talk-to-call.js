@@ -17,7 +17,7 @@ module.exports = function(callback, config) {
   var calls = Promise.promisifyAll(nexmo.calls);
   var talk = Promise.promisifyAll(nexmo.calls.talk);
   var callId = null;
-  nexmo.calls.getAsync()
+  nexmo.calls.getAsync({})
     .then(function(resp) {
       callId = resp._embedded.calls[0].uuid;
       return talk.startAsync(

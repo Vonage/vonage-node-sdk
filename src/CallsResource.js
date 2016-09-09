@@ -65,16 +65,26 @@ class CallsResource {
   /**
    * Get an existing call.
    *
-   * @param {string} [callId] - The unique identifier for the call to retrieve. Optional.
+   * @param {string|object} query - The unique identifier for the call to retrieve
+   *               or a set of filter parameters for the query. For more information
+   *               see https://docs.nexmo.com/voice/voice-api/api-reference#call_retrieve
    * @param {function} callback - function to be called when the request completes.
    */
-  get(callId, callback) {
-    if(callback === undefined) {
-      callback = callId;
-      callId = null;
+  get(query, callback) {
+    if(!query) {
+      throw new Error('"query" is a required parameter');
     }
     
-    var pathExt = (callId? `/${callId}`: '');
+    var pathExt = '';
+    if(typeof query === 'string') {
+      // single call Id
+      pathExt = `/${query}`;
+    }
+    else if(typeof query === 'object' && Object.keys(query).length > 0) {
+      // filter
+      pathExt = `?${querystring.stringify(query)}`;
+    }
+    
     var config = {
       host:'api.nexmo.com',
       path:`${CallsResource.PATH}${pathExt}`,

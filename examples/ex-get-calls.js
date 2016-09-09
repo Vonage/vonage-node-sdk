@@ -16,7 +16,7 @@ module.exports = function(callback, config) {
   
   var calls = Promise.promisifyAll(nexmo.calls);
   var callId = null;
-  nexmo.calls.getAsync()
+  nexmo.calls.getAsync({})
     .then(function(resp) {
       console.log(resp._embedded.calls);
       
@@ -26,6 +26,12 @@ module.exports = function(callback, config) {
     })
     .then(function(resp) {
       console.log('single call details', resp);
+      
+      console.log(SPACER, 'Getting calls by query');
+      return calls.getAsync({status: 'completed'});
+    })
+    .then(function(resp) {
+      console.log('Call query response', resp);
       
       console.log(SPACER, 'Updating a call', callId);
       return calls.updateAsync(callId, {action: 'hangup'});
