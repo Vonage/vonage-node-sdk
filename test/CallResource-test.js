@@ -45,9 +45,17 @@ describe('CallsResource', () => {
         emptyCallback
       );
   });
+
+  it('should throw an error if no query is provided', () => {
+    var expectThrow = function(){
+      calls.get();
+    };
+    
+    expect(expectThrow).to.throw(Error);
+  });
   
   it('should get a collection of calls', () => {
-    calls.get(emptyCallback);
+    calls.get({}, emptyCallback);
     
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: 'GET',
@@ -79,6 +87,21 @@ describe('CallsResource', () => {
       );
   });
   
+  it('should get a allow calls to be queried by filter', () => {
+    calls.get({status: 'answered'}, emptyCallback);
+    
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: 'GET',
+      body: undefined,
+      path: `${CallsResource.PATH}?status=answered`
+    });
+    
+    expect(httpClientStub.request)
+      .to.have.been.calledWith(
+        sinon.match(expectedRequestArgs),
+        emptyCallback
+      );
+  });
 
   it('should allow a call to be updated', () => {
     const callId = '2342342-lkjhlkjh-32423';

@@ -17,7 +17,7 @@ class ResourceTestHelper {
       if(callsArgs[key] === undefined) {
         delete callsArgs[key];
       }
-    })
+    });
     
     return callsArgs;
   }
