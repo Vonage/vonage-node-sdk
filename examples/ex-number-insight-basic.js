@@ -9,7 +9,5 @@ module.exports = function(callback, config) {
     {debug: config.DEBUG}
   );
   
-  console.log(nexmo.options);
-  
   nexmo.numberInsight.get({level:'basic', number: config.TO_NUMBER}, callback);
 };
