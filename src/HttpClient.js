@@ -66,7 +66,7 @@ class HttpClient {
             responseReturn += chunk;
         });
         response.on('end', () => {
-            this.logger.info('response ended');
+            this.logger.info('response ended:', response.statusCode);
             if (callback) {
                 var retJson = responseReturn;
                 var err = null;
@@ -82,6 +82,11 @@ class HttpClient {
 	                    err = parsererr;
 	                }
                 }
+                
+                if(response.statusCode < 200 || response.statusCode > 299) {
+                  err = retJson;
+                }
+                
                 callback(err, retJson);
             }
         })
