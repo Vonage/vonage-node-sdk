@@ -3,7 +3,7 @@ class ResourceTestHelper {
   static getRequestArgs(params, overrides = {}) {
     var callsArgs = {
       host: overrides.host       || 'api.nexmo.com',
-      path: overrides.path       || '/beta/calls',
+      path: overrides.path       || '/v1/calls',
       method: overrides.method   || 'POST',
       body: overrides.hasOwnProperty('body')? overrides.body : JSON.stringify(params),
       headers: overrides.headers || {

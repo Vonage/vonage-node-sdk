@@ -9,7 +9,7 @@ class DtmfResource {
    * The path to the `dtmf` resource.
    */
   static get PATH() {
-    return '/beta/calls/{call_uuid}/dtmf';
+    return '/v1/calls/{call_uuid}/dtmf';
   }
   
   /**

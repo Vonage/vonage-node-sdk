@@ -13,7 +13,7 @@ class CallsResource {
    * The path to the `calls` resource.
    */
   static get PATH() {
-    return '/beta/calls';
+    return '/v1/calls';
   }
   
   /**

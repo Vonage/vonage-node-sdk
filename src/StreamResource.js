@@ -9,7 +9,7 @@ class StreamResource {
    * The path to the `stream` resource.
    */
   static get PATH() {
-    return '/beta/calls/{call_uuid}/stream';
+    return '/v1/calls/{call_uuid}/stream';
   }
   
   /**

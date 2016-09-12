@@ -9,7 +9,7 @@ class TalkResource {
    * The path to the `talk` resource.
    */
   static get PATH() {
-    return '/beta/calls/{call_uuid}/talk';
+    return '/v1/calls/{call_uuid}/talk';
   }
   
   /**
