@@ -1,8 +1,18 @@
+import chai, { expect } from 'chai';
+import sinon            from 'sinon';
+import sinonChai        from 'sinon-chai';
+
+chai.use(sinonChai);
+
 import Nexmo from '../lib/Nexmo';
-import expect from 'expect.js'
-import sinon from 'sinon';
+import CallsResource from '../lib/CallsResource';
 
 describe('Nexmo Object instance', function () {
+
+  it('should expose a credentials object', function () {
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
+    expect(nexmo.credentials).to.be.a('object');
+  });
   
   it('should expose a message object', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
@@ -34,9 +44,24 @@ describe('Nexmo Object instance', function () {
     expect(nexmo.app).to.be.a('object');
   });
   
+  it('should expose a applications object', function () {
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
+    expect(nexmo.applications).to.be.a('object');
+  });
+  
+  it('should alias apps to applications object', function () {
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
+    expect(nexmo.applications).to.equal(nexmo.app);
+  });
+  
   it('should expose a account object', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
     expect(nexmo.account).to.be.a('object');
+  });
+  
+  it('should expose a calls object', function () {
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
+    expect(nexmo.calls).to.be.an.instanceOf(CallsResource);
   });
   
   it('should allow options to be passed', function () {
@@ -49,22 +74,33 @@ describe('Nexmo Object instance', function () {
       debug: true
     };
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, options);
-    expect( initializedSpy.calledWith('test', 'test', options) ).to.be.ok();
+    expect( initializedSpy.calledWith('test', 'test', options) ).to.be.true;
   });
 
   it('should have debug turned off by default', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
-    expect( nexmo.message._nexmo._getDebug() ).to.be(false);
+    expect( nexmo.options.debug ).to.be.false;
+  });
+  
+  it('should allow a custom logger to be set', function () {
+    var logger = {
+      info: function(){},
+      error: function() {},
+      warn: function() {}
+    };
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, {logger: logger});
+    console.log(nexmo.options.logger);
+    expect( nexmo.options.logger ).to.equal(logger);
   });
 
   it('should allow a debug option to be set', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, { debug: true });
-    expect( nexmo.message._nexmo._getDebug() ).to.be(true);
+    expect( nexmo.options.debug ).to.be.true;
   });
   
   it('should have a default user agent in the form LIBRARY-NAME/LIBRARY-VERSION/LANGUAGE-VERSION', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
-    expect( nexmo.message._nexmo._getUserAgent() ).to.match(/.*\/.*\/.*$/);
+    expect( nexmo.options.userAgent ).to.match(/.*\/.*\/.*$/);
   });
 
   it('should append to the user agent when a appendToUserAgent option is passed', function () {
@@ -72,7 +108,7 @@ describe('Nexmo Object instance', function () {
       appendToUserAgent: 'EXT'
     };
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, options);
-    expect( nexmo.message._nexmo._getUserAgent() ).to.match(/\/EXT$/);
+    expect( nexmo.options.userAgent ).to.match(/\/EXT$/);
   });
   
 });

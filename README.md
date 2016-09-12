@@ -6,33 +6,60 @@ For full API documentation refer to https://docs.nexmo.com/
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-## Installation Instructions
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Calls (Voice)](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) [Management](#management)
+
+## Installation
 
 ```bash
 npm install nexmo
 ```
 
-## Usage
+## Constructor
 
 ```js
 var Nexmo = require('nexmo');
 
-var nexmo = new Nexmo({apiKey: API_KEY, apiSecret: API_SECRET}, {debug: DEBUG});
+var nexmo = new Nexmo({
+		apiKey: API_KEY,
+		apiSecret: API_SECRET,
+		applicationId: APP_ID,
+		privateKey: PRIVATE_KEY_PATH,
+	}, options });
 ```
 
-* `API_KEY` - API Key from Nexmo
-* `API_SECRET` - API SECRET from Nexmo
-* `DEBUG` - set this to true to debug library calls
+* `apiKey` - API Key from Nexmo
+* `apiSecret` - API SECRET from Nexmo
+* `applicationId` - The Nexmo Application ID to be used when creating JWTs. Required for voice related functionality.
+* `privateKey` - The path to the Private Key to be used when creating JWTs.  Required for voice related functionality.
+* `options` - Additional options for the constructor
 
-## List of API's supported by the library
+Options are:
+
+```js
+{
+	// If true, log information to the console
+	debug: true|false,
+	// append info the the User-Agent sent to Nexmo
+	// e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
+	appendToUserAgent: string, 
+	// Set a custom logger
+	logger: {
+		log: function() {level, args...}
+		info: function() {args...},
+		warn: function() {args...}
+	}
+}
+```
+
+## Messaging
 
 ### Send a text message
 
 ```js
-nexmo.message.sendSms(sender, recipient, message, opts, callback);
+nexmo.message.sendSms(sender, recipient, message, options, callback);
 ```
 
-* `opts` - parameter is optional
+* `opts` - parameter is optional. See [SMS API Reference](https://docs.nexmo.com/messaging/sms-api/api-reference#request)
 
 ### Send a Binary Message
 
@@ -56,6 +83,179 @@ nexmo.message.sendWapPushMessage(fromnumber, tonumber, title, url, validity, cal
 ```js
 nexmo.message.shortcodeAlert(recipient, messageParams, opts, callback);
 ```
+
+## Calls
+
+### Make a call
+
+Requires `applicationId` and `privateKey` to be set on the constructor.
+
+```js
+nexmo.calls.create({
+	to: [{
+		type: 'phone',
+		number: TO_NUMBER
+	}],
+	from: {
+		type: 'phone',
+		number: FROM_NUMBER
+	},
+	answer_url: [ANSWER_URL]
+}, callback);
+```
+
+For more information check the documentation at https://docs.nexmo.com/voice/call
+
+### Get a Call
+
+```js
+nexmo.calls.get(callId, callback);
+```
+
+### Query Calls
+
+```
+nexmo.calls.get({status: 'completed'}, callback);
+```
+
+The first parameter can contain many properties to filter the returned call or to page results. For more information see the [Calls API Reference](https://docs.nexmo.com/voice/voice-api/api-reference#calls).
+
+### Stream an Audio File to a Call
+
+```js
+nexmo.calls.stream.start(
+	callId,
+	{
+		stream_url: [   
+			'https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3'
+		],
+		loop: 1
+	});
+```
+
+### Send DTMF to a Call
+
+```js
+nexmo.calls.dtmf(callId, {digits: '1234'});
+```
+
+## Verify
+
+### Submit a Verification Request
+
+```js
+nexmo.verify.request({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},callback);
+```
+
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#vrequest
+
+### Validate the response of a Verification Request
+
+```js
+nexmo.verify.check({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,code:<CODE_TO_CHECK>},callback);
+```
+
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#check
+
+### Search one or more Verification Request
+
+```js
+nexmo.verify.search(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
+```
+
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#search
+
+### Verification Control API
+
+```js
+nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>},callback);
+```
+
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
+
+## Number Insight
+
+### Basic
+
+```js
+nexmo.numberInsight.get({level: 'basic', number: NUMBER}, callback);
+```
+
+For more information check the documentation at https://docs.nexmo.com/number-insight/basic
+
+Example:
+
+```js
+nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, consolelog);
+```
+
+### Standard
+
+```js
+nexmo.numberInsight.get({level: 'standard', number: NUMBER}, callback);
+```
+	
+For more information check the documentation at https://docs.nexmo.com/number-insight/standard
+
+Example:
+
+```js
+nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, consolelog);
+```
+
+### Advanced
+
+```js
+nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
+```
+
+For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
+
+## Applications
+
+For an overview of applications see https://docs.nexmo.com/tools/application-api
+
+### Create an App
+
+```js
+nexmo.applications.create(name, type, answerUrl, eventUrl, options, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#create
+
+### Get a single App
+
+```js
+nexmo.applications.get(appId, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#retrieve
+
+### Get Apps by filter
+
+```js
+nexmo.application.get(options, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#list
+
+### Update an App
+
+```js
+nexmo.applications.update(appId, name, type, answerUrl, eventUrl, options, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#update
+
+### Delete an App
+
+```js
+nexmo.application.delete(appId, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#delete
+
+## Management
 
 ### Check Account Balance
 
@@ -162,10 +362,12 @@ nexmo.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
 nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
 ```
 
+## Legacy Voice
+
 ### Send TTS Message
 
 ```js
-nexmo.voice.sendTTSMessage = function(<TO_NUMBER>,message,options,callback);
+nexmo.voice.sendTTSMessage(<TO_NUMBER>,message,options,callback);
 ```
 
 ### Send TTS Prompt With Capture
@@ -180,155 +382,78 @@ nexmo.sendTTSPromptWithCapture(<TO_NUMBER>,message,<MAX_DIGITS>, <BYE_TEXT>,opti
 nexmo.voice.sendTTSPromptWithConfirm(<TO_NUMBER>, message ,<MAX_DIGITS>,'<PIN_CODE>',<BYE_TEXT>,<FAILED_TEXT>,options,callback);
 ```
 
-### Make a voice call
-
-```js
-nexmo.voice.call(<TO_NUMBER>,<ANSWER_URL>,options,callback);
-```
-
-For more information check the documentation at https://docs.nexmo.com/voice/call
-
-### Submit a Verification Request
-
-```js
-nexmo.verify.request({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},callback);
-```
-
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#vrequest
-
-### Validate the response of a Verification Request
-
-```js
-nexmo.verify.check({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,code:<CODE_TO_CHECK>},callback);
-```
-
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#check
-
-### Search one or more Verification Request
-
-```js
-nexmo.verify.search(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
-```
-
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#search
-
-### Verification Control API
-
-```js
-nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>},callback);
-```
-
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
-
-### Number Insight - Basic
-
-```js
-nexmo.numberInsight.get({level: 'basic', number: NUMBER}, callback);
-```
-
-For more information check the documentation at https://docs.nexmo.com/number-insight/basic
-
-Example:
-
-```js
-nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, consolelog);
-```
-
-### Number Insight - Standard
-
-```js
-nexmo.numberInsight.get({level: 'standard', number: NUMBER}, callback);
-```
-	
-For more information check the documentation at https://docs.nexmo.com/number-insight/standard
-
-Example:
-
-```js
-nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, consolelog);
-```
-
-### Number Insight - Advanced
-
-```js
-nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
-```
-
-For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
-
-## Callbacks
-
-Callback from all API calls returns 2 parameters - error and a json object.
-
-An example callback function:
-
-```js
-function consolelog (err,messageResponse) {
-	if (err) {
-		console.log(err);
-	} else {
-		console.dir(messageResponse);
-	}
-}
-```
-
-Refer here https://docs.nexmo.com/ to get the schema for the returned message response object.
-
 ## Testing
 
-Run the
+Run:
 
 ```bash
 npm test
 ```
 
-For testing purposes you can also use setHost function to make the library send requests to another place like localhost instead of real Nexmo. Feel free to catch and process those requests the way you need. A usage example:
+Or to continually watch and run tests as you change the code:
 
-```js
-nexmo.setHost('localhost');
-```
-
-Note that default port is 443 and nexmo does https calls in such a case. You can use setPort function to make it proper for your testing environment. When port is not 443 it will make requests via http protocol. Have a look at an example:
-
-```js
-nexmo.setPort('8080');
+```bash
+npm run-script test-watch
 ```
 
 ## Examples
 
-There are some basic examples which will test the functionality. They uses environment variables for settings for the tests. The environment variables are:
+See [examples/README.md](examples/README).
 
-* API_KEY = The API key provided by Nexmo for your account
-* API_SECRET = The secret provided by NExmo for your account
-* FROM_NUMBER = The phone number to send messages and make calls from.
-* TO_NUMBER = The phone number to send messages and make calls to.
-* MAX_DIGITS = The maximum number of digits for the pin code.
-* ANSWER_URL = The URL which has the VoiceXML file to control the call functionality
-* PIN_CODE = The digits you must enter to confirm the message
+Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/nexmo-node-quickstart).
 
-The simplest way to run the examples is to create a `.env` file in the `examples` directory with the following:
+## API Coverage
 
-```
-API_KEY={value}
-API_SECRET={value}
-FROM_NUMBER={value}
-TO_NUMBER={value}
-MAX_DIGITS={value}
-ANSWER_URL={value}
-PIN_CODE={value}
-```
-
-Then run:
-
-```bash
-node examples/pre-v1.js
-```
-
-And
-
-```bash
-node examples/v1-beta.js
-```
+* Calls (New Voice)
+	* [x] Outbound Calls
+	* [ ] Inbound Call Webhook
+	* [x] Stream to Call
+	* [x] Talk to Call
+	* [x] DTMF to Call
+* Messaging 
+  * [x] Send
+  * [ ] Delivery Receipt Webhook
+  * [ ] Inbound Message Webhook
+  * [ ] Search
+    * [ ] Message
+    * [ ] Messages
+    * [ ] Rejections
+  * [ ] US Short Codes
+    * [ ] Two-Factor Authentication
+    * [ ] Event Based Alerts
+      * [ ] Sending Alerts
+      * [ ] Campaign Subscription Management
+* Number Insight
+  * [X] Basic
+  * [X] Standard
+  * [ ] Advanced
+	* [x] Advanced Async
+  * [ ] Advanced Async Webhook
+* Verify
+  * [x] Verify
+  * [x] Check
+  * [x] Search
+  * [x] Control
+* Applications
+	* [x] Create an Application
+	* [x] Get Applications
+	* [x] Update an Application
+	* [x] Delete an Application
+* Voice (Legacy)
+    * [x] Outbound Calls
+    * [ ] Inbound Call Webhook
+    * [x] Text-To-Speech Call
+    * [x] Text-To-Speech Prompt
+* Account
+  * [X] Balance
+  * [x] Pricing
+  * [x] Settings
+  * [ ] Top Up
+  * [x] Numbers
+    * [x] Search
+    * [x] Buy
+    * [x] Cancel
+    * [x] Update
 
 ## License
 
