@@ -86,9 +86,24 @@ module.exports = function(callback, config) {
         ],
         loop: 1
       })
+      .then(function(resp) {
+        console.log('stream.start response', resp);
+        
+        console.log('waiting a short time');
+        return Promise.delay(2000);
+      })
+      .then(function(resp) {
+        console.log('stopping the stream', resp);
+        
+        return nexmo.calls.stream.stopAsync(callId);
+      })
       .then(function(res) {
         console.log('stream.stop res', res);
         
+        console.log('waiting a short time');
+        return Promise.delay(2000);
+      })
+      .then(function(res) {
         return calls.updateAsync(callId, {action: 'hangup'});
       })
       .then(function(res) {
