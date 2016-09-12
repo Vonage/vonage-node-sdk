@@ -6,7 +6,7 @@ For full API documentation refer to https://docs.nexmo.com/
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Management](#management)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Calls (Voice)](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) [Management](#management)
 
 ## Installation
 
@@ -66,7 +66,7 @@ nexmo.message.sendWapPushMessage(fromnumber, tonumber, title, url, validity, cal
 nexmo.message.shortcodeAlert(recipient, messageParams, opts, callback);
 ```
 
-## Voice
+## Calls
 
 ### Make a call
 
@@ -119,24 +119,6 @@ nexmo.calls.stream.start(
 
 ```js
 nexmo.calls.dtmf(callId, {digits: '1234'});
-```
-
-### Send TTS Message
-
-```js
-nexmo.voice.sendTTSMessage(<TO_NUMBER>,message,options,callback);
-```
-
-### Send TTS Prompt With Capture
-
-```js
-nexmo.sendTTSPromptWithCapture(<TO_NUMBER>,message,<MAX_DIGITS>, <BYE_TEXT>,options,callback);
-```
-
-### Send TTS Prompt With Confirm
-
-```js
-nexmo.voice.sendTTSPromptWithConfirm(<TO_NUMBER>, message ,<MAX_DIGITS>,'<PIN_CODE>',<BYE_TEXT>,<FAILED_TEXT>,options,callback);
 ```
 
 ## Verify
@@ -210,6 +192,50 @@ nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
+
+## Applications
+
+For an overview of applications see https://docs.nexmo.com/tools/application-api
+
+### Create an App
+
+```js
+nexmo.applications.create(name, type, answerUrl, eventUrl, options, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#create
+
+### Get a single App
+
+```js
+nexmo.applications.get(appId, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#retrieve
+
+### Get Apps by filter
+
+```js
+nexmo.application.get(options, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#list
+
+### Update an App
+
+```js
+nexmo.applications.update(appId, name, type, answerUrl, eventUrl, options, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#update
+
+### Delete an App
+
+```js
+nexmo.application.delete(appId, callback);
+```
+
+For more information see https://docs.nexmo.com/tools/application-api/api-reference#delete
 
 ## Management
 
@@ -318,6 +344,26 @@ nexmo.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
 nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
 ```
 
+## Legacy Voice
+
+### Send TTS Message
+
+```js
+nexmo.voice.sendTTSMessage(<TO_NUMBER>,message,options,callback);
+```
+
+### Send TTS Prompt With Capture
+
+```js
+nexmo.sendTTSPromptWithCapture(<TO_NUMBER>,message,<MAX_DIGITS>, <BYE_TEXT>,options,callback);
+```
+
+### Send TTS Prompt With Confirm
+
+```js
+nexmo.voice.sendTTSPromptWithConfirm(<TO_NUMBER>, message ,<MAX_DIGITS>,'<PIN_CODE>',<BYE_TEXT>,<FAILED_TEXT>,options,callback);
+```
+
 ## Testing
 
 Run:
@@ -337,6 +383,59 @@ npm run-script test-watch
 See [examples/README.md](examples/README).
 
 Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/nexmo-node-quickstart).
+
+## API Coverage
+
+* Calls (New Voice)
+	* [x] Outbound Calls
+	* [ ] Inbound Call Webhook
+	* [x] Stream to Call
+	* [x] Talk to Call
+	* [x] DTMF to Call
+* Messaging 
+  * [x] Send
+  * [ ] Delivery Receipt Webhook
+  * [ ] Inbound Message Webhook
+  * [ ] Search
+    * [ ] Message
+    * [ ] Messages
+    * [ ] Rejections
+  * [ ] US Short Codes
+    * [ ] Two-Factor Authentication
+    * [ ] Event Based Alerts
+      * [ ] Sending Alerts
+      * [ ] Campaign Subscription Management
+* Number Insight
+  * [X] Basic
+  * [X] Standard
+  * [ ] Advanced
+	* [x] Advanced Async
+  * [ ] Advanced Async Webhook
+* Verify
+  * [x] Verify
+  * [x] Check
+  * [x] Search
+  * [x] Control
+* Applications
+	* [x] Create an Application
+	* [x] Get Applications
+	* [x] Update an Application
+	* [x] Delete an Application
+* Voice (Legacy)
+    * [x] Outbound Calls
+    * [ ] Inbound Call Webhook
+    * [x] Text-To-Speech Call
+    * [x] Text-To-Speech Prompt
+* Account
+  * [X] Balance
+  * [x] Pricing
+  * [x] Settings
+  * [ ] Top Up
+  * [x] Numbers
+    * [x] Search
+    * [x] Buy
+    * [x] Cancel
+    * [x] Update
 
 ## License
 
