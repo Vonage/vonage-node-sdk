@@ -18,9 +18,10 @@ class Nexmo {
    * @param {Credentials} credentials - Nexmo API credentials
    * @param {string} credentials.apiKey - the Nexmo API key
    * @param {string} credentials.apiSecret - the Nexmo API secret
-   * @param {Object} options Additional options
-   * @param {boolean} options.debug `true` to turn on debug logging
-   * @param {string} options.appendToUserAgent A value to append to the user agent.
+   * @param {Object} options - Additional options
+   * @param {boolean} options.debug - `true` to turn on debug logging
+   * @param {Object} options.logger - Set a custom logger.
+   * @param {string} options.appendToUserAgent - A value to append to the user agent.
    *                    The value will be prefixed with a `/`
    */
   constructor(credentials, options = {debug:false}) {
@@ -32,7 +33,8 @@ class Nexmo {
     if(!this.options.logger && this.options.debug) {
       this.options.logger = new ConsoleLogger();
     }
-    else { // Otherwise, swallow the logging
+    else if(!this.options.logger) {
+      // Swallow the logging
       this.options.logger = new NullLogger();
     }
     

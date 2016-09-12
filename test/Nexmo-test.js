@@ -81,6 +81,17 @@ describe('Nexmo Object instance', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
     expect( nexmo.options.debug ).to.be.false;
   });
+  
+  it('should allow a custom logger to be set', function () {
+    var logger = {
+      info: function(){},
+      error: function() {},
+      warn: function() {}
+    };
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, {logger: logger});
+    console.log(nexmo.options.logger);
+    expect( nexmo.options.logger ).to.equal(logger);
+  });
 
   it('should allow a debug option to be set', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'}, { debug: true });

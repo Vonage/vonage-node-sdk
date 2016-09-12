@@ -20,18 +20,36 @@ npm install nexmo
 var Nexmo = require('nexmo');
 
 var nexmo = new Nexmo({
-	apiKey: API_KEY,
-	apiSecret: API_SECRET,
-	applicationId: APP_ID,
-	privateKey: PRIVATE_KEY_PATH,
-}, {debug: DEBUG});
+		apiKey: API_KEY,
+		apiSecret: API_SECRET,
+		applicationId: APP_ID,
+		privateKey: PRIVATE_KEY_PATH,
+	}, options });
 ```
 
 * `apiKey` - API Key from Nexmo
 * `apiSecret` - API SECRET from Nexmo
 * `applicationId` - The Nexmo Application ID to be used when creating JWTs. Required for voice related functionality.
 * `privateKey` - The path to the Private Key to be used when creating JWTs.  Required for voice related functionality.
-* `DEBUG` - set this to true to debug library calls
+* `options` - Additional options for the constructor
+
+Options are:
+
+```js
+{
+	// If true, log information to the console
+	debug: true|false,
+	// append info the the User-Agent sent to Nexmo
+	// e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
+	appendToUserAgent: string, 
+	// Set a custom logger
+	logger: {
+		log: function() {level, args...}
+		info: function() {args...},
+		warn: function() {args...}
+	}
+}
+```
 
 ## Messaging
 
