@@ -55,9 +55,14 @@ class Nexmo {
     this.number = new Number(this.credentials, this.options);
     this.verify = new Verify(this.credentials, this.options);
     this.numberInsight = new NumberInsight(this.credentials, this.options);
-    this.app = new App(this.credentials, this.options);
+    this.applications = new App(this.credentials, this.options);
     this.account = new Account(this.credentials, this.options);
     this.calls = new CallsResource(this.credentials, this.options);
+    
+    /**
+     * @deprecated Please use nexmo.applications
+     */
+    this.app = this.applications;
   }
 }
 
