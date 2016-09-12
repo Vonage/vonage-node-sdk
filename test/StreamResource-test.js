@@ -1,0 +1,67 @@
+import chai, { expect } from 'chai';
+import sinon            from 'sinon';
+import sinonChai        from 'sinon-chai';
+
+chai.use(sinonChai);
+
+import ResourceTestHelper from './ResourceTestHelper';
+
+import querystring from 'querystring';
+
+import StreamResource from '../lib/StreamResource';
+import HttpClient from '../lib/HttpClient';
+import Credentials from '../lib/Credentials';
+
+var creds = Credentials.parse({
+  applicationId: 'some-id',
+  privateKey: __dirname + '/private-test.key'
+});
+var emptyCallback = () => {};
+
+describe('StreamResource', () => {
+  
+  var httpClientStub = null;
+  var stream = null;
+  
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    stream = new StreamResource(creds, options);
+  })
+  
+  it('should allow a stream to be started', () => {
+    const callId = '2342342-lkjhlkjh-32423';
+    var params = {stream_url: 'https://example.com/test.mp3'};
+    stream.start(callId, params, emptyCallback);
+    
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+      path: StreamResource.PATH.replace('{call_uuid}', callId),
+      method: 'PUT'
+    });
+    expect(httpClientStub.request)
+      .to.have.been.calledWith(
+        sinon.match(expectedRequestArgs),
+        emptyCallback
+      );
+  });
+  
+  it('should be possible to stop a stream', () => {
+    const callId = '2342342-lkjhlkjh-32423';
+    stream.stop(callId, emptyCallback);
+    
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: 'DELETE',
+      body: undefined,
+      path: StreamResource.PATH.replace('{call_uuid}', callId),
+    });
+    
+    expect(httpClientStub.request)
+      .to.have.been.calledWith(
+        sinon.match(expectedRequestArgs),
+        emptyCallback
+      );
+  });
+  
+});
