@@ -44,6 +44,16 @@ describe('Nexmo Object instance', function () {
     expect(nexmo.app).to.be.a('object');
   });
   
+  it('should expose a applications object', function () {
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
+    expect(nexmo.applications).to.be.a('object');
+  });
+  
+  it('should alias apps to applications object', function () {
+    var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
+    expect(nexmo.applications).to.equal(nexmo.app);
+  });
+  
   it('should expose a account object', function () {
     var nexmo = new Nexmo({apiKey:'test', apiSecret:'test'});
     expect(nexmo.account).to.be.a('object');
