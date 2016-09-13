@@ -6,7 +6,7 @@ For full API documentation refer to https://docs.nexmo.com/
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Calls (Voice)](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) [Management](#management)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) [Management](#management)
 
 ## Installation
 
@@ -64,7 +64,7 @@ nexmo.message.sendSms(sender, recipient, message, options, callback);
 ### Send a Binary Message
 
 ```js
-nexmo.message.sendBinaryMessage(fromnumber, tonumber,body, udh, callback);
+nexmo.message.sendBinaryMessage(fromnumber, tonumber, body, udh, callback);
 ```
 
 * `body` - Hex encoded binary data
@@ -84,7 +84,9 @@ nexmo.message.sendWapPushMessage(fromnumber, tonumber, title, url, validity, cal
 nexmo.message.shortcodeAlert(recipient, messageParams, opts, callback);
 ```
 
-## Calls
+## Voice
+
+For detailed information please see the documentation at https://docs.nexmo.com/voice/call
 
 ### Make a call
 
@@ -104,13 +106,15 @@ nexmo.calls.create({
 }, callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/voice/call
+For more information see https://docs.nexmo.com/voice/voice-api/api-reference#call_create
 
 ### Get a Call
 
 ```js
 nexmo.calls.get(callId, callback);
 ```
+
+For more information see https://docs.nexmo.com/voice/voice-api/api-reference#call_create
 
 ### Query Calls
 
@@ -133,11 +137,23 @@ nexmo.calls.stream.start(
 	});
 ```
 
+For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_put
+
+### Stop an audio stream in a call
+
+```js
+nexmo.calls.stream.stop(callId);
+```
+
+For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_delete
+
 ### Send DTMF to a Call
 
 ```js
-nexmo.calls.dtmf(callId, {digits: '1234'});
+nexmo.calls.dtmf.send(callId, params, callback);
 ```
+
+For more information see https://docs.nexmo.com/voice/voice-api/api-reference#dtmf_put
 
 ## Verify
 
@@ -362,7 +378,7 @@ nexmo.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
 nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
 ```
 
-## Legacy Voice
+## Voice (Deprecated)
 
 ### Send TTS Message
 
@@ -404,7 +420,7 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 
 ## API Coverage
 
-* Calls (New Voice)
+* Voice
 	* [x] Outbound Calls
 	* [ ] Inbound Call Webhook
 	* [x] Stream to Call
@@ -439,11 +455,6 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 	* [x] Get Applications
 	* [x] Update an Application
 	* [x] Delete an Application
-* Voice (Legacy)
-    * [x] Outbound Calls
-    * [ ] Inbound Call Webhook
-    * [x] Text-To-Speech Call
-    * [x] Text-To-Speech Prompt
 * Account
   * [X] Balance
   * [x] Pricing
@@ -454,6 +465,12 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
     * [x] Buy
     * [x] Cancel
     * [x] Update
+* Voice (Deprecated)
+  * [x] Outbound Calls
+  * [ ] Inbound Call Webhook
+  * [x] Text-To-Speech Call
+  * [x] Text-To-Speech Prompt
+
 
 ## License
 
