@@ -239,7 +239,7 @@ nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, consolelog);
 ```js
 nexmo.numberInsight.get({level: 'standard', number: NUMBER}, callback);
 ```
-	
+
 For more information check the documentation at https://docs.nexmo.com/number-insight/standard
 
 Example:
@@ -251,10 +251,17 @@ nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, consolelo
 ### Number Insight - Advanced
 
 ```js
-nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
+nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, consolelog);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
+
+As the advanced call can take a few seconds to complete there is an asynchronous option that will instead make a webhook to a specified URL.
+
+
+```js
+nexmo.numberInsight.get({level: 'asyncAdvanced', number: NUMBER, callback: "http://example.com"}, consolelog);
+```
 
 ## Callbacks
 
