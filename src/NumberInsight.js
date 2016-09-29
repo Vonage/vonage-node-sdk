@@ -77,11 +77,9 @@ class NumberInsight {
       this._nexmo.numberInsight.apply(this._nexmo, arguments);
     }
     else if(level === 'standard') {
-      console.log('3');
       this._nexmo.numberInsightStandard.apply(this._nexmo, arguments);
     }
     else {
-      console.log('4');
       this._nexmo.numberInsightBasic.apply(this._nexmo, arguments);
     }
   }
