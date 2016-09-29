@@ -71,10 +71,11 @@ class NumberInsight {
     // remove 'level' as it's a library-only parameter
     delete options.level;
 
-    if(level === 'advanced') {
+    if (level === 'advancedAsync') {
+      this._nexmo.numberInsightAdvancedAsync.apply(this._nexmo, arguments);
+    }
+    else if(level === 'advanced') {
       this._nexmo.numberInsightAdvanced.apply(this._nexmo, arguments);
-    } else if (level === 'asyncAdvanced') {
-      this._nexmo.numberInsight.apply(this._nexmo, arguments);
     }
     else if(level === 'standard') {
       this._nexmo.numberInsightStandard.apply(this._nexmo, arguments);
