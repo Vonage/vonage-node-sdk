@@ -216,16 +216,26 @@ For more information check the documentation at https://docs.nexmo.com/number-in
 Example:
 
 ```js
-nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, consolelog);
+nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, callback_function);
 ```
 
 ### Advanced
 
 ```js
-nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
+nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback_function);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
+
+### Advanced Async
+
+Number Insight Advanced might take a few seconds to return a result, therefore the option exist to process the result asynchronously through a webhook.
+
+```js
+nexmo.numberInsight.get({level: 'advancedAsync', number: NUMBER, callback: "http://example.com"}, callback_function);
+```
+
+In this case the result of your insight request is posted to the callback URL as a webhook. For more details on webhooks see the [Number Insight Advanced](https://docs.nexmo.com/number-insight/advanced-async) documentation.
 
 ## Applications
 
@@ -442,8 +452,8 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 * Number Insight
   * [X] Basic
   * [X] Standard
-  * [ ] Advanced
-	* [x] Advanced Async
+  * [X] Advanced
+	* [X] Advanced Async
   * [ ] Advanced Async Webhook
 * Verify
   * [x] Verify

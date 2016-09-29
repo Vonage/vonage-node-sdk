@@ -3,10 +3,10 @@ import NumberInsight from '../lib/NumberInsight';
 import NexmoStub from './NexmoStub';
 
 var numberInsightAPIs = {
-  'numberInsight': 'get|{"level":"asyncAdvanced"}',
+  'numberInsightAdvancedAsync': 'get|{"level":"advancedAsync"}',
   'numberInsightAdvanced': 'get|{"level":"advanced"}',
-  'numberInsightBasic': 'get|{"level":"basic"}',
-  'numberInsightStandard': 'get|{"level":"standard"}'
+  'numberInsightStandard': 'get|{"level":"standard"}',
+  'numberInsightBasic': 'get|{"level":"basic"}'
 };
 
 describe('NumberInsight Object', function () {
