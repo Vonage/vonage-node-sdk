@@ -20,11 +20,11 @@ npm install nexmo
 var Nexmo = require('nexmo');
 
 var nexmo = new Nexmo({
-		apiKey: API_KEY,
-		apiSecret: API_SECRET,
-		applicationId: APP_ID,
-		privateKey: PRIVATE_KEY_PATH,
-	}, options });
+    apiKey: API_KEY,
+    apiSecret: API_SECRET,
+    applicationId: APP_ID,
+    privateKey: PRIVATE_KEY_PATH,
+  }, options });
 ```
 
 * `apiKey` - API Key from Nexmo
@@ -37,17 +37,17 @@ Options are:
 
 ```js
 {
-	// If true, log information to the console
-	debug: true|false,
-	// append info the the User-Agent sent to Nexmo
-	// e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
-	appendToUserAgent: string,
-	// Set a custom logger
-	logger: {
-		log: function() {level, args...}
-		info: function() {args...},
-		warn: function() {args...}
-	}
+  // If true, log information to the console
+  debug: true|false,
+  // append info the the User-Agent sent to Nexmo
+  // e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
+  appendToUserAgent: string,
+  // Set a custom logger
+  logger: {
+    log: function() {level, args...}
+    info: function() {args...},
+    warn: function() {args...}
+  }
 }
 ```
 
@@ -94,15 +94,15 @@ Requires `applicationId` and `privateKey` to be set on the constructor.
 
 ```js
 nexmo.calls.create({
-	to: [{
-		type: 'phone',
-		number: TO_NUMBER
-	}],
-	from: {
-		type: 'phone',
-		number: FROM_NUMBER
-	},
-	answer_url: [ANSWER_URL]
+  to: [{
+    type: 'phone',
+    number: TO_NUMBER
+  }],
+  from: {
+    type: 'phone',
+    number: FROM_NUMBER
+  },
+  answer_url: [ANSWER_URL]
 }, callback);
 ```
 
@@ -128,13 +128,13 @@ The first parameter can contain many properties to filter the returned call or t
 
 ```js
 nexmo.calls.stream.start(
-	callId,
-	{
-		stream_url: [   
-			'https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3'
-		],
-		loop: 1
-	});
+  callId,
+  {
+    stream_url: [   
+      'https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3'
+    ],
+    loop: 1
+  });
 ```
 
 For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_put
@@ -313,10 +313,10 @@ nexmo.number.get(options, callback);
 ```
 
 * `options` parameter is an optional Dictionary Object containing any of the following parameters
-	* `pattern`
-	* `search_pattern`
-	* `index`
-	* `size`
+  * `pattern`
+  * `search_pattern`
+  * `index`
+  * `size`
 
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/account-numbers)
 
@@ -336,11 +336,11 @@ nexmo.number.search(countryCode,options,callback);
 
 1. number pattern to match the search (eg. 1408)
 2. Dictionary Object optionally containing the following parameters :
-	* `pattern`
-	* `search_pattern`
-	* `features`
-	* `index`
-	* `size`
+  * `pattern`
+  * `search_pattern`
+  * `features`
+  * `index`
+  * `size`
 
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/number-search)
 
@@ -431,11 +431,11 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 ## API Coverage
 
 * Voice
-	* [x] Outbound Calls
-	* [ ] Inbound Call Webhook
-	* [x] Stream to Call
-	* [x] Talk to Call
-	* [x] DTMF to Call
+  * [x] Outbound Calls
+  * [ ] Inbound Call Webhook
+  * [x] Stream to Call
+  * [x] Talk to Call
+  * [x] DTMF to Call
 * Messaging
   * [x] Send
   * [ ] Delivery Receipt Webhook
@@ -453,7 +453,7 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
   * [X] Basic
   * [X] Standard
   * [X] Advanced
-	* [X] Advanced Async
+  * [X] Advanced Async
   * [ ] Advanced Async Webhook
 * Verify
   * [x] Verify
@@ -461,10 +461,10 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
   * [x] Search
   * [x] Control
 * Applications
-	* [x] Create an Application
-	* [x] Get Applications
-	* [x] Update an Application
-	* [x] Delete an Application
+  * [x] Create an Application
+  * [x] Get Applications
+  * [x] Update an Application
+  * [x] Delete an Application
 * Account
   * [X] Balance
   * [x] Pricing
