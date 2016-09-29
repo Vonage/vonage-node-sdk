@@ -202,7 +202,7 @@ For more information check the documentation at https://docs.nexmo.com/number-in
 Example:
 
 ```js
-nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, consolelog);
+nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'},  callback);
 ```
 
 ### Standard
@@ -216,13 +216,13 @@ For more information check the documentation at https://docs.nexmo.com/number-in
 Example:
 
 ```js
-nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, callback_function);
+nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, callback);
 ```
 
 ### Advanced
 
 ```js
-nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback_function);
+nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
@@ -232,7 +232,7 @@ For more information check the documentation at https://docs.nexmo.com/number-in
 Number Insight Advanced might take a few seconds to return a result, therefore the option exist to process the result asynchronously through a webhook.
 
 ```js
-nexmo.numberInsight.get({level: 'advancedAsync', number: NUMBER, callback: "http://example.com"}, callback_function);
+nexmo.numberInsight.get({level: 'advancedAsync', number: NUMBER, callback: "http://example.com"}, callback);
 ```
 
 In this case the result of your insight request is posted to the callback URL as a webhook. For more details on webhooks see the [Number Insight Advanced](https://docs.nexmo.com/number-insight/advanced-async) documentation.
@@ -323,7 +323,7 @@ For more details on what the above options mean refer to the Nexmo API  [documen
 Example:
 
 ```js
-nexmo.number.get({pattern:714,index:1,size:50,search_pattern:2},consolelog);
+nexmo.number.get({pattern:714,index:1,size:50,search_pattern:2}, callback);
 ```
 
 ### Search for MSISDN's available to purchase
@@ -347,7 +347,7 @@ For more details on what the above options mean refer to the Nexmo API  [documen
 Example:
 
 ```js
-nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2},consolelog);
+nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2}, callback);
 ```
 
 ### Purchase number
