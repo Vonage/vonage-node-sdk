@@ -13,8 +13,9 @@ var checkVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/check/json'};
 var controlVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/control/json'};
 var searchVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/search/json'};
 var niEndpoint = {host:'rest.nexmo.com',path:'/ni/json'};
-var niBasicEndpoint = {host:'api.nexmo.com',path:'/number/format/json'};
-var niStandardEndpoint = {host:'api.nexmo.com',path:'/number/lookup/json'};
+var niBasicEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/async/json'};
+var niStandardEndpoint = {host:'api.nexmo.com',path:'/ni/standard/json'};
+var niAdvancedEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/json'};
 var applicationsEndpoint = {host:'api.nexmo.com',path:'/v1/applications'};
 var up = {};
 var numberPattern = new RegExp("^[0-9 +()-]*$");
@@ -183,7 +184,7 @@ function getEndpoint(action) {
 
 function sendRequest(endpoint, method, callback) {
   endpoint.path = endpoint.path +
-                  (endpoint.path.indexOf('?')>0?'&':'?') + 
+                  (endpoint.path.indexOf('?')>0?'&':'?') +
                   querystring.stringify(up);
   _options.httpClient.request(endpoint, method, callback);
 }
@@ -452,13 +453,7 @@ exports.searchVerifyRequest = function(requestIds, callback) {
 }
 
 exports.numberInsight = function(inputParams, callback) {
-	if (!inputParams.number || ! inputParams.callback) {
-		sendError(callback, new Error(ERROR_MESSAGES.numberInsightAdvancedValidation));
-    } else {
-		var nEndpoint = clone(niEndpoint);
-		nEndpoint.path += '?' + querystring.stringify(inputParams);
-        sendRequest(nEndpoint, callback);
-    }
+	numberInsightAsync(inputParams, callback);
 }
 
 exports.numberInsightBasic = function(inputParams, callback) {
@@ -467,6 +462,24 @@ exports.numberInsightBasic = function(inputParams, callback) {
 
 exports.numberInsightStandard = function(inputParams, callback) {
 	numberInsightCommon(niStandardEndpoint,inputParams,callback)
+}
+
+exports.numberInsightAdvanced = function(inputParams, callback) {
+	numberInsightCommon(niAdvancedEndpoint,inputParams,callback)
+}
+
+exports.numberInsightAdvancedAsync = function(inputParams, callback) {
+  numberInsightAsync(inputParams, callback);
+}
+
+function numberInsightAsync(inputParams, callback) {
+  if (!inputParams.number || ! inputParams.callback) {
+		sendError(callback, new Error(ERROR_MESSAGES.numberInsightAdvancedValidation));
+    } else {
+		var nEndpoint = clone(niEndpoint);
+		nEndpoint.path += '?' + querystring.stringify(inputParams);
+        sendRequest(nEndpoint, callback);
+    }
 }
 
 function numberInsightCommon(endpoint,inputParams,callback) {
