@@ -41,7 +41,7 @@ Options are:
 	debug: true|false,
 	// append info the the User-Agent sent to Nexmo
 	// e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
-	appendToUserAgent: string, 
+	appendToUserAgent: string,
 	// Set a custom logger
 	logger: {
 		log: function() {level, args...}
@@ -210,7 +210,7 @@ nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, consolelog);
 ```js
 nexmo.numberInsight.get({level: 'standard', number: NUMBER}, callback);
 ```
-	
+
 For more information check the documentation at https://docs.nexmo.com/number-insight/standard
 
 Example:
@@ -333,6 +333,8 @@ nexmo.number.search(countryCode,options,callback);
 	* `size`
 
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/number-search)
+=======
+For more information check the documentation at https://docs.nexmo.com/number-insight/standard
 
 Example:
 
@@ -347,6 +349,20 @@ nexmo.number.buy(countryCode, msisdn, callback);
 ```
 
 ### Cancel Number
+=======
+nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, consolelog);
+```
+
+For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
+
+As the advanced call can take a few seconds to complete there is an asynchronous option that will instead make a webhook to a specified URL.
+
+
+```js
+nexmo.numberInsight.get({level: 'asyncAdvanced', number: NUMBER, callback: "http://example.com"}, consolelog);
+```
+
+## Callbacks
 
 ```js
 nexmo.number.cancel(countryCode, msisdn, callback);
@@ -426,7 +442,7 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 	* [x] Stream to Call
 	* [x] Talk to Call
 	* [x] DTMF to Call
-* Messaging 
+* Messaging
   * [x] Send
   * [ ] Delivery Receipt Webhook
   * [ ] Inbound Message Webhook
