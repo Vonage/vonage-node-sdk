@@ -20,11 +20,11 @@ npm install nexmo
 var Nexmo = require('nexmo');
 
 var nexmo = new Nexmo({
-		apiKey: API_KEY,
-		apiSecret: API_SECRET,
-		applicationId: APP_ID,
-		privateKey: PRIVATE_KEY_PATH,
-	}, options });
+    apiKey: API_KEY,
+    apiSecret: API_SECRET,
+    applicationId: APP_ID,
+    privateKey: PRIVATE_KEY_PATH,
+  }, options });
 ```
 
 * `apiKey` - API Key from Nexmo
@@ -37,17 +37,17 @@ Options are:
 
 ```js
 {
-	// If true, log information to the console
-	debug: true|false,
-	// append info the the User-Agent sent to Nexmo
-	// e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
-	appendToUserAgent: string, 
-	// Set a custom logger
-	logger: {
-		log: function() {level, args...}
-		info: function() {args...},
-		warn: function() {args...}
-	}
+  // If true, log information to the console
+  debug: true|false,
+  // append info the the User-Agent sent to Nexmo
+  // e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
+  appendToUserAgent: string,
+  // Set a custom logger
+  logger: {
+    log: function() {level, args...}
+    info: function() {args...},
+    warn: function() {args...}
+  }
 }
 ```
 
@@ -94,15 +94,15 @@ Requires `applicationId` and `privateKey` to be set on the constructor.
 
 ```js
 nexmo.calls.create({
-	to: [{
-		type: 'phone',
-		number: TO_NUMBER
-	}],
-	from: {
-		type: 'phone',
-		number: FROM_NUMBER
-	},
-	answer_url: [ANSWER_URL]
+  to: [{
+    type: 'phone',
+    number: TO_NUMBER
+  }],
+  from: {
+    type: 'phone',
+    number: FROM_NUMBER
+  },
+  answer_url: [ANSWER_URL]
 }, callback);
 ```
 
@@ -128,13 +128,13 @@ The first parameter can contain many properties to filter the returned call or t
 
 ```js
 nexmo.calls.stream.start(
-	callId,
-	{
-		stream_url: [   
-			'https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3'
-		],
-		loop: 1
-	});
+  callId,
+  {
+    stream_url: [   
+      'https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3'
+    ],
+    loop: 1
+  });
 ```
 
 For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_put
@@ -202,7 +202,7 @@ For more information check the documentation at https://docs.nexmo.com/number-in
 Example:
 
 ```js
-nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, consolelog);
+nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'},  callback);
 ```
 
 ### Standard
@@ -210,13 +210,13 @@ nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, consolelog);
 ```js
 nexmo.numberInsight.get({level: 'standard', number: NUMBER}, callback);
 ```
-	
+
 For more information check the documentation at https://docs.nexmo.com/number-insight/standard
 
 Example:
 
 ```js
-nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, consolelog);
+nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, callback);
 ```
 
 ### Advanced
@@ -226,6 +226,16 @@ nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
+
+### Advanced Async
+
+Number Insight Advanced might take a few seconds to return a result, therefore the option exist to process the result asynchronously through a webhook.
+
+```js
+nexmo.numberInsight.get({level: 'advancedAsync', number: NUMBER, callback: "http://example.com"}, callback);
+```
+
+In this case the result of your insight request is posted to the callback URL as a webhook. For more details on webhooks see the [Number Insight Advanced](https://docs.nexmo.com/number-insight/advanced-async) documentation.
 
 ## Applications
 
@@ -303,17 +313,17 @@ nexmo.number.get(options, callback);
 ```
 
 * `options` parameter is an optional Dictionary Object containing any of the following parameters
-	* `pattern`
-	* `search_pattern`
-	* `index`
-	* `size`
+  * `pattern`
+  * `search_pattern`
+  * `index`
+  * `size`
 
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/account-numbers)
 
 Example:
 
 ```js
-nexmo.number.get({pattern:714,index:1,size:50,search_pattern:2},consolelog);
+nexmo.number.get({pattern:714,index:1,size:50,search_pattern:2}, callback);
 ```
 
 ### Search for MSISDN's available to purchase
@@ -326,18 +336,18 @@ nexmo.number.search(countryCode,options,callback);
 
 1. number pattern to match the search (eg. 1408)
 2. Dictionary Object optionally containing the following parameters :
-	* `pattern`
-	* `search_pattern`
-	* `features`
-	* `index`
-	* `size`
+  * `pattern`
+  * `search_pattern`
+  * `features`
+  * `index`
+  * `size`
 
 For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/number-search)
 
 Example:
 
 ```js
-nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2},consolelog);
+nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2}, callback);
 ```
 
 ### Purchase number
@@ -421,12 +431,12 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 ## API Coverage
 
 * Voice
-	* [x] Outbound Calls
-	* [ ] Inbound Call Webhook
-	* [x] Stream to Call
-	* [x] Talk to Call
-	* [x] DTMF to Call
-* Messaging 
+  * [x] Outbound Calls
+  * [ ] Inbound Call Webhook
+  * [x] Stream to Call
+  * [x] Talk to Call
+  * [x] DTMF to Call
+* Messaging
   * [x] Send
   * [ ] Delivery Receipt Webhook
   * [ ] Inbound Message Webhook
@@ -442,8 +452,8 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 * Number Insight
   * [X] Basic
   * [X] Standard
-  * [ ] Advanced
-	* [x] Advanced Async
+  * [X] Advanced
+  * [X] Advanced Async
   * [ ] Advanced Async Webhook
 * Verify
   * [x] Verify
@@ -451,10 +461,10 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
   * [x] Search
   * [x] Control
 * Applications
-	* [x] Create an Application
-	* [x] Get Applications
-	* [x] Update an Application
-	* [x] Delete an Application
+  * [x] Create an Application
+  * [x] Get Applications
+  * [x] Update an Application
+  * [x] Delete an Application
 * Account
   * [X] Balance
   * [x] Pricing
