@@ -474,12 +474,12 @@ exports.numberInsightAdvancedAsync = function(inputParams, callback) {
 
 function numberInsightAsync(inputParams, callback) {
   if (!inputParams.number || ! inputParams.callback) {
-		sendError(callback, new Error(ERROR_MESSAGES.numberInsightAdvancedValidation));
-    } else {
-		var nEndpoint = clone(niEndpoint);
-		nEndpoint.path += '?' + querystring.stringify(inputParams);
-        sendRequest(nEndpoint, callback);
-    }
+    sendError(callback, new Error(ERROR_MESSAGES.numberInsightAdvancedValidation));
+  } else {
+    var nEndpoint = clone(niEndpoint);
+    nEndpoint.path += '?' + querystring.stringify(inputParams);
+    sendRequest(nEndpoint, callback);
+  }
 }
 
 function numberInsightCommon(endpoint,inputParams,callback) {
