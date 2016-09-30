@@ -18,10 +18,10 @@ class Credentials {
   constructor(apiKey, apiSecret, privateKey, applicationId) {
     this.apiKey = apiKey;
     this.apiSecret = apiSecret;
-    
+
     this.privateKey = null;
     this.applicationId = applicationId;
-    
+
     if(privateKey instanceof Buffer) {
       this.privateKey = privateKey;
     }
@@ -31,11 +31,11 @@ class Credentials {
       }
       this.privateKey = fs.readFileSync(privateKey);
     }
-    
+
     /** @private */
     this._jwtGenerator = new JwtGenerator();
   }
-  
+
   /**
    * Generate a Jwt using the Private Key in the Credentials.
    * By default the credentials.applicationId will be used when creating the token.
@@ -46,11 +46,11 @@ class Credentials {
    *
    * @returns {string} The generated JWT
    */
-  generateJwt(applicationId = this.applicationId) {
-    var token = this._jwtGenerator.generate(this.privateKey, applicationId);
+  generateJwt(applicationId = this.applicationId, privateKey = this.privateKey) {
+    var token = this._jwtGenerator.generate(privateKey, applicationId);
     return token;
   }
-  
+
   /**
    * @private
    * Used for testing purposes only.
@@ -58,10 +58,10 @@ class Credentials {
   _setJwtGenerator(generator) {
     this._jwtGenerator = generator;
   }
-  
+
   /**
    * Ensures a credentials instance is used.
-   * 
+   *
    * Key/Secret credentials are only supported at present.
    */
   static parse(obj) {
