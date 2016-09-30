@@ -80,4 +80,15 @@ describe('Credentials Object', function() {
         expect(stub.generate).to.be.calledWith(cred.privateKey, altAppId);
     });
 
+    it('should allow a JWT to be generated using an alternative private key', function() {
+        var stub = sinon.createStubInstance(JwtGenerator);
+
+        var cred = new Credentials('KEY', 'SECRET', __dirname + '/private-test.key', 'app-id');
+        cred._setJwtGenerator(stub);
+
+        var altAppId = 'another-app-id';
+        cred.generateJwt(altAppId, 'ALTERNATIVE_KEY');
+
+        expect(stub.generate).to.be.calledWith('ALTERNATIVE_KEY', altAppId);
+    });
 });
