@@ -56,7 +56,7 @@ describe('TalkResource', () => {
         var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
             method: 'DELETE',
             body: undefined,
-            path: TalkResource.PATH.replace('{call_uuid}', callId),
+            path: TalkResource.PATH.replace('{call_uuid}', callId)
         });
 
         expect(httpClientStub.request)

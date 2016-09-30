@@ -56,7 +56,7 @@ describe('StreamResource', () => {
         var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
             method: 'DELETE',
             body: undefined,
-            path: StreamResource.PATH.replace('{call_uuid}', callId),
+            path: StreamResource.PATH.replace('{call_uuid}', callId)
         });
 
         expect(httpClientStub.request)
