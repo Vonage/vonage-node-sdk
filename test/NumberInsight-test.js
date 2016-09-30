@@ -4,7 +4,7 @@ import NexmoStub from './NexmoStub';
 
 var numberInsightAPIs = {
     'numberInsightAdvancedAsync': 'get|{"level":"advancedAsync"}',
-    'numberInsightAdvanced': 'get|{"level":"advanced"}',
+    'numberInsightAdvanced': 'get|{"level":"advancedSync"}',
     'numberInsightStandard': 'get|{"level":"standard"}',
     'numberInsightBasic': 'get|{"level":"basic"}'
 };
