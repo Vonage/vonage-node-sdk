@@ -31,7 +31,8 @@
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",
     "prepublish": "npm run compile",
     "test": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
-    "test-watch": "nodemon --watch src --watch test -x 'npm test'"
+    "test-watch": "nodemon --watch src --watch test -x 'npm test'",
+    "pretest": "eslint test"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
@@ -42,6 +43,7 @@
     "body-parser": "^1.15.2",
     "chai": "^3.5.0",
     "dotenv": "^2.0.0",
+    "eslint": "^2",
     "expect.js": "^0.3.1",
     "express": "^4.14.0",
     "mocha": "^2.4.5",
