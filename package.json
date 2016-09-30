@@ -43,7 +43,7 @@
     "body-parser": "^1.15.2",
     "chai": "^3.5.0",
     "dotenv": "^2.0.0",
-    "eslint": "^3.6.1",
+    "eslint": "^2",
     "expect.js": "^0.3.1",
     "express": "^4.14.0",
     "mocha": "^2.4.5",
