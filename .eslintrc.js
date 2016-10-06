@@ -29,10 +29,10 @@ module.exports = {
             'warn'
         ],
         'no-trailing-spaces': [
-          'error'
+          'error', { "skipBlankLines": true }
         ],
         'camelcase': [
-          'error'
+          "error", {properties: "never"}
         ]
     }
 };
