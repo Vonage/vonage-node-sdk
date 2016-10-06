@@ -23,14 +23,14 @@ describe('JwtGenerator Object', function() {
 
             expect(token).to.be.a('string');
         });
-      
+
         it('should add jti and iat claims by default', function() {
             var testPrivateKey = fs.readFileSync(__dirname + '/private-test.key');
-            var testPublicKey = fs.readFileSync(__dirname + '/public-test.key'); 
+            var testPublicKey = fs.readFileSync(__dirname + '/public-test.key');
 
             var generator = new JwtGenerator();
             var token = generator.generate(testPrivateKey);
-            
+
             var decoded = jwt.verify(token, testPublicKey, {algorithms:['RS256']});
 
             expect(decoded.jti).to.be.ok();
@@ -39,14 +39,14 @@ describe('JwtGenerator Object', function() {
         
         it('should be possible to add additional claims', function() {
             var testPrivateKey = fs.readFileSync(__dirname + '/private-test.key');
-            var testPublicKey = fs.readFileSync(__dirname + '/public-test.key'); 
+            var testPublicKey = fs.readFileSync(__dirname + '/public-test.key');
 
             var generator = new JwtGenerator();
             var appId = 'app-id';
             var randomValue = Math.random();
             var token = generator.generate(testPrivateKey, {
-              application_id: appId,
-              random: randomValue
+                application_id: appId,
+                random: randomValue
             });
             
             var decoded = jwt.verify(token, testPublicKey, {algorithms:['RS256']});
