@@ -30,8 +30,9 @@
   "scripts": {
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",
     "prepublish": "npm run compile",
-    "test": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
-    "test-watch": "nodemon --watch src --watch test -x 'npm test'",
+    "test": "npm run-script test-no-lint",
+    "test-no-lint": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
+    "test-watch": "nodemon --watch src --watch test -x 'npm run-script test-no-lint'",
     "pretest": "eslint test"
   },
   "devDependencies": {
