@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 import Credentials from './Credentials';
+import JwtGenerator from './JwtGenerator';
 import Message from './Message';
 import Voice from './Voice';
 import Number from './Number';
@@ -13,7 +14,10 @@ import HttpClient from './HttpClient';
 import NullLogger from './NullLogger';
 import ConsoleLogger from './ConsoleLogger';
 
+const jwtGeneratorInstance = new JwtGenerator();
+
 class Nexmo {
+  
   /**
    * @param {Credentials} credentials - Nexmo API credentials
    * @param {string} credentials.apiKey - the Nexmo API key
@@ -67,5 +71,16 @@ class Nexmo {
     this.app = this.applications;
   }
 }
+
+/**
+ * Generate a JSON Web Token (JWT) for the application with the given
+ * `applicationId`.
+ *
+ * @param {Buffer} cert - the private key certificate to be used when signing
+ *		the claims.
+ *
+ * @returns {String} the generated token
+ */
+Nexmo.generateJwt = jwtGeneratorInstance.generate;
 
 export default Nexmo;

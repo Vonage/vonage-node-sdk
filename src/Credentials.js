@@ -47,7 +47,8 @@ class Credentials {
    * @returns {string} The generated JWT
    */
   generateJwt(applicationId = this.applicationId, privateKey = this.privateKey) {
-    var token = this._jwtGenerator.generate(privateKey, applicationId);
+    var claims = {application_id: applicationId};
+    var token = this._jwtGenerator.generate(privateKey, claims);
     return token;
   }
 

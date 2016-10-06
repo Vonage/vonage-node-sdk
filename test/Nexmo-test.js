@@ -9,6 +9,17 @@ chai.use(sinonChai);
 import Nexmo from '../lib/Nexmo';
 import CallsResource from '../lib/CallsResource';
 
+describe('Nexmo definition', () => {
+  
+  it('should expose a generateJwt function', () => {
+    console.log(Nexmo.generate);
+    
+    
+    expect(Nexmo.generateJwt).to.be.a('function');
+  });
+  
+});
+
 describe('Nexmo Object instance', function() {
 
     it('should expose a credentials object', function() {
