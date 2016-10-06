@@ -16,6 +16,9 @@ class JwtGenerator {
 		if(!cert instanceof Buffer) {
 			throw new Error('cert must be of type Buffer');
 		}
+		if(typeof claims !== 'object') {
+			throw new Error('claims must be of type object');
+		}
 		
 		var toSign = {
 			'iat': claims.issuedAt || (Date.now()/1000),
