@@ -73,14 +73,24 @@ class Nexmo {
 }
 
 /**
- * Generate a JSON Web Token (JWT) for the application with the given
- * `applicationId`.
+ * Generate a JSON Web Token (JWT).
  *
- * @param {Buffer} cert - the private key certificate to be used when signing
- *		the claims.
+ * @param {String|Buffer} privateKey - the path to the private key certificate
+ *          to be used when signing the claims.
+ * @param {Object} claims - name/value pair claims to sign within the JWT
  *
  * @returns {String} the generated token
  */
-Nexmo.generateJwt = jwtGeneratorInstance.generate;
+Nexmo.generateJwt = (privateKey, claims) => {
+    if(!(privateKey instanceof Buffer)) {
+        if(!fs.existsSync(privateKey)) {
+            throw new Error(`File "${privateKey}" not found.`);
+        }
+        else {
+            privateKey = fs.readFileSync(privateKey);
+        }
+    }
+    return jwtGeneratorInstance.generate(privateKey, claims);
+}
 
 export default Nexmo;
