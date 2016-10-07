@@ -28,13 +28,13 @@ describe('Nexmo definition', () => {
             var token = Nexmo.generateJwt(__dirname + '/private-test.key');
             expect(token).to.be.a('string');
         });
-        
+
         it('should create a JWT with a private key (Buffer)', () => {
             var fileBuffer = fs.readFileSync(__dirname + '/private-test.key');
             var token = Nexmo.generateJwt(fileBuffer);
             expect(token).to.be.a('string');
         });
-    })
+    });
 
 });
 
