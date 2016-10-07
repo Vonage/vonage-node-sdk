@@ -10,11 +10,11 @@ import Nexmo from '../lib/Nexmo';
 import CallsResource from '../lib/CallsResource';
 
 describe('Nexmo definition', () => {
-  
+
     it('should expose a generateJwt function', () => {
         expect(Nexmo.generateJwt).to.be.a('function');
     });
-  
+
 });
 
 describe('Nexmo Object instance', function() {

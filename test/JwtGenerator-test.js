@@ -14,7 +14,7 @@ describe('JwtGenerator Object', function() {
             };
             expect(generate).to.throwError();
         });
-        
+
         it('should throw an exception if the claims is not a Object', function() {
             var generator = new JwtGenerator();
             var generate = function() {
@@ -47,7 +47,7 @@ describe('JwtGenerator Object', function() {
             expect(decoded.jti).to.be.ok();
             expect(decoded.iat).to.be.ok();
         });
-        
+
         it('should be possible to add additional claims', function() {
             var testPrivateKey = fs.readFileSync(__dirname + '/private-test.key');
             var testPublicKey = fs.readFileSync(__dirname + '/public-test.key');
@@ -59,7 +59,7 @@ describe('JwtGenerator Object', function() {
                 application_id: appId,
                 random: randomValue
             });
-            
+
             var decoded = jwt.verify(token, testPublicKey, {algorithms:['RS256']});
 
             expect(decoded.application_id).to.be(appId);
