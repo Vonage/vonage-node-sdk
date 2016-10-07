@@ -28,8 +28,8 @@ describe('JwtGenerator Object', function() {
 
             var generator = new JwtGenerator();
             var token = generator.generate(testPrivateKey, {
-              application_id: 'app-id',
-              iat: new Date(2016, 9, 5).getTime()/1000
+                application_id: 'app-id',
+                iat: new Date(2016, 9, 5).getTime()/1000
             });
 
             expect(token).to.be.a('string');
