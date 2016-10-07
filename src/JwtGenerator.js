@@ -21,7 +21,7 @@ class JwtGenerator {
 		}
 		
 		var toSign = {
-			'iat': claims.issuedAt || (Date.now()/1000),
+			'iat': claims.issuedAt || parseInt(Date.now()/1000, 10),
 			'jti': claims.jti || uuid.v1()
 		};
 		Object.keys(claims).forEach((key) => {
