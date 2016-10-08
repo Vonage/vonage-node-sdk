@@ -3,11 +3,40 @@ import chai, {
 } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import fs from 'fs';
 
 chai.use(sinonChai);
 
 import Nexmo from '../lib/Nexmo';
 import CallsResource from '../lib/CallsResource';
+
+describe('Nexmo definition', () => {
+
+    describe('.generateJwt', () => {
+        it('should expose a generateJwt function', () => {
+            expect(Nexmo.generateJwt).to.be.a('function');
+        });
+
+        it('should throw an exception if privateKey file does not exist', () => {
+            var create = function() {
+                Nexmo.generateJwt('./no-key-here.key');
+            };
+            expect(create).to.throw(Error);
+        });
+
+        it('should create a JWT with a private key (file path)', () => {
+            var token = Nexmo.generateJwt(__dirname + '/private-test.key');
+            expect(token).to.be.a('string');
+        });
+
+        it('should create a JWT with a private key (Buffer)', () => {
+            var fileBuffer = fs.readFileSync(__dirname + '/private-test.key');
+            var token = Nexmo.generateJwt(fileBuffer);
+            expect(token).to.be.a('string');
+        });
+    });
+
+});
 
 describe('Nexmo Object instance', function() {
 

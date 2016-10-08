@@ -65,7 +65,7 @@ describe('Credentials Object', function() {
 
         cred.generateJwt();
 
-        expect(stub.generate).to.be.calledWith(cred.privateKey, cred.applicationId);
+        expect(stub.generate).to.be.calledWith(cred.privateKey, {application_id: cred.applicationId});
     });
 
     it('should allow a JWT to be generated using an alternative application ID', function() {
@@ -77,7 +77,18 @@ describe('Credentials Object', function() {
         var altAppId = 'another-app-id';
         cred.generateJwt(altAppId);
 
-        expect(stub.generate).to.be.calledWith(cred.privateKey, altAppId);
+        expect(stub.generate).to.be.calledWith(cred.privateKey, {application_id: altAppId});
     });
 
+    it('should allow a JWT to be generated using an alternative private key', function() {
+        var stub = sinon.createStubInstance(JwtGenerator);
+
+        var cred = new Credentials('KEY', 'SECRET', __dirname + '/private-test.key', 'app-id');
+        cred._setJwtGenerator(stub);
+
+        var altAppId = 'another-app-id';
+        cred.generateJwt(altAppId, 'ALTERNATIVE_KEY');
+
+        expect(stub.generate).to.be.calledWith('ALTERNATIVE_KEY', {application_id: altAppId});
+    });
 });

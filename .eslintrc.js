@@ -32,7 +32,7 @@ module.exports = {
           'error'
         ],
         'camelcase': [
-          'error'
+          "error", {properties: "never"}
         ]
     }
 };
