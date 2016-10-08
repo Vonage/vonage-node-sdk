@@ -2,6 +2,6 @@ root = true
 
 [*.js]
 trim_trailing_whitespace = true
-insert_final_newline = false
+insert_final_newline = true
 max_line_length = f
 indent_size = 4
