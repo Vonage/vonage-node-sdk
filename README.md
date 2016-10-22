@@ -6,7 +6,7 @@ For full API documentation refer to https://docs.nexmo.com/
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) [Management](#management)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [JWT (JSON Web Token)](#jwt)
 
 ## Installation
 
@@ -386,6 +386,31 @@ nexmo.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
 
 ```js
 nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
+```
+
+## JWT
+
+There are two ways of generating a JWT. You can use the function that exists on the Nexmo definition:
+
+```js
+var Nexmo = require('nexmo');
+
+var jwt = Nexmo.generateJwt('path/to/private.key', {application_id: APP_ID});
+```
+
+Or via a `Nexmo` instance where your supplied `applicationId` and `privateKey` credentials will be used:
+
+```js
+var Nexmo = require('nexmo');
+
+var nexmo = new Nexmo({
+    apiKey: API_KEY,
+    apiSecret: API_SECRET,
+    applicationId: APP_ID,
+    privateKey: PRIVATE_KEY_PATH,
+  });
+  
+var jwt = nexmo.credentials.generateJwt();
 ```
 
 ## Voice (Deprecated)
