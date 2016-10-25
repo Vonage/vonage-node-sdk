@@ -3,6 +3,7 @@ import chai, {
 } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
+import fs from 'fs';
 
 chai.use(sinonChai);
 
@@ -45,9 +46,14 @@ describe('Credentials Object', function() {
         expect(create).to.throw(Error);
     });
 
-
-    it('should read a private key into a Buffer accessible via Credentials.privateKey', function() {
+    it('should read a private key from a file into a Buffer accessible via Credentials.privateKey', function() {
         var cred = new Credentials('KEY', 'SECRET', __dirname + '/private-test.key');
+        expect(cred.privateKey).to.be.an.instanceof(Buffer);
+    });
+
+    it('should turn a private key string into a Buffer accessible via Credentials.privateKey', function() {
+        var key = fs.readFileSync(__dirname + '/private-test.key');
+        var cred = new Credentials('KEY', 'SECRET', key);
         expect(cred.privateKey).to.be.an.instanceof(Buffer);
     });
 
