@@ -11,8 +11,9 @@ import JwtGenerator from './JwtGenerator';
  * @param {string} apiKey - A Nexmo API Key
  * @param {string} apiSecret - A Nexmo API Secret
  * @param {string|Buffer} [privateKey] -  When a string value is passed it should
- *                        represent the path to the private key. If a Buffer is
- *                        passed then it should be the key read from the file system.
+ *                        either represent the path to the private key, or the actual
+ *                        private key in string format. If a Buffer is passed then
+ *                        it should be the key read from the file system.
  */
 class Credentials {
   constructor(apiKey, apiSecret, privateKey, applicationId) {
@@ -24,6 +25,10 @@ class Credentials {
 
     if(privateKey instanceof Buffer) {
       this.privateKey = privateKey;
+    }
+    else if(privateKey instanceof String &&
+       privateKey.startsWith('-----BEGIN PRIVATE KEY-----')) {
+      this.privateKey = new Buffer(privateKey);
     }
     else if(privateKey !== undefined) {
       if(!fs.existsSync(privateKey)) {
