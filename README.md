@@ -449,7 +449,7 @@ npm run-script test-watch
 
 ## Examples
 
-See [examples/README.md](examples/README).
+See [examples/README.md](examples/README.md).
 
 Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/nexmo-node-quickstart).
 
