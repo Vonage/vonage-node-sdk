@@ -30,13 +30,16 @@ class DtmfResource {
    * @param {function} callback - function to be called when the request completes.
    */
   send(callId, params, callback) {
+    params = JSON.stringify(params);
+
     var config = {
       host: 'api.nexmo.com',
       path: DtmfResource.PATH.replace('{call_uuid}', callId),
       method: 'PUT',
-      body: JSON.stringify(params),
+      body: params,
       headers: {
         'Content-Type': 'application/json',
+        'Content-Length': params.length,
         'Authorization': `Bearer ${this.creds.generateJwt()}`
       }
     };
