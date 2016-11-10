@@ -70,6 +70,25 @@ class Nexmo {
      */
     this.app = this.applications;
   }
+  
+  /**
+   * Generate a JSON Web Token (JWT).
+   *
+   * The private key used upon Nexmo instance construction will be used to sign
+   * the JWT. The application_id you used upon Nexmo instance creation will be
+   * included in the claims for the JWT, however this can be overridden by passing
+   * an application_id as part of the claims.
+   *
+   * @param {Object} claims - name/value pair claims to sign within the JWT
+   *
+   * @returns {String} the generated token
+   */
+  generateJwt(claims = {}) {
+    if(claims.application_id === undefined) {
+      claims.application_id = this.credentials.applicationId;
+    }
+    return Nexmo.generateJwt(this.credentials.privateKey, claims);
+  }
 }
 
 /**
@@ -82,15 +101,15 @@ class Nexmo {
  * @returns {String} the generated token
  */
 Nexmo.generateJwt = (privateKey, claims) => {
-    if(!(privateKey instanceof Buffer)) {
-        if(!fs.existsSync(privateKey)) {
-            throw new Error(`File "${privateKey}" not found.`);
-        }
-        else {
-            privateKey = fs.readFileSync(privateKey);
-        }
-    }
-    return jwtGeneratorInstance.generate(privateKey, claims);
+  if(!(privateKey instanceof Buffer)) {
+      if(!fs.existsSync(privateKey)) {
+          throw new Error(`File "${privateKey}" not found.`);
+      }
+      else {
+          privateKey = fs.readFileSync(privateKey);
+      }
+  }
+  return jwtGeneratorInstance.generate(privateKey, claims);
 }
 
 export default Nexmo;
