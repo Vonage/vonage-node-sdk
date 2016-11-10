@@ -24,16 +24,17 @@ describe('Nexmo definition', () => {
             expect(create).to.throw(Error);
         });
 
-        it('should create a JWT with a private key (file path)', () => {
+        it('should create a JWT with a private key (file path) [static]', () => {
             var token = Nexmo.generateJwt(__dirname + '/private-test.key');
             expect(token).to.be.a('string');
         });
 
-        it('should create a JWT with a private key (Buffer)', () => {
+        it('should create a JWT with a private key (Buffer) [static]', () => {
             var fileBuffer = fs.readFileSync(__dirname + '/private-test.key');
             var token = Nexmo.generateJwt(fileBuffer);
             expect(token).to.be.a('string');
         });
+
     });
 
 });
@@ -195,6 +196,42 @@ describe('Nexmo Object instance', function() {
             apiSecret: 'test'
         }, options);
         expect(nexmo.options.userAgent).to.match(/\/EXT$/);
+    });
+
+    it('should create a JWT', () => {
+        var nexmo = new Nexmo({
+            apiKey: 'test',
+            apiSecret: 'test',
+            privateKey: __dirname + '/private-test.key',
+            application_id: 'app-id'
+        });
+        var token = nexmo.generateJwt();
+        expect(token).to.be.a('string');
+    });
+
+    it('should create same JWT as static function', () => {
+        var iat = parseInt(Date.now()/1000, 10);
+        var jti = 'some_jti';
+        var appId = 'app_id';
+        var privateKey = __dirname + '/private-test.key';
+
+        var expectedJwt = Nexmo.generateJwt(
+          privateKey,
+          {
+              'application_id': appId,
+            'iat': iat,
+              'jti': jti
+          }
+        );
+
+        var nexmo = new Nexmo({
+            apiKey: 'test',
+            apiSecret: 'test',
+            privateKey: privateKey,
+            applicationId: appId
+        });
+        var token = nexmo.generateJwt({'iat': iat,'jti': jti});
+        expect(token).to.equal(expectedJwt);
     });
 
 });
