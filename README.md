@@ -410,7 +410,7 @@ var nexmo = new Nexmo({
     privateKey: PRIVATE_KEY_PATH,
   });
   
-var jwt = nexmo.credentials.generateJwt();
+var jwt = nexmo.generateJwt();
 ```
 
 ## Voice (Deprecated)
