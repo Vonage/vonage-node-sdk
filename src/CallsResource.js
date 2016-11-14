@@ -49,13 +49,16 @@ class CallsResource {
    * @param {function} callback - function to be called when the request completes.
    */
   create(params, callback) {
+    params = JSON.stringify(params);
+
     var config = {
       host: 'api.nexmo.com',
       path: CallsResource.PATH,
       method: 'POST',
-      body: JSON.stringify(params),
+      body: params,
       headers: {
         'Content-Type': 'application/json',
+        'Content-Length': params.length,
         'Authorization': `Bearer ${this.creds.generateJwt()}`
       }
     };
@@ -105,17 +108,20 @@ class CallsResource {
    * @param {function} callback - function to be called when the request completes.
    */
   update(callId, params, callback) {
+    params = JSON.stringify(params);
+
     var config = {
       host:'api.nexmo.com',
       path:`${CallsResource.PATH}/${callId}`,
       method: 'PUT',
-      body: JSON.stringify(params),
+      body: params,
       headers: {
         'Content-Type': 'application/json',
+        'Content-Length': params.length,
         'Authorization': `Bearer ${this.creds.generateJwt()}`
       }
     };
-    this.options.httpClient.request(config, callback);  
+    this.options.httpClient.request(config, callback);
   }
   
 }
