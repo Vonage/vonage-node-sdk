@@ -1,8 +1,8 @@
 # Nexmo Client Library for Node.js [![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node)
 
-A Node.JS REST API Wrapper library for [Nexmo](http://nexmo.com/)
+A Node.JS REST API Wrapper library for [Nexmo](http://nexmo.com/).
 
-For full API documentation refer to https://docs.nexmo.com/
+For full API documentation refer to [docs.nexmo.com](https://docs.nexmo.com/).
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
