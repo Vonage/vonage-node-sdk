@@ -147,6 +147,27 @@ nexmo.calls.stream.stop(callId);
 
 For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_delete
 
+### Play synthesized text in a call
+
+```js
+nexmo.calls.talk.start(
+  callId,
+  {
+    text: 'No songs detected',
+    voiceName: 'Emma',
+    loop: 1
+  }
+);
+```
+
+For more information see https://docs.nexmo.com/voice/voice-api/api-reference#talk_put
+
+### Stop synthesized text in a call
+
+```js
+nexmo.calls.talk.stop(callId);
+```
+
 ### Send DTMF to a Call
 
 ```js
@@ -409,7 +430,7 @@ var nexmo = new Nexmo({
     applicationId: APP_ID,
     privateKey: PRIVATE_KEY_PATH,
   });
-  
+
 var jwt = nexmo.generateJwt();
 ```
 
