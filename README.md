@@ -86,7 +86,7 @@ nexmo.message.shortcodeAlert(recipient, messageParams, opts, callback);
 
 ## Voice
 
-For detailed information please see the documentation at https://docs.nexmo.com/voice/call
+For detailed information please see the documentation at https://docs.nexmo.com/voice/voice-api
 
 ### Make a call
 
