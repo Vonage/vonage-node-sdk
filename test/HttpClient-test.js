@@ -158,6 +158,31 @@ describe('HttpClient Object', function() {
         });
     });
 
+    it('should not override the method when method and callback are undefined', function() {
+        var mock = sinon.mock(fakeHttp);
+        mock.expects('request')
+            .once()
+            .withArgs({
+                headers: defaultHeaders,
+                host: 'api.nexmo.com',
+                method: 'POST',
+                path: '/api',
+                port: 443
+            })
+            .returns(fakeRequest);
+
+        var client = new HttpClient({
+            https: fakeHttp,
+            logger: logger
+        });
+
+        client.request({
+            host: 'api.nexmo.com',
+            path: '/api',
+            method: 'POST'
+        });
+    });
+
     it('should log requests', function() {
         var mock = sinon.mock(fakeHttp);
         mock.expects('request').returns(fakeRequest);
