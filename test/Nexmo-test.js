@@ -184,18 +184,18 @@ describe('Nexmo Object instance', function() {
             apiKey: 'test',
             apiSecret: 'test'
         });
-        expect(nexmo.options.userAgent).to.match(/.*\/.*\/.*$/);
+        expect(nexmo.options.userAgent).to.match(/^nexmo-node\/[\d.]* node\/[\d.]*$/);
     });
 
     it('should append to the user agent when a appendToUserAgent option is passed', function() {
         var options = {
-            appendToUserAgent: 'EXT'
+            appendToUserAgent: 'nexmo-cli/1.0.0'
         };
         var nexmo = new Nexmo({
             apiKey: 'test',
             apiSecret: 'test'
         }, options);
-        expect(nexmo.options.userAgent).to.match(/\/EXT$/);
+        expect(nexmo.options.userAgent).to.match(/nexmo-node\/[\d.]* node\/[\d.]* nexmo-cli\/1\.0\.0/);
     });
 
     it('should create a JWT', () => {
