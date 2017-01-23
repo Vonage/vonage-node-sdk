@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+
+## 1.1.1
+
+- UPDATED: Changed User Agent format to match other libraries
+- FIXED: Bug #88 - Undefined method when missing `method` declaration
+
 ## 1.1.0
 
 - ADDED: `nexmo.generateJwt` to generate JWT based on instance credentials
