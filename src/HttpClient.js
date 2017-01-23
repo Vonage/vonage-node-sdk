@@ -11,12 +11,12 @@ class HttpClient {
         'Accept': 'application/json'
     };
     this.logger = options.logger;
-    
+
     if(options.userAgent) {
       this.headers['User-Agent'] = options.userAgent;
     }
   }
-  
+
   request(endpoint, method, callback) {
     if (typeof method == 'function') {
         callback = method;
@@ -25,7 +25,7 @@ class HttpClient {
     else if (typeof method !== 'undefined') {
       	endpoint.method = method;
     }
-    
+
     if (endpoint.method == 'POST' || endpoint.method == 'DELETE') {
         // TODO: verify the following fix is required
         // Fix broken due ot 411 Content-Length error now sent by Nexmo API
@@ -39,7 +39,7 @@ class HttpClient {
         method: endpoint.method,
         headers: this.headers
     };
-    
+
     // Allow existing headers to be overridden
     // Allow new headers to be added
     if(endpoint.headers) {
@@ -56,9 +56,9 @@ class HttpClient {
     } else {
         request = http.request(options);
     }
-    
+
     request.end(endpoint.body);
-    
+
     var responseReturn = '';
     request.on('response', (response) => {
         response.setEncoding('utf8');
@@ -82,11 +82,11 @@ class HttpClient {
 	                    err = parsererr;
 	                }
                 }
-                
+
                 if(response.statusCode < 200 || response.statusCode > 299) {
                   err = retJson;
                 }
-                
+
                 callback(err, retJson);
             }
         })
