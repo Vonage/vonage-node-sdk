@@ -17,7 +17,7 @@ import ConsoleLogger from './ConsoleLogger';
 const jwtGeneratorInstance = new JwtGenerator();
 
 class Nexmo {
-  
+
   /**
    * @param {Credentials} credentials - Nexmo API credentials
    * @param {string} credentials.apiKey - the Nexmo API key
@@ -31,7 +31,7 @@ class Nexmo {
   constructor(credentials, options = {debug:false}) {
     this.credentials = Credentials.parse(credentials);
     this.options = options;
-    
+
     // If no logger has been supplied but debug has been set
     // default to using the ConsoleLogger
     if(!this.options.logger && this.options.debug) {
@@ -41,21 +41,21 @@ class Nexmo {
       // Swallow the logging
       this.options.logger = new NullLogger();
     }
-    
-    let userAgent = 'nexmo-node/UNKNOWN/UNKNOWN';
+
+    let userAgent = 'nexmo-node/UNKNOWN node/UNKNOWN';
     try {
       var packageDetails = require(__dirname + '/../package.json');
-      userAgent = `nexmo-node/${packageDetails.version}/${process.version}`;
+      userAgent = `nexmo-node/${packageDetails.version} node/${process.version.replace('v', '')}`;
     }
     catch(e) {
       console.warn('Could not load package details');
     }
     this.options.userAgent = userAgent;
     if(this.options.appendToUserAgent) {
-      this.options.userAgent += `/${this.options.appendToUserAgent}`;
+      this.options.userAgent += ` ${this.options.appendToUserAgent}`;
     }
     this.options.httpClient = new HttpClient(this.options)
-    
+
     this.message = new Message(this.credentials, this.options);
     this.voice = new Voice(this.credentials, this.options);
     this.number = new Number(this.credentials, this.options);
@@ -64,13 +64,13 @@ class Nexmo {
     this.applications = new App(this.credentials, this.options);
     this.account = new Account(this.credentials, this.options);
     this.calls = new CallsResource(this.credentials, this.options);
-    
+
     /**
      * @deprecated Please use nexmo.applications
      */
     this.app = this.applications;
   }
-  
+
   /**
    * Generate a JSON Web Token (JWT).
    *
