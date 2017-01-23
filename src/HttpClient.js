@@ -22,8 +22,8 @@ class HttpClient {
         callback = method;
         endpoint.method = endpoint.method || 'GET';
     }
-    else {
-      endpoint.method = method;
+    else if (typeof method !== 'undefined') {
+      	endpoint.method = method;
     }
     
     if (endpoint.method == 'POST' || endpoint.method == 'DELETE') {
