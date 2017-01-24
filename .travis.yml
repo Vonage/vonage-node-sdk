@@ -1,5 +1,14 @@
 language: node_js
 node_js:
-  - 4
-  - 5
-  - 6
+- 4
+- 5
+- 6
+deploy:
+  provider: npm
+  email: devrel@nexmo.com
+  api_key:
+    secure: dIwjf+unoDvAX/oId0TiXZ1/KNgzxZ3sqk/nquKVu0Ln5hEmePiuFEYUlpI7Lz3xVgwJqvlOJwdqGZjTT1xuih9FtOTjYxmAmF+KvfQxlMmHMpQAiOOQryLbEPMJg4lHoCinqOaw9I/cWt0Dad2+OHvzdJ+hBYC9Q54vYguBj1Dq2ENf47Ay0T2w+s6AFDOEvDF7vprFFJFY9xGhTgvJR2AuixaffKMi06CA3+G7WyNCFyYGfZgMdsx+E6rh2RC6ZntWOxR/+DbNROF96RQ4zyPflPk52A5yGeIal15tfegF4ZZ912escYeEfXn2DM2xe98qcnUBexYRGCvQQYI0E3rUDs+wrAI84NeylZEVnDXRnRgBpx8KxAF3vBsh2v+FeWySGEy+w9stISXNuWx7VkhaKd8GDicATILE8jRMivu+LmObslrLWbFIn50j6yNltWZjcioDHAuUavIsHYAb42dtg0STpnAZXFkxv8lrIoJehGURRRl9sjaokHZXM7BoQNL08Jfyi6DCage9JokpRalkg89tlAkYynuM5dBaqJopQrr3+gpLmxUhYBik1nCR9/TF8NxcaoeRzLlam4anerXEz5MECtymnOKH9nYdiCFCftOWSgVJ3pZYmq1SXmMEAAFEVGHs2K8sA/9gmNFfseHAoQq4vMkR0rYnrCYcCkU=
+  on:
+    tags: true
+    branch: master
+    repo: Nexmo/nexmo-node
