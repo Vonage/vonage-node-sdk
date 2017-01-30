@@ -278,4 +278,12 @@ describe('parseResponse', function() {
     client.__parseReponse(201, '', 'DELETE', callback);
     expect(callback).was.calledWith(null, '');
   });
+
+  it ('should catch invalid json', function() {
+    var callback = sinon.spy();
+    client.__parseReponse(201, 'not_json', 'GET', callback);
+    expect(callback).was.calledWith(sinon.match({
+      message: 'The API response could not be parsed.'
+    }), null);
+  });
 });
