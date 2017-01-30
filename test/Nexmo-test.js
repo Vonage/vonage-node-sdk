@@ -129,6 +129,14 @@ describe('Nexmo Object instance', function() {
         expect(nexmo.calls).to.be.an.instanceOf(CallsResource);
     });
 
+    it('should expose a files object', function() {
+        var nexmo = new Nexmo({
+            apiKey: 'test',
+            apiSecret: 'test'
+        });
+        expect(nexmo.files).to.be.a('object');
+    });
+
     it('should allow options to be passed', function() {
         var initializedSpy = sinon.spy();
         var options = {
