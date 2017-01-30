@@ -96,10 +96,10 @@ class HttpClient {
                 }
 
                 if(response.statusCode < 200 || response.statusCode > 299) {
-                  callback(err, retJson);
+                  return callback(retJson, null);
                 }
 
-                callback(err, retJson);
+                callback(null, retJson);
             }
         })
         response.on('close', (e) => {
