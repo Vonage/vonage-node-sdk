@@ -70,7 +70,15 @@ class HttpClient {
             if (callback) {
                 var retJson = responseReturn;
                 var err = null;
+
+                if(response.statusCode >= 500) {
+                  return callback({
+                    message: 'Server Error: '+response.statusCode
+                  }, null);
+                }
+
                 if (method !== 'DELETE') {
+
                   try {
 	                    retJson = JSON.parse(responseReturn);
 	                } catch (parsererr) {
@@ -80,11 +88,15 @@ class HttpClient {
 						          this.logger.error('Raw Error message from API ');
 						          this.logger.error(responseReturn);
 	                    err = parsererr;
+                      return callback({
+                        message: "The API response could not be parsed.",
+                        parseError: parsererr
+                      }, null);
 	                }
                 }
 
                 if(response.statusCode < 200 || response.statusCode > 299) {
-                  err = retJson;
+                  callback(err, retJson);
                 }
 
                 callback(err, retJson);
