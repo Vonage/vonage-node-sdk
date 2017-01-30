@@ -56,5 +56,6 @@
   "dependencies": {
     "jsonwebtoken": "^7.1.9",
     "uuid": "^2.0.2"
-  }
+  },
+  "license": "MIT"
 }
