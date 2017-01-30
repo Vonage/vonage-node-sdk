@@ -59,35 +59,16 @@ class HttpClient {
 
     request.end(endpoint.body);
 
-    var responseReturn = '';
+    var responseData = '';
     request.on('response', (response) => {
         response.setEncoding('utf8');
         response.on('data', (chunk) => {
-            responseReturn += chunk;
+            responseData += chunk;
         });
         response.on('end', () => {
             this.logger.info('response ended:', response.statusCode);
             if (callback) {
-                var retJson = responseReturn;
-                var err = null;
-                if (method !== 'DELETE') {
-                  try {
-	                    retJson = JSON.parse(responseReturn);
-	                } catch (parsererr) {
-	                    // ignore parser error for now and send raw response to client
-	                    this.logger.error(parsererr);
-	                    this.logger.error('could not convert API response to JSON, above error is ignored and raw API response is returned to client');
-						          this.logger.error('Raw Error message from API ');
-						          this.logger.error(responseReturn);
-	                    err = parsererr;
-	                }
-                }
-
-                if(response.statusCode < 200 || response.statusCode > 299) {
-                  err = retJson;
-                }
-
-                callback(err, retJson);
+              this.__parseReponse(response.statusCode, responseData, method, callback)
             }
         })
         response.on('close', (e) => {
@@ -102,6 +83,35 @@ class HttpClient {
         callback(e);
     });
 
+  }
+
+  __parseReponse(status, data, method, callback) {
+    var response = null;
+    var error = null;
+
+    try {
+      if (status >= 500) {
+        error = { message: 'Server Error: '+status };
+      } else if (status >= 400 || status < 200) {
+        error = JSON.parse(data);
+      } else if (method !== 'DELETE') {
+        response = JSON.parse(data);
+      } else {
+        response = data;
+      }
+    } catch (parseError) {
+      this.logger.error(parseError);
+      this.logger.error('could not convert API response to JSON, above error is ignored and raw API response is returned to client');
+      this.logger.error('Raw Error message from API ');
+      this.logger.error(data);
+
+      error = {
+        message: "The API response could not be parsed.",
+        parseError: parseError
+      };
+    }
+
+    callback(error, response);
   }
 }
 

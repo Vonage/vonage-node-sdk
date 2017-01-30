@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
@@ -51,10 +51,12 @@
     "ngrok": "^2.2.2",
     "nodemon": "^1.10.2",
     "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "sinon-expect": "^0.3.0"
   },
   "dependencies": {
     "jsonwebtoken": "^7.1.9",
     "uuid": "^2.0.2"
-  }
+  },
+  "license": "MIT"
 }
