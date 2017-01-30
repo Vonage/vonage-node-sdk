@@ -51,7 +51,8 @@
     "ngrok": "^2.2.2",
     "nodemon": "^1.10.2",
     "sinon": "^1.17.4",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "sinon-expect": "^0.3.0"
   },
   "dependencies": {
     "jsonwebtoken": "^7.1.9",
