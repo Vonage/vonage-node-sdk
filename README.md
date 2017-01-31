@@ -176,6 +176,23 @@ nexmo.calls.dtmf.send(callId, params, callback);
 
 For more information see https://docs.nexmo.com/voice/voice-api/api-reference#dtmf_put
 
+
+## Files
+
+For detailed information please see the documentation at https://docs.nexmo.com/voice/voice-api/recordings
+
+### Get a file (recording)
+
+```js
+nexmo.files.get(fileIdOrUrl, callback);
+```
+
+### Save a file (recording)
+
+```js
+nexmo.files.save(fileIdOrUrl, file, callback);
+```
+
 ## Verify
 
 ### Submit a Verification Request
