@@ -59,7 +59,10 @@ class HttpClient {
 
     request.end(endpoint.body);
 
+    // Keep an array of String or Buffers,
+    // depending on content type (binary or JSON) of response
     var responseData = [];
+
     request.on('response', (response) => {
         var isBinary = response.headers['content-type'] === 'application/octet-stream';
         if (!isBinary) { response.setEncoding('utf8'); }
