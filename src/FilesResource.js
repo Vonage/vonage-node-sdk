@@ -53,25 +53,25 @@ class FilesResource {
    * Save remote File locally
    *
    * @param {string} [fileIdOrUrl] - The unique identifier or URL for the file
-   * @param {string} [filePath] - Path name to store the file to
+   * @param {string} [file] - Filename or file descriptor
    * @param {function} callback - function to be called when the request completes.
    */
-  save(fileIdOrUrl, filePath, callback) {
+  save(fileIdOrUrl, file, callback) {
     this.get(fileIdOrUrl, (error, data) => {
       if (error) {
         callback(error, null);
       } else {
-        this.__storeFile(data, filePath, callback);
+        this.__storeFile(data, file, callback);
       }
     })
   }
 
-  __storeFile(data, filePath, callback) {
-    fs.writeFile(filePath, data, (error) => {
+  __storeFile(data, file, callback) {
+    fs.writeFile(file, data, (error) => {
       if (error) {
         callback(error, null);
       } else {
-        callback(null, filePath);
+        callback(null, file);
       }
     });
   }
