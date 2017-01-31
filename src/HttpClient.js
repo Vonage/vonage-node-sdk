@@ -59,16 +59,27 @@ class HttpClient {
 
     request.end(endpoint.body);
 
-    var responseData = '';
+    var responseData = [];
     request.on('response', (response) => {
-        response.setEncoding('utf8');
+        var isBinary = response.headers['content-type'] === 'application/octet-stream';
+        if (!isBinary) { response.setEncoding('utf8'); }
+
         response.on('data', (chunk) => {
-            responseData += chunk;
+          responseData.push(chunk);
         });
+
         response.on('end', () => {
             this.logger.info('response ended:', response.statusCode);
             if (callback) {
-              this.__parseReponse(response.statusCode, responseData, method, callback)
+              if (isBinary) { responseData = Buffer.concat(responseData); }
+
+              this.__parseReponse(
+                response.status,
+                response.headers['content-type'],
+                responseData,
+                method,
+                callback
+              );
             }
         })
         response.on('close', (e) => {
@@ -85,7 +96,7 @@ class HttpClient {
 
   }
 
-  __parseReponse(status, data, method, callback) {
+  __parseReponse(status, contentType, data, method, callback) {
     var response = null;
     var error = null;
 
@@ -94,6 +105,8 @@ class HttpClient {
         error = { message: 'Server Error: '+status };
       } else if (status >= 400 || status < 200) {
         error = JSON.parse(data);
+      } else if (contentType === 'application/octet-stream') {
+        response = data;
       } else if (method !== 'DELETE') {
         response = JSON.parse(data);
       } else {
