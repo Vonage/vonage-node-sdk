@@ -17,7 +17,6 @@ var niBasicEndpoint = {host:'api.nexmo.com',path:'/ni/basic/json'};
 var niStandardEndpoint = {host:'api.nexmo.com',path:'/ni/standard/json'};
 var niAdvancedEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/json'};
 var applicationsEndpoint = {host:'api.nexmo.com',path:'/v1/applications'};
-var filesEndpoint = {host:'api.nexmo.com',path:'/v1/files'};
 var up = {};
 var numberPattern = new RegExp("^[0-9 +()-]*$");
 var _options = null;
@@ -52,8 +51,7 @@ var ERROR_MESSAGES = {
     applicationAnswerUrl: 'Invalid argument: answerUrl',
     applicationEventUrl: 'Invalid argument: eventUrl',
     applicationId: 'Invalid argument: appId',
-    product: 'Invalid product. Should be one of [voice, sms]',
-    fileIdOrUrl: 'Invalid file URL or ID'
+    product: 'Invalid product. Should be one of [voice, sms]'
 };
 
 exports.initialize = function(pkey, psecret, options) {
@@ -596,24 +594,6 @@ exports.call = function(recipient, answerUrl, opts, callback) {
         opts['answer_url'] = answerUrl;
         sendVoiceMessage(callEndpoint, opts, callback);
     }
-}
-
-exports.getFile = function (fileIdOrUrl, callback) {
-    if (!fileIdOrUrl) {
-        sendError(callback, new Error(ERROR_MESSAGES.fileIdOrUrl));
-    } else if (fileIdOrUrl.startsWith('https://') ){
-        var endpoint = clone(filesEndpoint);
-        endpoint.path += "/" + fileIdOrUrl.split("/").pop(-1);;
-        getFile(fileIdOrUrl, callback);
-    } else {
-        var endpoint = clone(filesEndpoint);
-        endpoint.path += "/" + fileIdOrUrl;
-        getFile(endpoint, callback);
-    }
-}
-
-function getFile(fileUrl, callback) {
-
 }
 
 function sendError(callback, err, returnData) {

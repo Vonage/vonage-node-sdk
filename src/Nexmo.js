@@ -9,8 +9,8 @@ import Verify from './Verify';
 import NumberInsight from './NumberInsight';
 import App from './App';
 import Account from './Account';
-import File from './File';
 import CallsResource from './CallsResource';
+import FilesResource from './FilesResource';
 import HttpClient from './HttpClient';
 import NullLogger from './NullLogger';
 import ConsoleLogger from './ConsoleLogger';
@@ -61,11 +61,11 @@ class Nexmo {
     this.voice = new Voice(this.credentials, this.options);
     this.number = new Number(this.credentials, this.options);
     this.verify = new Verify(this.credentials, this.options);
-    this.files = new File(this.credentials, this.options);
     this.numberInsight = new NumberInsight(this.credentials, this.options);
     this.applications = new App(this.credentials, this.options);
     this.account = new Account(this.credentials, this.options);
     this.calls = new CallsResource(this.credentials, this.options);
+    this.files = new FilesResource(this.credentials, this.options);
 
     /**
      * @deprecated Please use nexmo.applications
