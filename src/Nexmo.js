@@ -10,6 +10,7 @@ import NumberInsight from './NumberInsight';
 import App from './App';
 import Account from './Account';
 import CallsResource from './CallsResource';
+import FilesResource from './FilesResource';
 import HttpClient from './HttpClient';
 import NullLogger from './NullLogger';
 import ConsoleLogger from './ConsoleLogger';
@@ -64,6 +65,7 @@ class Nexmo {
     this.applications = new App(this.credentials, this.options);
     this.account = new Account(this.credentials, this.options);
     this.calls = new CallsResource(this.credentials, this.options);
+    this.files = new FilesResource(this.credentials, this.options);
 
     /**
      * @deprecated Please use nexmo.applications
