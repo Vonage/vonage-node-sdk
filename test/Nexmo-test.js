@@ -225,11 +225,11 @@ describe('Nexmo Object instance', function() {
 
         var expectedJwt = Nexmo.generateJwt(
           privateKey,
-          {
-              'application_id': appId,
-            'iat': iat,
-              'jti': jti
-          }
+            {
+                'application_id': appId,
+                'iat': iat,
+                'jti': jti
+            }
         );
 
         var nexmo = new Nexmo({
