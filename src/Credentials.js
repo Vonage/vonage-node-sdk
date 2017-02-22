@@ -26,7 +26,7 @@ class Credentials {
     if(privateKey instanceof Buffer) {
       this.privateKey = privateKey;
     }
-    else if(privateKey instanceof String &&
+    else if(typeof privateKey === "string" &&
        privateKey.startsWith('-----BEGIN PRIVATE KEY-----')) {
       this.privateKey = new Buffer(privateKey);
     }
