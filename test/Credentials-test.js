@@ -57,7 +57,7 @@ describe('Credentials Object', function() {
     expect(cred.privateKey).to.be.an.instanceof(Buffer);
   });
 
-  it('should support passing privateKey as a String', function() {
+  it('should support passing a privateKey of type string', function() {
     var key =
 `-----BEGIN PRIVATE KEY-----
 blah blah blah
