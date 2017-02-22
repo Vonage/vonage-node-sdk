@@ -57,6 +57,15 @@ describe('Credentials Object', function() {
     expect(cred.privateKey).to.be.an.instanceof(Buffer);
   });
 
+  it('should support passing privateKey as a String', function() {
+    var key =
+`-----BEGIN PRIVATE KEY-----
+blah blah blah
+-----END PRIVATE KEY-----`;
+    var cred = new Credentials('KEY', 'SECRET', key);
+    expect(cred.privateKey).to.be.an.instanceof(Buffer);
+  });
+
   it('should allow an applicationId to be provided upon construction', function() {
     var appId = 'some_app_id';
     var cred = new Credentials('KEY', 'SECRET', __dirname + '/private-test.key', appId);
