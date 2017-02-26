@@ -77,7 +77,7 @@ class HttpClient {
               if (isBinary) { responseData = Buffer.concat(responseData); }
 
               this.__parseReponse(
-                response.status,
+                response.statusCode,
                 response.headers['content-type'],
                 responseData,
                 method,
