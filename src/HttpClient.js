@@ -105,6 +105,7 @@ class HttpClient {
     }
 
     const status = httpResponse.statusCode;
+    const headers = httpResponse.headers;;
 
     let response = null;
     var error = null;
@@ -116,9 +117,14 @@ class HttpClient {
         response = data;
       } else if (status === 429) {
         // 429 does not return a parsable body
-        error = {statusCode: 429};
+        if(!headers['retry-after']) {
+          // retry based on allowed per second
+          const retryAfterMillis = (method === 'POST'? 1000/2 : 1000/5);
+          headers['retry-after'] = retryAfterMillis;
+        }
+        error = {statusCode: 429, body: data};
       } else if (status >= 400 || status < 200) {
-        error = {body: JSON.parse(data.join(''))};
+        error = {body: JSON.parse(data.join('')), headers};
       } else if(method !== 'DELETE') {
         response = JSON.parse(data.join(''));
       } else {
@@ -139,6 +145,7 @@ class HttpClient {
 
     if(error) {
       error.statusCode = status;
+      error.headers = headers;
     }
 
     callback(error, response);

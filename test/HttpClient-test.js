@@ -257,16 +257,18 @@ describe('parseResponse', function() {
 
   it ('should parse a 500+ status code as an error', function() {
     var callback = sinon.spy();
-    const response = {statusCode: 504, headers: {'content-type' : 'application/json'}};
+    const headers = {'content-type' : 'application/json'};
+    const response = {statusCode: 504, headers: headers};
     client.__parseResponse(response, [''], 'GET', callback);
-    expect(callback).was.calledWith({ message: 'Server Error', statusCode: 504 }, null);
+    expect(callback).was.calledWith({ message: 'Server Error', statusCode: 504, headers: headers }, null);
   });
 
   it ('should parse a 400-499 status code as a JSON error', function() {
     var callback = sinon.spy();
-    const response = {statusCode: 404, headers: {'content-type' : 'application/json'}};
+    const headers = {'content-type' : 'application/json'};
+    const response = {statusCode: 404, headers: headers};
     client.__parseResponse(response, ['{ "error" : "error" }'], 'GET', callback);
-    expect(callback).was.calledWith({ statusCode: 404, body: { 'error' : 'error' }}, null);
+    expect(callback).was.calledWith({ statusCode: 404, body: { 'error' : 'error' }, headers: headers}, null);
   });
 
   it ('should parse a 200-299 status code as a JSON object', function() {
