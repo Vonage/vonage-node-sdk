@@ -100,29 +100,36 @@ class HttpClient {
   }
 
   __parseReponse(status, contentType, data, method, callback) {
+    const isArrayOrBuffer = (data instanceof Array || data instanceof Buffer);
+    if(!isArrayOrBuffer) {
+      throw new Error('data should be of type Array or Buffer');
+    }
+
     var response = null;
     var error = null;
 
     try {
       if (status >= 500) {
         error = { message: 'Server Error: '+status };
-      } else if (status >= 400 || status < 200) {
-        error = JSON.parse(data);
       } else if (contentType === 'application/octet-stream') {
         response = data;
-      } else if (method !== 'DELETE') {
-        response = JSON.parse(data);
+      } else if (status >= 400 || status < 200) {
+        error = JSON.parse(data.join(''));
+      } else if(method !== 'DELETE') {
+        response = JSON.parse(data.join(''));
       } else {
+        console.log('not parsing', status, contentType, data, method, callback);
         response = data;
       }
     } catch (parseError) {
       this.logger.error(parseError);
       this.logger.error('could not convert API response to JSON, above error is ignored and raw API response is returned to client');
       this.logger.error('Raw Error message from API ');
-      this.logger.error(data);
+      this.logger.error(`"${data}"`);
 
       error = {
         message: "The API response could not be parsed.",
+        data: data,
         parseError: parseError
       };
     }
