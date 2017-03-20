@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.2.0
+
+- ADDED: Add File API to library. `nexmo.files.get` and `nexmo.files.save`.
+
+## 1.1.2
+
+- Fixed: Bug #104 - Fix JSON parsing error
 
 ## 1.1.1
 
