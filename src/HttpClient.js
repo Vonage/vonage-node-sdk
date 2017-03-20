@@ -111,13 +111,14 @@ class HttpClient {
 
     try {
       if (status >= 500) {
-        error = { message: 'Server Error: '+status };
+        error = { message: 'Server Error', statusCode: status };
       } else if (httpResponse.headers['content-type'] === 'application/octet-stream') {
         response = data;
       } else if (status === 429) {
+        // 429 does not return a parsable body
         error = {statusCode: 429};
       } else if (status >= 400 || status < 200) {
-        error = JSON.parse(data.join(''));
+        error = {body: JSON.parse(data.join(''))};
       } else if(method !== 'DELETE') {
         response = JSON.parse(data.join(''));
       } else {
@@ -130,11 +131,14 @@ class HttpClient {
       this.logger.error(`"${data}"`);
 
       error = {
-        statusCode: status,
         message: "The API response could not be parsed.",
-        data: data,
+        body: data.join(''),
         parseError: parseError
       };
+    }
+
+    if(error) {
+      error.statusCode = status;
     }
 
     callback(error, response);

@@ -259,14 +259,14 @@ describe('parseResponse', function() {
     var callback = sinon.spy();
     const response = {statusCode: 504, headers: {'content-type' : 'application/json'}};
     client.__parseResponse(response, [''], 'GET', callback);
-    expect(callback).was.calledWith({ message: 'Server Error: 504' }, null);
+    expect(callback).was.calledWith({ message: 'Server Error', statusCode: 504 }, null);
   });
 
   it ('should parse a 400-499 status code as a JSON error', function() {
     var callback = sinon.spy();
     const response = {statusCode: 404, headers: {'content-type' : 'application/json'}};
     client.__parseResponse(response, ['{ "error" : "error" }'], 'GET', callback);
-    expect(callback).was.calledWith({ 'error' : 'error' }, null);
+    expect(callback).was.calledWith({ statusCode: 404, body: { 'error' : 'error' }}, null);
   });
 
   it ('should parse a 200-299 status code as a JSON object', function() {
@@ -283,12 +283,15 @@ describe('parseResponse', function() {
     expect(callback).was.calledWith(null, ['']);
   });
 
-  it ('should catch invalid json', function() {
+  it ('should catch invalid json and expose the data in the error', function() {
     var callback = sinon.spy();
     const response = {statusCode: 201, headers: {'content-type' : 'application/json'}};
-    client.__parseResponse(response, ['not_json'], 'GET', callback);
+    const data = 'not_json';
+    client.__parseResponse(response, [data], 'GET', callback);
     expect(callback).was.calledWith(sinon.match({
-      message: 'The API response could not be parsed.'
+      message: 'The API response could not be parsed.',
+      body: data,
+      statusCode: 201
     }), null);
   });
 
@@ -299,4 +302,5 @@ describe('parseResponse', function() {
     client.__parseResponse(response, data, 'GET', callback);
     expect(callback).was.calledWith(null, data);
   });
+
 });
