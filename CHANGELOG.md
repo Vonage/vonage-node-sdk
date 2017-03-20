@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.0
+
+- FIXED: #110 - check the `statusCode` on the response
+- FIXED: #114 - handle 429 HTTP status codes
+- UPDATED: To allow errors to be programmatically useful the `error` callback objects has been updated to `{statusCode: STATUS_CODE, body: JSON_BODY, headers: HEADERS}`
+
 ## 1.2.0
 
 - ADDED: Add File API to library. `nexmo.files.get` and `nexmo.files.save`.
