@@ -77,8 +77,7 @@ class HttpClient {
               if (isBinary) { responseData = Buffer.concat(responseData); }
 
               this.__parseReponse(
-                response.statusCode,
-                response.headers['content-type'],
+                response,
                 responseData,
                 method,
                 callback
@@ -99,26 +98,29 @@ class HttpClient {
 
   }
 
-  __parseReponse(status, contentType, data, method, callback) {
+  __parseReponse(httpResponse, data, method, callback) {
     const isArrayOrBuffer = (data instanceof Array || data instanceof Buffer);
     if(!isArrayOrBuffer) {
       throw new Error('data should be of type Array or Buffer');
     }
 
-    var response = null;
+    const status = httpResponse.statusCode;
+
+    let response = null;
     var error = null;
 
     try {
       if (status >= 500) {
         error = { message: 'Server Error: '+status };
-      } else if (contentType === 'application/octet-stream') {
+      } else if (httpResponse.headers['content-type'] === 'application/octet-stream') {
         response = data;
+      } else if (status === 429) {
+        error = {statusCode: 429};
       } else if (status >= 400 || status < 200) {
         error = JSON.parse(data.join(''));
       } else if(method !== 'DELETE') {
         response = JSON.parse(data.join(''));
       } else {
-        console.log('not parsing', status, contentType, data, method, callback);
         response = data;
       }
     } catch (parseError) {
@@ -128,6 +130,7 @@ class HttpClient {
       this.logger.error(`"${data}"`);
 
       error = {
+        statusCode: status,
         message: "The API response could not be parsed.",
         data: data,
         parseError: parseError

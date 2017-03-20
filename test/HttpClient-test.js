@@ -257,31 +257,36 @@ describe('parseResponse', function() {
 
   it ('should parse a 500+ status code as an error', function() {
     var callback = sinon.spy();
-    client.__parseReponse(504, 'application/json', [''], 'GET', callback);
+    const response = {statusCode: 504, headers: {'content-type' : 'application/json'}};
+    client.__parseReponse(response, [''], 'GET', callback);
     expect(callback).was.calledWith({ message: 'Server Error: 504' }, null);
   });
 
   it ('should parse a 400-499 status code as a JSON error', function() {
     var callback = sinon.spy();
-    client.__parseReponse(404, 'application/json', ['{ "error" : "error" }'], 'GET', callback);
+    const response = {statusCode: 404, headers: {'content-type' : 'application/json'}};
+    client.__parseReponse(response, ['{ "error" : "error" }'], 'GET', callback);
     expect(callback).was.calledWith({ 'error' : 'error' }, null);
   });
 
   it ('should parse a 200-299 status code as a JSON object', function() {
     var callback = sinon.spy();
-    client.__parseReponse(201, 'application/json', ['{ "data" : "data" }'], 'GET', callback);
+    const response = {statusCode: 201, headers: {'content-type' : 'application/json'}};
+    client.__parseReponse(response, ['{ "data" : "data" }'], 'GET', callback);
     expect(callback).was.calledWith(null, { 'data' : 'data' });
   });
 
   it ('should not try and parse successful DELETE request to JSON', function() {
     var callback = sinon.spy();
-    client.__parseReponse(201, 'application/json', [''], 'DELETE', callback);
+    const response = {statusCode: 201, headers: {'content-type' : 'application/json'}};
+    client.__parseReponse(response, [''], 'DELETE', callback);
     expect(callback).was.calledWith(null, ['']);
   });
 
   it ('should catch invalid json', function() {
     var callback = sinon.spy();
-    client.__parseReponse(201, 'application/json', ['not_json'], 'GET', callback);
+    const response = {statusCode: 201, headers: {'content-type' : 'application/json'}};
+    client.__parseReponse(response, ['not_json'], 'GET', callback);
     expect(callback).was.calledWith(sinon.match({
       message: 'The API response could not be parsed.'
     }), null);
@@ -290,7 +295,8 @@ describe('parseResponse', function() {
   it ('should parse binary data', function() {
     var callback = sinon.spy();
     var data = new Buffer('data');
-    client.__parseReponse(200, 'application/octet-stream', data, 'GET', callback);
+    const response = {statusCode: 200, headers: {'content-type' : 'application/octet-stream'}};
+    client.__parseReponse(response, data, 'GET', callback);
     expect(callback).was.calledWith(null, data);
   });
 });
