@@ -105,7 +105,7 @@ class HttpClient {
     }
 
     const status = httpResponse.statusCode;
-    const headers = httpResponse.headers;;
+    const headers = httpResponse.headers;
 
     let response = null;
     var error = null;
