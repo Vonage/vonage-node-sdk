@@ -76,7 +76,7 @@ class HttpClient {
             if (callback) {
               if (isBinary) { responseData = Buffer.concat(responseData); }
 
-              this.__parseReponse(
+              this.__parseResponse(
                 response,
                 responseData,
                 method,
@@ -98,7 +98,7 @@ class HttpClient {
 
   }
 
-  __parseReponse(httpResponse, data, method, callback) {
+  __parseResponse(httpResponse, data, method, callback) {
     const isArrayOrBuffer = (data instanceof Array || data instanceof Buffer);
     if(!isArrayOrBuffer) {
       throw new Error('data should be of type Array or Buffer');
