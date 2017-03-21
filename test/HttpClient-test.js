@@ -305,4 +305,28 @@ describe('parseResponse', function() {
     expect(callback).was.calledWith(null, data);
   });
 
+  it ('should set a default retry-after of 200 for a GET with a 429 response', function() {
+    var callback = sinon.spy();
+    const headers = {};
+    const response = {statusCode: 429, headers: headers};
+    client.__parseResponse(response, [''], 'GET', callback);
+    expect(callback).was.calledWith({ statusCode: 429, body: '', headers: {'retry-after': 200}}, null);
+  });
+
+  it ('should set a default retry-after of 500 for a POST with a 429 response', function() {
+    var callback = sinon.spy();
+    const headers = {};
+    const response = {statusCode: 429, headers: headers};
+    client.__parseResponse(response, [''], 'POST', callback);
+    expect(callback).was.calledWith({ statusCode: 429, body: '', headers: {'retry-after': 500}}, null);
+  });
+
+  it ('should use the server returned retry-header with a 429 response', function() {
+    var callback = sinon.spy();
+    const headers = {'retry-after': 400};
+    const response = {statusCode: 429, headers: headers};
+    client.__parseResponse(response, [''], 'GET', callback);
+    expect(callback).was.calledWith({ statusCode: 429, body: '', headers: {'retry-after': 400}}, null);
+  });
+
 });
