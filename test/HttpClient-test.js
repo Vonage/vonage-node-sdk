@@ -321,7 +321,7 @@ describe('parseResponse', function() {
     expect(callback).was.calledWith({ statusCode: 429, body: '', headers: {'retry-after': 500}}, null);
   });
 
-  it ('should use the server returned retry-header with a 429 response', function() {
+  it ('should use the server returned retry-after header with a 429 response', function() {
     var callback = sinon.spy();
     const headers = {'retry-after': 400};
     const response = {statusCode: 429, headers: headers};
