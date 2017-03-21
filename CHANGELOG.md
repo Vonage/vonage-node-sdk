@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.1
+
+- FIXED: #116 - default setting of `retry-after` for 429 http status code responses
+
 ## 2.0.0
 
 - FIXED: #110 - check the `statusCode` on the response
