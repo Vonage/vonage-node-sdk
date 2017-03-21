@@ -47,7 +47,7 @@ var ERROR_MESSAGES = {
   numberInsightPatternFailure:'Number can contain digits and may include any or all of the following: white space, -,+, (, ).',
   optionsNotAnObject:'Options parameter should be a dictionary. Check the docs for valid properties for options',
     applicationName: 'Invalid argument: name',
-    applicationType: 'Invalid argument: type (valid options: [voice])',
+    applicationType: 'Invalid argument: type (valid options: [voice, rtc])',
     applicationAnswerUrl: 'Invalid argument: answerUrl',
     applicationEventUrl: 'Invalid argument: eventUrl',
     applicationId: 'Invalid argument: appId',
@@ -324,7 +324,7 @@ exports.getApplications = function(options, callback) {
 exports.createApplication = function(name, type, answerUrl, eventUrl, options, callback) {
   if (!name || name.length < 1) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationName));
-  } else if (!type || type != 'voice') {
+  } else if (!type || (type != 'voice' && product != 'rtc')) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationType));
   } else if (!answerUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationAnswerUrl));
@@ -356,7 +356,7 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else if (!name || name.length < 1) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationName));
-  } else if (!type || type != 'voice') {
+  } else if (!type || (type != 'voice' && product != 'rtc')) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationType));
   } else if (!answerUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationAnswerUrl));
