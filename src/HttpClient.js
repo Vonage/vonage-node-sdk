@@ -79,7 +79,7 @@ class HttpClient {
               this.__parseResponse(
                 response,
                 responseData,
-                method,
+                endpoint.method,
                 callback
               );
             }
@@ -122,7 +122,7 @@ class HttpClient {
           const retryAfterMillis = (method === 'POST'? 1000/2 : 1000/5);
           headers['retry-after'] = retryAfterMillis;
         }
-        error = {statusCode: 429, body: data};
+        error = {body: data.join('')};
       } else if (status >= 400 || status < 200) {
         error = {body: JSON.parse(data.join('')), headers};
       } else if(method !== 'DELETE') {
