@@ -19,6 +19,7 @@ var niAdvancedEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/json'};
 var applicationsEndpoint = {host:'api.nexmo.com',path:'/v1/applications'};
 var up = {};
 var numberPattern = new RegExp("^[0-9 +()-]*$");
+
 var _options = null;
 
 //Error message resources are maintained globally in one place for easy management
@@ -47,7 +48,7 @@ var ERROR_MESSAGES = {
   numberInsightPatternFailure:'Number can contain digits and may include any or all of the following: white space, -,+, (, ).',
   optionsNotAnObject:'Options parameter should be a dictionary. Check the docs for valid properties for options',
     applicationName: 'Invalid argument: name',
-    applicationType: 'Invalid argument: type (valid options: [voice])',
+    applicationType: 'Invalid argument: type',
     applicationAnswerUrl: 'Invalid argument: answerUrl',
     applicationEventUrl: 'Invalid argument: eventUrl',
     applicationId: 'Invalid argument: appId',
@@ -207,7 +208,7 @@ exports.getPricing = function(countryCode, callback) {
 exports.getPhonePricing = function(product, msisdn, callback) {
     if (!product || (product != 'sms' && product != 'voice')) {
         sendError(callback, new Error(ERROR_MESSAGES.product));
-    } else if (!msisdn || msisdn.length < 10) { // check if MSISDN validation is correct for international numbers
+    } else if (!msisdn) { 
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var pricingEndpoint = getEndpoint('/account/get-phone-pricing/outbound');
@@ -255,7 +256,7 @@ exports.searchNumbers = function(countryCode, pattern, callback) {
 exports.buyNumber = function(countryCode, msisdn, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn || msisdn.length < 10) { // check if MSISDN validation is correct for international numbers
+    } else if (!msisdn) { 
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var buyEndpoint = getEndpoint('/number/buy');
@@ -267,7 +268,7 @@ exports.buyNumber = function(countryCode, msisdn, callback) {
 exports.cancelNumber = function(countryCode, msisdn, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn || msisdn.length < 10) {
+    } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var cancelEndpoint = getEndpoint('/number/cancel');
@@ -279,7 +280,7 @@ exports.cancelNumber = function(countryCode, msisdn, callback) {
 exports.cancelNumber = function(countryCode, msisdn, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn || msisdn.length < 10) {
+    } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var cancelEndpoint = getEndpoint('/number/cancel');
@@ -291,7 +292,7 @@ exports.cancelNumber = function(countryCode, msisdn, callback) {
 exports.updateNumber = function(countryCode, msisdn, params, callback){
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn || msisdn.length < 10) {
+    } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var updateEndpoint = getEndpoint('/number/update');
@@ -324,7 +325,7 @@ exports.getApplications = function(options, callback) {
 exports.createApplication = function(name, type, answerUrl, eventUrl, options, callback) {
   if (!name || name.length < 1) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationName));
-  } else if (!type || type != 'voice') {
+  } else if (!type) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationType));
   } else if (!answerUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationAnswerUrl));
@@ -356,7 +357,7 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else if (!name || name.length < 1) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationName));
-  } else if (!type || type != 'voice') {
+  } else if (!type) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationType));
   } else if (!answerUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationAnswerUrl));
