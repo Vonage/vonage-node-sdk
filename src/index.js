@@ -19,6 +19,7 @@ var niAdvancedEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/json'};
 var applicationsEndpoint = {host:'api.nexmo.com',path:'/v1/applications'};
 var up = {};
 var numberPattern = new RegExp("^[0-9 +()-]*$");
+
 var _options = null;
 
 //Error message resources are maintained globally in one place for easy management
@@ -28,7 +29,7 @@ var ERROR_MESSAGES = {
     msg: 'Invalid Text Message',
     msgParams: 'Invalid shortcode message parameters',
     countrycode: 'Invalid Country Code',
-    msisdn: 'Invalid MSISDN passed',
+    msisdn: 'Invalid MSISDN passed - should be digits only',
     body: 'Invalid Body value in Binary Message',
     udh: 'Invalid udh value in Binary Message',
     title: 'Invalid title in WAP Push message',
@@ -207,7 +208,7 @@ exports.getPricing = function(countryCode, callback) {
 exports.getPhonePricing = function(product, msisdn, callback) {
     if (!product || (product != 'sms' && product != 'voice')) {
         sendError(callback, new Error(ERROR_MESSAGES.product));
-    } else if (!msisdn || msisdn.length < 10) { // check if MSISDN validation is correct for international numbers
+    } else if (!msisdn || numberPattern.test(msisdn)) { // check if MSISDN validation is correct for international numbers
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var pricingEndpoint = getEndpoint('/account/get-phone-pricing/outbound');
@@ -255,7 +256,7 @@ exports.searchNumbers = function(countryCode, pattern, callback) {
 exports.buyNumber = function(countryCode, msisdn, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn || msisdn.length < 10) { // check if MSISDN validation is correct for international numbers
+    } else if (!msisdn || numberPattern.test(msisdn)) { // check if MSISDN validation is correct for international numbers
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var buyEndpoint = getEndpoint('/number/buy');
@@ -267,7 +268,7 @@ exports.buyNumber = function(countryCode, msisdn, callback) {
 exports.cancelNumber = function(countryCode, msisdn, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn || msisdn.length < 10) {
+    } else if (!msisdn || numberPattern.test(msisdn)) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var cancelEndpoint = getEndpoint('/number/cancel');
@@ -279,7 +280,7 @@ exports.cancelNumber = function(countryCode, msisdn, callback) {
 exports.cancelNumber = function(countryCode, msisdn, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn || msisdn.length < 10) {
+    } else if (!msisdn || numberPattern.test(msisdn)) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var cancelEndpoint = getEndpoint('/number/cancel');
@@ -291,7 +292,7 @@ exports.cancelNumber = function(countryCode, msisdn, callback) {
 exports.updateNumber = function(countryCode, msisdn, params, callback){
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn || msisdn.length < 10) {
+    } else if (!msisdn || numberPattern.test(msisdn)) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var updateEndpoint = getEndpoint('/number/update');
