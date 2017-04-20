@@ -24,7 +24,7 @@ var nexmo = new Nexmo({
     apiSecret: API_SECRET,
     applicationId: APP_ID,
     privateKey: PRIVATE_KEY_PATH,
-  }, options });
+  }, options);
 ```
 
 * `apiKey` - API Key from Nexmo
