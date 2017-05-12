@@ -57,6 +57,7 @@ exampleFiles = [
   // 'ex-dtmf-to-call.js',
   'ex-get-apps.js',
   'ex-get-calls.js',
+  //'ex-generate-jwt.js',
   // 'ex-make-call.js',
   'ex-number-insight-basic.js',
   'ex-send-sms.js',

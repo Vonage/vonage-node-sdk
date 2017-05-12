@@ -35,7 +35,7 @@ describe('JwtGenerator Object', function() {
       expect(token).to.be.a('string');
     });
 
-    it('should add jti and iat claims by default', function() {
+    it('should add jti iat and acl claims by default', function() {
       var testPrivateKey = fs.readFileSync(__dirname + '/private-test.key');
       var testPublicKey = fs.readFileSync(__dirname + '/public-test.key');
 
@@ -46,6 +46,7 @@ describe('JwtGenerator Object', function() {
 
       expect(decoded.jti).to.be.ok();
       expect(decoded.iat).to.be.ok();
+      expect(decoded.acl).to.be.ok();
     });
 
     it('should be possible to add additional claims', function() {
