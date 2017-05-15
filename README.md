@@ -227,10 +227,18 @@ nexmo.verify.search(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
 
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#search
 
-### Verification Control API
+### Cancel verification
 
 ```js
-nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:<CODE_TO_CHECK>},callback);
+nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:'cancel'},callback);
+```
+
+For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
+
+### Trigger next verification event
+
+```js
+nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:'trigger_next_event'},callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
