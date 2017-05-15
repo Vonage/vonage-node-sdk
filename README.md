@@ -198,7 +198,7 @@ nexmo.files.save(fileIdOrUrl, file, callback);
 ### Submit a Verification Request
 
 ```js
-nexmo.verify.request({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},callback);
+nexmo.verify.request({number: <NUMBER_TO_BE_VERIFIED>, brand: <NAME_OF_THE_APP>}, callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#vrequest
@@ -206,7 +206,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 ### Validate the response of a Verification Request
 
 ```js
-nexmo.verify.check({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,code:<CODE_TO_CHECK>},callback);
+nexmo.verify.check({request_id: <UNIQUE_ID_FROM_VERIFICATION_REQUEST>, code: <CODE_TO_CHECK>}, callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#check
@@ -214,7 +214,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 ### Search one or more Verification Request
 
 ```js
-nexmo.verify.search(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
+nexmo.verify.search(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>, callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#search
@@ -222,7 +222,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 ### Cancel verification
 
 ```js
-nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:'cancel'},callback);
+nexmo.verify.control({request_id: <UNIQUE_ID_FROM_VERIFICATION_REQUEST>, cmd: 'cancel'}, callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
@@ -230,7 +230,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 ### Trigger next verification event
 
 ```js
-nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:'trigger_next_event'},callback);
+nexmo.verify.control({request_id: <UNIQUE_ID_FROM_VERIFICATION_REQUEST>, cmd: 'trigger_next_event'}, callback);
 ```
 
 For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
@@ -248,7 +248,7 @@ For more information check the documentation at https://docs.nexmo.com/number-in
 Example:
 
 ```js
-nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'},  callback);
+nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'}, callback);
 ```
 
 ### Standard
