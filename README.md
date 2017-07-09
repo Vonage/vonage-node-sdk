@@ -30,7 +30,7 @@ var nexmo = new Nexmo({
 * `apiKey` - API Key from Nexmo
 * `apiSecret` - API SECRET from Nexmo
 * `applicationId` - The Nexmo Application ID to be used when creating JWTs. Required for voice related functionality.
-* `privateKey` - The path to the Private Key to be used when creating JWTs.  Required for voice related functionality.
+* `privateKey` - The Private Key to be used when creating JWTs; either as a path to the key file, or a [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.  Required for voice related functionality.
 * `options` - Additional options for the constructor
 
 Options are:
