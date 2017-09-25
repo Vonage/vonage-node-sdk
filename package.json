@@ -37,7 +37,8 @@
     "lint": "eslint src test",
     "lint-fix": "eslint --fix src test",
     "prepublish": "npm run compile",
-    "pretest": "npm run lint"
+    "pretest": "npm run lint",
+    "test-e2e": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./e2e/*.spec.js"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
