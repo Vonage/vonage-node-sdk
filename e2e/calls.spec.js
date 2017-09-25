@@ -20,7 +20,7 @@ describe('calls', () => {
     );
   });
 
-  it('should allow a call to be created', () => {
+  it('should allow a call to be created', (done) => {
     console.log(config.TO_NUMBER);
     console.log(config.FROM_NUMBER);
     nexmo.message.sendSms(config.FROM_NUMBER, config.TO_NUMBER, 'testing');
@@ -35,9 +35,13 @@ describe('calls', () => {
         },
         answer_url: ['https://nexmo-community.github.io/ncco-examples/first_call_talk.json']
     }, (error, result) => {
-      console.log(error);
+      if(error) {
+          done(error);
+      }
       console.log(result);
       expect(result.status, 201);
+
+      done();
     });
   });
 
