@@ -33,6 +33,7 @@
     "test": "npm run-script test-no-lint",
     "test-no-lint": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
     "test-watch": "nodemon --watch src --watch test -x 'npm run-script test-no-lint'",
+    "test-e2e": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./e2e/*.spec.js",
     "pretest": "eslint test"
   },
   "devDependencies": {
