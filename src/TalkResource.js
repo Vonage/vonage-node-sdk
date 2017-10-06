@@ -26,7 +26,7 @@ class TalkResource {
   /**
    * Starts a talk in a call.
    *
-   * @param {Object} params - Parameters used when starting the talk. See https://docs.dev.nexmoinc.net/voice/voice-api/api-reference#talk_put for more information.
+   * @param {Object} params - Parameters used when starting the talk. See https://developer.nexmo.com/api/voice#talk for more information.
    * @param {function} callback - function to be called when the request completes.
    */
   start(callId, params, callback) {

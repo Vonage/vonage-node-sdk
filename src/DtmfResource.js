@@ -26,7 +26,7 @@ class DtmfResource {
   /**
    * Sends DTMF to a call.
    *
-   * @param {Object} params - Parameters used when sending the dtmf to the call. See https://docs.dev.nexmoinc.net/voice/voice-api/api-reference#dtmf_put for more information.
+   * @param {Object} params - Parameters used when sending the dtmf to the call. See https://developer.nexmo.com/api/voice#dtmf for more information.
    * @param {function} callback - function to be called when the request completes.
    */
   send(callId, params, callback) {

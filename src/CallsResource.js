@@ -45,7 +45,7 @@ class CallsResource {
   /**
    * Create a new call.
    *
-   * @param {Object} params - Parameters used when creating the call. See https://docs.dev.nexmoinc.net/voice/voice-api/api-reference#call_create for more information.
+   * @param {Object} params - Parameters used when creating the call. See https://developer.nexmo.com/api/voice#create-an-outbound-call for more information.
    * @param {function} callback - function to be called when the request completes.
    */
   create(params, callback) {
@@ -104,7 +104,7 @@ class CallsResource {
    * Update an existing call.
    *
    * @param {string} [callId] - The unique identifier for the call to update.
-   * @param {Object} params - Parameters used when updating the call. See https://docs.dev.nexmoinc.net/voice/voice-api/api-reference#call_modify_single for more information.
+   * @param {Object} params - Parameters used when updating the call. See https://developer.nexmo.com/api/voice#modify-an-existing-call for more information.
    * @param {function} callback - function to be called when the request completes.
    */
   update(callId, params, callback) {
