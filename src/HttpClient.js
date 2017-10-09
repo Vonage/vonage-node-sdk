@@ -1,5 +1,5 @@
-var https = require('https');
-var http = require('http');
+const https = require('https');
+const http = require('http');
 
 class HttpClient {
   constructor(options) {
@@ -32,7 +32,7 @@ class HttpClient {
         // PL 2016-Sept-6 - commented out Content-Length 0
         // headers['Content-Length'] = 0;
     }
-    var options = {
+    const options = {
         host: endpoint.host?endpoint.host:'rest.nexmo.com',
         port: this.port,
         path: endpoint.path,
@@ -49,7 +49,7 @@ class HttpClient {
     }
 
     this.logger.info('Request:', options, '\nBody:', endpoint.body);
-    var request;
+    let request;
 
     if (options.port == 443) {
         request = this.https.request(options);
@@ -61,10 +61,10 @@ class HttpClient {
 
     // Keep an array of String or Buffers,
     // depending on content type (binary or JSON) of response
-    var responseData = [];
+    let responseData = [];
 
     request.on('response', (response) => {
-        var isBinary = response.headers['content-type'] === 'application/octet-stream';
+        const isBinary = response.headers['content-type'] === 'application/octet-stream';
         if (!isBinary) { response.setEncoding('utf8'); }
 
         response.on('data', (chunk) => {
@@ -108,7 +108,7 @@ class HttpClient {
     const headers = httpResponse.headers;
 
     let response = null;
-    var error = null;
+    let error = null;
 
     try {
       if (status >= 500) {

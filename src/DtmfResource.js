@@ -4,14 +4,14 @@ import querystring from 'querystring';
  * Provides access to the `dtmf` resource.
  */
 class DtmfResource {
-  
+
   /**
    * The path to the `dtmf` resource.
    */
   static get PATH() {
     return '/v1/calls/{call_uuid}/dtmf';
   }
-  
+
   /**
    * Creates a new DtmfResource.
    *
@@ -22,7 +22,7 @@ class DtmfResource {
     this.creds = creds;
     this.options = options;
   }
-  
+
   /**
    * Sends DTMF to a call.
    *
@@ -32,7 +32,7 @@ class DtmfResource {
   send(callId, params, callback) {
     params = JSON.stringify(params);
 
-    var config = {
+    const config = {
       host: 'api.nexmo.com',
       path: DtmfResource.PATH.replace('{call_uuid}', callId),
       method: 'PUT',
@@ -45,7 +45,7 @@ class DtmfResource {
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
 }
 
 export default DtmfResource;

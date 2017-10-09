@@ -12,20 +12,20 @@ import StreamResource from '../lib/StreamResource';
 import HttpClient from '../lib/HttpClient';
 import Credentials from '../lib/Credentials';
 
-var creds = Credentials.parse({
+const creds = Credentials.parse({
   applicationId: 'some-id',
   privateKey: __dirname + '/private-test.key'
 });
-var emptyCallback = () => {};
+const emptyCallback = () => {};
 
 describe('StreamResource', () => {
 
-  var httpClientStub = null;
-  var stream = null;
+  let httpClientStub = null;
+  let stream = null;
 
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
-    var options = {
+    const options = {
       httpClient: httpClientStub
     };
     stream = new StreamResource(creds, options);
@@ -33,12 +33,12 @@ describe('StreamResource', () => {
 
   it('should allow a stream to be started', () => {
     const callId = '2342342-lkjhlkjh-32423';
-    var params = {
+    const params = {
       stream_url: 'https://example.com/test.mp3' // eslint-disable-line camelcase
     }; // eslint-disable-line camelcase
     stream.start(callId, params, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       path: StreamResource.PATH.replace('{call_uuid}', callId),
       method: 'PUT'
     });
@@ -53,7 +53,7 @@ describe('StreamResource', () => {
     const callId = '2342342-lkjhlkjh-32423';
     stream.stop(callId, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: 'DELETE',
       body: undefined,
       path: StreamResource.PATH.replace('{call_uuid}', callId)

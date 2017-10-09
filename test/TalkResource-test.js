@@ -12,7 +12,7 @@ import TalkResource from '../lib/TalkResource';
 import HttpClient from '../lib/HttpClient';
 import Credentials from '../lib/Credentials';
 
-var creds = Credentials.parse({
+const creds = Credentials.parse({
   applicationId: 'some-id',
   privateKey: __dirname + '/private-test.key'
 });
@@ -20,12 +20,12 @@ var emptyCallback = () => {};
 
 describe('TalkResource', () => {
 
-  var httpClientStub = null;
-  var talk = null;
+  let httpClientStub = null;
+  let talk = null;
 
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
-    var options = {
+    const options = {
       httpClient: httpClientStub
     };
     talk = new TalkResource(creds, options);
@@ -33,12 +33,12 @@ describe('TalkResource', () => {
 
   it('should be able to start a talk', () => {
     const callId = '2342342-lkjhlkjh-32423';
-    var params = {
+    const params = {
       text: 'Hello!'
     };
     talk.start(callId, params, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       path: TalkResource.PATH.replace('{call_uuid}', callId),
       method: 'PUT'
     });
@@ -53,7 +53,7 @@ describe('TalkResource', () => {
     const callId = '2342342-lkjhlkjh-32423';
     talk.stop(callId, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: 'DELETE',
       body: undefined,
       path: TalkResource.PATH.replace('{call_uuid}', callId)

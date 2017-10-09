@@ -5,7 +5,7 @@ import App from '../lib/App';
 
 import NexmoStub from './NexmoStub';
 
-var appAPIMapping = {
+const appAPIMapping = {
   'getApplications': 'get|{}',
   'createApplication': 'create',
   'getApplication': 'get|someAppId',
@@ -24,10 +24,10 @@ describe('App Object', function() {
   });
 
   it('should call nexmo.getApplications if 1st param is object', function() {
-    var mock = sinon.mock(nexmo);
+    const mock = sinon.mock(nexmo);
     mock.expects('getApplications').once();
 
-    var app = new App({
+    const app = new App({
       apiKey: 'test',
       apiSecret: 'test'
     }, {
@@ -37,10 +37,10 @@ describe('App Object', function() {
   });
 
   it('should call nexmo.getApplication if 1st param is an app ID', function() {
-    var mock = sinon.mock(nexmo);
+    const mock = sinon.mock(nexmo);
     mock.expects('getApplication').once();
 
-    var app = new App({
+    const app = new App({
       apiKey: 'test',
       apiSecret: 'test'
     }, {

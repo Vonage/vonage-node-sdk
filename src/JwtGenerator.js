@@ -19,16 +19,16 @@ class JwtGenerator {
 		if(typeof claims !== 'object') {
 			throw new Error('claims must be of type object');
 		}
-		
-		var toSign = {
+
+		const toSign = {
 			'iat': claims.issuedAt || parseInt(Date.now()/1000, 10),
 			'jti': claims.jti || uuid.v1()
 		};
 		Object.keys(claims).forEach((key) => {
 			toSign[key] = claims[key];
 		});
-		
-		var token = jwt.sign(toSign, cert, {algorithm: 'RS256'});
+
+		const token = jwt.sign(toSign, cert, {algorithm: 'RS256'});
 		return token;
 	}
 }

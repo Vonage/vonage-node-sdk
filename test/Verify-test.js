@@ -2,7 +2,7 @@ import Verify from '../lib/Verify';
 
 import NexmoStub from './NexmoStub';
 
-var verifyAPIs = {
+const verifyAPIs = {
   'verifyNumber': 'request',
   'checkVerifyRequest': 'check',
   'controlVerifyRequest': 'control',

@@ -4,7 +4,7 @@ class NexmoStub {
 
   static create(functions) {
 
-    var stub = {
+    const stub = {
       initialize: function() {},
       hasBeenCalled: function(name) {
         return this[name + '_called'] === true;
@@ -38,9 +38,9 @@ class NexmoStub {
    */
   static checkAllFunctionsAreCalled(mappings, objDef) {
     Object.keys(mappings).forEach(function(originalName) {
-      var nameAndParams = mappings[originalName].split('|');
-      var newName = nameAndParams[0];
-      var params = nameAndParams[1] ? nameAndParams[1].split(',') : [];
+      const nameAndParams = mappings[originalName].split('|');
+      const newName = nameAndParams[0];
+      const params = nameAndParams[1] ? nameAndParams[1].split(',') : [];
       params.forEach(function(paramValue, index) {
         try {
           params[index] = JSON.parse(paramValue);
@@ -50,8 +50,8 @@ class NexmoStub {
         }
       });
 
-      var stub = NexmoStub.create(Object.keys(mappings));
-      var obj = new objDef({
+      const stub = NexmoStub.create(Object.keys(mappings));
+      const obj = new objDef({
         apiKey: 'test',
         apiSecret: 'test'
       }, {

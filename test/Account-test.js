@@ -2,7 +2,7 @@ import Account from '../lib/Account';
 
 import NexmoStub from './NexmoStub';
 
-var accountAPIs = {
+const accountAPIs = {
   'checkBalance': 'checkBalance',
   'changePassword': 'updatePassword',
   'changeMoCallbackUrl': 'updateSMSCallback',

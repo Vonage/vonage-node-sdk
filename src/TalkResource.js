@@ -4,14 +4,14 @@ import querystring from 'querystring';
  * Provides access to the `talk` resource.
  */
 class TalkResource {
-  
+
   /**
    * The path to the `talk` resource.
    */
   static get PATH() {
     return '/v1/calls/{call_uuid}/talk';
   }
-  
+
   /**
    * Creates a new TalkResource.
    *
@@ -22,7 +22,7 @@ class TalkResource {
     this.creds = creds;
     this.options = options;
   }
-  
+
   /**
    * Starts a talk in a call.
    *
@@ -32,7 +32,7 @@ class TalkResource {
   start(callId, params, callback) {
     params = JSON.stringify(params);
 
-    var config = {
+    const config = {
       host: 'api.nexmo.com',
       path: TalkResource.PATH.replace('{call_uuid}', callId),
       method: 'PUT',
@@ -45,7 +45,7 @@ class TalkResource {
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
   /**
    * Stop a talk in a call.
    *
@@ -53,7 +53,7 @@ class TalkResource {
    * @param {function} callback - function to be called when the request completes.
    */
   stop(callId, callback) {
-    var config = {
+    const config = {
       host:'api.nexmo.com',
       path: TalkResource.PATH.replace('{call_uuid}', callId),
       method: 'DELETE',
@@ -64,7 +64,7 @@ class TalkResource {
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
 }
 
 export default TalkResource;

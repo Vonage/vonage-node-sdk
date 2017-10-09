@@ -45,7 +45,7 @@ class Nexmo {
 
     let userAgent = 'nexmo-node/UNKNOWN node/UNKNOWN';
     try {
-      var packageDetails = require(__dirname + '/../package.json');
+      const packageDetails = require(__dirname + '/../package.json');
       userAgent = `nexmo-node/${packageDetails.version} node/${process.version.replace('v', '')}`;
     }
     catch(e) {

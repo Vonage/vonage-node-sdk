@@ -1,7 +1,7 @@
 class ResourceTestHelper {
 
   static getRequestArgs(params, overrides = {}) {
-    var callsArgs = {
+    const callsArgs = {
       host: overrides.host || 'api.nexmo.com',
       path: overrides.path || '/v1/calls',
       method: overrides.method || 'POST',
@@ -24,9 +24,9 @@ class ResourceTestHelper {
 
   static requestArgsMatch(params, requestOverrides) {
     return function(actual) {
-      var expected = ResourceTestHelper.getRequestArgs(params, requestOverrides);
+      const expected = ResourceTestHelper.getRequestArgs(params, requestOverrides);
 
-      var match = (
+      const match = (
         expected.host === actual.host &&
         expected.path === actual.path &&
         expected.method === actual.method &&

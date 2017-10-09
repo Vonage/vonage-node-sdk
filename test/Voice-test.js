@@ -2,7 +2,7 @@ import Voice from '../lib/Voice';
 
 import NexmoStub from './NexmoStub';
 
-var voiceAPIs = {
+const voiceAPIs = {
   'sendTTSMessage': 'sendTTSMessage',
   'sendTTSPromptWithCapture': 'sendTTSPromptWithCapture',
   'sendTTSPromptWithConfirm': 'sendTTSPromptWithConfirm',

@@ -1,6 +1,6 @@
 "use strict";
 
-var fs = require('fs');
+const fs = require('fs');
 
 class FilesResource {
 
@@ -36,7 +36,7 @@ class FilesResource {
 
     fileIdOrUrl = fileIdOrUrl.split("/").pop(-1);
 
-    var config = {
+    const config = {
       host:'api.nexmo.com',
       path:`${FilesResource.PATH}/${fileIdOrUrl}`,
       method: 'GET',

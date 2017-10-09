@@ -67,7 +67,7 @@ class NumberInsight {
    *                 individual piece of information is retrieved.
    */
   get(options, callback) {
-    var level = options.level;
+    const level = options.level;
     // remove 'level' as it's a library-only parameter
     delete options.level;
 

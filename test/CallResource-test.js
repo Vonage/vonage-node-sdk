@@ -15,27 +15,27 @@ import DtmfResource from '../lib/DtmfResource';
 import HttpClient from '../lib/HttpClient';
 import Credentials from '../lib/Credentials';
 
-var creds = Credentials.parse({
+const creds = Credentials.parse({
   applicationId: 'some-id',
   privateKey: __dirname + '/private-test.key'
 });
-var emptyCallback = () => {};
+const emptyCallback = () => {};
 
 describe('CallsResource', () => {
 
-  var httpClientStub = null;
-  var calls = null;
+  let httpClientStub = null;
+  let calls = null;
 
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
-    var options = {
+    const options = {
       httpClient: httpClientStub
     };
     calls = new CallsResource(creds, options);
   });
 
   it('should allow a call to be created', () => {
-    var params = {};
+    const params = {};
     calls.create(params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params);
@@ -47,7 +47,7 @@ describe('CallsResource', () => {
   });
 
   it('should throw an error if no query is provided', () => {
-    var expectThrow = function() {
+    const expectThrow = function() {
       calls.get();
     };
 
@@ -57,7 +57,7 @@ describe('CallsResource', () => {
   it('should get a collection of calls', () => {
     calls.get({}, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: 'GET',
       body: undefined,
       path: `${CallsResource.PATH}`
@@ -74,7 +74,7 @@ describe('CallsResource', () => {
     const callId = '2342342-lkjhlkjh-32423';
     calls.get(callId, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: 'GET',
       body: undefined,
       path: `${CallsResource.PATH}/${callId}`
@@ -92,7 +92,7 @@ describe('CallsResource', () => {
       status: 'answered'
     }, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: 'GET',
       body: undefined,
       path: `${CallsResource.PATH}?status=answered`
@@ -107,12 +107,12 @@ describe('CallsResource', () => {
 
   it('should allow a call to be updated', () => {
     const callId = '2342342-lkjhlkjh-32423';
-    var params = {
+    const params = {
       action: 'hangup'
     };
     calls.update(callId, params, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       method: 'PUT',
       path: `${CallsResource.PATH}/${callId}`
     });

@@ -4,14 +4,14 @@ import querystring from 'querystring';
  * Provides access to the `stream` resource.
  */
 class StreamResource {
-  
+
   /**
    * The path to the `stream` resource.
    */
   static get PATH() {
     return '/v1/calls/{call_uuid}/stream';
   }
-  
+
   /**
    * Creates a new StreamResource.
    *
@@ -22,7 +22,7 @@ class StreamResource {
     this.creds = creds;
     this.options = options;
   }
-  
+
   /**
    * Starts a stream in a call.
    *
@@ -32,7 +32,7 @@ class StreamResource {
   start(callId, params, callback) {
     params = JSON.stringify(params);
 
-    var config = {
+    const config = {
       host: 'api.nexmo.com',
       path: StreamResource.PATH.replace('{call_uuid}', callId),
       method: 'PUT',
@@ -45,7 +45,7 @@ class StreamResource {
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
   /**
    * Stop a stream in a call.
    *
@@ -53,7 +53,7 @@ class StreamResource {
    * @param {function} callback - function to be called when the request completes.
    */
   stop(callId, callback) {
-    var config = {
+    const config = {
       host:'api.nexmo.com',
       path: StreamResource.PATH.replace('{call_uuid}', callId),
       method: 'DELETE',
@@ -64,7 +64,7 @@ class StreamResource {
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
 }
 
 export default StreamResource;

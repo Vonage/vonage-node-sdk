@@ -12,20 +12,20 @@ import FilesResource from '../lib/FilesResource';
 import HttpClient from '../lib/HttpClient';
 import Credentials from '../lib/Credentials';
 
-var creds = Credentials.parse({
+const creds = Credentials.parse({
   applicationId: 'some-id',
   privateKey: __dirname + '/private-test.key'
 });
-var emptyCallback = () => {};
+const emptyCallback = () => {};
 
 describe('FileResource', () => {
 
-  var httpClientStub = null;
-  var files = null;
+  let httpClientStub = null;
+  let files = null;
 
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
-    var options = {
+    const options = {
       httpClient: httpClientStub
     };
     files = new FilesResource(creds, options);
@@ -35,7 +35,7 @@ describe('FileResource', () => {
     const fileId = '2342342-lkjhlkjh-32423';
     files.get(fileId, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: 'GET',
       body: undefined,
       path: `${FilesResource.PATH}/${fileId}`,
@@ -57,7 +57,7 @@ describe('FileResource', () => {
     const fileUrl = `https://rest.nexmo.com/api/v1/files/${fileId}`;
     files.get(fileUrl, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+    const expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: 'GET',
       body: undefined,
       path: `${FilesResource.PATH}/${fileId}`,

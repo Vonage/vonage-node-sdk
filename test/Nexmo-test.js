@@ -18,20 +18,20 @@ describe('Nexmo definition', () => {
     });
 
     it('should throw an exception if privateKey file does not exist', () => {
-      var create = function() {
+      const create = function() {
         Nexmo.generateJwt('./no-key-here.key');
       };
       expect(create).to.throw(Error);
     });
 
     it('should create a JWT with a private key (file path) [static]', () => {
-      var token = Nexmo.generateJwt(__dirname + '/private-test.key');
+      const token = Nexmo.generateJwt(__dirname + '/private-test.key');
       expect(token).to.be.a('string');
     });
 
     it('should create a JWT with a private key (Buffer) [static]', () => {
-      var fileBuffer = fs.readFileSync(__dirname + '/private-test.key');
-      var token = Nexmo.generateJwt(fileBuffer);
+      const fileBuffer = fs.readFileSync(__dirname + '/private-test.key');
+      const token = Nexmo.generateJwt(fileBuffer);
       expect(token).to.be.a('string');
     });
 
@@ -42,7 +42,7 @@ describe('Nexmo definition', () => {
 describe('Nexmo Object instance', function() {
 
   it('should expose a credentials object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -50,7 +50,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a message object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -58,7 +58,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a voice object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -66,7 +66,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a number object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -74,7 +74,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a verify object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -82,7 +82,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a numberInsight object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -90,7 +90,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a app object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -98,7 +98,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a applications object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -106,7 +106,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should alias apps to applications object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -114,7 +114,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a account object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -122,7 +122,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a calls object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -130,7 +130,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should expose a files object', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -138,8 +138,8 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should allow options to be passed', function() {
-    var initializedSpy = sinon.spy();
-    var options = {
+    const initializedSpy = sinon.spy();
+    const options = {
       nexmoOverride: {
         initialize: initializedSpy
       },
@@ -154,7 +154,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should have debug turned off by default', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -162,12 +162,12 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should allow a custom logger to be set', function() {
-    var logger = {
+    const logger = {
       info: function() {},
       error: function() {},
       warn: function() {}
     };
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     }, {
@@ -177,7 +177,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should allow a debug option to be set', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     }, {
@@ -187,7 +187,7 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should have a default user agent in the form LIBRARY-NAME/LIBRARY-VERSION/LANGUAGE-VERSION', function() {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     });
@@ -195,10 +195,10 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should append to the user agent when a appendToUserAgent option is passed', function() {
-    var options = {
+    const options = {
       appendToUserAgent: 'nexmo-cli/1.0.0'
     };
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test'
     }, options);
@@ -206,23 +206,23 @@ describe('Nexmo Object instance', function() {
   });
 
   it('should create a JWT', () => {
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test',
       privateKey: __dirname + '/private-test.key',
       application_id: 'app-id'
     });
-    var token = nexmo.generateJwt();
+    const token = nexmo.generateJwt();
     expect(token).to.be.a('string');
   });
 
   it('should create same JWT as static function', () => {
-    var iat = parseInt(Date.now()/1000, 10);
-    var jti = 'some_jti';
-    var appId = 'app_id';
-    var privateKey = __dirname + '/private-test.key';
+    const iat = parseInt(Date.now()/1000, 10);
+    const jti = 'some_jti';
+    const appId = 'app_id';
+    const privateKey = __dirname + '/private-test.key';
 
-    var expectedJwt = Nexmo.generateJwt(
+    const expectedJwt = Nexmo.generateJwt(
       privateKey,
       {
         'application_id': appId,
@@ -231,13 +231,13 @@ describe('Nexmo Object instance', function() {
       }
     );
 
-    var nexmo = new Nexmo({
+    const nexmo = new Nexmo({
       apiKey: 'test',
       apiSecret: 'test',
       privateKey: privateKey,
       applicationId: appId
     });
-    var token = nexmo.generateJwt({'iat': iat,'jti': jti});
+    const token = nexmo.generateJwt({'iat': iat,'jti': jti});
     expect(token).to.equal(expectedJwt);
   });
 

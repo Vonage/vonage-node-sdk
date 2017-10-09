@@ -8,14 +8,14 @@ import DtmfResource from './DtmfResource';
  * Provides access to the `calls` resource.
  */
 class CallsResource {
-  
+
   /**
    * The path to the `calls` resource.
    */
   static get PATH() {
     return '/v1/calls';
   }
-  
+
   /**
    * Creates a new CallsResource.
    *
@@ -25,23 +25,23 @@ class CallsResource {
   constructor(creds, options) {
     this.creds = creds;
     this.options = options;
-    
+
     /**
      * @type StreamController
      */
     this.stream = new StreamResource(this.creds, this.options);
-    
+
     /**
      * @type TalkResource
      */
     this.talk = new TalkResource(this.creds, this.options);
-    
+
     /**
      * @type DtmfResource
      */
     this.dtmf = new DtmfResource(this.creds, this.options);
   }
-  
+
   /**
    * Create a new call.
    *
@@ -51,7 +51,7 @@ class CallsResource {
   create(params, callback) {
     params = JSON.stringify(params);
 
-    var config = {
+    const config = {
       host: 'api.nexmo.com',
       path: CallsResource.PATH,
       method: 'POST',
@@ -64,7 +64,7 @@ class CallsResource {
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
   /**
    * Get an existing call.
    *
@@ -77,8 +77,8 @@ class CallsResource {
     if(!query) {
       throw new Error('"query" is a required parameter');
     }
-    
-    var pathExt = '';
+
+    let pathExt = '';
     if(typeof query === 'string') {
       // single call Id
       pathExt = `/${query}`;
@@ -87,8 +87,8 @@ class CallsResource {
       // filter
       pathExt = `?${querystring.stringify(query)}`;
     }
-    
-    var config = {
+
+    const config = {
       host:'api.nexmo.com',
       path:`${CallsResource.PATH}${pathExt}`,
       method: 'GET',
@@ -99,7 +99,7 @@ class CallsResource {
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
   /**
    * Update an existing call.
    *
@@ -110,7 +110,7 @@ class CallsResource {
   update(callId, params, callback) {
     params = JSON.stringify(params);
 
-    var config = {
+    const config = {
       host:'api.nexmo.com',
       path:`${CallsResource.PATH}/${callId}`,
       method: 'PUT',
@@ -123,7 +123,7 @@ class CallsResource {
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
 }
 
 export default CallsResource;

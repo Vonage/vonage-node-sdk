@@ -1,29 +1,29 @@
 'use strict';
 
-var querystring = require('querystring');
 
-var initialized = false;
-var msgpath = {host:'rest.nexmo.com',path:'/sms/json'};
-var shortcodePath = {host:'rest.nexmo.com',path:'/sc/us/${type}/json'};
-var ttsEndpoint = {host:'api.nexmo.com',path:'/tts/json'};
-var ttsPromptEndpoint = {host:'api.nexmo.com',path:'/tts-prompt/json'};
-var callEndpoint = {host:'rest.nexmo.com',path:'/call/json'};
-var verifyEndpoint = {host:'api.nexmo.com',path:'/verify/json'};
-var checkVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/check/json'};
-var controlVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/control/json'};
-var searchVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/search/json'};
-var niEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/async/json'};
-var niBasicEndpoint = {host:'api.nexmo.com',path:'/ni/basic/json'};
-var niStandardEndpoint = {host:'api.nexmo.com',path:'/ni/standard/json'};
-var niAdvancedEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/json'};
-var applicationsEndpoint = {host:'api.nexmo.com',path:'/v1/applications'};
-var up = {};
-var numberPattern = new RegExp("^[0-9 +()-]*$");
+const querystring = require('querystring');
+const msgpath = {host:'rest.nexmo.com',path:'/sms/json'};
+const shortcodePath = {host:'rest.nexmo.com',path:'/sc/us/${type}/json'};
+const ttsEndpoint = {host:'api.nexmo.com',path:'/tts/json'};
+const ttsPromptEndpoint = {host:'api.nexmo.com',path:'/tts-prompt/json'};
+const callEndpoint = {host:'rest.nexmo.com',path:'/call/json'};
+const verifyEndpoint = {host:'api.nexmo.com',path:'/verify/json'};
+const checkVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/check/json'};
+const controlVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/control/json'};
+const searchVerifyEndpoint = {host:'api.nexmo.com',path:'/verify/search/json'};
+const niEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/async/json'};
+const niBasicEndpoint = {host:'api.nexmo.com',path:'/ni/basic/json'};
+const niStandardEndpoint = {host:'api.nexmo.com',path:'/ni/standard/json'};
+const niAdvancedEndpoint = {host:'api.nexmo.com',path:'/ni/advanced/json'};
+const applicationsEndpoint = {host:'api.nexmo.com',path:'/v1/applications'};
+const numberPattern = new RegExp("^[0-9 +()-]*$");
 
-var _options = null;
+let up = {};
+let initialized = false;
+let _options = null;
 
 //Error message resources are maintained globally in one place for easy management
-var ERROR_MESSAGES = {
+const ERROR_MESSAGES = {
     sender: 'Invalid from address',
     to: 'Invalid to address',
     msg: 'Invalid Text Message',
@@ -128,7 +128,7 @@ function sendMessage(data, callback) {
     } else if (!data.to) {
         sendError(callback, new Error(ERROR_MESSAGES.to));
     } else {
-        var path = clone(msgpath);
+        const path = clone(msgpath);
     path.path+= '?' + querystring.stringify(data);
         _options.logger.info('sending message from ' + data.from + ' to ' + data.to + ' with message ' + data.text);
         sendRequest(path, 'POST', function(err, apiResponse) {
@@ -149,7 +149,7 @@ function sendViaShortcode(type, recipient, messageParams, opts, callback) {
         sendError(callback, new Error(ERROR_MESSAGES.msgParams));
     }
     opts = opts || {};
-    var path = clone(shortcodePath);
+    const path = clone(shortcodePath);
     path.path = path.path.replace('${type}', type);
     Object.keys(messageParams).forEach(function(key) {
         opts[key] = messageParams[key];
@@ -191,7 +191,7 @@ function sendRequest(endpoint, method, callback) {
 }
 
 exports.checkBalance = function(callback) {
-    var balanceEndpoint = getEndpoint('/account/get-balance');
+    const balanceEndpoint = getEndpoint('/account/get-balance');
     sendRequest(balanceEndpoint, callback);
 }
 
@@ -199,7 +199,7 @@ exports.getPricing = function(countryCode, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
     } else {
-        var pricingEndpoint = getEndpoint('/account/get-pricing/outbound');
+        const pricingEndpoint = getEndpoint('/account/get-pricing/outbound');
     pricingEndpoint.path += '?country=' + countryCode;
         sendRequest(pricingEndpoint, callback);
     }
@@ -208,22 +208,22 @@ exports.getPricing = function(countryCode, callback) {
 exports.getPhonePricing = function(product, msisdn, callback) {
     if (!product || (product != 'sms' && product != 'voice')) {
         sendError(callback, new Error(ERROR_MESSAGES.product));
-    } else if (!msisdn) { 
+    } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
-        var pricingEndpoint = getEndpoint('/account/get-phone-pricing/outbound');
+        const pricingEndpoint = getEndpoint('/account/get-phone-pricing/outbound');
         pricingEndpoint.path += "/" + product + "/" + up.api_key + "/" + up.api_secret + "/" + msisdn;
         sendRequest(pricingEndpoint, callback);
     }
 }
 
 exports.getNumbers = function(options, callback) {
-    var numbersEndpoint = getEndpoint('/account/numbers');
+    const numbersEndpoint = getEndpoint('/account/numbers');
     if (typeof options == 'function') {
         callback = options;
     } else if (typeof options == 'object'){
         numbersEndpoint.path = numbersEndpoint.path + '?';
-        for (var key in options){
+        for (let key in options){
             numbersEndpoint.path = numbersEndpoint.path + key + '=' + options[key] + '&'
         }
     } else {
@@ -237,13 +237,13 @@ exports.searchNumbers = function(countryCode, pattern, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
     } else {
-        var searchEndpoint = getEndpoint('/number/search') ;
+        const searchEndpoint = getEndpoint('/number/search') ;
     searchEndpoint.path += '?country=' + countryCode
         if (typeof pattern == 'function') {
             callback = pattern;
         } else if (typeof pattern == 'object'){
             searchEndpoint.path = searchEndpoint.path + '&';
-            for (var arg in pattern){
+            for (let arg in pattern){
                 searchEndpoint.path = searchEndpoint.path + arg + '=' + pattern[arg] + '&'
             }
         } else {
@@ -256,10 +256,10 @@ exports.searchNumbers = function(countryCode, pattern, callback) {
 exports.buyNumber = function(countryCode, msisdn, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn) { 
+    } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
-        var buyEndpoint = getEndpoint('/number/buy');
+        const buyEndpoint = getEndpoint('/number/buy');
     buyEndpoint.path += '?country=' + countryCode + '&msisdn=' + msisdn;
         sendRequest(buyEndpoint, 'POST', callback);
     }
@@ -271,7 +271,7 @@ exports.cancelNumber = function(countryCode, msisdn, callback) {
     } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
-        var cancelEndpoint = getEndpoint('/number/cancel');
+        const cancelEndpoint = getEndpoint('/number/cancel');
     cancelEndpoint.path += '?country=' + countryCode + '&msisdn=' + msisdn;
         sendRequest(cancelEndpoint, 'POST', callback);
     }
@@ -283,7 +283,7 @@ exports.cancelNumber = function(countryCode, msisdn, callback) {
     } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
-        var cancelEndpoint = getEndpoint('/number/cancel');
+        const cancelEndpoint = getEndpoint('/number/cancel');
     cancelEndpoint.path += '?country=' + countryCode + '&msisdn=' + msisdn;
         sendRequest(cancelEndpoint, 'POST', callback);
     }
@@ -295,10 +295,10 @@ exports.updateNumber = function(countryCode, msisdn, params, callback){
     } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
-        var updateEndpoint = getEndpoint('/number/update');
+        const updateEndpoint = getEndpoint('/number/update');
   updateEndpoint.path += '?country=' + countryCode + '&msisdn=' + msisdn;
         updateEndpoint.path = updateEndpoint.path + '&';
-        for (var arg in params){
+        for (let arg in params){
             updateEndpoint.path = updateEndpoint.path + arg + '=' + encodeURIComponent(params[arg]) + '&'
         }
         sendRequest(updateEndpoint, 'POST', callback);
@@ -306,13 +306,13 @@ exports.updateNumber = function(countryCode, msisdn, params, callback){
 }
 
 exports.getApplications = function(options, callback) {
-    var endpoint = getEndpoint(applicationsEndpoint.path);
+    const endpoint = getEndpoint(applicationsEndpoint.path);
     endpoint.host = applicationsEndpoint.host;
     if (typeof options == 'function') {
         callback = options;
     } else if (typeof options == 'object'){
         endpoint.path += '?';
-        for (var key in options){
+        for (let key in options){
             endpoint.path += (key + '=' + options[key] + '&');
         }
     } else {
@@ -332,10 +332,10 @@ exports.createApplication = function(name, type, answerUrl, eventUrl, options, c
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var createEndpoint = getEndpoint(applicationsEndpoint.path);
+      const createEndpoint = getEndpoint(applicationsEndpoint.path);
       createEndpoint.host = applicationsEndpoint.host;
       createEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
-      for (var key in options){
+      for (let key in options){
           createEndpoint.path += ('&' + key + '=' + options[key]);
       }
       sendRequest(createEndpoint, 'POST', callback);
@@ -346,7 +346,7 @@ exports.getApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var showEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
+      const showEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
       showEndpoint.host = applicationsEndpoint.host;
       sendRequest(showEndpoint, callback);
   }
@@ -364,10 +364,10 @@ exports.updateApplication = function(appId, name, type, answerUrl, eventUrl, opt
   } else if (!eventUrl) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
   } else {
-      var updateEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
+      const updateEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
       updateEndpoint.path += ('?name=' + encodeURIComponent(name) + '&type=' + type  + '&answer_url=' + answerUrl  + '&event_url=' + eventUrl);
       updateEndpoint.host = applicationsEndpoint.host;
-      for (var key in options){
+      for (let key in options){
           updateEndpoint.path = updateEndpoint.path + '&' + key + '=' + options[key];
       }
       sendRequest(updateEndpoint, 'PUT', callback);
@@ -378,7 +378,7 @@ exports.deleteApplication = function(appId, callback) {
   if (!appId || appId.length < 36) {
       sendError(callback, new Error(ERROR_MESSAGES.applicationId));
   } else {
-      var deleteEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
+      const deleteEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
       deleteEndpoint.host = applicationsEndpoint.host;
       sendRequest(deleteEndpoint, 'DELETE', callback);
   }
@@ -386,19 +386,19 @@ exports.deleteApplication = function(appId, callback) {
 
 
 exports.changePassword = function(newSecret, callback) {
-    var settingsEndpoint = getEndpoint('/account/settings');
+    const settingsEndpoint = getEndpoint('/account/settings');
   settingsEndpoint.path += '?newSecret=' + encodeURIComponent(newSecret);
     sendRequest(settingsEndpoint, 'POST', callback);
 }
 
 exports.changeMoCallbackUrl = function(newUrl, callback) {
-    var settingsEndpoint = getEndpoint('/account/settings');
+    const settingsEndpoint = getEndpoint('/account/settings');
   settingsEndpoint.path  += '?moCallBackUrl=' + encodeURIComponent(newUrl);
     sendRequest(settingsEndpoint, 'POST', callback);
 }
 
 exports.changeDrCallbackUrl = function(newUrl, callback) {
-    var settingsEndpoint = getEndpoint('/account/settings');
+    const settingsEndpoint = getEndpoint('/account/settings');
   settingsEndpoint.path  += '?drCallBackUrl=' + encodeURIComponent(newUrl);
     sendRequest(settingsEndpoint, 'POST', callback);
 }
@@ -407,7 +407,7 @@ exports.verifyNumber = function(inputParams, callback) {
   if (!inputParams.number || !inputParams.brand ) {
     sendError(callback, new Error(ERROR_MESSAGES.verifyValidation));
     } else {
-    var vEndpoint = clone(verifyEndpoint);
+    const vEndpoint = clone(verifyEndpoint);
     vEndpoint.path += '?' + querystring.stringify(inputParams);
         sendRequest(vEndpoint, callback);
     }
@@ -417,7 +417,7 @@ exports.checkVerifyRequest = function(inputParams, callback) {
   if (!inputParams.request_id || !inputParams.code ) {
     sendError(callback, new Error(ERROR_MESSAGES.checkVerifyValidation));
     } else {
-    var vEndpoint = clone(checkVerifyEndpoint);
+    const vEndpoint = clone(checkVerifyEndpoint);
     vEndpoint.path += '?' + querystring.stringify(inputParams);
         sendRequest(vEndpoint, callback);
     }
@@ -427,14 +427,14 @@ exports.controlVerifyRequest = function(inputParams, callback) {
   if (!inputParams.request_id || !inputParams.cmd ) {
     sendError(callback, new Error(ERROR_MESSAGES.controlVerifyValidation));
     } else {
-    var vEndpoint = clone(controlVerifyEndpoint);
+    const vEndpoint = clone(controlVerifyEndpoint);
     vEndpoint.path += '?' + querystring.stringify(inputParams);
         sendRequest(vEndpoint, callback);
     }
 }
 
 exports.searchVerifyRequest = function(requestIds, callback) {
-  var requestIdParam = {};
+  const requestIdParam = {};
   if (!requestIds) {
     sendError(callback, new Error(ERROR_MESSAGES.searchVerifyValidation));
     } else {
@@ -447,7 +447,7 @@ exports.searchVerifyRequest = function(requestIds, callback) {
     } else {
       requestIdParam.request_id=requestIds;
     }
-    var vEndpoint = clone(searchVerifyEndpoint);
+    const vEndpoint = clone(searchVerifyEndpoint);
     vEndpoint.path += '?' + querystring.stringify(requestIdParam);
         sendRequest(vEndpoint, callback);
     }
@@ -477,7 +477,7 @@ function numberInsightAsync(inputParams, callback) {
   if (!inputParams.number || ! inputParams.callback) {
     sendError(callback, new Error(ERROR_MESSAGES.numberInsightAdvancedValidation));
   } else {
-    var nEndpoint = clone(niEndpoint);
+    const nEndpoint = clone(niEndpoint);
     nEndpoint.path += '?' + querystring.stringify(inputParams);
     sendRequest(nEndpoint, callback);
   }
@@ -485,13 +485,13 @@ function numberInsightAsync(inputParams, callback) {
 
 function numberInsightCommon(endpoint,inputParams,callback) {
   if (validateNumber(inputParams,callback)){
-    var inputObj;
+    let inputObj;
     if (typeof inputParams != 'object') {
       inputObj = {number:inputParams};
     } else {
       inputObj = inputParams;
     }
-    var nEndpoint = clone(endpoint);
+    const nEndpoint = clone(endpoint);
     nEndpoint.path += '?' + querystring.stringify(inputObj);
       sendRequest(nEndpoint, callback);
   }
@@ -514,7 +514,7 @@ function sendVoiceMessage(voiceEndpoint, data, callback) {
     if (!data.to) {
         sendError(callback, new Error(ERROR_MESSAGES.to));
     } else {
-        var endpoint = clone(voiceEndpoint);
+        const endpoint = clone(voiceEndpoint);
     endpoint.path += '?' + querystring.stringify(data);
         _options.logger.info('sending TTS message to ' + data.to + ' with message ' + data.text);
         sendRequest(endpoint, 'POST', function(err, apiResponse) {
@@ -622,6 +622,3 @@ exports.setHost = function(aHost) {
   applicationsEndpoint.host = aHost;
 }
 
-exports.setPort = function(aPort) {
-  port = aPort;
-}
