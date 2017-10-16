@@ -124,7 +124,6 @@ class HttpClient {
         }
         error = {body: data.join('')};
       } else if (status === 204) {
-        console.log(data);
         response = data;
       } else if (status >= 400 || status < 200) {
         error = {body: JSON.parse(data.join('')), headers};
