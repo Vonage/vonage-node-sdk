@@ -271,12 +271,12 @@ describe('parseResponse', function() {
     expect(callback).was.calledWith({ statusCode: 404, body: { 'error' : 'error' }, headers: headers}, null);
   });
 
-  it ('should parse a 204 status code as a JSON object', function() {
+  it ('should parse a 204 status code as null', function() {
     var callback = sinon.spy();
     const headers = {'content-type' : 'application/json'};
     const response = {statusCode: 204, headers: headers};
     client.__parseResponse(response, [''], 'GET', callback);
-    expect(callback).was.calledWith(null, ['']);
+    expect(callback).was.calledWith(null, null);
   });
 
   it ('should parse a 200-299 status code as a JSON object', function() {
