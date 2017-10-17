@@ -26,11 +26,11 @@ function runNextExample(err, res) {
   else if(currentExampleFile) {
     console.log('Example complete:', currentExampleFile, 'Result', res);
   }
-  
+
   if(exampleIndex < exampleFiles.length) {
     currentExampleFile = exampleFiles[exampleIndex];
     ++exampleIndex;
-    
+
     console.log(SPACER, exampleIndex + '.',  'Loading', currentExampleFile);
     runExample(currentExampleFile, runNextExample);
   }
@@ -52,16 +52,31 @@ function runExample(exampleFile, callback) {
 // By default all examples are run.
 // Use this array to run a select number of examples.
 exampleFiles = [
-  'ex-check-balance.js',
-  'ex-create-update-delete-app.js',
-  // 'ex-dtmf-to-call.js',
-  'ex-get-apps.js',
-  'ex-get-calls.js',
-  // 'ex-make-call.js',
-  'ex-number-insight-basic.js',
-  'ex-send-sms.js',
-  'ex-stream-to-call.js',
-  'ex-talk-to-call.js'
+  // 'ex-check-balance.js',
+  // 'ex-create-update-delete-app.js',
+  // // 'ex-dtmf-to-call.js',
+  // 'ex-get-apps.js',
+  // 'ex-get-calls.js',
+  // // 'ex-make-call.js',
+  // 'ex-number-insight-basic.js',
+  //  'ex-send-sms.js',
+  // 'ex-create-user.js',
+   'ex-get-user.js'
+  //'ex-get-user-conversations.js'
+  // 'ex-update-user.js',
+  // 'ex-delete-user.js',
+  //  'ex-get-users.js'
+  //'ex-create-conversation.js',
+  //'ex-add-members.js',
+  //  'ex-get-members.js',
+  //  'ex-get-member.js',
+  //'ex-create-read-update-delete-conversation.js'
+  // 'ex-get-conversation.js',
+  // 'ex-delete-conversation.js',
+  // 'ex-update-conversation.js'
+  // 'ex-get-conversations.js'
+  // 'ex-stream-to-call.js',
+  // 'ex-talk-to-call.js'
 ];
 
 console.log('Found', exampleFiles.length, 'examples to run:\n', exampleFiles);

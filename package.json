@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "2.2.0",
+  "version": "2.3.0-beta-1",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
@@ -25,7 +25,8 @@
     "bpilot",
     "justinfreitag",
     "ecwyne",
-    "https://github.com/backhand"
+    "https://github.com/backhand",
+    "alexlakatos"
   ],
   "scripts": {
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",

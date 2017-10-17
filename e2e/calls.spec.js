@@ -3,7 +3,7 @@ import chai, {
 } from 'chai';
 
 var Nexmo = require('../lib/Nexmo');
-const config = require('../examples/config');
+const config = require('./config');
 
 describe('calls', () => {
 
@@ -20,7 +20,7 @@ describe('calls', () => {
     );
   });
 
-  it('should allow a call to be created', (done) => {
+  xit('should allow a call to be created', (done) => {
     console.log(config.TO_NUMBER);
     console.log(config.FROM_NUMBER);
     nexmo.message.sendSms(config.FROM_NUMBER, config.TO_NUMBER, 'testing');
