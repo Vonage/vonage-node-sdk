@@ -208,7 +208,7 @@ exports.getPricing = function(countryCode, callback) {
 exports.getPhonePricing = function(product, msisdn, callback) {
     if (!product || (product != 'sms' && product != 'voice')) {
         sendError(callback, new Error(ERROR_MESSAGES.product));
-    } else if (!msisdn) { 
+    } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var pricingEndpoint = getEndpoint('/account/get-phone-pricing/outbound');
@@ -256,7 +256,7 @@ exports.searchNumbers = function(countryCode, pattern, callback) {
 exports.buyNumber = function(countryCode, msisdn, callback) {
     if (!countryCode || countryCode.length != 2) {
         sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-    } else if (!msisdn) { 
+    } else if (!msisdn) {
         sendError(callback, new Error(ERROR_MESSAGES.msisdn));
     } else {
         var buyEndpoint = getEndpoint('/number/buy');
@@ -604,6 +604,33 @@ function sendError(callback, err, returnData) {
     } else {
         throw err;
     }
+}
+
+exports.getWithQuery = function(path, query, creds, opts, callback) {
+  if(!query) {
+    throw new Error('"query" is a required parameter');
+  }
+
+  var pathExt = '';
+  if(typeof query === 'string') {
+    // single call Id
+    pathExt = `/${query}`;
+  }
+  else if(typeof query === 'object' && Object.keys(query).length > 0) {
+    // filter
+    pathExt = `?${querystring.stringify(query)}`;
+  }
+
+  var config = {
+    host:'api.nexmo.com',
+    path:`${path}${pathExt}`,
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${creds.generateJwt()}`
+    }
+  };
+  opts.httpClient.request(config, callback);
 }
 
 exports.setHost = function(aHost) {

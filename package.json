@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "2.0.2",
+  "version": "2.1.0-beta-1",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
@@ -25,13 +25,15 @@
     "bpilot",
     "justinfreitag",
     "ecwyne",
-    "https://github.com/backhand"
+    "https://github.com/backhand",
+    "alexlakatos"
   ],
   "scripts": {
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",
     "prepublish": "npm run compile",
     "test": "npm run-script test-no-lint",
     "test-no-lint": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
+    "test-e2e": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./e2e/*.spec.js",
     "test-watch": "nodemon --watch src --watch test -x 'npm run-script test-no-lint'",
     "test-e2e": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./e2e/*.spec.js",
     "pretest": "eslint test"

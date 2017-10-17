@@ -3,3 +3,5 @@ lib
 test/.env
 examples/.env
 examples/private.key
+e2e/.env
+e2e/private.key
