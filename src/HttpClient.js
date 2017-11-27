@@ -37,7 +37,7 @@ class HttpClient {
         port: this.port,
         path: endpoint.path,
         method: endpoint.method,
-        headers: this.headers
+        headers: Object.assign({}, this.headers)
     };
 
     // Allow existing headers to be overridden
