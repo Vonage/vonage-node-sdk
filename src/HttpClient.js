@@ -123,6 +123,8 @@ class HttpClient {
           headers['retry-after'] = retryAfterMillis;
         }
         error = {body: data.join('')};
+      } else if (status === 204) {
+        response = null;
       } else if (status >= 400 || status < 200) {
         error = {body: JSON.parse(data.join('')), headers};
       } else if(method !== 'DELETE') {
