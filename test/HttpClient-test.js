@@ -1,8 +1,11 @@
 import sinon from 'sinon';
+
 import expectjs from 'expect.js';
 
 import HttpClient from '../lib/HttpClient';
 import NullLogger from '../lib/NullLogger';
+
+import http from 'http';
 
 var expect = require('sinon-expect').enhance(expectjs, sinon, 'was');
 
@@ -335,6 +338,49 @@ describe('parseResponse', function() {
     const response = {statusCode: 429, headers: headers};
     client.__parseResponse(response, [''], 'GET', callback);
     expect(callback).was.calledWith({ statusCode: 429, body: '', headers: {'retry-after': 400}}, null);
+  });
+
+  it.only('should not modify the default headers', function() {
+    var mock = sinon.mock(http);
+    mock.expects('request')
+      .once()
+      .withArgs({
+        headers: {
+          // We expect application/json in our request as we explicitly
+          // specify it
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        host: 'api.nexmo.com',
+        method: 'GET',
+        path: '/api',
+        port: 80
+      })
+      .returns(fakeRequest);
+
+    var client = new HttpClient({
+      port: 80,
+      logger: logger
+    });
+
+    // We expect our initial headers to be set
+    expect(client.headers['Content-Type']).to.eql('application/x-www-form-urlencoded');
+
+    // Make a request, passing in a different Content-Type
+    client.request({
+      host: 'api.nexmo.com',
+      path: '/api',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }, 'GET', {
+      some: 'data'
+    });
+
+    // Our default headers should still be the same
+    expect(client.headers['Content-Type']).to.eql('application/x-www-form-urlencoded');
+
+    mock.verify();
   });
 
 });
