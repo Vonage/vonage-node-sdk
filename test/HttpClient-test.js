@@ -340,7 +340,7 @@ describe('parseResponse', function() {
     expect(callback).was.calledWith({ statusCode: 429, body: '', headers: {'retry-after': 400}}, null);
   });
 
-  it.only('should not modify the default headers', function() {
+  it('should not modify the default headers', function() {
     var mock = sinon.mock(http);
     mock.expects('request')
       .once()
