@@ -150,7 +150,9 @@ class HttpClient {
       error.headers = headers;
     }
 
-    callback(error, response);
+    if (typeof callback === "function"){
+      callback(error, response);
+    }
   }
 }
 
