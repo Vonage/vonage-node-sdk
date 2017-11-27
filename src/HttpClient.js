@@ -3,7 +3,7 @@ var http = require('http');
 
 class HttpClient {
   constructor(options) {
-    this.port = 443 || options.port;
+    this.port = options.port || 443;
     this.https = options.https || https;
     this.http =  options.http || http;
     this.headers = {
