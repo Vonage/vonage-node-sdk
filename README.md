@@ -124,13 +124,21 @@ nexmo.calls.get({status: 'completed'}, callback);
 
 The first parameter can contain many properties to filter the returned call or to page results. For more information see the [Calls API Reference](https://docs.nexmo.com/voice/voice-api/api-reference#calls).
 
+### Update a Call
+
+```js
+nexmo.calls.update(callId, { action: 'hangup' }, callback);
+```
+
+For more information see https://developer.nexmo.com/api/voice#modify-an-existing-call
+
 ### Stream an Audio File to a Call
 
 ```js
 nexmo.calls.stream.start(
   callId,
   {
-    stream_url: [   
+    stream_url: [
       'https://nexmo-community.github.io/ncco-examples/assets/voice_api_audio_streaming.mp3'
     ],
     loop: 1
@@ -496,6 +504,7 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 * Voice
   * [x] Outbound Calls
   * [ ] Inbound Call Webhook
+  * [x] Update calls
   * [x] Stream to Call
   * [x] Talk to Call
   * [x] DTMF to Call
