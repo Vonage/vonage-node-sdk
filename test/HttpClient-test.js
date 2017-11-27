@@ -367,15 +367,18 @@ describe('parseResponse', function() {
     expect(client.headers['Content-Type']).to.eql('application/x-www-form-urlencoded');
 
     // Make a request, passing in a different Content-Type
-    client.request({
-      host: 'api.nexmo.com',
-      path: '/api',
-      headers: {
-        'Content-Type': 'application/json'
+    client.request(
+      {
+        host: 'api.nexmo.com',
+        path: '/api',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      },
+      'GET',
+      function(){
       }
-    }, 'GET', {
-      some: 'data'
-    });
+    );
 
     // Our default headers should still be the same
     expect(client.headers['Content-Type']).to.eql('application/x-www-form-urlencoded');
