@@ -3,3 +3,7 @@ lib
 test/.env
 examples/.env
 examples/private.key
+npm-debug.log
+.nyc
+coverage
+.nyc_output

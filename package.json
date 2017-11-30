@@ -31,6 +31,8 @@
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",
     "prepublish": "npm run compile",
     "test": "npm run-script test-no-lint",
+    "test-coverage": "cross-env NODE_ENV=test nyc mocha",
+    "test-coverage-html": "cross-env NODE_ENV=test nyc --reporter html mocha",
     "test-no-lint": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
     "test-watch": "nodemon --watch src --watch test -x 'npm run-script test-no-lint'",
     "pretest": "eslint test"
@@ -38,11 +40,13 @@
   "devDependencies": {
     "babel-cli": "^6.7.7",
     "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-istanbul": "^4.1.5",
     "babel-preset-es2015": "^6.9.0",
     "babel-register": "^6.7.2",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "chai": "^3.5.0",
+    "cross-env": "^5.1.1",
     "dotenv": "^2.0.0",
     "eslint": "^3.18",
     "expect.js": "^0.3.1",
@@ -50,6 +54,7 @@
     "mocha": "^3.2.0",
     "ngrok": "^2.2.2",
     "nodemon": "^1.10.2",
+    "nyc": "^11.3.0",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "sinon-expect": "^0.3.0"
