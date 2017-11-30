@@ -29,13 +29,18 @@
   ],
   "scripts": {
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",
-    "prepublish": "npm run compile",
-    "test": "npm run-script test-no-lint",
+
+    "test": "npm run test-no-lint",
     "test-coverage": "cross-env NODE_ENV=test nyc mocha",
     "test-coverage-html": "cross-env NODE_ENV=test nyc --reporter html mocha",
     "test-no-lint": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
-    "test-watch": "nodemon --watch src --watch test -x 'npm run-script test-no-lint'",
-    "pretest": "eslint test"
+    "test-watch": "nodemon --watch src --watch test -x 'npm run test-no-lint'",
+
+    "lint": "eslint src test",
+    "lint-fix": "eslint --fix src test",
+
+    "prepublish": "npm run compile",
+    "pretest": "npm run lint"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
