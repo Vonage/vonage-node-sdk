@@ -1,21 +1,20 @@
-import querystring from 'querystring';
+import querystring from "querystring";
 
-import StreamResource from './StreamResource';
-import TalkResource from './TalkResource';
-import DtmfResource from './DtmfResource';
+import StreamResource from "./StreamResource";
+import TalkResource from "./TalkResource";
+import DtmfResource from "./DtmfResource";
 
 /**
  * Provides access to the `calls` resource.
  */
 class CallsResource {
-  
   /**
    * The path to the `calls` resource.
    */
   static get PATH() {
-    return '/v1/calls';
+    return "/v1/calls";
   }
-  
+
   /**
    * Creates a new CallsResource.
    *
@@ -25,23 +24,23 @@ class CallsResource {
   constructor(creds, options) {
     this.creds = creds;
     this.options = options;
-    
+
     /**
      * @type StreamController
      */
     this.stream = new StreamResource(this.creds, this.options);
-    
+
     /**
      * @type TalkResource
      */
     this.talk = new TalkResource(this.creds, this.options);
-    
+
     /**
      * @type DtmfResource
      */
     this.dtmf = new DtmfResource(this.creds, this.options);
   }
-  
+
   /**
    * Create a new call.
    *
@@ -52,19 +51,19 @@ class CallsResource {
     params = JSON.stringify(params);
 
     var config = {
-      host: 'api.nexmo.com',
+      host: "api.nexmo.com",
       path: CallsResource.PATH,
-      method: 'POST',
+      method: "POST",
       body: params,
       headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': params.length,
-        'Authorization': `Bearer ${this.creds.generateJwt()}`
+        "Content-Type": "application/json",
+        "Content-Length": params.length,
+        Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
   /**
    * Get an existing call.
    *
@@ -74,32 +73,31 @@ class CallsResource {
    * @param {function} callback - function to be called when the request completes.
    */
   get(query, callback) {
-    if(!query) {
+    if (!query) {
       throw new Error('"query" is a required parameter');
     }
-    
-    var pathExt = '';
-    if(typeof query === 'string') {
+
+    var pathExt = "";
+    if (typeof query === "string") {
       // single call Id
       pathExt = `/${query}`;
-    }
-    else if(typeof query === 'object' && Object.keys(query).length > 0) {
+    } else if (typeof query === "object" && Object.keys(query).length > 0) {
       // filter
       pathExt = `?${querystring.stringify(query)}`;
     }
-    
+
     var config = {
-      host:'api.nexmo.com',
-      path:`${CallsResource.PATH}${pathExt}`,
-      method: 'GET',
+      host: "api.nexmo.com",
+      path: `${CallsResource.PATH}${pathExt}`,
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.creds.generateJwt()}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
   /**
    * Update an existing call.
    *
@@ -111,19 +109,18 @@ class CallsResource {
     params = JSON.stringify(params);
 
     var config = {
-      host:'api.nexmo.com',
-      path:`${CallsResource.PATH}/${callId}`,
-      method: 'PUT',
+      host: "api.nexmo.com",
+      path: `${CallsResource.PATH}/${callId}`,
+      method: "PUT",
       body: params,
       headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': params.length,
-        'Authorization': `Bearer ${this.creds.generateJwt()}`
+        "Content-Type": "application/json",
+        "Content-Length": params.length,
+        Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };
     this.options.httpClient.request(config, callback);
   }
-  
 }
 
 export default CallsResource;

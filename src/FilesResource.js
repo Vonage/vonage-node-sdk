@@ -1,14 +1,13 @@
 "use strict";
 
-var fs = require('fs');
+var fs = require("fs");
 
 class FilesResource {
-
   /**
    * The path to the `calls` resource.
    */
   static get PATH() {
-    return '/v1/files';
+    return "/v1/files";
   }
 
   /**
@@ -29,20 +28,19 @@ class FilesResource {
    * @param {function} callback - function to be called when the request completes.
    */
   get(fileIdOrUrl, callback) {
-
-    if(!fileIdOrUrl) {
+    if (!fileIdOrUrl) {
       throw new Error('"fileIdOrUrl" is a required parameter');
     }
 
     fileIdOrUrl = fileIdOrUrl.split("/").pop(-1);
 
     var config = {
-      host:'api.nexmo.com',
-      path:`${FilesResource.PATH}/${fileIdOrUrl}`,
-      method: 'GET',
+      host: "api.nexmo.com",
+      path: `${FilesResource.PATH}/${fileIdOrUrl}`,
+      method: "GET",
       headers: {
-        'Content-Type': 'application/octet-stream',
-        'Authorization': `Bearer ${this.creds.generateJwt()}`
+        "Content-Type": "application/octet-stream",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };
 
@@ -63,11 +61,11 @@ class FilesResource {
       } else {
         this.__storeFile(data, file, callback);
       }
-    })
+    });
   }
 
   __storeFile(data, file, callback) {
-    fs.writeFile(file, data, (error) => {
+    fs.writeFile(file, data, error => {
       if (error) {
         callback(error, null);
       } else {
@@ -75,7 +73,6 @@ class FilesResource {
       }
     });
   }
-
 }
 
 export default FilesResource;
