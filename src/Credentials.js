@@ -1,7 +1,7 @@
 "use strict";
 
-import fs from 'fs';
-import JwtGenerator from './JwtGenerator';
+import fs from "fs";
+import JwtGenerator from "./JwtGenerator";
 
 /**
  * Right now only key/secret credentials are supported.
@@ -23,16 +23,16 @@ class Credentials {
     this.privateKey = null;
     this.applicationId = applicationId;
 
-    if(privateKey instanceof Buffer) {
+    if (privateKey instanceof Buffer) {
       this.privateKey = privateKey;
-    }
-    else if(typeof privateKey === "string" &&
-       privateKey.startsWith('-----BEGIN PRIVATE KEY-----')) {
+    } else if (
+      typeof privateKey === "string" &&
+      privateKey.startsWith("-----BEGIN PRIVATE KEY-----")
+    ) {
       this.privateKey = new Buffer(privateKey);
-    }
-    else if(privateKey !== undefined) {
-      if(!fs.existsSync(privateKey)) {
-        throw new Error(`File "${privateKey}" not found.`)
+    } else if (privateKey !== undefined) {
+      if (!fs.existsSync(privateKey)) {
+        throw new Error(`File "${privateKey}" not found.`);
       }
       this.privateKey = fs.readFileSync(privateKey);
     }
@@ -51,8 +51,11 @@ class Credentials {
    *
    * @returns {string} The generated JWT
    */
-  generateJwt(applicationId = this.applicationId, privateKey = this.privateKey) {
-    var claims = {application_id: applicationId};
+  generateJwt(
+    applicationId = this.applicationId,
+    privateKey = this.privateKey
+  ) {
+    var claims = { application_id: applicationId };
     var token = this._jwtGenerator.generate(privateKey, claims);
     return token;
   }
@@ -71,11 +74,15 @@ class Credentials {
    * Key/Secret credentials are only supported at present.
    */
   static parse(obj) {
-    if(obj instanceof Credentials) {
+    if (obj instanceof Credentials) {
       return obj;
-    }
-    else {
-      return new Credentials(obj.apiKey, obj.apiSecret, obj.privateKey, obj.applicationId);
+    } else {
+      return new Credentials(
+        obj.apiKey,
+        obj.apiSecret,
+        obj.privateKey,
+        obj.applicationId
+      );
     }
   }
 }

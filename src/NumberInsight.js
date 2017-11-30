@@ -1,9 +1,8 @@
 "use strict";
 
-import nexmo from './index';
+import nexmo from "./index";
 
 class NumberInsight {
-
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -17,7 +16,11 @@ class NumberInsight {
     // Used to facilitate testing of the call to the underlying object
     this._nexmo = this.options.nexmoOverride || nexmo;
 
-    this._nexmo.initialize(this.creds.apiKey, this.creds.apiSecret, this.options);
+    this._nexmo.initialize(
+      this.creds.apiKey,
+      this.creds.apiSecret,
+      this.options
+    );
   }
 
   /**
@@ -71,21 +74,21 @@ class NumberInsight {
     // remove 'level' as it's a library-only parameter
     delete options.level;
 
-    if (level === 'advanced' || level === 'advancedAsync') {
-      if (level === 'advanced') { console.warn('DEPRECATION WARNING: Number Insight Advanced with a level of "advanced" will be synchronous in v2.0+. Consider using the level "advancedAsync" to keep using the async option.') };
+    if (level === "advanced" || level === "advancedAsync") {
+      if (level === "advanced") {
+        console.warn(
+          'DEPRECATION WARNING: Number Insight Advanced with a level of "advanced" will be synchronous in v2.0+. Consider using the level "advancedAsync" to keep using the async option.'
+        );
+      }
       this._nexmo.numberInsightAdvancedAsync.apply(this._nexmo, arguments);
-    }
-    else if(level === 'advancedSync') {
+    } else if (level === "advancedSync") {
       this._nexmo.numberInsightAdvanced.apply(this._nexmo, arguments);
-    }
-    else if(level === 'standard') {
+    } else if (level === "standard") {
       this._nexmo.numberInsightStandard.apply(this._nexmo, arguments);
-    }
-    else {
+    } else {
       this._nexmo.numberInsightBasic.apply(this._nexmo, arguments);
     }
   }
-
 }
 
 export default NumberInsight;

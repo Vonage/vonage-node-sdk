@@ -1,17 +1,14 @@
-import querystring from 'querystring';
-
 /**
  * Provides access to the `dtmf` resource.
  */
 class DtmfResource {
-  
   /**
    * The path to the `dtmf` resource.
    */
   static get PATH() {
-    return '/v1/calls/{call_uuid}/dtmf';
+    return "/v1/calls/{call_uuid}/dtmf";
   }
-  
+
   /**
    * Creates a new DtmfResource.
    *
@@ -22,7 +19,7 @@ class DtmfResource {
     this.creds = creds;
     this.options = options;
   }
-  
+
   /**
    * Sends DTMF to a call.
    *
@@ -33,19 +30,18 @@ class DtmfResource {
     params = JSON.stringify(params);
 
     var config = {
-      host: 'api.nexmo.com',
-      path: DtmfResource.PATH.replace('{call_uuid}', callId),
-      method: 'PUT',
+      host: "api.nexmo.com",
+      path: DtmfResource.PATH.replace("{call_uuid}", callId),
+      method: "PUT",
       body: params,
       headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': params.length,
-        'Authorization': `Bearer ${this.creds.generateJwt()}`
+        "Content-Type": "application/json",
+        "Content-Length": params.length,
+        Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };
     this.options.httpClient.request(config, callback);
   }
-  
 }
 
 export default DtmfResource;

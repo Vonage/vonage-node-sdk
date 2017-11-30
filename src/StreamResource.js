@@ -1,17 +1,14 @@
-import querystring from 'querystring';
-
 /**
  * Provides access to the `stream` resource.
  */
 class StreamResource {
-  
   /**
    * The path to the `stream` resource.
    */
   static get PATH() {
-    return '/v1/calls/{call_uuid}/stream';
+    return "/v1/calls/{call_uuid}/stream";
   }
-  
+
   /**
    * Creates a new StreamResource.
    *
@@ -22,7 +19,7 @@ class StreamResource {
     this.creds = creds;
     this.options = options;
   }
-  
+
   /**
    * Starts a stream in a call.
    *
@@ -33,19 +30,19 @@ class StreamResource {
     params = JSON.stringify(params);
 
     var config = {
-      host: 'api.nexmo.com',
-      path: StreamResource.PATH.replace('{call_uuid}', callId),
-      method: 'PUT',
+      host: "api.nexmo.com",
+      path: StreamResource.PATH.replace("{call_uuid}", callId),
+      method: "PUT",
       body: params,
       headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': params.length,
-        'Authorization': `Bearer ${this.creds.generateJwt()}`
+        "Content-Type": "application/json",
+        "Content-Length": params.length,
+        Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };
     this.options.httpClient.request(config, callback);
   }
-  
+
   /**
    * Stop a stream in a call.
    *
@@ -54,17 +51,16 @@ class StreamResource {
    */
   stop(callId, callback) {
     var config = {
-      host:'api.nexmo.com',
-      path: StreamResource.PATH.replace('{call_uuid}', callId),
-      method: 'DELETE',
+      host: "api.nexmo.com",
+      path: StreamResource.PATH.replace("{call_uuid}", callId),
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.creds.generateJwt()}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };
     this.options.httpClient.request(config, callback);
   }
-  
 }
 
 export default StreamResource;

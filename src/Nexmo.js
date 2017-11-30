@@ -1,24 +1,24 @@
-import fs from 'fs';
+import fs from "fs";
+import path from "path";
 
-import Credentials from './Credentials';
-import JwtGenerator from './JwtGenerator';
-import Message from './Message';
-import Voice from './Voice';
-import Number from './Number';
-import Verify from './Verify';
-import NumberInsight from './NumberInsight';
-import App from './App';
-import Account from './Account';
-import CallsResource from './CallsResource';
-import FilesResource from './FilesResource';
-import HttpClient from './HttpClient';
-import NullLogger from './NullLogger';
-import ConsoleLogger from './ConsoleLogger';
+import Credentials from "./Credentials";
+import JwtGenerator from "./JwtGenerator";
+import Message from "./Message";
+import Voice from "./Voice";
+import Number from "./Number";
+import Verify from "./Verify";
+import NumberInsight from "./NumberInsight";
+import App from "./App";
+import Account from "./Account";
+import CallsResource from "./CallsResource";
+import FilesResource from "./FilesResource";
+import HttpClient from "./HttpClient";
+import NullLogger from "./NullLogger";
+import ConsoleLogger from "./ConsoleLogger";
 
 const jwtGeneratorInstance = new JwtGenerator();
 
 class Nexmo {
-
   /**
    * @param {Credentials} credentials - Nexmo API credentials
    * @param {string} credentials.apiKey - the Nexmo API key
@@ -29,33 +29,33 @@ class Nexmo {
    * @param {string} options.appendToUserAgent - A value to append to the user agent.
    *                    The value will be prefixed with a `/`
    */
-  constructor(credentials, options = {debug:false}) {
+  constructor(credentials, options = { debug: false }) {
     this.credentials = Credentials.parse(credentials);
     this.options = options;
 
     // If no logger has been supplied but debug has been set
     // default to using the ConsoleLogger
-    if(!this.options.logger && this.options.debug) {
+    if (!this.options.logger && this.options.debug) {
       this.options.logger = new ConsoleLogger();
-    }
-    else if(!this.options.logger) {
+    } else if (!this.options.logger) {
       // Swallow the logging
       this.options.logger = new NullLogger();
     }
 
-    let userAgent = 'nexmo-node/UNKNOWN node/UNKNOWN';
+    let userAgent = "nexmo-node/UNKNOWN node/UNKNOWN";
     try {
-      var packageDetails = require(__dirname + '/../package.json');
-      userAgent = `nexmo-node/${packageDetails.version} node/${process.version.replace('v', '')}`;
-    }
-    catch(e) {
-      console.warn('Could not load package details');
+      var packageDetails = require(path.join(__dirname, "..", "package.json"));
+      userAgent = `nexmo-node/${
+        packageDetails.version
+      } node/${process.version.replace("v", "")}`;
+    } catch (e) {
+      console.warn("Could not load package details");
     }
     this.options.userAgent = userAgent;
-    if(this.options.appendToUserAgent) {
+    if (this.options.appendToUserAgent) {
       this.options.userAgent += ` ${this.options.appendToUserAgent}`;
     }
-    this.options.httpClient = new HttpClient(this.options)
+    this.options.httpClient = new HttpClient(this.options);
 
     this.message = new Message(this.credentials, this.options);
     this.voice = new Voice(this.credentials, this.options);
@@ -86,7 +86,7 @@ class Nexmo {
    * @returns {String} the generated token
    */
   generateJwt(claims = {}) {
-    if(claims.application_id === undefined) {
+    if (claims.application_id === undefined) {
       claims.application_id = this.credentials.applicationId;
     }
     return Nexmo.generateJwt(this.credentials.privateKey, claims);
@@ -103,15 +103,14 @@ class Nexmo {
  * @returns {String} the generated token
  */
 Nexmo.generateJwt = (privateKey, claims) => {
-  if(!(privateKey instanceof Buffer)) {
-      if(!fs.existsSync(privateKey)) {
-          throw new Error(`File "${privateKey}" not found.`);
-      }
-      else {
-          privateKey = fs.readFileSync(privateKey);
-      }
+  if (!(privateKey instanceof Buffer)) {
+    if (!fs.existsSync(privateKey)) {
+      throw new Error(`File "${privateKey}" not found.`);
+    } else {
+      privateKey = fs.readFileSync(privateKey);
+    }
   }
   return jwtGeneratorInstance.generate(privateKey, claims);
-}
+};
 
 export default Nexmo;
