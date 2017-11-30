@@ -1,25 +1,24 @@
-import chai, {
-    expect
-} from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+import chai, { expect } from "chai";
+
+import path from "path";
+import sinon from "sinon";
+import sinonChai from "sinon-chai";
+
+import ResourceTestHelper from "./ResourceTestHelper";
+
+import DtmfResource from "../lib/DtmfResource";
+import HttpClient from "../lib/HttpClient";
+import Credentials from "../lib/Credentials";
 
 chai.use(sinonChai);
 
-import ResourceTestHelper from './ResourceTestHelper';
-
-import DtmfResource from '../lib/DtmfResource';
-import HttpClient from '../lib/HttpClient';
-import Credentials from '../lib/Credentials';
-
 var creds = Credentials.parse({
-  applicationId: 'some-id',
-  privateKey: __dirname + '/private-test.key'
+  applicationId: "some-id",
+  privateKey: path.join(__dirname, "private-test.key")
 });
 var emptyCallback = () => {};
 
-describe('DtmfResource', () => {
-
+describe("DtmfResource", () => {
   var httpClientStub = null;
   var dtmf = null;
 
@@ -31,22 +30,20 @@ describe('DtmfResource', () => {
     dtmf = new DtmfResource(creds, options);
   });
 
-  it('should be able to send DTMF to a call', () => {
-    const callId = '2342342-lkjhlkjh-32423';
+  it("should be able to send DTMF to a call", () => {
+    const callId = "2342342-lkjhlkjh-32423";
     var params = {
       digits: [1, 2, 3, 4]
     };
     dtmf.send(callId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
-      path: DtmfResource.PATH.replace('{call_uuid}', callId),
-      method: 'PUT'
+      path: DtmfResource.PATH.replace("{call_uuid}", callId),
+      method: "PUT"
     });
-    expect(httpClientStub.request)
-      .to.have.been.calledWith(
-        sinon.match(expectedRequestArgs),
-        emptyCallback
-      );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
   });
-
 });
