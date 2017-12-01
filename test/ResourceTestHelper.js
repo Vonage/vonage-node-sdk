@@ -27,10 +27,12 @@ class ResourceTestHelper {
 
   static requestArgsMatch(params, requestOverrides) {
     return function(actual) {
-      var expected = ResourceTestHelper.getRequestArgs(
-        params,
-        requestOverrides
-      );
+      var expected;
+      if (requestOverrides) {
+        expected = ResourceTestHelper.getRequestArgs(params, requestOverrides);
+      } else {
+        expected = params;
+      }
 
       // We strip api_key and api_secret out of `path` so that our tests
       // only look for specific parameters
@@ -42,21 +44,35 @@ class ResourceTestHelper {
         actual.path = qs[0] + "?" + querystring.stringify(qsParts);
       }
 
-      var match =
-        expected.host === actual.host &&
-        expected.path === actual.path &&
-        expected.method === actual.method &&
-        expected.body === actual.body &&
-        expected.headers["Content-Type"] === actual.headers["Content-Type"];
+      var match = true;
 
-      // Some requests don't use the auth header, so only check if it's set
-      if (actual.headers["Authorization"]) {
+      // Check response parameters
+      ["host", "path", "method", "body"].forEach(function(k) {
+        if (expected[k]) {
+          match = match && expected[k] == actual[k];
+        }
+      });
+
+      // Also check for any headers that we're expecting
+      expected.headers = expected.headers || {};
+      Object.keys(expected.headers).forEach(function(k) {
+        // We have a special check for authorization
+        if (k === "Authorization") {
+          return true;
+        }
+        match = match && expected.headers[k] === actual.headers[k];
+      });
+
+      // For Authorization we only check the beginning as JWTs are
+      // dynamically created
+      if (expected.headers["Authorization"]) {
         match =
           match &&
           actual.headers["Authorization"].indexOf(
             expected.headers["Authorization"]
           ) === 0;
       }
+
       return match;
     };
   }

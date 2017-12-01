@@ -35,7 +35,14 @@ describe("Message", function() {
       apiSecret: "mySecret"
     });
 
-    this.httpClientStub = sinon.createStubInstance(HttpClient);
+    this.httpClientStub = new HttpClient(
+      {
+        logger: new NullLogger()
+      },
+      creds
+    );
+
+    sinon.stub(this.httpClientStub, "request");
 
     var options = {
       rest: this.httpClientStub
@@ -46,16 +53,10 @@ describe("Message", function() {
 
   describe("#search", function() {
     it("should call the correct endpoint", function(done) {
-      this.httpClientStub.request.yields(null, { a: "b" });
+      this.httpClientStub.request.yields(null, {});
 
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
-        host: "rest.nexmo.com",
-        path: "/search/message?id=0D00000068264896",
-        method: "GET",
-        body: "",
-        headers: {
-          "Content-Type": "application/json"
-        }
+      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
+        path: "/search/message?id=0D00000068264896"
       });
 
       this.message.search(
