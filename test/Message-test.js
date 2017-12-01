@@ -52,7 +52,7 @@ describe("Message", function() {
   });
 
   describe("#search", function() {
-    it("should call the correct endpoint", function(done) {
+    it("should call the correct endpoint (single)", function(done) {
       this.httpClientStub.request.yields(null, {});
 
       var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
@@ -71,7 +71,26 @@ describe("Message", function() {
       );
     });
 
-    it("returns data on a successful request", function(done) {
+    it("should call the correct endpoint (multiple)", function(done) {
+      this.httpClientStub.request.yields(null, {});
+
+      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
+        path: "/search/messages?ids=1&ids=2"
+      });
+
+      this.message.search(
+        [1, 2],
+        function(err, data) {
+          expect(this.httpClientStub.request).to.have.been.calledWith(
+            sinon.match(expectedRequestArgs)
+          );
+
+          done();
+        }.bind(this)
+      );
+    });
+
+    it("returns data on a successful request (single)", function(done) {
       const mockData = {
         "message-id": "0D00000068264896",
         "account-id": "abc123",
@@ -89,6 +108,35 @@ describe("Message", function() {
 
       this.httpClientStub.request.yields(null, mockData);
       this.message.search("0D00000068264896", function(err, data) {
+        expect(err).to.eql(null);
+        expect(data).to.eql(mockData);
+        done();
+      });
+    });
+
+    it("returns data on a successful request (multiple)", function(done) {
+      const mockData = {
+        count: 1,
+        items: [
+          {
+            "message-id": "0D00000068264896",
+            "account-id": "abc123",
+            network: "23430",
+            from: "TestTest",
+            to: "442079460000",
+            body: "Hello",
+            price: "0.03330000",
+            "date-received": "2017-11-24 15:09:30",
+            "final-status": "DELIVRD",
+            "date-closed": "2017-11-24 15:09:45",
+            latency: 14806,
+            type: "MT"
+          }
+        ]
+      };
+
+      this.httpClientStub.request.yields(null, mockData);
+      this.message.search(["0D00000068264896"], function(err, data) {
         expect(err).to.eql(null);
         expect(data).to.eql(mockData);
         done();

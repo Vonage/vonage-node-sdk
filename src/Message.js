@@ -66,7 +66,12 @@ class Message {
   }
 
   search(id, callback) {
-    this.options.rest.get("/search/message", { id: id }, callback);
+    if (typeof id == "string") {
+      return this.options.rest.get("/search/message", { id: id }, callback);
+    }
+
+    // Otherwise we expect an array
+    return this.options.rest.get("/search/messages", { ids: id }, callback);
   }
 }
 
