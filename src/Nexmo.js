@@ -55,7 +55,22 @@ class Nexmo {
     if (this.options.appendToUserAgent) {
       this.options.userAgent += ` ${this.options.appendToUserAgent}`;
     }
-    this.options.httpClient = new HttpClient(this.options);
+
+    // This is legacy, everything should use rest or api going forward
+    this.options.httpClient = new HttpClient(
+      Object.assign({ host: "rest.nexmo.com" }, this.options),
+      this.credentials
+    );
+
+    // We have two different hosts, so we use two different HttpClients
+    this.options.api = new HttpClient(
+      Object.assign({ host: "api.nexmo.com" }, this.options),
+      this.credentials
+    );
+    this.options.rest = new HttpClient(
+      Object.assign({ host: "rest.nexmo.com" }, this.options),
+      this.credentials
+    );
 
     this.message = new Message(this.credentials, this.options);
     this.voice = new Voice(this.credentials, this.options);

@@ -73,8 +73,6 @@ exports.initialize = function(pkey, psecret, options) {
     api_key: pkey,
     api_secret: psecret
   };
-
-  options.auth = up;
   _options = options;
 };
 

@@ -38,7 +38,7 @@ describe("Message", function() {
     this.httpClientStub = sinon.createStubInstance(HttpClient);
 
     var options = {
-      httpClient: this.httpClientStub
+      rest: this.httpClientStub
     };
 
     this.message = new Message(creds, options);

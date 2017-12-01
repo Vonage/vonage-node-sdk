@@ -1,6 +1,5 @@
 "use strict";
 
-import querystring from "querystring";
 import nexmo from "./index";
 
 class Message {
@@ -67,34 +66,7 @@ class Message {
   }
 
   search(id, callback) {
-    this.options.httpClient.request(
-      this.getRequestConfig("GET", "/search/message", { id: id }),
-      callback
-    );
-  }
-
-  getRequestConfig(verb, path, params) {
-    params["api_key"] = this.options.auth.api_key;
-    params["api_secret"] = this.options.auth.api_secret;
-
-    var bodyParams = "";
-    params = querystring.stringify(params);
-
-    if (verb === "GET") {
-      path += "?" + params;
-    } else {
-      bodyParams = params;
-    }
-
-    return {
-      host: "rest.nexmo.com",
-      path: path,
-      method: verb,
-      body: bodyParams,
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
+    this.options.rest.get("/search/message", { id: id }, callback);
   }
 }
 

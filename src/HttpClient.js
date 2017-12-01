@@ -1,8 +1,11 @@
 var https = require("https");
 var http = require("http");
+var querystring = require("querystring");
 
 class HttpClient {
-  constructor(options) {
+  constructor(options, credentials) {
+    this.credentials = credentials;
+    this.host = options.host || "rest.nexmo.com";
     this.port = options.port || 443;
     this.https = options.https || https;
     this.http = options.http || http;
@@ -32,7 +35,7 @@ class HttpClient {
       // headers['Content-Length'] = 0;
     }
     var options = {
-      host: endpoint.host ? endpoint.host : "rest.nexmo.com",
+      host: endpoint.host ? endpoint.host : this.host,
       port: this.port,
       path: endpoint.path,
       method: endpoint.method,
@@ -162,6 +165,16 @@ class HttpClient {
     if (typeof callback === "function") {
       callback(error, response);
     }
+  }
+
+  get(path, params, callback) {
+    params = params || {};
+    params["api_key"] = this.credentials.apiKey;
+    params["api_secret"] = this.credentials.apiSecret;
+
+    path = path + "?" + querystring.stringify(params);
+
+    this.request({ path: path }, "GET", callback);
   }
 }
 
