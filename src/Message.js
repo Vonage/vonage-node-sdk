@@ -64,6 +64,15 @@ class Message {
   shortcodeMarketing() {
     this._nexmo.shortcodeMarketing.apply(this._nexmo, arguments);
   }
+
+  search(id, callback) {
+    if (typeof id == "string") {
+      return this.options.rest.get("/search/message", { id: id }, callback);
+    }
+
+    // Otherwise we expect an array
+    return this.options.rest.get("/search/messages", { ids: id }, callback);
+  }
 }
 
 export default Message;
