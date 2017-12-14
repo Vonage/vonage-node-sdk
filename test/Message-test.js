@@ -171,4 +171,75 @@ describe("Message", function() {
       });
     });
   });
+
+  describe("#searchRejections", function() {
+    it("should call the correct endpoint (multiple)", function(done) {
+      this.httpClientStub.request.yields(null, {});
+
+      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
+        path: "/search/rejections?to=INVALID&date=2020-01-01"
+      });
+
+      this.message.searchRejections(
+        "INVALID",
+        "2020-01-01",
+        function(err, data) {
+          expect(this.httpClientStub.request).to.have.been.calledWith(
+            sinon.match(expectedRequestArgs)
+          );
+
+          done();
+        }.bind(this)
+      );
+    });
+
+    it("returns data on a successful request", function(done) {
+      const mockData = {
+        count: 1,
+        items: [
+          {
+            "account-id": "API_KEY",
+            from: "447700900000",
+            to: "INVALID",
+            "date-received": "2020-01-01 12:00:00",
+            "error-code": "3",
+            "error-code-label": "to address is not numeric"
+          }
+        ]
+      };
+
+      this.httpClientStub.request.yields(null, mockData);
+      this.message.search("0D00000068264896", function(err, data) {
+        expect(err).to.eql(null);
+        expect(data).to.eql(mockData);
+        done();
+      });
+    });
+
+    it("returns an error when invalid parameters are provided", function(done) {
+      const mockError = {
+        body: { "error-code": "400", "error-code-label": "wrong parameters" },
+        headers: {
+          "content-disposition": 'attachment; filename="api.txt"',
+          "content-type": "application/json;charset=UTF-8",
+          date: "Thu, 14 Dec 2017 11:40:08 GMT",
+          server: "nginx",
+          "strict-transport-security": "max-age=31536000; includeSubdomains",
+          "x-frame-options": "deny",
+          "x-nexmo-trace-id": "38ad97a406aa8cc104cecf21feaf7da3",
+          "x-xss-protection": "1; mode=block;",
+          "content-length": "58",
+          connection: "close"
+        },
+        statusCode: 400
+      };
+
+      this.httpClientStub.request.yields(mockError, null);
+      this.message.searchRejections("123456", null, function(err, data) {
+        expect(err).to.eql(mockError);
+        expect(data).to.eql(null);
+        done();
+      });
+    });
+  });
 });
