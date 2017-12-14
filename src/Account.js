@@ -50,6 +50,14 @@ class Account {
   updateDeliveryReceiptCallback() {
     this._nexmo.changeDrCallbackUrl.apply(this._nexmo, arguments);
   }
+
+  topUp(trx, callback) {
+    return this.options.rest.postUseQueryString(
+      "/account/top-up",
+      { trx },
+      callback
+    );
+  }
 }
 
 export default Account;
