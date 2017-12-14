@@ -240,11 +240,6 @@ function sendRequest(endpoint, method, callback) {
   _options.httpClient.request(endpoint, method, callback);
 }
 
-exports.checkBalance = function(callback) {
-  var balanceEndpoint = getEndpoint("/account/get-balance");
-  sendRequest(balanceEndpoint, callback);
-};
-
 exports.getPricing = function(countryCode, callback) {
   if (!countryCode || countryCode.length !== 2) {
     sendError(callback, new Error(ERROR_MESSAGES.countrycode));

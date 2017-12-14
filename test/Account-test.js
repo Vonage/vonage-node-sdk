@@ -13,7 +13,6 @@ chai.use(sinonChai);
 chai.use(nexmoChai);
 
 var accountAPIs = {
-  checkBalance: "checkBalance",
   changePassword: "updatePassword",
   changeMoCallbackUrl: "updateSMSCallback",
   changeDrCallbackUrl: "updateDeliveryReceiptCallback"
@@ -50,6 +49,27 @@ describe("Account", function() {
     };
 
     this.account = new Account(creds, options);
+  });
+
+  describe("checkBalance", function() {
+    it("should call the correct endpoint", function(done) {
+      this.httpClientStub.request.yields(null, {});
+
+      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
+        path: "/account/get-balance"
+      });
+
+      this.account.checkBalance(
+        "ABC123",
+        function(err, data) {
+          expect(this.httpClientStub.request).to.have.been.calledWith(
+            sinon.match(expectedRequestArgs)
+          );
+
+          done();
+        }.bind(this)
+      );
+    });
   });
 
   describe("topUp", function() {

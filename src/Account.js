@@ -26,8 +26,8 @@ class Account {
   /**
    * TODO: document
    */
-  checkBalance() {
-    this._nexmo.checkBalance.apply(this._nexmo, arguments);
+  checkBalance(callback) {
+    return this.options.rest.get("/account/get-balance", callback);
   }
 
   /**
