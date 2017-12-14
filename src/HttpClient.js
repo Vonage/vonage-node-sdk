@@ -180,6 +180,13 @@ class HttpClient {
   }
 
   get(path, params, callback) {
+    if (!callback) {
+      if (typeof params == "function") {
+        callback = params;
+        params = {};
+      }
+    }
+
     params = params || {};
     params["api_key"] = this.credentials.apiKey;
     params["api_secret"] = this.credentials.apiSecret;
