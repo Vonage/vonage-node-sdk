@@ -73,6 +73,10 @@ class Message {
     // Otherwise we expect an array
     return this.options.rest.get("/search/messages", { ids: id }, callback);
   }
+
+  searchRejections(to, date, callback) {
+    return this.options.rest.get("/search/rejections", { to, date }, callback);
+  }
 }
 
 export default Message;
