@@ -3,13 +3,14 @@ import Credentials from "../lib/Credentials";
 import HttpClient from "../lib/HttpClient";
 import NullLogger from "../lib/ConsoleLogger.js";
 
-import ResourceTestHelper from "./ResourceTestHelper";
 import NexmoStub from "./NexmoStub";
 
 import sinon from "sinon";
 import chai, { expect } from "chai";
 import sinonChai from "sinon-chai";
+import nexmoChai from "./NexmoChai";
 chai.use(sinonChai);
+chai.use(nexmoChai);
 
 var accountAPIs = {
   checkBalance: "checkBalance",
@@ -55,17 +56,12 @@ describe("Account", function() {
     it("should call the correct endpoint", function(done) {
       this.httpClientStub.request.yields(null, {});
 
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/account/top-up?trx=ABC123"
-      });
-
       this.account.topUp(
         "ABC123",
         function(err, data) {
-          expect(this.httpClientStub.request).to.have.been.calledWith(
-            sinon.match(expectedRequestArgs)
+          expect(this.httpClientStub.request).to.match.url(
+            "/account/top-up?trx=ABC123"
           );
-
           done();
         }.bind(this)
       );
