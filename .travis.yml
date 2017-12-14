@@ -13,3 +13,4 @@ deploy:
   on:
     tags: true
     repo: Nexmo/nexmo-node
+  skip_cleanup: true
