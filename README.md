@@ -523,10 +523,10 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
   * [x] Send
   * [ ] Delivery Receipt Webhook
   * [ ] Inbound Message Webhook
-  * [ ] Search
-    * [ ] Message
-    * [ ] Messages
-    * [ ] Rejections
+  * [x] Search
+    * [x] Message
+    * [x] Messages
+    * [x] Rejections
   * [ ] US Short Codes
     * [ ] Two-Factor Authentication
     * [ ] Event Based Alerts
@@ -552,7 +552,7 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
   * [X] Balance
   * [x] Pricing
   * [x] Settings
-  * [ ] Top Up
+  * [x] Top Up
   * [x] Numbers
     * [x] Search
     * [x] Buy
