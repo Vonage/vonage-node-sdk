@@ -12,6 +12,7 @@ import App from "./App";
 import Account from "./Account";
 import CallsResource from "./CallsResource";
 import FilesResource from "./FilesResource";
+import Conversion from "./Conversion";
 import HttpClient from "./HttpClient";
 import NullLogger from "./NullLogger";
 import ConsoleLogger from "./ConsoleLogger";
@@ -81,6 +82,7 @@ class Nexmo {
     this.account = new Account(this.credentials, this.options);
     this.calls = new CallsResource(this.credentials, this.options);
     this.files = new FilesResource(this.credentials, this.options);
+    this.conversion = new Conversion(this.credentials, this.options);
 
     /**
      * @deprecated Please use nexmo.applications

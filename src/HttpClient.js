@@ -151,6 +151,7 @@ class HttpClient {
       this.logger.error(`"${data}"`);
 
       error = {
+        status: status,
         message: "The API response could not be parsed.",
         body: data.join(""),
         parseError: parseError
@@ -167,6 +168,17 @@ class HttpClient {
     }
   }
 
+  _addLimitedAccessMessageToErrors(callback, limitedAccessStatus) {
+    return function(err, data) {
+      if (err && err.status == limitedAccessStatus) {
+        err._INFO_ =
+          "This endpoint may need activating on your account. Please email support@nexmo.com for more information";
+      }
+
+      return callback(err, data);
+    };
+  }
+
   get(path, params, callback) {
     params = params || {};
     params["api_key"] = this.credentials.apiKey;
@@ -175,6 +187,36 @@ class HttpClient {
     path = path + "?" + querystring.stringify(params);
 
     this.request({ path: path }, "GET", callback);
+  }
+
+  post(path, params, callback) {
+    let qs = {
+      api_key: this.credentials.apiKey,
+      api_secret: this.credentials.apiSecret
+    };
+
+    let joinChar = "?";
+    if (path.indexOf(joinChar) !== -1) {
+      joinChar = "&";
+    }
+
+    path = path + joinChar + querystring.stringify(qs);
+
+    this.request(
+      { path: path, body: querystring.stringify(params) },
+      "POST",
+      callback
+    );
+  }
+
+  postUseQueryString(path, params, callback) {
+    params = params || {};
+    params["api_key"] = this.credentials.apiKey;
+    params["api_secret"] = this.credentials.apiSecret;
+
+    path = path + "?" + querystring.stringify(params);
+
+    this.request({ path: path }, "POST", callback);
   }
 }
 
