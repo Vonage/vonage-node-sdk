@@ -1,7 +1,4 @@
 import Account from "../lib/Account";
-import Credentials from "../lib/Credentials";
-import HttpClient from "../lib/HttpClient";
-import NullLogger from "../lib/ConsoleLogger.js";
 
 import NexmoStub from "./NexmoStub";
 
@@ -9,6 +6,7 @@ import sinon from "sinon";
 import chai, { expect } from "chai";
 import sinonChai from "sinon-chai";
 import nexmoChai from "./NexmoChai";
+import utils from "./NexmoUtils";
 chai.use(sinonChai);
 chai.use(nexmoChai);
 
@@ -30,45 +28,23 @@ describe("Account Object", function() {
 
 describe("Account", function() {
   beforeEach(function() {
-    var creds = Credentials.parse({
-      apiKey: "myKey",
-      apiSecret: "mySecret"
-    });
-
-    this.httpClientStub = new HttpClient(
-      {
-        logger: new NullLogger()
-      },
-      creds
-    );
-
+    this.httpClientStub = utils.getHttpClient();
     sinon.stub(this.httpClientStub, "request");
-
-    var options = {
+    this.account = new Account(utils.getCredentials(), {
       rest: this.httpClientStub
-    };
-
-    this.account = new Account(creds, options);
+    });
   });
 
   describe("checkBalance", function() {
     it("should call the correct endpoint", function(done) {
       this.httpClientStub.request.yields(null, {});
 
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/account/get-balance"
+      this.account.checkBalance(() => {
+        expect(this.httpClientStub.request).to.have.match.url(
+          "/account/get-balance"
+        );
+        done();
       });
-
-      this.account.checkBalance(
-        "ABC123",
-        function(err, data) {
-          expect(this.httpClientStub.request).to.have.been.calledWith(
-            sinon.match(expectedRequestArgs)
-          );
-
-          done();
-        }.bind(this)
-      );
     });
   });
 
@@ -76,15 +52,12 @@ describe("Account", function() {
     it("should call the correct endpoint", function(done) {
       this.httpClientStub.request.yields(null, {});
 
-      this.account.topUp(
-        "ABC123",
-        function(err, data) {
-          expect(this.httpClientStub.request).to.match.url(
-            "/account/top-up?trx=ABC123"
-          );
-          done();
-        }.bind(this)
-      );
+      this.account.topUp("ABC123", () => {
+        expect(this.httpClientStub.request).to.have.match.url(
+          "/account/top-up?trx=ABC123"
+        );
+        done();
+      });
     });
 
     it("returns data on a successful request", function(done) {
@@ -95,7 +68,7 @@ describe("Account", function() {
       };
 
       this.httpClientStub.request.yields(null, mockData);
-      this.account.topUp("trx-123", function(err, data) {
+      this.account.topUp("trx-123", (err, data) => {
         expect(err).to.eql(null);
         expect(data).to.eql(mockData);
         done();
@@ -110,7 +83,7 @@ describe("Account", function() {
       };
 
       this.httpClientStub.request.yields(mockData, null);
-      this.account.topUp("trx-123", function(err, data) {
+      this.account.topUp("trx-123", (err, data) => {
         expect(err).to.eql(mockData);
         expect(data).to.eql(null);
         done();

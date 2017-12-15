@@ -5,6 +5,15 @@ module.exports = function(chai, utils) {
   utils.addChainableMethod(chai.Assertion.prototype, "match", function() {});
 
   utils.addMethod(chai.Assertion.prototype, "url", function(url) {
+    if (!this._obj.args) {
+      throw new Error("This assertion should only be used on Sinon spies");
+    }
+    if (!this._obj.args[0]) {
+      throw new Error(
+        "Spy was never called; cannot access arguments to check URL"
+      );
+    }
+
     let calledPath = this._obj.args[0][0].path;
 
     // We strip api_key and api_secret out of `path` so that our tests
