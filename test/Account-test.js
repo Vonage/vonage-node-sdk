@@ -11,70 +11,50 @@ describe("Account", function() {
   });
 
   describe("checkBalance", function() {
-    it("should call the correct endpoint", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      this.account.checkBalance(() => {
-        expect(this.httpClientStub.request).to.have.match.url(
-          "/account/get-balance"
-        );
-        done();
-      });
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("checkBalance")
+        .to.get.url("/account/get-balance");
     });
   });
 
   describe("updatePassword", function() {
-    it("should call the correct endpoint", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      this.account.updatePassword("example_password", () => {
-        expect(this.httpClientStub.request).to.have.match.url(
-          "/account/settings?newSecret=example_password"
-        );
-        done();
-      });
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("updatePassword")
+        .withParams("example_password")
+        .to.post.to.url("/account/settings?newSecret=example_password");
     });
   });
 
   describe("updateSMSCallback", function() {
-    it("should call the correct endpoint", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      this.account.updateSMSCallback("http://example.com/sms_callback", () => {
-        expect(this.httpClientStub.request).to.have.match.url(
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("updateSMSCallback")
+        .withParams("http://example.com/sms_callback")
+        .to.post.to.url(
           "/account/settings?moCallBackUrl=http%3A%2F%2Fexample.com%2Fsms_callback"
         );
-        done();
-      });
     });
   });
 
   describe("updateDeliveryReceiptCallback", function() {
-    it("should call the correct endpoint", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      this.account.updateDeliveryReceiptCallback(
-        "http://example.com/dr_callback",
-        () => {
-          expect(this.httpClientStub.request).to.have.match.url(
-            "/account/settings?drCallBackUrl=http%3A%2F%2Fexample.com%2Fdr_callback"
-          );
-          done();
-        }
-      );
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("updateDeliveryReceiptCallback")
+        .withParams("http://example.com/dr_callback")
+        .to.post.to.url(
+          "/account/settings?drCallBackUrl=http%3A%2F%2Fexample.com%2Fdr_callback"
+        );
     });
   });
 
   describe("topUp", function() {
-    it("should call the correct endpoint", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      this.account.topUp("ABC123", () => {
-        expect(this.httpClientStub.request).to.have.match.url(
-          "/account/top-up?trx=ABC123"
-        );
-        done();
-      });
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("topUp")
+        .withParams("ABC123")
+        .to.post.to.url("/account/top-up?trx=ABC123");
     });
 
     it("returns data on a successful request", function(done) {
