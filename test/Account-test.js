@@ -10,22 +10,6 @@ import utils from "./NexmoUtils";
 chai.use(sinonChai);
 chai.use(nexmoChai);
 
-var accountAPIs = {
-  changePassword: "updatePassword",
-  changeMoCallbackUrl: "updateSMSCallback",
-  changeDrCallbackUrl: "updateDeliveryReceiptCallback"
-};
-
-describe("Account Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(accountAPIs, Account);
-  });
-
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(accountAPIs, Account);
-  });
-});
-
 describe("Account", function() {
   beforeEach(function() {
     this.httpClientStub = utils.getHttpClient();
@@ -45,6 +29,48 @@ describe("Account", function() {
         );
         done();
       });
+    });
+  });
+
+  describe("updatePassword", function() {
+    it("should call the correct endpoint", function(done) {
+      this.httpClientStub.request.yields(null, {});
+
+      this.account.updatePassword("example_password", () => {
+        expect(this.httpClientStub.request).to.have.match.url(
+          "/account/settings?newSecret=example_password"
+        );
+        done();
+      });
+    });
+  });
+
+  describe("updateSMSCallback", function() {
+    it("should call the correct endpoint", function(done) {
+      this.httpClientStub.request.yields(null, {});
+
+      this.account.updateSMSCallback("http://example.com/sms_callback", () => {
+        expect(this.httpClientStub.request).to.have.match.url(
+          "/account/settings?moCallBackUrl=http%3A%2F%2Fexample.com%2Fsms_callback"
+        );
+        done();
+      });
+    });
+  });
+
+  describe("updateDeliveryReceiptCallback", function() {
+    it("should call the correct endpoint", function(done) {
+      this.httpClientStub.request.yields(null, {});
+
+      this.account.updateDeliveryReceiptCallback(
+        "http://example.com/dr_callback",
+        () => {
+          expect(this.httpClientStub.request).to.have.match.url(
+            "/account/settings?drCallBackUrl=http%3A%2F%2Fexample.com%2Fdr_callback"
+          );
+          done();
+        }
+      );
     });
   });
 

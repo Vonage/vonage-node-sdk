@@ -30,25 +30,29 @@ class Account {
     return this.options.rest.get("/account/get-balance", callback);
   }
 
-  /**
-   * TODO: document
-   */
-  updatePassword() {
+  updatePassword(newSecret, callback) {
+    return this.options.rest.postUseQueryString(
+      "/account/settings",
+      { newSecret },
+      callback
+    );
     this._nexmo.changePassword.apply(this._nexmo, arguments);
   }
 
-  /**
-   * TODO: document
-   */
-  updateSMSCallback() {
-    this._nexmo.changeMoCallbackUrl.apply(this._nexmo, arguments);
+  updateSMSCallback(moCallBackUrl, callback) {
+    return this.options.rest.postUseQueryString(
+      "/account/settings",
+      { moCallBackUrl },
+      callback
+    );
   }
 
-  /**
-   * TODO: document
-   */
-  updateDeliveryReceiptCallback() {
-    this._nexmo.changeDrCallbackUrl.apply(this._nexmo, arguments);
+  updateDeliveryReceiptCallback(drCallBackUrl, callback) {
+    return this.options.rest.postUseQueryString(
+      "/account/settings",
+      { drCallBackUrl },
+      callback
+    );
   }
 
   topUp(trx, callback) {
