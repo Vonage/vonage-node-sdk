@@ -1,20 +1,11 @@
 import Account from "../lib/Account";
-
-import NexmoStub from "./NexmoStub";
-
-import sinon from "sinon";
-import chai, { expect } from "chai";
-import sinonChai from "sinon-chai";
-import nexmoChai from "./NexmoChai";
-import utils from "./NexmoUtils";
-chai.use(sinonChai);
-chai.use(nexmoChai);
+import { expect, sinon, TestUtils } from "./NexmoTestUtils";
 
 describe("Account", function() {
   beforeEach(function() {
-    this.httpClientStub = utils.getHttpClient();
+    this.httpClientStub = TestUtils.getHttpClient();
     sinon.stub(this.httpClientStub, "request");
-    this.account = new Account(utils.getCredentials(), {
+    this.account = new Account(TestUtils.getCredentials(), {
       rest: this.httpClientStub
     });
   });
