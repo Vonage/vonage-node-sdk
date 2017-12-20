@@ -560,6 +560,13 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
     * [x] Buy
     * [x] Cancel
     * [x] Update
+* Media
+  * [x] Upload
+  * [x] Download
+  * [x] Search
+  * [x] Get
+  * [x] Update
+  * [x] Delete
 * Voice (Deprecated)
   * [x] Outbound Calls
   * [ ] Inbound Call Webhook

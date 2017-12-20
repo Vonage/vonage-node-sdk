@@ -11,10 +11,17 @@ chai.use(nexmoChai);
 
 const TestUtils = {
   getCredentials: function() {
-    return Credentials.parse({
+    var creds = Credentials.parse({
       apiKey: "myKey",
       apiSecret: "mySecret"
     });
+
+    // Overwrite JWT generation for tests
+    creds.generateJwt = function() {
+      return "ThisIsAJWT";
+    };
+
+    return creds;
   },
   getHttpClient: function() {
     const httpClient = new HttpClient(
