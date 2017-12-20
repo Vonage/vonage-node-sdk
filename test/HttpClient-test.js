@@ -397,6 +397,17 @@ describe("parseResponse", function() {
     );
   });
 
+  it("should not error with invalid JSON if parsing is disabled", function() {
+    var callback = sinon.spy();
+    const response = {
+      statusCode: 200,
+      headers: { "content-type": "application/json" }
+    };
+    const data = "not_json";
+    client.__parseResponse(response, [data], "GET", callback, true);
+    expect(callback).was.calledWith(null, data);
+  });
+
   it("should parse binary data", function() {
     var callback = sinon.spy();
     var data = new Buffer("data");
