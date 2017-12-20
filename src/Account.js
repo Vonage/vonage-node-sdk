@@ -36,7 +36,6 @@ class Account {
       { newSecret },
       callback
     );
-    this._nexmo.changePassword.apply(this._nexmo, arguments);
   }
 
   updateSMSCallback(moCallBackUrl, callback) {
