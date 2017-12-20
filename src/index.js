@@ -240,6 +240,11 @@ function sendRequest(endpoint, method, callback) {
   _options.httpClient.request(endpoint, method, callback);
 }
 
+exports.checkBalance = function(callback) {
+  var balanceEndpoint = getEndpoint("/account/get-balance");
+  sendRequest(balanceEndpoint, callback);
+};
+
 exports.getPricing = function(countryCode, callback) {
   if (!countryCode || countryCode.length !== 2) {
     sendError(callback, new Error(ERROR_MESSAGES.countrycode));
@@ -463,6 +468,24 @@ exports.deleteApplication = function(appId, callback) {
     deleteEndpoint.host = applicationsEndpoint.host;
     sendRequest(deleteEndpoint, "DELETE", callback);
   }
+};
+
+exports.changePassword = function(newSecret, callback) {
+  var settingsEndpoint = getEndpoint("/account/settings");
+  settingsEndpoint.path += "?newSecret=" + encodeURIComponent(newSecret);
+  sendRequest(settingsEndpoint, "POST", callback);
+};
+
+exports.changeMoCallbackUrl = function(newUrl, callback) {
+  var settingsEndpoint = getEndpoint("/account/settings");
+  settingsEndpoint.path += "?moCallBackUrl=" + encodeURIComponent(newUrl);
+  sendRequest(settingsEndpoint, "POST", callback);
+};
+
+exports.changeDrCallbackUrl = function(newUrl, callback) {
+  var settingsEndpoint = getEndpoint("/account/settings");
+  settingsEndpoint.path += "?drCallBackUrl=" + encodeURIComponent(newUrl);
+  sendRequest(settingsEndpoint, "POST", callback);
 };
 
 exports.verifyNumber = function(inputParams, callback) {
