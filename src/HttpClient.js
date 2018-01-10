@@ -14,7 +14,7 @@ class HttpClient {
       Accept: "application/json"
     };
     this.logger = options.logger;
-    this.timeout = options.timeout || 30 * 1000;
+    this.timeout = options.timeout;
 
     if (options.userAgent) {
       this.headers["User-Agent"] = options.userAgent;
@@ -40,9 +40,12 @@ class HttpClient {
       port: this.port,
       path: endpoint.path,
       method: endpoint.method,
-      headers: Object.assign({}, this.headers),
-      timeout: this.timeout
+      headers: Object.assign({}, this.headers)
     };
+
+    if (this.timeout !== undefined) {
+      options.timeout = this.timeout;
+    }
 
     // Allow existing headers to be overridden
     // Allow new headers to be added

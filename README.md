@@ -51,7 +51,7 @@ Options are:
     info: function() {args...},
     warn: function() {args...}
   },
-  // Set a custom timeout for requests to Nexmo in milliseconds. Defaults to 30,000, ie. 30 seconds.
+  // Set a custom timeout for requests to Nexmo in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
   timeout: integer
 }
 ```
