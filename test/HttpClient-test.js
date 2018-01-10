@@ -40,7 +40,8 @@ describe("HttpClient Object", function() {
         host: "api.nexmo.com",
         method: "GET",
         path: "/api",
-        port: 443
+        port: 443,
+        timeout: 30000
       })
       .returns(fakeRequest);
 
@@ -72,7 +73,8 @@ describe("HttpClient Object", function() {
         host: "api.nexmo.com",
         method: "GET",
         path: "/api",
-        port: 80
+        port: 80,
+        timeout: 30000
       })
       .returns(fakeRequest);
 
@@ -104,7 +106,8 @@ describe("HttpClient Object", function() {
         host: "rest.nexmo.com",
         method: "GET",
         path: "/api",
-        port: 80
+        port: 80,
+        timeout: 30000
       })
       .returns(fakeRequest);
 
@@ -136,7 +139,8 @@ describe("HttpClient Object", function() {
         host: "api.nexmo.com",
         method: "GET",
         path: "/some_path",
-        port: 80
+        port: 80,
+        timeout: 30000
       })
       .returns(fakeRequest);
 
@@ -168,13 +172,47 @@ describe("HttpClient Object", function() {
         host: "api.nexmo.com",
         method: "POST",
         path: "/api",
-        port: 443
+        port: 443,
+        timeout: 30000
       })
       .returns(fakeRequest);
 
     var client = new HttpClient({
       https: fakeHttp,
       logger: logger
+    });
+
+    client.request(
+      {
+        host: "api.nexmo.com",
+        path: "/api"
+      },
+      "POST",
+      {
+        some: "data"
+      }
+    );
+  });
+
+  it("should be possible to set the timeout", function() {
+    var mock = sinon.mock(fakeHttp);
+    mock
+      .expects("request")
+      .once()
+      .withArgs({
+        headers: defaultHeaders,
+        host: "api.nexmo.com",
+        method: "POST",
+        path: "/api",
+        port: 443,
+        timeout: 5000
+      })
+      .returns(fakeRequest);
+
+    var client = new HttpClient({
+      https: fakeHttp,
+      logger: logger,
+      timeout: 5000
     });
 
     client.request(
@@ -199,7 +237,8 @@ describe("HttpClient Object", function() {
         host: "api.nexmo.com",
         method: "POST",
         path: "/api",
-        port: 443
+        port: 443,
+        timeout: 30000
       })
       .returns(fakeRequest);
 
@@ -260,7 +299,8 @@ describe("HttpClient Object", function() {
         host: "api.nexmo.com",
         method: "POST",
         path: "/api",
-        port: 443
+        port: 443,
+        timeout: 30000
       })
       .returns(fakeRequest);
 
@@ -423,7 +463,8 @@ describe("parseResponse", function() {
         host: "api.nexmo.com",
         method: "GET",
         path: "/api",
-        port: 80
+        port: 80,
+        timeout: 30000
       })
       .returns(fakeRequest);
 
