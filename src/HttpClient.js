@@ -14,6 +14,7 @@ class HttpClient {
       Accept: "application/json"
     };
     this.logger = options.logger;
+    this.timeout = options.timeout;
 
     if (options.userAgent) {
       this.headers["User-Agent"] = options.userAgent;
@@ -42,6 +43,10 @@ class HttpClient {
       headers: Object.assign({}, this.headers)
     };
 
+    if (this.timeout !== undefined) {
+      options.timeout = this.timeout;
+    }
+
     // Allow existing headers to be overridden
     // Allow new headers to be added
     if (endpoint.headers) {
@@ -56,7 +61,7 @@ class HttpClient {
     if (options.port === 443) {
       request = this.https.request(options);
     } else {
-      request = http.request(options);
+      request = this.http.request(options);
     }
 
     request.end(endpoint.body);
