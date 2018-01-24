@@ -512,6 +512,60 @@ See [examples/README.md](examples/README.md).
 
 Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/nexmo-node-quickstart).
 
+## Creating your own requests
+
+For endpoints that are not yet implemented, you can use the Nexmo HTTP Client to
+make requests with the correct authentication method.
+
+In these examples, we assume that you've created a `nexmo` instance as follows:
+
+```javascript
+var nexmo = new Nexmo({
+    apiKey: 'API_KEY',
+    apiSecret: 'API_SECRET',
+    applicationId: 'APPLICATION_ID',
+    privateKey: './private.key',
+});
+```
+
+* If your API endpoint is on `api.nexmo.com`, use the `nexmo.options.api` object.
+* If your API endpoint is on `rest.nexmo.com`, use the `nexmo.options.rest` object.
+
+Both of these objects expose the following methods:
+
+* `get(path, params, callback, useJwt)` (`params` is the query string to use)
+* `post(path, params, callback, useJwt)` (`params` is the POST body to send)
+* `postUseQueryString(path, params, callback, useJwt)` (`params` is the query string to use)
+* `delete(path, callback, useJwt)`
+
+To make a request to `api.nexmo.com/v1/calls?status=rejected`:
+
+```javascript
+nexmo.options.api.get(
+    "/v1/calls",
+    {"status": "rejected"},
+    function(err, data){
+        console.log(err);
+        console.log(data);
+    },
+    true // Use JWT for authentication
+);
+```
+
+To make a request to `rest.nexmo.com/sms/json?from=Demo&to=447700900000&text=Testing`:
+
+```javascript
+nexmo.options.rest.postUseQueryString(
+    "/sms/json",
+    {"from": "Demo", "to": "447700900000", "text": "Testing"},
+    function(err, data){
+        console.log(err);
+        console.log(data);
+    },
+    false // Don't use JWT, fall back to API key/secret
+);
+```
+
 ## API Coverage
 
 * Voice
