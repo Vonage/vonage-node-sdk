@@ -447,6 +447,52 @@ nexmo.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
 nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
 ```
 
+## Media
+
+### Upload a file
+
+```js
+nexmo.media.upload({"file": "/path/to/file"}, callback);
+```
+
+### Upload from a URL
+
+```js
+nexmo.media.upload({"url": "https://example.com/ncco.json"}, callback);
+```
+
+### Search existing media
+
+```js
+// See https://ea.developer.nexmo.com/api/media#search-media-files
+// for possible search parameters
+nexmo.media.search({ page_size: 1, page_index: 1 }, callback);
+```
+
+### Download media
+
+```js
+nexmo.media.download(id, callback);
+```
+
+### Delete media
+
+```js
+nexmo.media.delete(id, callback);
+```
+
+### Update media
+
+```js
+nexmo.media.update(id, body, callback);
+```
+
+### Get media details
+
+```js
+nexmo.media.get(id, callback);
+```
+
 ## JWT
 
 There are two ways of generating a JWT. You can use the function that exists on the Nexmo definition:
