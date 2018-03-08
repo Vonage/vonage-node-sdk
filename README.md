@@ -529,6 +529,60 @@ nexmo.media.update(id, body, callback);
 nexmo.media.get(id, callback);
 ```
 
+## Channel
+
+### Send a message
+
+```js
+nexmo.channel.send(
+  { type: "<TYPE>", number: "<TO>"},
+  { type: "<TYPE>", number: "<FROM>"},
+  { content: { type: "text", text: "testing" } },
+  callback
+);
+```
+
+## Workflow
+
+### Create a workflow
+
+```js
+nexmo.workflow.create(
+  "failover",
+  [
+    {
+      to: { type: "viber_service_msg", id: "<TO>"},
+      from: { type: "viber_service_msg", id: "<FROM>" },
+      message: {
+        content: {
+          type: "text",
+          text: "<CONTENT>"
+        },
+        viber_service_msg: {
+          ttl: 30
+        }
+      },
+      failover: {
+        expiry_time: 600,
+        condition_status: "delivered"
+      }
+    },
+    {
+      to: { type: "sms", number: "<TO>" },
+      from: { type: "sms", number: "<FROM>" },
+      message: {
+        content: {
+          type: "text",
+          text: "<CONTENT>"
+        }
+      }
+    }
+  ],
+  callback
+);
+```
+
+
 ## JWT
 
 There are two ways of generating a JWT. You can use the function that exists on the Nexmo definition:
@@ -706,6 +760,10 @@ nexmo.options.rest.postUseQueryString(
   * [x] Get
   * [x] Update
   * [x] Delete
+* Channel
+  * [x] Send
+* Workflow
+  * [x] Create
 * Voice (Deprecated)
   * [x] Outbound Calls
   * [ ] Inbound Call Webhook
