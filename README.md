@@ -16,6 +16,9 @@ npm install nexmo
 
 ## Constructor
 
+* `apiKey` and `apiSecret` are required for SMS, Verify, Number Insights, Account management APIs
+* `applicationId` and `privateKey` are required for Voice / Stitch applications
+
 ```js
 var Nexmo = require('nexmo');
 
@@ -461,8 +464,6 @@ Or via a `Nexmo` instance where your supplied `applicationId` and `privateKey` c
 var Nexmo = require('nexmo');
 
 var nexmo = new Nexmo({
-    apiKey: API_KEY,
-    apiSecret: API_SECRET,
     applicationId: APP_ID,
     privateKey: PRIVATE_KEY_PATH,
   });
