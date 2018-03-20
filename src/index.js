@@ -5,16 +5,6 @@ var querystring = require("querystring");
 var ttsEndpoint = { host: "api.nexmo.com", path: "/tts/json" };
 var ttsPromptEndpoint = { host: "api.nexmo.com", path: "/tts-prompt/json" };
 var callEndpoint = { host: "rest.nexmo.com", path: "/call/json" };
-var verifyEndpoint = { host: "api.nexmo.com", path: "/verify/json" };
-var checkVerifyEndpoint = { host: "api.nexmo.com", path: "/verify/check/json" };
-var controlVerifyEndpoint = {
-  host: "api.nexmo.com",
-  path: "/verify/control/json"
-};
-var searchVerifyEndpoint = {
-  host: "api.nexmo.com",
-  path: "/verify/search/json"
-};
 var niEndpoint = { host: "api.nexmo.com", path: "/ni/advanced/async/json" };
 var niBasicEndpoint = { host: "api.nexmo.com", path: "/ni/basic/json" };
 var niStandardEndpoint = { host: "api.nexmo.com", path: "/ni/standard/json" };
@@ -35,12 +25,6 @@ var ERROR_MESSAGES = {
   pinCode: "Invalid pin code for TTS confirm",
   failedText: "Invalid failed text for TTS confirm",
   answerUrl: "Invalid answer URL for call",
-  verifyValidation: "Missing Mandatory fields (number and/or brand)",
-  checkVerifyValidation: "Missing Mandatory fields (request_id and/or code)",
-  controlVerifyValidation:
-    "Missing Mandatory fields (request_id and/or cmd-command)",
-  searchVerifyValidation:
-    "Missing Mandatory fields (request_id or request_ids)",
   numberInsightAdvancedValidation:
     "Missing Mandatory fields (number and/or callback url)",
   numberInsightValidation: "Missing Mandatory field - number",
@@ -215,56 +199,6 @@ exports.changeDrCallbackUrl = function(newUrl, callback) {
   var settingsEndpoint = getEndpoint("/account/settings");
   settingsEndpoint.path += "?drCallBackUrl=" + encodeURIComponent(newUrl);
   sendRequest(settingsEndpoint, "POST", callback);
-};
-
-exports.verifyNumber = function(inputParams, callback) {
-  if (!inputParams.number || !inputParams.brand) {
-    sendError(callback, new Error(ERROR_MESSAGES.verifyValidation));
-  } else {
-    var vEndpoint = clone(verifyEndpoint);
-    vEndpoint.path += "?" + querystring.stringify(inputParams);
-    sendRequest(vEndpoint, callback);
-  }
-};
-
-exports.checkVerifyRequest = function(inputParams, callback) {
-  if (!inputParams.request_id || !inputParams.code) {
-    sendError(callback, new Error(ERROR_MESSAGES.checkVerifyValidation));
-  } else {
-    var vEndpoint = clone(checkVerifyEndpoint);
-    vEndpoint.path += "?" + querystring.stringify(inputParams);
-    sendRequest(vEndpoint, callback);
-  }
-};
-
-exports.controlVerifyRequest = function(inputParams, callback) {
-  if (!inputParams.request_id || !inputParams.cmd) {
-    sendError(callback, new Error(ERROR_MESSAGES.controlVerifyValidation));
-  } else {
-    var vEndpoint = clone(controlVerifyEndpoint);
-    vEndpoint.path += "?" + querystring.stringify(inputParams);
-    sendRequest(vEndpoint, callback);
-  }
-};
-
-exports.searchVerifyRequest = function(requestIds, callback) {
-  var requestIdParam = {};
-  if (!requestIds) {
-    sendError(callback, new Error(ERROR_MESSAGES.searchVerifyValidation));
-  } else {
-    if (Array.isArray(requestIds)) {
-      if (requestIds.length === 1) {
-        requestIdParam.request_id = requestIds;
-      } else {
-        requestIdParam.request_ids = requestIds;
-      }
-    } else {
-      requestIdParam.request_id = requestIds;
-    }
-    var vEndpoint = clone(searchVerifyEndpoint);
-    vEndpoint.path += "?" + querystring.stringify(requestIdParam);
-    sendRequest(vEndpoint, callback);
-  }
 };
 
 exports.numberInsight = function(inputParams, callback) {
@@ -451,10 +385,6 @@ exports.setHost = function(aHost) {
   ttsEndpoint.host = aHost;
   ttsPromptEndpoint.host = aHost;
   callEndpoint.host = aHost;
-  verifyEndpoint.host = aHost;
-  checkVerifyEndpoint.host = aHost;
-  controlVerifyEndpoint.host = aHost;
-  searchVerifyEndpoint.host = aHost;
   niEndpoint.host = aHost;
   niBasicEndpoint.host = aHost;
   niStandardEndpoint.host = aHost;

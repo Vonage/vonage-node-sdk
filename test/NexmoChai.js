@@ -39,6 +39,9 @@ module.exports = function(chai, utils) {
 
     return new Promise(resolve => {
       const callback = (err, data) => {
+        if (err) {
+          throw err;
+        }
         if (!spy.args) {
           throw new Error("This assertion should only be used on Sinon spies");
         }
