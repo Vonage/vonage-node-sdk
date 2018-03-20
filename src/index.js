@@ -5,13 +5,8 @@ var querystring = require("querystring");
 var ttsEndpoint = { host: "api.nexmo.com", path: "/tts/json" };
 var ttsPromptEndpoint = { host: "api.nexmo.com", path: "/tts-prompt/json" };
 var callEndpoint = { host: "rest.nexmo.com", path: "/call/json" };
-var niEndpoint = { host: "api.nexmo.com", path: "/ni/advanced/async/json" };
-var niBasicEndpoint = { host: "api.nexmo.com", path: "/ni/basic/json" };
-var niStandardEndpoint = { host: "api.nexmo.com", path: "/ni/standard/json" };
-var niAdvancedEndpoint = { host: "api.nexmo.com", path: "/ni/advanced/json" };
 var applicationsEndpoint = { host: "api.nexmo.com", path: "/v1/applications" };
 var up = {};
-var numberPattern = new RegExp("^[0-9 +()-]*$");
 
 var _options = null;
 
@@ -25,11 +20,6 @@ var ERROR_MESSAGES = {
   pinCode: "Invalid pin code for TTS confirm",
   failedText: "Invalid failed text for TTS confirm",
   answerUrl: "Invalid answer URL for call",
-  numberInsightAdvancedValidation:
-    "Missing Mandatory fields (number and/or callback url)",
-  numberInsightValidation: "Missing Mandatory field - number",
-  numberInsightPatternFailure:
-    "Number can contain digits and may include any or all of the following: white space, -,+, (, ).",
   optionsNotAnObject:
     "Options parameter should be a dictionary. Check the docs for valid properties for options",
   applicationName: "Invalid argument: name",
@@ -183,72 +173,6 @@ exports.deleteApplication = function(appId, callback) {
   }
 };
 
-exports.numberInsight = function(inputParams, callback) {
-  numberInsightAsync(inputParams, callback);
-};
-
-exports.numberInsightBasic = function(inputParams, callback) {
-  numberInsightCommon(niBasicEndpoint, inputParams, callback);
-};
-
-exports.numberInsightStandard = function(inputParams, callback) {
-  numberInsightCommon(niStandardEndpoint, inputParams, callback);
-};
-
-exports.numberInsightAdvanced = function(inputParams, callback) {
-  numberInsightCommon(niAdvancedEndpoint, inputParams, callback);
-};
-
-exports.numberInsightAdvancedAsync = function(inputParams, callback) {
-  numberInsightAsync(inputParams, callback);
-};
-
-function numberInsightAsync(inputParams, callback) {
-  if (!inputParams.number || !inputParams.callback) {
-    sendError(
-      callback,
-      new Error(ERROR_MESSAGES.numberInsightAdvancedValidation)
-    );
-  } else {
-    var nEndpoint = clone(niEndpoint);
-    nEndpoint.path += "?" + querystring.stringify(inputParams);
-    sendRequest(nEndpoint, callback);
-  }
-}
-
-function numberInsightCommon(endpoint, inputParams, callback) {
-  if (validateNumber(inputParams, callback)) {
-    var inputObj;
-    if (typeof inputParams !== "object") {
-      inputObj = { number: inputParams };
-    } else {
-      inputObj = inputParams;
-    }
-    var nEndpoint = clone(endpoint);
-    nEndpoint.path += "?" + querystring.stringify(inputObj);
-    sendRequest(nEndpoint, callback);
-  }
-}
-function validateNumber(inputParams, callback) {
-  if (typeof inputParams === "object" && !inputParams.number) {
-    sendError(callback, new Error(ERROR_MESSAGES.numberInsightValidation));
-    return false;
-  } else if (
-    typeof inputParams === "object" &&
-    !numberPattern.test(inputParams.number)
-  ) {
-    sendError(callback, new Error(ERROR_MESSAGES.numberInsightPatternFailure));
-    return false;
-  } else if (
-    typeof inputParams !== "object" &&
-    (!inputParams || !numberPattern.test(inputParams))
-  ) {
-    sendError(callback, new Error(ERROR_MESSAGES.numberInsightPatternFailure));
-    return false;
-  }
-  return true;
-}
-
 function sendVoiceMessage(voiceEndpoint, data, callback) {
   if (!data.to) {
     sendError(callback, new Error(ERROR_MESSAGES.to));
@@ -368,7 +292,6 @@ exports.setHost = function(aHost) {
   ttsPromptEndpoint.host = aHost;
   callEndpoint.host = aHost;
   niEndpoint.host = aHost;
-  niBasicEndpoint.host = aHost;
   niStandardEndpoint.host = aHost;
   applicationsEndpoint.host = aHost;
 };

@@ -74,20 +74,62 @@ class NumberInsight {
     // remove 'level' as it's a library-only parameter
     delete options.level;
 
-    if (level === "advanced" || level === "advancedAsync") {
-      if (level === "advanced") {
-        console.warn(
-          'DEPRECATION WARNING: Number Insight Advanced with a level of "advanced" will be synchronous in v2.0+. Consider using the level "advancedAsync" to keep using the async option.'
-        );
-      }
-      this._nexmo.numberInsightAdvancedAsync.apply(this._nexmo, arguments);
-    } else if (level === "advancedSync") {
-      this._nexmo.numberInsightAdvanced.apply(this._nexmo, arguments);
+    if (level === "advanced") {
+      return this.advanced(options, callback);
+    } else if (level === "advancedAync") {
+      return this.advancedAsync(options, callback);
     } else if (level === "standard") {
-      this._nexmo.numberInsightStandard.apply(this._nexmo, arguments);
-    } else {
-      this._nexmo.numberInsightBasic.apply(this._nexmo, arguments);
+      return this.standard(options, callback);
+    } else if (level === "basic") {
+      return this.basic(options, callback);
     }
+
+    throw new Error("Unknown insight type: " + level);
+  }
+
+  _fetchInsights(type, number, callback) {
+    if (typeof number !== "object") {
+      number = { number };
+    }
+
+    if (!number.number) {
+      return callback("Missing Mandatory field - number");
+    }
+
+    let numberPattern = new RegExp("^[0-9 +()-]*$");
+    if (!numberPattern.test(number.number)) {
+      return callback(
+        "Number can contain digits and may include any or all of the following: white space, -,+, (, )."
+      );
+    }
+
+    return this.options.rest.get(`/ni/${type}/json`, number, callback);
+  }
+
+  basic(number, callback) {
+    return this._fetchInsights("basic", number, callback);
+  }
+
+  standard(number, callback) {
+    return this._fetchInsights("standard", number, callback);
+  }
+
+  advanced(number, callback) {
+    return this._fetchInsights("advanced", number, callback);
+  }
+
+  advancedAsync(options, url, callback) {
+    // They've passed two strings instead of an object
+    // for the first parameter, so build the object ourselves
+    if (typeof url === "string") {
+      options = { number: options, callback: url };
+    }
+
+    if (!options.number || !options.callback) {
+      return callback("Missing Mandatory fields (number and/or callback)");
+    }
+
+    return this.options.rest.get(`/ni/advanced/async/json`, options, callback);
   }
 }
 
