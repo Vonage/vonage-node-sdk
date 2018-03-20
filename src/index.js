@@ -2,8 +2,6 @@
 
 var querystring = require("querystring");
 
-var msgpath = { host: "rest.nexmo.com", path: "/sms/json" };
-var shortcodePath = { host: "rest.nexmo.com", path: "/sc/us/${type}/json" };
 var ttsEndpoint = { host: "api.nexmo.com", path: "/tts/json" };
 var ttsPromptEndpoint = { host: "api.nexmo.com", path: "/tts-prompt/json" };
 var callEndpoint = { host: "rest.nexmo.com", path: "/call/json" };
@@ -31,13 +29,7 @@ var _options = null;
 var ERROR_MESSAGES = {
   sender: "Invalid from address",
   to: "Invalid to address",
-  msg: "Invalid Text Message",
-  msgParams: "Invalid shortcode message parameters",
   msisdn: "Invalid MSISDN passed",
-  body: "Invalid Body value in Binary Message",
-  udh: "Invalid udh value in Binary Message",
-  title: "Invalid title in WAP Push message",
-  url: "Invalid url in WAP Push message",
   maxDigits: "Invalid max digits for TTS prompt",
   byeText: "Invalid bye text for TTS prompt",
   pinCode: "Invalid pin code for TTS confirm",
@@ -73,154 +65,6 @@ exports.initialize = function(pkey, psecret, options) {
     api_secret: psecret
   };
   _options = options;
-};
-
-exports.sendBinaryMessage = function(sender, recipient, body, udh, callback) {
-  if (!body) {
-    sendError(callback, new Error(ERROR_MESSAGES.body));
-  } else if (!udh) {
-    sendError(callback, new Error(ERROR_MESSAGES.udh));
-  } else {
-    sendMessage(
-      {
-        from: sender,
-        to: recipient,
-        type: "binary",
-        body: body,
-        udh: udh
-      },
-      callback
-    );
-  }
-};
-
-exports.sendWapPushMessage = function(
-  sender,
-  recipient,
-  title,
-  url,
-  validity,
-  callback
-) {
-  if (!title) {
-    sendError(callback, new Error(ERROR_MESSAGES.title));
-  } else if (!url) {
-    sendError(callback, new Error(ERROR_MESSAGES.url));
-  } else {
-    if (typeof validity === "function") {
-      callback = validity;
-      validity = 86400000;
-    }
-    sendMessage(
-      {
-        from: sender,
-        to: recipient,
-        type: "wappush",
-        title: title,
-        validity: validity,
-        url: url
-      },
-      callback
-    );
-  }
-};
-
-exports.sendTextMessage = function(sender, recipient, message, opts, callback) {
-  if (!message) {
-    sendError(callback, new Error(ERROR_MESSAGES.msg));
-  } else {
-    if (!callback) {
-      callback = opts;
-      opts = {};
-    }
-    opts["from"] = sender;
-    opts["to"] = recipient;
-    opts["text"] = message;
-    sendMessage(opts, callback);
-  }
-};
-
-exports.sendMessage = function(opts, callback) {
-  sendMessage(opts, callback);
-};
-function sendMessage(data, callback) {
-  if (!data.from) {
-    sendError(callback, new Error(ERROR_MESSAGES.sender));
-  } else if (!data.to) {
-    sendError(callback, new Error(ERROR_MESSAGES.to));
-  } else {
-    var path = clone(msgpath);
-    path.path += "?" + querystring.stringify(data);
-    _options.logger.info(
-      "sending message from " +
-        data.from +
-        " to " +
-        data.to +
-        " with message " +
-        data.text
-    );
-    sendRequest(path, "POST", function(err, apiResponse) {
-      if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
-        sendError(
-          callback,
-          new Error(apiResponse.messages[0]["error-text"]),
-          apiResponse
-        );
-      } else {
-        if (callback) callback(err, apiResponse);
-      }
-    });
-  }
-}
-
-function sendViaShortcode(type, recipient, messageParams, opts, callback) {
-  if (!recipient) {
-    sendError(callback, new Error(ERROR_MESSAGES.to));
-  }
-  if (!messageParams || !Object.keys(messageParams)) {
-    sendError(callback, new Error(ERROR_MESSAGES.msgParams));
-  }
-  opts = opts || {};
-  var path = clone(shortcodePath);
-  path.path = path.path.replace("${type}", type);
-  Object.keys(messageParams).forEach(function(key) {
-    opts[key] = messageParams[key];
-  });
-  opts.to = recipient;
-  path.path += "?" + querystring.stringify(opts);
-  _options.logger.info(
-    "sending message from shortcode " +
-      type +
-      " to " +
-      recipient +
-      " with parameters " +
-      JSON.stringify(messageParams)
-  );
-  sendRequest(path, "POST", function(err, apiResponse) {
-    if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
-      sendError(
-        callback,
-        new Error(apiResponse.messages[0]["error-text"]),
-        apiResponse
-      );
-    } else {
-      if (callback) callback(err, apiResponse);
-    }
-  });
-}
-exports.shortcodeAlert = function(recipient, messageParams, opts, callback) {
-  sendViaShortcode("alert", recipient, messageParams, opts, callback);
-};
-exports.shortcode2FA = function(recipient, messageParams, opts, callback) {
-  sendViaShortcode("2fa", recipient, messageParams, opts, callback);
-};
-exports.shortcodeMarketing = function(
-  recipient,
-  messageParams,
-  opts,
-  callback
-) {
-  sendViaShortcode("marketing", recipient, messageParams, opts, callback);
 };
 
 function clone(a) {
@@ -604,8 +448,6 @@ function sendError(callback, err, returnData) {
 }
 
 exports.setHost = function(aHost) {
-  msgpath.host = aHost;
-  shortcodePath.host = aHost;
   ttsEndpoint.host = aHost;
   ttsPromptEndpoint.host = aHost;
   callEndpoint.host = aHost;

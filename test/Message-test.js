@@ -1,245 +1,133 @@
 import Message from "../lib/Message";
-import Credentials from "../lib/Credentials";
-import HttpClient from "../lib/HttpClient";
-import NullLogger from "../lib/ConsoleLogger.js";
-
-import NexmoStub from "./NexmoStub";
-import ResourceTestHelper from "./ResourceTestHelper";
-
-import sinon from "sinon";
-import chai, { expect } from "chai";
-
-var smsAPIs = {
-  sendBinaryMessage: "sendBinaryMessage",
-  sendWapPushMessage: "sendWapPushMessage",
-  sendTextMessage: "sendSms",
-  shortcodeAlert: "shortcodeAlert",
-  shortcode2FA: "shortcode2FA",
-  shortcodeMarketing: "shortcodeMarketing"
-};
-
-describe("Message Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(smsAPIs, Message);
-  });
-
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(smsAPIs, Message);
-  });
-});
+import { expect, sinon, TestUtils } from "./NexmoTestUtils";
 
 describe("Message", function() {
   beforeEach(function() {
-    var creds = Credentials.parse({
-      apiKey: "myKey",
-      apiSecret: "mySecret"
+    this.httpClientStub = TestUtils.getHttpClient();
+    sinon.stub(this.httpClientStub, "request");
+    this.message = new Message(TestUtils.getCredentials(), {
+      rest: this.httpClientStub
+    });
+  });
+
+  describe("#sendSMS", function() {
+    it("should call the correct endpoint (no options)", function() {
+      return expect(this.message)
+        .method("sendSms")
+        .withParams("14155550100", "14155550105", "Hello World")
+        .to.post.url(
+          "/sms/json?from=14155550100&to=14155550105&text=Hello%20World"
+        );
     });
 
-    this.httpClientStub = new HttpClient(
-      {
-        logger: new NullLogger()
-      },
-      creds
-    );
+    it("should call the correct endpoint (with options)", function() {
+      return expect(this.message)
+        .method("sendSms")
+        .withParams("14155550100", "14155550105", "Hello World", {
+          type: "unicode"
+        })
+        .to.post.url(
+          "/sms/json?type=unicode&from=14155550100&to=14155550105&text=Hello%20World"
+        );
+    });
+  });
 
-    sinon.stub(this.httpClientStub, "request");
+  describe("#sendBinaryMessage", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.message)
+        .method("sendBinaryMessage")
+        .withParams(
+          "14155550100",
+          "14155550105",
+          "BinaryMessageHere",
+          "udhHere"
+        )
+        .to.post.url(
+          "/sms/json?from=14155550100&to=14155550105&body=BinaryMessageHere&udh=udhHere&type=binary"
+        );
+    });
+  });
 
-    var options = {
-      rest: this.httpClientStub
-    };
+  describe("#sendWapPushMessage", function() {
+    it("should call the correct endpoint (default validity)", function() {
+      return expect(this.message)
+        .method("sendWapPushMessage")
+        .withParams(
+          "14155550100",
+          "14155550105",
+          "Push Title",
+          "https://example.com"
+        )
+        .to.post.url(
+          "/sms/json?from=14155550100&to=14155550105&title=Push%20Title&validity=86400000&url=https%3A%2F%2Fexample.com&type=wappush"
+        );
+    });
 
-    this.message = new Message(creds, options);
+    it("should call the correct endpoint (explicit validity)", function() {
+      return expect(this.message)
+        .method("sendWapPushMessage")
+        .withParams(
+          "14155550100",
+          "14155550105",
+          "Push Title",
+          "https://example.com",
+          300000
+        )
+        .to.post.url(
+          "/sms/json?from=14155550100&to=14155550105&title=Push%20Title&validity=300000&url=https%3A%2F%2Fexample.com&type=wappush"
+        );
+    });
+  });
+
+  describe("#shortcodeAlert", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.message)
+        .method("shortcodeAlert")
+        .withParams("14155550100", { TODO: "FIXME" }, {})
+        .to.post.url("/sc/us/alert/json?TODO=FIXME&to=14155550100");
+    });
+  });
+
+  describe("#shortcode2FA", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.message)
+        .method("shortcode2FA")
+        .withParams("14155550100", { TODO: "FIXME" }, {})
+        .to.post.url("/sc/us/2fa/json?TODO=FIXME&to=14155550100");
+    });
+  });
+
+  describe("#shortcodeMarketing", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.message)
+        .method("shortcodeMarketing")
+        .withParams("14155550100", { TODO: "FIXME" }, {})
+        .to.post.url("/sc/us/marketing/json?TODO=FIXME&to=14155550100");
+    });
   });
 
   describe("#search", function() {
-    it("should call the correct endpoint (single)", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/search/message?id=0D00000068264896"
-      });
-
-      this.message.search(
-        "0D00000068264896",
-        function(err, data) {
-          expect(this.httpClientStub.request).to.have.been.calledWith(
-            sinon.match(expectedRequestArgs)
-          );
-
-          done();
-        }.bind(this)
-      );
+    it("should call the correct endpoint (single)", function() {
+      return expect(this.message)
+        .method("search")
+        .withParams("0D00000068264896")
+        .to.get.url("/search/message?id=0D00000068264896");
     });
 
-    it("should call the correct endpoint (multiple)", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/search/messages?ids=1&ids=2"
-      });
-
-      this.message.search(
-        [1, 2],
-        function(err, data) {
-          expect(this.httpClientStub.request).to.have.been.calledWith(
-            sinon.match(expectedRequestArgs)
-          );
-
-          done();
-        }.bind(this)
-      );
-    });
-
-    it("returns data on a successful request (single)", function(done) {
-      const mockData = {
-        "message-id": "0D00000068264896",
-        "account-id": "abc123",
-        network: "23430",
-        from: "TestTest",
-        to: "442079460000",
-        body: "Hello",
-        price: "0.03330000",
-        "date-received": "2017-11-24 15:09:30",
-        "final-status": "DELIVRD",
-        "date-closed": "2017-11-24 15:09:45",
-        latency: 14806,
-        type: "MT"
-      };
-
-      this.httpClientStub.request.yields(null, mockData);
-      this.message.search("0D00000068264896", function(err, data) {
-        expect(err).to.eql(null);
-        expect(data).to.eql(mockData);
-        done();
-      });
-    });
-
-    it("returns data on a successful request (multiple)", function(done) {
-      const mockData = {
-        count: 1,
-        items: [
-          {
-            "message-id": "0D00000068264896",
-            "account-id": "abc123",
-            network: "23430",
-            from: "TestTest",
-            to: "442079460000",
-            body: "Hello",
-            price: "0.03330000",
-            "date-received": "2017-11-24 15:09:30",
-            "final-status": "DELIVRD",
-            "date-closed": "2017-11-24 15:09:45",
-            latency: 14806,
-            type: "MT"
-          }
-        ]
-      };
-
-      this.httpClientStub.request.yields(null, mockData);
-      this.message.search(["0D00000068264896"], function(err, data) {
-        expect(err).to.eql(null);
-        expect(data).to.eql(mockData);
-        done();
-      });
-    });
-
-    it("returns an error when the connection fails", function(done) {
-      const mockError = {
-        body: {
-          "error-code": "401",
-          "error-code-label": "authentication failed"
-        },
-        headers: {
-          "content-type": "application/json;charset=UTF-8",
-          date: "Thu, 30 Nov 2017 14:41:50 GMT",
-          server: "nginx",
-          "strict-transport-security": "max-age=31536000; includeSubdomains",
-          "x-frame-options": "deny",
-          "x-nexmo-trace-id": "91f401d459aa5050af280aee53288135",
-          "x-xss-protection": "1; mode=block;",
-          "content-length": "63",
-          connection: "close"
-        },
-        statusCode: 401
-      };
-
-      this.httpClientStub.request.yields(mockError, null);
-      this.message.search("0D00000068264896", function(err, data) {
-        expect(err).to.eql(mockError);
-        expect(data).to.eql(null);
-        done();
-      });
+    it("should call the correct endpoint (multiple)", function() {
+      return expect(this.message)
+        .method("search")
+        .withParams([1, 2])
+        .to.get.url("/search/messages?ids=1&ids=2");
     });
   });
 
   describe("#searchRejections", function() {
-    it("should call the correct endpoint (multiple)", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/search/rejections?to=INVALID&date=2020-01-01"
-      });
-
-      this.message.searchRejections(
-        "INVALID",
-        "2020-01-01",
-        function(err, data) {
-          expect(this.httpClientStub.request).to.have.been.calledWith(
-            sinon.match(expectedRequestArgs)
-          );
-
-          done();
-        }.bind(this)
-      );
-    });
-
-    it("returns data on a successful request", function(done) {
-      const mockData = {
-        count: 1,
-        items: [
-          {
-            "account-id": "API_KEY",
-            from: "447700900000",
-            to: "INVALID",
-            "date-received": "2020-01-01 12:00:00",
-            "error-code": "3",
-            "error-code-label": "to address is not numeric"
-          }
-        ]
-      };
-
-      this.httpClientStub.request.yields(null, mockData);
-      this.message.search("0D00000068264896", function(err, data) {
-        expect(err).to.eql(null);
-        expect(data).to.eql(mockData);
-        done();
-      });
-    });
-
-    it("returns an error when invalid parameters are provided", function(done) {
-      const mockError = {
-        body: { "error-code": "400", "error-code-label": "wrong parameters" },
-        headers: {
-          "content-disposition": 'attachment; filename="api.txt"',
-          "content-type": "application/json;charset=UTF-8",
-          date: "Thu, 14 Dec 2017 11:40:08 GMT",
-          server: "nginx",
-          "strict-transport-security": "max-age=31536000; includeSubdomains",
-          "x-frame-options": "deny",
-          "x-nexmo-trace-id": "38ad97a406aa8cc104cecf21feaf7da3",
-          "x-xss-protection": "1; mode=block;",
-          "content-length": "58",
-          connection: "close"
-        },
-        statusCode: 400
-      };
-
-      this.httpClientStub.request.yields(mockError, null);
-      this.message.searchRejections("123456", null, function(err, data) {
-        expect(err).to.eql(mockError);
-        expect(data).to.eql(null);
-        done();
-      });
+    it("should call the correct endpoint (multiple)", function() {
+      return expect(this.message)
+        .method("searchRejections")
+        .withParams("INVALID", "2020-01-01")
+        .to.get.url("/search/rejections?to=INVALID&date=2020-01-01");
     });
   });
 });
