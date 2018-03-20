@@ -33,7 +33,6 @@ var ERROR_MESSAGES = {
   to: "Invalid to address",
   msg: "Invalid Text Message",
   msgParams: "Invalid shortcode message parameters",
-  countrycode: "Invalid Country Code",
   msisdn: "Invalid MSISDN passed",
   body: "Invalid Body value in Binary Message",
   udh: "Invalid udh value in Binary Message",
@@ -243,120 +242,6 @@ function sendRequest(endpoint, method, callback) {
 exports.checkBalance = function(callback) {
   var balanceEndpoint = getEndpoint("/account/get-balance");
   sendRequest(balanceEndpoint, callback);
-};
-
-exports.getPricing = function(countryCode, callback) {
-  if (!countryCode || countryCode.length !== 2) {
-    sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-  } else {
-    var pricingEndpoint = getEndpoint("/account/get-pricing/outbound");
-    pricingEndpoint.path += "?country=" + countryCode;
-    sendRequest(pricingEndpoint, callback);
-  }
-};
-
-exports.getPhonePricing = function(product, msisdn, callback) {
-  if (!product || (product !== "sms" && product !== "voice")) {
-    sendError(callback, new Error(ERROR_MESSAGES.product));
-  } else if (!msisdn) {
-    sendError(callback, new Error(ERROR_MESSAGES.msisdn));
-  } else {
-    var pricingEndpoint = getEndpoint("/account/get-phone-pricing/outbound");
-    pricingEndpoint.path +=
-      "/" + product + "/" + up.api_key + "/" + up.api_secret + "/" + msisdn;
-    sendRequest(pricingEndpoint, callback);
-  }
-};
-
-exports.getNumbers = function(options, callback) {
-  var numbersEndpoint = getEndpoint("/account/numbers");
-  if (typeof options === "function") {
-    callback = options;
-  } else if (typeof options === "object") {
-    numbersEndpoint.path = numbersEndpoint.path + "?";
-    for (var key in options) {
-      numbersEndpoint.path =
-        numbersEndpoint.path + key + "=" + options[key] + "&";
-    }
-  } else {
-    sendError(callback, new Error(ERROR_MESSAGES.optionsNotAnObject));
-    return;
-  }
-  sendRequest(numbersEndpoint, callback);
-};
-
-exports.searchNumbers = function(countryCode, pattern, callback) {
-  if (!countryCode || countryCode.length !== 2) {
-    sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-  } else {
-    var searchEndpoint = getEndpoint("/number/search");
-    searchEndpoint.path += "?country=" + countryCode;
-    if (typeof pattern === "function") {
-      callback = pattern;
-    } else if (typeof pattern === "object") {
-      searchEndpoint.path = searchEndpoint.path + "&";
-      for (var arg in pattern) {
-        searchEndpoint.path =
-          searchEndpoint.path + arg + "=" + pattern[arg] + "&";
-      }
-    } else {
-      searchEndpoint.path = searchEndpoint.path + "&pattern=" + pattern;
-    }
-    sendRequest(searchEndpoint, callback);
-  }
-};
-
-exports.buyNumber = function(countryCode, msisdn, callback) {
-  if (!countryCode || countryCode.length !== 2) {
-    sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-  } else if (!msisdn) {
-    sendError(callback, new Error(ERROR_MESSAGES.msisdn));
-  } else {
-    var buyEndpoint = getEndpoint("/number/buy");
-    buyEndpoint.path += "?country=" + countryCode + "&msisdn=" + msisdn;
-    sendRequest(buyEndpoint, "POST", callback);
-  }
-};
-
-exports.cancelNumber = function(countryCode, msisdn, callback) {
-  if (!countryCode || countryCode.length !== 2) {
-    sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-  } else if (!msisdn) {
-    sendError(callback, new Error(ERROR_MESSAGES.msisdn));
-  } else {
-    var cancelEndpoint = getEndpoint("/number/cancel");
-    cancelEndpoint.path += "?country=" + countryCode + "&msisdn=" + msisdn;
-    sendRequest(cancelEndpoint, "POST", callback);
-  }
-};
-
-exports.cancelNumber = function(countryCode, msisdn, callback) {
-  if (!countryCode || countryCode.length !== 2) {
-    sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-  } else if (!msisdn) {
-    sendError(callback, new Error(ERROR_MESSAGES.msisdn));
-  } else {
-    var cancelEndpoint = getEndpoint("/number/cancel");
-    cancelEndpoint.path += "?country=" + countryCode + "&msisdn=" + msisdn;
-    sendRequest(cancelEndpoint, "POST", callback);
-  }
-};
-
-exports.updateNumber = function(countryCode, msisdn, params, callback) {
-  if (!countryCode || countryCode.length !== 2) {
-    sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-  } else if (!msisdn) {
-    sendError(callback, new Error(ERROR_MESSAGES.msisdn));
-  } else {
-    var updateEndpoint = getEndpoint("/number/update");
-    updateEndpoint.path += "?country=" + countryCode + "&msisdn=" + msisdn;
-    updateEndpoint.path = updateEndpoint.path + "&";
-    for (var arg in params) {
-      updateEndpoint.path =
-        updateEndpoint.path + arg + "=" + encodeURIComponent(params[arg]) + "&";
-    }
-    sendRequest(updateEndpoint, "POST", callback);
-  }
 };
 
 exports.getApplications = function(options, callback) {
