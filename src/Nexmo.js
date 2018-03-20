@@ -4,7 +4,6 @@ import path from "path";
 import Credentials from "./Credentials";
 import JwtGenerator from "./JwtGenerator";
 import Message from "./Message";
-import Voice from "./Voice";
 import Number from "./Number";
 import Verify from "./Verify";
 import NumberInsight from "./NumberInsight";
@@ -75,7 +74,6 @@ class Nexmo {
     );
 
     this.message = new Message(this.credentials, this.options);
-    this.voice = new Voice(this.credentials, this.options);
     this.number = new Number(this.credentials, this.options);
     this.verify = new Verify(this.credentials, this.options);
     this.numberInsight = new NumberInsight(this.credentials, this.options);

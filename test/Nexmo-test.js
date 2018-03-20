@@ -54,14 +54,6 @@ describe("Nexmo Object instance", function() {
     expect(nexmo.message).to.be.a("object");
   });
 
-  it("should expose a voice object", function() {
-    var nexmo = new Nexmo({
-      apiKey: "test",
-      apiSecret: "test"
-    });
-    expect(nexmo.voice).to.be.a("object");
-  });
-
   it("should expose a number object", function() {
     var nexmo = new Nexmo({
       apiKey: "test",
