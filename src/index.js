@@ -183,24 +183,6 @@ exports.deleteApplication = function(appId, callback) {
   }
 };
 
-exports.changePassword = function(newSecret, callback) {
-  var settingsEndpoint = getEndpoint("/account/settings");
-  settingsEndpoint.path += "?newSecret=" + encodeURIComponent(newSecret);
-  sendRequest(settingsEndpoint, "POST", callback);
-};
-
-exports.changeMoCallbackUrl = function(newUrl, callback) {
-  var settingsEndpoint = getEndpoint("/account/settings");
-  settingsEndpoint.path += "?moCallBackUrl=" + encodeURIComponent(newUrl);
-  sendRequest(settingsEndpoint, "POST", callback);
-};
-
-exports.changeDrCallbackUrl = function(newUrl, callback) {
-  var settingsEndpoint = getEndpoint("/account/settings");
-  settingsEndpoint.path += "?drCallBackUrl=" + encodeURIComponent(newUrl);
-  sendRequest(settingsEndpoint, "POST", callback);
-};
-
 exports.numberInsight = function(inputParams, callback) {
   numberInsightAsync(inputParams, callback);
 };
