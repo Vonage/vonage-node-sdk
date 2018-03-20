@@ -1,7 +1,5 @@
 "use strict";
 
-import nexmo from "./index";
-
 class Message {
   /**
    * @param {Credentials} credentials
@@ -12,15 +10,6 @@ class Message {
   constructor(credentials, options = {}) {
     this.creds = credentials;
     this.options = options;
-
-    // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
-
-    this._nexmo.initialize(
-      this.creds.apiKey,
-      this.creds.apiSecret,
-      this.options
-    );
   }
 
   _sendMessage(data, callback) {

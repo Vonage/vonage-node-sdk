@@ -126,25 +126,6 @@ describe("Nexmo Object instance", function() {
     expect(nexmo.files).to.be.a("object");
   });
 
-  it("should allow options to be passed", function() {
-    var initializedSpy = sinon.spy();
-    var options = {
-      nexmoOverride: {
-        initialize: initializedSpy
-      },
-      appendToUserAgent: "EXT",
-      debug: true
-    };
-    new Nexmo(
-      {
-        apiKey: "test",
-        apiSecret: "test"
-      },
-      options
-    );
-    expect(initializedSpy.calledWith("test", "test", options)).to.be.true;
-  });
-
   it("should have debug turned off by default", function() {
     var nexmo = new Nexmo({
       apiKey: "test",

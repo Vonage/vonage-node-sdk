@@ -1,7 +1,5 @@
 "use strict";
 
-import nexmo from "./index";
-
 var ERROR_MESSAGES = {
   applicationName: "Invalid argument: name",
   applicationType: "Invalid argument: type",
@@ -22,15 +20,6 @@ class App {
   constructor(credentials, options = {}) {
     this.creds = credentials;
     this.options = options;
-
-    // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
-
-    this._nexmo.initialize(
-      this.creds.apiKey,
-      this.creds.apiSecret,
-      this.options
-    );
   }
 
   static get PATH() {
