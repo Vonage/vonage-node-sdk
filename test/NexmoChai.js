@@ -68,7 +68,7 @@ module.exports = function(chai, utils) {
           const verb = new chai.Assertion(calledVerb.toUpperCase());
           verb.assert(
             verb._obj === this._httpMethod,
-            "expected HTTP verb #{this} to match '" + this._httpMethod + "'",
+            "found HTTP verb #{this}, expected '" + this._httpMethod + "'",
             "expected HTTP verb #{this} to not match '" + this._httpMethod + "'"
           );
         }

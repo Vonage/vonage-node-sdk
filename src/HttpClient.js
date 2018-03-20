@@ -308,6 +308,18 @@ class HttpClient {
 
     this.request({ path: path }, "POST", callback);
   }
+
+  putUseQueryString(path, params, callback, useJwt) {
+    params = params || {};
+    if (!useJwt) {
+      params["api_key"] = this.credentials.apiKey;
+      params["api_secret"] = this.credentials.apiSecret;
+    }
+
+    path = path + "?" + querystring.stringify(params);
+
+    this.request({ path: path }, "PUT", callback);
+  }
 }
 
 export default HttpClient;

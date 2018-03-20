@@ -2,6 +2,16 @@
 
 import nexmo from "./index";
 
+var ERROR_MESSAGES = {
+  applicationName: "Invalid argument: name",
+  applicationType: "Invalid argument: type",
+  applicationAnswerUrl: "Invalid argument: answerUrl",
+  applicationEventUrl: "Invalid argument: eventUrl",
+  applicationId: "Invalid argument: appId",
+  optionsNotAnObject:
+    "Options parameter should be a dictionary. Check the docs for valid properties for options"
+};
+
 class App {
   /**
    * @param {Credentials} credentials
@@ -23,36 +33,102 @@ class App {
     );
   }
 
-  /**
-   * TODO: document
-   */
-  create() {
-    this._nexmo.createApplication.apply(this._nexmo, arguments);
+  static get PATH() {
+    return "/v1/applications";
   }
-
   /**
    * TODO: document
    */
-  get(appId) {
-    if (typeof appId !== "object") {
-      this._nexmo.getApplication.apply(this._nexmo, arguments);
-    } else {
-      this._nexmo.getApplications.apply(this._nexmo, arguments);
+  create(name, type, answerUrl, eventUrl, options, callback) {
+    if (!name || name.length < 1) {
+      return callback(new Error(ERROR_MESSAGES.applicationName));
     }
+    if (!type) {
+      return callback(new Error(ERROR_MESSAGES.applicationType));
+    }
+    if (!answerUrl) {
+      return callback(new Error(ERROR_MESSAGES.applicationAnswerUrl));
+    }
+    if (!eventUrl) {
+      return callback(new Error(ERROR_MESSAGES.applicationEventUrl));
+    }
+
+    if (typeof options === "function") {
+      callback = options;
+      options = {};
+    }
+
+    return this.options.api.postUseQueryString(
+      App.PATH,
+      { ...options, name, type, answer_url: answerUrl, event_url: eventUrl },
+      callback
+    );
   }
 
   /**
    * TODO: document
    */
-  update() {
-    this._nexmo.updateApplication.apply(this._nexmo, arguments);
+  get(appId, callback) {
+    if (!appId || appId.length < 36) {
+      return callback(new Error(ERROR_MESSAGES.applicationId));
+    }
+
+    return this.options.api.get(App.PATH + "/" + appId, {}, callback);
   }
 
   /**
    * TODO: document
    */
-  delete() {
-    this._nexmo.deleteApplication.apply(this._nexmo, arguments);
+  search(options, callback) {
+    if (typeof options === "function") {
+      callback = options;
+      options = {};
+    }
+
+    if (typeof options !== "object") {
+      return callback(new Error(ERROR_MESSAGES.optionsNotAnObject));
+    }
+
+    return this.options.api.get(App.PATH, options, callback);
+  }
+  /**
+   * TODO: document
+   */
+  update(name, type, answerUrl, eventUrl, options, callback) {
+    if (!name || name.length < 1) {
+      return callback(new Error(ERROR_MESSAGES.applicationName));
+    }
+    if (!type) {
+      return callback(new Error(ERROR_MESSAGES.applicationType));
+    }
+    if (!answerUrl) {
+      return callback(new Error(ERROR_MESSAGES.applicationAnswerUrl));
+    }
+    if (!eventUrl) {
+      return callback(new Error(ERROR_MESSAGES.applicationEventUrl));
+    }
+
+    if (typeof options === "function") {
+      callback = options;
+      options = {};
+    }
+
+    return this.options.api.putUseQueryString(
+      App.PATH,
+      { ...options, name, type, answer_url: answerUrl, event_url: eventUrl },
+      callback
+    );
+  }
+
+  /**
+   * TODO: document
+   */
+  delete(appId, callback) {
+    if (!appId || appId.length < 36) {
+      return callback(new Error(ERROR_MESSAGES.applicationId));
+    }
+
+    return this.options.api.delete(App.PATH + "/" + appId, callback);
   }
 }
 

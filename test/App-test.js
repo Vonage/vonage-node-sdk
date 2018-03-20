@@ -1,56 +1,73 @@
-import sinon from "sinon";
-
-import nexmo from "../lib/index";
 import App from "../lib/App";
+import { expect, sinon, TestUtils } from "./NexmoTestUtils";
 
-import NexmoStub from "./NexmoStub";
-
-var appAPIMapping = {
-  getApplications: "get|{}",
-  createApplication: "create",
-  getApplication: "get|someAppId",
-  updateApplication: "update",
-  deleteApplication: "delete"
-};
-
-describe("App Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(appAPIMapping, App);
+describe("App", function() {
+  beforeEach(function() {
+    this.httpClientStub = TestUtils.getHttpClient();
+    sinon.stub(this.httpClientStub, "request");
+    this.app = new App(TestUtils.getCredentials(), {
+      api: this.httpClientStub
+    });
   });
 
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(appAPIMapping, App);
+  describe("#get", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.app)
+        .method("get")
+        .withParams("db860df6c9bc9dadb7c592c0faac14ba192a")
+        .to.get.url("/v1/applications/db860df6c9bc9dadb7c592c0faac14ba192a");
+    });
   });
 
-  it("should call nexmo.getApplications if 1st param is object", function() {
-    var mock = sinon.mock(nexmo);
-    mock.expects("getApplications").once();
-
-    var app = new App(
-      {
-        apiKey: "test",
-        apiSecret: "test"
-      },
-      {
-        nexmoOverride: nexmo
-      }
-    );
-    app.get({});
+  describe("#delete", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.app)
+        .method("delete")
+        .withParams("db860df6c9bc9dadb7c592c0faac14ba192a")
+        .to.delete.url("/v1/applications/db860df6c9bc9dadb7c592c0faac14ba192a");
+    });
   });
 
-  it("should call nexmo.getApplication if 1st param is an app ID", function() {
-    var mock = sinon.mock(nexmo);
-    mock.expects("getApplication").once();
+  describe("#search", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.app)
+        .method("search")
+        .withParams({ type: "voice" })
+        .to.get.url("/v1/applications?type=voice");
+    });
+  });
 
-    var app = new App(
-      {
-        apiKey: "test",
-        apiSecret: "test"
-      },
-      {
-        nexmoOverride: nexmo
-      }
-    );
-    app.get("some-app-id");
+  describe("#create", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.app)
+        .method("create")
+        .withParams(
+          "My App",
+          "voice",
+          "https://example.com/answer",
+          "https://example.com/event",
+          {}
+        )
+        .to.post.url(
+          "/v1/applications?name=My%20App&type=voice&answer_url=https%3A%2F%2Fexample.com%2Fanswer&event_url=https%3A%2F%2Fexample.com%2Fevent"
+        );
+    });
+  });
+
+  describe("#update", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.app)
+        .method("update")
+        .withParams(
+          "Updated App",
+          "voice",
+          "https://example.com/answer",
+          "https://example.com/event",
+          {}
+        )
+        .to.put.url(
+          "/v1/applications?name=Updated%20App&type=voice&answer_url=https%3A%2F%2Fexample.com%2Fanswer&event_url=https%3A%2F%2Fexample.com%2Fevent"
+        );
+    });
   });
 });
