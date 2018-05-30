@@ -33,6 +33,17 @@ module.exports = function(chai, utils) {
   utils.addChainableMethod(chai.Assertion.prototype, "withParams", function() {
     this._params = Array.prototype.slice.call(arguments);
   });
+  utils.addChainableMethod(
+    chai.Assertion.prototype,
+    "withJsonBody",
+    function() {
+      this._expectedHeaders = this._expectedHeaders || {};
+      this._expectedHeaders["Content-Type"] = "application/json";
+      this._expectedJsonBody = JSON.stringify(
+        Array.prototype.slice.call(arguments)[0]
+      );
+    }
+  );
 
   utils.addMethod(chai.Assertion.prototype, "url", function(url) {
     let spy;
@@ -110,6 +121,47 @@ module.exports = function(chai, utils) {
           "expected url #{this} to match '" + url + "'",
           "expected url #{this} to not match '" + url + "'"
         );
+
+        // Next up, let's check that the path we called is what we expected
+        if (this._expectedJsonBody) {
+          let requestBody = args[0].body;
+          const body = new chai.Assertion(requestBody);
+          body.assert(
+            body._obj === this._expectedJsonBody,
+            "expected body #{this} to match '" + this._expectedJsonBody + "'",
+            "expected body #{this} to not match '" +
+              this._expectedJsonBody +
+              "'"
+          );
+        }
+
+        if (
+          this._expectedHeaders &&
+          Object.keys(this._expectedHeaders).length
+        ) {
+          let requestHeaders = args[0].headers;
+          for (let headerName in requestHeaders) {
+            let header = new chai.Assertion(requestHeaders[headerName]);
+            header.assert(
+              header._obj === requestHeaders[headerName],
+              "expected header " +
+                headerName +
+                " (" +
+                requestHeaders[headerName] +
+                ") to match '" +
+                this._expectedHeaders[headerName] +
+                "'",
+              "expected header " +
+                headerName +
+                " (" +
+                requestHeaders[headerName] +
+                ") to not match '" +
+                this._expectedHeaders[headerName] +
+                "'"
+            );
+          }
+        }
+
         return resolve(data);
       }; // End of callback
 

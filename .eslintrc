@@ -4,7 +4,8 @@
         "impliedStrict": true,
         "sourceType": "module",
         "ecmaFeatures": {
-            "impliedStrict": true
+            "impliedStrict": true,
+            "experimentalObjectRestSpread": true
         }
     },
     "plugins": [

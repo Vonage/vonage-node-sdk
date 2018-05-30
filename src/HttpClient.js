@@ -297,6 +297,31 @@ class HttpClient {
     );
   }
 
+  postJson(path, params, callback, useJwt) {
+    let qs = {};
+    if (!useJwt) {
+      qs["api_key"] = this.credentials.apiKey;
+      qs["api_secret"] = this.credentials.apiSecret;
+    }
+
+    let joinChar = "?";
+    if (path.indexOf(joinChar) !== -1) {
+      joinChar = "&";
+    }
+
+    path = path + joinChar + querystring.stringify(qs);
+
+    this.request(
+      {
+        path: path,
+        body: JSON.stringify(params),
+        headers: { "Content-Type": "application/json" }
+      },
+      "POST",
+      callback
+    );
+  }
+
   postUseQueryString(path, params, callback, useJwt) {
     params = params || {};
     if (!useJwt) {
