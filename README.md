@@ -6,7 +6,7 @@ For full API documentation refer to [docs.nexmo.com](https://docs.nexmo.com/).
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [JWT (JSON Web Token)](#jwt)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [JWT (JSON Web Token)](#jwt)
 
 ## Installation
 
@@ -447,6 +447,14 @@ nexmo.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
 nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
 ```
 
+## Redact
+
+### Redact a specific ID
+
+```js
+nexmo.redact.transaction(id, type, callback);
+```
+
 ## Media
 
 ### Upload a file
@@ -674,6 +682,8 @@ nexmo.options.rest.postUseQueryString(
   * [ ] Inbound Call Webhook
   * [x] Text-To-Speech Call
   * [x] Text-To-Speech Prompt
+* Redact
+  * [x] Transaction
 
 
 ## License
