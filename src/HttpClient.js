@@ -191,7 +191,7 @@ class HttpClient {
     };
   }
 
-  get(path, params, callback, useJwt = false) {
+  get(path, params, callback, useJwt = false, useBasicAuth = false) {
     if (!callback) {
       if (typeof params == "function") {
         callback = params;
@@ -200,7 +200,7 @@ class HttpClient {
     }
 
     params = params || {};
-    if (!useJwt) {
+    if (!useJwt && !useBasicAuth) {
       params["api_key"] = this.credentials.apiKey;
       params["api_secret"] = this.credentials.apiSecret;
     }
@@ -211,20 +211,28 @@ class HttpClient {
     if (useJwt) {
       headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
     }
+      if (useBasicAuth) {
+          headers["Authorization"] = `Basic ${Buffer.from(this.credentials.apiKey+":"+this.credentials.apiSecret).toString('base64')}`
+      }
 
     this.request({ path: path, headers }, "GET", callback);
   }
 
-  delete(path, callback, useJwt) {
+  delete(path, callback, useJwt, useBasicAuth) {
     let params = {};
-    if (!useJwt) {
+    if (!useJwt && !useBasicAuth) {
       params["api_key"] = this.credentials.apiKey;
       params["api_secret"] = this.credentials.apiSecret;
     }
 
+      let headers = {};
+
+      if (useBasicAuth) {
+          headers["Authorization"] = `Basic ${Buffer.from(this.credentials.apiKey+":"+this.credentials.apiSecret).toString('base64')}`
+      }
     path = path + "?" + querystring.stringify(params);
 
-    this.request({ path: path }, "DELETE", callback);
+    this.request({ path: path, headers }, "DELETE", callback);
   }
 
   postFile(path, options, callback, useJwt) {
@@ -297,9 +305,9 @@ class HttpClient {
     );
   }
 
-  postJson(path, params, callback, useJwt) {
+  postJson(path, params, callback, useJwt, useBasicAuth) {
     let qs = {};
-    if (!useJwt) {
+    if (!useJwt && !useBasicAuth) {
       qs["api_key"] = this.credentials.apiKey;
       qs["api_secret"] = this.credentials.apiSecret;
     }
@@ -311,11 +319,16 @@ class HttpClient {
 
     path = path + joinChar + querystring.stringify(qs);
 
+      let headers = { "Content-Type": "application/json" };
+      if (useBasicAuth) {
+          headers["Authorization"] = `Basic ${Buffer.from(this.credentials.apiKey+":"+this.credentials.apiSecret).toString('base64')}`
+      }
+
     this.request(
       {
         path: path,
         body: JSON.stringify(params),
-        headers: { "Content-Type": "application/json" }
+        headers
       },
       "POST",
       callback
