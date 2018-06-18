@@ -1,11 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-<<<<<<< HEAD
-  "version": "2.3.1",
-=======
-  "version": "2.3.0-beta-1",
->>>>>>> beta-stitch
+  "version": "2.3.1-beta-1",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",

@@ -17,6 +17,8 @@ import FilesResource from "./FilesResource";
 import Conversion from "./Conversion";
 import Media from "./Media";
 import Redact from "./Redact";
+import Channel from "./Channel";
+import Workflow from "./Workflow";
 import HttpClient from "./HttpClient";
 import NullLogger from "./NullLogger";
 import ConsoleLogger from "./ConsoleLogger";
@@ -91,6 +93,8 @@ class Nexmo {
     this.conversion = new Conversion(this.credentials, this.options);
     this.media = new Media(this.credentials, this.options);
     this.redact = new Redact(this.credentials, this.options);
+    this.channel = new Channel(this.credentials, this.options);
+    this.workflow = new Workflow(this.credentials, this.options);
 
     /**
      * @deprecated Please use nexmo.applications

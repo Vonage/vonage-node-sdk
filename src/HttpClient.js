@@ -278,7 +278,7 @@ class HttpClient {
     );
   }
 
-  post(path, params, callback, useJwt) {
+  post(path, params, callback, useJwt, headers) {
     let qs = {};
     if (!useJwt) {
       qs["api_key"] = this.credentials.apiKey;
@@ -292,11 +292,19 @@ class HttpClient {
 
     path = path + joinChar + querystring.stringify(qs);
 
-    this.request(
-      { path: path, body: querystring.stringify(params) },
-      "POST",
-      callback
-    );
+    headers = headers || {};
+    if (useJwt) {
+      headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
+    }
+
+    let encodedParams;
+    if (headers["Content-Type"] == "application/json") {
+      encodedParams = JSON.stringify(params);
+    } else {
+      encodedParams = querystring.stringify(params);
+    }
+
+    this.request({ path, body: encodedParams, headers }, "POST", callback);
   }
 
   postJson(path, params, callback, useJwt) {
