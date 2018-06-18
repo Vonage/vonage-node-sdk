@@ -342,7 +342,7 @@ For more information see https://docs.nexmo.com/tools/application-api/api-refere
 
 ## Conversations
 
-For an overview of conversations see https://ea.developer.nexmo.com/conversation/overview
+For an overview of conversations see https://developer.nexmo.com/stitch/overview
 
 ### Create a Conversation
 
@@ -350,7 +350,7 @@ For an overview of conversations see https://ea.developer.nexmo.com/conversation
 nexmo.conversations.create(params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://ea.developer.nexmo.com/api/conversation#create-a-conversation)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#createConversation)
 
 ### Get a single Conversation
 
@@ -358,15 +358,15 @@ params is a dictionary of parameters per [documentation](https://ea.developer.ne
 nexmo.conversations.get(conversationId, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation#retrieve-a-conversation
-<!-- TODO: uncomment when the API is fixed
+For more information see https://developer.nexmo.com/api/stitch#retrieveConversation
+
 ### Get Conversations by filter
 
 ```js
 nexmo.conversations.get(options, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation
+For more information see https://developer.nexmo.com/api/stitch
 
 ### Update a Conversation
 
@@ -374,7 +374,7 @@ For more information see https://ea.developer.nexmo.com/api/conversation
 nexmo.conversations.update(conversationId, params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://ea.developer.nexmo.com/api/conversation#create-a-conversation)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#replaceConversation)
 
 ### Delete a Conversation
 
@@ -382,15 +382,15 @@ params is a dictionary of parameters per [documentation](https://ea.developer.ne
 nexmo.conversations.delete(conversationId, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation
--->
+For more information see https://developer.nexmo.com/api/stitch#deleteConversation
+
 ### Add a Member to a Conversation
 
 ```js
 nexmo.conversations.members.add(conversationId, params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://ea.developer.nexmo.com/api/conversation#add-a-user-to-a-conversation)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch)
 
 ### Get a single Member
 
@@ -398,7 +398,7 @@ params is a dictionary of parameters per [documentation](https://ea.developer.ne
 nexmo.conversations.members.get(conversationId, memberId, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation#retrieve-members-of-a-conversation
+For more information see https://developer.nexmo.com/api/stitch#getUser
 
 ### Get Members by filter
 
@@ -406,7 +406,7 @@ For more information see https://ea.developer.nexmo.com/api/conversation#retriev
 nexmo.conversations.members.get(conversationId, params, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation
+For more information see https://developer.nexmo.com/api/stitch
 
 ## Users
 
@@ -416,7 +416,7 @@ For more information see https://ea.developer.nexmo.com/api/conversation
 nexmo.users.create(params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://ea.developer.nexmo.com/api/conversation#create-a-user)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#createUse)
 
 ### Get a single User
 
@@ -424,7 +424,7 @@ params is a dictionary of parameters per [documentation](https://ea.developer.ne
 nexmo.users.get(userId, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation#retrive-a-user
+For more information see https://developer.nexmo.com/api/stitch#getUser
 
 ### Get Users by filter
 
@@ -432,7 +432,7 @@ For more information see https://ea.developer.nexmo.com/api/conversation#retrive
 nexmo.users.get(options, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation#retrieve-all-users
+For more information see https://developer.nexmo.com/api/stitch#getUsers
 
 ### Get all Conversations for a Users
 
@@ -440,8 +440,8 @@ For more information see https://ea.developer.nexmo.com/api/conversation#retriev
 nexmo.users.getConversations(userId, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation#retrieve-all-users
-<!-- TODO: uncomment when the API is fixed
+For more information see https://developer.nexmo.com/api/stitch#getuserConversations
+
 ### Update a User
 
 ```js
@@ -456,8 +456,8 @@ params is a dictionary of parameters per [documentation](https://ea.developer.ne
 nexmo.users.delete(userId, callback);
 ```
 
-For more information see https://ea.developer.nexmo.com/api/conversation
--->
+For more information see https://developer.nexmo.com/api/stitch#deleteUser
+
 ## Management
 
 ### Check Account Balance
