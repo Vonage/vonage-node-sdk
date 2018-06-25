@@ -385,8 +385,7 @@ Example:
 nexmo.number.get({pattern:714,index:1,size:50,search_pattern:2}, callback);
 ```
 
-### Search for 
-'s available to purchase
+### Search for MSISDN's available to purchase
 
 ```js
 nexmo.number.search(countryCode,options,callback);
