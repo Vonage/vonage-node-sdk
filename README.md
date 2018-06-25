@@ -359,11 +359,11 @@ nexmo.number.getPricing(countryCode, callback);
 ### Get Pricing for sending message or making a call to a number.
 
 ```js
-nexmo.number.getPhonePricing(product, countryCode, callback);
+nexmo.number.getPhonePricing(product, msisdn, callback);
 ```
 
 * `product` - either `voice` or `sms`
-* `countryCode` - 2 letter ISO Country Code
+* `msisdn` - Mobile Station International Subscriber Directory Number (MSISDN) is a number used to identify a mobile phone number internationally. i.e. 447700900000
 
 ### Get all numbers associated to the account.
 
@@ -385,7 +385,8 @@ Example:
 nexmo.number.get({pattern:714,index:1,size:50,search_pattern:2}, callback);
 ```
 
-### Search for MSISDN's available to purchase
+### Search for 
+'s available to purchase
 
 ```js
 nexmo.number.search(countryCode,options,callback);
