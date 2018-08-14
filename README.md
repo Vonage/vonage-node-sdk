@@ -698,7 +698,7 @@ var nexmo = new Nexmo({
 var jwt = nexmo.generateJwt();
 ```
 
-For more information on JWT payloads, please visit the [JWT and ACL overview](https://developer.nexmo.com/stitch/concepts/jwt-acl) guide.
+For more information on JWT payloads when authenticating with the Stitch API, please visit the [JWT and ACL overview](https://developer.nexmo.com/stitch/concepts/jwt-acl) guide.
 
 ## Voice (Deprecated)
 
