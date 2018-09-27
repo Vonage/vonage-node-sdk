@@ -351,25 +351,25 @@ nexmo.account.checkBalance(callback);
 ### List Account Secrets
 
 ```js
-nexmo.account.listSecrets(api_key, callback);
+nexmo.account.listSecrets(apiKey, callback);
 ```
 
 ### Get Account Secret
 
 ```js
-nexmo.account.getSecret(api_key, secretId, callback);
+nexmo.account.getSecret(apiKey, secretId, callback);
 ```
 
 ### Create Account Secret
 
 ```js
-nexmo.account.createSecret(api_key, secret, callback);
+nexmo.account.createSecret(apiKey, secret, callback);
 ```
 
 ### Delete Account Secret
 
 ```js
-nexmo.account.deleteSecret(api_key, secretId, callback);
+nexmo.account.deleteSecret(apiKey, secretId, callback);
 ```
 
 ### Get Pricing for sending message to a country.
