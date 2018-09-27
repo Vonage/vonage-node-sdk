@@ -85,7 +85,7 @@ class Account {
   createSecret(account, secret, callback) {
     return this.options.api.postJson(
       "/accounts/" + account + "/secrets/",
-      { secret },
+      { secret: secret },
       callback,
       false,
       true
