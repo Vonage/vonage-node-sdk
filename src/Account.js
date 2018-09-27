@@ -61,6 +61,45 @@ class Account {
       callback
     );
   }
+
+  listSecrets(apiKey, callback) {
+    return this.options.api.get(
+      "/accounts/" + apiKey + "/secrets",
+      {},
+      callback,
+      false,
+      true
+    );
+  }
+
+  getSecret(apiKey, id, callback) {
+    return this.options.api.get(
+      "/accounts/" + apiKey + "/secrets/" + id,
+      {},
+      callback,
+      false,
+      true
+    );
+  }
+
+  createSecret(apiKey, secret, callback) {
+    return this.options.api.postJson(
+      "/accounts/" + apiKey + "/secrets/",
+      { secret: secret },
+      callback,
+      false,
+      true
+    );
+  }
+
+  deleteSecret(apiKey, id, callback) {
+    return this.options.api.delete(
+      "/accounts/" + apiKey + "/secrets/" + id,
+      callback,
+      false,
+      true
+    );
+  }
 }
 
 export default Account;

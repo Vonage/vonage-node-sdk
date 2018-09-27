@@ -348,6 +348,30 @@ For more information see https://docs.nexmo.com/tools/application-api/api-refere
 nexmo.account.checkBalance(callback);
 ```
 
+### List Account Secrets
+
+```js
+nexmo.account.listSecrets(apiKey, callback);
+```
+
+### Get Account Secret
+
+```js
+nexmo.account.getSecret(apiKey, secretId, callback);
+```
+
+### Create Account Secret
+
+```js
+nexmo.account.createSecret(apiKey, secret, callback);
+```
+
+### Delete Account Secret
+
+```js
+nexmo.account.deleteSecret(apiKey, secretId, callback);
+```
+
 ### Get Pricing for sending message to a country.
 
 ```js
