@@ -62,9 +62,9 @@ class Account {
     );
   }
 
-  listSecrets(account, callback) {
+  listSecrets(api_key, callback) {
     return this.options.api.get(
-      "/accounts/" + account + "/secrets",
+      "/accounts/" + api_key + "/secrets",
       {},
       callback,
       false,
@@ -72,9 +72,9 @@ class Account {
     );
   }
 
-  getSecret(account, id, callback) {
+  getSecret(api_key, id, callback) {
     return this.options.api.get(
-      "/accounts/" + account + "/secrets/" + id,
+      "/accounts/" + api_key + "/secrets/" + id,
       {},
       callback,
       false,
@@ -82,9 +82,9 @@ class Account {
     );
   }
 
-  createSecret(account, secret, callback) {
+  createSecret(api_key, secret, callback) {
     return this.options.api.postJson(
-      "/accounts/" + account + "/secrets/",
+      "/accounts/" + api_key + "/secrets/",
       { secret: secret },
       callback,
       false,
@@ -92,9 +92,9 @@ class Account {
     );
   }
 
-  deleteSecret(account, id, callback) {
+  deleteSecret(api_key, id, callback) {
     return this.options.api.delete(
-      "/accounts/" + account + "/secrets/" + id,
+      "/accounts/" + api_key + "/secrets/" + id,
       callback,
       false,
       true
