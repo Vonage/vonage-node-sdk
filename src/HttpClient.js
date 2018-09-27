@@ -213,9 +213,11 @@ class HttpClient {
     if (useJwt) {
       headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
     }
-      if (useBasicAuth) {
-          headers["Authorization"] = `Basic ${Buffer.from(this.credentials.apiKey+":"+this.credentials.apiSecret).toString('base64')}`
-      }
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
 
     this.request({ path: path, headers }, "GET", callback);
   }
@@ -227,11 +229,13 @@ class HttpClient {
       params["api_secret"] = this.credentials.apiSecret;
     }
 
-      let headers = {};
+    let headers = {};
 
-      if (useBasicAuth) {
-          headers["Authorization"] = `Basic ${Buffer.from(this.credentials.apiKey+":"+this.credentials.apiSecret).toString('base64')}`
-      }
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
     path = path + "?" + querystring.stringify(params);
 
     this.request({ path: path, headers }, "DELETE", callback);
@@ -321,10 +325,12 @@ class HttpClient {
 
     path = path + joinChar + querystring.stringify(qs);
 
-      let headers = { "Content-Type": "application/json" };
-      if (useBasicAuth) {
-          headers["Authorization"] = `Basic ${Buffer.from(this.credentials.apiKey+":"+this.credentials.apiSecret).toString('base64')}`
-      }
+    let headers = { "Content-Type": "application/json" };
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
 
     this.request(
       {
