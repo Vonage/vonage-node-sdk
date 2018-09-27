@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "2.3.0",
+  "version": "2.3.2",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
@@ -56,10 +56,10 @@
     "eslint-plugin-prettier": "^2.3.1",
     "expect.js": "^0.3.1",
     "express": "^4.14.0",
-    "mocha": "^3.2.0",
+    "mocha": "^5.2.0",
     "ngrok": "^2.2.2",
-    "nodemon": "^1.17.3",
-    "nyc": "^11.7.1",
+    "nodemon": "^1.17.5",
+    "nyc": "^13.0.0",
     "prettier": "^1.12.1",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",

@@ -100,11 +100,13 @@ class HttpClient {
         }
       });
       response.on("close", e => {
-        this.logger.error(
-          "problem with API request detailed stacktrace below "
-        );
-        this.logger.error(e);
-        callback(e);
+        if (e) {
+          this.logger.error(
+            "problem with API request detailed stacktrace below "
+          );
+          this.logger.error(e);
+          callback(e);
+        }
       });
     });
     request.on("error", e => {
