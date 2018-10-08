@@ -6,7 +6,7 @@ import querystring from "querystring";
 
 class Channel {
   static get PATH() {
-    return "/beta/messages";
+    return "/v0.1/messages";
   }
 
   constructor(credentials, options) {

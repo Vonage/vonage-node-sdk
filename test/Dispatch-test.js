@@ -1,12 +1,12 @@
-import Workflow from "../lib/Workflow";
+import Dispatch from "../lib/Dispatch";
 import { expect, sinon, TestUtils } from "./NexmoTestUtils";
 
-describe("Workflow", function() {
+describe("Dispatch", function() {
   beforeEach(function() {
     this.sandbox = sinon.sandbox.create();
     this.httpClientStub = TestUtils.getHttpClient();
     this.sandbox.stub(this.httpClientStub, "request");
-    this.workflow = new Workflow(TestUtils.getCredentials(), {
+    this.dispatch = new Dispatch(TestUtils.getCredentials(), {
       api: this.httpClientStub
     });
   });
@@ -17,7 +17,7 @@ describe("Workflow", function() {
 
   describe("create", function() {
     it("should call the correct endpoint", function() {
-      return expect(this.workflow)
+      return expect(this.dispatch)
         .method("create")
         .withParams("failover", [
           {
@@ -34,12 +34,12 @@ describe("Workflow", function() {
             }
           }
         ])
-        .to.post.to.url(Workflow.PATH);
+        .to.post.to.url(Dispatch.PATH);
     });
 
     it("formats the outgoing request correctly)", function(done) {
       const template = "failover";
-      const workflow1 = {
+      const dispatch1 = {
         to: { type: "viber_service_msg", number: "1234567890" },
         from: { type: "viber_service_msg", number: "9876543210" },
         message: {
@@ -53,7 +53,7 @@ describe("Workflow", function() {
         }
       };
 
-      const workflow2 = {
+      const dispatch2 = {
         to: { type: "sms", number: "1234567890" },
         from: { type: "sms", number: "9876543210" },
         message: {
@@ -68,13 +68,13 @@ describe("Workflow", function() {
       postMock
         .expects("post")
         .once()
-        .withArgs(Workflow.PATH, {
+        .withArgs(Dispatch.PATH, {
           template: template,
-          workflow: [workflow1, workflow2]
+          dispatch: [dispatch1, dispatch2]
         })
         .yields(null, []);
 
-      this.workflow.create("failover", [workflow1, workflow2], () => {
+      this.dispatch.create("failover", [dispatch1, dispatch2], () => {
         postMock.verify();
         done();
       });

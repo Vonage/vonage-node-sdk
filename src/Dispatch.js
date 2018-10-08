@@ -4,9 +4,9 @@ import nexmo from "./index";
 import fs from "fs";
 import querystring from "querystring";
 
-class Workflow {
+class Dispatch {
   static get PATH() {
-    return "/beta/workflows";
+    return "/v0.1/dispatch";
   }
 
   constructor(credentials, options) {
@@ -23,16 +23,16 @@ class Workflow {
     );
   }
 
-  create(template, workflow, callback) {
+  create(template, dispatch, callback) {
     const params = {
       template: template,
-      workflow: workflow
+      dispatch: dispatch
     };
 
-    return this.options.api.post(Workflow.PATH, params, callback, true, {
+    return this.options.api.post(Dispatch.PATH, params, callback, true, {
       "Content-Type": "application/json"
     });
   }
 }
 
-export default Workflow;
+export default Dispatch;
