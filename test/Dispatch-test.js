@@ -39,7 +39,7 @@ describe("Dispatch", function() {
 
     it("formats the outgoing request correctly)", function(done) {
       const template = "failover";
-      const dispatch1 = {
+      const workflow1 = {
         to: { type: "viber_service_msg", number: "1234567890" },
         from: { type: "viber_service_msg", number: "9876543210" },
         message: {
@@ -53,7 +53,7 @@ describe("Dispatch", function() {
         }
       };
 
-      const dispatch2 = {
+      const workflow2 = {
         to: { type: "sms", number: "1234567890" },
         from: { type: "sms", number: "9876543210" },
         message: {
@@ -70,11 +70,11 @@ describe("Dispatch", function() {
         .once()
         .withArgs(Dispatch.PATH, {
           template: template,
-          dispatch: [dispatch1, dispatch2]
+          workflow: [workflow1, workflow2]
         })
         .yields(null, []);
 
-      this.dispatch.create("failover", [dispatch1, dispatch2], () => {
+      this.dispatch.create("failover", [workflow1, workflow2], () => {
         postMock.verify();
         done();
       });
