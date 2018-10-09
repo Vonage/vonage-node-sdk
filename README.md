@@ -506,12 +506,12 @@ nexmo.channel.send(
 );
 ```
 
-## Workflow
+## Dispatch
 
-### Create a workflow
+### Create a dispatch
 
 ```js
-nexmo.workflow.create(
+nexmo.dispatch.create(
   "failover",
   [
     {

@@ -8,3 +8,6 @@ npm-debug.log
 coverage
 .nyc_output
 .idea
+.nexmo-app
+*.key
+.DS_Store
