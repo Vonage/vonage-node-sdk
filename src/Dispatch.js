@@ -23,10 +23,10 @@ class Dispatch {
     );
   }
 
-  create(template, dispatch, callback) {
+  create(template, workflow, callback) {
     const params = {
       template: template,
-      dispatch: dispatch
+      workflow: workflow
     };
 
     return this.options.api.post(Dispatch.PATH, params, callback, true, {

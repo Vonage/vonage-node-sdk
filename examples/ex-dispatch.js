@@ -3,18 +3,20 @@ module.exports = function(callback, config) {
 
   var nexmo = new Nexmo(
     {
+      apiKey: config.API_KEY,
+      apiSecret: config.API_SECRET,
       applicationId: config.APP_ID,
       privateKey: config.PRIVATE_KEY
     },
     { debug: config.DEBUG }
   );
 
-  nexmo.workflow.create(
+  nexmo.dispatch.create(
     "failover",
     [
       {
-        to: { type: "viber_service_msg", id: CONFIG.TO_NUMBER },
-        from: { type: "viber_service_msg", id: CONFIG.FROM_NUMBER },
+        to: { type: "viber_service_msg", number: config.TO_NUMBER },
+        from: { type: "viber_service_msg", id: config.SERVICE_MESSAGE_ID },
         message: {
           content: {
             type: "text",
