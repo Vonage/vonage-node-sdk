@@ -17,9 +17,9 @@ npm install nexmo
 ## Constructor
 
 ```js
-var Nexmo = require('nexmo');
+const Nexmo = require('nexmo');
 
-var nexmo = new Nexmo({
+const nexmo = new Nexmo({
     apiKey: API_KEY,
     apiSecret: API_SECRET,
     applicationId: APP_ID,
@@ -530,24 +530,24 @@ nexmo.media.get(id, callback);
 There are two ways of generating a JWT. You can use the function that exists on the Nexmo definition:
 
 ```js
-var Nexmo = require('nexmo');
+const Nexmo = require('nexmo');
 
-var jwt = Nexmo.generateJwt('path/to/private.key', {application_id: APP_ID});
+const jwt = Nexmo.generateJwt('path/to/private.key', {application_id: APP_ID});
 ```
 
 Or via a `Nexmo` instance where your supplied `applicationId` and `privateKey` credentials will be used:
 
 ```js
-var Nexmo = require('nexmo');
+const Nexmo = require('nexmo');
 
-var nexmo = new Nexmo({
+const nexmo = new Nexmo({
     apiKey: API_KEY,
     apiSecret: API_SECRET,
     applicationId: APP_ID,
     privateKey: PRIVATE_KEY_PATH,
   });
 
-var jwt = nexmo.generateJwt();
+const jwt = nexmo.generateJwt();
 ```
 
 ## Voice (Deprecated)
@@ -600,7 +600,7 @@ make requests with the correct authentication method.
 In these examples, we assume that you've created a `nexmo` instance as follows:
 
 ```javascript
-var nexmo = new Nexmo({
+const nexmo = new Nexmo({
     apiKey: 'API_KEY',
     apiSecret: 'API_SECRET',
     applicationId: 'APPLICATION_ID',
