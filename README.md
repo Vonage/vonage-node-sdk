@@ -29,10 +29,10 @@ var nexmo = new Nexmo({
 
 * `apiKey` - API Key from Nexmo
 * `apiSecret` - API SECRET from Nexmo
-* `applicationId` - The Nexmo Application ID to be used when creating JWTs. Required for voice related functionality.
+* `applicationId` - The Nexmo Application ID to be used when creating JWTs. Required for voice-related functionality.
 * `privateKey` - The Private Key to be used when creating JWTs. You can specify the key as any of the following:
   * The private key as a string (It must start with `-----BEGIN PRIVATE KEY-----`)
-  * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.  Required for voice related functionality.
+  * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.  Required for voice-related functionality.
   * A path to the key file on disk
 * `options` - Additional options for the constructor
 
@@ -433,7 +433,7 @@ Example:
 nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2}, callback);
 ```
 
-### Purchase number
+### Purchase Number
 
 ```js
 nexmo.number.buy(countryCode, msisdn, callback);
