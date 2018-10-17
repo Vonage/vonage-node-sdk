@@ -1,0 +1,3 @@
+# Set the default behavior for line endings
+* text=auto
+* text eol=lf
