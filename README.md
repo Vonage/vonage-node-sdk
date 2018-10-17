@@ -348,6 +348,8 @@ For more information see https://docs.nexmo.com/tools/application-api/api-refere
 nexmo.account.checkBalance(callback);
 ```
 
+For more information see https://developer.nexmo.com/api/developer/account
+
 ### List Account Secrets
 
 ```js
