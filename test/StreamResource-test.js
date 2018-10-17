@@ -32,14 +32,19 @@ describe("StreamResource", () => {
   it("should allow a stream to be started", () => {
     const callId = "2342342-lkjhlkjh-32423";
     var params = {
-      stream_url: "https://example.com/test.mp3" // eslint-disable-line camelcase
+      stream_url: "https://example.com/▶tést.mp3" // eslint-disable-line camelcase
     }; // eslint-disable-line camelcase
     stream.start(callId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       path: StreamResource.PATH.replace("{call_uuid}", callId),
-      method: "PUT"
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": 49
+      }
     });
+
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
       emptyCallback

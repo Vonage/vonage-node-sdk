@@ -60,6 +60,7 @@ class ResourceTestHelper {
         if (k === "Authorization") {
           return true;
         }
+
         match = match && expected.headers[k] === actual.headers[k];
       });
 
