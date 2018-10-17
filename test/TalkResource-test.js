@@ -38,7 +38,32 @@ describe("TalkResource", () => {
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       path: TalkResource.PATH.replace("{call_uuid}", callId),
-      method: "PUT"
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": 17
+      }
+    });
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should be able to start a talk with unicode characters", () => {
+    const callId = "2342342-lkjhlkjh-32423";
+    var params = {
+      text: "Alô 😊!"
+    };
+    talk.start(callId, params, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+      path: TalkResource.PATH.replace("{call_uuid}", callId),
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": 21
+      }
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
