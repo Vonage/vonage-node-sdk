@@ -2,9 +2,9 @@
 [![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node) 
 [![Known Vulnerabilities](https://snyk.io/test/github/Nexmo/nexmo-node/badge.svg)](https://snyk.io/test/github/Nexmo/nexmo-node)
 
-A Node.JS REST API Wrapper library for [Nexmo](http://nexmo.com/).
+A Node.JS REST API Wrapper library for [Nexmo](https://www.nexmo.com/).
 
-For full API documentation refer to [docs.nexmo.com](https://docs.nexmo.com/).
+For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
@@ -29,14 +29,14 @@ const nexmo = new Nexmo({
   }, options);
 ```
 
-* `apiKey` - API Key from Nexmo
-* `apiSecret` - API SECRET from Nexmo
+* `apiKey` - API Key from Nexmo.
+* `apiSecret` - API SECRET from Nexmo.
 * `applicationId` - The Nexmo Application ID to be used when creating JWTs. Required for voice-related functionality.
 * `privateKey` - The Private Key to be used when creating JWTs. You can specify the key as any of the following:
-  * The private key as a string (It must start with `-----BEGIN PRIVATE KEY-----`)
+  * The private key as a string (It must start with `-----BEGIN PRIVATE KEY-----`).
   * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.  Required for voice-related functionality.
-  * A path to the key file on disk
-* `options` - Additional options for the constructor
+  * A path to the key file on disk.
+* `options` - Additional options for the constructor.
 
 Options are:
 
@@ -66,7 +66,7 @@ Options are:
 nexmo.message.sendSms(sender, recipient, message, options, callback);
 ```
 
-* `opts` - parameter is optional. See [SMS API Reference](https://docs.nexmo.com/messaging/sms-api/api-reference#request)
+* `opts` - parameter is optional. See [SMS API Reference](https://developer.nexmo.com/api/sms#send-an-sms)
 
 ### Send a Binary Message
 
@@ -93,7 +93,7 @@ nexmo.message.shortcodeAlert(recipient, messageParams, opts, callback);
 
 ## Voice
 
-For detailed information please see the documentation at https://docs.nexmo.com/voice/voice-api
+For detailed information please see the documentation at https://developer.nexmo.com/api/voice
 
 ### Make a call
 
@@ -113,7 +113,7 @@ nexmo.calls.create({
 }, callback);
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#call_create
+For more information see https://developer.nexmo.com/api/voice#createCall
 
 ### Get a Call
 
@@ -121,7 +121,7 @@ For more information see https://docs.nexmo.com/voice/voice-api/api-reference#ca
 nexmo.calls.get(callId, callback);
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#call_create
+For more information see https://developer.nexmo.com/api/voice#getCall
 
 ### Query Calls
 
@@ -129,7 +129,7 @@ For more information see https://docs.nexmo.com/voice/voice-api/api-reference#ca
 nexmo.calls.get({status: 'completed'}, callback);
 ```
 
-The first parameter can contain many properties to filter the returned call or to page results. For more information see the [Calls API Reference](https://docs.nexmo.com/voice/voice-api/api-reference#calls).
+The first parameter can contain many properties to filter the returned call or to page results. For more information see the [Calls API Reference](https://developer.nexmo.com/api/voice#getCalls).
 
 ### Update a Call
 
@@ -137,7 +137,7 @@ The first parameter can contain many properties to filter the returned call or t
 nexmo.calls.update(callId, { action: 'hangup' }, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/voice#modify-an-existing-call
+For more information see https://developer.nexmo.com/api/voice#updateCall
 
 ### Stream an Audio File to a Call
 
@@ -152,7 +152,7 @@ nexmo.calls.stream.start(
   });
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_put
+For more information see https://developer.nexmo.com/api/voice#startStream
 
 ### Stop an audio stream in a call
 
@@ -160,7 +160,7 @@ For more information see https://docs.nexmo.com/voice/voice-api/api-reference#st
 nexmo.calls.stream.stop(callId);
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_delete
+For more information see https://developer.nexmo.com/api/voice#stopStream
 
 ### Play synthesized text in a call
 
@@ -175,7 +175,7 @@ nexmo.calls.talk.start(
 );
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#talk_put
+For more information see https://developer.nexmo.com/api/voice#startTalk
 
 ### Stop synthesized text in a call
 
@@ -183,18 +183,20 @@ For more information see https://docs.nexmo.com/voice/voice-api/api-reference#ta
 nexmo.calls.talk.stop(callId);
 ```
 
+For more information see https://developer.nexmo.com/api/voice#stopTalk
+
 ### Send DTMF to a Call
 
 ```js
 nexmo.calls.dtmf.send(callId, params, callback);
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#dtmf_put
+For more information see https://developer.nexmo.com/api/voice#startDTMF
 
 
 ## Files
 
-For detailed information please see the documentation at https://docs.nexmo.com/voice/voice-api/recordings
+For detailed information please see the documentation at https://developer.nexmo.com/voice/voice-api/guides/recording
 
 ### Get a file (recording)
 
@@ -216,7 +218,7 @@ nexmo.files.save(fileIdOrUrl, file, callback);
 nexmo.verify.request({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#vrequest
+For more information check the documentation at https://developer.nexmo.com/api/verify#verify-request
 
 ### Validate the response of a Verification Request
 
@@ -224,7 +226,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 nexmo.verify.check({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,code:<CODE_TO_CHECK>},callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#check
+For more information check the documentation at https://developer.nexmo.com/api/verify#verify-check
 
 ### Search one or more Verification Request
 
@@ -232,7 +234,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 nexmo.verify.search(<ONE_REQUEST_ID or ARRAY_OF_REQUEST_ID>,callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#search
+For more information check the documentation at https://developer.nexmo.com/api/verify#verify-search
 
 ### Cancel verification
 
@@ -240,7 +242,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:'cancel'},callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
+For more information check the documentation at https://developer.nexmo.com/api/verify#verify-control
 
 ### Trigger next verification event
 
@@ -248,7 +250,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 nexmo.verify.control({request_id:<UNIQUE_ID_FROM_VERIFICATION_REQUEST>,cmd:'trigger_next_event'},callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/verify/api-reference/api-reference#control
+For more information check the documentation at https://developer.nexmo.com/api/verify#verify-control
 
 ## Number Insight
 
@@ -258,7 +260,7 @@ For more information check the documentation at https://docs.nexmo.com/verify/ap
 nexmo.numberInsight.get({level: 'basic', number: NUMBER}, callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/number-insight/basic
+For more information check the documentation at https://developer.nexmo.com/number-insight/building-blocks/number-insight-basic/node
 
 Example:
 
@@ -272,7 +274,7 @@ nexmo.numberInsight.get({level: 'basic', number: '1-234-567-8900'},  callback);
 nexmo.numberInsight.get({level: 'standard', number: NUMBER}, callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/number-insight/standard
+For more information check the documentation at https://developer.nexmo.com/number-insight/building-blocks/number-insight-standard/node
 
 Example:
 
@@ -286,7 +288,7 @@ nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, callback)
 nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
 ```
 
-For more information check the documentation at https://docs.nexmo.com/number-insight/advanced
+For more information check the documentation at https://developer.nexmo.com/number-insight/building-blocks/number-insight-advanced/node
 
 ### Advanced Async
 
@@ -296,11 +298,11 @@ Number Insight Advanced might take a few seconds to return a result, therefore t
 nexmo.numberInsight.get({level: 'advancedAsync', number: NUMBER, callback: "http://example.com"}, callback);
 ```
 
-In this case the result of your insight request is posted to the callback URL as a webhook. For more details on webhooks see the [Number Insight Advanced](https://docs.nexmo.com/number-insight/advanced-async) documentation.
+In this case the result of your insight request is posted to the callback URL as a webhook. For more details on webhooks see the [Number Insight Advanced](https://developer.nexmo.com/number-insight/building-blocks/number-insight-advanced-async-callback/node) documentation.
 
 ## Applications
 
-For an overview of applications see https://docs.nexmo.com/tools/application-api
+For an overview of applications see https://developer.nexmo.com/concepts/guides/applications
 
 ### Create an App
 
@@ -308,7 +310,7 @@ For an overview of applications see https://docs.nexmo.com/tools/application-api
 nexmo.applications.create(name, type, answerUrl, eventUrl, options, callback);
 ```
 
-For more information see https://docs.nexmo.com/tools/application-api/api-reference#create
+For more information see https://developer.nexmo.com/api/application#create-an-application
 
 ### Get a single App
 
@@ -316,7 +318,7 @@ For more information see https://docs.nexmo.com/tools/application-api/api-refere
 nexmo.applications.get(appId, callback);
 ```
 
-For more information see https://docs.nexmo.com/tools/application-api/api-reference#retrieve
+For more information see https://developer.nexmo.com/api/application#retrieve-an-application
 
 ### Get Apps by filter
 
@@ -324,7 +326,7 @@ For more information see https://docs.nexmo.com/tools/application-api/api-refere
 nexmo.application.get(options, callback);
 ```
 
-For more information see https://docs.nexmo.com/tools/application-api/api-reference#list
+For more information see https://developer.nexmo.com/api/application#retrieve-your-applications
 
 ### Update an App
 
@@ -332,7 +334,7 @@ For more information see https://docs.nexmo.com/tools/application-api/api-refere
 nexmo.applications.update(appId, name, type, answerUrl, eventUrl, options, callback);
 ```
 
-For more information see https://docs.nexmo.com/tools/application-api/api-reference#update
+For more information see https://developer.nexmo.com/api/application#update-an-application
 
 ### Delete an App
 
@@ -340,7 +342,7 @@ For more information see https://docs.nexmo.com/tools/application-api/api-refere
 nexmo.application.delete(appId, callback);
 ```
 
-For more information see https://docs.nexmo.com/tools/application-api/api-reference#delete
+For more information see https://developer.nexmo.com/api/application#destroy-an-application
 
 ## Management
 
@@ -403,7 +405,7 @@ nexmo.number.get(options, callback);
   * `index`
   * `size`
 
-For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/account-numbers)
+For more details on what the above options mean refer to the Nexmo API  [documentation](https://developer.nexmo.com/api/developer/numbers#list-owned-numbers)
 
 Example:
 
@@ -427,7 +429,7 @@ nexmo.number.search(countryCode,options,callback);
   * `index`
   * `size`
 
-For more details on what the above options mean refer to the Nexmo API  [documentation](https://docs.nexmo.com/tools/developer-api/number-search)
+For more details on what the above options mean refer to the Nexmo API  [documentation](https://developer.nexmo.com/api/developer/numbers#search-available-numbers)
 
 Example:
 
@@ -453,7 +455,7 @@ nexmo.number.cancel(countryCode, msisdn, callback);
 nexmo.number.update(countryCode, msisdn, params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://docs.nexmo.com/index.php/developer-api/number-update)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/developer/numbers#update-a-number)
 
 ### Update Password (API Secret)
 
