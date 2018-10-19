@@ -113,7 +113,7 @@ nexmo.calls.create({
 }, callback);
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#call_create
+For more information see https://developer.nexmo.com/api/voice#createCall
 
 ### Get a Call
 
@@ -121,7 +121,7 @@ For more information see https://docs.nexmo.com/voice/voice-api/api-reference#ca
 nexmo.calls.get(callId, callback);
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#call_create
+For more information see https://developer.nexmo.com/api/voice#getCall
 
 ### Query Calls
 
@@ -129,7 +129,7 @@ For more information see https://docs.nexmo.com/voice/voice-api/api-reference#ca
 nexmo.calls.get({status: 'completed'}, callback);
 ```
 
-The first parameter can contain many properties to filter the returned call or to page results. For more information see the [Calls API Reference](https://docs.nexmo.com/voice/voice-api/api-reference#calls).
+The first parameter can contain many properties to filter the returned call or to page results. For more information see the [Calls API Reference](https://developer.nexmo.com/api/voice#getCalls).
 
 ### Update a Call
 
@@ -137,7 +137,7 @@ The first parameter can contain many properties to filter the returned call or t
 nexmo.calls.update(callId, { action: 'hangup' }, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/voice#modify-an-existing-call
+For more information see https://developer.nexmo.com/api/voice#updateCall
 
 ### Stream an Audio File to a Call
 
@@ -152,7 +152,7 @@ nexmo.calls.stream.start(
   });
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_put
+For more information see https://developer.nexmo.com/api/voice#startStream
 
 ### Stop an audio stream in a call
 
@@ -160,7 +160,7 @@ For more information see https://docs.nexmo.com/voice/voice-api/api-reference#st
 nexmo.calls.stream.stop(callId);
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#stream_delete
+For more information see https://developer.nexmo.com/api/voice#stopStream
 
 ### Play synthesized text in a call
 
@@ -175,7 +175,7 @@ nexmo.calls.talk.start(
 );
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#talk_put
+For more information see https://developer.nexmo.com/api/voice#startTalk
 
 ### Stop synthesized text in a call
 
@@ -183,13 +183,15 @@ For more information see https://docs.nexmo.com/voice/voice-api/api-reference#ta
 nexmo.calls.talk.stop(callId);
 ```
 
+For more information see https://developer.nexmo.com/api/voice#stopTalk
+
 ### Send DTMF to a Call
 
 ```js
 nexmo.calls.dtmf.send(callId, params, callback);
 ```
 
-For more information see https://docs.nexmo.com/voice/voice-api/api-reference#dtmf_put
+For more information see https://developer.nexmo.com/api/voice#startDTMF
 
 
 ## Files
