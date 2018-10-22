@@ -594,7 +594,8 @@ Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/ne
 
 ## Creating your own requests
 
-> !!!IMPORTANT!!! This section uses internal APIs and should not be relied on. We make no guarantees that the interface is stable. Relying on these methods is not recommended for production applications
+> #### IMPORTANT
+> This section uses internal APIs and should not be relied on. We make no guarantees that the interface is stable. Relying on these methods is not recommended for production applications
 
 For endpoints that are not yet implemented, you can use the Nexmo HTTP Client to
 make requests with the correct authentication method.
