@@ -1,4 +1,5 @@
 import Media from "../lib/Media";
+import os from "os";
 import { expect, sinon, TestUtils } from "./NexmoTestUtils";
 
 describe("Media", function() {
@@ -62,9 +63,10 @@ describe("Media", function() {
     // @TODO Add assertions for POST body
     // @TODO Add mocks for request
     it("should call the correct URL (file provided)", function() {
+      const file = os.type() === "Windows_NT" ? "\\\\.\\NUL" : "/dev/null";
       return expect(this.media)
         .method("upload")
-        .withParams({ file: "/dev/null" })
+        .withParams({ file })
         .to.postFile.to.url("/v3/media");
     });
 
