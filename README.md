@@ -292,7 +292,7 @@ For more information check the documentation at https://developer.nexmo.com/numb
 
 ### Advanced Async
 
-Number Insight Advanced might take a few seconds to return a result, therefore the option exist to process the result asynchronously through a webhook.
+Number Insight Advanced might take a few seconds to return a result, therefore the option exists to process the result asynchronously through a webhook.
 
 ```js
 nexmo.numberInsight.get({level: 'advancedAsync', number: NUMBER, callback: "http://example.com"}, callback);
