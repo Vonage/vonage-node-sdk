@@ -1,10 +1,14 @@
+os:
+  - windows
+  - linux
+  - osx
 language: node_js
 node_js:
-- 4
-- 6
-- 8
-- lts/*
-- node
+  - 4
+  - 6
+  - 8
+  - lts/*
+  - node
 deploy:
   provider: npm
   email: devrel@nexmo.com
