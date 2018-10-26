@@ -2,7 +2,7 @@ import expect from "expect.js";
 
 class NexmoStub {
   static create(functions) {
-    var stub = {
+    let stub = {
       initialize: function() {},
       hasBeenCalled: function(name) {
         return this[name + "_called"] === true;
@@ -24,7 +24,7 @@ class NexmoStub {
    */
   static checkAllFunctionsAreDefined(mappings, obj) {
     Object.keys(mappings).forEach(function(originalName) {
-      var newName = mappings[originalName].split("|")[0];
+      let newName = mappings[originalName].split("|")[0];
       expect(obj.prototype[newName]).to.be.a("function");
     });
   }
@@ -35,9 +35,9 @@ class NexmoStub {
    */
   static checkAllFunctionsAreCalled(mappings, ObjDef) {
     Object.keys(mappings).forEach(function(originalName) {
-      var nameAndParams = mappings[originalName].split("|");
-      var newName = nameAndParams[0];
-      var params = nameAndParams[1] ? nameAndParams[1].split(",") : [];
+      let nameAndParams = mappings[originalName].split("|");
+      let newName = nameAndParams[0];
+      let params = nameAndParams[1] ? nameAndParams[1].split(",") : [];
       params.forEach(function(paramValue, index) {
         try {
           params[index] = JSON.parse(paramValue);
@@ -47,8 +47,8 @@ class NexmoStub {
         }
       });
 
-      var stub = NexmoStub.create(Object.keys(mappings));
-      var obj = new ObjDef(
+      let stub = NexmoStub.create(Object.keys(mappings));
+      let obj = new ObjDef(
         {
           apiKey: "test",
           apiSecret: "test"

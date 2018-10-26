@@ -11,24 +11,24 @@ import Credentials from "../lib/Credentials";
 chai.use(sinonChai);
 
 describe("Credentials Object", function() {
-  it("should be possible to construct a Credential object", function() {
-    var cred = Credentials.parse("KEY", "SECRET");
+  it("should be possible to construct a Credential object", () => {
+    const cred = Credentials.parse("KEY", "SECRET");
 
     expect(cred).to.be.an.instanceof(Credentials);
   });
 
-  it("should parse object literal into a Credential object", function() {
-    var key = "KEY";
-    var secret = "SECRET";
-    var appId = "app-id";
-    var privateKey = path.join(__dirname, "private-test.key");
-    var obj = {
+  it("should parse object literal into a Credential object", () => {
+    const key = "KEY";
+    const secret = "SECRET";
+    const appId = "app-id";
+    const privateKey = path.join(__dirname, "private-test.key");
+    const obj = {
       apiKey: key,
       apiSecret: secret,
       applicationId: appId,
       privateKey: privateKey
     };
-    var parsed = Credentials.parse(obj);
+    const parsed = Credentials.parse(obj);
 
     expect(parsed).to.be.an.instanceof(Credentials);
     expect(parsed.apiKey).to.be.equal(key);
@@ -37,15 +37,15 @@ describe("Credentials Object", function() {
     expect(parsed.privateKey).to.be.ok;
   });
 
-  it("should throw an error when a privateKey is provided and the file does not exist", function() {
-    var create = function() {
+  it("should throw an error when a privateKey is provided and the file does not exist", () => {
+    const create = () => {
       return new Credentials("KEY", "SECRET", "./no-key-here.key");
     };
     expect(create).to.throw(Error);
   });
 
-  it("should read a private key from a file into a Buffer accessible via Credentials.privateKey", function() {
-    var cred = new Credentials(
+  it("should read a private key from a file into a Buffer accessible via Credentials.privateKey", () => {
+    const cred = new Credentials(
       "KEY",
       "SECRET",
       path.join(__dirname, "private-test.key")
@@ -53,23 +53,23 @@ describe("Credentials Object", function() {
     expect(cred.privateKey).to.be.an.instanceof(Buffer);
   });
 
-  it("should turn a private key string into a Buffer accessible via Credentials.privateKey", function() {
-    var key = fs.readFileSync(path.join(__dirname, "private-test.key"));
-    var cred = new Credentials("KEY", "SECRET", key);
+  it("should turn a private key string into a Buffer accessible via Credentials.privateKey", () => {
+    const key = fs.readFileSync(path.join(__dirname, "private-test.key"));
+    const cred = new Credentials("KEY", "SECRET", key);
     expect(cred.privateKey).to.be.an.instanceof(Buffer);
   });
 
-  it("should support passing a privateKey of type string", function() {
-    var key = `-----BEGIN PRIVATE KEY-----
+  it("should support passing a privateKey of type string", () => {
+    const key = `-----BEGIN PRIVATE KEY-----
 blah blah blah
 -----END PRIVATE KEY-----`;
-    var cred = new Credentials("KEY", "SECRET", key);
+    const cred = new Credentials("KEY", "SECRET", key);
     expect(cred.privateKey).to.be.an.instanceof(Buffer);
   });
 
-  it("should allow an applicationId to be provided upon construction", function() {
-    var appId = "some_app_id";
-    var cred = new Credentials(
+  it("should allow an applicationId to be provided upon construction", () => {
+    const appId = "some_app_id";
+    const cred = new Credentials(
       "KEY",
       "SECRET",
       path.join(__dirname, "private-test.key"),
@@ -78,10 +78,10 @@ blah blah blah
     expect(cred.applicationId).to.equal(appId);
   });
 
-  it("should allow a JWT to be generated using supplied application ID", function() {
-    var stub = sinon.createStubInstance(JwtGenerator);
+  it("should allow a JWT to be generated using supplied application ID", () => {
+    const stub = sinon.createStubInstance(JwtGenerator);
 
-    var cred = new Credentials(
+    const cred = new Credentials(
       "KEY",
       "SECRET",
       path.join(__dirname, "private-test.key"),
@@ -96,10 +96,10 @@ blah blah blah
     });
   });
 
-  it("should allow a JWT to be generated using an alternative application ID", function() {
-    var stub = sinon.createStubInstance(JwtGenerator);
+  it("should allow a JWT to be generated using an alternative application ID", () => {
+    const stub = sinon.createStubInstance(JwtGenerator);
 
-    var cred = new Credentials(
+    const cred = new Credentials(
       "KEY",
       "SECRET",
       path.join(__dirname, "private-test.key"),
@@ -107,7 +107,7 @@ blah blah blah
     );
     cred._setJwtGenerator(stub);
 
-    var altAppId = "another-app-id";
+    const altAppId = "another-app-id";
     cred.generateJwt(altAppId);
 
     expect(stub.generate).to.be.calledWith(cred.privateKey, {
@@ -115,10 +115,10 @@ blah blah blah
     });
   });
 
-  it("should allow a JWT to be generated using an alternative private key", function() {
-    var stub = sinon.createStubInstance(JwtGenerator);
+  it("should allow a JWT to be generated using an alternative private key", () => {
+    const stub = sinon.createStubInstance(JwtGenerator);
 
-    var cred = new Credentials(
+    const cred = new Credentials(
       "KEY",
       "SECRET",
       path.join(__dirname, "private-test.key"),
@@ -126,7 +126,7 @@ blah blah blah
     );
     cred._setJwtGenerator(stub);
 
-    var altAppId = "another-app-id";
+    const altAppId = "another-app-id";
     cred.generateJwt(altAppId, "ALTERNATIVE_KEY");
 
     expect(stub.generate).to.be.calledWith("ALTERNATIVE_KEY", {

@@ -2,7 +2,7 @@ import Number from "../lib/Number";
 
 import NexmoStub from "./NexmoStub";
 
-var numberAPIs = {
+const numberAPIs = {
   getPricing: "getPricing",
   getPhonePricing: "getPhonePricing",
   getNumbers: "get",
@@ -12,12 +12,9 @@ var numberAPIs = {
   updateNumber: "update"
 };
 
-describe("Number Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(numberAPIs, Number);
-  });
-
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(numberAPIs, Number);
-  });
+describe("Number Object", () => {
+  it("should implement all v1 APIs", () =>
+    NexmoStub.checkAllFunctionsAreDefined(numberAPIs, Number));
+  it("should proxy the function call to the underlying `nexmo` object", () =>
+    NexmoStub.checkAllFunctionsAreCalled(numberAPIs, Number));
 });

@@ -2,7 +2,7 @@ import querystring from "querystring";
 
 class ResourceTestHelper {
   static getRequestArgs(params, overrides = {}) {
-    var callsArgs = {
+    const callsArgs = {
       host: overrides.host || "api.nexmo.com",
       path: overrides.path || "/v1/calls",
       method: overrides.method || "POST",
@@ -16,7 +16,7 @@ class ResourceTestHelper {
     };
 
     // Removed undefined properties
-    Object.keys(callsArgs).forEach(function(key) {
+    Object.keys(callsArgs).forEach(key => {
       if (callsArgs[key] === undefined) {
         delete callsArgs[key];
       }
@@ -27,7 +27,7 @@ class ResourceTestHelper {
 
   static requestArgsMatch(params, requestOverrides) {
     return function(actual) {
-      var expected;
+      let expected;
       if (requestOverrides) {
         expected = ResourceTestHelper.getRequestArgs(params, requestOverrides);
       } else {
@@ -36,15 +36,15 @@ class ResourceTestHelper {
 
       // We strip api_key and api_secret out of `path` so that our tests
       // only look for specific parameters
-      var qs = actual.path.split("?");
-      var qsParts = querystring.parse(qs[1]);
+      let qs = actual.path.split("?");
+      let qsParts = querystring.parse(qs[1]);
       delete qsParts["api_key"];
       delete qsParts["api_secret"];
       if (Object.keys(qsParts).length) {
         actual.path = qs[0] + "?" + querystring.stringify(qsParts);
       }
 
-      var match = true;
+      let match = true;
 
       // Check response parameters
       ["host", "path", "method", "body"].forEach(function(k) {
@@ -55,7 +55,7 @@ class ResourceTestHelper {
 
       // Also check for any headers that we're expecting
       expected.headers = expected.headers || {};
-      Object.keys(expected.headers).forEach(function(k) {
+      Object.keys(expected.headers).forEach(k => {
         // We have a special check for authorization
         if (k === "Authorization") {
           return true;

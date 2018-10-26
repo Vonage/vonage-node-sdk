@@ -25,7 +25,7 @@ describe("Conversion", function() {
 
     sinon.stub(this.httpClientStub, "request");
 
-    var options = {
+    const options = {
       api: this.httpClientStub
     };
 
@@ -36,7 +36,7 @@ describe("Conversion", function() {
     it("should call the correct endpoint", function(done) {
       this.httpClientStub.request.yields(null, {});
 
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
+      const expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
         path:
           "/conversions/foo?message-id=1234&delivered=1&timestamp=1513254618"
       });

@@ -2,19 +2,16 @@ import Voice from "../lib/Voice";
 
 import NexmoStub from "./NexmoStub";
 
-var voiceAPIs = {
+const voiceAPIs = {
   sendTTSMessage: "sendTTSMessage",
   sendTTSPromptWithCapture: "sendTTSPromptWithCapture",
   sendTTSPromptWithConfirm: "sendTTSPromptWithConfirm",
   call: "call"
 };
 
-describe("Voice Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(voiceAPIs, Voice);
-  });
-
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(voiceAPIs, Voice);
-  });
+describe("Voice Object", () => {
+  it("should implement all v1 APIs", () =>
+    NexmoStub.checkAllFunctionsAreDefined(voiceAPIs, Voice));
+  it("should proxy the function call to the underlying `nexmo` object", () =>
+    NexmoStub.checkAllFunctionsAreCalled(voiceAPIs, Voice));
 });

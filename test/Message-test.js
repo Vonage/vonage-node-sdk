@@ -9,7 +9,7 @@ import ResourceTestHelper from "./ResourceTestHelper";
 import sinon from "sinon";
 import chai, { expect } from "chai";
 
-var smsAPIs = {
+let smsAPIs = {
   sendBinaryMessage: "sendBinaryMessage",
   sendWapPushMessage: "sendWapPushMessage",
   sendTextMessage: "sendSms",
@@ -30,7 +30,7 @@ describe("Message Object", function() {
 
 describe("Message", function() {
   beforeEach(function() {
-    var creds = Credentials.parse({
+    let creds = Credentials.parse({
       apiKey: "myKey",
       apiSecret: "mySecret"
     });
@@ -44,7 +44,7 @@ describe("Message", function() {
 
     sinon.stub(this.httpClientStub, "request");
 
-    var options = {
+    let options = {
       rest: this.httpClientStub
     };
 
@@ -55,7 +55,7 @@ describe("Message", function() {
     it("should call the correct endpoint (single)", function(done) {
       this.httpClientStub.request.yields(null, {});
 
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
+      let expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
         path: "/search/message?id=0D00000068264896"
       });
 
@@ -74,7 +74,7 @@ describe("Message", function() {
     it("should call the correct endpoint (multiple)", function(done) {
       this.httpClientStub.request.yields(null, {});
 
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
+      let expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
         path: "/search/messages?ids=1&ids=2"
       });
 
@@ -176,7 +176,7 @@ describe("Message", function() {
     it("should call the correct endpoint (multiple)", function(done) {
       this.httpClientStub.request.yields(null, {});
 
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
+      let expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
         path: "/search/rejections?to=INVALID&date=2020-01-01"
       });
 

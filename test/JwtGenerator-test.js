@@ -6,29 +6,25 @@ import jwt from "jsonwebtoken";
 
 describe("JwtGenerator Object", function() {
   describe(".generate", function() {
-    it("should throw an exception if the cert is not a Buffer", function() {
-      var generator = new JwtGenerator();
-      var generate = function() {
-        generator.generate("blah blah");
-      };
+    it("should throw an exception if the cert is not a Buffer", () => {
+      let generator = new JwtGenerator();
+      let generate = () => generator.generate("blah blah");
       expect(generate).to.throwError();
     });
 
-    it("should throw an exception if the claims is not a Object", function() {
-      var generator = new JwtGenerator();
-      var generate = function() {
-        generator.generate("blah blah", "application_id");
-      };
+    it("should throw an exception if the claims is not a Object", () => {
+      let generator = new JwtGenerator();
+      let generate = () => generator.generate("blah blah", "application_id");
       expect(generate).to.throwError();
     });
 
-    it("should generate a JWT", function() {
-      var testPrivateKey = fs.readFileSync(
+    it("should generate a JWT", () => {
+      let testPrivateKey = fs.readFileSync(
         path.join(__dirname, "private-test.key")
       );
 
-      var generator = new JwtGenerator();
-      var token = generator.generate(testPrivateKey, {
+      let generator = new JwtGenerator();
+      let token = generator.generate(testPrivateKey, {
         application_id: "app-id",
         iat: new Date(2016, 9, 5).getTime() / 1000
       });
@@ -36,40 +32,40 @@ describe("JwtGenerator Object", function() {
       expect(token).to.be.a("string");
     });
 
-    it("should add jti and iat claims by default", function() {
-      var testPrivateKey = fs.readFileSync(
+    it("should add jti and iat claims by default", () => {
+      let testPrivateKey = fs.readFileSync(
         path.join(__dirname, "private-test.key")
       );
-      var testPublicKey = fs.readFileSync(
+      let testPublicKey = fs.readFileSync(
         path.join(__dirname, "public-test.key")
       );
 
-      var generator = new JwtGenerator();
-      var token = generator.generate(testPrivateKey);
+      let generator = new JwtGenerator();
+      let token = generator.generate(testPrivateKey);
 
-      var decoded = jwt.verify(token, testPublicKey, { algorithms: ["RS256"] });
+      let decoded = jwt.verify(token, testPublicKey, { algorithms: ["RS256"] });
 
       expect(decoded.jti).to.be.ok();
       expect(decoded.iat).to.be.ok();
     });
 
-    it("should be possible to add additional claims", function() {
-      var testPrivateKey = fs.readFileSync(
+    it("should be possible to add additional claims", () => {
+      let testPrivateKey = fs.readFileSync(
         path.join(__dirname, "private-test.key")
       );
-      var testPublicKey = fs.readFileSync(
+      let testPublicKey = fs.readFileSync(
         path.join(__dirname, "public-test.key")
       );
 
-      var generator = new JwtGenerator();
-      var appId = "app-id";
-      var randomValue = Math.random();
-      var token = generator.generate(testPrivateKey, {
+      let generator = new JwtGenerator();
+      let appId = "app-id";
+      let randomValue = Math.random();
+      let token = generator.generate(testPrivateKey, {
         application_id: appId,
         random: randomValue
       });
 
-      var decoded = jwt.verify(token, testPublicKey, { algorithms: ["RS256"] });
+      let decoded = jwt.verify(token, testPublicKey, { algorithms: ["RS256"] });
 
       expect(decoded.application_id).to.be(appId);
       expect(decoded.random).to.be(randomValue);

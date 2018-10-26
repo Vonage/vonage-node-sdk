@@ -11,7 +11,7 @@ chai.use(nexmoChai);
 
 const TestUtils = {
   getCredentials: function() {
-    var creds = Credentials.parse({
+    let creds = Credentials.parse({
       apiKey: "myKey",
       apiSecret: "mySecret"
     });

@@ -11,19 +11,19 @@ import Credentials from "../lib/Credentials";
 
 chai.use(sinonChai);
 
-var creds = Credentials.parse({
+let creds = Credentials.parse({
   applicationId: "some-id",
   privateKey: path.join(__dirname, "private-test.key")
 });
-var emptyCallback = () => {};
+let emptyCallback = () => {};
 
 describe("StreamResource", () => {
-  var httpClientStub = null;
-  var stream = null;
+  let httpClientStub = null;
+  let stream = null;
 
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
-    var options = {
+    let options = {
       httpClient: httpClientStub
     };
     stream = new StreamResource(creds, options);
@@ -31,12 +31,12 @@ describe("StreamResource", () => {
 
   it("should allow a stream to be started", () => {
     const callId = "2342342-lkjhlkjh-32423";
-    var params = {
+    let params = {
       stream_url: "https://example.com/▶tést.mp3" // eslint-disable-line camelcase
     }; // eslint-disable-line camelcase
     stream.start(callId, params, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+    let expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       path: StreamResource.PATH.replace("{call_uuid}", callId),
       method: "PUT",
       headers: {
@@ -55,7 +55,7 @@ describe("StreamResource", () => {
     const callId = "2342342-lkjhlkjh-32423";
     stream.stop(callId, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+    let expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "DELETE",
       body: undefined,
       path: StreamResource.PATH.replace("{call_uuid}", callId)

@@ -5,7 +5,7 @@ import App from "../lib/App";
 
 import NexmoStub from "./NexmoStub";
 
-var appAPIMapping = {
+const appAPIMapping = {
   getApplications: "get|{}",
   createApplication: "create",
   getApplication: "get|someAppId",
@@ -13,20 +13,18 @@ var appAPIMapping = {
   deleteApplication: "delete"
 };
 
-describe("App Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(appAPIMapping, App);
-  });
+describe("App Object", () => {
+  it("should implement all v1 APIs", () =>
+    NexmoStub.checkAllFunctionsAreDefined(appAPIMapping, App));
 
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(appAPIMapping, App);
-  });
+  it("should proxy the function call to the underlying `nexmo` object", () =>
+    NexmoStub.checkAllFunctionsAreCalled(appAPIMapping, App));
 
-  it("should call nexmo.getApplications if 1st param is object", function() {
-    var mock = sinon.mock(nexmo);
+  it("should call nexmo.getApplications if 1st param is object", () => {
+    const mock = sinon.mock(nexmo);
     mock.expects("getApplications").once();
 
-    var app = new App(
+    const app = new App(
       {
         apiKey: "test",
         apiSecret: "test"
@@ -38,11 +36,11 @@ describe("App Object", function() {
     app.get({});
   });
 
-  it("should call nexmo.getApplication if 1st param is an app ID", function() {
-    var mock = sinon.mock(nexmo);
+  it("should call nexmo.getApplication if 1st param is an app ID", () => {
+    const mock = sinon.mock(nexmo);
     mock.expects("getApplication").once();
 
-    var app = new App(
+    const app = new App(
       {
         apiKey: "test",
         apiSecret: "test"
