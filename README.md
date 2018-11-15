@@ -320,7 +320,7 @@ nexmo.applications.get(appId, callback);
 
 For more information see https://developer.nexmo.com/api/application#retrieve-an-application
 
-### Get Apps by filter
+### Get Apps by a filter
 
 ```js
 nexmo.application.get(options, callback);
