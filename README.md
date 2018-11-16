@@ -298,7 +298,7 @@ Number Insight Advanced might take a few seconds to return a result, therefore t
 nexmo.numberInsight.get({level: 'advancedAsync', number: NUMBER, callback: "http://example.com"}, callback);
 ```
 
-In this case the result of your insight request is posted to the callback URL as a webhook. For more details on webhooks see the [Number Insight Advanced](https://developer.nexmo.com/number-insight/building-blocks/number-insight-advanced-async-callback/node) documentation.
+In this case, the result of your insight request is posted to the callback URL as a webhook. For more details on webhooks see the [Number Insight Advanced](https://developer.nexmo.com/number-insight/building-blocks/number-insight-advanced-async-callback/node) documentation.
 
 ## Applications
 
@@ -376,7 +376,7 @@ nexmo.account.createSecret(apiKey, secret, callback);
 nexmo.account.deleteSecret(apiKey, secretId, callback);
 ```
 
-### Get Pricing for sending message to a country.
+### Get Pricing for sending a message to a country.
 
 ```js
 nexmo.number.getPricing(countryCode, callback);
@@ -384,7 +384,7 @@ nexmo.number.getPricing(countryCode, callback);
 
 * `countryCode` - 2 letter ISO Country Code
 
-### Get Pricing for sending message or making a call to a number.
+### Get Pricing for sending a message or making a call to a number.
 
 ```js
 nexmo.number.getPhonePricing(product, msisdn, callback);
@@ -393,7 +393,7 @@ nexmo.number.getPhonePricing(product, msisdn, callback);
 * `product` - either `voice` or `sms`
 * `msisdn` - Mobile Station International Subscriber Directory Number (MSISDN) is a number used to identify a mobile phone number internationally. i.e. 447700900000
 
-### Get all numbers associated to the account.
+### Get all numbers associated with the account.
 
 ```js
 nexmo.number.get(options, callback);
@@ -405,7 +405,7 @@ nexmo.number.get(options, callback);
   * `index`
   * `size`
 
-For more details on what the above options mean refer to the Nexmo API  [documentation](https://developer.nexmo.com/api/developer/numbers#list-owned-numbers)
+For more details on what the above options mean, refer to the Nexmo API  [documentation](https://developer.nexmo.com/api/developer/numbers#list-owned-numbers)
 
 Example:
 
@@ -429,7 +429,7 @@ nexmo.number.search(countryCode,options,callback);
   * `index`
   * `size`
 
-For more details on what the above options mean refer to the Nexmo API  [documentation](https://developer.nexmo.com/api/developer/numbers#search-available-numbers)
+For more details on what the above options mean, refer to the Nexmo API  [documentation](https://developer.nexmo.com/api/developer/numbers#search-available-numbers)
 
 Example:
 
@@ -592,7 +592,7 @@ npm run-script test-watch
 
 See [examples/README.md](examples/README.md).
 
-Also see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/nexmo-node-quickstart).
+Also, see the [Nexmo Node Quickstarts repo](https://github.com/nexmo-community/nexmo-node-quickstart).
 
 ## Creating your own requests
 
@@ -656,7 +656,7 @@ nexmo.options.rest.postUseQueryString(
 * Voice
   * [x] Outbound Calls
   * [ ] Inbound Call Webhook
-  * [x] Update calls
+  * [x] Update Calls
   * [x] Stream to Call
   * [x] Talk to Call
   * [x] DTMF to Call
@@ -670,7 +670,7 @@ nexmo.options.rest.postUseQueryString(
     * [x] Rejections
   * [ ] US Short Codes
     * [ ] Two-Factor Authentication
-    * [ ] Event Based Alerts
+    * [ ] Event-Based Alerts
       * [ ] Sending Alerts
       * [ ] Campaign Subscription Management
 * Number Insight
