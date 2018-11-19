@@ -26,29 +26,32 @@ class Account {
   /**
    * TODO: document
    */
-  checkBalance() {
-    this._nexmo.checkBalance.apply(this._nexmo, arguments);
+  checkBalance(callback) {
+    return this.options.rest.get("/account/get-balance", callback);
   }
 
-  /**
-   * TODO: document
-   */
-  updatePassword() {
-    this._nexmo.changePassword.apply(this._nexmo, arguments);
+  updatePassword(newSecret, callback) {
+    return this.options.rest.postUseQueryString(
+      "/account/settings",
+      { newSecret },
+      callback
+    );
   }
 
-  /**
-   * TODO: document
-   */
-  updateSMSCallback() {
-    this._nexmo.changeMoCallbackUrl.apply(this._nexmo, arguments);
+  updateSMSCallback(moCallBackUrl, callback) {
+    return this.options.rest.postUseQueryString(
+      "/account/settings",
+      { moCallBackUrl },
+      callback
+    );
   }
 
-  /**
-   * TODO: document
-   */
-  updateDeliveryReceiptCallback() {
-    this._nexmo.changeDrCallbackUrl.apply(this._nexmo, arguments);
+  updateDeliveryReceiptCallback(drCallBackUrl, callback) {
+    return this.options.rest.postUseQueryString(
+      "/account/settings",
+      { drCallBackUrl },
+      callback
+    );
   }
 
   topUp(trx, callback) {
@@ -56,6 +59,45 @@ class Account {
       "/account/top-up",
       { trx },
       callback
+    );
+  }
+
+  listSecrets(apiKey, callback) {
+    return this.options.api.get(
+      "/accounts/" + apiKey + "/secrets",
+      {},
+      callback,
+      false,
+      true
+    );
+  }
+
+  getSecret(apiKey, id, callback) {
+    return this.options.api.get(
+      "/accounts/" + apiKey + "/secrets/" + id,
+      {},
+      callback,
+      false,
+      true
+    );
+  }
+
+  createSecret(apiKey, secret, callback) {
+    return this.options.api.postJson(
+      "/accounts/" + apiKey + "/secrets/",
+      { secret: secret },
+      callback,
+      false,
+      true
+    );
+  }
+
+  deleteSecret(apiKey, id, callback) {
+    return this.options.api.delete(
+      "/accounts/" + apiKey + "/secrets/" + id,
+      callback,
+      false,
+      true
     );
   }
 }

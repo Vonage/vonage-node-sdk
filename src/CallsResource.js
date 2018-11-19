@@ -57,7 +57,7 @@ class CallsResource {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": params.length,
+        "Content-Length": Buffer.byteLength(params),
         Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };
@@ -115,7 +115,7 @@ class CallsResource {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": params.length,
+        "Content-Length": Buffer.byteLength(params),
         Authorization: `Bearer ${this.creds.generateJwt()}`
       }
     };

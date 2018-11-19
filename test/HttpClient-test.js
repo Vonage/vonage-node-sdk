@@ -189,6 +189,39 @@ describe("HttpClient Object", function() {
     );
   });
 
+  it("should be possible to set the timeout", function() {
+    var mock = sinon.mock(fakeHttp);
+    mock
+      .expects("request")
+      .once()
+      .withArgs({
+        headers: defaultHeaders,
+        host: "api.nexmo.com",
+        method: "POST",
+        path: "/api",
+        port: 443,
+        timeout: 5000
+      })
+      .returns(fakeRequest);
+
+    var client = new HttpClient({
+      https: fakeHttp,
+      logger: logger,
+      timeout: 5000
+    });
+
+    client.request(
+      {
+        host: "api.nexmo.com",
+        path: "/api"
+      },
+      "POST",
+      {
+        some: "data"
+      }
+    );
+  });
+
   it("should not override the method when method and callback are undefined", function() {
     var mock = sinon.mock(fakeHttp);
     mock
@@ -362,6 +395,17 @@ describe("parseResponse", function() {
       }),
       null
     );
+  });
+
+  it("should not error with invalid JSON if parsing is disabled", function() {
+    var callback = sinon.spy();
+    const response = {
+      statusCode: 200,
+      headers: { "content-type": "application/json" }
+    };
+    const data = "not_json";
+    client.__parseResponse(response, [data], "GET", callback, true);
+    expect(callback).was.calledWith(null, data);
   });
 
   it("should parse binary data", function() {

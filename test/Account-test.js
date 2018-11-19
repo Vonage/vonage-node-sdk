@@ -1,74 +1,61 @@
 import Account from "../lib/Account";
-import Credentials from "../lib/Credentials";
-import HttpClient from "../lib/HttpClient";
-import NullLogger from "../lib/ConsoleLogger.js";
-
-import ResourceTestHelper from "./ResourceTestHelper";
-import NexmoStub from "./NexmoStub";
-
-import sinon from "sinon";
-import chai, { expect } from "chai";
-import sinonChai from "sinon-chai";
-chai.use(sinonChai);
-
-var accountAPIs = {
-  checkBalance: "checkBalance",
-  changePassword: "updatePassword",
-  changeMoCallbackUrl: "updateSMSCallback",
-  changeDrCallbackUrl: "updateDeliveryReceiptCallback"
-};
-
-describe("Account Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(accountAPIs, Account);
-  });
-
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(accountAPIs, Account);
-  });
-});
+import { expect, sinon, TestUtils } from "./NexmoTestUtils";
 
 describe("Account", function() {
   beforeEach(function() {
-    var creds = Credentials.parse({
-      apiKey: "myKey",
-      apiSecret: "mySecret"
-    });
-
-    this.httpClientStub = new HttpClient(
-      {
-        logger: new NullLogger()
-      },
-      creds
-    );
-
+    this.httpClientStub = TestUtils.getHttpClient();
     sinon.stub(this.httpClientStub, "request");
+    this.account = new Account(TestUtils.getCredentials(), {
+      rest: this.httpClientStub,
+      api: this.httpClientStub
+    });
+  });
 
-    var options = {
-      rest: this.httpClientStub
-    };
+  describe("checkBalance", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("checkBalance")
+        .to.get.url("/account/get-balance");
+    });
+  });
 
-    this.account = new Account(creds, options);
+  describe("updatePassword", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("updatePassword")
+        .withParams("example_password")
+        .to.post.to.url("/account/settings?newSecret=example_password");
+    });
+  });
+
+  describe("updateSMSCallback", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("updateSMSCallback")
+        .withParams("http://example.com/sms_callback")
+        .to.post.to.url(
+          "/account/settings?moCallBackUrl=http%3A%2F%2Fexample.com%2Fsms_callback"
+        );
+    });
+  });
+
+  describe("updateDeliveryReceiptCallback", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("updateDeliveryReceiptCallback")
+        .withParams("http://example.com/dr_callback")
+        .to.post.to.url(
+          "/account/settings?drCallBackUrl=http%3A%2F%2Fexample.com%2Fdr_callback"
+        );
+    });
   });
 
   describe("topUp", function() {
-    it("should call the correct endpoint", function(done) {
-      this.httpClientStub.request.yields(null, {});
-
-      var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/account/top-up?trx=ABC123"
-      });
-
-      this.account.topUp(
-        "ABC123",
-        function(err, data) {
-          expect(this.httpClientStub.request).to.have.been.calledWith(
-            sinon.match(expectedRequestArgs)
-          );
-
-          done();
-        }.bind(this)
-      );
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("topUp")
+        .withParams("ABC123")
+        .to.post.to.url("/account/top-up?trx=ABC123");
     });
 
     it("returns data on a successful request", function(done) {
@@ -79,7 +66,7 @@ describe("Account", function() {
       };
 
       this.httpClientStub.request.yields(null, mockData);
-      this.account.topUp("trx-123", function(err, data) {
+      this.account.topUp("trx-123", (err, data) => {
         expect(err).to.eql(null);
         expect(data).to.eql(mockData);
         done();
@@ -94,11 +81,48 @@ describe("Account", function() {
       };
 
       this.httpClientStub.request.yields(mockData, null);
-      this.account.topUp("trx-123", function(err, data) {
+      this.account.topUp("trx-123", (err, data) => {
         expect(err).to.eql(mockData);
         expect(data).to.eql(null);
         done();
       });
+    });
+  });
+
+  describe("listSecrets", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("listSecrets")
+        .withParams("ABC123")
+        .to.get.url("/accounts/ABC123/secrets");
+    });
+  });
+
+  describe("getSecret", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("getSecret")
+        .withParams("ABC123", "123")
+        .to.get.url("/accounts/ABC123/secrets/123");
+    });
+  });
+
+  describe("createSecret", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("createSecret")
+        .withParams("ABC123", "123")
+        .to.post.withJsonBody({ secret: "123" })
+        .to.url("/accounts/ABC123/secrets/");
+    });
+  });
+
+  describe("deleteSecret", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("deleteSecret")
+        .withParams("ABC123", "123")
+        .to.delete.url("/accounts/ABC123/secrets/123");
     });
   });
 });

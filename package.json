@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "2.0.2",
+  "version": "2.4.0",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
@@ -29,23 +29,21 @@
   ],
   "scripts": {
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",
-
     "test": "npm run test-no-lint",
     "test-coverage": "cross-env NODE_ENV=test nyc mocha",
     "test-coverage-html": "cross-env NODE_ENV=test nyc --reporter html mocha",
     "test-no-lint": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
     "test-watch": "nodemon --watch src --watch test -x 'npm run test-no-lint'",
-
     "lint": "eslint src test",
     "lint-fix": "eslint --fix src test",
-
     "prepublish": "npm run compile",
     "pretest": "npm run lint"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-istanbul": "^4.1.5",
+    "babel-plugin-istanbul": "^4.1.6",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-register": "^6.7.2",
     "bluebird": "^3.4.6",
@@ -58,17 +56,18 @@
     "eslint-plugin-prettier": "^2.3.1",
     "expect.js": "^0.3.1",
     "express": "^4.14.0",
-    "mocha": "^3.2.0",
+    "mocha": "^5.2.0",
     "ngrok": "^2.2.2",
-    "nodemon": "^1.10.2",
-    "nyc": "^11.3.0",
-    "prettier": "^1.8.2",
+    "nodemon": "^1.17.5",
+    "nyc": "^13.0.0",
+    "prettier": "^1.12.1",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "sinon-expect": "^0.3.0"
   },
   "dependencies": {
-    "jsonwebtoken": "^7.1.9",
+    "jsonwebtoken": "^8.2.1",
+    "request": "^2.83.0",
     "uuid": "^2.0.2"
   },
   "license": "MIT"

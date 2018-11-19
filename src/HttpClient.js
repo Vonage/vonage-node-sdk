@@ -1,5 +1,6 @@
 var https = require("https");
 var http = require("http");
+var request = require("request");
 var querystring = require("querystring");
 
 class HttpClient {
@@ -14,13 +15,15 @@ class HttpClient {
       Accept: "application/json"
     };
     this.logger = options.logger;
+    this.timeout = options.timeout;
+    this.requestLib = request;
 
     if (options.userAgent) {
       this.headers["User-Agent"] = options.userAgent;
     }
   }
 
-  request(endpoint, method, callback) {
+  request(endpoint, method, callback, skipJsonParsing = false) {
     if (typeof method === "function") {
       callback = method;
       endpoint.method = endpoint.method || "GET";
@@ -42,6 +45,10 @@ class HttpClient {
       headers: Object.assign({}, this.headers)
     };
 
+    if (this.timeout !== undefined) {
+      options.timeout = this.timeout;
+    }
+
     // Allow existing headers to be overridden
     // Allow new headers to be added
     if (endpoint.headers) {
@@ -56,7 +63,7 @@ class HttpClient {
     if (options.port === 443) {
       request = this.https.request(options);
     } else {
-      request = http.request(options);
+      request = this.http.request(options);
     }
 
     request.end(endpoint.body);
@@ -87,16 +94,19 @@ class HttpClient {
             response,
             responseData,
             endpoint.method,
-            callback
+            callback,
+            skipJsonParsing
           );
         }
       });
       response.on("close", e => {
-        this.logger.error(
-          "problem with API request detailed stacktrace below "
-        );
-        this.logger.error(e);
-        callback(e);
+        if (e) {
+          this.logger.error(
+            "problem with API request detailed stacktrace below "
+          );
+          this.logger.error(e);
+          callback(e);
+        }
       });
     });
     request.on("error", e => {
@@ -106,7 +116,7 @@ class HttpClient {
     });
   }
 
-  __parseResponse(httpResponse, data, method, callback) {
+  __parseResponse(httpResponse, data, method, callback, skipJsonParsing) {
     const isArrayOrBuffer = data instanceof Array || data instanceof Buffer;
     if (!isArrayOrBuffer) {
       throw new Error("data should be of type Array or Buffer");
@@ -138,7 +148,11 @@ class HttpClient {
       } else if (status >= 400 || status < 200) {
         error = { body: JSON.parse(data.join("")), headers };
       } else if (method !== "DELETE") {
-        response = JSON.parse(data.join(""));
+        if (!!skipJsonParsing) {
+          response = data.join("");
+        } else {
+          response = JSON.parse(data.join(""));
+        }
       } else {
         response = data;
       }
@@ -179,21 +193,109 @@ class HttpClient {
     };
   }
 
-  get(path, params, callback) {
+  get(path, params, callback, useJwt = false, useBasicAuth = false) {
+    if (!callback) {
+      if (typeof params == "function") {
+        callback = params;
+        params = {};
+      }
+    }
+
     params = params || {};
-    params["api_key"] = this.credentials.apiKey;
-    params["api_secret"] = this.credentials.apiSecret;
+    if (!useJwt && !useBasicAuth) {
+      params["api_key"] = this.credentials.apiKey;
+      params["api_secret"] = this.credentials.apiSecret;
+    }
 
     path = path + "?" + querystring.stringify(params);
 
-    this.request({ path: path }, "GET", callback);
+    const headers = { "Content-Type": "application/json" };
+    if (useJwt) {
+      headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
+    }
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
+
+    this.request({ path: path, headers }, "GET", callback);
   }
 
-  post(path, params, callback) {
-    let qs = {
-      api_key: this.credentials.apiKey,
-      api_secret: this.credentials.apiSecret
-    };
+  delete(path, callback, useJwt, useBasicAuth) {
+    let params = {};
+    if (!useJwt && !useBasicAuth) {
+      params["api_key"] = this.credentials.apiKey;
+      params["api_secret"] = this.credentials.apiSecret;
+    }
+
+    let headers = {};
+
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
+    path = path + "?" + querystring.stringify(params);
+
+    this.request({ path: path, headers }, "DELETE", callback);
+  }
+
+  postFile(path, options, callback, useJwt) {
+    let qs = {};
+    if (!useJwt) {
+      qs["api_key"] = this.credentials.apiKey;
+      qs["api_secret"] = this.credentials.apiSecret;
+    }
+
+    if (Object.keys(qs).length) {
+      let joinChar = "?";
+      if (path.indexOf(joinChar) !== -1) {
+        joinChar = "&";
+      }
+      path = path + joinChar + querystring.stringify(qs);
+    }
+
+    const file = options.file;
+    delete options.file; // We don't send this as metadata
+
+    const formData = {};
+
+    if (file) {
+      formData["filedata"] = {
+        value: file,
+        options: {
+          filename: options.filename || null
+        }
+      };
+    }
+
+    if (options.info) {
+      formData.info = JSON.stringify(options.info);
+    }
+
+    if (options.url) {
+      formData.url = options.url;
+    }
+
+    this.requestLib.post(
+      {
+        url: "https://" + this.host + path,
+        formData: formData,
+        headers: {
+          Authorization: `Bearer ${this.credentials.generateJwt()}`
+        }
+      },
+      callback
+    );
+  }
+
+  post(path, params, callback, useJwt) {
+    let qs = {};
+    if (!useJwt) {
+      qs["api_key"] = this.credentials.apiKey;
+      qs["api_secret"] = this.credentials.apiSecret;
+    }
 
     let joinChar = "?";
     if (path.indexOf(joinChar) !== -1) {
@@ -209,10 +311,44 @@ class HttpClient {
     );
   }
 
-  postUseQueryString(path, params, callback) {
+  postJson(path, params, callback, useJwt, useBasicAuth) {
+    let qs = {};
+    if (!useJwt && !useBasicAuth) {
+      qs["api_key"] = this.credentials.apiKey;
+      qs["api_secret"] = this.credentials.apiSecret;
+    }
+
+    let joinChar = "?";
+    if (path.indexOf(joinChar) !== -1) {
+      joinChar = "&";
+    }
+
+    path = path + joinChar + querystring.stringify(qs);
+
+    let headers = { "Content-Type": "application/json" };
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
+
+    this.request(
+      {
+        path: path,
+        body: JSON.stringify(params),
+        headers
+      },
+      "POST",
+      callback
+    );
+  }
+
+  postUseQueryString(path, params, callback, useJwt) {
     params = params || {};
-    params["api_key"] = this.credentials.apiKey;
-    params["api_secret"] = this.credentials.apiSecret;
+    if (!useJwt) {
+      params["api_key"] = this.credentials.apiKey;
+      params["api_secret"] = this.credentials.apiSecret;
+    }
 
     path = path + "?" + querystring.stringify(params);
 
