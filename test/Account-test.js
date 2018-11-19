@@ -6,7 +6,8 @@ describe("Account", function() {
     this.httpClientStub = TestUtils.getHttpClient();
     sinon.stub(this.httpClientStub, "request");
     this.account = new Account(TestUtils.getCredentials(), {
-      rest: this.httpClientStub
+      rest: this.httpClientStub,
+      api: this.httpClientStub
     });
   });
 
@@ -85,6 +86,43 @@ describe("Account", function() {
         expect(data).to.eql(null);
         done();
       });
+    });
+  });
+
+  describe("listSecrets", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("listSecrets")
+        .withParams("ABC123")
+        .to.get.url("/accounts/ABC123/secrets");
+    });
+  });
+
+  describe("getSecret", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("getSecret")
+        .withParams("ABC123", "123")
+        .to.get.url("/accounts/ABC123/secrets/123");
+    });
+  });
+
+  describe("createSecret", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("createSecret")
+        .withParams("ABC123", "123")
+        .to.post.withJsonBody({ secret: "123" })
+        .to.url("/accounts/ABC123/secrets/");
+    });
+  });
+
+  describe("deleteSecret", function() {
+    it("should call the correct endpoint", function() {
+      return expect(this.account)
+        .method("deleteSecret")
+        .withParams("ABC123", "123")
+        .to.delete.url("/accounts/ABC123/secrets/123");
     });
   });
 });

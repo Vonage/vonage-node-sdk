@@ -66,9 +66,12 @@ var ERROR_MESSAGES = {
 };
 
 exports.initialize = function(pkey, psecret, options) {
-  if (!pkey || !psecret) {
-    throw "key and secret cannot be empty, set valid values";
-  }
+  // These can default to empty as we may provide a private key for JWT auth
+  // In that situation, private key and secret are not required. If you don't provide
+  // A key/secret and try and make a request you'll get a 401 error back
+  pkey = pkey || "";
+  psecret = psecret || "";
+
   up = {
     api_key: pkey,
     api_secret: psecret

@@ -39,7 +39,11 @@ describe("DtmfResource", () => {
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       path: DtmfResource.PATH.replace("{call_uuid}", callId),
-      method: "PUT"
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": 20
+      }
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),

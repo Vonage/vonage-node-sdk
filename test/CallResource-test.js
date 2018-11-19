@@ -33,10 +33,25 @@ describe("CallsResource", () => {
   });
 
   it("should allow a call to be created", () => {
-    var params = {};
+    var params = {
+      to: {
+        type: "websocket",
+        uri: "wss://example.com/socket",
+        "content-type": "audio/l16;rate=16000",
+        headers: {
+          "utf-8": "✅"
+        }
+      }
+    };
     calls.create(params, emptyCallback);
 
-    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params);
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": 124
+      }
+    });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
       emptyCallback
@@ -105,13 +120,21 @@ describe("CallsResource", () => {
   it("should allow a call to be updated", () => {
     const callId = "2342342-lkjhlkjh-32423";
     var params = {
-      action: "hangup"
+      action: "hangup",
+      destination: {
+        type: "ncco",
+        url: ["http://exémple.com/ncco.json"]
+      }
     };
     calls.update(callId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       method: "PUT",
-      path: `${CallsResource.PATH}/${callId}`
+      path: `${CallsResource.PATH}/${callId}`,
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Length": 89
+      }
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

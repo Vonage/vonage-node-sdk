@@ -100,11 +100,13 @@ class HttpClient {
         }
       });
       response.on("close", e => {
-        this.logger.error(
-          "problem with API request detailed stacktrace below "
-        );
-        this.logger.error(e);
-        callback(e);
+        if (e) {
+          this.logger.error(
+            "problem with API request detailed stacktrace below "
+          );
+          this.logger.error(e);
+          callback(e);
+        }
       });
     });
     request.on("error", e => {
@@ -191,7 +193,7 @@ class HttpClient {
     };
   }
 
-  get(path, params, callback, useJwt = false) {
+  get(path, params, callback, useJwt = false, useBasicAuth = false) {
     if (!callback) {
       if (typeof params == "function") {
         callback = params;
@@ -200,7 +202,7 @@ class HttpClient {
     }
 
     params = params || {};
-    if (!useJwt) {
+    if (!useJwt && !useBasicAuth) {
       params["api_key"] = this.credentials.apiKey;
       params["api_secret"] = this.credentials.apiSecret;
     }
@@ -211,20 +213,32 @@ class HttpClient {
     if (useJwt) {
       headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
     }
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
 
     this.request({ path: path, headers }, "GET", callback);
   }
 
-  delete(path, callback, useJwt) {
+  delete(path, callback, useJwt, useBasicAuth) {
     let params = {};
-    if (!useJwt) {
+    if (!useJwt && !useBasicAuth) {
       params["api_key"] = this.credentials.apiKey;
       params["api_secret"] = this.credentials.apiSecret;
     }
 
+    let headers = {};
+
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
     path = path + "?" + querystring.stringify(params);
 
-    this.request({ path: path }, "DELETE", callback);
+    this.request({ path: path, headers }, "DELETE", callback);
   }
 
   postFile(path, options, callback, useJwt) {
@@ -292,6 +306,38 @@ class HttpClient {
 
     this.request(
       { path: path, body: querystring.stringify(params) },
+      "POST",
+      callback
+    );
+  }
+
+  postJson(path, params, callback, useJwt, useBasicAuth) {
+    let qs = {};
+    if (!useJwt && !useBasicAuth) {
+      qs["api_key"] = this.credentials.apiKey;
+      qs["api_secret"] = this.credentials.apiSecret;
+    }
+
+    let joinChar = "?";
+    if (path.indexOf(joinChar) !== -1) {
+      joinChar = "&";
+    }
+
+    path = path + joinChar + querystring.stringify(qs);
+
+    let headers = { "Content-Type": "application/json" };
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
+
+    this.request(
+      {
+        path: path,
+        body: JSON.stringify(params),
+        headers
+      },
       "POST",
       callback
     );
