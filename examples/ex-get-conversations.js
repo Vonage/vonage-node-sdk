@@ -4,10 +4,12 @@ module.exports = function(callback, config) {
 
   var nexmo = new Nexmo({
       apiKey: config.API_KEY,
-      apiSecret: config.API_SECRET
+      apiSecret: config.API_SECRET,
+      applicationId: config.APP_ID,
+      privateKey: config.PRIVATE_KEY
     },
     {debug: config.DEBUG}
   );
 
-  nexmo.message.sendSms(config.FROM_NUMBER, config.TO_NUMBER, 'testing', callback);
+  nexmo.conversations.get({}, callback);
 };

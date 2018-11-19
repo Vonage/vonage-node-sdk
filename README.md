@@ -8,7 +8,7 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [JWT (JSON Web Token)](#jwt)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Conversations](#conversations) | [Users](#users) | [Management](#management) | [JWT (JSON Web Token)](#jwt)
 
 ## Installation
 
@@ -346,6 +346,124 @@ nexmo.application.delete(appId, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/application#destroy-an-application
+
+## Conversations
+
+For an overview of conversations see https://developer.nexmo.com/stitch/overview
+
+### Create a Conversation
+
+```js
+nexmo.conversations.create(params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#createConversation)
+
+### Get a single Conversation
+
+```js
+nexmo.conversations.get(conversationId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch#retrieveConversation
+
+### Get Conversations by filter
+
+```js
+nexmo.conversations.get(options, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch
+
+### Update a Conversation
+
+```js
+nexmo.conversations.update(conversationId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#replaceConversation)
+
+### Delete a Conversation
+
+```js
+nexmo.conversations.delete(conversationId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch#deleteConversation
+
+### Add a Member to a Conversation
+
+```js
+nexmo.conversations.members.add(conversationId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch)
+
+### Get a single Member
+
+```js
+nexmo.conversations.members.get(conversationId, memberId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch#getUser
+
+### Get Members by filter
+
+```js
+nexmo.conversations.members.get(conversationId, params, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch
+
+## Users
+
+### Create a User
+
+```js
+nexmo.users.create(params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#createUse)
+
+### Get a single User
+
+```js
+nexmo.users.get(userId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch#getUser
+
+### Get Users by filter
+
+```js
+nexmo.users.get(options, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch#getUsers
+
+### Get all Conversations for a Users
+
+```js
+nexmo.users.getConversations(userId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch#getuserConversations
+
+### Update a User
+
+```js
+nexmo.users.update(userId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://ea.developer.nexmo.com/api/conversation#create-a-conversation)
+
+### Delete a User
+
+```js
+nexmo.users.delete(userId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/stitch#deleteUser
 
 ## Management
 
@@ -690,6 +808,19 @@ nexmo.options.rest.postUseQueryString(
   * [x] Get Applications
   * [x] Update an Application
   * [x] Delete an Application
+* Conversations
+  * [x] Create a Conversation
+  * [x] Get Conversations
+  * [x] Update a Conversation
+  * [x] Delete a Conversation
+  * [x] Add a Member to a Conversation
+  * [x] Get Members
+* Users
+  * [x] Create a User
+  * [x] Get Users
+  * [x] Get Conversations for a User
+  * [x] Update a User
+  * [x] Delete a User    
 * Account
   * [X] Balance
   * [x] Pricing
