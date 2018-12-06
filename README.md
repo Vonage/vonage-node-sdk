@@ -285,7 +285,7 @@ nexmo.numberInsight.get({level: 'standard', number: '1-234-567-8900'}, callback)
 ### Advanced
 
 ```js
-nexmo.numberInsight.get({level: 'advanced', number: NUMBER}, callback);
+nexmo.numberInsight.get({level: 'advancedSync', number: NUMBER}, callback);
 ```
 
 For more information check the documentation at https://developer.nexmo.com/number-insight/building-blocks/number-insight-advanced/node
