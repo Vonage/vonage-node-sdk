@@ -23,16 +23,21 @@ class Channel {
     );
   }
 
-  send(to, from, message, callback) {
+  send(to, from, message, callback, opts = {}) {
     const params = {
       to: to,
       from: from,
       message: message
     };
 
-    return this.options.api.post(Channel.PATH, params, callback, true, {
-      "Content-Type": "application/json"
-    });
+    return this.options.api.post(
+      Channel.PATH,
+      params,
+      callback,
+      !opts.useBasicAuth,
+      opts.useBasicAuth,
+      { "Content-Type": "application/json" }
+    );
   }
 }
 

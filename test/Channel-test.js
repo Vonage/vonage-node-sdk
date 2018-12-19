@@ -52,5 +52,56 @@ describe("Channel", function() {
         done();
       });
     });
+
+    it("uses JWT auth by default", function(done) {
+      const postMock = this.sandbox.mock(this.httpClientStub);
+      postMock
+        .expects("post")
+        .once()
+        .withArgs(
+          sinon.match.any,
+          sinon.match.any,
+          sinon.match.any,
+          true,
+          undefined
+        )
+        .yields(null, []);
+
+      this.channel.send(
+        { type: "sms", number: "1234567890" },
+        { type: "sms", number: "9876543210" },
+        { type: "text", text: "Hello World" },
+        () => {
+          postMock.verify();
+          done();
+        }
+      );
+    });
+
+    it("uses basicAuth auth if option supplied", function(done) {
+      const postMock = this.sandbox.mock(this.httpClientStub);
+      postMock
+        .expects("post")
+        .once()
+        .withArgs(
+          sinon.match.any,
+          sinon.match.any,
+          sinon.match.any,
+          false,
+          true
+        )
+        .yields(null, []);
+
+      this.channel.send(
+        { type: "sms", number: "1234567890" },
+        { type: "sms", number: "9876543210" },
+        { type: "text", text: "Hello World" },
+        () => {
+          postMock.verify();
+          done();
+        },
+        { useBasicAuth: true }
+      );
+    });
   });
 });

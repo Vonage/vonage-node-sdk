@@ -23,15 +23,20 @@ class Dispatch {
     );
   }
 
-  create(template, workflow, callback) {
+  create(template, workflow, callback, opts = {}) {
     const params = {
       template: template,
       workflow: workflow
     };
 
-    return this.options.api.post(Dispatch.PATH, params, callback, true, {
-      "Content-Type": "application/json"
-    });
+    return this.options.api.post(
+      Dispatch.PATH,
+      params,
+      callback,
+      !opts.useBasicAuth,
+      opts.useBasicAuth,
+      { "Content-Type": "application/json" }
+    );
   }
 }
 
