@@ -290,9 +290,9 @@ class HttpClient {
     );
   }
 
-  post(path, params, callback, useJwt, headers) {
+  post(path, params, callback, useJwt, useBasicAuth, headers = {}) {
     let qs = {};
-    if (!useJwt) {
+    if (!useJwt && !useBasicAuth) {
       qs["api_key"] = this.credentials.apiKey;
       qs["api_secret"] = this.credentials.apiSecret;
     }
@@ -304,9 +304,14 @@ class HttpClient {
 
     path = path + joinChar + querystring.stringify(qs);
 
-    headers = headers || {};
     if (useJwt) {
       headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
+    }
+
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
     }
 
     let encodedParams;

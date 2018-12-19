@@ -25,6 +25,43 @@ var defaultHeaders = {
 
 var client = null;
 
+function expectPostWithHeadersContaining(headers) {
+  sinon
+    .mock(fakeHttp)
+    .expects("request")
+    .once()
+    .withArgs({
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        ...headers
+      },
+      host: "rest.nexmo.com",
+      method: "POST",
+      path: "/api?",
+      port: 443
+    })
+    .returns(fakeRequest);
+}
+
+function expectPostWithQuery(query) {
+  sinon
+    .mock(fakeHttp)
+    .expects("request")
+    .once()
+    .withArgs({
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      host: "rest.nexmo.com",
+      method: "POST",
+      path: `/api${query}`,
+      port: 443
+    })
+    .returns(fakeRequest);
+}
+
 describe("HttpClient Object", function() {
   afterEach(function() {
     fakeHttp.request.restore();
@@ -313,6 +350,52 @@ describe("HttpClient Object", function() {
         some: "data"
       }
     );
+  });
+});
+
+describe("HttpClient post()", () => {
+  afterEach(function() {
+    fakeHttp.request.restore();
+  });
+
+  it("defaults to credentials as URL params", function() {
+    expectPostWithQuery("?api_key=key&api_secret=secret");
+
+    var client = new HttpClient(
+      { https: fakeHttp, logger: logger },
+      { apiKey: "key", apiSecret: "secret" }
+    );
+
+    client.post("/api", undefined, () => {});
+  });
+
+  it("should allow Basic auth", function() {
+    expectPostWithHeadersContaining({
+      Authorization: "Basic a2V5OnNlY3JldA=="
+    });
+
+    var client = new HttpClient(
+      { https: fakeHttp, logger: logger },
+      { apiKey: "key", apiSecret: "secret" }
+    );
+
+    client.post("/api", undefined, () => {}, false, true);
+  });
+
+  it("should allow JWT auth", function() {
+    var expectedUserAgent = "nexmo-node/1.0.0/v4.4.7";
+    const jwt = "generated";
+
+    expectPostWithHeadersContaining({
+      Authorization: "Bearer generated"
+    });
+
+    var client = new HttpClient(
+      { https: fakeHttp, logger: logger },
+      { generateJwt: () => jwt }
+    );
+
+    client.post("/api", undefined, () => {}, true, false);
   });
 });
 
