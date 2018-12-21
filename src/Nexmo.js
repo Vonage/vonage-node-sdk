@@ -11,6 +11,8 @@ import NumberInsight from "./NumberInsight";
 import App from "./App";
 import Account from "./Account";
 import CallsResource from "./CallsResource";
+import Conversations from "./Conversations";
+import Users from "./Users";
 import FilesResource from "./FilesResource";
 import Conversion from "./Conversion";
 import Media from "./Media";
@@ -83,6 +85,8 @@ class Nexmo {
     this.applications = new App(this.credentials, this.options);
     this.account = new Account(this.credentials, this.options);
     this.calls = new CallsResource(this.credentials, this.options);
+    this.conversations = new Conversations(this.credentials, this.options);
+    this.users = new Users(this.credentials, this.options);
     this.files = new FilesResource(this.credentials, this.options);
     this.conversion = new Conversion(this.credentials, this.options);
     this.media = new Media(this.credentials, this.options);

@@ -8,3 +8,5 @@ npm-debug.log
 coverage
 .nyc_output
 .idea
+e2e/.env
+e2e/private.key
