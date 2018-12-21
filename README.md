@@ -673,7 +673,7 @@ const nexmo = new Nexmo({
 Both of these objects expose the following methods:
 
 * `get(path, params, callback, useJwt)` (`params` is the query string to use)
-* `post(path, params, callback, useJwt)` (`params` is the POST body to send)
+* `post(path, params, callback, useJwt, useBasicAuth, headers = {})` (`params` is the POST body to send)
 * `postUseQueryString(path, params, callback, useJwt)` (`params` is the query string to use)
 * `delete(path, callback, useJwt)`
 
