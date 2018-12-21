@@ -290,9 +290,9 @@ class HttpClient {
     );
   }
 
-  post(path, params, callback, useJwt) {
+  post(path, params, callback, useJwt, useBasicAuth, headers = {}) {
     let qs = {};
-    if (!useJwt) {
+    if (!useJwt && !useBasicAuth) {
       qs["api_key"] = this.credentials.apiKey;
       qs["api_secret"] = this.credentials.apiSecret;
     }
@@ -304,11 +304,24 @@ class HttpClient {
 
     path = path + joinChar + querystring.stringify(qs);
 
-    this.request(
-      { path: path, body: querystring.stringify(params) },
-      "POST",
-      callback
-    );
+    if (useJwt) {
+      headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
+    }
+
+    if (useBasicAuth) {
+      headers["Authorization"] = `Basic ${Buffer.from(
+        this.credentials.apiKey + ":" + this.credentials.apiSecret
+      ).toString("base64")}`;
+    }
+
+    let encodedParams;
+    if (headers["Content-Type"] == "application/json") {
+      encodedParams = JSON.stringify(params);
+    } else {
+      encodedParams = querystring.stringify(params);
+    }
+
+    this.request({ path, body: encodedParams, headers }, "POST", callback);
   }
 
   postJson(path, params, callback, useJwt, useBasicAuth) {

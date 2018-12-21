@@ -650,6 +650,60 @@ nexmo.media.update(id, body, callback);
 nexmo.media.get(id, callback);
 ```
 
+## Channel
+
+### Send a message
+
+```js
+nexmo.channel.send(
+  { type: "<TYPE>", number: "<TO>"},
+  { type: "<TYPE>", number: "<FROM>"},
+  { content: { type: "text", text: "testing" } },
+  callback
+);
+```
+
+## Dispatch
+
+### Create a dispatch
+
+```js
+nexmo.dispatch.create(
+  "failover",
+  [
+    {
+      to: { type: "viber_service_msg", id: "<TO>"},
+      from: { type: "viber_service_msg", id: "<FROM>" },
+      message: {
+        content: {
+          type: "text",
+          text: "<CONTENT>"
+        },
+        viber_service_msg: {
+          ttl: 30
+        }
+      },
+      failover: {
+        expiry_time: 600,
+        condition_status: "delivered"
+      }
+    },
+    {
+      to: { type: "sms", number: "<TO>" },
+      from: { type: "sms", number: "<FROM>" },
+      message: {
+        content: {
+          type: "text",
+          text: "<CONTENT>"
+        }
+      }
+    }
+  ],
+  callback
+);
+```
+
+
 ## JWT
 
 There are two ways of generating a JWT. You can use the function that exists on the Nexmo definition:
@@ -738,7 +792,7 @@ const nexmo = new Nexmo({
 Both of these objects expose the following methods:
 
 * `get(path, params, callback, useJwt)` (`params` is the query string to use)
-* `post(path, params, callback, useJwt)` (`params` is the POST body to send)
+* `post(path, params, callback, useJwt, useBasicAuth, headers = {})` (`params` is the POST body to send)
 * `postUseQueryString(path, params, callback, useJwt)` (`params` is the query string to use)
 * `delete(path, callback, useJwt)`
 
@@ -838,6 +892,10 @@ nexmo.options.rest.postUseQueryString(
   * [x] Get
   * [x] Update
   * [x] Delete
+* Channel
+  * [x] Send
+* Workflow
+  * [x] Create
 * Voice (Deprecated)
   * [x] Outbound Calls
   * [ ] Inbound Call Webhook
