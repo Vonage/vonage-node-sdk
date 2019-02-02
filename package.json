@@ -3,6 +3,7 @@
   "author": "nexmo",
   "version": "2.4.1",
   "main": "lib/Nexmo",
+  "types": "./typings/index.d.ts",
   "keywords": [
     "sms",
     "voice",
