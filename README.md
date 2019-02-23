@@ -326,7 +326,7 @@ For more information see https://developer.nexmo.com/api/application#retrieve-an
 ### Get Apps by a filter
 
 ```js
-nexmo.application.get(options, callback);
+nexmo.applications.get(options, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/application#retrieve-your-applications
@@ -342,7 +342,7 @@ For more information see https://developer.nexmo.com/api/application#update-an-a
 ### Delete an App
 
 ```js
-nexmo.application.delete(appId, callback);
+nexmo.applications.delete(appId, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/application#destroy-an-application
