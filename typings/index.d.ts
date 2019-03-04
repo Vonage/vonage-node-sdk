@@ -4,6 +4,7 @@ declare module 'nexmo' {
         apiKey: string;
         apiSecret: string;
         applicationId: string;
+        privateKey?: string;
     }
 
     export interface NexmoApiError {
