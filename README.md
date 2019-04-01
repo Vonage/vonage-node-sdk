@@ -66,7 +66,7 @@ Options are:
 nexmo.message.sendSms(sender, recipient, message, options, callback);
 ```
 
-* `opts` - parameter is optional. See [SMS API Reference](https://developer.nexmo.com/api/sms#send-an-sms)
+* `options` - parameter is optional. See [SMS API Reference](https://developer.nexmo.com/api/sms#send-an-sms)
 
 ### Send a Binary Message
 
