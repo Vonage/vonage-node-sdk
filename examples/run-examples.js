@@ -55,7 +55,6 @@ exampleFiles = [
   // 'ex-check-balance.js',
   // 'ex-create-update-delete-app.js',
   // 'ex-dtmf-to-call.js',
-  // 'ex-get-apps.js',
   // 'ex-get-calls.js',
   // 'ex-make-call.js',
   // 'ex-number-insight-basic.js',
@@ -64,8 +63,15 @@ exampleFiles = [
   // 'ex-talk-to-call.js',
   // 'ex-create-secret.js',
   // 'ex-get-secret.js',
-  'ex-list-secrets.js',
-  // 'ex-revoke-secret.js'
+  // 'ex-list-secrets.js',
+  // 'ex-revoke-secret.js',
+  // 'ex-create-v1-application.js',
+  // 'ex-create-v2-application.js',
+  // 'ex-update-v1-application.js',
+  // 'ex-update-v2-application.js',
+  // 'ex-get-application.js',
+  // 'ex-get-applications.js',
+  // 'ex-delete-application.js',
 ];
 
 console.log('Found', exampleFiles.length, 'examples to run:\n', exampleFiles);
