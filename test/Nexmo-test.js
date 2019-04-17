@@ -198,7 +198,7 @@ describe("Nexmo Object instance", function() {
       apiSecret: "test"
     });
     expect(nexmo.options.userAgent).to.match(
-      /^nexmo-node\/[\d.]* node\/[\d.]*$/
+      /^nexmo-node\/[\d|\w\-\d.]* node\/[\d.]*$/
     );
   });
 
@@ -214,7 +214,7 @@ describe("Nexmo Object instance", function() {
       options
     );
     expect(nexmo.options.userAgent).to.match(
-      /nexmo-node\/[\d.]* node\/[\d.]* nexmo-cli\/1\.0\.0/
+      /nexmo-node\/[\d|\w\-\d.]* node\/[\d.]* nexmo-cli\/1\.0\.0/
     );
   });
 
