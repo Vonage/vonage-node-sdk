@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "2.4.1",
+  "version": "2.5.1-beta-1",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
@@ -59,7 +59,7 @@
     "mocha": "^5.2.0",
     "ngrok": "^2.2.2",
     "nodemon": "^1.18.9",
-    "nyc": "^13.1.0",
+    "nyc": "^14.0.0",
     "prettier": "^1.16.3",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
