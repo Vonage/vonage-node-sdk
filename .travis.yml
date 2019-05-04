@@ -4,11 +4,10 @@ os:
   - osx
 language: node_js
 node_js:
-  - 4
-  - 6
   - 8
-  - lts/*
-  - node
+  - 10
+  - 11
+  - 12
 deploy:
   provider: npm
   email: devrel@nexmo.com
