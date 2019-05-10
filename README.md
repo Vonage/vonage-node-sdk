@@ -405,7 +405,7 @@ nexmo.number.get(options, callback);
   * `index`
   * `size`
 
-For more details on what the above options mean, refer to the Nexmo API  [documentation](https://developer.nexmo.com/api/developer/numbers#list-owned-numbers)
+For more details about these options, refer to the [Numbers API reference](https://developer.nexmo.com/api/numbers#getOwnedNumbers)
 
 Example:
 
@@ -425,16 +425,17 @@ nexmo.number.search(countryCode,options,callback);
 2. Dictionary Object optionally containing the following parameters :
   * `pattern`
   * `search_pattern`
+  * `type`
   * `features`
   * `index`
   * `size`
 
-For more details on what the above options mean, refer to the Nexmo API  [documentation](https://developer.nexmo.com/api/developer/numbers#search-available-numbers)
+For more details about these options, refer to the [Numbers API reference](https://developer.nexmo.com/api/numbers#getAvailableNumbers)
 
 Example:
 
 ```js
-nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_pattern:2}, callback);
+nexmo.number.search('US',{pattern:3049,index:1,size:50,type:'mobile-lvn',features:'VOICE',search_pattern:2}, callback);
 ```
 
 ### Purchase Number
@@ -443,11 +444,15 @@ nexmo.number.search('US',{pattern:3049,index:1,size:50,features:'VOICE',search_p
 nexmo.number.buy(countryCode, msisdn, callback);
 ```
 
+For more details on these parameters, see the [Numbers API reference](https://developer.nexmo.com/api/numbers#buyANumber).
+
 ### Cancel Number
 
 ```js
 nexmo.number.cancel(countryCode, msisdn, callback);
 ```
+
+For more details on these parameters, see the [Numbers API reference](https://developer.nexmo.com/api/numbers#cancelANumber).
 
 ### Update Number
 
@@ -455,7 +460,7 @@ nexmo.number.cancel(countryCode, msisdn, callback);
 nexmo.number.update(countryCode, msisdn, params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/developer/numbers#update-a-number)
+`params` is a dictionary of parameters as described in the [Numbers API reference](https://developer.nexmo.com/api/numbers#updateANumber).
 
 ### Update Password (API Secret)
 
