@@ -66,11 +66,11 @@ exampleFiles = [
   // 'ex-list-secrets.js',
   // 'ex-revoke-secret.js',
   // 'ex-create-v1-application.js',
-  // 'ex-create-v2-application.js',
+  //'ex-create-v2-application.js',
   // 'ex-update-v1-application.js',
   // 'ex-update-v2-application.js',
-  // 'ex-get-application.js',
-  // 'ex-get-applications.js',
+  'ex-get-application.js',
+  'ex-get-applications.js',
   // 'ex-delete-application.js',
 ];
 

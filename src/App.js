@@ -78,16 +78,42 @@ class App {
     };
   }
 
+  _convertApplicationResponse(application) {
+    for (let capability in application.capabilities) {
+      application[capability] = {
+        webhooks: []
+      }
+      for (let webhook in application.capabilities[capability].webhooks) {
+        application[capability].webhooks.push({
+          endpoint_type: webhook,
+          endpoint: application.capabilities[capability].webhooks[webhook].address,
+          http_method: application.capabilities[capability].webhooks[webhook].http_method
+        })
+      }
+    }
+
+    delete application.capabilities;
+    return application;
+  }
+
+  _convertApplicationListResponse(response) {
+    for (let i = 0; i < response._embedded.applications.length; i++) {
+      response._embedded.applications[i] = this._convertApplicationResponse(response._embedded.applications[i])
+    }
+  }
+
   /**
    * TODO: document
    */
   create(name, type, answerUrl, eventUrl, options, callback) {
     let params = {};
+    let responseParser = null;
 
     if (arguments.length > 2) {
       params = JSON.stringify(
         this._convertMethodSignature(name, type, answerUrl, eventUrl, options)
       );
+      responseParser = this._convertApplicationResponse;
     } else {
       params = JSON.stringify(name);
     }
@@ -105,7 +131,7 @@ class App {
       }
     };
 
-    this.options.httpClient.request(config, callback);
+    this.options.httpClient.request(config, callback, callback, false, responseParser);
   }
 
   /**
@@ -113,6 +139,7 @@ class App {
    */
   get(params, callback) {
     const authorization = `${this.creds.apiKey}:${this.creds.apiSecret}`;
+    let responseParser = null;
 
     if (typeof params !== "object") {
       var config = {
@@ -126,6 +153,7 @@ class App {
           )}`
         }
       };
+      responseParser = this._convertApplicationResponse;
     } else {
       var config = {
         host: "api.nexmo.com",
@@ -139,9 +167,10 @@ class App {
           )}`
         }
       };
+      responseParser = this._convertApplicationListResponse;
     }
 
-    this.options.httpClient.request(config, callback);
+    this.options.httpClient.request(config, callback, callback, false, responseParser);
   }
 
   /**
@@ -149,10 +178,12 @@ class App {
    */
   update(appId, name, type, answerUrl, eventUrl, options, callback) {
     let params = {};
+    let responseParser = null;
     if (arguments.length > 3) {
       params = JSON.stringify(
         this._convertMethodSignature(name, type, answerUrl, eventUrl, options)
       );
+      responseParser = this._convertApplicationResponse;
     } else {
       params = JSON.stringify(name);
     }
@@ -170,7 +201,7 @@ class App {
       }
     };
 
-    this.options.httpClient.request(config, callback);
+    this.options.httpClient.request(config, callback, callback, false, responseParser);
   }
 
   /**
