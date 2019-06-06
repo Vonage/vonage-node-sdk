@@ -323,7 +323,7 @@ For more information see https://developer.nexmo.com/api/application#retrieve-an
 ### Get Apps by a filter
 
 ```js
-nexmo.application.get(options, callback);
+nexmo.applications.get(options, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/application#retrieve-your-applications
