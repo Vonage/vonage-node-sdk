@@ -369,6 +369,26 @@ describe("parseResponse", function() {
     expect(callback).was.calledWith(null, { data: "data" });
   });
 
+  it("should allow a custom response parser", function() {
+    var callback = sinon.spy();
+    const response = {
+      statusCode: 201,
+      headers: { "content-type": "application/json" }
+    };
+    client.__parseResponse(
+      response,
+      ['{ "data" : "data" }'],
+      "GET",
+      callback,
+      false,
+      response => {
+        response.data = "new";
+        return response;
+      }
+    );
+    expect(callback).was.calledWith(null, { data: "new" });
+  });
+
   it("should not try and parse successful DELETE request to JSON", function() {
     var callback = sinon.spy();
     const response = {

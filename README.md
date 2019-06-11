@@ -1,5 +1,5 @@
-# Nexmo Client Library for Node.js 
-[![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node) 
+# Nexmo Client Library for Node.js
+[![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node)
 [![Known Vulnerabilities](https://snyk.io/test/github/Nexmo/nexmo-node/badge.svg)](https://snyk.io/test/github/Nexmo/nexmo-node)
 
 A Node.JS REST API Wrapper library for [Nexmo](https://www.nexmo.com/).
@@ -307,34 +307,82 @@ For an overview of applications see https://developer.nexmo.com/concepts/guides/
 ### Create an App
 
 ```js
-nexmo.applications.create(name, type, answerUrl, eventUrl, options, callback);
+nexmo.applications.create(params, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/application#create-an-application
+For more information see https://developer.nexmo.com/api/application.v2#createApplication
+
+`params` can be
+
+``` json
+{
+"name": "My Application",
+  "capabilities": {
+    "voice": {
+      "webhooks": {
+        "answer_url": {
+          "address": "https://example.com/webhooks/answer",
+          "http_method": "POST"
+        },
+        "event_url": {
+          "address": "https://example.com/webhooks/event",
+          "http_method": "POST"
+        }
+      }
+    },
+    "messages": {
+      "webhooks": {
+        "inbound_url": {
+          "address": "https://example.com/webhooks/inbound",
+          "http_method": "POST"
+        },
+        "status_url": {
+          "address": "https://example.com/webhooks/status",
+          "http_method": "POST"
+        }
+      }
+    },
+    "rtc": {
+      "webhooks": {
+        "event_url": {
+          "address": "https://example.com/webhooks/event",
+          "http_method": "POST"
+        }
+      }
+    },
+    "vbc": {}
+  }
+}
+```
 
 ### Get a single App
 
 ```js
-nexmo.applications.get(appId, callback);
+nexmo.applications.get(appId, callback, v2flag);
 ```
 
-For more information see https://developer.nexmo.com/api/application#retrieve-an-application
+For more information see https://developer.nexmo.com/api/application.v2#getApplication
+
+ - `v2flag` - if `true`, you'll receive the V2 API response, else you'll receive a V1 style response from the V2 API
 
 ### Get Apps by a filter
 
 ```js
-nexmo.application.get(options, callback);
+nexmo.application.get(options, callback, v2flag);
 ```
 
-For more information see https://developer.nexmo.com/api/application#retrieve-your-applications
+For more information see https://developer.nexmo.com/api/application.v2#listApplication
+- `options` - filter options, use `{}` to get all your applications
+- `v2flag` - if `true`, you'll receive the V2 API response, else you'll receive a V1 style response from the V2 API
+
 
 ### Update an App
 
 ```js
-nexmo.applications.update(appId, name, type, answerUrl, eventUrl, options, callback);
+nexmo.applications.update(params, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/application#update-an-application
+For more information see https://developer.nexmo.com/api/application.v2#updateApplication
 
 ### Delete an App
 
@@ -342,7 +390,7 @@ For more information see https://developer.nexmo.com/api/application#update-an-a
 nexmo.application.delete(appId, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/application#destroy-an-application
+For more information see https://developer.nexmo.com/api/application.v2#deleteApplication
 
 ## Management
 

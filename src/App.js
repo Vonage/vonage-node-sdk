@@ -82,13 +82,15 @@ class App {
     for (let capability in application.capabilities) {
       application[capability] = {
         webhooks: []
-      }
+      };
       for (let webhook in application.capabilities[capability].webhooks) {
         application[capability].webhooks.push({
           endpoint_type: webhook,
-          endpoint: application.capabilities[capability].webhooks[webhook].address,
-          http_method: application.capabilities[capability].webhooks[webhook].http_method
-        })
+          endpoint:
+            application.capabilities[capability].webhooks[webhook].address,
+          http_method:
+            application.capabilities[capability].webhooks[webhook].http_method
+        });
       }
     }
 
@@ -96,10 +98,16 @@ class App {
     return application;
   }
 
-  _convertApplicationListResponse(response) {
-    for (let i = 0; i < response._embedded.applications.length; i++) {
-      response._embedded.applications[i] = this._convertApplicationResponse(response._embedded.applications[i])
-    }
+  _convertApplicationListResponse(applicationResponseHandler) {
+    return response => {
+      for (let i in response._embedded.applications) {
+        response._embedded.applications[i] = applicationResponseHandler(
+          response._embedded.applications[i]
+        );
+      }
+
+      return response;
+    };
   }
 
   /**
@@ -131,13 +139,19 @@ class App {
       }
     };
 
-    this.options.httpClient.request(config, callback, callback, false, responseParser);
+    this.options.httpClient.request(
+      config,
+      callback,
+      callback,
+      false,
+      responseParser
+    );
   }
 
   /**
    * TODO: document
    */
-  get(params, callback) {
+  get(params, callback, v2 = false) {
     const authorization = `${this.creds.apiKey}:${this.creds.apiSecret}`;
     let responseParser = null;
 
@@ -167,10 +181,22 @@ class App {
           )}`
         }
       };
-      responseParser = this._convertApplicationListResponse;
+      responseParser = this._convertApplicationListResponse(
+        this._convertApplicationResponse
+      );
     }
 
-    this.options.httpClient.request(config, callback, callback, false, responseParser);
+    if (v2) {
+      responseParser = null;
+    }
+
+    this.options.httpClient.request(
+      config,
+      callback,
+      callback,
+      false,
+      responseParser
+    );
   }
 
   /**
@@ -201,7 +227,13 @@ class App {
       }
     };
 
-    this.options.httpClient.request(config, callback, callback, false, responseParser);
+    this.options.httpClient.request(
+      config,
+      callback,
+      callback,
+      false,
+      responseParser
+    );
   }
 
   /**

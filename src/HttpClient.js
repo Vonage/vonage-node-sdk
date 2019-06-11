@@ -23,7 +23,13 @@ class HttpClient {
     }
   }
 
-  request(endpoint, method, callback, skipJsonParsing = false, customResponseParser) {
+  request(
+    endpoint,
+    method,
+    callback,
+    skipJsonParsing = false,
+    customResponseParser
+  ) {
     if (typeof method === "function") {
       callback = method;
       endpoint.method = endpoint.method || "GET";
@@ -117,7 +123,14 @@ class HttpClient {
     });
   }
 
-  __parseResponse(httpResponse, data, method, callback, skipJsonParsing, customResponseParser) {
+  __parseResponse(
+    httpResponse,
+    data,
+    method,
+    callback,
+    skipJsonParsing,
+    customResponseParser
+  ) {
     const isArrayOrBuffer = data instanceof Array || data instanceof Buffer;
     if (!isArrayOrBuffer) {
       throw new Error("data should be of type Array or Buffer");
