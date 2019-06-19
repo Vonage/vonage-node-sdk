@@ -124,6 +124,7 @@ class App {
       responseParser = this._convertApplicationResponse;
     } else {
       params = JSON.stringify(name);
+      callback = type;
     }
 
     const authorization = `${this.creds.apiKey}:${this.creds.apiSecret}`;
@@ -212,6 +213,7 @@ class App {
       responseParser = this._convertApplicationResponse;
     } else {
       params = JSON.stringify(name);
+      callback = type;
     }
 
     const authorization = `${this.creds.apiKey}:${this.creds.apiSecret}`;
