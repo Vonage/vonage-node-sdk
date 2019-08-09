@@ -470,7 +470,7 @@ nexmo.account.updatePassword(<NEW_PASSWORD>,callback);
 ### Update Callback URL associated to the account
 
 ```js
-nexmo.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
+nexmo.account.updateSMSCallback(<NEW_CALLBACK_URL>,callback);
 ```
 
 ### Change Delivery Receipt URL associated to the account
