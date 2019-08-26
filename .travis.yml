@@ -10,6 +10,7 @@ node_js:
   - 12
 install:
   - npm install -g codecov nyc mocha
+  - npm install
 script:
   - nyc --reporter=text-lcov mocha > coverage.lcov
   - codecov
