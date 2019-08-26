@@ -8,6 +8,11 @@ node_js:
   - 10
   - 11
   - 12
+install:
+  - npm install -g codecov
+script:
+  - nyc report --reporter=text-lcov > coverage.lcov
+  - codecov
 deploy:
   provider: npm
   email: devrel@nexmo.com
