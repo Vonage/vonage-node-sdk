@@ -9,11 +9,10 @@ node_js:
   - 11
   - 12
 install:
-  - npm install -g nyc
+  - npm install -g codecov nyc mocha
 script:
-  - nyc report --reporter=text-lcov > coverage.lcov
-after_success:
-    - bash <(curl -s https://codecov.io/bash)
+  - nyc --reporter=text-lcov mocha > coverage.lcov
+  - codecov
 deploy:
   provider: npm
   email: devrel@nexmo.com
