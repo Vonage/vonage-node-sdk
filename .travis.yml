@@ -9,7 +9,7 @@ node_js:
   - 11
   - 12
 install:
-  - npm install -g codecov
+  - npm install -g codecov nyc
 script:
   - nyc report --reporter=text-lcov > coverage.lcov
   - codecov
