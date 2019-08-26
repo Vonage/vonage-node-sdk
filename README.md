@@ -1,6 +1,7 @@
-# Nexmo Client Library for Node.js 
-[![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node) 
+# Nexmo Client Library for Node.js
+[![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node)
 [![Known Vulnerabilities](https://snyk.io/test/github/Nexmo/nexmo-node/badge.svg)](https://snyk.io/test/github/Nexmo/nexmo-node)
+[![codecov](https://codecov.io/gh/Nexmo/nexmo-node/branch/master/graph/badge.svg)](https://codecov.io/gh/Nexmo/nexmo-node)
 
 A Node.JS REST API Wrapper library for [Nexmo](https://www.nexmo.com/).
 
@@ -31,9 +32,9 @@ const nexmo = new Nexmo({
 
 * `apiKey` - API Key from Nexmo.
 * `apiSecret` - API SECRET from Nexmo.
-* `applicationId` - (optional) The Nexmo Application ID to be used when creating JWTs. 
+* `applicationId` - (optional) The Nexmo Application ID to be used when creating JWTs.
 * `privateKey` - (optional) The Private Key to be used when creating JWTs. You can specify the key as any of the following:
-  * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.  
+  * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.
   * A String containing the path to the key file on disk.
 * `options` - (optional) Additional options for the constructor.
 
