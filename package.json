@@ -30,6 +30,7 @@
   "scripts": {
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",
     "test": "npm run test-no-lint",
+    "report-coverage": "cross-env NODE_ENV=test nyc --reporter=text-lcov mocha > coverage.lcov",
     "test-coverage": "cross-env NODE_ENV=test nyc mocha",
     "test-coverage-html": "cross-env NODE_ENV=test nyc --reporter html mocha",
     "test-no-lint": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
