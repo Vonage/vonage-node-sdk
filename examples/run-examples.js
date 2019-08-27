@@ -56,6 +56,7 @@ exampleFiles = [
   // 'ex-check-balance.js',
   // 'ex-create-update-delete-app.js',
   // 'ex-dtmf-to-call.js',
+  'ex-make-call-ncco.js',
   // 'ex-get-apps.js',
   // 'ex-get-calls.js',
   // 'ex-make-call.js',
@@ -65,7 +66,7 @@ exampleFiles = [
   // 'ex-talk-to-call.js',
   // 'ex-create-secret.js',
   // 'ex-get-secret.js',
-  'ex-list-secrets.js',
+  // 'ex-list-secrets.js',
   // 'ex-revoke-secret.js'
 ];
 
