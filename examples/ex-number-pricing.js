@@ -3,11 +3,11 @@ module.exports = function(callback, config) {
   var Nexmo = require('../lib/Nexmo');
 
   var nexmo = new Nexmo({
-      apiKey: config.API_KEY, 
-      apiSecret: config.API_SECRET
-    },
-    {debug: config.DEBUG}
-  );
+    apiKey: config.API_KEY,
+    apiSecret: config.API_SECRET
+  }, {
+    debug: config.DEBUG
+  });
 
   // You can get general pricing for a country
   nexmo.number.getPricing('GB', console.log);

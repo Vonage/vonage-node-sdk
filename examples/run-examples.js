@@ -19,24 +19,25 @@ var currentExampleFile = null;
 var failures = [];
 
 function runNextExample(err, res) {
-  if(err) {
+  if (err) {
     console.error('Error running', currentExampleFile, 'Error', err);
-    failures.push({example: currentExampleFile, error: err});
-  }
-  else if(currentExampleFile) {
+    failures.push({
+      example: currentExampleFile,
+      error: err
+    });
+  } else if (currentExampleFile) {
     console.log('Example complete:', currentExampleFile, 'Result', res);
   }
 
-  if(exampleIndex < exampleFiles.length) {
+  if (exampleIndex < exampleFiles.length) {
     currentExampleFile = exampleFiles[exampleIndex];
     ++exampleIndex;
 
-    console.log(SPACER, exampleIndex + '.',  'Loading', currentExampleFile);
+    console.log(SPACER, exampleIndex + '.', 'Loading', currentExampleFile);
     runExample(currentExampleFile, runNextExample);
-  }
-  else {
+  } else {
     console.log(SPACER, 'All examples complete');
-    if(failures.length > 0) {
+    if (failures.length > 0) {
       console.error(SPACER, failures.length, 'example(s) provided errors\n\n', failures);
     }
   }

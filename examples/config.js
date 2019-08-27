@@ -1,4 +1,6 @@
-require('dotenv').config({path:__dirname + '/.env'});
+require('dotenv').config({
+  path: __dirname + '/.env'
+});
 
 var config = {
   API_KEY: process.env.API_KEY || '',
