@@ -9,5 +9,14 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.account.checkBalance(callback);
+  nexmo.verify.check({
+    request_id: config.REQUEST_ID,
+    code: config.CODE
+  }, (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(result);
+    }
+  });
 };

@@ -1,19 +1,19 @@
 module.exports = function(callback, config) {
 
   var Promise = require('bluebird');
-  
+
   var Nexmo = require('../lib/Nexmo');
 
   var nexmo = new Nexmo({
-      apiKey: config.API_KEY, 
-      apiSecret: config.API_SECRET
-    },
-    {debug: config.DEBUG}
-  );
-    
+    apiKey: config.API_KEY,
+    apiSecret: config.API_SECRET
+  }, {
+    debug: config.DEBUG
+  });
+
   var app = Promise.promisifyAll(nexmo.app);
-  
-  var tempAppName = new Date().getTime(); 
+
+  var tempAppName = new Date().getTime();
   console.log('Creating App', tempAppName);
 
   app.createAsync(tempAppName, 'voice', 'https://v1uxw2scimhr.runscope.net', 'https://v1uxw2scimhr.runscope.net', null)

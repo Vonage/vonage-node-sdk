@@ -11,12 +11,18 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.media.update(config.MEDIA_ID, {
-    public_item: true
-  }, function(err, data) {
-    if (err) {
-      throw err;
-    }
-    console.log(data);
-  });
+  nexmo.calls.create({
+    to: [{
+      type: 'phone',
+      number: config.TO_NUMBER
+    }],
+    from: {
+      type: 'phone',
+      number: config.FROM_NUMBER
+    },
+    ncco: [{
+      "action": "talk",
+      "text": "This is a text to speech call from Nexmo"
+    }]
+  }, callback);
 };
