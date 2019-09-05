@@ -18,6 +18,8 @@ var fakeRequest = {
   on: function() {}
 };
 
+var emptyCredentials = {};
+
 var defaultHeaders = {
   "Content-Type": "application/x-www-form-urlencoded",
   Accept: "application/json"
@@ -44,11 +46,14 @@ describe("HttpClient Object", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      https: fakeHttp,
-      port: 443,
-      logger: logger
-    });
+    var client = new HttpClient(
+      {
+        https: fakeHttp,
+        port: 443,
+        logger: logger
+      },
+      emptyCredentials
+    );
 
     client.request(
       {
@@ -76,11 +81,14 @@ describe("HttpClient Object", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      http: fakeHttp,
-      port: 80,
-      logger: logger
-    });
+    var client = new HttpClient(
+      {
+        http: fakeHttp,
+        port: 80,
+        logger: logger
+      },
+      emptyCredentials
+    );
 
     client.request(
       {
@@ -108,11 +116,14 @@ describe("HttpClient Object", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      http: fakeHttp,
-      port: 80,
-      logger: logger
-    });
+    var client = new HttpClient(
+      {
+        http: fakeHttp,
+        port: 80,
+        logger: logger
+      },
+      emptyCredentials
+    );
 
     client.request(
       {
@@ -140,11 +151,14 @@ describe("HttpClient Object", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      http: fakeHttp,
-      port: 80,
-      logger: logger
-    });
+    var client = new HttpClient(
+      {
+        http: fakeHttp,
+        port: 80,
+        logger: logger
+      },
+      emptyCredentials
+    );
 
     client.request(
       {
@@ -155,6 +169,80 @@ describe("HttpClient Object", function() {
       {
         some: "data"
       }
+    );
+  });
+
+  it("should generate a signature when credentials are present", function() {
+    var mock = sinon.mock(fakeHttp);
+    mock
+      .expects("request")
+      .once()
+      .withArgs({
+        headers: defaultHeaders,
+        host: "api.nexmo.com",
+        method: "GET",
+        path: "/some_path?timestamp=1&sig=undefined",
+        port: 80
+      })
+      .returns(fakeRequest);
+
+    var client = new HttpClient(
+      {
+        http: fakeHttp,
+        port: 80,
+        logger: logger
+      },
+      {
+        signatureSecret: "meh",
+        signatureMethod: "md5hash",
+        generateSignature: function() {}
+      }
+    );
+
+    client.request(
+      {
+        host: "api.nexmo.com",
+        path: "/some_path?timestamp=1"
+      },
+      "GET"
+    );
+  });
+
+  it("should generate a timestamp for signed requests", function() {
+    var timestamp = (new Date().getTime() / 1000) | 0; // floor to seconds
+    timestamp = timestamp.toString();
+    var mock = sinon.mock(fakeHttp);
+    mock
+      .expects("request")
+      .once()
+      .withArgs({
+        headers: defaultHeaders,
+        host: "api.nexmo.com",
+        method: "GET",
+        path: `/some_path?timestamp=${timestamp}&sig=undefined`,
+        port: 80
+      })
+      .returns(fakeRequest);
+
+    var client = new HttpClient(
+      {
+        http: fakeHttp,
+        port: 80,
+        logger: logger
+      },
+      {
+        signatureSecret: "meh",
+        signatureMethod: "md5hash",
+        generateSignature: function() {}
+      }
+    );
+
+    client.request(
+      {
+        host: "api.nexmo.com",
+        path: "/some_path"
+      },
+      "GET"
     );
   });
 
@@ -172,10 +260,13 @@ describe("HttpClient Object", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      https: fakeHttp,
-      logger: logger
-    });
+    var client = new HttpClient(
+      {
+        https: fakeHttp,
+        logger: logger
+      },
+      emptyCredentials
+    );
 
     client.request(
       {
@@ -204,11 +295,14 @@ describe("HttpClient Object", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      https: fakeHttp,
-      logger: logger,
-      timeout: 5000
-    });
+    var client = new HttpClient(
+      {
+        https: fakeHttp,
+        logger: logger,
+        timeout: 5000
+      },
+      emptyCredentials
+    );
 
     client.request(
       {
@@ -236,10 +330,13 @@ describe("HttpClient Object", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      https: fakeHttp,
-      logger: logger
-    });
+    var client = new HttpClient(
+      {
+        https: fakeHttp,
+        logger: logger
+      },
+      emptyCredentials
+    );
 
     client.request({
       host: "api.nexmo.com",
@@ -258,10 +355,13 @@ describe("HttpClient Object", function() {
         logged = true;
       }
     };
-    var client = new HttpClient({
-      https: fakeHttp,
-      logger: testLogger
-    });
+    var client = new HttpClient(
+      {
+        https: fakeHttp,
+        logger: testLogger
+      },
+      emptyCredentials
+    );
 
     client.request(
       {
@@ -297,11 +397,14 @@ describe("HttpClient Object", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      https: fakeHttp,
-      logger: logger,
-      userAgent: expectedUserAgent
-    });
+    var client = new HttpClient(
+      {
+        https: fakeHttp,
+        logger: logger,
+        userAgent: expectedUserAgent
+      },
+      emptyCredentials
+    );
 
     client.request(
       {
@@ -322,7 +425,7 @@ describe("parseResponse", function() {
       https: fakeHttp,
       logger: logger
     });
-  });
+  }, emptyCredentials);
 
   it("should parse a 500+ status code as an error", function() {
     var callback = sinon.spy();
@@ -471,10 +574,13 @@ describe("parseResponse", function() {
       })
       .returns(fakeRequest);
 
-    var client = new HttpClient({
-      port: 80,
-      logger: logger
-    });
+    var client = new HttpClient(
+      {
+        port: 80,
+        logger: logger
+      },
+      emptyCredentials
+    );
 
     // We expect our initial headers to be set
     expect(client.headers["Content-Type"]).to.eql(

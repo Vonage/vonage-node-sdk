@@ -3,6 +3,7 @@ import path from "path";
 
 import Credentials from "./Credentials";
 import JwtGenerator from "./JwtGenerator";
+import HashGenerator from "./HashGenerator";
 import Message from "./Message";
 import Voice from "./Voice";
 import Number from "./Number";
@@ -20,6 +21,7 @@ import NullLogger from "./NullLogger";
 import ConsoleLogger from "./ConsoleLogger";
 
 const jwtGeneratorInstance = new JwtGenerator();
+const hashGeneratorInstance = new HashGenerator();
 
 class Nexmo {
   /**
@@ -106,11 +108,23 @@ class Nexmo {
    *
    * @returns {String} the generated token
    */
+
   generateJwt(claims = {}) {
     if (claims.application_id === undefined) {
       claims.application_id = this.credentials.applicationId;
     }
     return Nexmo.generateJwt(this.credentials.privateKey, claims);
+  }
+
+  /**
+   * Generate a Signature Hash.
+   *
+   * @param {Object} params - params to generate hash from
+   *
+   * @returns {String} the generated token
+   */
+  generateSignature(params) {
+    return this.credentials.generateSignature(params);
   }
 }
 
@@ -132,6 +146,19 @@ Nexmo.generateJwt = (privateKey, claims) => {
     }
   }
   return jwtGeneratorInstance.generate(privateKey, claims);
+};
+
+/**
+ * Generate a Signature Hash.
+ *
+ * @param {String} method - the method to be used when creating the hash
+ * @param {String} secret - the secret to be used when creating the hash
+ * @param {Object} params - params to generate hash from
+ *
+ * @returns {String} the generated token
+ */
+Nexmo.generateSignature = (method, secret, params) => {
+  return hashGeneratorInstance.generate(method, secret, params);
 };
 
 export default Nexmo;

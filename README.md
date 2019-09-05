@@ -9,7 +9,7 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [JWT (JSON Web Token)](#jwt)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [JWT (JSON Web Token)](#jwt)
 
 ## Installation
 
@@ -27,6 +27,8 @@ const nexmo = new Nexmo({
     apiSecret: API_SECRET,
     applicationId: APP_ID,
     privateKey: PRIVATE_KEY_PATH,
+    signatureSecret: SIGNATURE_SECRET,
+    signatureMethod: SIGNATURE_METHOD
   }, options);
 ```
 
@@ -36,6 +38,8 @@ const nexmo = new Nexmo({
 * `privateKey` - (optional) The Private Key to be used when creating JWTs. You can specify the key as any of the following:
   * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.
   * A String containing the path to the key file on disk.
+* `signatureSecret` - (optional) API singature secret from Nexmo, used for signing SMS message requests
+* `signatureMethod` - (optional) singature method matching the one you gave Nexmo, used for signing SMS message requests. Must be one of "md5hash", "md5", "sha1", "sha256", or "sha512"
 * `options` - (optional) Additional options for the constructor.
 
 Options are:
@@ -558,6 +562,35 @@ const nexmo = new Nexmo({
 
 const jwt = nexmo.generateJwt();
 ```
+
+## Signature
+
+There are two ways of generating a signature hash. Both strip the `sig` parameter if supplied. You can use the function that exists on the Nexmo definition:
+
+```js
+const Nexmo = require('nexmo');
+
+const hash = Nexmo.generateSignature(SIGNATURE_METHOD, SIGNATURE_SECRET, params);
+```
+
+Or via a `Nexmo` instance where your supplied `signatureSecret` and `signatureMethod`:
+
+```js
+const Nexmo = require('nexmo');
+
+const nexmo = new Nexmo({
+    apiKey: API_KEY,
+    apiSecret: API_SECRET,
+    signatureSecret: SIGNATURE_SECRET,
+    signatureMethod: SIGNATURE_METHOD,
+  });
+
+const hash = nexmo.generateSignature();
+```
+
+`SIGNATURE_METHOD` is the signature method matching the one you gave Nexmo. Must be one of "md5hash", "md5", "sha1", "sha256", or "sha512".
+
+
 
 ## Voice (Deprecated)
 

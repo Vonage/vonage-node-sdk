@@ -57,6 +57,38 @@ class HttpClient {
       });
     }
 
+    if (this.credentials.signatureSecret && this.credentials.signatureMethod) {
+      const splitPath = options.path.split(/\?(.+)/);
+      const path = splitPath[0];
+
+      var params = querystring.decode(splitPath[1]);
+
+      // add timestamp if not already present
+      if (!params.timestamp) {
+        params.timestamp = (new Date().getTime() / 1000) | 0; // floor to seconds
+        params.timestamp = params.timestamp.toString();
+      }
+
+      // strip API Secret
+      delete params.api_secret;
+
+      const hash = this.credentials.generateSignature(params);
+
+      var query = "";
+
+      // rebuild query
+      Object.keys(params)
+        .sort()
+        .forEach(key => {
+          query += "&" + key + "=" + params[key];
+        });
+
+      // replace the first & with ?
+      query = query.replace(/&/i, "?");
+
+      options.path = `${path}${query}&sig=${hash}`;
+    }
+
     this.logger.info("Request:", options, "\nBody:", endpoint.body);
     var request;
 
@@ -130,7 +162,10 @@ class HttpClient {
 
     try {
       if (status >= 500) {
-        error = { message: "Server Error", statusCode: status };
+        error = {
+          message: "Server Error",
+          statusCode: status
+        };
       } else if (
         httpResponse.headers["content-type"] === "application/octet-stream"
       ) {
@@ -142,11 +177,16 @@ class HttpClient {
           const retryAfterMillis = method === "POST" ? 1000 / 2 : 1000 / 5;
           headers["retry-after"] = retryAfterMillis;
         }
-        error = { body: data.join("") };
+        error = {
+          body: data.join("")
+        };
       } else if (status === 204) {
         response = null;
       } else if (status >= 400 || status < 200) {
-        error = { body: JSON.parse(data.join("")), headers };
+        error = {
+          body: JSON.parse(data.join("")),
+          headers
+        };
       } else if (method !== "DELETE") {
         if (!!skipJsonParsing) {
           response = data.join("");
@@ -209,7 +249,9 @@ class HttpClient {
 
     path = path + "?" + querystring.stringify(params);
 
-    const headers = { "Content-Type": "application/json" };
+    const headers = {
+      "Content-Type": "application/json"
+    };
     if (useJwt) {
       headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
     }
@@ -219,7 +261,14 @@ class HttpClient {
       ).toString("base64")}`;
     }
 
-    this.request({ path: path, headers }, "GET", callback);
+    this.request(
+      {
+        path: path,
+        headers
+      },
+      "GET",
+      callback
+    );
   }
 
   delete(path, callback, useJwt, useBasicAuth) {
@@ -238,7 +287,14 @@ class HttpClient {
     }
     path = path + "?" + querystring.stringify(params);
 
-    this.request({ path: path, headers }, "DELETE", callback);
+    this.request(
+      {
+        path: path,
+        headers
+      },
+      "DELETE",
+      callback
+    );
   }
 
   postFile(path, options, callback, useJwt) {
@@ -305,7 +361,10 @@ class HttpClient {
     path = path + joinChar + querystring.stringify(qs);
 
     this.request(
-      { path: path, body: querystring.stringify(params) },
+      {
+        path: path,
+        body: querystring.stringify(params)
+      },
       "POST",
       callback
     );
@@ -325,7 +384,9 @@ class HttpClient {
 
     path = path + joinChar + querystring.stringify(qs);
 
-    let headers = { "Content-Type": "application/json" };
+    let headers = {
+      "Content-Type": "application/json"
+    };
     if (useBasicAuth) {
       headers["Authorization"] = `Basic ${Buffer.from(
         this.credentials.apiKey + ":" + this.credentials.apiSecret
@@ -352,7 +413,13 @@ class HttpClient {
 
     path = path + "?" + querystring.stringify(params);
 
-    this.request({ path: path }, "POST", callback);
+    this.request(
+      {
+        path: path
+      },
+      "POST",
+      callback
+    );
   }
 }
 

@@ -35,6 +35,17 @@ describe("Nexmo definition", () => {
       expect(token).to.be.a("string");
     });
   });
+
+  describe(".generateSignature", () => {
+    it("should expose a generateSignature function", () => {
+      expect(Nexmo.generateSignature).to.be.a("function");
+    });
+
+    it("should create a hash", () => {
+      var hash = Nexmo.generateSignature("md5hash", "secret", {});
+      expect(hash).to.be.a("string");
+    });
+  });
 });
 
 describe("Nexmo Object instance", function() {
@@ -227,6 +238,17 @@ describe("Nexmo Object instance", function() {
     });
     var token = nexmo.generateJwt();
     expect(token).to.be.a("string");
+  });
+
+  it("should create a hash", () => {
+    var nexmo = new Nexmo({
+      apiKey: "test",
+      apiSecret: "test",
+      signatureSecret: "secret",
+      signatureMethod: "md5hash"
+    });
+    var hash = nexmo.generateSignature({});
+    expect(hash).to.be.a("string");
   });
 
   it("should create same JWT as static function", () => {
