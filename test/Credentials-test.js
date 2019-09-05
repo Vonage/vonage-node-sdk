@@ -5,6 +5,7 @@ import sinonChai from "sinon-chai";
 import fs from "fs";
 
 import JwtGenerator from "../lib/JwtGenerator";
+import HashGenerator from "../lib/HashGenerator";
 
 import Credentials from "../lib/Credentials";
 
@@ -132,5 +133,47 @@ blah blah blah
     expect(stub.generate).to.be.calledWith("ALTERNATIVE_KEY", {
       application_id: altAppId
     });
+  });
+
+  it("should allow a hash to be generated using supplied signature secret and method", function() {
+    var stub = sinon.createStubInstance(HashGenerator);
+
+    var cred = new Credentials(
+      "KEY",
+      "SECRET",
+      undefined,
+      undefined,
+      "secret",
+      "md5hash"
+    );
+
+    cred._setHashGenerator(stub);
+
+    cred.generateSignature({});
+
+    expect(stub.generate).to.be.calledWith(
+      cred.signatureMethod,
+      cred.signatureSecret,
+      {}
+    );
+  });
+
+  it("should allow a hash to be generated using alternate signature secret and method", function() {
+    var stub = sinon.createStubInstance(HashGenerator);
+
+    var cred = new Credentials(
+      "KEY",
+      "SECRET",
+      undefined,
+      undefined,
+      "secret",
+      "md5hash"
+    );
+
+    cred._setHashGenerator(stub);
+
+    cred.generateSignature({}, "md5", "secrit");
+
+    expect(stub.generate).to.be.calledWith("secrit", "md5", {});
   });
 });

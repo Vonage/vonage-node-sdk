@@ -2,6 +2,7 @@
 
 import fs from "fs";
 import JwtGenerator from "./JwtGenerator";
+import HashGenerator from "./HashGenerator";
 
 /**
  * Right now only key/secret credentials are supported.
@@ -10,18 +11,31 @@ import JwtGenerator from "./JwtGenerator";
  *
  * @param {string} apiKey - A Nexmo API Key
  * @param {string} apiSecret - A Nexmo API Secret
+ * @param {string} [applicationId] - A Nexmo Application ID
  * @param {string|Buffer} [privateKey] -  When a string value is passed it should
  *                        either represent the path to the private key, or the actual
  *                        private key in string format. If a Buffer is passed then
  *                        it should be the key read from the file system.
+ * @param {string} [signatureSecret] - A Nexmo signature Secret
+ * @param {string} [signatureMethod] - A Nexmo compatible request signing method
  */
 class Credentials {
-  constructor(apiKey, apiSecret, privateKey, applicationId) {
+  constructor(
+    apiKey,
+    apiSecret,
+    privateKey,
+    applicationId,
+    signatureSecret,
+    signatureMethod
+  ) {
     this.apiKey = apiKey;
     this.apiSecret = apiSecret;
 
     this.privateKey = null;
     this.applicationId = applicationId;
+
+    this.signatureSecret = signatureSecret;
+    this.signatureMethod = signatureMethod;
 
     if (privateKey instanceof Buffer) {
       this.privateKey = privateKey;
@@ -39,6 +53,7 @@ class Credentials {
 
     /** @private */
     this._jwtGenerator = new JwtGenerator();
+    this._hashGenerator = new HashGenerator();
   }
 
   /**
@@ -55,9 +70,23 @@ class Credentials {
     applicationId = this.applicationId,
     privateKey = this.privateKey
   ) {
-    var claims = { application_id: applicationId };
+    var claims = {
+      application_id: applicationId
+    };
     var token = this._jwtGenerator.generate(privateKey, claims);
     return token;
+  }
+
+  generateSignature(
+    params,
+    signatureSecret = this.signatureSecret,
+    signatureMethod = this.signatureMethod
+  ) {
+    return this._hashGenerator.generate(
+      signatureMethod,
+      signatureSecret,
+      params
+    );
   }
 
   /**
@@ -66,6 +95,14 @@ class Credentials {
    */
   _setJwtGenerator(generator) {
     this._jwtGenerator = generator;
+  }
+
+  /**
+   * @private
+   * Used for testing purposes only.
+   */
+  _setHashGenerator(generator) {
+    this._hashGenerator = generator;
   }
 
   /**
@@ -81,7 +118,9 @@ class Credentials {
         obj.apiKey,
         obj.apiSecret,
         obj.privateKey,
-        obj.applicationId
+        obj.applicationId,
+        obj.signatureSecret,
+        obj.signatureMethod
       );
     }
   }

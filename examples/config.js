@@ -5,6 +5,7 @@ require('dotenv').config({
 var config = {
   API_KEY: process.env.API_KEY || '',
   API_SECRET: process.env.API_SECRET || '',
+  SIGNATURE_SECRET: process.env.SIGNATURE_SECRET || '',
   NEW_API_SECRET: process.env.NEW_API_SECRET || '',
   API_SECRET_ID: process.env.API_SECRET_ID || '',
   FROM_NUMBER: process.env.FROM_NUMBER || '',
