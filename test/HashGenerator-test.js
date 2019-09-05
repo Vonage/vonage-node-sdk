@@ -25,6 +25,13 @@ describe("HashGenerator Object", function() {
       expect(hash).to.be("5ebe2294ecd0e0f08eab7690d2a6ee69");
     });
 
+    it("should generate a hash from params", function() {
+      var generator = new HashGenerator();
+      var hash = generator.generate("md5hash", "secret", { from: "NEXMO" });
+
+      expect(hash).to.be("2cdd20a2a0f7270545a98b3ccb87ba51");
+    });
+
     it("should generate a md5 hash", function() {
       var generator = new HashGenerator();
       var hash = generator.generate("md5", "secret", {});
