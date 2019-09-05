@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.4.2
+- Added message signing for for sending SMS
+- Added `Nexmo.generateSignature` to verify signed messages
+
 ## 2.0.1
 
 - FIXED: #116 - default setting of `retry-after` for 429 http status code responses
