@@ -38,6 +38,13 @@ describe("Credentials Object", function() {
     expect(parsed.privateKey).to.be.ok;
   });
 
+  it("should not parse Credential object", function() {
+    var cred = new Credentials("KEY", "SECRET");
+    var parsed = Credentials.parse(cred);
+
+    expect(parsed.signatureMethod).to.equal(undefined);
+  });
+
   it("should throw an error when a privateKey is provided and the file does not exist", function() {
     var create = function() {
       return new Credentials("KEY", "SECRET", "./no-key-here.key");

@@ -40,6 +40,11 @@ describe("Nexmo definition", () => {
     it("should expose a generateSignature function", () => {
       expect(Nexmo.generateSignature).to.be.a("function");
     });
+
+    it("should create a hash", () => {
+      var hash = Nexmo.generateSignature("md5hash", "secret", {});
+      expect(hash).to.be.a("string");
+    });
   });
 });
 
