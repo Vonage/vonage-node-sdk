@@ -28,10 +28,10 @@ describe("Members", () => {
     members = new Members(creds, options);
   });
 
-  it("should allow a user to be added to a conversation", () => {
+  it("should allow a user to be created as a member in a conversation", () => {
     const conversationId = "CON-eeefffggg-444555666";
     var params = {};
-    members.add(conversationId, params, emptyCallback);
+    members.create(conversationId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       path: `${Members.PATH.replace("{conversation_uuid}", conversationId)}`

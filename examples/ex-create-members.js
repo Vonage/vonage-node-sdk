@@ -11,5 +11,5 @@ module.exports = function(callback, config) {
     {debug: config.DEBUG}
   );
 
-  nexmo.conversations.members.add(config.CONVERSATION_ID, {"action":"join", "user_id":config.USER_ID, "channel":{"type":"app"}}, callback);
+  nexmo.conversations.members.create(config.CONVERSATION_ID, {"action":"join", "user_id":config.USER_ID, "channel":{"type":"app"}}, callback);
 };

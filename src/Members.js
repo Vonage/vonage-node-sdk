@@ -25,13 +25,13 @@ class Members {
   }
 
   /**
-   * Adds a member to a conversation.
+   * Creates a member in a conversation.
    *
    * @param {string} [conversationId] - The unique identifier for the conversation
    * @param {Object} params - Parameters used when adding a member to the conversation. See https://ea.developer.nexmo.com/api/conversation#add-a-user-to-a-conversation for more information.
    * @param {function} callback - function to be called when the request completes.
    */
-  add(conversationId, params, callback) {
+  create(conversationId, params, callback) {
     params = JSON.stringify(params);
 
     var config = {
