@@ -96,6 +96,30 @@ class Conversations {
   }
 
   /**
+   * Record an existing conversation.
+   *
+   * @param {string} [conversationId] - The unique identifier for the conversation to record.
+   * @param {Object} params - Parameters used when recording the conversation.
+   * @param {function} callback - function to be called when the request completes.
+   */
+  record(conversationId, params, callback) {
+    params = JSON.stringify(params);
+
+    var config = {
+      host: "api.nexmo.com",
+      path: `${Conversations.PATH}/${conversationId}/record`,
+      method: "PUT",
+      body: params,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
+    };
+
+    this.options.httpClient.request(config, callback);
+  }
+
+  /**
    * Deleta an existing conversation.
    *
    * @param {string} [conversationId] - The unique identifier for the conversation to delete.
