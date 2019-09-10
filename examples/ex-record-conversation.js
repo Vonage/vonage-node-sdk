@@ -11,7 +11,7 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.conversations.update(config.CONVERSATION_ID, {
+  nexmo.conversations.record(config.CONVERSATION_ID, {
     action: "start",
     event_url: "https://example.com/event",
     event_method: "POST",
