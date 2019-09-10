@@ -357,7 +357,7 @@ For an overview of conversations see https://developer.nexmo.com/stitch/overview
 nexmo.conversations.create(params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#createConversation)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#createConversation)
 
 ### Get a single Conversation
 
@@ -365,7 +365,7 @@ params is a dictionary of parameters per [documentation](https://developer.nexmo
 nexmo.conversations.get(conversationId, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch#retrieveConversation
+For more information see https://developer.nexmo.com/api/conversation#retrieveConversation
 
 ### Get Conversations by filter
 
@@ -373,7 +373,7 @@ For more information see https://developer.nexmo.com/api/stitch#retrieveConversa
 nexmo.conversations.get(options, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch
+For more information see https://developer.nexmo.com/api/conversation
 
 ### Update a Conversation
 
@@ -381,7 +381,15 @@ For more information see https://developer.nexmo.com/api/stitch
 nexmo.conversations.update(conversationId, params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#replaceConversation)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#replaceConversation)
+
+### Record a Conversation
+
+```js
+nexmo.conversations.record(conversationId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#recordConversation)
 
 ### Delete a Conversation
 
@@ -389,15 +397,15 @@ params is a dictionary of parameters per [documentation](https://developer.nexmo
 nexmo.conversations.delete(conversationId, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch#deleteConversation
+For more information see https://developer.nexmo.com/api/conversation#deleteConversation
 
-### Add a Member to a Conversation
+### Create a Member in a Conversation
 
 ```js
-nexmo.conversations.members.add(conversationId, params, callback);
+nexmo.conversations.members.create(conversationId, params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#createMember)
 
 ### Get a single Member
 
@@ -405,7 +413,7 @@ params is a dictionary of parameters per [documentation](https://developer.nexmo
 nexmo.conversations.members.get(conversationId, memberId, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch#getUser
+For more information see https://developer.nexmo.com/api/conversation#getMember
 
 ### Get Members by filter
 
@@ -413,7 +421,55 @@ For more information see https://developer.nexmo.com/api/stitch#getUser
 nexmo.conversations.members.get(conversationId, params, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch
+For more information see https://developer.nexmo.com/api/conversation#getMembers
+
+### Update a Member
+
+```js
+nexmo.conversations.members.update(conversationId, memberId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#updateMember)
+
+### Delete a Member
+
+```js
+nexmo.conversations.members.delete(conversationId, memberId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#deleteMember
+
+### Create a Event in a Conversation
+
+```js
+nexmo.conversations.events.create(conversationId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#createEvent)
+
+### Get a single Event
+
+```js
+nexmo.conversations.events.get(conversationId, eventId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getEvent
+
+### Get Events by filter
+
+```js
+nexmo.conversations.events.get(conversationId, params, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getEvents
+
+### Delete a Event
+
+```js
+nexmo.conversations.events.delete(conversationId, eventId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#deleteEvent
 
 ## Users
 
@@ -423,7 +479,7 @@ For more information see https://developer.nexmo.com/api/stitch
 nexmo.users.create(params, callback);
 ```
 
-params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/stitch#createUse)
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#createUse)
 
 ### Get a single User
 
@@ -431,7 +487,7 @@ params is a dictionary of parameters per [documentation](https://developer.nexmo
 nexmo.users.get(userId, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch#getUser
+For more information see https://developer.nexmo.com/api/conversation#getUser
 
 ### Get Users by filter
 
@@ -439,7 +495,7 @@ For more information see https://developer.nexmo.com/api/stitch#getUser
 nexmo.users.get(options, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch#getUsers
+For more information see https://developer.nexmo.com/api/conversation#getUsers
 
 ### Get all Conversations for a Users
 
@@ -447,7 +503,7 @@ For more information see https://developer.nexmo.com/api/stitch#getUsers
 nexmo.users.getConversations(userId, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch#getuserConversations
+For more information see https://developer.nexmo.com/api/conversation#getuserConversations
 
 ### Update a User
 
@@ -463,7 +519,7 @@ params is a dictionary of parameters per [documentation](https://ea.developer.ne
 nexmo.users.delete(userId, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/stitch#deleteUser
+For more information see https://developer.nexmo.com/api/conversation#deleteUser
 
 ## Management
 
@@ -813,14 +869,20 @@ nexmo.options.rest.postUseQueryString(
   * [x] Get Conversations
   * [x] Update a Conversation
   * [x] Delete a Conversation
-  * [x] Add a Member to a Conversation
+  * [x] Record a Conversation
+  * [x] Create a Member in a Conversation
   * [x] Get Members
+  * [x] Update Members
+  * [x] Delete Members
+  * [x] Create an Event in a Conversation
+  * [x] Get Events
+  * [x] Delete Events
 * Users
   * [x] Create a User
   * [x] Get Users
   * [x] Get Conversations for a User
   * [x] Update a User
-  * [x] Delete a User    
+  * [x] Delete a User
 * Account
   * [X] Balance
   * [x] Pricing

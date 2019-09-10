@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.4.3-beta-1
+- Add Conversation Recording
+- Rename `nexmo.conversations.members.add` to `nexmo.conversations.members.create` with backwards compatibility
+- Add Member Update and Deletions
+- Add Event Creation, Retrieval and Deletion
+
 ## 2.0.1
 
 - FIXED: #116 - default setting of `retry-after` for 429 http status code responses
