@@ -61,11 +61,11 @@ exampleFiles = [
   // 'ex-number-insight-basic.js',
   //  'ex-send-sms.js',
   // 'ex-create-user.js',
-  // 'ex-get-user.js'
-  //'ex-get-user-conversations.js'
+  // 'ex-get-user.js',
+  // 'ex-get-user-conversations.js',
   // 'ex-update-user.js',
   // 'ex-delete-user.js',
-  //  'ex-get-users.js'
+   // 'ex-get-users.js',
   //'ex-create-conversation.js',
   // 'ex-create-member.js',
   // 'ex-update-member.js',
@@ -75,7 +75,7 @@ exampleFiles = [
   // 'ex-create-event.js',
   // 'ex-delete-event.js',
   // 'ex-get-event.js',
-  'ex-get-events.js',
+  // 'ex-get-events.js',
   //'ex-create-read-update-delete-conversation.js'
   // 'ex-get-conversation.js',
   // 'ex-delete-conversation.js',

@@ -1,5 +1,7 @@
 import nexmo from "./index";
 
+import Utils from "./Utils";
+
 /**
  * Provides access to the `members` resource.
  */
@@ -27,7 +29,7 @@ class Members {
   /**
    * Creates a member in a conversation.
    *
-   * @param {string} [conversationId] - The unique identifier for the conversation
+   * @param {string} conversationId - The unique identifier for the conversation
    * @param {Object} params - Parameters used when adding a member to the conversation. See https://ea.developer.nexmo.com/api/conversation#add-a-user-to-a-conversation for more information.
    * @param {function} callback - function to be called when the request completes.
    */
@@ -55,20 +57,27 @@ class Members {
   /**
    * Get an existing member.
    *
-   * @param {string} [conversationId] - The unique identifier for the conversation
+   * @param {string} conversationId - The unique identifier for the conversation
    * @param {string|object} query - The unique identifier for the member to retrieve
    *               or a set of filter parameters for the query. For more information
    *               see https://ea.developer.nexmo.com/api/conversation#retrieve-members-of-a-conversation
    * @param {function} callback - function to be called when the request completes.
    */
   get(conversationId, query, callback) {
-    this._nexmo.getWithQuery(
-      Members.PATH.replace("{conversation_uuid}", conversationId),
-      query,
-      this.creds,
-      this.options,
-      callback
-    );
+    var config = {
+      host: "api.nexmo.com",
+      path: Utils.createPathWithQuery(
+        Members.PATH.replace("{conversation_uuid}", conversationId),
+        query
+      ),
+      method: "GET",
+      body: undefined,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
+    };
+    this.options.httpClient.request(config, callback);
   }
 
   /**
