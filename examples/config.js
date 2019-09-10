@@ -13,6 +13,7 @@ var config = {
   CONVERSATION_ID: process.env.CONVERSATION_ID || '',
   USER_ID: process.env.USER_ID || '',
   MEMBER_ID: process.env.MEMBER_ID || '',
+  EVENT_ID: process.env.EVENT_ID || '',
   PRIVATE_KEY: process.env.PRIVATE_KEY || '',
   DEBUG: process.env.DEBUG === 'true'
 };

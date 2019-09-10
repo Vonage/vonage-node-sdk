@@ -68,11 +68,14 @@ exampleFiles = [
   //  'ex-get-users.js'
   //'ex-create-conversation.js',
   // 'ex-create-member.js',
-
   // 'ex-update-member.js',
   // 'ex-delete-member.js',
-   // 'ex-get-members.js',
-   'ex-get-member.js',
+  // 'ex-get-members.js',
+  // 'ex-get-member.js',
+  // 'ex-create-event.js',
+  // 'ex-delete-event.js',
+  // 'ex-get-event.js',
+  'ex-get-events.js',
   //'ex-create-read-update-delete-conversation.js'
   // 'ex-get-conversation.js',
   // 'ex-delete-conversation.js',

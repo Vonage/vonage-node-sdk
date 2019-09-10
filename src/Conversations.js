@@ -3,6 +3,7 @@
 import nexmo from "./index";
 
 import Members from "./Members";
+import Events from "./Events";
 
 /**
  * Provides access to the `conversations` endpoint.
@@ -26,6 +27,11 @@ class Conversations {
      * @type Members
      */
     this.members = new Members(this.creds, this.options);
+
+    /**
+     * @type Events
+     */
+    this.events = new Events(this.creds, this.options);
 
     // Used to facilitate testing of the call to the underlying object
     this._nexmo = this.options.nexmoOverride || nexmo;
