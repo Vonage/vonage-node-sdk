@@ -47,6 +47,11 @@ class Members {
     this.options.httpClient.request(config, callback);
   }
 
+  // backwards compatibility to 2.4.0-beta1. Remove for 3.0.0
+  add(conversationId, params, callback) {
+    this.create(conversationId, params, callback);
+  }
+
   /**
    * Get an existing member.
    *

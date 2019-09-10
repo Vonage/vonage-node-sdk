@@ -58,6 +58,26 @@ describe("Members", () => {
     );
   });
 
+  it("should get a single Member", () => {
+    const conversationId = "CON-eeefffggg-444555666";
+    const memberId = "MEM-aaabbbccc-111222333";
+    members.get(conversationId, memberId, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      path: `${Members.PATH.replace(
+        "{conversation_uuid}",
+        conversationId
+      )}/${memberId}`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
   it("should update a member", () => {
     const memberId = "MEM-aaabbbccc-111222333";
     const conversationId = "CON-eeefffggg-444555666";
