@@ -34,9 +34,6 @@ class Conversations {
      * @type Events
      */
     this.events = new Events(this.creds, this.options);
-
-    // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
   }
 
   /**

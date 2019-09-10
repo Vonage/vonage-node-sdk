@@ -21,9 +21,6 @@ class Users {
   constructor(credentials, options = {}) {
     this.creds = credentials;
     this.options = options;
-
-    // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
   }
 
   /**

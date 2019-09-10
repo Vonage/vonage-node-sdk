@@ -22,8 +22,6 @@ class Events {
   constructor(creds, options) {
     this.creds = creds;
     this.options = options;
-
-    this._nexmo = this.options.nexmoOverride || nexmo;
   }
 
   /**
