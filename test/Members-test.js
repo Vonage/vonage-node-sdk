@@ -58,13 +58,34 @@ describe("Members", () => {
     );
   });
 
-  it("should get a single member using a member ID", () => {
+  it("should update a member", () => {
     const memberId = "MEM-aaabbbccc-111222333";
     const conversationId = "CON-eeefffggg-444555666";
-    members.get(conversationId, memberId, emptyCallback);
+    const params = {};
+    members.update(conversationId, memberId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
-      method: "GET",
+      method: "PUT",
+      body: JSON.stringify(params),
+      path: `${Members.PATH.replace(
+        "{conversation_uuid}",
+        conversationId
+      )}/${memberId}`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should delete a member", () => {
+    const memberId = "MEM-aaabbbccc-111222333";
+    const conversationId = "CON-eeefffggg-444555666";
+    members.delete(conversationId, memberId, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "DELETE",
       body: undefined,
       path: `${Members.PATH.replace(
         "{conversation_uuid}",

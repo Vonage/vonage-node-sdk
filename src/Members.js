@@ -65,6 +65,58 @@ class Members {
       callback
     );
   }
+
+  /**
+   * Update an existing member.
+   *
+   * @param {string} conversationId - The unique identifier for the conversation to update the member in.
+   * @param {string} memberId - The unique identifier for the member to update.
+   * @param {Object} params - Parameters used when updating the member.
+   * @param {function} callback - function to be called when the request completes.
+   */
+  update(conversationId, memberId, params, callback) {
+    params = JSON.stringify(params);
+
+    var config = {
+      host: "api.nexmo.com",
+      path: `${Members.PATH.replace(
+        "{conversation_uuid}",
+        conversationId
+      )}/${memberId}`,
+      method: "PUT",
+      body: params,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
+    };
+
+    this.options.httpClient.request(config, callback);
+  }
+
+  /**
+   * Deleta an existing member.
+   *
+   * @param {string} conversationId- The unique identifier for the conversation to delete the member from.
+   * @param {string} memberId - The unique identifier for the member to delete.
+   * @param {function} callback - function to be called when the request completes.
+   */
+  delete(conversationId, memberId, callback) {
+    var config = {
+      host: "api.nexmo.com",
+      path: `${Members.PATH.replace(
+        "{conversation_uuid}",
+        conversationId
+      )}/${memberId}`,
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
+    };
+
+    this.options.httpClient.request(config, callback);
+  }
 }
 
 export default Members;

@@ -10,3 +10,5 @@ coverage
 .idea
 e2e/.env
 e2e/private.key
+.nexmo-app
+coverage.lcov

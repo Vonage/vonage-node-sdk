@@ -61,15 +61,18 @@ exampleFiles = [
   // 'ex-number-insight-basic.js',
   //  'ex-send-sms.js',
   // 'ex-create-user.js',
-   'ex-get-user.js'
+  // 'ex-get-user.js'
   //'ex-get-user-conversations.js'
   // 'ex-update-user.js',
   // 'ex-delete-user.js',
   //  'ex-get-users.js'
   //'ex-create-conversation.js',
-  //'ex-add-members.js',
-  //  'ex-get-members.js',
-  //  'ex-get-member.js',
+  // 'ex-create-member.js',
+
+  // 'ex-update-member.js',
+  // 'ex-delete-member.js',
+   // 'ex-get-members.js',
+   'ex-get-member.js',
   //'ex-create-read-update-delete-conversation.js'
   // 'ex-get-conversation.js',
   // 'ex-delete-conversation.js',
