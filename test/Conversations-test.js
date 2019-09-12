@@ -91,6 +91,24 @@ describe("Conversations", () => {
     );
   });
 
+  it("should allow a conversation to be recorded", () => {
+    const conversationId = "CON-aaabbbccc-111222333";
+    var params = {
+      action: "start"
+    };
+    conversations.record(conversationId, params, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+      method: "PUT",
+      path: `${Conversations.PATH}/${conversationId}/record`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
   it("should allow a conversation to be deleted", () => {
     const conversationId = "CON-aaabbbccc-111222333";
     conversations.delete(conversationId, emptyCallback);

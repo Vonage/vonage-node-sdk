@@ -17,7 +17,7 @@ describe('members', () => {
     });
 
     it('should allow a member to be added to a conversation', (done) => {
-        nexmo.conversations.members.add(config.CONVERSATION_ID, {
+        nexmo.conversations.members.create(config.CONVERSATION_ID, {
             "action": "invite",
             "user_id": config.USER_ID,
             "channel": {
@@ -35,7 +35,7 @@ describe('members', () => {
         nexmo.conversations.members.get(config.CONVERSATION_ID, config.MEMBER_ID, (error, result) => {
             if (error)
                 done(new Error(`${error.statusCode} - ${error.message}`));
-            expect(result.id).to.have.string("MEM");
+            expect(result.member_id).to.have.string("MEM");
             done();
         });
     });

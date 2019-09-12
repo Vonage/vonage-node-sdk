@@ -2,6 +2,8 @@
 
 import nexmo from "./index";
 
+import Utils from "./Utils";
+
 /**
  * Provides access to the `users` endpoint.
  */
@@ -19,9 +21,6 @@ class Users {
   constructor(credentials, options = {}) {
     this.creds = credentials;
     this.options = options;
-
-    // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
   }
 
   /**
@@ -55,35 +54,43 @@ class Users {
    * @param {function} callback - function to be called when the request completes.
    */
   get(query, callback) {
-    this._nexmo.getWithQuery(
-      Users.PATH,
-      query,
-      this.creds,
-      this.options,
-      callback
-    );
+    var config = {
+      host: "api.nexmo.com",
+      path: Utils.createPathWithQuery(Users.PATH, query),
+      method: "GET",
+      body: undefined,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
+    };
+    this.options.httpClient.request(config, callback);
   }
 
   /**
    * Get an conversations for an existing user.
    *
-   * @param {string} [userId] - The unique identifier for the user to retrieve conversations for
+   * @param {string} userId - The unique identifier for the user to retrieve conversations for
    * @param {function} callback - function to be called when the request completes.
    */
   getConversations(userId, callback) {
-    this._nexmo.getWithQuery(
-      `${Users.PATH}/${userId}/conversations`,
-      {},
-      this.creds,
-      this.options,
-      callback
-    );
+    var config = {
+      host: "api.nexmo.com",
+      path: `${Users.PATH}/${userId}/conversations`,
+      method: "GET",
+      body: undefined,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
+    };
+    this.options.httpClient.request(config, callback);
   }
 
   /**
    * Update an existing user.
    *
-   * @param {string} [userId] - The unique identifier for the user to update.
+   * @param {string} userId - The unique identifier for the user to update.
    * @param {Object} params - Parameters used when updating the conversation.
    * @param {function} callback - function to be called when the request completes.
    */
@@ -107,7 +114,7 @@ class Users {
   /**
    * Deleta an existing user.
    *
-   * @param {string} [userId] - The unique identifier for the user to delete.
+   * @param {string} userId - The unique identifier for the user to delete.
    * @param {function} callback - function to be called when the request completes.
    */
   delete(userId, callback) {

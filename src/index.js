@@ -721,32 +721,6 @@ function sendError(callback, err, returnData) {
   }
 }
 
-exports.getWithQuery = function(path, query, creds, opts, callback) {
-  if (!query) {
-    throw new Error('"query" is a required parameter');
-  }
-
-  var pathExt = "";
-  if (typeof query === "string") {
-    // single call Id
-    pathExt = `/${query}`;
-  } else if (typeof query === "object" && Object.keys(query).length > 0) {
-    // filter
-    pathExt = `?${querystring.stringify(query)}`;
-  }
-
-  var config = {
-    host: "api.nexmo.com",
-    path: `${path}${pathExt}`,
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${creds.generateJwt()}`
-    }
-  };
-  opts.httpClient.request(config, callback);
-};
-
 exports.setHost = function(aHost) {
   msgpath.host = aHost;
   shortcodePath.host = aHost;
