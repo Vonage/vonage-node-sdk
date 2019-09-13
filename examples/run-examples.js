@@ -98,6 +98,7 @@ exampleFiles = [
   // 'ex-update-conversation.js'
   'ex-get-conversations.js'
   // 'ex-stream-to-call.js',
+  'ex-dispatch.js',
   // 'ex-talk-to-call.js'
   // 'ex-revoke-secret.js'
 ];
