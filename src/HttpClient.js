@@ -233,7 +233,10 @@ class HttpClient {
 
     if (typeof callback === "function") {
       if (typeof customResponseParser === "function") {
-        response = customResponseParser(response);
+        // don't try to parse the response on errors
+        if (response) {
+          response = customResponseParser(response);
+        }
       }
       callback(error, response);
     }

@@ -14,3 +14,6 @@ e2e/private.key
 coverage.lcov
 *.key
 .DS_Store
+.env
+.nexmo-app
+coverage.lcov
