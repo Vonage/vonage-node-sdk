@@ -8,5 +8,7 @@ npm-debug.log
 coverage
 .nyc_output
 .idea
-coverage.lcov
+e2e/.env
+e2e/private.key
 .nexmo-app
+coverage.lcov

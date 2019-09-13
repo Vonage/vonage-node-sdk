@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "2.4.2",
+  "version": "2.5.2-beta-2",
   "main": "lib/Nexmo",
   "keywords": [
     "sms",
@@ -25,7 +25,8 @@
     "bpilot",
     "justinfreitag",
     "ecwyne",
-    "https://github.com/backhand"
+    "https://github.com/backhand",
+    "alexlakatos"
   ],
   "scripts": {
     "compile": "./node_modules/.bin/babel -d lib src/ -s inline",
@@ -38,7 +39,8 @@
     "lint": "eslint src test",
     "lint-fix": "eslint --fix src test",
     "prepublish": "npm run compile",
-    "pretest": "npm run lint"
+    "pretest": "npm run lint",
+    "test-e2e": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./e2e/*.spec.js"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",

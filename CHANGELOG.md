@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.5.2-beta-1
+- Add Conversation Recording
+- Rename `nexmo.conversations.members.add` to `nexmo.conversations.members.create` with backwards compatibility
+- Add Member Update and Deletions
+- Add Event Creation, Retrieval and Deletion
+
 ## 2.4.2
 - Added message signing for for sending SMS
 - Added `Nexmo.generateSignature` to verify signed messages

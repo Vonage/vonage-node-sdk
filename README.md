@@ -9,7 +9,7 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [JWT (JSON Web Token)](#jwt)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Conversations](#conversations) | [Users](#users) | [Management](#management) | [Redact](#redact) | [JWT (JSON Web Token)](#jwt)
 
 ## Installation
 
@@ -18,6 +18,9 @@ npm install nexmo
 ```
 
 ## Constructor
+
+* `apiKey` and `apiSecret` are required for SMS, Verify, Number Insights, Account management APIs
+* `applicationId` and `privateKey` are required for Voice / Stitch applications
 
 ```js
 const Nexmo = require('nexmo');
@@ -348,6 +351,180 @@ nexmo.application.delete(appId, callback);
 
 For more information see https://developer.nexmo.com/api/application#destroy-an-application
 
+## Conversations
+
+For an overview of conversations see https://developer.nexmo.com/stitch/overview
+
+### Create a Conversation
+
+```js
+nexmo.conversations.create(params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#createConversation)
+
+### Get a single Conversation
+
+```js
+nexmo.conversations.get(conversationId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#retrieveConversation
+
+### Get Conversations by filter
+
+```js
+nexmo.conversations.get(options, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation
+
+### Update a Conversation
+
+```js
+nexmo.conversations.update(conversationId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#replaceConversation)
+
+### Record a Conversation
+
+```js
+nexmo.conversations.record(conversationId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#recordConversation)
+
+### Delete a Conversation
+
+```js
+nexmo.conversations.delete(conversationId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#deleteConversation
+
+### Create a Member in a Conversation
+
+```js
+nexmo.conversations.members.create(conversationId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#createMember)
+
+### Get a single Member
+
+```js
+nexmo.conversations.members.get(conversationId, memberId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getMember
+
+### Get Members by filter
+
+```js
+nexmo.conversations.members.get(conversationId, params, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getMembers
+
+### Update a Member
+
+```js
+nexmo.conversations.members.update(conversationId, memberId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#updateMember)
+
+### Delete a Member
+
+```js
+nexmo.conversations.members.delete(conversationId, memberId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#deleteMember
+
+### Create a Event in a Conversation
+
+```js
+nexmo.conversations.events.create(conversationId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#createEvent)
+
+### Get a single Event
+
+```js
+nexmo.conversations.events.get(conversationId, eventId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getEvent
+
+### Get Events by filter
+
+```js
+nexmo.conversations.events.get(conversationId, params, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getEvents
+
+### Delete a Event
+
+```js
+nexmo.conversations.events.delete(conversationId, eventId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#deleteEvent
+
+## Users
+
+### Create a User
+
+```js
+nexmo.users.create(params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://developer.nexmo.com/api/conversation#createUse)
+
+### Get a single User
+
+```js
+nexmo.users.get(userId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getUser
+
+### Get Users by filter
+
+```js
+nexmo.users.get(options, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getUsers
+
+### Get all Conversations for a Users
+
+```js
+nexmo.users.getConversations(userId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#getuserConversations
+
+### Update a User
+
+```js
+nexmo.users.update(userId, params, callback);
+```
+
+params is a dictionary of parameters per [documentation](https://ea.developer.nexmo.com/api/conversation#create-a-conversation)
+
+### Delete a User
+
+```js
+nexmo.users.delete(userId, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#deleteUser
+
 ## Management
 
 ### Check Account Balance
@@ -554,8 +731,6 @@ Or via a `Nexmo` instance where your supplied `applicationId` and `privateKey` c
 const Nexmo = require('nexmo');
 
 const nexmo = new Nexmo({
-    apiKey: API_KEY,
-    apiSecret: API_SECRET,
     applicationId: APP_ID,
     privateKey: PRIVATE_KEY_PATH,
   });
@@ -727,6 +902,25 @@ nexmo.options.rest.postUseQueryString(
   * [x] Get Applications
   * [x] Update an Application
   * [x] Delete an Application
+* Conversations
+  * [x] Create a Conversation
+  * [x] Get Conversations
+  * [x] Update a Conversation
+  * [x] Delete a Conversation
+  * [x] Record a Conversation
+  * [x] Create a Member in a Conversation
+  * [x] Get Members
+  * [x] Update Members
+  * [x] Delete Members
+  * [x] Create an Event in a Conversation
+  * [x] Get Events
+  * [x] Delete Events
+* Users
+  * [x] Create a User
+  * [x] Get Users
+  * [x] Get Conversations for a User
+  * [x] Update a User
+  * [x] Delete a User
 * Account
   * [X] Balance
   * [x] Pricing
