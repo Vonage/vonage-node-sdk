@@ -23,7 +23,13 @@ class HttpClient {
     }
   }
 
-  request(endpoint, method, callback, skipJsonParsing = false) {
+  request(
+    endpoint,
+    method,
+    callback,
+    skipJsonParsing = false,
+    customResponseParser
+  ) {
     if (typeof method === "function") {
       callback = method;
       endpoint.method = endpoint.method || "GET";
@@ -127,7 +133,8 @@ class HttpClient {
             responseData,
             endpoint.method,
             callback,
-            skipJsonParsing
+            skipJsonParsing,
+            customResponseParser
           );
         }
       });
@@ -148,7 +155,14 @@ class HttpClient {
     });
   }
 
-  __parseResponse(httpResponse, data, method, callback, skipJsonParsing) {
+  __parseResponse(
+    httpResponse,
+    data,
+    method,
+    callback,
+    skipJsonParsing,
+    customResponseParser
+  ) {
     const isArrayOrBuffer = data instanceof Array || data instanceof Buffer;
     if (!isArrayOrBuffer) {
       throw new Error("data should be of type Array or Buffer");
@@ -218,6 +232,9 @@ class HttpClient {
     }
 
     if (typeof callback === "function") {
+      if (typeof customResponseParser === "function") {
+        response = customResponseParser(response);
+      }
       callback(error, response);
     }
   }

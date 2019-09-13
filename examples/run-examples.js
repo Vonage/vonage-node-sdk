@@ -100,7 +100,16 @@ exampleFiles = [
   // 'ex-stream-to-call.js',
   'ex-dispatch.js',
   // 'ex-talk-to-call.js'
-  // 'ex-revoke-secret.js'
+  // 'ex-revoke-secret.js',
+  // 'ex-create-v1-application.js',
+  //'ex-create-v2-application.js',
+  // 'ex-update-v1-application.js',
+  // 'ex-update-v2-application.js',
+  // 'ex-get-v1-application.js',
+  // 'ex-get-v1-applications.js',
+  // 'ex-get-v2-application.js',
+  // 'ex-get-v2-applications.js',
+  // 'ex-delete-application.js',
 ];
 
 console.log('Found', exampleFiles.length, 'examples to run:\n', exampleFiles);
