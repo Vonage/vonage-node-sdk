@@ -3,5 +3,6 @@ examples
 coverage
 node_modules
 test
+e2e
 .nyc_output
 coverage.lcov
