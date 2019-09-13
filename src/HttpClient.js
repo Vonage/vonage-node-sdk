@@ -424,6 +424,7 @@ class HttpClient {
       "POST",
       callback
     );
+  }
 
   postUseQueryString(path, params, callback, useJwt) {
     params = params || {};
