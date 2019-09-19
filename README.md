@@ -386,7 +386,7 @@ For more information see https://developer.nexmo.com/api/application.v2#listAppl
 ### Update an App
 
 ```js
-nexmo.applications.update(params, callback);
+nexmo.applications.update(appId, params, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/application.v2#updateApplication
