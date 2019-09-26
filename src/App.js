@@ -101,6 +101,8 @@ class App {
 
   _convertApplicationListResponse(applicationResponseHandler) {
     return response => {
+      response.count = response.total_items;
+      response.page_index = response.page;
       for (let i in response._embedded.applications) {
         response._embedded.applications[i] = applicationResponseHandler(
           response._embedded.applications[i]
