@@ -1,6 +1,7 @@
 "use strict";
 
 import nexmo from "./index";
+import Utils from "./Utils";
 
 class App {
   /**
@@ -157,31 +158,8 @@ class App {
     let responseParser = null;
 
     if (typeof params !== "object") {
-      var config = {
-        host: "api.nexmo.com",
-        path: `${App.PATH}/${params}`,
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic ${Buffer.from(authorization).toString(
-            "base64"
-          )}`
-        }
-      };
       responseParser = this._convertApplicationResponse;
     } else {
-      var config = {
-        host: "api.nexmo.com",
-        path: App.PATH,
-        method: "GET",
-        body: JSON.stringify(params),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic ${Buffer.from(authorization).toString(
-            "base64"
-          )}`
-        }
-      };
       responseParser = this._convertApplicationListResponse(
         this._convertApplicationResponse
       );
@@ -190,6 +168,17 @@ class App {
     if (v2) {
       responseParser = null;
     }
+
+    var config = {
+      host: "api.nexmo.com",
+      path: Utils.createPathWithQuery(App.PATH, params),
+      method: "GET",
+      body: undefined,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`
+      }
+    };
 
     this.options.httpClient.request(
       config,

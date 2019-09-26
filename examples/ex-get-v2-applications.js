@@ -9,5 +9,5 @@ module.exports = function(callback, config) {
     {debug: config.DEBUG}
   );
 
-  nexmo.applications.get({}, callback, true);
+  nexmo.applications.get({page_size: 10}, callback, true);
 };
