@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.5.4-beta-1
+- Fix `applications.get` to use request query instead of request body
+
+## 2.5.3-beta-3
+- Fix application V2 parsing error responses
+
 ## 2.5.2-beta-1
 - Add Conversation Recording
 - Rename `nexmo.conversations.members.add` to `nexmo.conversations.members.create` with backwards compatibility

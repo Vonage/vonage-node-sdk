@@ -21,10 +21,10 @@ describe("App Object", function() {
   });
 
   it("should convert method signature from V1 to V2", function() {
-    var app = new App();
+    var applications = new App();
     expect(
       JSON.stringify(
-        app._convertMethodSignature(
+        applications._convertMethodSignature(
           "app",
           "voice",
           "example.com",
@@ -52,11 +52,69 @@ describe("App Object", function() {
     );
   });
 
-  it("should convert application response from V1 to V2", function() {
-    var app = new App();
+  it("should convert messages method signature from V1 to V2", function() {
+    var applications = new App();
     expect(
       JSON.stringify(
-        app._convertApplicationResponse({
+        applications._convertMethodSignature("app", "messages", "", "", {
+          inbound_url: "example.com",
+          status_url: "example.com"
+        })
+      )
+    ).to.equal(
+      JSON.stringify({
+        name: "app",
+        capabilities: {
+          messages: {
+            webhooks: {
+              inbound_url: {
+                address: "example.com",
+                http_method: "POST"
+              },
+              status_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      })
+    );
+  });
+
+  it("should convert voice method signature from V1 to V2", function() {
+    var applications = new App();
+    expect(
+      JSON.stringify(
+        applications._convertMethodSignature(
+          "app",
+          "rtc",
+          "example.com",
+          "example.com"
+        )
+      )
+    ).to.equal(
+      JSON.stringify({
+        name: "app",
+        capabilities: {
+          rtc: {
+            webhooks: {
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      })
+    );
+  });
+
+  it("should convert application response from V1 to V2", function() {
+    var applications = new App();
+    expect(
+      JSON.stringify(
+        applications._convertApplicationResponse({
           name: "app",
           capabilities: {
             voice: {
@@ -96,10 +154,12 @@ describe("App Object", function() {
   });
 
   it("should convert application list response from V1 to V2", function() {
-    var app = new App();
+    var applications = new App();
     expect(
       JSON.stringify(
-        app._convertApplicationListResponse(app._convertApplicationResponse)({
+        applications._convertApplicationListResponse(
+          applications._convertApplicationResponse
+        )({
           _embedded: {
             applications: [
               {
