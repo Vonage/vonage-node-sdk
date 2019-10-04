@@ -1,7 +1,7 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "2.4.2",
+  "version": "2.5.1",
   "main": "lib/Nexmo",
   "types": "./typings/index.d.ts",
   "keywords": [
@@ -42,7 +42,7 @@
     "pretest": "npm run lint"
   },
   "devDependencies": {
-    "babel-cli": "^6.7.7",
+    "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

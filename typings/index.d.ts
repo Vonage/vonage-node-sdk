@@ -36,6 +36,7 @@ declare module 'nexmo' {
         require_type?: string;
         pin_expiry?: string;
         next_event_wait?: number;
+        workflow_id?: number;
     }
 
     export interface RequestResponse {
@@ -104,4 +105,3 @@ declare module 'nexmo' {
         public readonly verify: Verify;
     }
 }
-

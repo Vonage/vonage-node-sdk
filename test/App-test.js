@@ -1,9 +1,23 @@
+import chai, { expect } from "chai";
 import sinon from "sinon";
+import sinonChai from "sinon-chai";
 
 import nexmo from "../lib/index";
 import App from "../lib/App";
 
+import HttpClient from "../lib/HttpClient";
+import Credentials from "../lib/Credentials";
+
 import NexmoStub from "./NexmoStub";
+import ResourceTestHelper from "./ResourceTestHelper";
+
+chai.use(sinonChai);
+
+var creds = Credentials.parse({
+  apiKey: "someKey",
+  apiSecret: "someSecret"
+});
+var emptyCallback = () => {};
 
 var appAPIMapping = {
   getApplications: "get|{}",
@@ -13,44 +27,550 @@ var appAPIMapping = {
   deleteApplication: "delete"
 };
 
-describe("App Object", function() {
+describe("applications", function() {
   it("should implement all v1 APIs", function() {
     NexmoStub.checkAllFunctionsAreDefined(appAPIMapping, App);
   });
+});
 
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(appAPIMapping, App);
+describe("applications.create", function() {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    applications = new App(creds, options);
   });
+  it("should call the V2 API with V1 parameters", function() {
+    applications.create(
+      "testy",
+      "voice",
+      "example.com",
+      "example.com",
+      {},
+      emptyCallback
+    );
 
-  it("should call nexmo.getApplications if 1st param is object", function() {
-    var mock = sinon.mock(nexmo);
-    mock.expects("getApplications").once();
-
-    var app = new App(
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
       {
-        apiKey: "test",
-        apiSecret: "test"
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
       },
       {
-        nexmoOverride: nexmo
+        method: "POST",
+        path: App.PATH,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
       }
     );
-    app.get({});
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      applications._convertApplicationResponse
+    );
   });
 
-  it("should call nexmo.getApplication if 1st param is an app ID", function() {
-    var mock = sinon.mock(nexmo);
-    mock.expects("getApplication").once();
-
-    var app = new App(
+  it("should call the V2 API with V2 parameters", function() {
+    applications.create(
       {
-        apiKey: "test",
-        apiSecret: "test"
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
       },
       {
-        nexmoOverride: nexmo
+        method: "POST",
+        path: App.PATH,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
       }
     );
-    app.get("some-app-id");
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
+});
+
+describe("applications.update", function() {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    applications = new App(creds, options);
+  });
+  it("should call the V2 API with V1 parameters", function() {
+    applications.update(
+      "app_id",
+      "testy",
+      "voice",
+      "example.com",
+      "example.com",
+      {},
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      {
+        method: "PUT",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      applications._convertApplicationResponse
+    );
+  });
+
+  it("should call the V2 API with V2 parameters", function() {
+    applications.update(
+      "app_id",
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      {
+        method: "PUT",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
+});
+
+describe("applications.get", function() {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    applications = new App(creds, options);
+  });
+  it("should call the V2 API for ID with response parser", function() {
+    applications.get("app_id", emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "GET",
+        path: `${App.PATH}/app_id`,
+        body: undefined,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      applications._convertApplicationResponse
+    );
+  });
+
+  it("should call the V2 API for filter with response parser", function() {
+    applications.get({some: "param"}, emptyCallback, true);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "GET",
+        path: `${App.PATH}?some=param`,
+        body: undefined,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
+
+  it("should call the V2 API with V2 flag", function() {
+    applications.get("app_id", emptyCallback, true);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "GET",
+        path: `${App.PATH}/app_id`,
+        body: undefined,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
+});
+
+describe("applications.delete", function() {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    applications = new App(creds, options);
+  });
+  it("should call the V2 API", function() {
+    applications.delete("app_id", emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "DELETE",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+});
+
+describe("applications._convertMethodSignature", function() {
+  it("should convert method signature from V1 to V2", function() {
+    var applications = new App();
+    expect(
+      JSON.stringify(
+        applications._convertMethodSignature(
+          "app",
+          "voice",
+          "example.com",
+          "example.com"
+        )
+      )
+    ).to.equal(
+      JSON.stringify({
+        name: "app",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      })
+    );
+  });
+
+  it("should convert messages method signature from V1 to V2", function() {
+    var applications = new App();
+    expect(
+      JSON.stringify(
+        applications._convertMethodSignature("app", "messages", "", "", {
+          inbound_url: "example.com",
+          status_url: "example.com"
+        })
+      )
+    ).to.equal(
+      JSON.stringify({
+        name: "app",
+        capabilities: {
+          messages: {
+            webhooks: {
+              inbound_url: {
+                address: "example.com",
+                http_method: "POST"
+              },
+              status_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      })
+    );
+  });
+
+  it("should convert voice method signature from V1 to V2", function() {
+    var applications = new App();
+    expect(
+      JSON.stringify(
+        applications._convertMethodSignature(
+          "app",
+          "rtc",
+          "example.com",
+          "example.com"
+        )
+      )
+    ).to.equal(
+      JSON.stringify({
+        name: "app",
+        capabilities: {
+          rtc: {
+            webhooks: {
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      })
+    );
+  });
+
+  it("should convert application response from V1 to V2", function() {
+    var applications = new App();
+    expect(
+      JSON.stringify(
+        applications._convertApplicationResponse({
+          name: "app",
+          capabilities: {
+            voice: {
+              webhooks: {
+                answer_url: {
+                  address: "https://example.com",
+                  http_method: "GET"
+                },
+                event_url: {
+                  address: "https://example.com",
+                  http_method: "POST"
+                }
+              }
+            }
+          }
+        })
+      )
+    ).to.equal(
+      JSON.stringify({
+        name: "app",
+        voice: {
+          webhooks: [
+            {
+              endpoint_type: "answer_url",
+              endpoint: "https://example.com",
+              http_method: "GET"
+            },
+            {
+              endpoint_type: "event_url",
+              endpoint: "https://example.com",
+              http_method: "POST"
+            }
+          ]
+        }
+      })
+    );
+  });
+
+  it("should convert application list response from V1 to V2", function() {
+    var applications = new App();
+    expect(
+      JSON.stringify(
+        applications._convertApplicationListResponse(
+          applications._convertApplicationResponse
+        )({
+          _embedded: {
+            applications: [
+              {
+                name: "app",
+                capabilities: {
+                  voice: {
+                    webhooks: {
+                      answer_url: {
+                        address: "https://example.com",
+                        http_method: "GET"
+                      },
+                      event_url: {
+                        address: "https://example.com",
+                        http_method: "POST"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        })
+      )
+    ).to.equal(
+      JSON.stringify({
+        _embedded: {
+          applications: [
+            {
+              name: "app",
+              voice: {
+                webhooks: [
+                  {
+                    endpoint_type: "answer_url",
+                    endpoint: "https://example.com",
+                    http_method: "GET"
+                  },
+                  {
+                    endpoint_type: "event_url",
+                    endpoint: "https://example.com",
+                    http_method: "POST"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      })
+    );
   });
 });
