@@ -5,7 +5,19 @@ import sinonChai from "sinon-chai";
 import nexmo from "../lib/index";
 import App from "../lib/App";
 
+import HttpClient from "../lib/HttpClient";
+import Credentials from "../lib/Credentials";
+
 import NexmoStub from "./NexmoStub";
+import ResourceTestHelper from "./ResourceTestHelper";
+
+chai.use(sinonChai);
+
+var creds = Credentials.parse({
+  apiKey: "someKey",
+  apiSecret: "someSecret"
+});
+var emptyCallback = () => {};
 
 var appAPIMapping = {
   getApplications: "get|{}",
@@ -15,11 +27,363 @@ var appAPIMapping = {
   deleteApplication: "delete"
 };
 
-describe("App Object", function() {
+describe("applications", function() {
   it("should implement all v1 APIs", function() {
     NexmoStub.checkAllFunctionsAreDefined(appAPIMapping, App);
   });
+});
 
+describe("applications.create", function() {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    applications = new App(creds, options);
+  });
+  it("should call the V2 API with V1 parameters", function() {
+    applications.create(
+      "testy",
+      "voice",
+      "example.com",
+      "example.com",
+      {},
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      {
+        method: "POST",
+        path: App.PATH,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      applications._convertApplicationResponse
+    );
+  });
+
+  it("should call the V2 API with V2 parameters", function() {
+    applications.create(
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      {
+        method: "POST",
+        path: App.PATH,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
+});
+
+describe("applications.update", function() {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    applications = new App(creds, options);
+  });
+  it("should call the V2 API with V1 parameters", function() {
+    applications.update(
+      "app_id",
+      "testy",
+      "voice",
+      "example.com",
+      "example.com",
+      {},
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      {
+        method: "PUT",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      applications._convertApplicationResponse
+    );
+  });
+
+  it("should call the V2 API with V2 parameters", function() {
+    applications.update(
+      "app_id",
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {
+        name: "testy",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      },
+      {
+        method: "PUT",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
+});
+
+describe("applications.get", function() {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    applications = new App(creds, options);
+  });
+  it("should call the V2 API for ID with response parser", function() {
+    applications.get("app_id", emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "GET",
+        path: `${App.PATH}/app_id`,
+        body: undefined,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      applications._convertApplicationResponse
+    );
+  });
+
+  it("should call the V2 API for filter with response parser", function() {
+    applications.get({ some: "param" }, emptyCallback, true);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "GET",
+        path: `${App.PATH}?some=param`,
+        body: undefined,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
+
+  it("should call the V2 API with V2 flag", function() {
+    applications.get("app_id", emptyCallback, true);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "GET",
+        path: `${App.PATH}/app_id`,
+        body: undefined,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
+});
+
+describe("applications.delete", function() {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub
+    };
+    applications = new App(creds, options);
+  });
+  it("should call the V2 API", function() {
+    applications.delete("app_id", emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "DELETE",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+});
+
+describe("applications._convertMethodSignature", function() {
   it("should convert method signature from V1 to V2", function() {
     var applications = new App();
     expect(
