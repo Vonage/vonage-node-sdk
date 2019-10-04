@@ -10,3 +10,4 @@ coverage
 .idea
 coverage.lcov
 .nexmo-app
+e2e/
