@@ -429,19 +429,33 @@ describe("parseResponse", function() {
 
   it("should parse a 500+ status code as an error", function() {
     var callback = sinon.spy();
-    const headers = { "content-type": "application/json" };
-    const response = { statusCode: 504, headers: headers };
+    const headers = {
+      "content-type": "application/json"
+    };
+    const response = {
+      statusCode: 504,
+      headers: headers
+    };
     client.__parseResponse(response, [""], "GET", callback);
     expect(callback).was.calledWith(
-      { message: "Server Error", statusCode: 504, headers: headers },
+      {
+        message: "Server Error",
+        statusCode: 504,
+        headers: headers
+      },
       null
     );
   });
 
   it("should parse a 400-499 status code as a JSON error", function() {
     var callback = sinon.spy();
-    const headers = { "content-type": "application/json" };
-    const response = { statusCode: 404, headers: headers };
+    const headers = {
+      "content-type": "application/json"
+    };
+    const response = {
+      statusCode: 404,
+      headers: headers
+    };
     client.__parseResponse(
       response,
       ['{ "error" : "error" }'],
@@ -449,15 +463,26 @@ describe("parseResponse", function() {
       callback
     );
     expect(callback).was.calledWith(
-      { statusCode: 404, body: { error: "error" }, headers: headers },
+      {
+        statusCode: 404,
+        body: {
+          error: "error"
+        },
+        headers: headers
+      },
       null
     );
   });
 
   it("should parse a 204 status code as null", function() {
     var callback = sinon.spy();
-    const headers = { "content-type": "application/json" };
-    const response = { statusCode: 204, headers: headers };
+    const headers = {
+      "content-type": "application/json"
+    };
+    const response = {
+      statusCode: 204,
+      headers: headers
+    };
     client.__parseResponse(response, [""], "GET", callback);
     expect(callback).was.calledWith(null, null);
   });
@@ -466,17 +491,81 @@ describe("parseResponse", function() {
     var callback = sinon.spy();
     const response = {
       statusCode: 201,
-      headers: { "content-type": "application/json" }
+      headers: {
+        "content-type": "application/json"
+      }
     };
     client.__parseResponse(response, ['{ "data" : "data" }'], "GET", callback);
-    expect(callback).was.calledWith(null, { data: "data" });
+    expect(callback).was.calledWith(null, {
+      data: "data"
+    });
+  });
+
+  it("should allow a custom response parser", function() {
+    var callback = sinon.spy();
+    const response = {
+      statusCode: 201,
+      headers: {
+        "content-type": "application/json"
+      }
+    };
+    client.__parseResponse(
+      response,
+      ['{ "data" : "data" }'],
+      "GET",
+      callback,
+      false,
+      response => {
+        response.data = "new";
+        return response;
+      }
+    );
+    expect(callback).was.calledWith(null, {
+      data: "new"
+    });
+  });
+
+  it("should not run the custom response parser on a null response", function() {
+    var callback = sinon.spy();
+    const response = {
+      statusCode: 400,
+      headers: {
+        "content-type": "application/json"
+      }
+    };
+    client.__parseResponse(
+      response,
+      [null],
+      "GET",
+      callback,
+      false,
+      response => {
+        response.data = "new";
+        return response;
+      }
+    );
+    expect(callback).was.calledWith(
+      {
+        body: "",
+        headers: {
+          "content-type": "application/json"
+        },
+        message: "The API response could not be parsed.",
+        parseError: new SyntaxError("Unexpected end of JSON input"),
+        status: 400,
+        statusCode: 400
+      },
+      null
+    );
   });
 
   it("should not try and parse successful DELETE request to JSON", function() {
     var callback = sinon.spy();
     const response = {
       statusCode: 201,
-      headers: { "content-type": "application/json" }
+      headers: {
+        "content-type": "application/json"
+      }
     };
     client.__parseResponse(response, [""], "DELETE", callback);
     expect(callback).was.calledWith(null, [""]);
@@ -486,7 +575,9 @@ describe("parseResponse", function() {
     var callback = sinon.spy();
     const response = {
       statusCode: 201,
-      headers: { "content-type": "application/json" }
+      headers: {
+        "content-type": "application/json"
+      }
     };
     const data = "not_json";
     client.__parseResponse(response, [data], "GET", callback);
@@ -504,7 +595,9 @@ describe("parseResponse", function() {
     var callback = sinon.spy();
     const response = {
       statusCode: 200,
-      headers: { "content-type": "application/json" }
+      headers: {
+        "content-type": "application/json"
+      }
     };
     const data = "not_json";
     client.__parseResponse(response, [data], "GET", callback, true);
@@ -516,7 +609,9 @@ describe("parseResponse", function() {
     var data = new Buffer("data");
     const response = {
       statusCode: 200,
-      headers: { "content-type": "application/octet-stream" }
+      headers: {
+        "content-type": "application/octet-stream"
+      }
     };
     client.__parseResponse(response, data, "GET", callback);
     expect(callback).was.calledWith(null, data);
@@ -525,10 +620,19 @@ describe("parseResponse", function() {
   it("should set a default retry-after of 200 for a GET with a 429 response", function() {
     var callback = sinon.spy();
     const headers = {};
-    const response = { statusCode: 429, headers: headers };
+    const response = {
+      statusCode: 429,
+      headers: headers
+    };
     client.__parseResponse(response, [""], "GET", callback);
     expect(callback).was.calledWith(
-      { statusCode: 429, body: "", headers: { "retry-after": 200 } },
+      {
+        statusCode: 429,
+        body: "",
+        headers: {
+          "retry-after": 200
+        }
+      },
       null
     );
   });
@@ -536,21 +640,41 @@ describe("parseResponse", function() {
   it("should set a default retry-after of 500 for a POST with a 429 response", function() {
     var callback = sinon.spy();
     const headers = {};
-    const response = { statusCode: 429, headers: headers };
+    const response = {
+      statusCode: 429,
+      headers: headers
+    };
     client.__parseResponse(response, [""], "POST", callback);
     expect(callback).was.calledWith(
-      { statusCode: 429, body: "", headers: { "retry-after": 500 } },
+      {
+        statusCode: 429,
+        body: "",
+        headers: {
+          "retry-after": 500
+        }
+      },
       null
     );
   });
 
   it("should use the server returned retry-after header with a 429 response", function() {
     var callback = sinon.spy();
-    const headers = { "retry-after": 400 };
-    const response = { statusCode: 429, headers: headers };
+    const headers = {
+      "retry-after": 400
+    };
+    const response = {
+      statusCode: 429,
+      headers: headers
+    };
     client.__parseResponse(response, [""], "GET", callback);
     expect(callback).was.calledWith(
-      { statusCode: 429, body: "", headers: { "retry-after": 400 } },
+      {
+        statusCode: 429,
+        body: "",
+        headers: {
+          "retry-after": 400
+        }
+      },
       null
     );
   });

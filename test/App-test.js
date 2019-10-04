@@ -1,4 +1,6 @@
+import chai, { expect } from "chai";
 import sinon from "sinon";
+import sinonChai from "sinon-chai";
 
 import nexmo from "../lib/index";
 import App from "../lib/App";
@@ -18,39 +20,133 @@ describe("App Object", function() {
     NexmoStub.checkAllFunctionsAreDefined(appAPIMapping, App);
   });
 
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(appAPIMapping, App);
+  it("should convert method signature from V1 to V2", function() {
+    var app = new App();
+    expect(
+      JSON.stringify(
+        app._convertMethodSignature(
+          "app",
+          "voice",
+          "example.com",
+          "example.com"
+        )
+      )
+    ).to.equal(
+      JSON.stringify({
+        name: "app",
+        capabilities: {
+          voice: {
+            webhooks: {
+              answer_url: {
+                address: "example.com",
+                http_method: "GET"
+              },
+              event_url: {
+                address: "example.com",
+                http_method: "POST"
+              }
+            }
+          }
+        }
+      })
+    );
   });
 
-  it("should call nexmo.getApplications if 1st param is object", function() {
-    var mock = sinon.mock(nexmo);
-    mock.expects("getApplications").once();
-
-    var app = new App(
-      {
-        apiKey: "test",
-        apiSecret: "test"
-      },
-      {
-        nexmoOverride: nexmo
-      }
+  it("should convert application response from V1 to V2", function() {
+    var app = new App();
+    expect(
+      JSON.stringify(
+        app._convertApplicationResponse({
+          name: "app",
+          capabilities: {
+            voice: {
+              webhooks: {
+                answer_url: {
+                  address: "https://example.com",
+                  http_method: "GET"
+                },
+                event_url: {
+                  address: "https://example.com",
+                  http_method: "POST"
+                }
+              }
+            }
+          }
+        })
+      )
+    ).to.equal(
+      JSON.stringify({
+        name: "app",
+        voice: {
+          webhooks: [
+            {
+              endpoint_type: "answer_url",
+              endpoint: "https://example.com",
+              http_method: "GET"
+            },
+            {
+              endpoint_type: "event_url",
+              endpoint: "https://example.com",
+              http_method: "POST"
+            }
+          ]
+        }
+      })
     );
-    app.get({});
   });
 
-  it("should call nexmo.getApplication if 1st param is an app ID", function() {
-    var mock = sinon.mock(nexmo);
-    mock.expects("getApplication").once();
-
-    var app = new App(
-      {
-        apiKey: "test",
-        apiSecret: "test"
-      },
-      {
-        nexmoOverride: nexmo
-      }
+  it("should convert application list response from V1 to V2", function() {
+    var app = new App();
+    expect(
+      JSON.stringify(
+        app._convertApplicationListResponse(app._convertApplicationResponse)({
+          _embedded: {
+            applications: [
+              {
+                name: "app",
+                capabilities: {
+                  voice: {
+                    webhooks: {
+                      answer_url: {
+                        address: "https://example.com",
+                        http_method: "GET"
+                      },
+                      event_url: {
+                        address: "https://example.com",
+                        http_method: "POST"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        })
+      )
+    ).to.equal(
+      JSON.stringify({
+        _embedded: {
+          applications: [
+            {
+              name: "app",
+              voice: {
+                webhooks: [
+                  {
+                    endpoint_type: "answer_url",
+                    endpoint: "https://example.com",
+                    http_method: "GET"
+                  },
+                  {
+                    endpoint_type: "event_url",
+                    endpoint: "https://example.com",
+                    http_method: "POST"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      })
     );
-    app.get("some-app-id");
   });
 });

@@ -21,7 +21,6 @@ var niEndpoint = { host: "api.nexmo.com", path: "/ni/advanced/async/json" };
 var niBasicEndpoint = { host: "api.nexmo.com", path: "/ni/basic/json" };
 var niStandardEndpoint = { host: "api.nexmo.com", path: "/ni/standard/json" };
 var niAdvancedEndpoint = { host: "api.nexmo.com", path: "/ni/advanced/json" };
-var applicationsEndpoint = { host: "api.nexmo.com", path: "/v1/applications" };
 var up = {};
 var numberPattern = new RegExp("^[0-9 +()-]*$");
 
@@ -57,11 +56,6 @@ var ERROR_MESSAGES = {
     "Number can contain digits and may include any or all of the following: white space, -,+, (, ).",
   optionsNotAnObject:
     "Options parameter should be a dictionary. Check the docs for valid properties for options",
-  applicationName: "Invalid argument: name",
-  applicationType: "Invalid argument: type",
-  applicationAnswerUrl: "Invalid argument: answerUrl",
-  applicationEventUrl: "Invalid argument: eventUrl",
-  applicationId: "Invalid argument: appId",
   product: "Invalid product. Should be one of [voice, sms]"
 };
 
@@ -359,117 +353,6 @@ exports.updateNumber = function(countryCode, msisdn, params, callback) {
   }
 };
 
-exports.getApplications = function(options, callback) {
-  var endpoint = getEndpoint(applicationsEndpoint.path);
-  endpoint.host = applicationsEndpoint.host;
-  if (typeof options === "function") {
-    callback = options;
-  } else if (typeof options === "object") {
-    endpoint.path += "?";
-    for (var key in options) {
-      endpoint.path += key + "=" + options[key] + "&";
-    }
-  } else {
-    sendError(callback, new Error(ERROR_MESSAGES.optionsNotAnObject));
-    return;
-  }
-  sendRequest(endpoint, callback);
-};
-
-exports.createApplication = function(
-  name,
-  type,
-  answerUrl,
-  eventUrl,
-  options,
-  callback
-) {
-  if (!name || name.length < 1) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationName));
-  } else if (!type) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationType));
-  } else if (!answerUrl) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationAnswerUrl));
-  } else if (!eventUrl) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
-  } else {
-    var createEndpoint = getEndpoint(applicationsEndpoint.path);
-    createEndpoint.host = applicationsEndpoint.host;
-    createEndpoint.path +=
-      "?name=" +
-      encodeURIComponent(name) +
-      "&type=" +
-      type +
-      "&answer_url=" +
-      answerUrl +
-      "&event_url=" +
-      eventUrl;
-    for (var key in options) {
-      createEndpoint.path += "&" + key + "=" + options[key];
-    }
-    sendRequest(createEndpoint, "POST", callback);
-  }
-};
-
-exports.getApplication = function(appId, callback) {
-  if (!appId || appId.length < 36) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationId));
-  } else {
-    var showEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
-    showEndpoint.host = applicationsEndpoint.host;
-    sendRequest(showEndpoint, callback);
-  }
-};
-
-exports.updateApplication = function(
-  appId,
-  name,
-  type,
-  answerUrl,
-  eventUrl,
-  options,
-  callback
-) {
-  if (!appId || appId.length < 36) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationId));
-  } else if (!name || name.length < 1) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationName));
-  } else if (!type) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationType));
-  } else if (!answerUrl) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationAnswerUrl));
-  } else if (!eventUrl) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationEventUrl));
-  } else {
-    var updateEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
-    updateEndpoint.path +=
-      "?name=" +
-      encodeURIComponent(name) +
-      "&type=" +
-      type +
-      "&answer_url=" +
-      answerUrl +
-      "&event_url=" +
-      eventUrl;
-    updateEndpoint.host = applicationsEndpoint.host;
-    for (var key in options) {
-      updateEndpoint.path =
-        updateEndpoint.path + "&" + key + "=" + options[key];
-    }
-    sendRequest(updateEndpoint, "PUT", callback);
-  }
-};
-
-exports.deleteApplication = function(appId, callback) {
-  if (!appId || appId.length < 36) {
-    sendError(callback, new Error(ERROR_MESSAGES.applicationId));
-  } else {
-    var deleteEndpoint = getEndpoint(applicationsEndpoint.path + "/" + appId);
-    deleteEndpoint.host = applicationsEndpoint.host;
-    sendRequest(deleteEndpoint, "DELETE", callback);
-  }
-};
-
 exports.changePassword = function(newSecret, callback) {
   var settingsEndpoint = getEndpoint("/account/settings");
   settingsEndpoint.path += "?newSecret=" + encodeURIComponent(newSecret);
@@ -731,5 +614,4 @@ exports.setHost = function(aHost) {
   niEndpoint.host = aHost;
   niBasicEndpoint.host = aHost;
   niStandardEndpoint.host = aHost;
-  applicationsEndpoint.host = aHost;
 };
