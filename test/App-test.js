@@ -303,7 +303,7 @@ describe("applications.get", function() {
   });
 
   it("should call the V2 API for filter with response parser", function() {
-    applications.get({some: "param"}, emptyCallback, true);
+    applications.get({ some: "param" }, emptyCallback, true);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
       {},
