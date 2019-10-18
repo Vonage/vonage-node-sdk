@@ -11,5 +11,7 @@ module.exports = function(callback, config) {
     {debug: config.DEBUG}
   );
 
-  nexmo.users.get({page_size: 20}, callback);
+  nexmo.conversations.events.get(config.CONVERSATION_ID, {page_size: 5}, (error, response) => {
+    nexmo.conversations.events.next(response, callback);
+  });
 };

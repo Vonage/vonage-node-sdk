@@ -15,6 +15,14 @@ class Conversations {
     return "/beta/conversations";
   }
 
+  static get BETA2_PATH() {
+    return "/beta2/conversations";
+  }
+
+  static get V1_PATH() {
+    return "/v1/conversations";
+  }
+
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -46,7 +54,7 @@ class Conversations {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: Conversations.PATH,
       method: "POST",
       body: params,
@@ -68,8 +76,11 @@ class Conversations {
    */
   get(query, callback) {
     var config = {
-      host: "api.nexmo.com",
-      path: Utils.createPathWithQuery(Conversations.PATH, query),
+      host: this.options.host || "api.nexmo.com",
+      path:
+        typeof query === "string"
+          ? `${Conversations.PATH}/${query}`
+          : Utils.createPathWithQuery(Conversations.BETA2_PATH, query),
       method: "GET",
       body: undefined,
       headers: {
@@ -78,6 +89,38 @@ class Conversations {
       }
     };
     this.options.httpClient.request(config, callback);
+  }
+
+  /**
+   * Get next page of conversations.
+   *
+   * @param {object} response - The response from a paginated conversations list
+   *               see https://ea.developer.nexmo.com/api/conversation#listConversations
+   * @param {function} callback - function to be called when the request completes.
+   */
+  next(response, callback) {
+    if (response._links.next) {
+      this.get(Utils.getQuery(response._links.next.href), callback);
+    } else {
+      const error = new Error("The response doesn't have a next page.");
+      callback(error, null);
+    }
+  }
+
+  /**
+   * Get previous page of conversations.
+   *
+   * @param {object} response - The response from a paginated conversations list
+   *               see https://ea.developer.nexmo.com/api/conversation#listConversations
+   * @param {function} callback - function to be called when the request completes.
+   */
+  prev(response, callback) {
+    if (response._links.prev) {
+      this.get(Utils.getQuery(response._links.prev.href), callback);
+    } else {
+      const error = new Error("The response doesn't have a previous page.");
+      callback(error, null);
+    }
   }
 
   /**
@@ -91,7 +134,7 @@ class Conversations {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: `${Conversations.PATH}/${conversationId}`,
       method: "PUT",
       body: params,
@@ -115,8 +158,8 @@ class Conversations {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
-      path: `${Conversations.PATH}/${conversationId}/record`,
+      host: this.options.host || "api.nexmo.com",
+      path: `${Conversations.V1_PATH}/${conversationId}/record`,
       method: "PUT",
       body: params,
       headers: {
@@ -136,7 +179,7 @@ class Conversations {
    */
   delete(conversationId, callback) {
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: `${Conversations.PATH}/${conversationId}`,
       method: "DELETE",
       headers: {

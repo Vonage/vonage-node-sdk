@@ -49,7 +49,10 @@ describe("Members", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Members.PATH.replace("{conversation_uuid}", conversationId)}`
+      path: `${Members.BETA2_PATH.replace(
+        "{conversation_uuid}",
+        conversationId
+      )}`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -66,7 +69,7 @@ describe("Members", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Members.PATH.replace(
+      path: `${Members.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
       )}/${memberId}`

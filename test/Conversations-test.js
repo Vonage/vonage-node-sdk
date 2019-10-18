@@ -48,7 +48,7 @@ describe("Conversations", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Conversations.PATH}`
+      path: `${Conversations.BETA2_PATH}`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -100,7 +100,7 @@ describe("Conversations", () => {
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       method: "PUT",
-      path: `${Conversations.PATH}/${conversationId}/record`
+      path: `${Conversations.V1_PATH}/${conversationId}/record`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

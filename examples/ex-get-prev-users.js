@@ -11,5 +11,9 @@ module.exports = function(callback, config) {
     {debug: config.DEBUG}
   );
 
-  nexmo.users.get({page_size: 20}, callback);
+  nexmo.users.get({page_size: 20}, (error, response) => {
+    nexmo.users.next(response, (error, response) => {
+      nexmo.users.prev(response, callback);
+    })
+  });
 };

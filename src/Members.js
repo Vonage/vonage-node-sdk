@@ -13,6 +13,10 @@ class Members {
     return "/beta/conversations/{conversation_uuid}/members";
   }
 
+  static get BETA2_PATH() {
+    return "/beta2/conversations/{conversation_uuid}/members";
+  }
+
   /**
    * Creates a new Members.
    *
@@ -35,7 +39,7 @@ class Members {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: Members.PATH.replace("{conversation_uuid}", conversationId),
       method: "POST",
       body: params,
@@ -63,9 +67,9 @@ class Members {
    */
   get(conversationId, query, callback) {
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: Utils.createPathWithQuery(
-        Members.PATH.replace("{conversation_uuid}", conversationId),
+        Members.BETA2_PATH.replace("{conversation_uuid}", conversationId),
         query
       ),
       method: "GET",
@@ -76,6 +80,48 @@ class Members {
       }
     };
     this.options.httpClient.request(config, callback);
+  }
+
+  /**
+   * Get next page of members for a conversation.
+   *
+   * @param {object} response - The response from a paginated members list
+   *               see https://ea.developer.nexmo.com/api/conversation#getMembers
+   * @param {function} callback - function to be called when the request completes.
+   */
+  next(response, callback) {
+    if (response._links.next) {
+      const conversationId = response._links.next.href.match(/CON-[^/]*/g);
+      this.get(
+        conversationId,
+        Utils.getQuery(response._links.next.href),
+        callback
+      );
+    } else {
+      const error = new Error("The response doesn't have a next page.");
+      callback(error, null);
+    }
+  }
+
+  /**
+   * Get previous page members for a conversation.
+   *
+   * @param {object} response - The response from a paginated members list
+   *               see https://ea.developer.nexmo.com/api/conversation#getMembers
+   * @param {function} callback - function to be called when the request completes.
+   */
+  prev(response, callback) {
+    if (response._links.prev) {
+      const conversationId = response._links.prev.href.match(/CON-[^/]*/g);
+      this.get(
+        conversationId,
+        Utils.getQuery(response._links.prev.href),
+        callback
+      );
+    } else {
+      const error = new Error("The response doesn't have a previous page.");
+      callback(error, null);
+    }
   }
 
   /**
@@ -90,7 +136,7 @@ class Members {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: `${Members.PATH.replace(
         "{conversation_uuid}",
         conversationId
@@ -115,7 +161,7 @@ class Members {
    */
   delete(conversationId, memberId, callback) {
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: `${Members.PATH.replace(
         "{conversation_uuid}",
         conversationId

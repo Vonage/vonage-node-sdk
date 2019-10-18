@@ -552,7 +552,7 @@ For more information see https://developer.nexmo.com/api/conversation#getUsers
 ### Get all Conversations for a Users
 
 ```js
-nexmo.users.getConversations(userId, callback);
+nexmo.users.getConversations(userId, options, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/conversation#getuserConversations

@@ -47,7 +47,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.PATH}`
+      path: `${Users.BETA2_PATH}`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -63,7 +63,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.PATH}/${userId}`
+      path: `${Users.BETA2_PATH}/${userId}`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -74,12 +74,12 @@ describe("Users", () => {
 
   it("should get conversations for a user", () => {
     const userId = "USR-aaabbbccc-111222333";
-    users.getConversations(userId, emptyCallback);
+    users.getConversations(userId, {}, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.PATH}/${userId}/conversations`
+      path: `${Users.BETA2_PATH}/${userId}/conversations`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
