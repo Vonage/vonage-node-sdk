@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file. This projec
 - Added cursor pagination methods `next()` and `prev()` for `nexmo.users`, `nexmo.conversations`, `nexmo.conversations.members` and `nexmo.conversations.events`
 - Added v1 API version for `nexmo.conversations.record()`
 - Added the ability to change host for `nexmo.users`, `nexmo.conversations`, `nexmo.conversations.members` and `nexmo.conversations.events`
+- Updated `nexmo.users.getConversations` to accept a query parameter
 
 ## 2.5.4-beta-1
 - Fix `applications.get` to use request query instead of request body
