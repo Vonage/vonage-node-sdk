@@ -42,6 +42,20 @@ describe("Members", () => {
     );
   });
 
+  it("should have backwards compatibility for add/create", () => {
+    const conversationId = "CON-eeefffggg-444555666";
+    var params = {};
+    members.add(conversationId, params, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
+      path: `${Members.PATH.replace("{conversation_uuid}", conversationId)}`
+    });
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
   it("should get a collection of Members", () => {
     const conversationId = "CON-eeefffggg-444555666";
     members.get(conversationId, {}, emptyCallback);
@@ -58,6 +72,70 @@ describe("Members", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
       emptyCallback
+    );
+  });
+
+  it("should get the next collection of members", () => {
+    const conversationId = "CON-eeefffggg-444555666";
+    members.next(
+      { _links: { next: { href: `${conversationId}/?some=query` } } },
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      path: `${Members.BETA2_PATH.replace(
+        "{conversation_uuid}",
+        conversationId
+      )}?some=query`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should error when the next collection of members doesn't exit", () => {
+    let callback = sinon.spy();
+    members.next({ _links: { prev: { href: "?some=query" } } }, callback);
+
+    expect(callback).to.have.been.calledWith(
+      Error("The response doesn't have a next page."),
+      null
+    );
+  });
+
+  it("should get the previous collection of members", () => {
+    const conversationId = "CON-eeefffggg-444555666";
+    members.prev(
+      { _links: { prev: { href: `${conversationId}/?some=query` } } },
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      path: `${Members.BETA2_PATH.replace(
+        "{conversation_uuid}",
+        conversationId
+      )}?some=query`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should error when the previous collection of members doesn't exit", () => {
+    let callback = sinon.spy();
+    members.prev({ _links: { next: { href: "?some=query" } } }, callback);
+
+    expect(callback).to.have.been.calledWith(
+      Error("The response doesn't have a next page."),
+      null
     );
   });
 
