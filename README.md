@@ -419,13 +419,25 @@ nexmo.conversations.get(conversationId, callback);
 
 For more information see https://developer.nexmo.com/api/conversation#retrieveConversation
 
-### Get Conversations by filter
+### Get paginated Conversations
 
 ```js
 nexmo.conversations.get(options, callback);
 ```
 
-For more information see https://developer.nexmo.com/api/conversation
+### Get next page of Conversations
+
+```js
+nexmo.conversations.next(response, callback);
+```
+
+### Get next previous of Conversations
+
+```js
+nexmo.conversations.prev(response, callback);
+```
+
+For more information see https://developer.nexmo.com/api/conversation#listConversations
 
 ### Update a Conversation
 
@@ -467,10 +479,22 @@ nexmo.conversations.members.get(conversationId, memberId, callback);
 
 For more information see https://developer.nexmo.com/api/conversation#getMember
 
-### Get Members by filter
+### Get paginated Members
 
 ```js
-nexmo.conversations.members.get(conversationId, params, callback);
+nexmo.conversations.members.get(conversationId, options, callback);
+```
+
+### Get next page of Members
+
+```js
+nexmo.conversations.members.next(response, callback);
+```
+
+### Get next previous of Members
+
+```js
+nexmo.conversations.members.prev(response, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/conversation#getMembers
@@ -507,10 +531,22 @@ nexmo.conversations.events.get(conversationId, eventId, callback);
 
 For more information see https://developer.nexmo.com/api/conversation#getEvent
 
-### Get Events by filter
+### Get paginated Events
 
 ```js
 nexmo.conversations.events.get(conversationId, params, callback);
+```
+
+### Get next page of Events
+
+```js
+nexmo.conversations.events.next(response, callback);
+```
+
+### Get next previous of Events
+
+```js
+nexmo.conversations.events.prev(response, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/conversation#getEvents
@@ -541,18 +577,42 @@ nexmo.users.get(userId, callback);
 
 For more information see https://developer.nexmo.com/api/conversation#getUser
 
-### Get Users by filter
+### Get paginated Users
 
 ```js
 nexmo.users.get(options, callback);
 ```
 
+### Get next page of Users
+
+```js
+nexmo.users.next(users_list_response, callback);
+```
+
+### Get previous page of Users
+
+```js
+nexmo.users.prev(users_list_response, callback);
+```
+
 For more information see https://developer.nexmo.com/api/conversation#getUsers
 
-### Get all Conversations for a Users
+### Get paginated Conversations for a User
 
 ```js
 nexmo.users.getConversations(userId, options, callback);
+```
+
+### Get next page of Conversations for a User
+
+```js
+nexmo.users.next(conversations_list_response, callback);
+```
+
+### Get previous page of Conversations for a User
+
+```js
+nexmo.users.prev(conversations_list_response, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/conversation#getuserConversations
