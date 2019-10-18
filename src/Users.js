@@ -128,6 +128,12 @@ class Users {
    * @param {function} callback - function to be called when the request completes.
    */
   getConversations(userId, query, callback) {
+    // backwards compatibility to 2.5.4-beta-1. Remove for 3.0.0
+    if (typeof query === "function") {
+      callback = query;
+      query = {};
+    }
+
     var config = {
       host: this.options.host || "api.nexmo.com",
       path: Utils.createPathWithQuery(
