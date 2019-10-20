@@ -34,13 +34,14 @@ declare module 'nexmo' {
         code_length?: number;
         lg?: string;
         require_type?: string;
-        pin_expiry?: string;
+        pin_expiry?: number;
         next_event_wait?: number;
         workflow_id?: number;
     }
 
     export interface RequestResponse {
         request_id: string;
+        status: string;
     }
 
     export enum RequestResponseStatusCode {
