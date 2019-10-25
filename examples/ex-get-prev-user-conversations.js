@@ -1,6 +1,7 @@
 module.exports = function(callback, config) {
 
   var Nexmo = require('../lib/Nexmo');
+  var querystring = require("querystring");
 
   var nexmo = new Nexmo({
       apiKey: config.API_KEY,
@@ -11,5 +12,9 @@ module.exports = function(callback, config) {
     {debug: config.DEBUG}
   );
 
-  nexmo.users.get({page_size: 20}, callback);
+  nexmo.users.getConversations(config.USER_ID, {page_size: 20}, (err, response) => {
+    nexmo.users.next(response, (err, response) => {
+      nexmo.users.prev(response, callback);
+    });
+  });
 };

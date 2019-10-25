@@ -11,5 +11,5 @@ module.exports = function(callback, config) {
     {debug: config.DEBUG}
   );
 
-  nexmo.conversations.members.get(config.CONVERSATION_ID, {}, callback);
+  nexmo.conversations.members.get(config.CONVERSATION_ID, {page_size: 5}, callback);
 };
