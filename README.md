@@ -588,13 +588,13 @@ nexmo.users.get(options, callback);
 ### Get next page of Users
 
 ```js
-nexmo.users.next(users_list_response, callback);
+nexmo.users.next(response, callback);
 ```
 
 ### Get previous page of Users
 
 ```js
-nexmo.users.prev(users_list_response, callback);
+nexmo.users.prev(response, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/conversation#getUsers
@@ -608,13 +608,13 @@ nexmo.users.getConversations(userId, options, callback);
 ### Get next page of Conversations for a User
 
 ```js
-nexmo.users.next(conversations_list_response, callback);
+nexmo.users.next(response, callback);
 ```
 
 ### Get previous page of Conversations for a User
 
 ```js
-nexmo.users.prev(conversations_list_response, callback);
+nexmo.users.prev(response, callback);
 ```
 
 For more information see https://developer.nexmo.com/api/conversation#getuserConversations
