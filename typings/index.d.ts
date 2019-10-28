@@ -21,7 +21,7 @@ declare module 'nexmo' {
 
     /* verify API */
     export interface VerifyError extends NexmoApiError {
-        status: RequestResponseStatusCode | ControlResponseStatusCode | number;
+        status: RequestResponseStatusCode | ControlResponseStatusCode | string;
         error_text: string;
         [key: string]: any;
     }
@@ -34,31 +34,32 @@ declare module 'nexmo' {
         code_length?: number;
         lg?: string;
         require_type?: string;
-        pin_expiry?: string;
+        pin_expiry?: number;
         next_event_wait?: number;
         workflow_id?: number;
     }
 
     export interface RequestResponse {
         request_id: string;
+        status: string;
     }
 
     export enum RequestResponseStatusCode {
-        Success = 0,
-        Throttled,
-        MissingParameters,
-        InvalidCredentials,
-        InternalError,
-        NotProcessed,
-        BlackListedNumber,
-        BlockedAccount,
-        QuotaExceeded,
-        ConcurrentVerificationNumber,
-        TargetNetworkNotSupported,
-        WrongVerificationCode,
-        TooManyRequests,
-        NoMoreEvents,
-        NoRequestFound,
+        Success = "0",
+        Throttled = "1",
+        MissingParameters = "2",
+        InvalidCredentials = "3",
+        InternalError = "4",
+        NotProcessed = "5",
+        BlackListedNumber = "6",
+        BlockedAccount = "7",
+        QuotaExceeded = "8",
+        ConcurrentVerificationNumber = "9",
+        TargetNetworkNotSupported = "10",
+        WrongVerificationCode = "11",
+        TooManyRequests = "12",
+        NoMoreEvents = "13",
+        NoRequestFound = "14",
     }
 
     export interface ControlObject {
@@ -72,8 +73,8 @@ declare module 'nexmo' {
     }
 
     export enum ControlResponseStatusCode {
-        Success = 0,
-        CancelOrTriggerNextEvent = 19,
+        Success = "0",
+        CancelOrTriggerNextEvent = "19",
     }
 
     export interface CheckObject {
