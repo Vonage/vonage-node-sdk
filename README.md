@@ -433,7 +433,7 @@ nexmo.conversations.get(options, callback);
 nexmo.conversations.next(response, callback);
 ```
 
-### Get next previous of Conversations
+### Get previous page of Conversations
 
 ```js
 nexmo.conversations.prev(response, callback);
@@ -493,7 +493,7 @@ nexmo.conversations.members.get(conversationId, options, callback);
 nexmo.conversations.members.next(response, callback);
 ```
 
-### Get next previous of Members
+### Get previous page of Members
 
 ```js
 nexmo.conversations.members.prev(response, callback);
@@ -545,7 +545,7 @@ nexmo.conversations.events.get(conversationId, params, callback);
 nexmo.conversations.events.next(response, callback);
 ```
 
-### Get next previous of Events
+### Get previous page of Events
 
 ```js
 nexmo.conversations.events.prev(response, callback);
