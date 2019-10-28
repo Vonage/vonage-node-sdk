@@ -16,3 +16,7 @@ exports.createPathWithQuery = function(path, query) {
 
   return `${path}${pathExt}`;
 };
+
+exports.getQuery = function(path) {
+  return querystring.parse(path.split("?")[1]);
+};

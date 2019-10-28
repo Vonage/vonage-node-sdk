@@ -28,6 +28,12 @@ describe("Users", () => {
     users = new Users(creds, options);
   });
 
+  it("should default options to empty object in the constructor", () => {
+    let users = new Users(creds);
+
+    expect(JSON.stringify(users.options)).to.equal("{}");
+  });
+
   it("should allow a user to be created", () => {
     var params = {};
     users.create(params, emptyCallback);
@@ -47,12 +53,62 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.PATH}`
+      path: `${Users.BETA2_PATH}`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
       emptyCallback
+    );
+  });
+
+  it("should get the next collection of users", () => {
+    users.next({ _links: { next: { href: "?some=query" } } }, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      path: `${Users.BETA2_PATH}?some=query`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should error when the next collection of users doesn't exit", () => {
+    let callback = sinon.spy();
+    users.next({ _links: { prev: { href: "?some=query" } } }, callback);
+
+    expect(callback).to.have.been.calledWith(
+      Error("The response doesn't have a next page."),
+      null
+    );
+  });
+
+  it("should get the previous collection of users", () => {
+    users.prev({ _links: { prev: { href: "?some=query" } } }, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      path: `${Users.BETA2_PATH}?some=query`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should error when the previous collection of users doesn't exit", () => {
+    let callback = sinon.spy();
+    users.prev({ _links: { next: { href: "?some=query" } } }, callback);
+
+    expect(callback).to.have.been.calledWith(
+      Error("The response doesn't have a next page."),
+      null
     );
   });
 
@@ -63,7 +119,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.PATH}/${userId}`
+      path: `${Users.BETA2_PATH}/${userId}`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -74,12 +130,66 @@ describe("Users", () => {
 
   it("should get conversations for a user", () => {
     const userId = "USR-aaabbbccc-111222333";
+    users.getConversations(userId, {}, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      path: `${Users.BETA2_PATH}/${userId}/conversations`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should get conversations for a user without a query", () => {
+    const userId = "USR-aaabbbccc-111222333";
     users.getConversations(userId, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.PATH}/${userId}/conversations`
+      path: `${Users.BETA2_PATH}/${userId}/conversations`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should get the next collection of conversations for a user", () => {
+    let userId = "USR-eeefffggg-444555666";
+    users.next(
+      { _links: { next: { href: `${userId}/?some=query` } } },
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      path: `${Users.BETA2_PATH}/${userId}/conversations?some=query`
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should get the previous collection of conversations for a user", () => {
+    let userId = "USR-eeefffggg-444555666";
+    users.prev(
+      { _links: { prev: { href: `${userId}/?some=query` } } },
+      emptyCallback
+    );
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      path: `${Users.BETA2_PATH}/${userId}/conversations?some=query`
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

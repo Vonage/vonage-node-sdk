@@ -12,6 +12,10 @@ class Users {
     return "/beta/users";
   }
 
+  static get BETA2_PATH() {
+    return "/beta2/users";
+  }
+
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -33,7 +37,7 @@ class Users {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: Users.PATH,
       method: "POST",
       body: params,
@@ -55,8 +59,8 @@ class Users {
    */
   get(query, callback) {
     var config = {
-      host: "api.nexmo.com",
-      path: Utils.createPathWithQuery(Users.PATH, query),
+      host: this.options.host || "api.nexmo.com",
+      path: Utils.createPathWithQuery(Users.BETA2_PATH, query),
       method: "GET",
       body: undefined,
       headers: {
@@ -68,15 +72,74 @@ class Users {
   }
 
   /**
+   * Get next page of users or conversations for a user.
+   *
+   * @param {object} response - The response from a paginated users or conversations list
+   *               see https://ea.developer.nexmo.com/api/conversation#retrieve-all-users
+   * @param {function} callback - function to be called when the request completes.
+   */
+  next(response, callback) {
+    if (response._links.next) {
+      const userId = response._links.next.href.match(/USR-[^/]*/g);
+      if (userId) {
+        this.getConversations(
+          userId[0],
+          Utils.getQuery(response._links.next.href),
+          callback
+        );
+      } else {
+        this.get(Utils.getQuery(response._links.next.href), callback);
+      }
+    } else {
+      const error = new Error("The response doesn't have a next page.");
+      callback(error, null);
+    }
+  }
+
+  /**
+   * Get previous page of users or conversations for a user.
+   *
+   * @param {object} response - The response from a paginated users or conversations list
+   *               see https://ea.developer.nexmo.com/api/conversation#retrieve-all-users
+   * @param {function} callback - function to be called when the request completes.
+   */
+  prev(response, callback) {
+    if (response._links.prev) {
+      const userId = response._links.prev.href.match(/USR-[^/]*/g);
+      if (userId) {
+        this.getConversations(
+          userId[0],
+          Utils.getQuery(response._links.prev.href),
+          callback
+        );
+      } else {
+        this.get(Utils.getQuery(response._links.prev.href), callback);
+      }
+    } else {
+      const error = new Error("The response doesn't have a previous page.");
+      callback(error, null);
+    }
+  }
+
+  /**
    * Get an conversations for an existing user.
    *
    * @param {string} userId - The unique identifier for the user to retrieve conversations for
    * @param {function} callback - function to be called when the request completes.
    */
-  getConversations(userId, callback) {
+  getConversations(userId, query, callback) {
+    // backwards compatibility to 2.5.4-beta-1. Remove for 3.0.0
+    if (typeof query === "function") {
+      callback = query;
+      query = {};
+    }
+
     var config = {
-      host: "api.nexmo.com",
-      path: `${Users.PATH}/${userId}/conversations`,
+      host: this.options.host || "api.nexmo.com",
+      path: Utils.createPathWithQuery(
+        `${Users.BETA2_PATH}/${userId}/conversations`,
+        query
+      ),
       method: "GET",
       body: undefined,
       headers: {
@@ -98,7 +161,7 @@ class Users {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: `${Users.PATH}/${userId}`,
       method: "PUT",
       body: params,
@@ -119,7 +182,7 @@ class Users {
    */
   delete(userId, callback) {
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: `${Users.PATH}/${userId}`,
       method: "DELETE",
       headers: {

@@ -21,4 +21,12 @@ describe("Utils", () => {
       ).to.equal("some?things=neverChange");
     });
   });
+
+  describe(".getQuery", () => {
+    it("should return query from path", () => {
+      expect(
+        JSON.stringify(Utils.getQuery("some/path/with?some=query"))
+      ).to.equal('{"some":"query"}');
+    });
+  });
 });

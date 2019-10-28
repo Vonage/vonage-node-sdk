@@ -11,5 +11,5 @@ module.exports = function(callback, config) {
     {debug: config.DEBUG}
   );
 
-  nexmo.conversations.get({}, callback);
+  nexmo.conversations.get({page_size: 5}, callback);
 };

@@ -13,6 +13,10 @@ class Events {
     return "/beta/conversations/{conversation_uuid}/events";
   }
 
+  static get BETA2_PATH() {
+    return "/beta2/conversations/{conversation_uuid}/events";
+  }
+
   /**
    * Creates a new Events instance.
    *
@@ -35,7 +39,7 @@ class Events {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: Events.PATH.replace("{conversation_uuid}", conversationId),
       method: "POST",
       body: params,
@@ -59,9 +63,9 @@ class Events {
 
   get(conversationId, query, callback) {
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: Utils.createPathWithQuery(
-        Events.PATH.replace("{conversation_uuid}", conversationId),
+        Events.BETA2_PATH.replace("{conversation_uuid}", conversationId),
         query
       ),
       method: "GET",
@@ -75,6 +79,48 @@ class Events {
   }
 
   /**
+   * Get next page of events for a conversation.
+   *
+   * @param {object} response - The response from a paginated events list
+   *               see https://ea.developer.nexmo.com/api/conversation#getEvents
+   * @param {function} callback - function to be called when the request completes.
+   */
+  next(response, callback) {
+    if (response._links.next) {
+      const conversationId = response._links.next.href.match(/CON-[^/]*/g);
+      this.get(
+        conversationId,
+        Utils.getQuery(response._links.next.href),
+        callback
+      );
+    } else {
+      const error = new Error("The response doesn't have a next page.");
+      callback(error, null);
+    }
+  }
+
+  /**
+   * Get previous page of events for a conversation.
+   *
+   * @param {object} response - The response from a paginated events list
+   *               see https://ea.developer.nexmo.com/api/conversation#getEvents
+   * @param {function} callback - function to be called when the request completes.
+   */
+  prev(response, callback) {
+    if (response._links.prev) {
+      const conversationId = response._links.prev.href.match(/CON-[^/]*/g);
+      this.get(
+        conversationId,
+        Utils.getQuery(response._links.prev.href),
+        callback
+      );
+    } else {
+      const error = new Error("The response doesn't have a previous page.");
+      callback(error, null);
+    }
+  }
+
+  /**
    * Deleta an existing event.
    *
    * @param {string} conversationId- The unique identifier for the conversation to delete the event from.
@@ -83,7 +129,7 @@ class Events {
    */
   delete(conversationId, eventId, callback) {
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.host || "api.nexmo.com",
       path: `${Events.PATH.replace(
         "{conversation_uuid}",
         conversationId
