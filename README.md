@@ -456,6 +456,8 @@ nexmo.number.get(options, callback);
   * `search_pattern`
   * `index`
   * `size`
+  * `has_application`
+  * `application_id`
 
 For more details about these options, refer to the [Numbers API reference](https://developer.nexmo.com/api/numbers#getOwnedNumbers)
 
