@@ -239,29 +239,6 @@ exports.checkBalance = function(callback) {
   sendRequest(balanceEndpoint, callback);
 };
 
-exports.getPricing = function(countryCode, callback) {
-  if (!countryCode || countryCode.length !== 2) {
-    sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-  } else {
-    var pricingEndpoint = getEndpoint("/account/get-pricing/outbound");
-    pricingEndpoint.path += "?country=" + countryCode;
-    sendRequest(pricingEndpoint, callback);
-  }
-};
-
-exports.getPhonePricing = function(product, msisdn, callback) {
-  if (!product || (product !== "sms" && product !== "voice")) {
-    sendError(callback, new Error(ERROR_MESSAGES.product));
-  } else if (!msisdn) {
-    sendError(callback, new Error(ERROR_MESSAGES.msisdn));
-  } else {
-    var pricingEndpoint = getEndpoint("/account/get-phone-pricing/outbound");
-    pricingEndpoint.path +=
-      "/" + product + "/" + up.api_key + "/" + up.api_secret + "/" + msisdn;
-    sendRequest(pricingEndpoint, callback);
-  }
-};
-
 exports.getNumbers = function(options, callback) {
   var numbersEndpoint = getEndpoint("/account/numbers");
   if (typeof options === "function") {

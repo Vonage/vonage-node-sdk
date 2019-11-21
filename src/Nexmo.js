@@ -16,6 +16,7 @@ import FilesResource from "./FilesResource";
 import Conversion from "./Conversion";
 import Media from "./Media";
 import Redact from "./Redact";
+import Pricing from "./Pricing";
 import HttpClient from "./HttpClient";
 import NullLogger from "./NullLogger";
 import ConsoleLogger from "./ConsoleLogger";
@@ -89,6 +90,7 @@ class Nexmo {
     this.conversion = new Conversion(this.credentials, this.options);
     this.media = new Media(this.credentials, this.options);
     this.redact = new Redact(this.credentials, this.options);
+    this.pricing = new Pricing(this.credentials, this.options);
 
     /**
      * @deprecated Please use nexmo.applications
