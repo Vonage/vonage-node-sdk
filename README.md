@@ -9,7 +9,7 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [JWT (JSON Web Token)](#jwt)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [Pricing](#pricing) | [JWT (JSON Web Token)](#jwt)
 
 ## Installation
 
@@ -540,6 +540,34 @@ nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
 
 ```js
 nexmo.redact.transaction(id, type, callback);
+```
+
+## Pricing
+
+`type` is the type of service you wish to retrieve pricing for: either `sms`, `sms-transit` or `voice`.
+
+### Get pricing for a specific country
+
+```js
+nexmo.pricing.get(type, country_code, callback);
+```
+
+### Get pricing for all countries
+
+```js
+nexmo.pricing.getFull(type, callback);
+```
+
+### Get pricing for a specific dialing prefix
+
+```js
+nexmo.pricing.getPrefix(type, country_prefix, callback);
+```
+
+### Get pricing for a specific phone number
+
+```js
+nexmo.pricing.getPhone(type, phone, callback);
 ```
 
 ## Media

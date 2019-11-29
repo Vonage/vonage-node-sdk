@@ -85,6 +85,12 @@ exampleFiles = [
   // 'ex-get-v2-application.js',
   // 'ex-get-v2-applications.js',
   // 'ex-delete-application.js',
+  // 'ex-get-pricing.js',
+  // 'ex-get-full-pricing.js',
+  // 'ex-get-prefix-pricing.js',
+  // 'ex-get-phone-pricing.js',
+  // 'ex-get-phone-pricing-number.js',
+  // 'ex-get-pricing-number.js',
 ];
 
 console.log('Found', exampleFiles.length, 'examples to run:\n', exampleFiles);
