@@ -3,7 +3,7 @@ declare module 'nexmo' {
     export interface CredentialsObject {
         apiKey: string;
         apiSecret: string;
-        applicationId: string;
+        applicationId?: string;
         privateKey?: string;
     }
 
