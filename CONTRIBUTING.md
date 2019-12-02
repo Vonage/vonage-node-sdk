@@ -12,4 +12,14 @@ We're always open to pull requests, but these should be small and clearly descri
  
 When you're ready to start coding, fork this repository to your own GitHub account and make your changes in a new branch. Once you're happy, open a pull request and explain what the change is and why you think we should include it in our project.
  
+## Reviewing a Pull Request
 
+To run the code for an open PR, follow these steps:
+
+1. `git clone https://github.com/Nexmo/nexmo-node.git`
+2. `cd nexmo-node`
+3. `git checkout BRANCH_NAME`
+4. `npm install`
+5. Update `examples/run-examples.js` to uncomment the examples you want to run
+6. Update `example.env` in the examples folder with your api key and secret, and rename it to be `.env`
+7. `node examples/run-examples.js`
