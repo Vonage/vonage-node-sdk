@@ -21,5 +21,6 @@ To run the code for an open PR, follow these steps:
 3. `git checkout BRANCH_NAME`
 4. `npm install`
 5. Uncomment the appropriate line in `examples/run-examples.js` for each example you want to run.
-6. In the `examples` folder, copy `example.env` to `.env` and update it with your API key and API secret.
-7. `node examples/run-examples.js`
+6. In the `examples` folder, copy `example.env` to `.env`.
+7. Update `.env` with your API key and API secret.
+8. `node examples/run-examples.js`
