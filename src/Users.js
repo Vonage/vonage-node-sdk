@@ -9,11 +9,7 @@ import Utils from "./Utils";
  */
 class Users {
   static get PATH() {
-    return "/beta/users";
-  }
-
-  static get BETA2_PATH() {
-    return "/beta2/users";
+    return "/v0.1/users";
   }
 
   /**
@@ -60,7 +56,7 @@ class Users {
   get(query, callback) {
     var config = {
       host: this.options.host || "api.nexmo.com",
-      path: Utils.createPathWithQuery(Users.BETA2_PATH, query),
+      path: Utils.createPathWithQuery(Users.PATH, query),
       method: "GET",
       body: undefined,
       headers: {
@@ -137,7 +133,7 @@ class Users {
     var config = {
       host: this.options.host || "api.nexmo.com",
       path: Utils.createPathWithQuery(
-        `${Users.BETA2_PATH}/${userId}/conversations`,
+        `${Users.PATH}/${userId}/conversations`,
         query
       ),
       method: "GET",
