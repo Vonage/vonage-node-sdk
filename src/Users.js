@@ -70,22 +70,14 @@ class Users {
   /**
    * Get next page of users or conversations for a user.
    *
-   * @param {object} response - The response from a paginated users or conversations list
+   * @param {object} response - The response from a paginated users list
    *               see https://ea.developer.nexmo.com/api/conversation#retrieve-all-users
    * @param {function} callback - function to be called when the request completes.
    */
+
   next(response, callback) {
     if (response._links.next) {
-      const userId = response._links.next.href.match(/USR-[^/]*/g);
-      if (userId) {
-        this.getConversations(
-          userId[0],
-          Utils.getQuery(response._links.next.href),
-          callback
-        );
-      } else {
-        this.get(Utils.getQuery(response._links.next.href), callback);
-      }
+      this.get(Utils.getQuery(response._links.next.href), callback);
     } else {
       const error = new Error("The response doesn't have a next page.");
       callback(error, null);
@@ -95,56 +87,18 @@ class Users {
   /**
    * Get previous page of users or conversations for a user.
    *
-   * @param {object} response - The response from a paginated users or conversations list
+   * @param {object} response - The response from a paginated users list
    *               see https://ea.developer.nexmo.com/api/conversation#retrieve-all-users
    * @param {function} callback - function to be called when the request completes.
    */
-  prev(response, callback) {
-    if (response._links.prev) {
-      const userId = response._links.prev.href.match(/USR-[^/]*/g);
-      if (userId) {
-        this.getConversations(
-          userId[0],
-          Utils.getQuery(response._links.prev.href),
-          callback
-        );
-      } else {
-        this.get(Utils.getQuery(response._links.prev.href), callback);
-      }
-    } else {
-      const error = new Error("The response doesn't have a previous page.");
-      callback(error, null);
-    }
-  }
-
-  /**
-   * Get an conversations for an existing user.
-   *
-   * @param {string} userId - The unique identifier for the user to retrieve conversations for
-   * @param {function} callback - function to be called when the request completes.
-   */
-  getConversations(userId, query, callback) {
-    // backwards compatibility to 2.5.4-beta-1. Remove for 3.0.0
-    if (typeof query === "function") {
-      callback = query;
-      query = {};
-    }
-
-    var config = {
-      host: this.options.host || "api.nexmo.com",
-      path: Utils.createPathWithQuery(
-        `${Users.PATH}/${userId}/conversations`,
-        query
-      ),
-      method: "GET",
-      body: undefined,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
-    };
-    this.options.httpClient.request(config, callback);
-  }
+   prev(response, callback) {
+     if (response._links.prev) {
+       this.get(Utils.getQuery(response._links.prev.href), callback);
+     } else {
+       const error = new Error("The response doesn't have a previous page.");
+       callback(error, null);
+     }
+   }
 
   /**
    * Update an existing user.
