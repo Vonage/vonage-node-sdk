@@ -91,14 +91,14 @@ class Users {
    *               see https://ea.developer.nexmo.com/api/conversation#retrieve-all-users
    * @param {function} callback - function to be called when the request completes.
    */
-   prev(response, callback) {
-     if (response._links.prev) {
-       this.get(Utils.getQuery(response._links.prev.href), callback);
-     } else {
-       const error = new Error("The response doesn't have a previous page.");
-       callback(error, null);
-     }
-   }
+  prev(response, callback) {
+    if (response._links.prev) {
+      this.get(Utils.getQuery(response._links.prev.href), callback);
+    } else {
+      const error = new Error("The response doesn't have a previous page.");
+      callback(error, null);
+    }
+  }
 
   /**
    * Update an existing user.
