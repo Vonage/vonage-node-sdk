@@ -11,5 +11,5 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.message.sendSms(config.FROM_NUMBER, config.TO_NUMBER, 'testing', callback);
+  nexmo.message.sendSms(config.FROM_NUMBER, config.TO_NUMBER, 'testing 123', callback);
 };
