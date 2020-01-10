@@ -86,7 +86,7 @@ class HttpClient {
       Object.keys(params)
         .sort()
         .forEach(key => {
-          query += "&" + key + "=" + params[key];
+          query += "&" + key + "=" + encodeURI(params[key]);
         });
 
       // replace the first & with ?

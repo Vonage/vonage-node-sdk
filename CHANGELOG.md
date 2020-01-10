@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.5.3
+- FIXED: URI Encode Signed SMS Message
+
 ## 2.5.2
 - ADDED: Pricing API support
 
