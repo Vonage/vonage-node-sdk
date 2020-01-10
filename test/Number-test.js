@@ -14,8 +14,8 @@ var numberAPIs = {
 
 var pricingAPIs = {
   get: "getPricing",
-  getPhone: "getPhonePricing",
-}
+  getPhone: "getPhonePricing"
+};
 
 describe("Number Object", function() {
   it("should implement all v1 APIs", function() {

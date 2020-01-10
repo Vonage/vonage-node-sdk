@@ -246,6 +246,42 @@ describe("HttpClient Object", function() {
     );
   });
 
+  it("should encode the URI for signed requests", function() {
+    var mock = sinon.mock(fakeHttp);
+    mock
+      .expects("request")
+      .once()
+      .withArgs({
+        headers: defaultHeaders,
+        host: "api.nexmo.com",
+        method: "GET",
+        path: `/some_path?message=some%20message&timestamp=1&sig=undefined`,
+        port: 80
+      })
+      .returns(fakeRequest);
+
+    var client = new HttpClient(
+      {
+        http: fakeHttp,
+        port: 80,
+        logger: logger
+      },
+      {
+        signatureSecret: "meh",
+        signatureMethod: "md5hash",
+        generateSignature: function() {}
+      }
+    );
+
+    client.request(
+      {
+        host: "api.nexmo.com",
+        path: "/some_path?message=some message&timestamp=1"
+      },
+      "GET"
+    );
+  });
+
   it("should be possible to set the method", function() {
     var mock = sinon.mock(fakeHttp);
     mock
