@@ -30,7 +30,7 @@ class TalkResource {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: TalkResource.PATH.replace("{call_uuid}", callId),
       method: "PUT",
       body: params,
@@ -51,7 +51,7 @@ class TalkResource {
    */
   stop(callId, callback) {
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: TalkResource.PATH.replace("{call_uuid}", callId),
       method: "DELETE",
       headers: {

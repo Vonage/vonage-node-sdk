@@ -35,7 +35,7 @@ class FilesResource {
     fileIdOrUrl = fileIdOrUrl.split("/").pop(-1);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${FilesResource.PATH}/${fileIdOrUrl}`,
       method: "GET",
       headers: {

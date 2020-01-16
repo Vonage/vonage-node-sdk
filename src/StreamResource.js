@@ -30,7 +30,7 @@ class StreamResource {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: StreamResource.PATH.replace("{call_uuid}", callId),
       method: "PUT",
       body: params,
@@ -51,7 +51,7 @@ class StreamResource {
    */
   stop(callId, callback) {
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: StreamResource.PATH.replace("{call_uuid}", callId),
       method: "DELETE",
       headers: {

@@ -64,17 +64,26 @@ class Nexmo {
 
     // This is legacy, everything should use rest or api going forward
     this.options.httpClient = new HttpClient(
-      Object.assign({ host: "rest.nexmo.com" }, this.options),
+      Object.assign(
+        { host: this.options.restHost || "rest.nexmo.com" },
+        this.options
+      ),
       this.credentials
     );
 
     // We have two different hosts, so we use two different HttpClients
     this.options.api = new HttpClient(
-      Object.assign({ host: "api.nexmo.com" }, this.options),
+      Object.assign(
+        { host: this.options.apiHost || "api.nexmo.com" },
+        this.options
+      ),
       this.credentials
     );
     this.options.rest = new HttpClient(
-      Object.assign({ host: "rest.nexmo.com" }, this.options),
+      Object.assign(
+        { host: this.options.restHost || "rest.nexmo.com" },
+        this.options
+      ),
       this.credentials
     );
 

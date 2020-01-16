@@ -30,7 +30,7 @@ class DtmfResource {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: DtmfResource.PATH.replace("{call_uuid}", callId),
       method: "PUT",
       body: params,
