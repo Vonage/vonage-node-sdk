@@ -147,6 +147,36 @@ describe("applications.create", function() {
       null
     );
   });
+
+  it("should support host override", function() {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    applications = new App(creds, options);
+    applications.create({}, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "POST",
+        host: "api.example.com",
+        path: App.PATH,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
 });
 
 describe("applications.update", function() {
@@ -265,6 +295,36 @@ describe("applications.update", function() {
       null
     );
   });
+
+  it("should support host override", function() {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    applications = new App(creds, options);
+    applications.update("app_id", {}, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "PUT",
+        host: "api.example.com",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
 });
 
 describe("applications.get", function() {
@@ -349,6 +409,37 @@ describe("applications.get", function() {
       null
     );
   });
+
+  it("should support host override", function() {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    let applications = new App(creds, options);
+    applications.get("app_id", emptyCallback, true);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "GET",
+        host: "api.example.com",
+        path: `${App.PATH}/app_id`,
+        body: undefined,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback,
+      emptyCallback,
+      false,
+      null
+    );
+  });
 });
 
 describe("applications.delete", function() {
@@ -369,6 +460,33 @@ describe("applications.delete", function() {
       {},
       {
         method: "DELETE",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic "
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should allow host override", function() {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    let applications = new App(creds, options);
+    applications.delete("app_id", emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "DELETE",
+        host: "api.example.com",
         path: `${App.PATH}/app_id`,
         headers: {
           "Content-Type": "application/json",

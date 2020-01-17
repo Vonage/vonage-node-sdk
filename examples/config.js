@@ -18,7 +18,9 @@ var config = {
   CODE: process.env.CODE || '',
   APP_ID: process.env.APP_ID || '',
   PRIVATE_KEY: process.env.PRIVATE_KEY || '',
-  DEBUG: process.env.DEBUG === 'true'
+  DEBUG: process.env.DEBUG === 'true',
+  REST_HOST: process.env.REST_HOST || 'rest.nexmo.com',
+  API_HOST: process.env.API_HOST || 'api.nexmo.com'
 };
 
 module.exports = config;

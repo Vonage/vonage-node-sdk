@@ -29,6 +29,33 @@ describe("FileResource", () => {
     files = new FilesResource(creds, options);
   });
 
+  it("should support host override", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    let files = new FilesResource(creds, options);
+    const fileId = "2342342-lkjhlkjh-32423";
+    files.get(fileId, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "GET",
+      body: undefined,
+      host: "api.example.com",
+      path: `${FilesResource.PATH}/${fileId}`,
+      headers: {
+        "Content-Type": "application/octet-stream",
+        Authorization: "Bearer "
+      }
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
   it("should get a single file using a file ID", () => {
     const fileId = "2342342-lkjhlkjh-32423";
     files.get(fileId, emptyCallback);

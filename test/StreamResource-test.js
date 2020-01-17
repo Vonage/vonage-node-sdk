@@ -51,6 +51,34 @@ describe("StreamResource", () => {
     );
   });
 
+  it("should support host override in stream.start", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    let stream = new StreamResource(creds, options);
+    const callId = "2342342-lkjhlkjh-32423";
+    stream.start(callId, {}, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        path: StreamResource.PATH.replace("{call_uuid}", callId),
+        method: "PUT",
+        host: "api.example.com",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
   it("should be possible to stop a stream", () => {
     const callId = "2342342-lkjhlkjh-32423";
     stream.stop(callId, emptyCallback);
@@ -58,6 +86,29 @@ describe("StreamResource", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "DELETE",
       body: undefined,
+      path: StreamResource.PATH.replace("{call_uuid}", callId)
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should support host override on stream.stop", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    let stream = new StreamResource(creds, options);
+    const callId = "2342342-lkjhlkjh-32423";
+    stream.stop(callId, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "DELETE",
+      body: undefined,
+      host: "api.example.com",
       path: StreamResource.PATH.replace("{call_uuid}", callId)
     });
 

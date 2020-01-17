@@ -32,6 +32,84 @@ describe("CallsResource", () => {
     calls = new CallsResource(creds, options);
   });
 
+  it("should support host override for calls.create", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    calls = new CallsResource(creds, options);
+    calls.create({}, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "POST",
+        host: "api.example.com",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should support host override for calls.update", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    calls = new CallsResource(creds, options);
+    calls.update("call_id", {}, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "PUT",
+        host: "api.example.com",
+        path: `${CallsResource.PATH}/call_id`,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should support host override for calls.update", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    calls = new CallsResource(creds, options);
+    calls.get("call_id", emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "GET",
+        host: "api.example.com",
+        body: undefined,
+        path: `${CallsResource.PATH}/call_id`,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
   it("should allow a call to be created", () => {
     var params = {
       to: {
