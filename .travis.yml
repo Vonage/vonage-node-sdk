@@ -14,12 +14,3 @@ install:
 script:
   - npm run report-coverage
   - codecov
-deploy:
-  provider: npm
-  email: devrel@nexmo.com
-  api_key:
-    secure: RWSwDXu7YtlKEcFhSjs9rHIme6B4RyVxxRwgcieXJsR109JXi53g/0PzBPY/jb0zQIVe0+nN6BKBGijcI/Fgk+OWqTqvr1nxqBxwsCm1l8Wbuq30JWiUhijDdBoLj4XSKo1RMapVjz5UhkLJnrgIxgPbrTaOc2i5EKx/jTSyMU6AgW05ANIWRxxedi6L3h3EA614I9OGX8rpPp5TGqGqYVv6MoKm7xw4PDes8iGA30qjruJKpfwP4ZvYiDuGJLz/TUmUyoF/gX3/nmWBsdK7XrXIVg/3JzHboN11zBFjkNlinEEdAWGA8efv3iP+31fpJpq1qZs+Xhjybp5O5fY9my+aaBUOSC7nxitjUqeZgv30B6KsjYVT881EbCHtnm7wY8OyA6nOb8Lf4o+6MTqXFD+UDZMz1pe9U3dvZ8ZrIUgUweSZrk5tdf3VDOCY6v04S8JGbhezE7UzF2vmIsHabW6noBNiA0N1a9tEJaEsAYU/QJHPLQVbOSLb2wUA+MArEZOtSKUpb2fHStEhjJtB0RyUG4gJX7B2/o4kUW+JijPFUbh02VkLHb+BrFlDTLQbVZYqkC8Otz9bdhiI4fBF3GOH51cJjwGfjHa03h7PtkfJLV7jHIO3ZxVYQrOpDXaN12t4eA/IaYpA7QDQ2hG9sVeg2sMTro/CIP+ynCJ5LLw=
-  on:
-    tags: true
-    repo: Nexmo/nexmo-node
-  skip_cleanup: true
