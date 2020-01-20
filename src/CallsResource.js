@@ -51,7 +51,7 @@ class CallsResource {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: CallsResource.PATH,
       method: "POST",
       body: params,
@@ -87,7 +87,7 @@ class CallsResource {
     }
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${CallsResource.PATH}${pathExt}`,
       method: "GET",
       headers: {
@@ -109,7 +109,7 @@ class CallsResource {
     params = JSON.stringify(params);
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${CallsResource.PATH}/${callId}`,
       method: "PUT",
       body: params,

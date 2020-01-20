@@ -58,7 +58,11 @@ Options are:
     warn: function() {args...}
   },
   // Set a custom timeout for requests to Nexmo in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
-  timeout: integer
+  timeout: integer,
+  // Set a custom host for requests instead of api.nexmo.com
+  apiHost: string,
+  // Set a custom host for requests instead of rest.nexmo.com
+  restHost: string
 }
 ```
 

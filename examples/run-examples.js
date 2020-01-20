@@ -53,6 +53,8 @@ function runExample(exampleFile, callback) {
 // By default all examples are run.
 // Use this array to run a select number of examples.
 exampleFiles = [
+  // 'ex-change-api-host.js',
+  // 'ex-change-rest-host.js',
   // 'ex-check-balance.js',
   // 'ex-create-update-delete-app.js',
   // 'ex-dtmf-to-call.js',

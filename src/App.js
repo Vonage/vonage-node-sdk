@@ -133,7 +133,7 @@ class App {
     const authorization = `${this.creds.apiKey}:${this.creds.apiSecret}`;
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: App.PATH,
       method: "POST",
       body: params,
@@ -172,7 +172,7 @@ class App {
     }
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Utils.createPathWithQuery(App.PATH, params),
       method: "GET",
       body: undefined,
@@ -210,7 +210,7 @@ class App {
     const authorization = `${this.creds.apiKey}:${this.creds.apiSecret}`;
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${App.PATH}/${appId}`,
       method: "PUT",
       body: params,
@@ -236,7 +236,7 @@ class App {
     const authorization = `${this.creds.apiKey}:${this.creds.apiSecret}`;
 
     var config = {
-      host: "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${App.PATH}/${appId}`,
       method: "DELETE",
       body: "{}",
