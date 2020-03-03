@@ -1,3 +1,15 @@
+/*
+ * TOOD: add prefix for Verify api's typings like Message api on next major update.
+ *       RequestObject -> VerifyRequestObject
+ *       RequestResponse -> VerifyRequestResponse
+ *       RequestResponseStatusCode -> VerifyRequestResponseStatusCode
+ *       ControlObject -> VerifyControlObject
+ *       ControlResponse -> VerifyControlResponse
+ *       ControlResponseStatusCode -> VerifyControlResponseStatusCode
+ *       CheckObject -> VerifyCheckObject
+ *       CheckResponse -> VerifyCheckResponse
+ */
+
 declare module 'nexmo' {
     /* general */
     export interface CredentialsObject {
