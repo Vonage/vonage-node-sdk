@@ -4,7 +4,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/Nexmo/nexmo-node/badge.svg)](https://snyk.io/test/github/Nexmo/nexmo-node)
 [![codecov](https://codecov.io/gh/Nexmo/nexmo-node/branch/master/graph/badge.svg)](https://codecov.io/gh/Nexmo/nexmo-node)
 
-<img src="https://nexmo-developer-pr-2520.herokuapp.com/assets/images/Vonage_Nexmo.svg" height="48px" alt="Nexmo is now known as Vonage" />
+<img src="https://developer.nexmo.com/assets/images/Vonage_Nexmo.svg" height="48px" alt="Nexmo is now known as Vonage" />
 
 A Node.JS REST API Wrapper library for [Nexmo](https://www.nexmo.com/).
 
