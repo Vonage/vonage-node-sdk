@@ -33,7 +33,7 @@ describe("Conversations", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      host: "example.com"
+      apiHost: "example.com"
     };
     let conversations = new Conversations(creds, options);
 
