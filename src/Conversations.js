@@ -54,7 +54,7 @@ class Conversations {
     params = JSON.stringify(params);
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Conversations.PATH,
       method: "POST",
       body: params,
@@ -76,7 +76,7 @@ class Conversations {
    */
   get(query, callback) {
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path:
         typeof query === "string"
           ? `${Conversations.PATH}/${query}`
@@ -134,7 +134,7 @@ class Conversations {
     params = JSON.stringify(params);
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${Conversations.PATH}/${conversationId}`,
       method: "PUT",
       body: params,
@@ -158,7 +158,7 @@ class Conversations {
     params = JSON.stringify(params);
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${Conversations.V1_PATH}/${conversationId}/record`,
       method: "PUT",
       body: params,
@@ -179,7 +179,7 @@ class Conversations {
    */
   delete(conversationId, callback) {
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${Conversations.PATH}/${conversationId}`,
       method: "DELETE",
       headers: {
