@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.7.0-beta-1
+- ADDED: Change host via the config object, using `apiHost` & `restHost`
+
+## 2.6.0
+- ADDED: Change host via the config object, using `apiHost` & `restHost`
+
+## 2.5.3
+- FIXED: URI Encode Signed SMS Message
+
+## 2.5.2
+- ADDED: Pricing API support
+
+## 2.5.1
+- ADDED: typings for Verify API
+- ADDED: Applications API V2 support
+
 ## 2.6.0-beta-1
 - Added beta2 API version for `get()` methods in `nexmo.users`, `nexmo.users.getConversations`, `nexmo.conversations`, `nexmo.conversations.members` and `nexmo.conversations.events`
 - Added cursor pagination methods `next()` and `prev()` for `nexmo.users`, `nexmo.conversations`, `nexmo.conversations.members` and `nexmo.conversations.events`

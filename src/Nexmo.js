@@ -20,6 +20,7 @@ import Media from "./Media";
 import Redact from "./Redact";
 import Channel from "./Channel";
 import Dispatch from "./Dispatch";
+import Pricing from "./Pricing";
 import HttpClient from "./HttpClient";
 import NullLogger from "./NullLogger";
 import ConsoleLogger from "./ConsoleLogger";
@@ -67,17 +68,26 @@ class Nexmo {
 
     // This is legacy, everything should use rest or api going forward
     this.options.httpClient = new HttpClient(
-      Object.assign({ host: "rest.nexmo.com" }, this.options),
+      Object.assign(
+        { host: this.options.restHost || "rest.nexmo.com" },
+        this.options
+      ),
       this.credentials
     );
 
     // We have two different hosts, so we use two different HttpClients
     this.options.api = new HttpClient(
-      Object.assign({ host: "api.nexmo.com" }, this.options),
+      Object.assign(
+        { host: this.options.apiHost || "api.nexmo.com" },
+        this.options
+      ),
       this.credentials
     );
     this.options.rest = new HttpClient(
-      Object.assign({ host: "rest.nexmo.com" }, this.options),
+      Object.assign(
+        { host: this.options.restHost || "rest.nexmo.com" },
+        this.options
+      ),
       this.credentials
     );
 
@@ -97,6 +107,7 @@ class Nexmo {
     this.redact = new Redact(this.credentials, this.options);
     this.channel = new Channel(this.credentials, this.options);
     this.dispatch = new Dispatch(this.credentials, this.options);
+    this.pricing = new Pricing(this.credentials, this.options);
 
     /**
      * @deprecated Please use nexmo.applications

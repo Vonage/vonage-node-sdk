@@ -50,4 +50,31 @@ describe("DtmfResource", () => {
       emptyCallback
     );
   });
+
+  it("should support host override", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    let dtmf = new DtmfResource(creds, options);
+    const callId = "2342342-lkjhlkjh-32423";
+    dtmf.send(callId, {}, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        path: DtmfResource.PATH.replace("{call_uuid}", callId),
+        method: "PUT",
+        host: "api.example.com",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
 });

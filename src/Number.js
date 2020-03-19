@@ -2,6 +2,8 @@
 
 import nexmo from "./index";
 
+import Pricing from "./Pricing";
+
 class Number {
   /**
    * @param {Credentials} credentials
@@ -12,6 +14,8 @@ class Number {
   constructor(credentials, options = {}) {
     this.creds = credentials;
     this.options = options;
+
+    this._pricing = new Pricing(credentials, options);
 
     // Used to facilitate testing of the call to the underlying object
     this._nexmo = this.options.nexmoOverride || nexmo;
@@ -24,17 +28,17 @@ class Number {
   }
 
   /**
-   * TODO: document
+   * TODO: remove with next major release
    */
   getPricing() {
-    this._nexmo.getPricing.apply(this._nexmo, arguments);
+    this._pricing.get.apply(this, arguments);
   }
 
   /**
-   * TODO: document
+   * TODO: remove with next major release
    */
   getPhonePricing() {
-    this._nexmo.getPhonePricing.apply(this._nexmo, arguments);
+    this._pricing.getPhone.apply(this, arguments);
   }
 
   /**
