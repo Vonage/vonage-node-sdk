@@ -1,7 +1,10 @@
 # Nexmo Client Library for Node.js
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 [![build status](https://secure.travis-ci.org/Nexmo/nexmo-node.png)](http://travis-ci.org/Nexmo/nexmo-node)
 [![Known Vulnerabilities](https://snyk.io/test/github/Nexmo/nexmo-node/badge.svg)](https://snyk.io/test/github/Nexmo/nexmo-node)
 [![codecov](https://codecov.io/gh/Nexmo/nexmo-node/branch/master/graph/badge.svg)](https://codecov.io/gh/Nexmo/nexmo-node)
+
+<img src="https://developer.nexmo.com/assets/images/Vonage_Nexmo.svg" height="48px" alt="Nexmo is now known as Vonage" />
 
 A Node.JS REST API Wrapper library for [Nexmo](https://www.nexmo.com/).
 
@@ -9,7 +12,7 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Conversations](#conversations) | [Users](#users) | [Management](#management) | [Redact](#redact) | [JWT (JSON Web Token)](#jwt)
+[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Conversations](#conversations) | [Users](#users) | [Management](#management) | [Redact](#redact) | [Pricing](#pricing) | [JWT (JSON Web Token)](#jwt)
 
 ## Installation
 
@@ -62,8 +65,10 @@ Options are:
   },
   // Set a custom timeout for requests to Nexmo in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
   timeout: integer,
-  // Set a custom API host for requests to Conversations API and Messages API. Defaults to api.nexmo.com.
-  host: string
+  // Set a custom host for requests instead of api.nexmo.com
+  apiHost: string,
+  // Set a custom host for requests instead of rest.nexmo.com
+  restHost: string
 }
 ```
 
@@ -695,6 +700,8 @@ nexmo.number.get(options, callback);
   * `search_pattern`
   * `index`
   * `size`
+  * `has_application`
+  * `application_id`
 
 For more details about these options, refer to the [Numbers API reference](https://developer.nexmo.com/api/numbers#getOwnedNumbers)
 
@@ -777,6 +784,34 @@ nexmo.account.updateDeliveryReceiptCallback(<NEW_DR_CALLBACK_URL>,callback);
 
 ```js
 nexmo.redact.transaction(id, type, callback);
+```
+
+## Pricing
+
+`type` is the type of service you wish to retrieve pricing for: either `sms`, `sms-transit` or `voice`.
+
+### Get pricing for a specific country
+
+```js
+nexmo.pricing.get(type, country_code, callback);
+```
+
+### Get pricing for all countries
+
+```js
+nexmo.pricing.getFull(type, callback);
+```
+
+### Get pricing for a specific dialing prefix
+
+```js
+nexmo.pricing.getPrefix(type, country_prefix, callback);
+```
+
+### Get pricing for a specific phone number
+
+```js
+nexmo.pricing.getPhone(type, phone, callback);
 ```
 
 ## Media

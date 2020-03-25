@@ -53,6 +53,8 @@ function runExample(exampleFile, callback) {
 // By default all examples are run.
 // Use this array to run a select number of examples.
 exampleFiles = [
+  // 'ex-change-api-host.js',
+  // 'ex-change-rest-host.js',
   // 'ex-check-balance.js',
   // 'ex-create-update-delete-app.js',
   // 'ex-dtmf-to-call.js',
@@ -100,7 +102,7 @@ exampleFiles = [
   // 'ex-get-next-events.js',
   // 'ex-get-prev-events.js',
   // 'ex-create-read-update-delete-conversation.js',
-  'ex-create-conversation.js',
+  // 'ex-create-conversation.js',
   // 'ex-get-conversation.js',
   // 'ex-delete-conversation.js',
   // 'ex-update-conversation.js',
@@ -121,6 +123,12 @@ exampleFiles = [
   // 'ex-get-v2-application.js',
   // 'ex-get-v2-applications.js',
   // 'ex-delete-application.js',
+  // 'ex-get-pricing.js',
+  // 'ex-get-full-pricing.js',
+  // 'ex-get-prefix-pricing.js',
+  // 'ex-get-phone-pricing.js',
+  // 'ex-get-phone-pricing-number.js',
+  // 'ex-get-pricing-number.js',
 ];
 
 console.log('Found', exampleFiles.length, 'examples to run:\n', exampleFiles);

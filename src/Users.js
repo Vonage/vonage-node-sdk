@@ -37,7 +37,7 @@ class Users {
     params = JSON.stringify(params);
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Users.PATH,
       method: "POST",
       body: params,
@@ -59,7 +59,7 @@ class Users {
    */
   get(query, callback) {
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Utils.createPathWithQuery(Users.BETA2_PATH, query),
       method: "GET",
       body: undefined,
@@ -135,7 +135,7 @@ class Users {
     }
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Utils.createPathWithQuery(
         `${Users.BETA2_PATH}/${userId}/conversations`,
         query
@@ -161,7 +161,7 @@ class Users {
     params = JSON.stringify(params);
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${Users.PATH}/${userId}`,
       method: "PUT",
       body: params,
@@ -182,7 +182,7 @@ class Users {
    */
   delete(userId, callback) {
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${Users.PATH}/${userId}`,
       method: "DELETE",
       headers: {

@@ -39,7 +39,7 @@ class Events {
     params = JSON.stringify(params);
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Events.PATH.replace("{conversation_uuid}", conversationId),
       method: "POST",
       body: params,
@@ -63,7 +63,7 @@ class Events {
 
   get(conversationId, query, callback) {
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Utils.createPathWithQuery(
         Events.BETA2_PATH.replace("{conversation_uuid}", conversationId),
         query
@@ -129,7 +129,7 @@ class Events {
    */
   delete(conversationId, eventId, callback) {
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${Events.PATH.replace(
         "{conversation_uuid}",
         conversationId

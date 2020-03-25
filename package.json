@@ -1,8 +1,9 @@
 {
   "name": "nexmo",
   "author": "nexmo",
-  "version": "2.6.0-beta-1",
+  "version": "2.7.0-beta-1",
   "main": "lib/Nexmo",
+  "types": "./typings/index.d.ts",
   "keywords": [
     "sms",
     "voice",
@@ -43,7 +44,7 @@
     "test-e2e": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./e2e/*.spec.js"
   },
   "devDependencies": {
-    "babel-cli": "^6.7.7",
+    "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",

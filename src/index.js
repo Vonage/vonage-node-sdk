@@ -2,13 +2,34 @@
 
 var querystring = require("querystring");
 
-var msgpath = { host: "rest.nexmo.com", path: "/sms/json" };
-var shortcodePath = { host: "rest.nexmo.com", path: "/sc/us/${type}/json" };
-var ttsEndpoint = { host: "api.nexmo.com", path: "/tts/json" };
-var ttsPromptEndpoint = { host: "api.nexmo.com", path: "/tts-prompt/json" };
-var callEndpoint = { host: "rest.nexmo.com", path: "/call/json" };
-var verifyEndpoint = { host: "api.nexmo.com", path: "/verify/json" };
-var checkVerifyEndpoint = { host: "api.nexmo.com", path: "/verify/check/json" };
+var msgpath = {
+  host: "rest.nexmo.com",
+  path: "/sms/json"
+};
+var shortcodePath = {
+  host: "rest.nexmo.com",
+  path: "/sc/us/${type}/json"
+};
+var ttsEndpoint = {
+  host: "api.nexmo.com",
+  path: "/tts/json"
+};
+var ttsPromptEndpoint = {
+  host: "api.nexmo.com",
+  path: "/tts-prompt/json"
+};
+var callEndpoint = {
+  host: "rest.nexmo.com",
+  path: "/call/json"
+};
+var verifyEndpoint = {
+  host: "api.nexmo.com",
+  path: "/verify/json"
+};
+var checkVerifyEndpoint = {
+  host: "api.nexmo.com",
+  path: "/verify/check/json"
+};
 var controlVerifyEndpoint = {
   host: "api.nexmo.com",
   path: "/verify/control/json"
@@ -17,10 +38,22 @@ var searchVerifyEndpoint = {
   host: "api.nexmo.com",
   path: "/verify/search/json"
 };
-var niEndpoint = { host: "api.nexmo.com", path: "/ni/advanced/async/json" };
-var niBasicEndpoint = { host: "api.nexmo.com", path: "/ni/basic/json" };
-var niStandardEndpoint = { host: "api.nexmo.com", path: "/ni/standard/json" };
-var niAdvancedEndpoint = { host: "api.nexmo.com", path: "/ni/advanced/json" };
+var niEndpoint = {
+  host: "api.nexmo.com",
+  path: "/ni/advanced/async/json"
+};
+var niBasicEndpoint = {
+  host: "api.nexmo.com",
+  path: "/ni/basic/json"
+};
+var niStandardEndpoint = {
+  host: "api.nexmo.com",
+  path: "/ni/standard/json"
+};
+var niAdvancedEndpoint = {
+  host: "api.nexmo.com",
+  path: "/ni/advanced/json"
+};
 var up = {};
 var numberPattern = new RegExp("^[0-9 +()-]*$");
 
@@ -71,6 +104,25 @@ exports.initialize = function(pkey, psecret, options) {
     api_secret: psecret
   };
   _options = options;
+
+  if (_options.restHost) {
+    msgpath.host = _options.restHost;
+    shortcodePath.host = _options.restHost;
+    callEndpoint.host = _options.restHost;
+  }
+
+  if (_options.apiHost) {
+    ttsEndpoint.host = _options.apiHost;
+    ttsPromptEndpoint.host = _options.apiHost;
+    verifyEndpoint.host = _options.apiHost;
+    checkVerifyEndpoint.host = _options.apiHost;
+    controlVerifyEndpoint.host = _options.apiHost;
+    searchVerifyEndpoint.host = _options.apiHost;
+    niEndpoint.host = _options.apiHost;
+    niBasicEndpoint.host = _options.apiHost;
+    niStandardEndpoint.host = _options.apiHost;
+    niAdvancedEndpoint.host = _options.apiHost;
+  }
 };
 
 exports.sendBinaryMessage = function(sender, recipient, body, udh, callback) {
@@ -240,29 +292,6 @@ function sendRequest(endpoint, method, callback) {
 exports.checkBalance = function(callback) {
   var balanceEndpoint = getEndpoint("/account/get-balance");
   sendRequest(balanceEndpoint, callback);
-};
-
-exports.getPricing = function(countryCode, callback) {
-  if (!countryCode || countryCode.length !== 2) {
-    sendError(callback, new Error(ERROR_MESSAGES.countrycode));
-  } else {
-    var pricingEndpoint = getEndpoint("/account/get-pricing/outbound");
-    pricingEndpoint.path += "?country=" + countryCode;
-    sendRequest(pricingEndpoint, callback);
-  }
-};
-
-exports.getPhonePricing = function(product, msisdn, callback) {
-  if (!product || (product != "sms" && product != "voice")) {
-    sendError(callback, new Error(ERROR_MESSAGES.product));
-  } else if (!msisdn) {
-    sendError(callback, new Error(ERROR_MESSAGES.msisdn));
-  } else {
-    var pricingEndpoint = getEndpoint("/account/get-phone-pricing/outbound");
-    pricingEndpoint.path +=
-      "/" + product + "/" + up.api_key + "/" + up.api_secret + "/" + msisdn;
-    sendRequest(pricingEndpoint, callback);
-  }
 };
 
 exports.getNumbers = function(options, callback) {
@@ -603,18 +632,3 @@ function sendError(callback, err, returnData) {
     throw err;
   }
 }
-
-exports.setHost = function(aHost) {
-  msgpath.host = aHost;
-  shortcodePath.host = aHost;
-  ttsEndpoint.host = aHost;
-  ttsPromptEndpoint.host = aHost;
-  callEndpoint.host = aHost;
-  verifyEndpoint.host = aHost;
-  checkVerifyEndpoint.host = aHost;
-  controlVerifyEndpoint.host = aHost;
-  searchVerifyEndpoint.host = aHost;
-  niEndpoint.host = aHost;
-  niBasicEndpoint.host = aHost;
-  niStandardEndpoint.host = aHost;
-};

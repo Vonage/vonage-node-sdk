@@ -192,6 +192,34 @@ describe("Nexmo Object instance", function() {
     );
   });
 
+  it("should allow api host change", function() {
+    var options = {
+      apiHost: "some.host.com"
+    };
+    var nexmo = new Nexmo(
+      {
+        apiKey: "test",
+        apiSecret: "test"
+      },
+      options
+    );
+    expect(nexmo.options.apiHost).to.equal("some.host.com");
+  });
+
+  it("should allow rest host change", function() {
+    var options = {
+      restHost: "some.host.com"
+    };
+    var nexmo = new Nexmo(
+      {
+        apiKey: "test",
+        apiSecret: "test"
+      },
+      options
+    );
+    expect(nexmo.options.restHost).to.equal("some.host.com");
+  });
+
   it("should create a JWT", () => {
     var nexmo = new Nexmo({
       apiKey: "test",

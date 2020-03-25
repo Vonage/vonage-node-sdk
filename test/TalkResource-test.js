@@ -50,6 +50,33 @@ describe("TalkResource", () => {
     );
   });
 
+  it("should support host override on talk.start", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    let talk = new TalkResource(creds, options);
+    const callId = "2342342-lkjhlkjh-32423";
+    talk.start(callId, {}, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        path: TalkResource.PATH.replace("{call_uuid}", callId),
+        method: "PUT",
+        host: "api.example.com",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
   it("should be able to start a talk with unicode characters", () => {
     const callId = "2342342-lkjhlkjh-32423";
     var params = {
@@ -77,6 +104,29 @@ describe("TalkResource", () => {
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "DELETE",
+      body: undefined,
+      path: TalkResource.PATH.replace("{call_uuid}", callId)
+    });
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should support host override on talk.stop", () => {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com"
+    };
+    let talk = new TalkResource(creds, options);
+    const callId = "2342342-lkjhlkjh-32423";
+    talk.stop(callId, emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
+      method: "DELETE",
+      host: "api.example.com",
       body: undefined,
       path: TalkResource.PATH.replace("{call_uuid}", callId)
     });

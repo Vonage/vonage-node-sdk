@@ -39,7 +39,7 @@ class Members {
     params = JSON.stringify(params);
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Members.PATH.replace("{conversation_uuid}", conversationId),
       method: "POST",
       body: params,
@@ -67,7 +67,7 @@ class Members {
    */
   get(conversationId, query, callback) {
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: Utils.createPathWithQuery(
         Members.BETA2_PATH.replace("{conversation_uuid}", conversationId),
         query
@@ -136,7 +136,7 @@ class Members {
     params = JSON.stringify(params);
 
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${Members.PATH.replace(
         "{conversation_uuid}",
         conversationId
@@ -161,7 +161,7 @@ class Members {
    */
   delete(conversationId, memberId, callback) {
     var config = {
-      host: this.options.host || "api.nexmo.com",
+      host: this.options.apiHost || "api.nexmo.com",
       path: `${Members.PATH.replace(
         "{conversation_uuid}",
         conversationId
