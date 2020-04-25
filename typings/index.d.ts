@@ -107,6 +107,7 @@ declare module 'nexmo' {
     interface ChannelToFrom {
         // The type of message that you want to send.
         type: ChannelType;
+        id?: string;
         /**
          * The phone number of the message recipient in the E.164 format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
          */
@@ -170,14 +171,28 @@ declare module 'nexmo' {
         client_ref?: string;
     }
 
+    export interface MessageSendResponse {
+		message_uuid: string;
+    }
+    
+    export interface MessageSendError {
+		type: string;
+		title: string;
+		detail: string;
+		instance: string;
+	}
+
     export class Channel {
         constructor(credentials: CredentialsObject, options: { [key: string]: any });
         static readonly PATH: string;
         send(
             to: ChannelToFrom,
             from: ChannelToFrom,
-            message: any,
-            callback: (err: any, data: any) => void
+            message: ChannelMessage,
+            callback: (err: MessageSendError, data: MessageSendResponse) => void,
+            // This isn't actually present in the code, but _is_ documented by the "getting started" guide:
+            // @see https://dashboard.nexmo.com/getting-started/messages
+            opts?: { useBasicAuth: boolean }
         );
     }
 
