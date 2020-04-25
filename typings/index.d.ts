@@ -200,6 +200,6 @@ declare module 'nexmo' {
     export default class Nexmo {
         constructor(credentials: CredentialsObject, options?: { [key: string]: any });
         public readonly verify: Verify;
-        public channel: Channel;
+        public readonly channel: Channel;
     }
 }
