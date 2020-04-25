@@ -100,9 +100,91 @@ declare module 'nexmo' {
         [key: string]: any;
     }
 
+    type ChannelType = 'sms' | 'viber_service_msg' | 'messenger' | 'whatsapp' | 'mms';
+
+    type ChannelMessageType = 'text' | 'image' | 'audio' | 'video' | 'file' | 'template' | 'custom';
+
+    interface ChannelToFrom {
+        // The type of message that you want to send.
+        type: ChannelType;
+        /**
+         * The phone number of the message recipient in the E.164 format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+         */
+        number: string;
+    }
+
+    interface ChannelContentImage {
+        url: string;
+        caption: string;
+    }
+
+    interface ChannelContentAudio {
+        url: string;
+    }
+
+    interface ChannelContentVideo {
+        url: string;
+    }
+
+    interface ChannelContentFile {
+        url: string;
+        caption: string;
+    }
+
+    interface ChannelContentTemplate {
+        name: string;
+        parameters: object[];
+    }
+
+    interface ChannelContent {
+        type: ChannelMessageType;
+        text: string;
+        image?: ChannelContentImage;
+        audio?: ChannelContentAudio;
+        video?: ChannelContentVideo;
+        file?: ChannelContentFile;
+        template?: ChannelContentTemplate;
+    }
+
+    interface ChannelViberServiceMsg {
+        category?: 'transaction' | 'promotion';
+        ttl?: number;
+        type?: string;
+    }
+
+    interface ChannelMessenger {
+        category?: 'response' | 'update' | 'message_tag';
+        tag?: string;
+    }
+
+    interface ChannelWhatsApp {
+        policy?: 'fallback' | 'deterministic';
+        locale?: string;
+    }
+
+    interface ChannelMessage {
+        content: ChannelContent;
+        viber_service_msg?: ChannelViberServiceMsg;
+        channel?: ChannelMessenger;
+        whatsapp?: ChannelWhatsApp;
+        client_ref?: string;
+    }
+
+    export class Channel {
+        constructor(credentials: CredentialsObject, options: { [key: string]: any });
+        static readonly PATH: string;
+        send(
+            to: ChannelToFrom,
+            from: ChannelToFrom,
+            message: any,
+            callback: (err: any, data: any) => void
+        );
+    }
+
     /* Nexmo */
     export default class Nexmo {
         constructor(credentials: CredentialsObject, options?: { [key: string]: any });
         public readonly verify: Verify;
+        public channel: Channel;
     }
 }
