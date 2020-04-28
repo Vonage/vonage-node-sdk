@@ -189,10 +189,7 @@ declare module 'nexmo' {
             to: ChannelToFrom,
             from: ChannelToFrom,
             message: ChannelMessage,
-            callback: (err: MessageSendError, data: MessageSendResponse) => void,
-            // This isn't actually present in the code, but _is_ documented by the "getting started" guide:
-            // @see https://dashboard.nexmo.com/getting-started/messages
-            opts?: { useBasicAuth: boolean }
+            callback: (err: MessageSendError, data: MessageSendResponse) => void
         );
     }
 
