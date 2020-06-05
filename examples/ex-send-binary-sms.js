@@ -9,5 +9,8 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.verify.search(config.REQUEST_ID, callback);
+  // Sends an SMS with the text WIN
+  nexmo.message.sendBinaryMessage(config.FROM_NUMBER, config.TO_NUMBER, '57494E', '050003CC0101', {
+    "protocol-id": "65"
+  }, callback);
 };

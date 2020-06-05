@@ -12,11 +12,5 @@ module.exports = function(callback, config) {
   nexmo.verify.check({
     request_id: config.REQUEST_ID,
     code: config.CODE
-  }, (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(result);
-    }
-  });
+  }, callback);
 };

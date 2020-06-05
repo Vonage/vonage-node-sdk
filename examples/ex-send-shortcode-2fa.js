@@ -9,5 +9,5 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.verify.search(config.REQUEST_ID, callback);
+  nexmo.message.shortcode2FA(config.TO_US_NUMBER, {"company-name": "Acme", "pin": "1234"}, {}, callback);
 };

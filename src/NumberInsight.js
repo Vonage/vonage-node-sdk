@@ -1,8 +1,19 @@
 "use strict";
 
-import nexmo from "./index";
+import Utils from "./Utils";
 
 class NumberInsight {
+  static get PATH() {
+    return "/ni/{type}/json";
+  }
+
+  static get ERROR_MESSAGES() {
+    return {
+      numberInsightAdvancedValidation: "Missing Mandatory fields (number and/or callback url)",
+      numberInsightValidation: "Missing Mandatory field - number",
+      numberInsightPatternFailure: "Number can contain digits and may include any or all of the following: white space, -,+, (, ).",
+    };
+  }
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -12,15 +23,6 @@ class NumberInsight {
   constructor(credentials, options = {}) {
     this.creds = credentials;
     this.options = options;
-
-    // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
-
-    this._nexmo.initialize(
-      this.creds.apiKey,
-      this.creds.apiSecret,
-      this.options
-    );
   }
 
   /**
@@ -80,14 +82,82 @@ class NumberInsight {
           'DEPRECATION WARNING: Number Insight Advanced with a level of "advanced" will be synchronous in v2.0+. Consider using the level "advancedAsync" to keep using the async option.'
         );
       }
-      this._nexmo.numberInsightAdvancedAsync.apply(this._nexmo, arguments);
+      this._numberInsightAsync(options, callback);
     } else if (level === "advancedSync") {
-      this._nexmo.numberInsightAdvanced.apply(this._nexmo, arguments);
+      this._numberInsightCommon("advanced", options, callback);
     } else if (level === "standard") {
-      this._nexmo.numberInsightStandard.apply(this._nexmo, arguments);
+      this._numberInsightCommon("standard", options, callback);
     } else {
-      this._nexmo.numberInsightBasic.apply(this._nexmo, arguments);
+      this._numberInsightCommon("basic", options, callback);
     }
+  }
+
+  _numberInsightAsync(inputParams, callback) {
+    if (!inputParams.number || !inputParams.callback) {
+      Utils.sendError(
+        callback,
+        new Error(NumberInsight.ERROR_MESSAGES.numberInsightAdvancedValidation)
+      );
+    } else {
+      inputParams["api_key"] = this.creds.apiKey;
+      inputParams["api_secret"] = this.creds.apiSecret;
+      this.options.httpClient.request({
+          host: this.options.apiHost || "api.nexmo.com",
+          path: Utils.createPathWithQuery(`${NumberInsight.PATH.replace("{type}", "advanced/async")}`, inputParams)
+        },
+        callback);
+    }
+  }
+
+  _numberInsightCommon(type, inputParams, callback) {
+    if (this._validateNumber(inputParams, callback)) {
+      var inputObj;
+      if (typeof inputParams !== "object") {
+        inputObj = {
+          number: inputParams
+        };
+      } else {
+        inputObj = inputParams;
+      }
+      inputObj["api_key"] = this.creds.apiKey;
+      inputObj["api_secret"] = this.creds.apiSecret;
+      this.options.httpClient.request({
+          host: this.options.apiHost || "api.nexmo.com",
+          path: Utils.createPathWithQuery(`${NumberInsight.PATH.replace("{type}", type)}`, inputObj)
+        },
+        callback);
+    }
+  }
+
+  _validateNumber(inputParams, callback) {
+    var numberPattern = new RegExp("^[0-9 +()-]*$");
+
+    if (typeof inputParams === "object" && !inputParams.number) {
+      Utils.sendError(
+        callback,
+        new Error(NumberInsight.ERROR_MESSAGES.numberInsightValidation)
+      );
+      return false;
+    } else if (
+      typeof inputParams === "object" &&
+      !numberPattern.test(inputParams.number)
+    ) {
+      Utils.sendError(
+        callback,
+        new Error(NumberInsight.ERROR_MESSAGES.numberInsightPatternFailure)
+      );
+      return false;
+    } else if (
+      typeof inputParams !== "object" &&
+      (!inputParams || !numberPattern.test(inputParams))
+    ) {
+      Utils.sendError(
+        callback,
+        new Error(NumberInsight.ERROR_MESSAGES.numberInsightPatternFailure)
+      );
+      return false;
+    }
+    return true;
   }
 }
 

@@ -1,10 +1,21 @@
 "use strict";
 
-import nexmo from "./index";
-
 import Pricing from "./Pricing";
 
+import Utils from "./Utils";
+
 class Number {
+  static get PATH() {
+    return "/number";
+  }
+
+  static get ERROR_MESSAGES() {
+    return {
+      optionsNotAnObject: "Options parameter should be a dictionary. Check the docs for valid properties for options",
+      countrycode: "Invalid Country Code",
+      msisdn: "Invalid MSISDN passed",
+    };
+  }
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -16,15 +27,6 @@ class Number {
     this.options = options;
 
     this._pricing = new Pricing(credentials, options);
-
-    // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
-
-    this._nexmo.initialize(
-      this.creds.apiKey,
-      this.creds.apiSecret,
-      this.options
-    );
   }
 
   /**
@@ -44,36 +46,111 @@ class Number {
   /**
    * TODO: document
    */
-  get() {
-    this._nexmo.getNumbers.apply(this._nexmo, arguments);
+  get(options, callback) {
+    if (typeof options === "function") {
+      callback = options;
+    } else if (typeof options === "object") {
+      options.api_key = options.api_key || this.creds.apiKey;
+      options.api_secret = options.api_secret || this.creds.apiSecret;
+      this.options.httpClient.request({
+          path: Utils.createPathWithQuery(`/account${Number.PATH}s`, options)
+        },
+        callback);
+    } else {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.optionsNotAnObject));
+      return;
+    }
   }
 
   /**
    * TODO: document
    */
-  search() {
-    this._nexmo.searchNumbers.apply(this._nexmo, arguments);
+  search(countryCode, pattern, callback) {
+    let params = {
+      api_key: this.creds.apiKey,
+      api_secret: this.creds.apiSecret
+    };
+    if (!countryCode || countryCode.length !== 2) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
+    } else {
+      params["country"] = countryCode;
+      if (typeof pattern === "function") {
+        callback = pattern;
+      } else if (typeof pattern === "object") {
+        for (var arg in pattern) {
+          params[arg] = pattern[arg];
+        }
+      } else {
+        params[pattern] = pattern;
+      }
+      this.options.httpClient.request({
+          path: Utils.createPathWithQuery(`${Number.PATH}/search`, params)
+        },
+        callback);
+    }
   }
 
   /**
    * TODO: document
    */
-  buy() {
-    this._nexmo.buyNumber.apply(this._nexmo, arguments);
+  buy(countryCode, msisdn, callback) {
+    if (!countryCode || countryCode.length !== 2) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
+    } else if (!msisdn) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
+    } else {
+      this.options.httpClient.request({
+          path: Utils.createPathWithQuery(`${Number.PATH}/buy`, {
+            country: countryCode,
+            msisdn,
+            api_key: this.creds.apiKey,
+            api_secret: this.creds.apiSecret
+          })
+        }, "POST",
+        callback);
+    }
   }
 
   /**
    * TODO: document
    */
-  cancel() {
-    this._nexmo.cancelNumber.apply(this._nexmo, arguments);
+  cancel(countryCode, msisdn, callback) {
+    if (!countryCode || countryCode.length !== 2) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
+    } else if (!msisdn) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
+    } else {
+      this.options.httpClient.request({
+          path: Utils.createPathWithQuery(`${Number.PATH}/cancel`, {
+            country: countryCode,
+            msisdn,
+            api_key: this.creds.apiKey,
+            api_secret: this.creds.apiSecret
+          })
+        }, "POST",
+        callback);
+    }
   }
 
   /**
    * TODO: document
    */
-  update() {
-    this._nexmo.updateNumber.apply(this._nexmo, arguments);
+  update(countryCode, msisdn, params, callback) {
+    if (!countryCode || countryCode.length !== 2) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
+    } else if (!msisdn) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
+    } else {
+      params["country"] = countryCode;
+      params["msisdn"] = msisdn;
+      params["api_key"] = this.creds.apiKey;
+      params["api_secret"] = this.creds.apiSecret;
+
+      this.options.httpClient.request({
+          path: Utils.createPathWithQuery(`${Number.PATH}/update`, params)
+        }, "POST",
+        callback);
+    }
   }
 }
 
