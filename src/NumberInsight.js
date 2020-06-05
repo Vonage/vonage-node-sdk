@@ -9,9 +9,11 @@ class NumberInsight {
 
   static get ERROR_MESSAGES() {
     return {
-      numberInsightAdvancedValidation: "Missing Mandatory fields (number and/or callback url)",
+      numberInsightAdvancedValidation:
+        "Missing Mandatory fields (number and/or callback url)",
       numberInsightValidation: "Missing Mandatory field - number",
-      numberInsightPatternFailure: "Number can contain digits and may include any or all of the following: white space, -,+, (, ).",
+      numberInsightPatternFailure:
+        "Number can contain digits and may include any or all of the following: white space, -,+, (, )."
     };
   }
   /**
@@ -101,11 +103,16 @@ class NumberInsight {
     } else {
       inputParams["api_key"] = this.creds.apiKey;
       inputParams["api_secret"] = this.creds.apiSecret;
-      this.options.httpClient.request({
+      this.options.httpClient.request(
+        {
           host: this.options.apiHost || "api.nexmo.com",
-          path: Utils.createPathWithQuery(`${NumberInsight.PATH.replace("{type}", "advanced/async")}`, inputParams)
+          path: Utils.createPathWithQuery(
+            `${NumberInsight.PATH.replace("{type}", "advanced/async")}`,
+            inputParams
+          )
         },
-        callback);
+        callback
+      );
     }
   }
 
@@ -121,11 +128,16 @@ class NumberInsight {
       }
       inputObj["api_key"] = this.creds.apiKey;
       inputObj["api_secret"] = this.creds.apiSecret;
-      this.options.httpClient.request({
+      this.options.httpClient.request(
+        {
           host: this.options.apiHost || "api.nexmo.com",
-          path: Utils.createPathWithQuery(`${NumberInsight.PATH.replace("{type}", type)}`, inputObj)
+          path: Utils.createPathWithQuery(
+            `${NumberInsight.PATH.replace("{type}", type)}`,
+            inputObj
+          )
         },
-        callback);
+        callback
+      );
     }
   }
 

@@ -60,13 +60,14 @@ class Message {
       var path = Message.PATH + "?" + querystring.stringify(data);
       this.options.logger.info(
         "sending message from " +
-        data.from +
-        " to " +
-        data.to +
-        " with message " +
-        data.text
+          data.from +
+          " to " +
+          data.to +
+          " with message " +
+          data.text
       );
-      this._sendRequest({
+      this._sendRequest(
+        {
           host: this.options.restHost || "rest.nexmo.com",
           path: path
         },
@@ -133,15 +134,7 @@ class Message {
   /**
    * TODO: document
    */
-  sendWapPushMessage(
-    sender,
-    recipient,
-    title,
-    url,
-    validity,
-    opts,
-    callback
-  ) {
+  sendWapPushMessage(sender, recipient, title, url, validity, opts, callback) {
     if (!title) {
       Utils.sendError(callback, new Error(ERROR_MESSAGES.title));
     } else if (!url) {
@@ -162,30 +155,40 @@ class Message {
       opts["title"] = title;
       opts["validity"] = validity;
       opts["url"] = url;
-      this._sendMessage(opts,
-        callback
-      );
+      this._sendMessage(opts, callback);
     }
-  };
+  }
 
   search(id, callback) {
     if (typeof id == "string") {
-      return this.options.rest.get("/search/message", {
-        id: id
-      }, callback);
+      return this.options.rest.get(
+        "/search/message",
+        {
+          id: id
+        },
+        callback
+      );
     }
 
     // Otherwise we expect an array
-    return this.options.rest.get("/search/messages", {
-      ids: id
-    }, callback);
+    return this.options.rest.get(
+      "/search/messages",
+      {
+        ids: id
+      },
+      callback
+    );
   }
 
   searchRejections(to, date, callback) {
-    return this.options.rest.get("/search/rejections", {
-      to,
-      date
-    }, callback);
+    return this.options.rest.get(
+      "/search/rejections",
+      {
+        to,
+        date
+      },
+      callback
+    );
   }
 }
 

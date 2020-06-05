@@ -15,7 +15,7 @@ class ShortCode {
   static get ERROR_MESSAGES() {
     return {
       to: "Invalid to address",
-      msgParams: "Invalid shortcode message parameters",
+      msgParams: "Invalid shortcode message parameters"
     };
   }
 
@@ -57,42 +57,47 @@ class ShortCode {
     path += "?" + querystring.stringify(opts);
     this.options.logger.info(
       "sending message from shortcode " +
-      type +
-      " to " +
-      recipient +
-      " with parameters " +
-      JSON.stringify(messageParams)
+        type +
+        " to " +
+        recipient +
+        " with parameters " +
+        JSON.stringify(messageParams)
     );
-    this._sendRequest({
+    this._sendRequest(
+      {
         host: this.options.restHost || "rest.nexmo.com",
         path: path
-      }, "POST", function(err, apiResponse) {
-      if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
-        Utils.sendError(
-          callback,
-          new Error(apiResponse.messages[0]["error-text"]),
-          apiResponse
-        );
-      } else {
-        if (callback) callback(err, apiResponse);
+      },
+      "POST",
+      function(err, apiResponse) {
+        if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
+          Utils.sendError(
+            callback,
+            new Error(apiResponse.messages[0]["error-text"]),
+            apiResponse
+          );
+        } else {
+          if (callback) callback(err, apiResponse);
+        }
       }
-    });
+    );
   }
 
   shortcodeAlert(recipient, messageParams, opts, callback) {
     this._sendViaShortcode("alert", recipient, messageParams, opts, callback);
-  };
+  }
   shortcode2FA(recipient, messageParams, opts, callback) {
     this._sendViaShortcode("2fa", recipient, messageParams, opts, callback);
-  };
-  shortcodeMarketing(
-    recipient,
-    messageParams,
-    opts,
-    callback
-  ) {
-    this._sendViaShortcode("marketing", recipient, messageParams, opts, callback);
-  };
+  }
+  shortcodeMarketing(recipient, messageParams, opts, callback) {
+    this._sendViaShortcode(
+      "marketing",
+      recipient,
+      messageParams,
+      opts,
+      callback
+    );
+  }
 }
 
 export default ShortCode;

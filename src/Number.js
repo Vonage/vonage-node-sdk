@@ -11,9 +11,10 @@ class Number {
 
   static get ERROR_MESSAGES() {
     return {
-      optionsNotAnObject: "Options parameter should be a dictionary. Check the docs for valid properties for options",
+      optionsNotAnObject:
+        "Options parameter should be a dictionary. Check the docs for valid properties for options",
       countrycode: "Invalid Country Code",
-      msisdn: "Invalid MSISDN passed",
+      msisdn: "Invalid MSISDN passed"
     };
   }
   /**
@@ -52,12 +53,17 @@ class Number {
     } else if (typeof options === "object") {
       options.api_key = options.api_key || this.creds.apiKey;
       options.api_secret = options.api_secret || this.creds.apiSecret;
-      this.options.httpClient.request({
+      this.options.httpClient.request(
+        {
           path: Utils.createPathWithQuery(`/account${Number.PATH}s`, options)
         },
-        callback);
+        callback
+      );
     } else {
-      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.optionsNotAnObject));
+      Utils.sendError(
+        callback,
+        new Error(Number.ERROR_MESSAGES.optionsNotAnObject)
+      );
       return;
     }
   }
@@ -83,10 +89,12 @@ class Number {
       } else {
         params[pattern] = pattern;
       }
-      this.options.httpClient.request({
+      this.options.httpClient.request(
+        {
           path: Utils.createPathWithQuery(`${Number.PATH}/search`, params)
         },
-        callback);
+        callback
+      );
     }
   }
 
@@ -99,15 +107,18 @@ class Number {
     } else if (!msisdn) {
       Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
     } else {
-      this.options.httpClient.request({
+      this.options.httpClient.request(
+        {
           path: Utils.createPathWithQuery(`${Number.PATH}/buy`, {
             country: countryCode,
             msisdn,
             api_key: this.creds.apiKey,
             api_secret: this.creds.apiSecret
           })
-        }, "POST",
-        callback);
+        },
+        "POST",
+        callback
+      );
     }
   }
 
@@ -120,15 +131,18 @@ class Number {
     } else if (!msisdn) {
       Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
     } else {
-      this.options.httpClient.request({
+      this.options.httpClient.request(
+        {
           path: Utils.createPathWithQuery(`${Number.PATH}/cancel`, {
             country: countryCode,
             msisdn,
             api_key: this.creds.apiKey,
             api_secret: this.creds.apiSecret
           })
-        }, "POST",
-        callback);
+        },
+        "POST",
+        callback
+      );
     }
   }
 
@@ -146,10 +160,13 @@ class Number {
       params["api_key"] = this.creds.apiKey;
       params["api_secret"] = this.creds.apiSecret;
 
-      this.options.httpClient.request({
+      this.options.httpClient.request(
+        {
           path: Utils.createPathWithQuery(`${Number.PATH}/update`, params)
-        }, "POST",
-        callback);
+        },
+        "POST",
+        callback
+      );
     }
   }
 }

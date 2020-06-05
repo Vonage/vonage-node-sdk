@@ -11,7 +11,7 @@ class Voice {
       byeText: "Invalid bye text for TTS prompt",
       pinCode: "Invalid pin code for TTS confirm",
       failedText: "Invalid failed text for TTS confirm",
-      answerUrl: "Invalid answer URL for call",
+      answerUrl: "Invalid answer URL for call"
     };
   }
   /**
@@ -34,20 +34,24 @@ class Voice {
       this.options.logger.info(
         "sending TTS message to " + data.to + " with message " + data.text
       );
-      this.options.httpClient.request({
-        host: endpoint.host,
-        path: Utils.createPathWithQuery(endpoint.path, data)
-      }, "POST", (err, apiResponse) => {
-        if (!err && apiResponse.status && apiResponse.status > 0) {
-          Utils.sendError(
-            callback,
-            new Error(apiResponse["error-text"]),
-            apiResponse
-          );
-        } else {
-          if (callback) callback(err, apiResponse);
+      this.options.httpClient.request(
+        {
+          host: endpoint.host,
+          path: Utils.createPathWithQuery(endpoint.path, data)
+        },
+        "POST",
+        (err, apiResponse) => {
+          if (!err && apiResponse.status && apiResponse.status > 0) {
+            Utils.sendError(
+              callback,
+              new Error(apiResponse["error-text"]),
+              apiResponse
+            );
+          } else {
+            if (callback) callback(err, apiResponse);
+          }
         }
-      });
+      );
     }
   }
 
@@ -63,10 +67,14 @@ class Voice {
       }
       opts["to"] = recipient;
       opts["text"] = message;
-      this._sendVoiceMessage({
-        host: this.options.apiHost || "api.nexmo.com",
-        path: "/tts/json"
-      }, opts, callback);
+      this._sendVoiceMessage(
+        {
+          host: this.options.apiHost || "api.nexmo.com",
+          path: "/tts/json"
+        },
+        opts,
+        callback
+      );
     }
   }
 
@@ -95,10 +103,14 @@ class Voice {
       opts["text"] = message;
       opts["max_digits"] = maxDigits;
       opts["bye_text"] = byeText;
-      this._sendVoiceMessage({
-        host: this.options.apiHost || "api.nexmo.com",
-        path: "/tts-prompt/json"
-      }, opts, callback);
+      this._sendVoiceMessage(
+        {
+          host: this.options.apiHost || "api.nexmo.com",
+          path: "/tts-prompt/json"
+        },
+        opts,
+        callback
+      );
     }
   }
 
@@ -135,10 +147,14 @@ class Voice {
       opts["pin_code"] = pinCode;
       opts["bye_text"] = byeText;
       opts["failed_text"] = failedText;
-      this._sendVoiceMessage({
-        host: this.options.apiHost || "api.nexmo.com",
-        path: "/tts-prompt/json"
-      }, opts, callback);
+      this._sendVoiceMessage(
+        {
+          host: this.options.apiHost || "api.nexmo.com",
+          path: "/tts-prompt/json"
+        },
+        opts,
+        callback
+      );
     }
   }
 
@@ -154,10 +170,14 @@ class Voice {
       }
       opts["to"] = recipient;
       opts["answer_url"] = answerUrl;
-      this._sendVoiceMessage({
-        host: this.options.restHost || "rest.nexmo.com",
-        path: "/call/json"
-      }, opts, callback);
+      this._sendVoiceMessage(
+        {
+          host: this.options.restHost || "rest.nexmo.com",
+          path: "/call/json"
+        },
+        opts,
+        callback
+      );
     }
   }
 }
