@@ -1,35 +1,6 @@
 import Number from "../lib/Number";
 
-import NexmoStub from "./NexmoStub";
-
 import { expect, sinon, TestUtils } from "./NexmoTestUtils";
-
-var numberAPIs = {
-  getNumbers: "get",
-  searchNumbers: "search",
-  buyNumber: "buy",
-  cancelNumber: "cancel",
-  updateNumber: "update"
-};
-
-var pricingAPIs = {
-  get: "getPricing",
-  getPhone: "getPhonePricing"
-};
-
-describe("Number Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(numberAPIs, Number);
-  });
-
-  it("should implement legacy pricing APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(pricingAPIs, Number);
-  });
-
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(numberAPIs, Number);
-  });
-});
 
 describe("Number _pricing", function() {
   beforeEach(function() {

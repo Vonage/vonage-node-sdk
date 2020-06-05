@@ -3,30 +3,10 @@ import Credentials from "../lib/Credentials";
 import HttpClient from "../lib/HttpClient";
 import NullLogger from "../lib/ConsoleLogger.js";
 
-import NexmoStub from "./NexmoStub";
 import ResourceTestHelper from "./ResourceTestHelper";
 
 import sinon from "sinon";
 import chai, { expect } from "chai";
-
-var smsAPIs = {
-  sendBinaryMessage: "sendBinaryMessage",
-  sendWapPushMessage: "sendWapPushMessage",
-  sendTextMessage: "sendSms",
-  shortcodeAlert: "shortcodeAlert",
-  shortcode2FA: "shortcode2FA",
-  shortcodeMarketing: "shortcodeMarketing"
-};
-
-describe("Message Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(smsAPIs, Message);
-  });
-
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(smsAPIs, Message);
-  });
-});
 
 describe("Message", function() {
   beforeEach(function() {

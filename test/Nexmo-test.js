@@ -146,11 +146,7 @@ describe("Nexmo Object instance", function() {
   });
 
   it("should allow options to be passed", function() {
-    var initializedSpy = sinon.spy();
     var options = {
-      nexmoOverride: {
-        initialize: initializedSpy
-      },
       appendToUserAgent: "EXT",
       debug: true
     };
@@ -161,7 +157,7 @@ describe("Nexmo Object instance", function() {
       },
       options
     );
-    expect(initializedSpy.calledWith("test", "test", options)).to.be.true;
+    expect(options.userAgent).to.match(/.*EXT/);
   });
 
   it("should have debug turned off by default", function() {
