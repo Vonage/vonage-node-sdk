@@ -149,7 +149,6 @@ class NumberInsight {
         callback,
         new Error(NumberInsight.ERROR_MESSAGES.numberInsightValidation)
       );
-      return false;
     } else if (
       typeof inputParams === "object" &&
       !numberPattern.test(inputParams.number)
@@ -158,7 +157,6 @@ class NumberInsight {
         callback,
         new Error(NumberInsight.ERROR_MESSAGES.numberInsightPatternFailure)
       );
-      return false;
     } else if (
       typeof inputParams !== "object" &&
       (!inputParams || !numberPattern.test(inputParams))
@@ -167,7 +165,6 @@ class NumberInsight {
         callback,
         new Error(NumberInsight.ERROR_MESSAGES.numberInsightPatternFailure)
       );
-      return false;
     }
     return true;
   }

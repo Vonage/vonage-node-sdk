@@ -50,22 +50,23 @@ class Number {
   get(options, callback) {
     if (typeof options === "function") {
       callback = options;
-    } else if (typeof options === "object") {
-      options.api_key = options.api_key || this.creds.apiKey;
-      options.api_secret = options.api_secret || this.creds.apiSecret;
-      this.options.httpClient.request(
-        {
-          path: Utils.createPathWithQuery(`/account${Number.PATH}s`, options)
-        },
-        callback
-      );
-    } else {
+      options = {};
+    } else if (typeof options !== "object") {
       Utils.sendError(
         callback,
         new Error(Number.ERROR_MESSAGES.optionsNotAnObject)
       );
-      return;
     }
+
+    options.api_key = options.api_key || this.creds.apiKey;
+    options.api_secret = options.api_secret || this.creds.apiSecret;
+
+    this.options.httpClient.request(
+      {
+        path: Utils.createPathWithQuery(`/account${Number.PATH}s`, options)
+      },
+      callback
+    );
   }
 
   /**
@@ -87,7 +88,7 @@ class Number {
           params[arg] = pattern[arg];
         }
       } else {
-        params[pattern] = pattern;
+        params["pattern"] = pattern;
       }
       this.options.httpClient.request(
         {

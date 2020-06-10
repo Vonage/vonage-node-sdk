@@ -27,7 +27,7 @@ class Voice {
 
   _sendVoiceMessage(endpoint, data, callback) {
     if (!data.to) {
-      Utils.sendError(callback, new Error(ERROR_MESSAGES.to));
+      Utils.sendError(callback, new Error(Voice.ERROR_MESSAGES.to));
     } else {
       data["api_key"] = this.creds.apiKey;
       data["api_secret"] = this.creds.apiSecret;

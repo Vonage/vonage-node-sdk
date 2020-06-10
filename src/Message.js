@@ -114,9 +114,9 @@ class Message {
    */
   sendBinaryMessage(sender, recipient, body, udh, opts, callback) {
     if (!body) {
-      Utils.sendError(callback, new Error(ERROR_MESSAGES.body));
+      Utils.sendError(callback, new Error(Message.ERROR_MESSAGES.body));
     } else if (!udh) {
-      Utils.sendError(callback, new Error(ERROR_MESSAGES.udh));
+      Utils.sendError(callback, new Error(Message.ERROR_MESSAGES.udh));
     } else {
       if (!callback) {
         callback = opts;
@@ -136,9 +136,9 @@ class Message {
    */
   sendWapPushMessage(sender, recipient, title, url, validity, opts, callback) {
     if (!title) {
-      Utils.sendError(callback, new Error(ERROR_MESSAGES.title));
+      Utils.sendError(callback, new Error(Message.ERROR_MESSAGES.title));
     } else if (!url) {
-      Utils.sendError(callback, new Error(ERROR_MESSAGES.url));
+      Utils.sendError(callback, new Error(Message.ERROR_MESSAGES.url));
     } else {
       if (typeof validity === "function") {
         callback = validity;

@@ -1,5 +1,6 @@
 import Utils from "../src/Utils";
 import expect from "expect.js";
+import sinon from "sinon";
 
 describe("Utils", () => {
   describe(".createPathWithQuery", () => {
@@ -19,6 +20,24 @@ describe("Utils", () => {
       expect(
         Utils.createPathWithQuery("some", { things: "neverChange" })
       ).to.equal("some?things=neverChange");
+    });
+  });
+
+  describe(".sendError", () => {
+    it("should throw error", () => {
+      expect(Utils.sendError).to.throwError();
+    });
+
+    it("should throw call the callback", () => {
+      let callback = sinon.spy();
+      Utils.sendError(callback);
+      expect(callback.calledWith(undefined, undefined));
+    });
+  });
+
+  describe(".clone", () => {
+    it("should clone object", () => {
+      expect(JSON.stringify(Utils.clone({}))).to.equal("{}");
     });
   });
 });
