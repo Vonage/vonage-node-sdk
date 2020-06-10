@@ -812,11 +812,11 @@ nexmo.options.rest.postUseQueryString(
     * [x] Message
     * [x] Messages
     * [x] Rejections
-  * [ ] US Short Codes
-    * [ ] Two-Factor Authentication
-    * [ ] Event-Based Alerts
-      * [ ] Sending Alerts
-      * [ ] Campaign Subscription Management
+  * [x] US Short Codes
+    * [x] Two-Factor Authentication
+    * [x] Event-Based Alerts
+      * [x] Sending Alerts
+      * [x] Campaign Subscription Management
 * Number Insight
   * [X] Basic
   * [X] Standard
