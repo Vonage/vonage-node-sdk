@@ -9,5 +9,5 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.number.cancel("GB", "447418349929", callback);
+  nexmo.number.cancel(config.NEXMO_COUNTRY_CODE, config.NEXMO_NUMBER, callback);
 };

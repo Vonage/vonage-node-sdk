@@ -73,7 +73,7 @@ exampleFiles = [
   // 'ex-number-insight-advanced-async.js',
   // 'ex-send-shortcode-alert.js',
   // 'ex-send-shortcode-2fa.js',
-  'ex-send-sms.js',
+  // 'ex-send-sms.js',
   // 'ex-send-binary-sms.js',
   // 'ex-send-wap-message.js',
   // 'ex-send-signed-sms.js',

@@ -11,6 +11,8 @@ var config = {
   FROM_NUMBER: process.env.FROM_NUMBER || '',
   ALT_TO_NUMBER: process.env.ALT_TO_NUMBER || '',
   TO_NUMBER: process.env.TO_NUMBER || '',
+  NEXMO_COUNTRY_CODE: process.env.NEXMO_COUNTRY_CODE || '',
+  NEXMO_NUMBER: process.env.NEXMO_NUMBER || '',
   TO_US_NUMBER: process.env.TO_US_NUMBER || '',
   MEDIA_ID: process.env.MEDIA_ID || '',
   BRAND_NAME: process.env.BRAND_NAME || '',
