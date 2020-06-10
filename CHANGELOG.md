@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 2.60
+## 2.7.0
+- ADDED: Made `apiKey` and `apiSecret` optional when `applicationId` and `privateKey` are present in Nexmo constructor.
+
+## 2.6.0
 - ADDED: Change host via the config object, using `apiHost` & `restHost`
 
 ## 2.5.3

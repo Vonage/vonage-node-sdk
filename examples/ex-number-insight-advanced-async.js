@@ -9,5 +9,9 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.verify.search(config.REQUEST_ID, callback);
+  nexmo.numberInsight.get({
+    level: 'advanced',
+    number: config.TO_NUMBER,
+    callback: "http://example.com"
+  }, callback);
 };

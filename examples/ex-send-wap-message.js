@@ -9,5 +9,6 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.verify.search(config.REQUEST_ID, callback);
+  // Unless you have a phone capable of receiving WAP messages, you won't be able to test this.
+  nexmo.message.sendWapPushMessage(config.FROM_NUMBER, config.TO_NUMBER, 'Test', 'http://example.com', callback);
 };

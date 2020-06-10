@@ -9,5 +9,5 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.verify.search(config.REQUEST_ID, callback);
+  nexmo.number.update("GB", config.FROM_NUMBER, {app_id: config.APP_ID}, callback);
 };

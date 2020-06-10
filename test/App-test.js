@@ -2,13 +2,11 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import nexmo from "../lib/index";
 import App from "../lib/App";
 
 import HttpClient from "../lib/HttpClient";
 import Credentials from "../lib/Credentials";
 
-import NexmoStub from "./NexmoStub";
 import ResourceTestHelper from "./ResourceTestHelper";
 
 chai.use(sinonChai);
@@ -18,20 +16,6 @@ var creds = Credentials.parse({
   apiSecret: "someSecret"
 });
 var emptyCallback = () => {};
-
-var appAPIMapping = {
-  getApplications: "get|{}",
-  createApplication: "create",
-  getApplication: "get|someAppId",
-  updateApplication: "update",
-  deleteApplication: "delete"
-};
-
-describe("applications", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(appAPIMapping, App);
-  });
-});
 
 describe("applications.create", function() {
   var httpClientStub = null;

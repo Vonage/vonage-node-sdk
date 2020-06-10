@@ -9,5 +9,5 @@ module.exports = function(callback, config) {
     debug: config.DEBUG
   });
 
-  nexmo.verify.search(config.REQUEST_ID, callback);
+  nexmo.message.shortcodeAlert(config.TO_US_NUMBER, {time: "now", place: "here"}, {}, callback);
 };

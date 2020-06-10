@@ -20,7 +20,10 @@ To run the code for an open PR, follow these steps:
 2. `cd nexmo-node`
 3. `git checkout BRANCH_NAME`
 4. `npm install`
-5. Uncomment the appropriate line in `examples/run-examples.js` for each example you want to run.
-6. In the `examples` folder, copy `example.env` to `.env`.
-7. Update `.env` with your API key and API secret.
-8. `node examples/run-examples.js`
+5. `npm compile`
+6. Uncomment the appropriate line in `examples/run-examples.js` for each example you want to run.
+7. In the `examples` folder, copy `example.env` to `.env`.
+8. Update `.env` with your API key and API secret.
+9. `node examples/run-examples.js`
+
+When reviewing PRs, and switching branches to compare running examples against feature branches, don't forget to run `npm compile` after switching branches. Because examples run from the `lib/` folder, and that folder is ignored by Git, you'll need to re-compile the source every time you switch a branch.

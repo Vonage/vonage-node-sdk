@@ -13,12 +13,5 @@ module.exports = function(callback, config) {
     number: config.TO_NUMBER,
     brand: config.BRAND_NAME,
     workflow_id: config.WORKFLOW_ID
-  }, (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      const verifyRequestId = result.request_id;
-      console.log('request_id', verifyRequestId);
-    }
-  });
+  }, callback);
 };
