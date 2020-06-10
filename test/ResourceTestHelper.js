@@ -34,8 +34,6 @@ class ResourceTestHelper {
         expected = params;
       }
 
-      console.log(expected, actual);
-
       // We strip api_key and api_secret out of `path` so that our tests
       // only look for specific parameters
       var qs = actual.path.split("?");
