@@ -12,7 +12,7 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 
 [![NPM](https://nodei.co/npm/nexmo.png)](https://nodei.co/npm/nexmo/)
 
-[Installation](#installation) | [Constructor](#constructor) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [Pricing](#pricing) | [JWT (JSON Web Token)](#jwt)
+[Installation](#installation) | [Constructor](#constructor) | [Callbacks](#callbacks) | [Messaging](#messaging) | [Message Signing](#signature) | [Voice](#voice) | [Verify](#verify) | [Number Insight](#number-insight) | [Applications](#applications) | [Management](#management) | [Redact](#redact) | [Pricing](#pricing) | [JWT (JSON Web Token)](#jwt)
 
 ## Installation
 
@@ -35,8 +35,8 @@ const nexmo = new Nexmo({
   }, options);
 ```
 
-* `apiKey` - API Key from Nexmo.
-* `apiSecret` - API SECRET from Nexmo.
+* `apiKey` - API Key from Nexmo. If `applicationId` and `privateKey` are present, `apiKey` is optional.
+* `apiSecret` - API SECRET from Nexmo. If `applicationId` and `privateKey` are present, `apiSecret` is optional.
 * `applicationId` - (optional) The Nexmo Application ID to be used when creating JWTs.
 * `privateKey` - (optional) The Private Key to be used when creating JWTs. You can specify the key as any of the following:
   * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.
@@ -66,6 +66,27 @@ Options are:
   apiHost: string,
   // Set a custom host for requests instead of rest.nexmo.com
   restHost: string
+}
+```
+
+## Callbacks
+
+All methods expect a `callback` function to be passed in, with a method signature of `(error, response)` where:
+
+* `error` - is an Error object if the API call returns an error, or `null` if the API call was successful.
+* `response` - is an Object, with the API response if the API call was successful, or `null` if there was an error.
+
+Example:
+
+```js
+callback = (error, response) => {
+  if (error) {
+    console.error(error)
+  }
+
+  if (response) {
+    console.log(response)
+  }
 }
 ```
 
