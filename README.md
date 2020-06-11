@@ -252,6 +252,14 @@ nexmo.verify.request({number:<NUMBER_TO_BE_VERIFIED>,brand:<NAME_OF_THE_APP>},ca
 
 For more information check the documentation at https://developer.nexmo.com/api/verify#verify-request
 
+### Submit a PSD2 (Payment Services Directive 2) Verification Request
+
+```js
+nexmo.verify.pd2({number:<NUMBER_TO_BE_VERIFIED>,payee:<NAME_OF_THE_SELLER>,amount:<AMOUNT_IN_EUROS>},callback);
+```
+
+For more information check the documentation at https://developer.nexmo.com/api/verify#verifyRequestWithPSD2
+
 ### Validate the response of a Verification Request
 
 ```js
@@ -825,6 +833,7 @@ nexmo.options.rest.postUseQueryString(
   * [ ] Advanced Async Webhook
 * Verify
   * [x] Verify
+  * [x] PSD2
   * [x] Check
   * [x] Search
   * [x] Control

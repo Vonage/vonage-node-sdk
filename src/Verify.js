@@ -57,6 +57,24 @@ class Verify {
   /**
    * TODO: document
    */
+  psd2(inputParams, callback) {
+    inputParams["api_key"] = this.creds.apiKey;
+    inputParams["api_secret"] = this.creds.apiSecret;
+    this.options.httpClient.request(
+      {
+        host: this.options.apiHost || "api.nexmo.com",
+        path: Utils.createPathWithQuery(
+          `${Verify.PATH.replace("{action}", "/psd2")}`,
+          inputParams
+        )
+      },
+      callback
+    );
+  }
+
+  /**
+   * TODO: document
+   */
   check(inputParams, callback) {
     if (!inputParams.request_id || !inputParams.code) {
       Utils.sendError(
