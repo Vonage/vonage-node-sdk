@@ -2,8 +2,8 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 2.7.1
-- ADDED: Support for Verify PSD2 requestes via `nexmo.verify.psd2()`.
+## 2.8.0
+- ADDED: Support for Verify PSD2 requests via `nexmo.verify.psd2()`.
 
 ## 2.7.0
 - ADDED: Made `apiKey` and `apiSecret` optional when `applicationId` and `privateKey` are present in Nexmo constructor.

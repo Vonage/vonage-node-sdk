@@ -255,7 +255,7 @@ For more information check the documentation at https://developer.nexmo.com/api/
 ### Submit a PSD2 (Payment Services Directive 2) Verification Request
 
 ```js
-nexmo.verify.pd2({number:<NUMBER_TO_BE_VERIFIED>,payee:<NAME_OF_THE_SELLER>,amount:<AMOUNT_IN_EUROS>},callback);
+nexmo.verify.psd2({number:<NUMBER_TO_BE_VERIFIED>,payee:<NAME_OF_THE_SELLER>,amount:<AMOUNT_IN_EUROS>},callback);
 ```
 
 For more information check the documentation at https://developer.nexmo.com/api/verify#verifyRequestWithPSD2
