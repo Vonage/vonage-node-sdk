@@ -76,7 +76,26 @@ describe("Verify", () => {
     verify.request({ number: "123", brand: "acme" }, emptyCallback);
 
     expect(httpClientStub.request).to.have.been.calledWith(
-      sinon.match(ResourceTestHelper.requestArgsMatch({}))
+      sinon.match({
+        host: "api.nexmo.com",
+        path:
+          "/verify/json?number=123&brand=acme&api_key=some-key&api_secret=some-secret"
+      })
+    );
+  });
+
+  it("should allow sending a psd2verify request", () => {
+    verify.psd2(
+      { number: "123", payee: "acme", amount: "amount" },
+      emptyCallback
+    );
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        host: "api.nexmo.com",
+        path:
+          "/verify/psd2/json?number=123&payee=acme&amount=amount&api_key=some-key&api_secret=some-secret"
+      })
     );
   });
 

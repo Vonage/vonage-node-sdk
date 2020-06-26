@@ -61,6 +61,8 @@ exampleFiles = [
   // 'ex-make-call-ncco.js',
   // 'ex-send-verification.js',
   // 'ex-send-verification-with-workflow.js',
+  // 'ex-send-psd2-verification.js',
+  // 'ex-send-psd2-verification-with-workflow.js',
   // 'ex-check-verification.js',
   // 'ex-control-verification.js',
   // 'ex-search-verification.js',
