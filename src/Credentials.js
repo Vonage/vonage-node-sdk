@@ -39,16 +39,11 @@ class Credentials {
 
     if (privateKey instanceof Buffer) {
       this.privateKey = privateKey;
-    } else if (
-      typeof privateKey === "string" &&
-      privateKey.startsWith("-----BEGIN PRIVATE KEY-----")
-    ) {
-      this.privateKey = new Buffer(privateKey);
-    } else if (privateKey !== undefined) {
-      if (!fs.existsSync(privateKey)) {
-        throw new Error(`File "${privateKey}" not found.`);
-      }
-      this.privateKey = fs.readFileSync(privateKey);
+    } else if (typeof privateKey === "string") {
+      if (fs.existsSync(privateKey)) {
+        privateKey = fs.readFileSync(privateKey);
+      } 
+      this.privateKey = Buffer.from(privateKey.replace(/\\n/g, '\n').replace(/\n\s\s/g, '\n'), 'utf-8');     
     }
 
     /** @private */
