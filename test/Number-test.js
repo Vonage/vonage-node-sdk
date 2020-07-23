@@ -169,6 +169,17 @@ describe("Number", () => {
     );
   });
 
+  it("should allow buying with a target api key", () => {
+    number.buy("GB", "1234", "5678", emptyCallback);
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        path:
+          "/number/buy?country=GB&msisdn=1234&target_api_key=5678&api_key=some-key&api_secret=some-secret"
+      })
+    );
+  });
+
   it("should allow cancelling available numbers", () => {
     number.cancel("GB", "1234", emptyCallback);
 
