@@ -1,3 +1,15 @@
+/*
+ * TOOD: add prefix for Verify api's typings like Message api on next major update.
+ *       RequestObject -> VerifyRequestObject
+ *       RequestResponse -> VerifyRequestResponse
+ *       RequestResponseStatusCode -> VerifyRequestResponseStatusCode
+ *       ControlObject -> VerifyControlObject
+ *       ControlResponse -> VerifyControlResponse
+ *       ControlResponseStatusCode -> VerifyControlResponseStatusCode
+ *       CheckObject -> VerifyCheckObject
+ *       CheckResponse -> VerifyCheckResponse
+ */
+
 declare module 'nexmo' {
     /* general */
     export interface CredentialsObject {
@@ -17,6 +29,99 @@ declare module 'nexmo' {
         message: string;
         body: string;
         parseError: Error;
+    }
+
+    /* message API */
+    export enum MessageRequestResponseStatusCode {
+        Success = '0',
+        Throttled = '1',
+        MissingParameters = '2',
+        InvalidParameters = '3',
+        InvalidCredentials = '4',
+        InternalError = '5',
+        InvalidMessage = '6',
+        NumberBarred = '7',
+        PartnerAccountBarred = '8',
+        PartnerQuotaViolation = '9',
+        TooManyExistingBinds = '10',
+        AccountNotEnabledForHTTP = '11',
+        MessageTooLong = '12',
+        InvalidSignature = '14',
+        InvalidSenderAddress = '15',
+        InvalidNetworkCode = '22',
+        InvalidCallbackURL = '23',
+        NonWhitelistedDestination = '29',
+        SignatureAndAPISecretDisallowed = '32',
+        NumberDeActivated = '33',
+    }
+
+    export interface MessageRequestResponseSuccess {
+        to: string,
+        'message-id': string,
+        status: MessageRequestResponseStatusCode,
+        'remaining-balance': string,
+        'message-price': string,
+        'network': string,
+        'account-ref': string,
+    }
+
+    export interface MessageError {
+        status: MessageRequestResponseStatusCode;
+        error_text: string;
+    }
+    
+    export interface MessageRequestResponse {
+      'message-count': number;
+      messages: (MessageRequestResponseSuccess | MessageError)[];
+    }
+    
+    export interface SendSmsOptions {
+        from: string;
+        to: string;
+        text?: string;
+        sig?: string;
+        ttl?: number;
+        'status-report-req'?: boolean;
+        callback?: string;
+        'message-class'?: number;
+        type?: string;
+        vcard?: string | any;
+        vcal?: string | any;
+        body?: string;
+        udh?: string;
+        'protocol-id'?: number;
+        title?: string;
+        url?: string;
+        validity?: string;
+        'client-ref'?: string;
+        'account-ref'?: string;
+    }
+    
+    export type SendSms = (
+      sender: string,
+      recipient: string,
+      message: string,
+      opts: Partial<SendSmsOptions>,
+      callback: (err: MessageError, data: MessageRequestResponse) => void
+    ) => void;
+    
+    export class Message {
+        constructor(credentials: CredentialsObject, options: { [key: string]: any });
+        sendSms: SendSms;
+
+        /**
+         * TODO: typing
+         */
+        sendBinaryMessage: any;
+        sendWapPushMessage: any;
+        shortcodeAlert: any;
+        shortcode2FA: any;
+        shortcodeMarketing: any;
+        search: any;
+        searchRejections: any;
+      
+        __proto__: any;
+        [key: string]: any;
     }
 
     /* verify API */
@@ -100,9 +205,11 @@ declare module 'nexmo' {
         [key: string]: any;
     }
 
+
     /* Nexmo */
     export default class Nexmo {
         constructor(credentials: CredentialsObject, options?: { [key: string]: any });
         public readonly verify: Verify;
+        public readonly message: Message;
     }
 }
