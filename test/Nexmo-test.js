@@ -145,19 +145,24 @@ describe("Nexmo Object instance", function() {
     expect(nexmo.files).to.be.a("object");
   });
 
-  it("should allow options to be passed", function() {
-    var options = {
+  it("should allow options to be passed and remain unchanged", function() {
+    var localOptions = {
       appendToUserAgent: "EXT",
       debug: true
     };
-    new Nexmo(
+
+    let passedOptions = Object.assign({}, localOptions);
+
+    let nexmo = new Nexmo(
       {
         apiKey: "test",
         apiSecret: "test"
       },
-      options
+      passedOptions
     );
-    expect(options.userAgent).to.match(/.*EXT/);
+
+    expect(localOptions).to.eql(passedOptions);
+    expect(nexmo.options.userAgent).to.match(/.*EXT/);
   });
 
   it("should have debug turned off by default", function() {
