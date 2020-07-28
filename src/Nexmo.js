@@ -37,7 +37,7 @@ class Nexmo {
    */
   constructor(credentials, options = { debug: false }) {
     this.credentials = Credentials.parse(credentials);
-    this.options = options;
+    this.options = Object.assign({}, options);
 
     // If no logger has been supplied but debug has been set
     // default to using the ConsoleLogger
