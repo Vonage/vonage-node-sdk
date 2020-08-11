@@ -175,7 +175,7 @@ describe("Number", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         path:
-          "/number/buy?country=GB&msisdn=1234&target_api_key=5678&api_key=some-key&api_secret=some-secret"
+          "/number/buy?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret&target_api_key=5678"
       })
     );
   });
@@ -187,6 +187,17 @@ describe("Number", () => {
       sinon.match({
         path:
           "/number/cancel?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret"
+      })
+    );
+  });
+
+  it("should allow cancelling available numbers with a target api key", () => {
+    number.cancel("GB", "1234", "5678", emptyCallback);
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        path:
+          "/number/cancel?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret&target_api_key=5678"
       })
     );
   });
