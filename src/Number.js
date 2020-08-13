@@ -102,20 +102,28 @@ class Number {
   /**
    * TODO: document
    */
-  buy(countryCode, msisdn, callback) {
+  buy(countryCode, msisdn, targetApiKey, callback) {
     if (!countryCode || countryCode.length !== 2) {
       Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
     } else if (!msisdn) {
       Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
     } else {
+      let opts = {
+        country: countryCode,
+        msisdn,
+        api_key: this.creds.apiKey,
+        api_secret: this.creds.apiSecret
+      };
+
+      if (targetApiKey instanceof Function) {
+        callback = targetApiKey;
+      } else {
+        opts.target_api_key = targetApiKey;
+      }
+
       this.options.httpClient.request(
         {
-          path: Utils.createPathWithQuery(`${Number.PATH}/buy`, {
-            country: countryCode,
-            msisdn,
-            api_key: this.creds.apiKey,
-            api_secret: this.creds.apiSecret
-          })
+          path: Utils.createPathWithQuery(`${Number.PATH}/buy`, opts)
         },
         "POST",
         callback
@@ -126,20 +134,28 @@ class Number {
   /**
    * TODO: document
    */
-  cancel(countryCode, msisdn, callback) {
+  cancel(countryCode, msisdn, targetApiKey, callback) {
     if (!countryCode || countryCode.length !== 2) {
       Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
     } else if (!msisdn) {
       Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
     } else {
+      let opts = {
+        country: countryCode,
+        msisdn,
+        api_key: this.creds.apiKey,
+        api_secret: this.creds.apiSecret
+      };
+
+      if (targetApiKey instanceof Function) {
+        callback = targetApiKey;
+      } else {
+        opts.target_api_key = targetApiKey;
+      }
+
       this.options.httpClient.request(
         {
-          path: Utils.createPathWithQuery(`${Number.PATH}/cancel`, {
-            country: countryCode,
-            msisdn,
-            api_key: this.creds.apiKey,
-            api_secret: this.creds.apiSecret
-          })
+          path: Utils.createPathWithQuery(`${Number.PATH}/cancel`, opts)
         },
         "POST",
         callback
