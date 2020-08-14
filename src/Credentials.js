@@ -38,12 +38,15 @@ class Credentials {
     this.signatureMethod = signatureMethod;
 
     if (privateKey instanceof Buffer) {
+      // it is already a buffer, use it as-is
       this.privateKey = privateKey;
     } else if (
       typeof privateKey === "string" &&
       privateKey.startsWith("-----BEGIN PRIVATE KEY-----")
     ) {
-      this.privateKey = new Buffer(privateKey);
+      // It's a key string. Check for \n, replace with newlines
+      privateKey = privateKey.replace(/\\n/g, "\n");
+      this.privateKey = Buffer.from(privateKey, "utf-8");
     } else if (privateKey !== undefined) {
       if (!fs.existsSync(privateKey)) {
         throw new Error(`File "${privateKey}" not found.`);
