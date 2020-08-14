@@ -40,19 +40,18 @@ class Credentials {
     if (privateKey instanceof Buffer) {
       // it is already a buffer, use it as-is
       this.privateKey = privateKey;
-    } else if (typeof privateKey === "string") {
-      // is this a filename that we can find?
-      if (fs.existsSync(privateKey)) {
-        // it is a file, use its contents
-        this.privateKey = fs.readFileSync(privateKey);
-      } else {
-        // a string but not a filename, does it look like a key?
-        if(privateKey.startsWith("-----BEGIN PRIVATE KEY-----")) {
-          // OK it's a key. Check for \n, replace with newlines
-          privateKey = privateKey.replace(/\\n/g, '\n');
-          this.privateKey = Buffer.from(privateKey, 'utf-8');
-        }
+    } else if (
+      typeof privateKey === "string" &&
+      privateKey.startsWith("-----BEGIN PRIVATE KEY-----")
+    ) {
+      // It's a key string. Check for \n, replace with newlines
+      privateKey = privateKey.replace(/\\n/g, "\n");
+      this.privateKey = Buffer.from(privateKey, "utf-8");
+    } else if (privateKey !== undefined) {
+      if (!fs.existsSync(privateKey)) {
+        throw new Error(`File "${privateKey}" not found.`);
       }
+      this.privateKey = fs.readFileSync(privateKey);
     }
 
     /** @private */
