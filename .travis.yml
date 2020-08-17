@@ -14,3 +14,5 @@ install:
 script:
   - npm run report-coverage
   - codecov
+  - npm run compile
+  - node -e "const n = require('.'); new n({});"
