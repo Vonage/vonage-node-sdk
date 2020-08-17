@@ -2,26 +2,40 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.9.0
+
+- FIXED: #295 - Nexmo constructor changes of given options object
+- ADDED: Optional `target_api_key` parameter for the `number.buy()` and `number.cancel()` methods.  
+- ADDED: Typings for Messages API
+- UPDATED: Private Key strings now replaces `\n` with newlines for easier usage in environment variables.
+
 ## 2.8.0
+
 - ADDED: Support for Verify PSD2 requests via `nexmo.verify.psd2()`.
 
 ## 2.7.0
+
 - ADDED: Made `apiKey` and `apiSecret` optional when `applicationId` and `privateKey` are present in Nexmo constructor.
 
 ## 2.6.0
+
 - ADDED: Change host via the config object, using `apiHost` & `restHost`
 
 ## 2.5.3
+
 - FIXED: URI Encode Signed SMS Message
 
 ## 2.5.2
+
 - ADDED: Pricing API support
 
 ## 2.5.1
+
 - ADDED: typings for Verify API
 - ADDED: Applications API V2 support
 
 ## 2.4.2
+
 - Added message signing for for sending SMS
 - Added `Nexmo.generateSignature` to verify signed messages
 
@@ -61,13 +75,13 @@ All notable changes to this project will be documented in this file. This projec
 - ADDED: nexmo.calls adding support to `create`, `get`, `update` and `delete` calls.
 - ADDED: nexmo.applications adding support to `create`, `get`, `update` and `delete` calls.
 - ADDED: Functionality is now namespaced:
-  - `nexmo.message`
-  - `nexmo.calls`
-  - `nexmo.number`
-  - `nexmo.verify`
-  - `nexmo.numberInsight`
-  - `nexmo.account`
-  - `nexmo.voice` - legacy voice functionality
+    - `nexmo.message`
+    - `nexmo.calls`
+    - `nexmo.number`
+    - `nexmo.verify`
+    - `nexmo.numberInsight`
+    - `nexmo.account`
+    - `nexmo.voice` - legacy voice functionality
 - CHANGED: `var Nexmo = require('nexmo');` returns a class definition which should be created using the `new` operator e.g. `var nexmo = new Nexmo(args...);`.
 - REMOVED: `var nexmo = require('nexmo');` no longer exposes singleton functions offered by "easynexmo".
 

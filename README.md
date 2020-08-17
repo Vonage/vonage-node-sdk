@@ -532,6 +532,9 @@ nexmo.number.search('US',{pattern:3049,index:1,size:50,type:'mobile-lvn',feature
 
 ```js
 nexmo.number.buy(countryCode, msisdn, callback);
+
+// optional target_api_key option
+nexmo.number.buy(countryCode, msisdn, target_api_key, callback);
 ```
 
 For more details on these parameters, see the [Numbers API reference](https://developer.nexmo.com/api/numbers#buyANumber).
@@ -540,6 +543,9 @@ For more details on these parameters, see the [Numbers API reference](https://de
 
 ```js
 nexmo.number.cancel(countryCode, msisdn, callback);
+
+// optional target_api_key option
+nexmo.number.cancel(countryCode, msisdn, target_api_key, callback);
 ```
 
 For more details on these parameters, see the [Numbers API reference](https://developer.nexmo.com/api/numbers#cancelANumber).
