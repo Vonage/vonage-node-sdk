@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.9.1
+
+- FIXED: #317 - TypeError: Nexmo is not a constructor
+
 ## 2.9.0
 
 - FIXED: #295 - Nexmo constructor changes of given options object
