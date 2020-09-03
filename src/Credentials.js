@@ -9,15 +9,15 @@ import HashGenerator from "./HashGenerator";
  * However, in time JWT will also be supported.
  * The `Credentials` object provides an abstraction to this.
  *
- * @param {string} apiKey - A Nexmo API Key
- * @param {string} apiSecret - A Nexmo API Secret
- * @param {string} [applicationId] - A Nexmo Application ID
+ * @param {string} apiKey - A VonageAPI Key
+ * @param {string} apiSecret - A VonageAPI Secret
+ * @param {string} [applicationId] - A VonageApplication ID
  * @param {string|Buffer} [privateKey] -  When a string value is passed it should
  *                        either represent the path to the private key, or the actual
  *                        private key in string format. If a Buffer is passed then
  *                        it should be the key read from the file system.
- * @param {string} [signatureSecret] - A Nexmo signature Secret
- * @param {string} [signatureMethod] - A Nexmo compatible request signing method
+ * @param {string} [signatureSecret] - A Vonagesignature Secret
+ * @param {string} [signatureMethod] - A Vonagecompatible request signing method
  */
 class Credentials {
   constructor(

@@ -39,7 +39,7 @@ class HttpClient {
 
     if (endpoint.method === "POST" || endpoint.method === "DELETE") {
       // TODO: verify the following fix is required
-      // Fix broken due ot 411 Content-Length error now sent by Nexmo API
+      // Fix broken due ot 411 Content-Length error now sent by VonageAPI
       // PL 2016-Sept-6 - commented out Content-Length 0
       // headers['Content-Length'] = 0;
     }
@@ -246,7 +246,7 @@ class HttpClient {
     return function(err, data) {
       if (err && err.status == limitedAccessStatus) {
         err._INFO_ =
-          "This endpoint may need activating on your account. Please email support@nexmo.com for more information";
+          "This endpoint may need activating on your account. Please email support@vonage.com for more information";
       }
 
       return callback(err, data);
