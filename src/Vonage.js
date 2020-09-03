@@ -48,10 +48,10 @@ class Vonage {
       this.options.logger = new NullLogger();
     }
 
-    let userAgent = "vonage-node/UNKNOWN node/UNKNOWN";
+    let userAgent = "@vonage/server-sdk/UNKNOWN node/UNKNOWN";
     try {
       var packageDetails = require(path.join(__dirname, "..", "package.json"));
-      userAgent = `vonage-node/${
+      userAgent = `@vonage/server-sdk/${
         packageDetails.version
       } node/${process.version.replace("v", "")}`;
     } catch (e) {

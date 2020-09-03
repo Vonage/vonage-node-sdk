@@ -210,7 +210,7 @@ describe("Vonage Object instance", function() {
       apiSecret: "test"
     });
     expect(vonage.options.userAgent).to.match(
-      /^vonage-node\/[\d|\w\-\d.]* node\/[\d.]*$/
+      /^@vonage\/server-sdk\/[\d|\w\-\d.]* node\/[\d.]*$/
     );
   });
 
@@ -226,7 +226,7 @@ describe("Vonage Object instance", function() {
       options
     );
     expect(vonage.options.userAgent).to.match(
-      /vonage-node\/[\d|\w\-\d.]* node\/[\d.]* vonage-cli\/1\.0\.0/
+      /@vonage\/server-sdk\/[\d|\w\-\d.]* node\/[\d.]* vonage-cli\/1\.0\.0/
     );
   });
 
