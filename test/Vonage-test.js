@@ -4,26 +4,26 @@ import sinonChai from "sinon-chai";
 import path from "path";
 import fs from "fs";
 
-import Nexmo from "../lib/Nexmo";
+import Vonage from "../lib/Vonage";
 import CallsResource from "../lib/CallsResource";
 
 chai.use(sinonChai);
 
-describe("Nexmo definition", () => {
+describe("Vonage definition", () => {
   describe(".generateJwt", () => {
     it("should expose a generateJwt function", () => {
-      expect(Nexmo.generateJwt).to.be.a("function");
+      expect(Vonage.generateJwt).to.be.a("function");
     });
 
     it("should throw an exception if privateKey file does not exist", () => {
       var create = function() {
-        Nexmo.generateJwt("./no-key-here.key");
+        Vonage.generateJwt("./no-key-here.key");
       };
       expect(create).to.throw(Error);
     });
 
     it("should create a JWT with a private key (file path) [static]", () => {
-      var token = Nexmo.generateJwt(path.join(__dirname, "private-test.key"));
+      var token = Vonage.generateJwt(path.join(__dirname, "private-test.key"));
       expect(token).to.be.a("string");
     });
 
@@ -31,118 +31,118 @@ describe("Nexmo definition", () => {
       var fileBuffer = fs.readFileSync(
         path.join(__dirname, "private-test.key")
       );
-      var token = Nexmo.generateJwt(fileBuffer);
+      var token = Vonage.generateJwt(fileBuffer);
       expect(token).to.be.a("string");
     });
   });
 
   describe(".generateSignature", () => {
     it("should expose a generateSignature function", () => {
-      expect(Nexmo.generateSignature).to.be.a("function");
+      expect(Vonage.generateSignature).to.be.a("function");
     });
 
     it("should create a hash", () => {
-      var hash = Nexmo.generateSignature("md5hash", "secret", {});
+      var hash = Vonage.generateSignature("md5hash", "secret", {});
       expect(hash).to.be.a("string");
     });
   });
 });
 
-describe("Nexmo Object instance", function() {
+describe("Vonage Object instance", function() {
   it("should expose a credentials object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.credentials).to.be.a("object");
+    expect(vonage.credentials).to.be.a("object");
   });
 
   it("should expose a message object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.message).to.be.a("object");
+    expect(vonage.message).to.be.a("object");
   });
 
   it("should expose a voice object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.voice).to.be.a("object");
+    expect(vonage.voice).to.be.a("object");
   });
 
   it("should expose a number object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.number).to.be.a("object");
+    expect(vonage.number).to.be.a("object");
   });
 
   it("should expose a verify object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.verify).to.be.a("object");
+    expect(vonage.verify).to.be.a("object");
   });
 
   it("should expose a numberInsight object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.numberInsight).to.be.a("object");
+    expect(vonage.numberInsight).to.be.a("object");
   });
 
   it("should expose a app object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.app).to.be.a("object");
+    expect(vonage.app).to.be.a("object");
   });
 
   it("should expose a applications object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.applications).to.be.a("object");
+    expect(vonage.applications).to.be.a("object");
   });
 
   it("should alias apps to applications object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.applications).to.equal(nexmo.app);
+    expect(vonage.applications).to.equal(vonage.app);
   });
 
   it("should expose a account object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.account).to.be.a("object");
+    expect(vonage.account).to.be.a("object");
   });
 
   it("should expose a calls object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.calls).to.be.an.instanceOf(CallsResource);
+    expect(vonage.calls).to.be.an.instanceOf(CallsResource);
   });
 
   it("should expose a files object", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.files).to.be.a("object");
+    expect(vonage.files).to.be.a("object");
   });
 
   it("should allow options to be passed and remain unchanged", function() {
@@ -153,7 +153,7 @@ describe("Nexmo Object instance", function() {
 
     let passedOptions = Object.assign({}, localOptions);
 
-    let nexmo = new Nexmo(
+    let vonage = new Vonage(
       {
         apiKey: "test",
         apiSecret: "test"
@@ -162,15 +162,15 @@ describe("Nexmo Object instance", function() {
     );
 
     expect(localOptions).to.eql(passedOptions);
-    expect(nexmo.options.userAgent).to.match(/.*EXT/);
+    expect(vonage.options.userAgent).to.match(/.*EXT/);
   });
 
   it("should have debug turned off by default", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.options.debug).to.be.false;
+    expect(vonage.options.debug).to.be.false;
   });
 
   it("should allow a custom logger to be set", function() {
@@ -179,7 +179,7 @@ describe("Nexmo Object instance", function() {
       error: function() {},
       warn: function() {}
     };
-    var nexmo = new Nexmo(
+    var vonage = new Vonage(
       {
         apiKey: "test",
         apiSecret: "test"
@@ -188,11 +188,11 @@ describe("Nexmo Object instance", function() {
         logger: logger
       }
     );
-    expect(nexmo.options.logger).to.equal(logger);
+    expect(vonage.options.logger).to.equal(logger);
   });
 
   it("should allow a debug option to be set", function() {
-    var nexmo = new Nexmo(
+    var vonage = new Vonage(
       {
         apiKey: "test",
         apiSecret: "test"
@@ -201,32 +201,32 @@ describe("Nexmo Object instance", function() {
         debug: true
       }
     );
-    expect(nexmo.options.debug).to.be.true;
+    expect(vonage.options.debug).to.be.true;
   });
 
   it("should have a default user agent in the form LIBRARY-NAME/LIBRARY-VERSION/LANGUAGE-VERSION", function() {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
     });
-    expect(nexmo.options.userAgent).to.match(
-      /^nexmo-node\/[\d|\w\-\d.]* node\/[\d.]*$/
+    expect(vonage.options.userAgent).to.match(
+      /^vonage-node\/[\d|\w\-\d.]* node\/[\d.]*$/
     );
   });
 
   it("should append to the user agent when a appendToUserAgent option is passed", function() {
     var options = {
-      appendToUserAgent: "nexmo-cli/1.0.0"
+      appendToUserAgent: "vonage-cli/1.0.0"
     };
-    var nexmo = new Nexmo(
+    var vonage = new Vonage(
       {
         apiKey: "test",
         apiSecret: "test"
       },
       options
     );
-    expect(nexmo.options.userAgent).to.match(
-      /nexmo-node\/[\d|\w\-\d.]* node\/[\d.]* nexmo-cli\/1\.0\.0/
+    expect(vonage.options.userAgent).to.match(
+      /vonage-node\/[\d|\w\-\d.]* node\/[\d.]* vonage-cli\/1\.0\.0/
     );
   });
 
@@ -234,49 +234,49 @@ describe("Nexmo Object instance", function() {
     var options = {
       apiHost: "some.host.com"
     };
-    var nexmo = new Nexmo(
+    var vonage = new Vonage(
       {
         apiKey: "test",
         apiSecret: "test"
       },
       options
     );
-    expect(nexmo.options.apiHost).to.equal("some.host.com");
+    expect(vonage.options.apiHost).to.equal("some.host.com");
   });
 
   it("should allow rest host change", function() {
     var options = {
       restHost: "some.host.com"
     };
-    var nexmo = new Nexmo(
+    var vonage = new Vonage(
       {
         apiKey: "test",
         apiSecret: "test"
       },
       options
     );
-    expect(nexmo.options.restHost).to.equal("some.host.com");
+    expect(vonage.options.restHost).to.equal("some.host.com");
   });
 
   it("should create a JWT", () => {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test",
       privateKey: path.join(__dirname, "private-test.key"),
       application_id: "app-id"
     });
-    var token = nexmo.generateJwt();
+    var token = vonage.generateJwt();
     expect(token).to.be.a("string");
   });
 
   it("should create a hash", () => {
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test",
       signatureSecret: "secret",
       signatureMethod: "md5hash"
     });
-    var hash = nexmo.generateSignature({});
+    var hash = vonage.generateSignature({});
     expect(hash).to.be.a("string");
   });
 
@@ -286,19 +286,19 @@ describe("Nexmo Object instance", function() {
     var appId = "app_id";
     var privateKey = path.join(__dirname, "private-test.key");
 
-    var expectedJwt = Nexmo.generateJwt(privateKey, {
+    var expectedJwt = Vonage.generateJwt(privateKey, {
       application_id: appId,
       iat: iat,
       jti: jti
     });
 
-    var nexmo = new Nexmo({
+    var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test",
       privateKey: privateKey,
       applicationId: appId
     });
-    var token = nexmo.generateJwt({ iat: iat, jti: jti });
+    var token = vonage.generateJwt({ iat: iat, jti: jti });
     expect(token).to.equal(expectedJwt);
   });
 });

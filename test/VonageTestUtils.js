@@ -5,9 +5,9 @@ import NullLogger from "../lib/ConsoleLogger.js";
 import sinon from "sinon";
 import chai, { expect } from "chai";
 import sinonChai from "sinon-chai";
-import nexmoChai from "./NexmoChai";
+import vonageChai from "./VonageChai";
 chai.use(sinonChai);
-chai.use(nexmoChai);
+chai.use(vonageChai);
 
 const TestUtils = {
   getCredentials: function() {
