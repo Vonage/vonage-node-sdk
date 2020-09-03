@@ -23,6 +23,8 @@ jobs:
         node-version: ${{ matrix.node }}
     - name: Install codecov
       run: npm install -g codecov
+    - name: Install dependencies
+      run: npm install
     - name: Create codecov report
       run: npm run report-coverage
     - name: Publish report
