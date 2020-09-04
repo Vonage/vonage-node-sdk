@@ -64,7 +64,7 @@ describe("Conversion", function() {
       this.httpClientStub.request.yields(mockError, null);
       this.conversion.sms("1234", 1, 1234567890, function(err, data) {
         expect(err._INFO_).to.eql(
-          "This endpoint may need activating on your account. Please email support@vonage.com for more information"
+          "This endpoint may need activating on your account. Please email support@nexmo.com for more information"
         );
         expect(data).to.eql(null);
         done();

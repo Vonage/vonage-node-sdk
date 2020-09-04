@@ -246,7 +246,7 @@ class HttpClient {
     return function(err, data) {
       if (err && err.status == limitedAccessStatus) {
         err._INFO_ =
-          "This endpoint may need activating on your account. Please email support@vonage.com for more information";
+          "This endpoint may need activating on your account. Please email support@nexmo.com for more information";
       }
 
       return callback(err, data);
