@@ -9,8 +9,8 @@ import HashGenerator from "./HashGenerator";
  * However, in time JWT will also be supported.
  * The `Credentials` object provides an abstraction to this.
  *
- * @param {string} apiKey - A VonageAPI Key
- * @param {string} apiSecret - A VonageAPI Secret
+ * @param {string} apiKey - A Vonage API Key
+ * @param {string} apiSecret - A Vonage API Secret
  * @param {string} [applicationId] - A VonageApplication ID
  * @param {string|Buffer} [privateKey] -  When a string value is passed it should
  *                        either represent the path to the private key, or the actual
