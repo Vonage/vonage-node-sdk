@@ -16,8 +16,8 @@ import HashGenerator from "./HashGenerator";
  *                        either represent the path to the private key, or the actual
  *                        private key in string format. If a Buffer is passed then
  *                        it should be the key read from the file system.
- * @param {string} [signatureSecret] - A Vonagesignature Secret
- * @param {string} [signatureMethod] - A Vonagecompatible request signing method
+ * @param {string} [signatureSecret] - A Vonage signature Secret
+ * @param {string} [signatureMethod] - A Vonage compatible request signing method
  */
 class Credentials {
   constructor(
