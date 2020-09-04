@@ -20,8 +20,8 @@ To run the code for an open PR, follow these steps:
 1. `cd vonage-node-sdk`
 1. `git checkout BRANCH_NAME`
 1. `npm install`
-1. `npm compile`
-1. Download the `https://github.com/Vonage/vonage-node-code-snippets` repository
+1. `npm run compile`
+1. In a new directory, download the `https://github.com/Vonage/vonage-node-code-snippets` repository
 1. Install the local Vonage package `npm i /path/to/vonage-node-sdk`
 1. Copy `.env-example` to `.env` and update any variables required.
 1. Run the sample code snippet to test the SDK.
