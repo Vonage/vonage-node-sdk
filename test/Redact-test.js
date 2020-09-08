@@ -1,5 +1,5 @@
 import Redact from "../lib/Redact";
-import { expect, sinon, TestUtils } from "./NexmoTestUtils";
+import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
 describe("Redact", function() {
   beforeEach(function() {

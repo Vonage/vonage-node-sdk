@@ -70,7 +70,7 @@ class NumberInsight {
    *                 Insight Return Parameters. This may be useful for your
    *                 internal reports.
    * @param {string} options['include-intermediate-callbacks'] - 'advanced' only.
-   *                 Tells the Nexmo platform to make callbacks as soon as an
+   *                 Tells the Vonage platform to make callbacks as soon as an
    *                 individual piece of information is retrieved.
    */
   get(options, callback) {

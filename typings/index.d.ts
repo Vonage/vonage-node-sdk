@@ -10,7 +10,7 @@
  *       CheckResponse -> VerifyCheckResponse
  */
 
-declare module 'nexmo' {
+declare module 'vonage' {
     /* general */
     export interface CredentialsObject {
         apiKey: string;
@@ -125,7 +125,7 @@ declare module 'nexmo' {
     }
 
     /* verify API */
-    export interface VerifyError extends NexmoApiError {
+    export interface VerifyError extends VonageApiError {
         status: RequestResponseStatusCode | ControlResponseStatusCode | string;
         error_text: string;
         [key: string]: any;
@@ -206,8 +206,8 @@ declare module 'nexmo' {
     }
 
 
-    /* Nexmo */
-    export default class Nexmo {
+    /* Vonage */
+    export default class Vonage {
         constructor(credentials: CredentialsObject, options?: { [key: string]: any });
         public readonly verify: Verify;
         public readonly message: Message;

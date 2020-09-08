@@ -1,25 +1,26 @@
 {
-  "name": "nexmo",
-  "author": "nexmo",
+  "name": "@vonage/server-sdk",
+  "author": "vonage",
   "version": "2.9.1",
-  "main": "lib/Nexmo",
+  "main": "lib/Vonage",
   "types": "./typings/index.d.ts",
   "keywords": [
     "sms",
     "voice",
-    "nexmo",
+    "vonage",
     "verify",
     "2fa",
     "phone numbers"
   ],
-  "homepage": "https://github.com/nexmo/nexmo-node",
+  "homepage": "https://github.com/vonage/vonage-node-sdk",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nexmo/nexmo-node.git"
+    "url": "git://github.com/vonage/vonage-node-sdk.git"
   },
-  "description": "Nexmo REST API client for Node.js. API support for SMS, Voice Calls, Text-to-Speech, Numbers, Verify (2FA) and more.",
+  "description": "Vonage Server SDK for Node.js. API support for SMS, Voice Calls, Text-to-Speech, Numbers, Verify (2FA) and more.",
   "contributors": [
-    "nexmo",
+    "vonage",
+    "kellyjandrews",
     "pvela",
     "leggetter",
     "akuzi",
@@ -58,9 +59,7 @@
     "eslint-config-prettier": "^6.2",
     "eslint-plugin-prettier": "^2.7",
     "expect.js": "^0.3.1",
-    "express": "^4.16.4",
     "mocha": "^7.2.0",
-    "ngrok": "^3.2.7",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
     "prettier": "^1.16.3",

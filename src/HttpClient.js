@@ -39,7 +39,7 @@ class HttpClient {
 
     if (endpoint.method === "POST" || endpoint.method === "DELETE") {
       // TODO: verify the following fix is required
-      // Fix broken due ot 411 Content-Length error now sent by Nexmo API
+      // Fix broken due ot 411 Content-Length error now sent by Vonage API
       // PL 2016-Sept-6 - commented out Content-Length 0
       // headers['Content-Length'] = 0;
     }

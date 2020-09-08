@@ -1,5 +1,5 @@
 import Account from "../lib/Account";
-import { expect, sinon, TestUtils } from "./NexmoTestUtils";
+import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
 describe("Account", function() {
   beforeEach(function() {

@@ -1,6 +1,6 @@
 import Number from "../lib/Number";
 
-import { expect, sinon, TestUtils } from "./NexmoTestUtils";
+import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
 describe("Number _pricing", function() {
   beforeEach(function() {

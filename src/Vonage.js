@@ -24,11 +24,11 @@ import ConsoleLogger from "./ConsoleLogger";
 const jwtGeneratorInstance = new JwtGenerator();
 const hashGeneratorInstance = new HashGenerator();
 
-class Nexmo {
+class Vonage {
   /**
-   * @param {Credentials} credentials - Nexmo API credentials
-   * @param {string} credentials.apiKey - the Nexmo API key
-   * @param {string} credentials.apiSecret - the Nexmo API secret
+   * @param {Credentials} credentials - Vonage API credentials
+   * @param {string} credentials.apiKey - the Vonage API key
+   * @param {string} credentials.apiSecret - the Vonage API secret
    * @param {Object} options - Additional options
    * @param {boolean} options.debug - `true` to turn on debug logging
    * @param {Object} options.logger - Set a custom logger.
@@ -48,10 +48,10 @@ class Nexmo {
       this.options.logger = new NullLogger();
     }
 
-    let userAgent = "nexmo-node/UNKNOWN node/UNKNOWN";
+    let userAgent = "@vonage/server-sdk/UNKNOWN node/UNKNOWN";
     try {
       var packageDetails = require(path.join(__dirname, "..", "package.json"));
-      userAgent = `nexmo-node/${
+      userAgent = `@vonage/server-sdk/${
         packageDetails.version
       } node/${process.version.replace("v", "")}`;
     } catch (e) {
@@ -102,7 +102,7 @@ class Nexmo {
     this.pricing = new Pricing(this.credentials, this.options);
 
     /**
-     * @deprecated Please use nexmo.applications
+     * @deprecated Please use vonage.applications
      */
     this.app = this.applications;
   }
@@ -110,8 +110,8 @@ class Nexmo {
   /**
    * Generate a JSON Web Token (JWT).
    *
-   * The private key used upon Nexmo instance construction will be used to sign
-   * the JWT. The application_id you used upon Nexmo instance creation will be
+   * The private key used upon Vonage instance construction will be used to sign
+   * the JWT. The application_id you used upon Vonage instance creation will be
    * included in the claims for the JWT, however this can be overridden by passing
    * an application_id as part of the claims.
    *
@@ -124,7 +124,7 @@ class Nexmo {
     if (claims.application_id === undefined) {
       claims.application_id = this.credentials.applicationId;
     }
-    return Nexmo.generateJwt(this.credentials.privateKey, claims);
+    return Vonage.generateJwt(this.credentials.privateKey, claims);
   }
 
   /**
@@ -148,7 +148,7 @@ class Nexmo {
  *
  * @returns {String} the generated token
  */
-Nexmo.generateJwt = (privateKey, claims) => {
+Vonage.generateJwt = (privateKey, claims) => {
   if (!(privateKey instanceof Buffer)) {
     if (!fs.existsSync(privateKey)) {
       throw new Error(`File "${privateKey}" not found.`);
@@ -168,8 +168,8 @@ Nexmo.generateJwt = (privateKey, claims) => {
  *
  * @returns {String} the generated token
  */
-Nexmo.generateSignature = (method, secret, params) => {
+Vonage.generateSignature = (method, secret, params) => {
   return hashGeneratorInstance.generate(method, secret, params);
 };
 
-export default Nexmo;
+export default Vonage;
