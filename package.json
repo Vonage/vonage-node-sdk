@@ -69,7 +69,7 @@
   },
   "dependencies": {
     "jsonwebtoken": "^8.4.0",
-    "request": "^2.88.0",
+    "request": "^2.88.2",
     "uuid": "^2.0.2"
   },
   "license": "MIT"
