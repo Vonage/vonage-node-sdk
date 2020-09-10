@@ -72,5 +72,5 @@
     "request": "^2.88.2",
     "uuid": "^2.0.2"
   },
-  "license": "MIT"
+  "license": "Apache 2.0"
 }
