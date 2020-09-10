@@ -110,11 +110,12 @@ npm run test-watch
 
 ## Examples
 
-See the [Vonage Node Quickstarts repo](https://github.com/nexmo-community/vonage-node-quickstart).
+See the [Vonage Node Quickstarts repo](https://github.com/Vonage/vonage-node-code-snippets).
 
 ## Supported APIs
 
-The following is a list of Vonage APIs and whether the Ruby SDK provides support for them:
+The following is a list of Vonage APIs and whether the Node Server SDK provides support for them:
+
 | API   | API Release Status |  Supported?
 |----------|:---------:|:-------------:|
 | Account API | General Availability |✅|
