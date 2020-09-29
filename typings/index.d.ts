@@ -67,7 +67,7 @@ declare module 'vonage' {
 
     export interface MessageError {
         status: MessageRequestResponseStatusCode;
-        error_text: string;
+        'error-text': string;
     }
     
     export interface MessageRequestResponse {
