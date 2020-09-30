@@ -10,7 +10,7 @@
  *       CheckResponse -> VerifyCheckResponse
  */
 
-declare module 'vonage' {
+declare module '@vonage/server-sdk' {
     /* general */
     export interface CredentialsObject {
         apiKey: string;
@@ -19,9 +19,9 @@ declare module 'vonage' {
         privateKey?: string;
     }
 
-    export interface NexmoApiError {
-        body: { [key: string]: any };
-        headers?: { [key: string]: any };
+    export interface VonageApiError {
+      body: { [key: string]: any };
+      headers?: { [key: string]: any };
     }
 
     export interface ParserError {
