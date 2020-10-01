@@ -45,8 +45,8 @@ const vonage = new Vonage({
     * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.
     * A String containing the path to the key file on disk.
     * A String containing the key itself.
-* `signatureSecret` - (optional) API singature secret from Vonage API, used for signing SMS message requests
-* `signatureMethod` - (optional) singature method matching the one you gave Vonage API, used for signing SMS message requests. Must be one of "md5hash", "md5", "sha1", "sha256", or "sha512"
+* `signatureSecret` - (optional) API signature secret from Vonage API, used for signing SMS message requests
+* `signatureMethod` - (optional) signature method matching the one you gave Vonage API, used for signing SMS message requests. Must be one of "md5hash", "md5", "sha1", "sha256", or "sha512"
 * `options` - (optional) Additional options for the constructor.
 
 Options are:
