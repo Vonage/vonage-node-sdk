@@ -111,7 +111,7 @@ describe("Verify", () => {
     );
   });
 
-  it("should allow controling a verify request", () => {
+  it("should allow controlling a verify request", () => {
     verify.control({ request_id: "123", cmd: "test" }, emptyCallback);
 
     expect(httpClientStub.request).to.have.been.calledWith(
