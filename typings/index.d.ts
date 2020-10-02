@@ -205,11 +205,24 @@ declare module 'vonage' {
         [key: string]: any;
     }
 
+    export interface AccountBalance {
+        id: string;
+        created_at: string;
+    }
+
+    
+
+    export class Account {
+        constructor(credentials: CredentialsObject, options?: { [key: string]: any });
+        checkBalance(callback: (err: NexmoApiError, balance: AccountBalance) => void): void;
+    }
+
 
     /* Vonage */
     export default class Vonage {
         constructor(credentials: CredentialsObject, options?: { [key: string]: any });
         public readonly verify: Verify;
         public readonly message: Message;
+        public readonly account: Account;
     }
 }
