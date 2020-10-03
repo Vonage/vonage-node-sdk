@@ -69,7 +69,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 2.4.2
 
-* Added message signing for for sending SMS
+* Added message signing for sending SMS
 * Added `Nexmo.generateSignature` to verify signed messages
 
 ## 2.0.1
