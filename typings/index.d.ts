@@ -10,82 +10,16 @@
  *       CheckResponse -> VerifyCheckResponse
  */
 
-declare module 'vonage' {
+declare module '@vonage/server-sdk' {
 	/* general */
 	export interface CredentialsObject {
 		apiKey: string;
 		apiSecret: string;
 		applicationId?: string;
 		privateKey?: string;
-		signatureSecret?: string;
-		signatureMethod?: string;
 	}
 
-	/* account API */
-	interface AccountOptions {
-		debug?: boolean;
-		appendToUserAgent?: string;
-		logger?: Console;
-		timeout?: number;
-		apiHost?: string;
-		restHost?: string;
-	}
-
-	interface AccountErrorResponse {
-		"error-code": string;
-		"error-code-label": string;
-	}
-
-	interface AccountBalanceResponse {
-		value: number;
-		autoReload: boolean;
-	}
-
-	interface AccountSettingsResponse {
-		"mo-callback-url"?: string;
-		"dr-callback-url"?: string;
-		"max-outbound-request"?: number;
-		"max-inbound-request"?: number;
-		"max-calls-per-second"?: number;
-	}
-
-	class Account {
-		constructor(credentials: CredentialsObject, options: AccountOptions);
-		public checkBalance(
-			callback?: (error: ErrorResponse, response: BalanceResponse) => void
-		);
-		public updatePassword(
-			newSecret: string,
-			callback?: (
-				error: ErrorResponse,
-				response: AccountSettingsResponse
-			) => void
-		);
-		public updateSMSCallback(
-			moCallbackUrl: string,
-			callback?: (
-				error: ErrorResponse,
-				response: AccountSettingsResponse
-			) => void
-		);
-		updateDeliveryReceiptCallback(
-			drCallBackUrl: string,
-			callback?: (
-				error: ErrorResponse,
-				response: AccountSettingsResponse
-			) => void
-		);
-		topUp(
-			trx: string,
-			callback?: (error: ErrorResponse, response: ErrorResponse) => void
-		);
-		listSecrets(apiKey: string, callback?: unknown): void;
-		getSecret(apiKey: string, id: string, callback?: unknown): void;
-		createSecret(apiKey: string, secret: string, callback?: unknown): void;
-		deleteSecret(apiKey: string, id: string, callback?: unknown): void;
-	}
-
-	export interface NexmoApiError {
+	export interface VonageApiError {
 		body: { [key: string]: any };
 		headers?: { [key: string]: any };
 	}
@@ -269,6 +203,70 @@ declare module 'vonage' {
 		check(request: CheckObject, callback: (err: VerifyError, data: CheckResponse) => void): void;
 		__proto__: any;
 		[key: string]: any;
+	}
+
+	/* account API */
+	export interface AccountOptions {
+		debug?: boolean;
+		appendToUserAgent?: string;
+		logger?: Console;
+		timeout?: number;
+		apiHost?: string;
+		restHost?: string;
+	}
+
+	export interface AccountErrorResponse {
+		"error-code": string;
+		"error-code-label": string;
+	}
+
+	export interface AccountBalanceResponse {
+		value: number;
+		autoReload: boolean;
+	}
+
+	export interface AccountSettingsResponse {
+		"mo-callback-url"?: string;
+		"dr-callback-url"?: string;
+		"max-outbound-request"?: number;
+		"max-inbound-request"?: number;
+		"max-calls-per-second"?: number;
+	}
+
+	export class Account {
+		constructor(credentials: CredentialsObject, options: AccountOptions);
+		public checkBalance(
+			callback?: (error: ErrorResponse, response: BalanceResponse) => void
+		);
+		public updatePassword(
+			newSecret: string,
+			callback?: (
+				error: ErrorResponse,
+				response: AccountSettingsResponse
+			) => void
+		);
+		public updateSMSCallback(
+			moCallbackUrl: string,
+			callback?: (
+				error: ErrorResponse,
+				response: AccountSettingsResponse
+			) => void
+		);
+		updateDeliveryReceiptCallback(
+			drCallBackUrl: string,
+			callback?: (
+				error: ErrorResponse,
+				response: AccountSettingsResponse
+			) => void
+		);
+		topUp(
+			trx: string,
+			callback?: (error: ErrorResponse, response: ErrorResponse) => void
+		);
+		listSecrets(apiKey: string, callback?: unknown): void;
+		getSecret(apiKey: string, id: string, callback?: unknown): void;
+		createSecret(apiKey: string, secret: string, callback?: unknown): void;
+		deleteSecret(apiKey: string, id: string, callback?: unknown): void;
 	}
 
 

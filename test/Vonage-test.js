@@ -97,7 +97,7 @@ describe("Vonage Object instance", function() {
     expect(vonage.numberInsight).to.be.a("object");
   });
 
-  it("should expose a app object", function() {
+  it("should expose an app object", function() {
     var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
@@ -105,7 +105,7 @@ describe("Vonage Object instance", function() {
     expect(vonage.app).to.be.a("object");
   });
 
-  it("should expose a applications object", function() {
+  it("should expose applications object", function() {
     var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test"
