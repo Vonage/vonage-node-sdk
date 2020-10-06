@@ -1,5 +1,5 @@
 node_modules
-lib
+/lib/
 test/.env
 examples/.env
 examples/private.key
