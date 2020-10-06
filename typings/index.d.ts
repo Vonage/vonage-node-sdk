@@ -327,7 +327,7 @@ declare module "@vonage/server-sdk" {
             options: { [key: string]: any }
         );
         get(
-            request: NumberInsightObject,
+            options: NumberInsightObject,
             callback: (
                 err: NumberInsightError,
                 data: NumberInsightResponse
