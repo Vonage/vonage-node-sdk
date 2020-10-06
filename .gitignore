@@ -12,3 +12,6 @@ coverage
 .env
 .nexmo-app
 coverage.lcov
+src
+test
+typings

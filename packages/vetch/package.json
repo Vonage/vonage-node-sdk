@@ -1,5 +1,5 @@
 {
-  "name": "vetch",
+  "name": "@vonage/vetch",
   "version": "3.0.0",
   "description": "Vonage package for server side fetch.",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",

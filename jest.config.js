@@ -11,10 +11,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
+"use strict";
 
-const vetch = require('..');
-
-describe('vetch', () => {
-    it('needs tests');
-});
+module.exports = {
+  collectCoverageFrom: [`**/packages/*/**/*.js`, `**/packages/*/**/*.ts`],
+  modulePathIgnorePatterns: [
+    "src/.*",
+    "/test/.*",
+    "/typings/.*",
+    "packages/.*/build"
+  ],
+  projects: ["<rootDir>", "<rootDir>/packages/*/"],
+  testPathIgnorePatterns: [
+    "<rootDir>.*(node_modules)(?!.*@vonage.*).*$",
+    "/src/",
+    "/test/",
+    "/typings/",
+    "\\.snap$",
+    "/packages/.*/build"
+  ],
+  watchPathIgnorePatterns: ["coverage"]
+};

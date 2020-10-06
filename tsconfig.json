@@ -2,5 +2,8 @@
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
     "baseUrl": "./packages",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true
   }
 }
