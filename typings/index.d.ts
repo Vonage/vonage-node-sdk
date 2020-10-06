@@ -279,5 +279,6 @@ declare module '@vonage/server-sdk' {
         constructor(credentials: CredentialsObject, options?: { [key: string]: any });
         public readonly verify: Verify;
         public readonly message: Message;
+        public readonly media: Media;
     }
 }
