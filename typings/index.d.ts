@@ -281,7 +281,7 @@ declare module "@vonage/server-sdk" {
 		get(
 			params: string | object,
 			callback: AppCallback,
-			v2: boolean = false
+			v2: boolean
 		): void;
 		update(
 			appId: string,
