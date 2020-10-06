@@ -222,10 +222,7 @@ declare module "@vonage/server-sdk" {
 
     /* number-insight API */
     export interface NumberInsightError extends VonageApiError {
-        status:
-            | NumberInsightResponseStatusCode
-            | AdvancedNumberInsightResponseStatusCode
-            | string;
+        status: NumberInsightResponseStatusCode | number;
         error_text: string;
         [key: string]: any;
     }
@@ -240,10 +237,7 @@ declare module "@vonage/server-sdk" {
     }
 
     export interface NumberInsightResponse {
-        status:
-            | NumberInsightResponseStatusCode
-            | AdvancedNumberInsightResponseStatusCode
-            | number;
+        status: NumberInsightResponseStatusCode | number;
         status_message: string;
         request_id: string;
         international_format_number: string;
@@ -291,9 +285,8 @@ declare module "@vonage/server-sdk" {
         error_text?: string;
     }
 
-    export interface AdvancedNumberInsightWebhook {
-        // TODO: Typings
-    }
+    export interface NumberInsightWebhookRequest
+        extends NumberInsightResponse {}
 
     export enum NumberInsightLookupCode {
         Success = 0,
@@ -315,15 +308,6 @@ declare module "@vonage/server-sdk" {
     }
 
     export enum NumberInsightResponseStatusCode {
-        Success = 0,
-        Busy = 1,
-        InvalidRequest = 3,
-        InvalidCredentials = 4,
-        InternalError = 5,
-        PartnerQuotaExceeded = 9
-    }
-
-    export enum AdvancedNumberInsightResponseStatusCode {
         Success = 0,
         Busy = 1,
         InvalidRequest = 3,
