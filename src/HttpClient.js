@@ -5,14 +5,13 @@ var querystring = require("querystring");
 
 class HttpClient {
   constructor(options, credentials) {
-
     const hostProtocolRegex = /^((http|https):\/\/)(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))$/;
 
     this.credentials = credentials;
     this.host = options.host
       ? hostProtocolRegex.test(options.host)
-      ? options.host
-      : `https://${options.host}`
+        ? options.host
+        : `https://${options.host}`
       : "https://rest.nexmo.com";
     this.port = options.port || 443;
     this.https = options.https || https;
