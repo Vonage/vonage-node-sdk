@@ -274,11 +274,80 @@ declare module '@vonage/server-sdk' {
         [key: string]: any;
     }
 
+    /* number API */
+    export interface INumberResponse {
+        'error-code': string;
+        'error-code-label': string;
+    }
+
+    export interface INumber {
+        country: string;
+        msisdn: string;
+        moHttpUrl: string;
+        type: string;
+        cost: string;
+        features: string[];
+        messagesCallbackType: string;
+        messagesCallbackValue: string;
+        voiceCallbackType: string;
+        voiceCallbackValue: string;
+    }
+
+    export interface getNumberResponse {
+        count: number;
+        numbers: Omit<Required<INumber>, 'cost'>[];
+    }
+
+    export interface searchNumberResponse {
+        count: number;
+        numbers: Pick<Required<INumber>, 'country' | 'msisdn' | 'type' | 'cost' | 'features'>[];
+    }
+
+    export class Number {
+        constructor(
+            credentials: CredentialsObject,
+            options: { [key: string]: any }
+        );
+        getPricing(): void;
+        getPhonePricing(): void;
+        get(
+            options: { [key: string]: any } | ((error?: INumberResponse, response?: getNumberResponse) => void),
+            callback?: (error?: INumberResponse, response?: getNumberResponse) => void
+        ): void;
+        search(
+            countryCode?: string,
+            pattern?: unknown,
+            callback?: (error?: INumberResponse, response?: searchNumberResponse) => void
+        ): void;
+        buy(
+            countryCode?: string,
+            msisdn?: string,
+            targetApiKey?: string | ((error?: INumberResponse, response?: INumberResponse) => void),
+            callback?: (error?: INumberResponse, response?: INumberResponse) => void
+        ): void;
+        cancel(
+            countryCode?: string,
+            msisdn?: string,
+            targetApiKey?: string | ((error?: INumberResponse, response?: INumberResponse) => void),
+            callback?: (error?: INumberResponse, response?: INumberResponse) => void
+        ): void;
+        update(
+            countryCode?: string,
+            msisdn?: string,
+            params?: string | ((error?: INumberResponse, response?: INumberResponse) => void),
+            callback?: (error?: INumberResponse, response?: INumberResponse) => void
+        ): void;
+        __proto__: any;
+        [key: string]: any;
+    }
+
+
     /* Vonage */
     export default class Vonage {
         constructor(credentials: CredentialsObject, options?: { [key: string]: any });
         public readonly verify: Verify;
         public readonly message: Message;
         public readonly media: Media;
+        public readonly number: Number;
     }
 }
