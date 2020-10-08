@@ -47,7 +47,7 @@ declare module '@vonage/server-sdk' {
         AccountNotEnabledForHTTP = '11',
         MessageTooLong = '12',
         InvalidSignature = '14',
-        InvalidSenderAddress = '15',
+        InvalidToAddress = '15',
         InvalidNetworkCode = '22',
         InvalidCallbackURL = '23',
         NonWhitelistedDestination = '29',
@@ -98,7 +98,7 @@ declare module '@vonage/server-sdk' {
     }
     
     export type SendSms = (
-      sender: string,
+      To: string,
       recipient: string,
       message: string,
       opts: Partial<SendSmsOptions>,
@@ -134,7 +134,7 @@ declare module '@vonage/server-sdk' {
     export interface RequestObject {
         brand: string;
         number: string;
-        sender_id?: string;
+        To_id?: string;
         country?: string;
         code_length?: number;
         lg?: string;
@@ -205,6 +205,136 @@ declare module '@vonage/server-sdk' {
         [key: string]: any;
     }
 
+    /* voice API */
+    export interface To{
+        type: string;
+        number: string;
+        dtmfAnswer?: string;
+    }
+    
+    export interface From{
+        type: string;
+        number: string;
+    }
+
+    export interface CallsResponse {
+        count: number;
+        page_size: number;
+        record_index: number;
+        _links: CallDetailLinks;
+        _embedded: CallDetailEmbedded;
+    }
+    
+    export interface CallDetailLinks {
+        self: CallDetailsSelf;
+    }
+    
+    export interface CallDetailsSelf {
+        href: string;
+    }
+    
+    export interface CallDetailEmbedded {
+        calls: CallDetailCall[];
+    }
+    
+    export interface CallDetailCall {
+        _links: CallDetailLinks;
+        uuid: string;
+        conversation_uuid: string;
+        to: To;
+        from: From;
+        status: string;
+        direction: string;
+        rate: string;
+        price: string;
+        duration: string;
+        start_time: Date;
+        end_time: Date;
+        network: string;
+    }
+
+    export interface OutboundCallRequest{
+        answer_url?: string[];
+        ncco?: Ncco[];
+        status: string;
+        to: To[];
+        from: From;
+        event_url: string[];
+        machine_detection: string;
+    }
+    
+    export interface Ncco {
+        action: string;
+        text: string;
+    }
+    
+    export interface OutboundCallResponse{
+        uuid: string;
+        status: string;
+        direction: string;
+        conversation_uuid: string;
+    }
+
+    export interface CallDetailResponse {
+        _links: CallDetailLinks;
+        uuid: string;
+        conversation_uuid: string;
+        to: To;
+        from: From;
+        status: string;
+        direction: string;
+        rate: string;
+        price: string;
+        duration: string;
+        start_time: Date;
+        end_time: Date;
+        network: string;
+    }
+
+    export interface InProgressCallRequest {
+        action: string;
+        destination?: Destination;
+    }
+
+    export interface Destination {
+        type: string;
+        ncco?: Ncco[]; 
+        url?: string[];
+    }
+
+    export interface StreamAudioInCallRequest {
+        stream_url: string[];
+        level?: string;
+    }
+    
+    export interface ModifyInProgressCallResponse {
+        message: string;
+        uuid: string;
+    }
+
+    export interface TextToSpeechRequest {
+        text: string;
+        level?: string;
+    }
+    
+    export interface DTMFRequest {
+        digits: number;
+    }
+
+    export class Voice {
+        constructor(credentials: CredentialsObject, options: { [key: string]: any });
+        getCalls(callback: (data: CallsResponse) => void): void;
+        createOutboundCall(request: OutboundCallRequest, callback: (data: OutboundCallResponse) => void): void;
+        getCallDetail(callback: (data: CallDetailResponse) => void): void;
+        modifyInProgressCall(request: InProgressCallRequest, callback: () => void): void;
+        streamAudio(request: StreamAudioInCallRequest, callback: (data: ModifyInProgressCallResponse) => void): void;
+        stopAudio(callback: (data: ModifyInProgressCallResponse) => void): void;
+        ttsStart(request: TextToSpeechRequest, callback: (data: ModifyInProgressCallResponse) => void): void;
+        ttsStop(callback: (data: ModifyInProgressCallResponse) => void): void;
+        dtmf(request: DTMFRequest, callback: (data: ModifyInProgressCallResponse) => void): void;
+        __proto__: any;
+        [key: string]: any;
+    }
 
     /* Vonage */
     export default class Vonage {
