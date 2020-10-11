@@ -25,7 +25,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 2.10.0
 
->This version serves as the change from the Nexmo namespace to the Vonage namespace. The module now resides on NPM as `@vonage/server-sdk`. Prior versions under the Nexmo namespace will remain in maintenance mode for the next 12 months and recieve bug and security fixes. All new functionality will only be added to the @vonage namespace.
+>This version serves as the change from the Nexmo namespace to the Vonage namespace. The module now resides on NPM as `@vonage/server-sdk`. Prior versions under the Nexmo namespace will remain in maintenance mode for the next 12 months and receive bug and security fixes. All new functionality will only be added to the @vonage namespace.
 
 ### Updated
 
