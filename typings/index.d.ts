@@ -333,6 +333,7 @@ declare module "@vonage/server-sdk" {
                 data: NumberInsightResponse
             ) => void
         ): void;
+    }
 
     /* Media API */
     export interface MediaSearchRequestObject {
