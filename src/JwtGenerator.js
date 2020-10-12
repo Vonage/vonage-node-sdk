@@ -1,4 +1,4 @@
-import uuid from "uuid";
+import { v1 as uuidv1 } from "uuid";
 import jwt from "jsonwebtoken";
 
 class JwtGenerator {
@@ -22,7 +22,7 @@ class JwtGenerator {
 
     var toSign = {
       iat: claims.issuedAt || parseInt(Date.now() / 1000, 10),
-      jti: claims.jti || uuid.v1()
+      jti: claims.jti || uuidv1()
     };
     Object.keys(claims).forEach(key => {
       toSign[key] = claims[key];
