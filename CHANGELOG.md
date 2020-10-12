@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.10.2
+
+### Updated
+
+* #350 - Bump eslint-config-prettier from 6.11.0 to 6.12.0
+
+### Fixed
+
+* #370 - Fixed typos
+* #369 - Fixed typos
+* #358 - Fixed typos
+* #357 - Fixed typos
+* #355 - Fixed types module name
+* #352 - Fixed typos
+
 ## 2.10.1
 
 ### Updated
@@ -69,7 +84,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 2.4.2
 
-* Added message signing for sending SMS
+* Added message signing for for sending SMS
 * Added `Nexmo.generateSignature` to verify signed messages
 
 ## 2.0.1
