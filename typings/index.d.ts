@@ -333,6 +333,72 @@ declare module "@vonage/server-sdk" {
                 data: NumberInsightResponse
             ) => void
         ): void;
+
+    /* Media API */
+    export interface MediaSearchRequestObject {
+        order: string;
+        page_index: number;
+        page_size: number;
+        start_time: string;
+        end_time: string;
+    }
+
+    export interface MediaLinkObject {
+        self: {
+            href: string;
+        };
+        first: {
+            href: string;
+        };
+        last: {
+            href: string;
+        };
+    }
+
+    export interface MediaSearchResponseObject {
+        page_size: number;
+        page_index: number;
+        _links: MediaLinkObject;
+        count: number;
+        _embedded: {
+            media: [MediaResponseObject]
+        };
+    }
+
+
+    export interface MediaResponseObject {
+        id: string;
+        original_file_name: string;
+        mime_type: string;
+        account_id: string;
+        store_id: string;
+        max_downloads_allowed: number;
+        times_downloaded: number;
+        etag: string;
+        media_size: number;
+        time_created: string;
+        time_last_updated: string;
+        public: boolean;
+        metadata_primary: string;
+        metadata_secondary: string;
+    }
+
+    export interface MediaUpdateRequest {
+        public: boolean;
+        metadata_primary: string;
+        metadata_secondary: string;
+        title: string;
+        description: string;
+        mime_type: string;
+        max_downloads_allowed: number;
+    }
+
+    export class Media {
+        constructor(credentials: CredentialsObject, options: { [key: string]: any });
+        search(request: MediaSearchRequestObject, callback: (err: VonageApiError, data: MediaSearchResponseObject) => void): void;
+        delete(id: string, callback: (err: VonageApiError) => void): void;
+        get(id: string, callback: (err: VonageApiError, data: MediaResponseObject) => void): void;
+        update(id: string, request: MediaUpdateRequest, callback: (err: VonageApiError) => void): void;
         __proto__: any;
         [key: string]: any;
     }
@@ -346,5 +412,6 @@ declare module "@vonage/server-sdk" {
         public readonly verify: Verify;
         public readonly message: Message;
         public readonly numberInsight: NumberInsight;
+        public readonly media: Media;
     }
 }
