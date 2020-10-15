@@ -10,22 +10,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+import * as main from '../lib/index'
 
-import { VetchOptions } from './common'
-import { Vetch } from './vetch'
-
-export {
-    VetchError,
-    VetchPromise,
-    VetchResponse,
-    Headers,
-    RetryConfig,
-} from './common'
-
-export { Vetch, VetchOptions }
-
-export const instance = new Vetch()
-
-export async function request<T>(opts: VetchOptions) {
-  return instance.request<T>(opts)   
-}
+test('main exports', () => {
+    expect(main.Vetch)
+})

@@ -25,5 +25,9 @@
   },
   "bugs": {
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "dependencies": {
+    "lodash.merge": "^4.6.2",
+    "node-fetch": "^2.6.1"
   }
 }
