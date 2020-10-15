@@ -341,6 +341,122 @@ declare module '@vonage/server-sdk' {
         [key: string]: any;
     }
 
+    /* number-insight API */
+    export interface NumberInsightError extends VonageApiError {
+        status: NumberInsightResponseStatusCode | number;
+        error_text: string;
+        [key: string]: any;
+    }
+
+    export interface NumberInsightObject {
+        level: NumberInsightLevel;
+        number: string;
+        country?: string;
+        cnam?: boolean;
+        ip?: string;
+        features?: string[];
+        callback?: string;
+        callback_timeout?: number;
+        callback_method?: string;
+        client_ref?: string;
+        'include-intermediate-callbacks'?: string;
+    }
+
+    export interface NumberInsightResponse {
+        status: NumberInsightResponseStatusCode | number;
+        status_message: string;
+        request_id: string;
+        international_format_number: string;
+        national_format_number: string;
+        country_code: string;
+        country_code_iso3: string;
+        country_name: string;
+        country_prefix: string;
+        request_price?: string;
+        refund_price?: string;
+        remaining_balance?: string;
+        current_carrier?: {
+            network_code?: string;
+            name?: string;
+            country?: string;
+            network_type?: string;
+        };
+        original_carrier?: {
+            network_code?: string;
+            name?: string;
+            country?: string;
+            network_type?: string;
+        };
+        ported?: string;
+        roaming?: {
+            status?: string;
+            roaming_country_code?: string;
+            roaming_network_code?: string;
+            roaming_network_name?: string;
+        };
+        caller_identity?: {
+            caller_type?: string;
+            caller_name?: string;
+            first_name?: string;
+            last_name?: string;
+        };
+        caller_name?: string;
+        first_name?: string;
+        last_name?: string;
+        caller_type?: NumberInsightCallerType;
+        lookup_outcome?: NumberInsightLookupCode;
+        lookup_outcome_message?: string;
+        valid_number?: string;
+        reachable?: string;
+        error_text?: string;
+    }
+
+    export interface NumberInsightWebhookRequest
+        extends NumberInsightResponse { }
+
+    export enum NumberInsightLookupCode {
+        Success = 0,
+        PartialSuccess = 1,
+        Failed = 2
+    }
+
+    export enum NumberInsightLevel {
+        Basic = "basic",
+        Standard = "standard",
+        AdvancedAsync = "advancedAsync",
+        AdvancedSync = "advancedSync"
+    }
+
+    export enum NumberInsightCallerType {
+        Business = "business",
+        Consumer = "consumer",
+        Unknown = "unknown"
+    }
+
+    export enum NumberInsightResponseStatusCode {
+        Success = 0,
+        Busy = 1,
+        InvalidRequest = 3,
+        InvalidCredentials = 4,
+        InternalError = 5,
+        PartnerQuotaExceeded = 9,
+        FacilityNotAllowed = 19,
+        LiveMobileLookupNotReturned1 = 43,
+        LiveMobileLookupNotReturned2 = 44,
+        LiveMobileLookupNotReturned3 = 45,
+        RequestUnparseable = 999
+    }
+
+    export class NumberInsight {
+        constructor(
+            credentials: CredentialsObject,
+            options: { [key: string]: any }
+        );
+        get(
+            options: NumberInsightObject,
+            callback?: (err?: NumberInsightError, data?: NumberInsightResponse) => void
+        ): void;
+    }
 
     /* Vonage */
     export default class Vonage {
@@ -349,5 +465,6 @@ declare module '@vonage/server-sdk' {
         public readonly message: Message;
         public readonly media: Media;
         public readonly number: Number;
+        public readonly numberInsight: NumberInsight;
     }
 }
