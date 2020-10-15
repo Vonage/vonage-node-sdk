@@ -3,7 +3,6 @@
   "compilerOptions": {
     "baseUrl": "./packages",
     "declaration": true,
-    "emitDeclarationOnly": true,
-    "isolatedModules": true
+    "emitDeclarationOnly": true
   }
 }

@@ -11,18 +11,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-module.exports = function (api) {
-  api.cache(true);
-
-  const presets = [
-    ["@babel/preset-env", { targets: { node: 10 } }],
-    "@babel/preset-typescript"
-  ];
-
-  const plugins = ["@babel/plugin-proposal-object-rest-spread"];
-
-  return {
-    presets,
-    plugins
-  };
+module.exports = {
+  "parserOptions": {
+    "ecmaVersion": 5,
+    "impliedStrict": true,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "impliedStrict": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  }
 };
