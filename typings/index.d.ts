@@ -353,8 +353,13 @@ declare module '@vonage/server-sdk' {
         number: string;
         country?: string;
         cnam?: boolean;
-        callback?: string;
         ip?: string;
+        features?: string[];
+        callback?: string;
+        callback_timeout?: number;
+        callback_method?: string;
+        client_ref?: string;
+        'include-intermediate-callbacks'?: string;
     }
 
     export interface NumberInsightResponse {
@@ -449,10 +454,7 @@ declare module '@vonage/server-sdk' {
         );
         get(
             options: NumberInsightObject,
-            callback: (
-                err: NumberInsightError,
-                data: NumberInsightResponse
-            ) => void
+            callback?: (err?: NumberInsightError, data?: NumberInsightResponse) => void
         ): void;
     }
 
