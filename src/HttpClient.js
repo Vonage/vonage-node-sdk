@@ -35,7 +35,8 @@ class HttpClient {
     callback,
     skipJsonParsing = false,
     customResponseParser
-  ) {
+  )//Regular parameters should not come after default parameters.
+  {
     if (typeof method === "function") {
       callback = method;
       endpoint.method = endpoint.method || "GET";
@@ -269,8 +270,8 @@ class HttpClient {
 
     params = params || {};
     if (!useJwt && !useBasicAuth) {
-      params["api_key"] = this.credentials.apiKey;
-      params["api_secret"] = this.credentials.apiSecret;
+      params["api_key"] = this.credentials.apiKey;//['api_secret'] is better written in dot notation.
+      params["api_secret"] = this.credentials.apiSecret;//['api_secret'] is better written in dot notation.
     }
 
     path = path + "?" + querystring.stringify(params);
