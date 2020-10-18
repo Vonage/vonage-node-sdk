@@ -323,15 +323,10 @@ declare module '@vonage/server-sdk' {
 
     export class Voice {
         constructor(credentials: CredentialsObject, options: { [key: string]: any });
-        getCalls(callback: (data: CallsResponse) => void): void;
-        createOutboundCall(request: OutboundCallRequest, callback: (data: OutboundCallResponse) => void): void;
-        getCallDetail(callback: (data: CallDetailResponse) => void): void;
-        modifyInProgressCall(request: InProgressCallRequest, callback: () => void): void;
-        streamAudio(request: StreamAudioInCallRequest, callback: (data: ModifyInProgressCallResponse) => void): void;
-        stopAudio(callback: (data: ModifyInProgressCallResponse) => void): void;
-        ttsStart(request: TextToSpeechRequest, callback: (data: ModifyInProgressCallResponse) => void): void;
-        ttsStop(callback: (data: ModifyInProgressCallResponse) => void): void;
-        dtmf(request: DTMFRequest, callback: (data: ModifyInProgressCallResponse) => void): void;
+        sendTTSMessage(recipient: To, message: TextToSpeechRequest, options: CredentialsObject, callback: (data: ModifyInProgressCallResponse) => void ): void;
+        sendTTSPromptWithCapture(recipient: To, message: TextToSpeechRequest, maxDigits: Number, callback: (data: ModifyInProgressCallResponse) => void ): void;
+        sendTTSPromptWithConfirm(recipient: To, message: TextToSpeechRequest, maxDigits: Number, pinCode: string, byeText: string, failedText: string, callback: (data: ModifyInProgressCallResponse) => void ): void;
+        call(recipient: To, answerUrl: string, opts: OutboundCallRequest, callback: (data: OutboundCallResponse) => void): void;
         __proto__: any;
         [key: string]: any;
     }
@@ -341,5 +336,6 @@ declare module '@vonage/server-sdk' {
         constructor(credentials: CredentialsObject, options?: { [key: string]: any });
         public readonly verify: Verify;
         public readonly message: Message;
+        public readonly voice: Voice;
     }
 }
