@@ -180,7 +180,7 @@ describe('data handling', () => {
   })
 })
 
-describe('🍂 defaults & instances', () => {
+describe('defaults and instances', () => {
     test('should allow creating a new instance', () => {
       let vetch = new Vetch()
       expect(typeof vetch.request).toEqual('function')

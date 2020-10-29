@@ -1,8 +1,14 @@
 {
-  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": "./packages",
+    "strict": true,
+    "composite": true,
     "declaration": true,
-    "emitDeclarationOnly": true
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "../",
   }
 }

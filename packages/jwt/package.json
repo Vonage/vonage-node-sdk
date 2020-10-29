@@ -1,0 +1,26 @@
+{
+  "name": "jwt",
+  "version": "3.0.0",
+  "description": "> TODO: description",
+  "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/jwt#readme",
+  "license": "ISC",
+  "main": "lib/jwt.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "scripts": {
+    "test-watch": "../../node_modules/.bin/jest --watch"
+  },
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  }
+}

@@ -10,27 +10,54 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+const base = require('./jest.config.base.js')
 
 module.exports = {
-    collectCoverageFrom: [`**/packages/*/**/*.js`, `**/packages/*/**/*.ts`],
-    transform: {
-        '^.+\\.(ts)$': 'ts-jest',
-    },
-    modulePathIgnorePatterns: [
-        'src/.*',
-        '/test/.*',
-        '/typings/.*',
-        'packages/.*/build',
-    ],
-    projects: ['<rootDir>', '<rootDir>/packages/*/'],
-    testPathIgnorePatterns: [
-        '<rootDir>.*(node_modules)(?!.*@vonage.*).*$',
-        '/src/',
-        '/test/',
-        '/typings/',
-        '\\.snap$',
-        '/packages/.*/build',
-    ],
-    testMatch: ['**/test/**/*.test.+(ts|js)'],
-    watchPathIgnorePatterns: ['coverage'],
+    ...base,
+    projects: ['<rootDir>/packages/*/jest.config.js'],
+    coverageDirectory: '<rootDir>/coverage/',
 }
+// module.exports = {
+//     transform: { '^.+\\.(ts)?$': 'ts-jest' },
+//     testEnvironment: 'node',
+//     testPathIgnorePatterns: ['.d.ts', '.js'],
+//     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.ts?$',
+//   moduleFileExtensions: ['ts', 'js'],
+//     collectCoverageFrom: [`**/packages/.*/lib/*.ts`],
+//     modulePathIgnorePatterns: [
+//         'src/.*',
+//         '/test/.*',
+//         '/typings/.*',
+//         'packages/.*/dist',
+//     ],
+// }
+// module.exports = {
+//     preset: 'ts-jest',
+//     testEnvironment: 'node',
+//     collectCoverageFrom: [`**/packages/*/**/*.ts`],
+//     modulePathIgnorePatterns: [
+//         'src/.*',
+//         '/test/.*',
+//         '/typings/.*',
+//         'packages/.*/build',
+//     ],
+//     coverageThreshold: {
+//         global: {
+//             branches: 80,
+//             functions: 80,
+//             lines: 80,
+//             statements: 80,
+//         },
+//     },
+//     projects: ['<rootDir>', '<rootDir>/packages/*/'],
+//     testPathIgnorePatterns: [
+//         '<rootDir>.*(node_modules)(?!.*@vonage.*).*$',
+//         '/src/',
+//         '/test/',
+//         '/typings/',
+//         '\\.snap$',
+//         '/packages/.*/build',
+//     ],
+//     testMatch: ['**/__test__/**/*.test.+(ts)'],
+//     watchPathIgnorePatterns: ['coverage'],
+// }

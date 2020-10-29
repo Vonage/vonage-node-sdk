@@ -10,19 +10,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+import * as main from '../lib'
 
-module.exports = function (api) {
-  api.cache(true);
-
-  const presets = [
-    ["@babel/preset-env", { targets: { node: 10 } }],
-    "@babel/preset-typescript"
-  ];
-
-  const plugins = ["@babel/plugin-proposal-object-rest-spread"];
-
-  return {
-    presets,
-    plugins
-  };
-};
+test('main exports', () => {
+    expect(main.Vetch)
+})

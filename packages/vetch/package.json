@@ -6,7 +6,7 @@
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/vetch#readme",
   "license": "Apache-2.0",
   "main": "dist/index",
-  "types": "dist/index",
+  "types": "dist/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -21,7 +21,8 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
-    "compile": "../../node_modules/.bin/tsc -p tsconfig.build.json"
+    "compile": "../../node_modules/.bin/tsc -p tsconfig.json",
+    "test-watch": "../../node_modules/.bin/jest --watch"
   },
   "bugs": {
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
