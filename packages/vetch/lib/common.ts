@@ -32,7 +32,7 @@ export interface Headers {
 }
 
 export interface VetchHttpRequest {
-    responseURL: string
+    responseUrl: string
 }
 
 export type VetchPromise<T = any> = Promise<VetchResponse<T>>
@@ -53,6 +53,7 @@ export interface VetchOptions {
         defaultAdapter: (options: VetchOptions) => VetchPromise<T>
     ) => VetchPromise<T>
     url?: string
+    baseUrl?: string
     baseURL?: string
     method?:
         | 'GET'
