@@ -13,7 +13,7 @@
 
 import fetch, { Response as fetchResponse } from 'node-fetch'
 import { stringify } from 'querystring'
-import merge from 'lodash.merge'
+import {merge} from 'lodash'
 
 import {
     VetchError,
@@ -30,11 +30,6 @@ export class Vetch {
         this.defaults = defaults || {}
     }
 
-    async request<T = any>(opts: VetchOptions = {}): VetchPromise<T> {
-        opts = this.validateOpts(opts)
-        return this._request(opts)
-    }
-
     private async _defaultAdapter<T>(
         opts: VetchOptions
     ): Promise<VetchResponse<T>> {
@@ -43,7 +38,9 @@ export class Vetch {
         return this.createResponse<T>(opts, res, data)
     }
 
-    private async _request<T = any>(opts: VetchOptions = {}): VetchPromise<T> {
+    async request<T = any>(opts: VetchOptions = {}): VetchPromise<T> {
+        opts = this.validateOpts(opts)
+
         try {
             let formattedResponse: VetchResponse<T>
             formattedResponse = await this._defaultAdapter(opts)
@@ -86,11 +83,11 @@ export class Vetch {
 
     private validateOpts(options: VetchOptions): VetchOptions {
         const opts = merge({}, this.defaults, options)
-        
+
         opts.headers = opts.headers || {}
         opts.checkStatus = this.checkStatus
         opts.responseType = opts.responseType || 'json'
-        
+
         if (!opts.url) {
             throw new Error('URL is required.')
         }
@@ -148,7 +145,7 @@ export class Vetch {
             status: res.status,
             statusText: res.statusText,
             request: {
-                responseURL: res.url,
+                responseUrl: res.url,
             },
         }
     }
