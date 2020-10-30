@@ -134,7 +134,7 @@ declare module '@vonage/server-sdk' {
     export interface RequestObject {
         brand: string;
         number: string;
-        To_id?: string;
+        sender_id?: string;
         country?: string;
         code_length?: number;
         lg?: string;
