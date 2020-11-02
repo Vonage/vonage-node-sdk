@@ -457,7 +457,133 @@ declare module '@vonage/server-sdk' {
 			options: NumberInsightObject,
 			callback?: (err?: NumberInsightError, data?: NumberInsightResponse) => void
 		): void;
-	}
+    }
+    
+    /* voice API */
+    export interface To{
+        type: string;
+        number: string;
+        dtmfAnswer?: string;
+    }
+    
+    export interface From{
+        type: string;
+        number: string;
+    }
+
+    export interface CallsResponse {
+        count: number;
+        page_size: number;
+        record_index: number;
+        _links: CallDetailLinks;
+        _embedded: CallDetailEmbedded;
+    }
+    
+    export interface CallDetailLinks {
+        self: CallDetailsSelf;
+    }
+    
+    export interface CallDetailsSelf {
+        href: string;
+    }
+    
+    export interface CallDetailEmbedded {
+        calls: CallDetailCall[];
+    }
+    
+    export interface CallDetailCall {
+        _links: CallDetailLinks;
+        uuid: string;
+        conversation_uuid: string;
+        to: To;
+        from: From;
+        status: string;
+        direction: string;
+        rate: string;
+        price: string;
+        duration: string;
+        start_time: Date;
+        end_time: Date;
+        network: string;
+    }
+
+    export interface OutboundCallRequest{
+        answer_url?: string[];
+        ncco?: Ncco[];
+        status: string;
+        to: To[];
+        from: From;
+        event_url: string[];
+        machine_detection: string;
+    }
+    
+    export interface Ncco {
+        action: string;
+        text: string;
+    }
+    
+    export interface OutboundCallResponse{
+        uuid: string;
+        status: string;
+        direction: string;
+        conversation_uuid: string;
+    }
+
+    export interface CallDetailResponse {
+        _links: CallDetailLinks;
+        uuid: string;
+        conversation_uuid: string;
+        to: To;
+        from: From;
+        status: string;
+        direction: string;
+        rate: string;
+        price: string;
+        duration: string;
+        start_time: Date;
+        end_time: Date;
+        network: string;
+    }
+
+    export interface InProgressCallRequest {
+        action: string;
+        destination?: Destination;
+    }
+
+    export interface Destination {
+        type: string;
+        ncco?: Ncco[]; 
+        url?: string[];
+    }
+
+    export interface StreamAudioInCallRequest {
+        stream_url: string[];
+        level?: string;
+    }
+    
+    export interface ModifyInProgressCallResponse {
+        message: string;
+        uuid: string;
+    }
+
+    export interface TextToSpeechRequest {
+        text: string;
+        level?: string;
+    }
+    
+    export interface DTMFRequest {
+        digits: number;
+    }
+
+    export class Voice {
+        constructor(credentials: CredentialsObject, options: { [key: string]: any });
+        sendTTSMessage(recipient: To, message: TextToSpeechRequest, options: CredentialsObject, callback: (data: ModifyInProgressCallResponse) => void ): void;
+        sendTTSPromptWithCapture(recipient: To, message: TextToSpeechRequest, maxDigits: Number, callback: (data: ModifyInProgressCallResponse) => void ): void;
+        sendTTSPromptWithConfirm(recipient: To, message: TextToSpeechRequest, maxDigits: Number, pinCode: string, byeText: string, failedText: string, callback: (data: ModifyInProgressCallResponse) => void ): void;
+        call(recipient: To, answerUrl: string, opts: OutboundCallRequest, callback: (data: OutboundCallResponse) => void): void;
+        __proto__: any;
+        [key: string]: any;
+    }
 
 	/* Vonage */
 	export default class Vonage {
@@ -466,6 +592,7 @@ declare module '@vonage/server-sdk' {
 		public readonly message: Message;
 		public readonly media: Media;
 		public readonly number: Number;
-		public readonly numberInsight: NumberInsight;
+        public readonly numberInsight: NumberInsight;
+        public readonly voice: Voice;
 	}
 }
