@@ -5,13 +5,13 @@
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/jwt#readme",
   "license": "ISC",
-  "main": "lib/jwt.js",
+  "main": "dist/jwt.js",
   "directories": {
-    "lib": "lib",
+    "lib": "dist",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -22,5 +22,9 @@
   },
   "bugs": {
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "dependencies": {
+    "@types/uuid": "^8.3.0",
+    "uuid": "^8.3.1"
   }
 }

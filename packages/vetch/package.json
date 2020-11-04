@@ -8,7 +8,7 @@
   "main": "dist/index",
   "types": "dist/index.d.ts",
   "directories": {
-    "lib": "lib",
+    "lib": "dist",
     "test": "__tests__"
   },
   "files": [
