@@ -1,5 +1,5 @@
 {
-  "name": "jwt",
+  "name": "@vonage/jwt",
   "version": "3.0.0",
   "description": "> TODO: description",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
