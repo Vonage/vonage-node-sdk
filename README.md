@@ -18,11 +18,15 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 * [Supported APIs](#supported-apis)
 
 ## Installation
+
 ### With NPM
+
 ```bash
 npm install @vonage/server-sdk
 ```
+
 ### With Yarn
+
 ```bash
 yarn add @vonage/server-sdk
 ```

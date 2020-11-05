@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.10.3
+
+### Added
+
+* #400 - Added Yarn example in README.md
+* #380 - Added Number typings
+* #379 - Added Voice typings
+* #376 - Added Media typings
+* #373 - Added Number Insight typings
+
+### Updated
+
+* #389 - Discriminating unions support for different message responses
+* #387 - Bump @babel/register from 7.11.5 to 7.12.0
+* #385 - Bump @babel/core from 7.11.6 to 7.12.0
+* #384 - Bump @babel/preset-env from 7.11.5 to 7.12.0
+* #378 - Allow for Full URL Overrides in Constructor
+* #375 - Updated uuid-dependency for performance improvement
+
+### Fixed
+
 ## 2.10.2
 
 ### Updated
