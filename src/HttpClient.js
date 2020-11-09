@@ -365,9 +365,11 @@ class HttpClient {
       formData.url = options.url;
     }
 
+    let protocol = this.port === 443 ? "https://" : "http://";
+
     this.requestLib.post(
       {
-        url: "https://" + this.host + path,
+        url: protocol + this.host + path,
         formData: formData,
         headers: {
           Authorization: `Bearer ${this.credentials.generateJwt()}`
