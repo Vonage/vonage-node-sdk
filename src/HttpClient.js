@@ -2,17 +2,22 @@ var https = require("https");
 var http = require("http");
 var request = require("request");
 var querystring = require("querystring");
+var URL = require("url").URL;
+
+const isValidUrl = s => {
+  try {
+    let o = new URL(s);
+    return o.host;
+  } catch (err) {
+    return false;
+  }
+};
 
 class HttpClient {
   constructor(options, credentials) {
-    const hostProtocolRegex = /^((http|https):\/\/)(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))$/;
-
+    let hostOverride = isValidUrl(options.host);
     this.credentials = credentials;
-    this.host = options.host
-      ? hostProtocolRegex.test(options.host)
-        ? options.host
-        : `https://${options.host}`
-      : "https://rest.nexmo.com";
+    this.host = hostOverride ? hostOverride : `rest.nexmo.com`;
     this.port = options.port || 443;
     this.https = options.https || https;
     this.http = options.http || http;
@@ -360,9 +365,11 @@ class HttpClient {
       formData.url = options.url;
     }
 
+    let protocol = this.port === 443 ? "https://" : "http://";
+
     this.requestLib.post(
       {
-        url: "https://" + this.host + path,
+        url: protocol + this.host + path,
         formData: formData,
         headers: {
           Authorization: `Bearer ${this.credentials.generateJwt()}`
