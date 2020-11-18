@@ -1,5 +1,5 @@
 import Dispatch from "../lib/Dispatch";
-import { expect, sinon, TestUtils } from "./NexmoTestUtils";
+import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
 describe("Dispatch", function() {
   beforeEach(function() {

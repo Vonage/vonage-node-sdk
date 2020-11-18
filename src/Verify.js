@@ -1,8 +1,23 @@
 "use strict";
 
-import nexmo from "./index";
+import Utils from "./Utils";
 
 class Verify {
+  static get PATH() {
+    return "/verify{action}/json";
+  }
+
+  static get ERROR_MESSAGES() {
+    return {
+      verifyValidation: "Missing Mandatory fields (number and/or brand)",
+      checkVerifyValidation:
+        "Missing Mandatory fields (request_id and/or code)",
+      controlVerifyValidation:
+        "Missing Mandatory fields (request_id and/or cmd-command)",
+      searchVerifyValidation:
+        "Missing Mandatory fields (request_id or request_ids)"
+    };
+  }
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -12,43 +27,134 @@ class Verify {
   constructor(credentials, options = {}) {
     this.creds = credentials;
     this.options = options;
+  }
 
-    // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
+  /**
+   * TODO: document
+   */
+  request(inputParams, callback) {
+    if (!inputParams.number || !inputParams.brand) {
+      Utils.sendError(
+        callback,
+        new Error(Verify.ERROR_MESSAGES.verifyValidation)
+      );
+    } else {
+      inputParams["api_key"] = this.creds.apiKey;
+      inputParams["api_secret"] = this.creds.apiSecret;
+      this.options.httpClient.request(
+        {
+          host: this.options.apiHost || "api.nexmo.com",
+          path: Utils.createPathWithQuery(
+            `${Verify.PATH.replace("{action}", "")}`,
+            inputParams
+          )
+        },
+        callback
+      );
+    }
+  }
 
-    this._nexmo.initialize(
-      this.creds.apiKey,
-      this.creds.apiSecret,
-      this.options
+  /**
+   * TODO: document
+   */
+  psd2(inputParams, callback) {
+    inputParams["api_key"] = this.creds.apiKey;
+    inputParams["api_secret"] = this.creds.apiSecret;
+    this.options.httpClient.request(
+      {
+        host: this.options.apiHost || "api.nexmo.com",
+        path: Utils.createPathWithQuery(
+          `${Verify.PATH.replace("{action}", "/psd2")}`,
+          inputParams
+        )
+      },
+      callback
     );
   }
 
   /**
    * TODO: document
    */
-  request() {
-    this._nexmo.verifyNumber.apply(this._nexmo, arguments);
+  check(inputParams, callback) {
+    if (!inputParams.request_id || !inputParams.code) {
+      Utils.sendError(
+        callback,
+        new Error(Verify.ERROR_MESSAGES.checkVerifyValidation)
+      );
+    } else {
+      inputParams["api_key"] = this.creds.apiKey;
+      inputParams["api_secret"] = this.creds.apiSecret;
+      this.options.httpClient.request(
+        {
+          host: this.options.apiHost || "api.nexmo.com",
+          path: Utils.createPathWithQuery(
+            `${Verify.PATH.replace("{action}", "/check")}`,
+            inputParams
+          )
+        },
+        callback
+      );
+    }
   }
 
   /**
    * TODO: document
    */
-  check() {
-    this._nexmo.checkVerifyRequest.apply(this._nexmo, arguments);
+  control(inputParams, callback) {
+    if (!inputParams.request_id || !inputParams.cmd) {
+      Utils.sendError(
+        callback,
+        new Error(Verify.ERROR_MESSAGES.controlVerifyValidation)
+      );
+    } else {
+      inputParams["api_key"] = this.creds.apiKey;
+      inputParams["api_secret"] = this.creds.apiSecret;
+      this.options.httpClient.request(
+        {
+          host: this.options.apiHost || "api.nexmo.com",
+          path: Utils.createPathWithQuery(
+            `${Verify.PATH.replace("{action}", "/control")}`,
+            inputParams
+          )
+        },
+        callback
+      );
+    }
   }
 
   /**
    * TODO: document
    */
-  control() {
-    this._nexmo.controlVerifyRequest.apply(this._nexmo, arguments);
-  }
-
-  /**
-   * TODO: document
-   */
-  search() {
-    this._nexmo.searchVerifyRequest.apply(this._nexmo, arguments);
+  search(requestIds, callback) {
+    var requestIdParam = {};
+    if (!requestIds) {
+      Utils.sendError(
+        callback,
+        new Error(Verify.ERROR_MESSAGES.searchVerifyValidation)
+      );
+    } else {
+      if (Array.isArray(requestIds)) {
+        if (requestIds.length === 1) {
+          requestIdParam.request_id = requestIds;
+        } else {
+          requestIdParam.request_ids = requestIds;
+        }
+      } else {
+        requestIdParam.request_id = requestIds;
+      }
+      requestIdParam["api_key"] = this.creds.apiKey;
+      requestIdParam["api_secret"] = this.creds.apiSecret;
+      this.options.httpClient.request(
+        {
+          host: this.options.apiHost || "api.nexmo.com",
+          path: Utils.createPathWithQuery(
+            `${Verify.PATH.replace("{action}", "/search")}`,
+            requestIdParam
+          )
+        },
+        callback
+      );
+    }
   }
 }
 

@@ -20,3 +20,16 @@ exports.createPathWithQuery = function(path, query) {
 exports.getQuery = function(path) {
   return querystring.parse(path.split("?")[1]);
 };
+
+exports.sendError = function(callback, err, returnData) {
+  // Throw the error in case if there is no callback passed
+  if (callback) {
+    callback(err, returnData);
+  } else {
+    throw err;
+  }
+};
+
+exports.clone = function(a) {
+  return JSON.parse(JSON.stringify(a));
+};

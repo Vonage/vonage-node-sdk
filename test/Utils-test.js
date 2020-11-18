@@ -1,4 +1,6 @@
 import Utils from "../src/Utils";
+import sinon from "sinon";
+
 import expect from "expect.js";
 
 describe("Utils", () => {
@@ -27,6 +29,24 @@ describe("Utils", () => {
       expect(
         JSON.stringify(Utils.getQuery("some/path/with?some=query"))
       ).to.equal('{"some":"query"}');
+    });
+  });
+
+  describe(".sendError", () => {
+    it("should throw error", () => {
+      expect(Utils.sendError).to.throwError();
+    });
+
+    it("should throw call the callback", () => {
+      let callback = sinon.spy();
+      Utils.sendError(callback);
+      expect(callback.calledWith(undefined, undefined));
+    });
+  });
+
+  describe(".clone", () => {
+    it("should clone object", () => {
+      expect(JSON.stringify(Utils.clone({}))).to.equal("{}");
     });
   });
 });

@@ -2,13 +2,12 @@ import chai, { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 
-import nexmo from "../lib/index";
 import App from "../lib/App";
 
 import HttpClient from "../lib/HttpClient";
 import Credentials from "../lib/Credentials";
 
-import NexmoStub from "./NexmoStub";
+import VonageStub from "./VonageStub";
 import ResourceTestHelper from "./ResourceTestHelper";
 
 chai.use(sinonChai);
@@ -29,7 +28,8 @@ var appAPIMapping = {
 
 describe("applications", function() {
   it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(appAPIMapping, App);
+    console.log(App);
+    VonageStub.checkAllFunctionsAreDefined(appAPIMapping, App);
   });
 });
 

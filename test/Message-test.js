@@ -3,28 +3,231 @@ import Credentials from "../lib/Credentials";
 import HttpClient from "../lib/HttpClient";
 import NullLogger from "../lib/ConsoleLogger.js";
 
-import NexmoStub from "./NexmoStub";
 import ResourceTestHelper from "./ResourceTestHelper";
 
 import sinon from "sinon";
 import chai, { expect } from "chai";
+import path from "path";
+import sinonChai from "sinon-chai";
 
-var smsAPIs = {
-  sendBinaryMessage: "sendBinaryMessage",
-  sendWapPushMessage: "sendWapPushMessage",
-  sendTextMessage: "sendSms",
-  shortcodeAlert: "shortcodeAlert",
-  shortcode2FA: "shortcode2FA",
-  shortcodeMarketing: "shortcodeMarketing"
-};
+chai.use(sinonChai);
 
-describe("Message Object", function() {
-  it("should implement all v1 APIs", function() {
-    NexmoStub.checkAllFunctionsAreDefined(smsAPIs, Message);
+var creds = Credentials.parse({
+  apiKey: "some-key",
+  apiSecret: "some-secret"
+});
+var emptyCallback = () => {};
+
+describe("SMS", () => {
+  var httpClientStub = null;
+  var message = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub,
+      logger: {
+        info: () => {}
+      }
+    };
+    message = new Message(creds, options);
   });
 
-  it("should proxy the function call to the underlying `nexmo` object", function() {
-    NexmoStub.checkAllFunctionsAreCalled(smsAPIs, Message);
+  it("should throw if there is no message when sending an sms", () => {
+    try {
+      message.sendSms("1234", "1234", undefined);
+    } catch (e) {
+      expect(e.toString()).to.include("Error: Invalid Text Message");
+    }
+  });
+
+  it("should throw if there is no body when sending a binary sms", () => {
+    try {
+      message.sendBinaryMessage(
+        "1234",
+        "1234",
+        undefined,
+        "ff",
+        {},
+        emptyCallback
+      );
+    } catch (e) {
+      expect(e.toString()).to.include(
+        "Error: Invalid Body value in Binary Message"
+      );
+    }
+  });
+
+  it("should throw if there is no udh when sending a binary sms", () => {
+    try {
+      message.sendBinaryMessage(
+        "1234",
+        "1234",
+        "00",
+        undefined,
+        {},
+        emptyCallback
+      );
+    } catch (e) {
+      expect(e.toString()).to.include(
+        "Error: Invalid udh value in Binary Message"
+      );
+    }
+  });
+
+  it("should throw if there is no title when sending a wap push message", () => {
+    try {
+      message.sendWapPushMessage(
+        "1234",
+        "1234",
+        undefined,
+        "url",
+        "validity",
+        {},
+        emptyCallback
+      );
+    } catch (e) {
+      expect(e.toString()).to.include(
+        "Error: Invalid title in WAP Push message"
+      );
+    }
+  });
+
+  it("should throw if there is no url when sending a wap push message", () => {
+    try {
+      message.sendWapPushMessage(
+        "1234",
+        "1234",
+        "title",
+        undefined,
+        "validity",
+        {},
+        emptyCallback
+      );
+    } catch (e) {
+      expect(e.toString()).to.include("Error: Invalid url in WAP Push message");
+    }
+  });
+
+  it("should allow sending an sms message", () => {
+    message.sendSms("1234", "1234", "test", emptyCallback);
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        host: "rest.nexmo.com",
+        path:
+          "/sms/json?from=1234&to=1234&text=test&api_key=some-key&api_secret=some-secret"
+      }),
+      "POST"
+    );
+  });
+
+  it("should allow host override when sending an sms message", () => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub,
+      restHost: "rest.example.com",
+      logger: {
+        info: () => {}
+      }
+    };
+    let message = new Message(creds, options);
+    message.sendSms("1234", "1234", "test", emptyCallback);
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        host: "rest.example.com",
+        path:
+          "/sms/json?from=1234&to=1234&text=test&api_key=some-key&api_secret=some-secret"
+      }),
+      "POST"
+    );
+  });
+
+  it("should allow sending a binary sms message", () => {
+    message.sendBinaryMessage("1234", "1234", "00", "ff", {}, emptyCallback);
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        host: "rest.nexmo.com",
+        path:
+          "/sms/json?from=1234&to=1234&type=binary&body=00&udh=ff&api_key=some-key&api_secret=some-secret"
+      }),
+      "POST"
+    );
+  });
+
+  it("should allow host override when sending a binary sms message", () => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub,
+      restHost: "rest.example.com",
+      logger: {
+        info: () => {}
+      }
+    };
+    let message = new Message(creds, options);
+    message.sendBinaryMessage("1234", "1234", "00", "ff", {}, emptyCallback);
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        host: "rest.example.com",
+        path:
+          "/sms/json?from=1234&to=1234&type=binary&body=00&udh=ff&api_key=some-key&api_secret=some-secret"
+      }),
+      "POST"
+    );
+  });
+
+  it("should allow sending a wap push message", () => {
+    message.sendWapPushMessage(
+      "1234",
+      "1234",
+      "title",
+      "url",
+      "validity",
+      {},
+      emptyCallback
+    );
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        host: "rest.nexmo.com",
+        path:
+          "/sms/json?from=1234&to=1234&type=wappush&title=title&validity=validity&url=url&api_key=some-key&api_secret=some-secret"
+      }),
+      "POST"
+    );
+  });
+
+  it("should allow host override when sending a wap push message", () => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub,
+      restHost: "rest.example.com",
+      logger: {
+        info: () => {}
+      }
+    };
+    let message = new Message(creds, options);
+    message.sendWapPushMessage(
+      "1234",
+      "1234",
+      "title",
+      "url",
+      "validity",
+      {},
+      emptyCallback
+    );
+
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match({
+        host: "rest.example.com",
+        path:
+          "/sms/json?from=1234&to=1234&type=wappush&title=title&validity=validity&url=url&api_key=some-key&api_secret=some-secret"
+      }),
+      "POST"
+    );
   });
 });
 

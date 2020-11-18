@@ -1,6 +1,6 @@
 import Media from "../lib/Media";
 import os from "os";
-import { expect, sinon, TestUtils } from "./NexmoTestUtils";
+import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
 describe("Media", function() {
   beforeEach(function() {

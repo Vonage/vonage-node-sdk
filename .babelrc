@@ -1,8 +1,16 @@
 {
-  "presets": ["es2015"],
+  "presets": [
+    ["@babel/preset-env",
+    {
+      "targets": {
+        "esmodules": true,
+        "node": "8"
+      }
+    }]
+  ],
   "plugins": [
     "add-module-exports",
-    "transform-object-rest-spread"
+    "@babel/plugin-proposal-object-rest-spread"
   ],
   "env": {
     "test": {

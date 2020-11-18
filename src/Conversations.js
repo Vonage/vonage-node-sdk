@@ -1,6 +1,6 @@
 "use strict";
 
-import nexmo from "./index";
+import vonage from "./index";
 
 import Utils from "./Utils";
 
