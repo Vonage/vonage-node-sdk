@@ -21,3 +21,11 @@ export interface Claims {
     iat?: number
     application_id?: string
 }
+
+export interface JWTInterface {
+    tokenGenerate(
+        applicationId: string,
+        privateKey: string | Buffer,
+        opts?: GeneratorOptions
+    ): void
+}

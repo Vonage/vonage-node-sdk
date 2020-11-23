@@ -5,19 +5,21 @@
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/jwt#readme",
   "license": "ISC",
-  "main": "dist/jwt.js",
-  "directories": {
-    "lib": "dist",
-    "test": "__tests__"
-  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "/dist"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "../../node_modules/.bin/tsc -b --clean",
+    "compile": "../../node_modules/.bin/tsc -p tsconfig.json",
+    "lerna": "../../node_modules/.bin/lerna",
+    "prepare": "npm run build",
     "test-watch": "../../node_modules/.bin/jest --watch"
   },
   "bugs": {

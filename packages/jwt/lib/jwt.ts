@@ -1,8 +1,8 @@
-import { GeneratorOptions, Claims } from './common'
+import { JWTInterface, GeneratorOptions, Claims } from './common'
 import { sign } from 'jsonwebtoken'
 import { v4 as uuidv4 } from 'uuid'
 
-export class JWT {
+export class JWT implements JWTInterface{
     tokenGenerate<T>(
         applicationId: string,
         privateKey: string | Buffer,

@@ -6,3 +6,4 @@ test
 e2e
 .nyc_output
 coverage.lcov
+tsconfig.tsbuildinfo

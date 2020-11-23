@@ -11,8 +11,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as main from '../lib'
+import { Numbers } from '../lib'
+
+// openapi spec location
+// docker run --init -p 4010:4010 stoplight/prism:4 mock -h 0.0.0.0
+// https://raw.githubusercontent.com/Nexmo/api-specification/master/definitions/numbers.yml
 
 test('main exports', () => {
-    expect(main.Auth)
+    expect(Numbers)
 })

@@ -1,14 +1,18 @@
 {
-  "name": "@vonage/auth",
+  "name": "@vonage/numbers",
   "version": "3.0.0",
   "description": "> TODO: description",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
-  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/auth#readme",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
   "license": "ISC",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
   "files": [
-    "/dist"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -19,12 +23,13 @@
     "clean": "../../node_modules/.bin/tsc -b --clean",
     "compile": "../../node_modules/.bin/tsc -p tsconfig.json",
     "lerna": "../../node_modules/.bin/lerna",
-    "prepare": "npm run build",
     "test-watch": "../../node_modules/.bin/jest --watch"
   },
   "bugs": {
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
+    "@vonage/auth": "^3.0.0",
+    "@vonage/vetch": "^3.0.0"
   }
 }
