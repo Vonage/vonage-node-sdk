@@ -40,11 +40,7 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 ## Enforcement
 
-<<<<<<< HEAD
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at [devrel@nexmo.com](mailto:devrel@nexmo.com). All complaints will be reviewed and investigated promptly and fairly.
-=======
 Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to the community leaders responsible for enforcement at [devrel@vonage.com](mailto:devrel@vonage.com). All complaints will be reviewed and investigated promptly and fairly.
->>>>>>> beta-base
 
 All community leaders are obligated to respect the privacy and security of the reporter of any incident.
 
