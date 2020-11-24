@@ -2,11 +2,22 @@ var https = require("https");
 var http = require("http");
 var request = require("request");
 var querystring = require("querystring");
+var URL = require("url").URL;
+
+const isValidUrl = s => {
+  try {
+    let o = new URL(s);
+    return o.host;
+  } catch (err) {
+    return false;
+  }
+};
 
 class HttpClient {
   constructor(options, credentials) {
+    let hostOverride = isValidUrl(options.host);
     this.credentials = credentials;
-    this.host = options.host || "rest.nexmo.com";
+    this.host = hostOverride ? hostOverride : `rest.nexmo.com`;
     this.port = options.port || 443;
     this.https = options.https || https;
     this.http = options.http || http;
@@ -39,7 +50,7 @@ class HttpClient {
 
     if (endpoint.method === "POST" || endpoint.method === "DELETE") {
       // TODO: verify the following fix is required
-      // Fix broken due ot 411 Content-Length error now sent by Nexmo API
+      // Fix broken due ot 411 Content-Length error now sent by Vonage API
       // PL 2016-Sept-6 - commented out Content-Length 0
       // headers['Content-Length'] = 0;
     }
@@ -354,9 +365,11 @@ class HttpClient {
       formData.url = options.url;
     }
 
+    let protocol = this.port === 443 ? "https://" : "http://";
+
     this.requestLib.post(
       {
-        url: "https://" + this.host + path,
+        url: protocol + this.host + path,
         formData: formData,
         headers: {
           Authorization: `Bearer ${this.credentials.generateJwt()}`

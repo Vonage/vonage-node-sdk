@@ -414,7 +414,7 @@ describe("HttpClient Object", function() {
   });
 
   it("should allow User-Agent header to be set via options", function() {
-    var expectedUserAgent = "nexmo-node/1.0.0/v4.4.7";
+    var expectedUserAgent = "@vonage/server-sdk/UNKNOWN node/UNKNOWN";
 
     var mock = sinon.mock(fakeHttp);
     mock

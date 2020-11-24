@@ -1,5 +1,5 @@
 import Channel from "../lib/Channel";
-import { expect, sinon, TestUtils } from "./NexmoTestUtils";
+import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
 //
 describe("Channel", function() {

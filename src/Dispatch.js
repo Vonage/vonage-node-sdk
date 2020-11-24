@@ -1,8 +1,6 @@
 "use strict";
 
-import nexmo from "./index";
-import fs from "fs";
-import querystring from "querystring";
+import vonage from "./index";
 
 class Dispatch {
   static get PATH() {
@@ -14,9 +12,9 @@ class Dispatch {
     this.options = options;
 
     // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
+    this._vonage = this.options.vonageOverride || vonage;
 
-    this._nexmo.initialize(
+    this._vonage.initialize(
       this.creds.apiKey,
       this.creds.apiSecret,
       this.options

@@ -1,25 +1,26 @@
 {
-  "name": "nexmo",
-  "author": "nexmo",
-  "version": "2.7.0-beta-1",
-  "main": "lib/Nexmo",
+  "name": "@vonage/server-sdk",
+  "author": "vonage",
+  "version": "2.10.4-beta",
+  "main": "lib/Vonage",
   "types": "./typings/index.d.ts",
   "keywords": [
     "sms",
     "voice",
-    "nexmo",
+    "vonage",
     "verify",
     "2fa",
     "phone numbers"
   ],
-  "homepage": "https://github.com/nexmo/nexmo-node",
+  "homepage": "https://github.com/vonage/vonage-node-sdk",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nexmo/nexmo-node.git"
+    "url": "git://github.com/vonage/vonage-node-sdk.git"
   },
-  "description": "Nexmo REST API client for Node.js. API support for SMS, Voice Calls, Text-to-Speech, Numbers, Verify (2FA) and more.",
+  "description": "Vonage Server SDK for Node.js. API support for SMS, Voice Calls, Text-to-Speech, Numbers, Verify (2FA) and more.",
   "contributors": [
-    "nexmo",
+    "vonage",
+    "kellyjandrews",
     "pvela",
     "leggetter",
     "akuzi",
@@ -35,7 +36,7 @@
     "report-coverage": "cross-env NODE_ENV=test nyc --reporter=text-lcov mocha > coverage.lcov",
     "test-coverage": "cross-env NODE_ENV=test nyc mocha",
     "test-coverage-html": "cross-env NODE_ENV=test nyc --reporter html mocha",
-    "test-no-lint": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./test/*-test.js",
+    "test-no-lint": "npm run compile && mocha --require ./node_modules/.bin/_mocha --require @babel/register ./test/*-test.js",
     "test-watch": "nodemon --watch src --watch test -x 'npm run test-no-lint'",
     "lint": "eslint src test",
     "lint-fix": "eslint --fix src test",
@@ -44,26 +45,25 @@
     "test-e2e": "npm run compile && mocha --compilers ./node_modules/.bin/_mocha --compilers js:babel-register ./e2e/*.spec.js"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-istanbul": "^4.1.6",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-register": "^6.7.2",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/register": "^7.10.5",
+    "babel-plugin-istanbul": "^6.0.0",
+    "babel-plugin-add-module-exports": "^1.0.4",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "chai": "^3.5.0",
-    "cross-env": "^5.2.0",
-    "dotenv": "^2.0.0",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
     "eslint": "^4.18",
     "eslint-config-prettier": "^6.2",
     "eslint-plugin-prettier": "^2.7",
     "expect.js": "^0.3.1",
-    "express": "^4.16.4",
-    "mocha": "^5.2.0",
-    "ngrok": "^2.2.2",
-    "nodemon": "^1.18.9",
-    "nyc": "^14.1.1",
+    "mocha": "^7.2.0",
+    "nodemon": "^2.0.4",
+    "nyc": "^15.1.0",
     "prettier": "^1.16.3",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
@@ -71,8 +71,8 @@
   },
   "dependencies": {
     "jsonwebtoken": "^8.4.0",
-    "request": "^2.88.0",
-    "uuid": "^2.0.2"
+    "request": "^2.88.2",
+    "uuid": "^8.3.0"
   },
-  "license": "MIT"
+  "license": "Apache 2.0"
 }
