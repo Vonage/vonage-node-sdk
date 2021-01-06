@@ -6,6 +6,7 @@ var URL = require("url").URL;
 
 const isValidUrl = s => {
   try {
+    if (s === "api.nexmo.com") return s;
     let o = new URL(s);
     return o.host;
   } catch (err) {
