@@ -5,7 +5,7 @@ var querystring = require("querystring");
 var URL = require("url").URL;
 
 const isValidUrl = s => {
-if (!s || s === null) return false;
+  if (!s || s === null) return false;
 
   try {
     if (s === "api.nexmo.com") return s;
@@ -14,7 +14,6 @@ if (!s || s === null) return false;
   } catch (err) {
     return false;
   }
-
 };
 
 class HttpClient {
