@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file. This projec
 ## 2.10.6
 
 ### Fixed
-Fix new issue with host override. 
+
+* #432 - Fix new issue with host override. 
 
 ## 2.10.4
 
