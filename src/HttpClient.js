@@ -5,7 +5,10 @@ var querystring = require("querystring");
 var URL = require("url").URL;
 
 const isValidUrl = s => {
+  if (!s || s === null) return false;
+
   try {
+    if (s === "api.nexmo.com") return s;
     let o = new URL(s);
     return o.host;
   } catch (err) {
