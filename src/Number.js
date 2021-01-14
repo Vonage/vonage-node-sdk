@@ -1,6 +1,6 @@
 "use strict";
 
-import nexmo from "./index";
+import vonage from "./index";
 
 import Pricing from "./Pricing";
 
@@ -18,9 +18,9 @@ class Number {
     this._pricing = new Pricing(credentials, options);
 
     // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
+    this._vonage = this.options.vonageOverride || vonage;
 
-    this._nexmo.initialize(
+    this._vonage.initialize(
       this.creds.apiKey,
       this.creds.apiSecret,
       this.options
@@ -45,35 +45,35 @@ class Number {
    * TODO: document
    */
   get() {
-    this._nexmo.getNumbers.apply(this._nexmo, arguments);
+    this._vonage.getNumbers.apply(this._vonage, arguments);
   }
 
   /**
    * TODO: document
    */
   search() {
-    this._nexmo.searchNumbers.apply(this._nexmo, arguments);
+    this._vonage.searchNumbers.apply(this._vonage, arguments);
   }
 
   /**
    * TODO: document
    */
   buy() {
-    this._nexmo.buyNumber.apply(this._nexmo, arguments);
+    this._vonage.buyNumber.apply(this._vonage, arguments);
   }
 
   /**
    * TODO: document
    */
   cancel() {
-    this._nexmo.cancelNumber.apply(this._nexmo, arguments);
+    this._vonage.cancelNumber.apply(this._vonage, arguments);
   }
 
   /**
    * TODO: document
    */
   update() {
-    this._nexmo.updateNumber.apply(this._nexmo, arguments);
+    this._vonage.updateNumber.apply(this._vonage, arguments);
   }
 }
 

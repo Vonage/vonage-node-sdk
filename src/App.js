@@ -1,6 +1,6 @@
 "use strict";
 
-import nexmo from "./index";
+import vonage from "./index";
 import Utils from "./Utils";
 
 class App {
@@ -21,7 +21,7 @@ class App {
     this.options = options;
 
     // Used to facilitate testing of the call to the underlying object
-    this._nexmo = this.options.nexmoOverride || nexmo;
+    this._vonage = this.options.vonageOverride || vonage;
   }
 
   _convertMethodSignature(name, type, answerUrl, eventUrl, options) {

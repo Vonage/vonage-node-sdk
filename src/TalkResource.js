@@ -12,7 +12,7 @@ class TalkResource {
   /**
    * Creates a new TalkResource.
    *
-   * @param {Credentials} creds - Credentials used when interacting with the Nexmo API.
+   * @param {Credentials} creds - Credentials used when interacting with the Vonage API.
    * @param {Object} options - additional options for the class.
    */
   constructor(creds, options) {

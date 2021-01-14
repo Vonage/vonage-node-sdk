@@ -16,11 +16,14 @@ When you're ready to start coding, fork this repository to your own GitHub accou
 
 To run the code for an open PR, follow these steps:
 
-1. `git clone https://github.com/Nexmo/nexmo-node.git`
-2. `cd nexmo-node`
-3. `git checkout BRANCH_NAME`
-4. `npm install`
-5. Uncomment the appropriate line in `examples/run-examples.js` for each example you want to run.
-6. In the `examples` folder, copy `example.env` to `.env`.
-7. Update `.env` with your API key and API secret.
-8. `node examples/run-examples.js`
+1. `git clone https://github.com/vonage/vonage-node-sdk.git`
+1. `cd vonage-node-sdk`
+1. `git checkout BRANCH_NAME`
+1. `npm install`
+1. `npm run compile`
+1. In a new directory, download the `https://github.com/Vonage/vonage-node-code-snippets` repository
+1. Install the local Vonage package `npm i /path/to/vonage-node-sdk`
+1. Copy `.env-example` to `.env` and update any variables required.
+1. Run the sample code snippet to test the SDK.
+
+When reviewing PRs, and switching branches to compare running examples against feature branches, don't forget to run `npm compile` after switching branches.

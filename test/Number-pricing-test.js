@@ -1,35 +1,6 @@
 import Number from "../lib/Number";
 
-import VonageStub from "./VonageStub";
-
 import { expect, sinon, TestUtils } from "./VonageTestUtils";
-
-var numberAPIs = {
-  getNumbers: "get",
-  searchNumbers: "search",
-  buyNumber: "buy",
-  cancelNumber: "cancel",
-  updateNumber: "update"
-};
-
-var pricingAPIs = {
-  get: "getPricing",
-  getPhone: "getPhonePricing"
-};
-
-describe("Number Object", function() {
-  it("should implement all v1 APIs", function() {
-    VonageStub.checkAllFunctionsAreDefined(numberAPIs, Number);
-  });
-
-  it("should implement legacy pricing APIs", function() {
-    VonageStub.checkAllFunctionsAreDefined(pricingAPIs, Number);
-  });
-
-  it("should proxy the function call to the underlying `vonage` object", function() {
-    VonageStub.checkAllFunctionsAreCalled(numberAPIs, Number);
-  });
-});
 
 describe("Number _pricing", function() {
   beforeEach(function() {
