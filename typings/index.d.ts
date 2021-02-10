@@ -457,131 +457,224 @@ declare module '@vonage/server-sdk' {
 			options: NumberInsightObject,
 			callback?: (err?: NumberInsightError, data?: NumberInsightResponse) => void
 		): void;
-    }
-    
-    /* voice API */
-    export interface To{
-        type: string;
-        number: string;
-        dtmfAnswer?: string;
-    }
-    
-    export interface From{
-        type: string;
-        number: string;
-    }
+	}
 
-    export interface CallsResponse {
-        count: number;
-        page_size: number;
-        record_index: number;
-        _links: CallDetailLinks;
-        _embedded: CallDetailEmbedded;
-    }
-    
-    export interface CallDetailLinks {
-        self: CallDetailsSelf;
-    }
-    
-    export interface CallDetailsSelf {
-        href: string;
-    }
-    
-    export interface CallDetailEmbedded {
-        calls: CallDetailCall[];
-    }
-    
-    export interface CallDetailCall {
-        _links: CallDetailLinks;
-        uuid: string;
-        conversation_uuid: string;
-        to: To;
-        from: From;
-        status: string;
-        direction: string;
-        rate: string;
-        price: string;
-        duration: string;
-        start_time: Date;
-        end_time: Date;
-        network: string;
-    }
+	/* voice API */
+	export interface To{
+		type: string;
+		number: string;
+		dtmfAnswer?: string;
+	}
 
-    export interface OutboundCallRequest{
-        answer_url?: string[];
-        ncco?: Ncco[];
-        status: string;
-        to: To[];
-        from: From;
-        event_url: string[];
-        machine_detection: string;
-    }
-    
-    export interface Ncco {
-        action: string;
-        text: string;
-    }
-    
-    export interface OutboundCallResponse{
-        uuid: string;
-        status: string;
-        direction: string;
-        conversation_uuid: string;
-    }
+	export interface From{
+		type: string;
+		number: string;
+	}
 
-    export interface CallDetailResponse {
-        _links: CallDetailLinks;
-        uuid: string;
-        conversation_uuid: string;
-        to: To;
-        from: From;
-        status: string;
-        direction: string;
-        rate: string;
-        price: string;
-        duration: string;
-        start_time: Date;
-        end_time: Date;
-        network: string;
-    }
+	export interface CallsResponse {
+		count: number;
+		page_size: number;
+		record_index: number;
+		_links: CallDetailLinks;
+		_embedded: CallDetailEmbedded;
+	}
 
-    export interface InProgressCallRequest {
-        action: string;
-        destination?: Destination;
-    }
+	export interface CallDetailLinks {
+		self: CallDetailsSelf;
+	}
 
-    export interface Destination {
-        type: string;
-        ncco?: Ncco[]; 
-        url?: string[];
-    }
+	export interface CallDetailsSelf {
+		href: string;
+	}
 
-    export interface StreamAudioInCallRequest {
-        stream_url: string[];
-        level?: string;
-    }
-    
-    export interface ModifyInProgressCallResponse {
-        message: string;
-        uuid: string;
-    }
+	export interface CallDetailEmbedded {
+		calls: CallDetailCall[];
+	}
 
-    export interface TextToSpeechRequest {
-        text: string;
-        level?: string;
-    }
-    
-    export interface DTMFRequest {
-        digits: number;
-    }
+	export interface CallDetailCall {
+		_links: CallDetailLinks;
+		uuid: string;
+		conversation_uuid: string;
+		to: To;
+		from: From;
+		status: string;
+		direction: string;
+		rate: string;
+		price: string;
+		duration: string;
+		start_time: Date;
+		end_time: Date;
+		network: string;
+	}
 
-    export class Voice {
-        constructor(credentials: CredentialsObject, options: { [key: string]: any });
-        sendTTSMessage(recipient: To, message: TextToSpeechRequest, options: CredentialsObject, callback: (data: ModifyInProgressCallResponse) => void ): void;
-        sendTTSPromptWithCapture(recipient: To, message: TextToSpeechRequest, maxDigits: Number, callback: (data: ModifyInProgressCallResponse) => void ): void;
-        sendTTSPromptWithConfirm(recipient: To, message: TextToSpeechRequest, maxDigits: Number, pinCode: string, byeText: string, failedText: string, callback: (data: ModifyInProgressCallResponse) => void ): void;
-        call(recipient: To, answerUrl: string, opts: OutboundCallRequest, callback: (data: OutboundCallResponse) => void): void;
-    }
+	export interface OutboundCallRequest{
+		answer_url?: string[];
+		ncco?: Ncco[];
+		status: string;
+		to: To[];
+		from: From;
+		event_url: string[];
+		machine_detection: string;
+	}
+
+	export interface Ncco {
+		action: string;
+		text: string;
+	}
+
+	export interface OutboundCallResponse{
+		uuid: string;
+		status: string;
+		direction: string;
+		conversation_uuid: string;
+	}
+
+	export interface CallDetailResponse {
+		_links: CallDetailLinks;
+		uuid: string;
+		conversation_uuid: string;
+		to: To;
+		from: From;
+		status: string;
+		direction: string;
+		rate: string;
+		price: string;
+		duration: string;
+		start_time: Date;
+		end_time: Date;
+		network: string;
+	}
+
+	export interface InProgressCallRequest {
+		action: string;
+		destination?: Destination;
+	}
+
+	export interface Destination {
+		type: string;
+		ncco?: Ncco[];
+		url?: string[];
+	}
+
+	export interface StreamAudioInCallRequest {
+		stream_url: string[];
+		level?: string;
+	}
+
+	export interface ModifyInProgressCallResponse {
+		message: string;
+		uuid: string;
+	}
+
+	export interface TextToSpeechRequest {
+		text: string;
+		level?: string;
+	}
+
+	export interface DTMFRequest {
+		digits: number;
+	}
+
+	export class Voice {
+		constructor(credentials: CredentialsObject, options: { [key: string]: any });
+		sendTTSMessage(recipient: To, message: TextToSpeechRequest, options: CredentialsObject, callback: (data: ModifyInProgressCallResponse) => void ): void;
+		sendTTSPromptWithCapture(recipient: To, message: TextToSpeechRequest, maxDigits: Number, callback: (data: ModifyInProgressCallResponse) => void ): void;
+		sendTTSPromptWithConfirm(recipient: To, message: TextToSpeechRequest, maxDigits: Number, pinCode: string, byeText: string, failedText: string, callback: (data: ModifyInProgressCallResponse) => void ): void;
+		call(recipient: To, answerUrl: string, opts: OutboundCallRequest, callback: (data: OutboundCallResponse) => void): void;
+	}
+
+	type ChannelType = 'sms' | 'viber_service_msg' | 'messenger' | 'whatsapp' | 'mms';
+
+	type ChannelMessageType = 'text' | 'image' | 'audio' | 'video' | 'file' | 'template' | 'custom';
+
+	interface ChannelToFrom {
+		// The type of message that you want to send.
+		type: ChannelType;
+		id?: string;
+		/**
+		 * The phone number of the message recipient in the E.164 format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
+		 */
+		number: string;
+	}
+
+	interface ChannelContentImage {
+		url: string;
+		caption: string;
+	}
+
+	interface ChannelContentAudio {
+		url: string;
+	}
+
+	interface ChannelContentVideo {
+		url: string;
+	}
+
+	interface ChannelContentFile {
+		url: string;
+		caption: string;
+	}
+
+	interface ChannelContentTemplate {
+		name: string;
+		parameters: object[];
+	}
+
+	interface ChannelContent {
+		type: ChannelMessageType;
+		text: string;
+		image?: ChannelContentImage;
+		audio?: ChannelContentAudio;
+		video?: ChannelContentVideo;
+		file?: ChannelContentFile;
+		template?: ChannelContentTemplate;
+	}
+
+	interface ChannelViberServiceMsg {
+		category?: 'transaction' | 'promotion';
+		ttl?: number;
+		type?: string;
+	}
+
+	interface ChannelMessenger {
+		category?: 'response' | 'update' | 'message_tag';
+		tag?: string;
+	}
+
+	interface ChannelWhatsApp {
+		policy?: 'fallback' | 'deterministic';
+		locale?: string;
+	}
+
+	interface ChannelMessage {
+		content: ChannelContent;
+		viber_service_msg?: ChannelViberServiceMsg;
+		channel?: ChannelMessenger;
+		whatsapp?: ChannelWhatsApp;
+		client_ref?: string;
+	}
+
+	export interface MessageSendResponse {
+		message_uuid: string;
+	}
+
+	export interface MessageSendError {
+		type: string;
+		title: string;
+		detail: string;
+		instance: string;
+	}
+
+	export class Channel {
+		constructor(credentials: CredentialsObject, options: { [key: string]: any });
+		static readonly PATH: string;
+		send(
+			to: ChannelToFrom,
+			from: ChannelToFrom,
+			message: ChannelMessage,
+			callback: (err: MessageSendError, data: MessageSendResponse) => void
+		);
+	}
 
 	/* Vonage */
 	export default class Vonage {
@@ -590,7 +683,8 @@ declare module '@vonage/server-sdk' {
 		public readonly message: Message;
 		public readonly media: Media;
 		public readonly number: Number;
-        public readonly numberInsight: NumberInsight;
-        public readonly voice: Voice;
+		public readonly numberInsight: NumberInsight;
+		public readonly voice: Voice;
+		public readonly channel: Channel;
 	}
 }
