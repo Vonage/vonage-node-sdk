@@ -592,9 +592,13 @@ export class Voice {
 
 
 export default class Vonage {
-	credentials: CredentialsObject;
-	options: VonageOptions;
-
 	constructor(credentials: CredentialsObject, options?: { [key: string]: any });
-	message: Message
+	public readonlycredentials: CredentialsObject;
+	public readonlyoptions: VonageOptions;
+	public readonly message: Message
+	public readonly media: Media
+	public readonly number: Number
+	public readonly numberInsight: NumberInsight
+	public readonly verify: Verify
+	public readonly voice: Voice
 }
