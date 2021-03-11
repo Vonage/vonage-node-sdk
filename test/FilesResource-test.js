@@ -13,7 +13,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: path.join(__dirname, "private-test.key")
+  privateKey: path.join(__dirname, "private-test.key"),
 });
 var emptyCallback = () => {};
 
@@ -24,7 +24,7 @@ describe("FileResource", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     files = new FilesResource(creds, options);
   });
@@ -33,7 +33,7 @@ describe("FileResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     let files = new FilesResource(creds, options);
     const fileId = "2342342-lkjhlkjh-32423";
@@ -46,8 +46,8 @@ describe("FileResource", () => {
       path: `${FilesResource.PATH}/${fileId}`,
       headers: {
         "Content-Type": "application/octet-stream",
-        Authorization: "Bearer "
-      }
+        Authorization: "Bearer ",
+      },
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -66,8 +66,8 @@ describe("FileResource", () => {
       path: `${FilesResource.PATH}/${fileId}`,
       headers: {
         "Content-Type": "application/octet-stream",
-        Authorization: "Bearer "
-      }
+        Authorization: "Bearer ",
+      },
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -87,8 +87,8 @@ describe("FileResource", () => {
       path: `${FilesResource.PATH}/${fileId}`,
       headers: {
         "Content-Type": "application/octet-stream",
-        Authorization: "Bearer "
-      }
+        Authorization: "Bearer ",
+      },
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

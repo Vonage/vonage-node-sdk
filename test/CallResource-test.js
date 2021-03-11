@@ -16,7 +16,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: path.join(__dirname, "private-test.key")
+  privateKey: path.join(__dirname, "private-test.key"),
 });
 var emptyCallback = () => {};
 
@@ -27,7 +27,7 @@ describe("CallsResource", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     calls = new CallsResource(creds, options);
   });
@@ -36,7 +36,7 @@ describe("CallsResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     calls = new CallsResource(creds, options);
     calls.create({}, emptyCallback);
@@ -47,8 +47,8 @@ describe("CallsResource", () => {
         method: "POST",
         host: "api.example.com",
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -61,7 +61,7 @@ describe("CallsResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     calls = new CallsResource(creds, options);
     calls.update("call_id", {}, emptyCallback);
@@ -73,8 +73,8 @@ describe("CallsResource", () => {
         host: "api.example.com",
         path: `${CallsResource.PATH}/call_id`,
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -87,7 +87,7 @@ describe("CallsResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     calls = new CallsResource(creds, options);
     calls.get("call_id", emptyCallback);
@@ -100,8 +100,8 @@ describe("CallsResource", () => {
         body: undefined,
         path: `${CallsResource.PATH}/call_id`,
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -117,9 +117,9 @@ describe("CallsResource", () => {
         uri: "wss://example.com/socket",
         "content-type": "audio/l16;rate=16000",
         headers: {
-          "utf-8": "✅"
-        }
-      }
+          "utf-8": "✅",
+        },
+      },
     };
     calls.create(params, emptyCallback);
 
@@ -127,8 +127,8 @@ describe("CallsResource", () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": 124
-      }
+        "Content-Length": 124,
+      },
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -137,7 +137,7 @@ describe("CallsResource", () => {
   });
 
   it("should throw an error if no query is provided", () => {
-    var expectThrow = function() {
+    var expectThrow = function () {
       calls.get();
     };
 
@@ -150,7 +150,7 @@ describe("CallsResource", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${CallsResource.PATH}`
+      path: `${CallsResource.PATH}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -166,7 +166,7 @@ describe("CallsResource", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${CallsResource.PATH}/${callId}`
+      path: `${CallsResource.PATH}/${callId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -178,7 +178,7 @@ describe("CallsResource", () => {
   it("should get a allow calls to be queried by filter", () => {
     calls.get(
       {
-        status: "answered"
+        status: "answered",
       },
       emptyCallback
     );
@@ -186,7 +186,7 @@ describe("CallsResource", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${CallsResource.PATH}?status=answered`
+      path: `${CallsResource.PATH}?status=answered`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -201,8 +201,8 @@ describe("CallsResource", () => {
       action: "hangup",
       destination: {
         type: "ncco",
-        url: ["http://exémple.com/ncco.json"]
-      }
+        url: ["http://exémple.com/ncco.json"],
+      },
     };
     calls.update(callId, params, emptyCallback);
 
@@ -211,8 +211,8 @@ describe("CallsResource", () => {
       path: `${CallsResource.PATH}/${callId}`,
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": 89
-      }
+        "Content-Length": 89,
+      },
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

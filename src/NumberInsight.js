@@ -13,7 +13,7 @@ class NumberInsight {
         "Missing Mandatory fields (number and/or callback url)",
       numberInsightValidation: "Missing Mandatory field - number",
       numberInsightPatternFailure:
-        "Number can contain digits and may include any or all of the following: white space, -,+, (, )."
+        "Number can contain digits and may include any or all of the following: white space, -,+, (, ).",
     };
   }
   /**
@@ -109,7 +109,7 @@ class NumberInsight {
           path: Utils.createPathWithQuery(
             `${NumberInsight.PATH.replace("{type}", "advanced/async")}`,
             inputParams
-          )
+          ),
         },
         callback
       );
@@ -121,7 +121,7 @@ class NumberInsight {
       var inputObj;
       if (typeof inputParams !== "object") {
         inputObj = {
-          number: inputParams
+          number: inputParams,
         };
       } else {
         inputObj = inputParams;
@@ -134,7 +134,7 @@ class NumberInsight {
           path: Utils.createPathWithQuery(
             `${NumberInsight.PATH.replace("{type}", type)}`,
             inputObj
-          )
+          ),
         },
         callback
       );

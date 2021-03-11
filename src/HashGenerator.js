@@ -22,7 +22,7 @@ class HashGenerator {
 
     Object.keys(params)
       .sort()
-      .forEach(key => {
+      .forEach((key) => {
         // replace & and = with _
         signedQuery += "&" + key + "=" + params[key].replace(/\&|\=/g, "_");
       });
@@ -32,10 +32,7 @@ class HashGenerator {
     switch (method) {
       case "md5hash":
         signedQuery += secret;
-        hash = crypto
-          .createHash("md5")
-          .update(signedQuery)
-          .digest("hex");
+        hash = crypto.createHash("md5").update(signedQuery).digest("hex");
         break;
       case "md5":
       case "sha1":
