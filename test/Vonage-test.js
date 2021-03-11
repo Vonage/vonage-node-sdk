@@ -16,7 +16,7 @@ describe("Vonage definition", () => {
     });
 
     it("should throw an exception if privateKey file does not exist", () => {
-      var create = function () {
+      var create = function() {
         Vonage.generateJwt("./no-key-here.key");
       };
       expect(create).to.throw(Error);
@@ -48,107 +48,107 @@ describe("Vonage definition", () => {
   });
 });
 
-describe("Vonage Object instance", function () {
-  it("should expose a credentials object", function () {
+describe("Vonage Object instance", function() {
+  it("should expose a credentials object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.credentials).to.be.a("object");
   });
 
-  it("should expose a message object", function () {
+  it("should expose a message object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.message).to.be.a("object");
   });
 
-  it("should expose a voice object", function () {
+  it("should expose a voice object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.voice).to.be.a("object");
   });
 
-  it("should expose a number object", function () {
+  it("should expose a number object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.number).to.be.a("object");
   });
 
-  it("should expose a verify object", function () {
+  it("should expose a verify object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.verify).to.be.a("object");
   });
 
-  it("should expose a numberInsight object", function () {
+  it("should expose a numberInsight object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.numberInsight).to.be.a("object");
   });
 
-  it("should expose an app object", function () {
+  it("should expose an app object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.app).to.be.a("object");
   });
 
-  it("should expose applications object", function () {
+  it("should expose applications object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.applications).to.be.a("object");
   });
 
-  it("should alias apps to applications object", function () {
+  it("should alias apps to applications object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.applications).to.equal(vonage.app);
   });
 
-  it("should expose a account object", function () {
+  it("should expose a account object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.account).to.be.a("object");
   });
 
-  it("should expose a calls object", function () {
+  it("should expose a calls object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.calls).to.be.an.instanceOf(CallsResource);
   });
 
-  it("should expose a files object", function () {
+  it("should expose a files object", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.files).to.be.a("object");
   });
 
-  it("should allow options to be passed and remain unchanged", function () {
+  it("should allow options to be passed and remain unchanged", function() {
     var localOptions = {
       appendToUserAgent: "EXT",
-      debug: true,
+      debug: true
     };
 
     let passedOptions = Object.assign({}, localOptions);
@@ -156,7 +156,7 @@ describe("Vonage Object instance", function () {
     let vonage = new Vonage(
       {
         apiKey: "test",
-        apiSecret: "test",
+        apiSecret: "test"
       },
       passedOptions
     );
@@ -165,63 +165,63 @@ describe("Vonage Object instance", function () {
     expect(vonage.options.userAgent).to.match(/.*EXT/);
   });
 
-  it("should have debug turned off by default", function () {
+  it("should have debug turned off by default", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.options.debug).to.be.false;
   });
 
-  it("should allow a custom logger to be set", function () {
+  it("should allow a custom logger to be set", function() {
     var logger = {
-      info: function () {},
-      error: function () {},
-      warn: function () {},
+      info: function() {},
+      error: function() {},
+      warn: function() {}
     };
     var vonage = new Vonage(
       {
         apiKey: "test",
-        apiSecret: "test",
+        apiSecret: "test"
       },
       {
-        logger: logger,
+        logger: logger
       }
     );
     expect(vonage.options.logger).to.equal(logger);
   });
 
-  it("should allow a debug option to be set", function () {
+  it("should allow a debug option to be set", function() {
     var vonage = new Vonage(
       {
         apiKey: "test",
-        apiSecret: "test",
+        apiSecret: "test"
       },
       {
-        debug: true,
+        debug: true
       }
     );
     expect(vonage.options.debug).to.be.true;
   });
 
-  it("should have a default user agent in the form LIBRARY-NAME/LIBRARY-VERSION/LANGUAGE-VERSION", function () {
+  it("should have a default user agent in the form LIBRARY-NAME/LIBRARY-VERSION/LANGUAGE-VERSION", function() {
     var vonage = new Vonage({
       apiKey: "test",
-      apiSecret: "test",
+      apiSecret: "test"
     });
     expect(vonage.options.userAgent).to.match(
       /^@vonage\/server-sdk\/[\d|\w\-\d.]* node\/[\d.]*$/
     );
   });
 
-  it("should append to the user agent when a appendToUserAgent option is passed", function () {
+  it("should append to the user agent when a appendToUserAgent option is passed", function() {
     var options = {
-      appendToUserAgent: "vonage-cli/1.0.0",
+      appendToUserAgent: "vonage-cli/1.0.0"
     };
     var vonage = new Vonage(
       {
         apiKey: "test",
-        apiSecret: "test",
+        apiSecret: "test"
       },
       options
     );
@@ -230,28 +230,28 @@ describe("Vonage Object instance", function () {
     );
   });
 
-  it("should allow api host change", function () {
+  it("should allow api host change", function() {
     var options = {
-      apiHost: "some.host.com",
+      apiHost: "some.host.com"
     };
     var vonage = new Vonage(
       {
         apiKey: "test",
-        apiSecret: "test",
+        apiSecret: "test"
       },
       options
     );
     expect(vonage.options.apiHost).to.equal("some.host.com");
   });
 
-  it("should allow rest host change", function () {
+  it("should allow rest host change", function() {
     var options = {
-      restHost: "some.host.com",
+      restHost: "some.host.com"
     };
     var vonage = new Vonage(
       {
         apiKey: "test",
-        apiSecret: "test",
+        apiSecret: "test"
       },
       options
     );
@@ -263,7 +263,7 @@ describe("Vonage Object instance", function () {
       apiKey: "test",
       apiSecret: "test",
       privateKey: path.join(__dirname, "private-test.key"),
-      application_id: "app-id",
+      application_id: "app-id"
     });
     var token = vonage.generateJwt();
     expect(token).to.be.a("string");
@@ -274,7 +274,7 @@ describe("Vonage Object instance", function () {
       apiKey: "test",
       apiSecret: "test",
       signatureSecret: "secret",
-      signatureMethod: "md5hash",
+      signatureMethod: "md5hash"
     });
     var hash = vonage.generateSignature({});
     expect(hash).to.be.a("string");
@@ -289,14 +289,14 @@ describe("Vonage Object instance", function () {
     var expectedJwt = Vonage.generateJwt(privateKey, {
       application_id: appId,
       iat: iat,
-      jti: jti,
+      jti: jti
     });
 
     var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test",
       privateKey: privateKey,
-      applicationId: appId,
+      applicationId: appId
     });
     var token = vonage.generateJwt({ iat: iat, jti: jti });
     expect(token).to.equal(expectedJwt);

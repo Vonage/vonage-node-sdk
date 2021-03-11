@@ -37,8 +37,8 @@ class StreamResource {
       headers: {
         "Content-Type": "application/json",
         "Content-Length": Buffer.byteLength(params),
-        Authorization: `Bearer ${this.creds.generateJwt()}`,
-      },
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
     };
     this.options.httpClient.request(config, callback);
   }
@@ -56,8 +56,8 @@ class StreamResource {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`,
-      },
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
     };
     this.options.httpClient.request(config, callback);
   }

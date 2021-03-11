@@ -15,7 +15,7 @@ class Verify {
       controlVerifyValidation:
         "Missing Mandatory fields (request_id and/or cmd-command)",
       searchVerifyValidation:
-        "Missing Mandatory fields (request_id or request_ids)",
+        "Missing Mandatory fields (request_id or request_ids)"
     };
   }
   /**
@@ -47,7 +47,7 @@ class Verify {
           path: Utils.createPathWithQuery(
             `${Verify.PATH.replace("{action}", "")}`,
             inputParams
-          ),
+          )
         },
         callback
       );
@@ -66,7 +66,7 @@ class Verify {
         path: Utils.createPathWithQuery(
           `${Verify.PATH.replace("{action}", "/psd2")}`,
           inputParams
-        ),
+        )
       },
       callback
     );
@@ -90,7 +90,7 @@ class Verify {
           path: Utils.createPathWithQuery(
             `${Verify.PATH.replace("{action}", "/check")}`,
             inputParams
-          ),
+          )
         },
         callback
       );
@@ -115,7 +115,7 @@ class Verify {
           path: Utils.createPathWithQuery(
             `${Verify.PATH.replace("{action}", "/control")}`,
             inputParams
-          ),
+          )
         },
         callback
       );
@@ -150,7 +150,7 @@ class Verify {
           path: Utils.createPathWithQuery(
             `${Verify.PATH.replace("{action}", "/search")}`,
             requestIdParam
-          ),
+          )
         },
         callback
       );

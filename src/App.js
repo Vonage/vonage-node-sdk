@@ -29,14 +29,14 @@ class App {
             webhooks: {
               answer_url: {
                 address: answerUrl,
-                http_method: "GET",
+                http_method: "GET"
               },
               event_url: {
                 address: eventUrl,
-                http_method: "POST",
-              },
-            },
-          },
+                http_method: "POST"
+              }
+            }
+          }
         };
         break;
       case "messages":
@@ -45,14 +45,14 @@ class App {
             webhooks: {
               inbound_url: {
                 address: options.inbound_url,
-                http_method: "POST",
+                http_method: "POST"
               },
               status_url: {
                 address: options.status_url,
-                http_method: "POST",
-              },
-            },
-          },
+                http_method: "POST"
+              }
+            }
+          }
         };
         break;
       case "rtc":
@@ -61,24 +61,24 @@ class App {
             webhooks: {
               event_url: {
                 address: eventUrl,
-                http_method: "POST",
-              },
-            },
-          },
+                http_method: "POST"
+              }
+            }
+          }
         };
         break;
     }
 
     return {
       name: name,
-      capabilities: capability,
+      capabilities: capability
     };
   }
 
   _convertApplicationResponse(application) {
     for (let capability in application.capabilities) {
       application[capability] = {
-        webhooks: [],
+        webhooks: []
       };
       for (let webhook in application.capabilities[capability].webhooks) {
         application[capability].webhooks.push({
@@ -86,7 +86,7 @@ class App {
           endpoint:
             application.capabilities[capability].webhooks[webhook].address,
           http_method:
-            application.capabilities[capability].webhooks[webhook].http_method,
+            application.capabilities[capability].webhooks[webhook].http_method
         });
       }
     }
@@ -96,7 +96,7 @@ class App {
   }
 
   _convertApplicationListResponse(applicationResponseHandler) {
-    return (response) => {
+    return response => {
       response.count = response.total_items;
       response.page_index = response.page;
       for (let i in response._embedded.applications) {
@@ -135,8 +135,8 @@ class App {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`,
-      },
+        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`
+      }
     };
 
     this.options.httpClient.request(
@@ -174,8 +174,8 @@ class App {
       body: undefined,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`,
-      },
+        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`
+      }
     };
 
     this.options.httpClient.request(
@@ -212,8 +212,8 @@ class App {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`,
-      },
+        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`
+      }
     };
 
     this.options.httpClient.request(
@@ -238,8 +238,8 @@ class App {
       body: "{}",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`,
-      },
+        Authorization: `Basic ${Buffer.from(authorization).toString("base64")}`
+      }
     };
 
     this.options.httpClient.request(config, callback);

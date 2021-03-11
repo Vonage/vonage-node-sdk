@@ -14,7 +14,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   apiKey: "some-key",
-  apiSecret: "some-secret",
+  apiSecret: "some-secret"
 });
 var emptyCallback = () => {};
 
@@ -27,8 +27,8 @@ describe("SMS", () => {
     var options = {
       httpClient: httpClientStub,
       logger: {
-        info: () => {},
-      },
+        info: () => {}
+      }
     };
     message = new Message(creds, options);
   });
@@ -116,7 +116,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path:
-          "/sms/json?from=1234&to=1234&text=test&api_key=some-key&api_secret=some-secret",
+          "/sms/json?from=1234&to=1234&text=test&api_key=some-key&api_secret=some-secret"
       }),
       "POST"
     );
@@ -128,8 +128,8 @@ describe("SMS", () => {
       httpClient: httpClientStub,
       restHost: "rest.example.com",
       logger: {
-        info: () => {},
-      },
+        info: () => {}
+      }
     };
     let message = new Message(creds, options);
     message.sendSms("1234", "1234", "test", emptyCallback);
@@ -138,7 +138,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.example.com",
         path:
-          "/sms/json?from=1234&to=1234&text=test&api_key=some-key&api_secret=some-secret",
+          "/sms/json?from=1234&to=1234&text=test&api_key=some-key&api_secret=some-secret"
       }),
       "POST"
     );
@@ -151,7 +151,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path:
-          "/sms/json?from=1234&to=1234&type=binary&body=00&udh=ff&api_key=some-key&api_secret=some-secret",
+          "/sms/json?from=1234&to=1234&type=binary&body=00&udh=ff&api_key=some-key&api_secret=some-secret"
       }),
       "POST"
     );
@@ -163,8 +163,8 @@ describe("SMS", () => {
       httpClient: httpClientStub,
       restHost: "rest.example.com",
       logger: {
-        info: () => {},
-      },
+        info: () => {}
+      }
     };
     let message = new Message(creds, options);
     message.sendBinaryMessage("1234", "1234", "00", "ff", {}, emptyCallback);
@@ -173,7 +173,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.example.com",
         path:
-          "/sms/json?from=1234&to=1234&type=binary&body=00&udh=ff&api_key=some-key&api_secret=some-secret",
+          "/sms/json?from=1234&to=1234&type=binary&body=00&udh=ff&api_key=some-key&api_secret=some-secret"
       }),
       "POST"
     );
@@ -194,7 +194,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path:
-          "/sms/json?from=1234&to=1234&type=wappush&title=title&validity=validity&url=url&api_key=some-key&api_secret=some-secret",
+          "/sms/json?from=1234&to=1234&type=wappush&title=title&validity=validity&url=url&api_key=some-key&api_secret=some-secret"
       }),
       "POST"
     );
@@ -206,8 +206,8 @@ describe("SMS", () => {
       httpClient: httpClientStub,
       restHost: "rest.example.com",
       logger: {
-        info: () => {},
-      },
+        info: () => {}
+      }
     };
     let message = new Message(creds, options);
     message.sendWapPushMessage(
@@ -224,23 +224,23 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.example.com",
         path:
-          "/sms/json?from=1234&to=1234&type=wappush&title=title&validity=validity&url=url&api_key=some-key&api_secret=some-secret",
+          "/sms/json?from=1234&to=1234&type=wappush&title=title&validity=validity&url=url&api_key=some-key&api_secret=some-secret"
       }),
       "POST"
     );
   });
 });
 
-describe("Message", function () {
-  beforeEach(function () {
+describe("Message", function() {
+  beforeEach(function() {
     var creds = Credentials.parse({
       apiKey: "myKey",
-      apiSecret: "mySecret",
+      apiSecret: "mySecret"
     });
 
     this.httpClientStub = new HttpClient(
       {
-        logger: new NullLogger(),
+        logger: new NullLogger()
       },
       creds
     );
@@ -248,23 +248,23 @@ describe("Message", function () {
     sinon.stub(this.httpClientStub, "request");
 
     var options = {
-      rest: this.httpClientStub,
+      rest: this.httpClientStub
     };
 
     this.message = new Message(creds, options);
   });
 
-  describe("#search", function () {
-    it("should call the correct endpoint (single)", function (done) {
+  describe("#search", function() {
+    it("should call the correct endpoint (single)", function(done) {
       this.httpClientStub.request.yields(null, {});
 
       var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/search/message?id=0D00000068264896",
+        path: "/search/message?id=0D00000068264896"
       });
 
       this.message.search(
         "0D00000068264896",
-        function (err, data) {
+        function(err, data) {
           expect(this.httpClientStub.request).to.have.been.calledWith(
             sinon.match(expectedRequestArgs)
           );
@@ -274,16 +274,16 @@ describe("Message", function () {
       );
     });
 
-    it("should call the correct endpoint (multiple)", function (done) {
+    it("should call the correct endpoint (multiple)", function(done) {
       this.httpClientStub.request.yields(null, {});
 
       var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/search/messages?ids=1&ids=2",
+        path: "/search/messages?ids=1&ids=2"
       });
 
       this.message.search(
         [1, 2],
-        function (err, data) {
+        function(err, data) {
           expect(this.httpClientStub.request).to.have.been.calledWith(
             sinon.match(expectedRequestArgs)
           );
@@ -293,7 +293,7 @@ describe("Message", function () {
       );
     });
 
-    it("returns data on a successful request (single)", function (done) {
+    it("returns data on a successful request (single)", function(done) {
       const mockData = {
         "message-id": "0D00000068264896",
         "account-id": "abc123",
@@ -306,18 +306,18 @@ describe("Message", function () {
         "final-status": "DELIVRD",
         "date-closed": "2017-11-24 15:09:45",
         latency: 14806,
-        type: "MT",
+        type: "MT"
       };
 
       this.httpClientStub.request.yields(null, mockData);
-      this.message.search("0D00000068264896", function (err, data) {
+      this.message.search("0D00000068264896", function(err, data) {
         expect(err).to.eql(null);
         expect(data).to.eql(mockData);
         done();
       });
     });
 
-    it("returns data on a successful request (multiple)", function (done) {
+    it("returns data on a successful request (multiple)", function(done) {
       const mockData = {
         count: 1,
         items: [
@@ -333,24 +333,24 @@ describe("Message", function () {
             "final-status": "DELIVRD",
             "date-closed": "2017-11-24 15:09:45",
             latency: 14806,
-            type: "MT",
-          },
-        ],
+            type: "MT"
+          }
+        ]
       };
 
       this.httpClientStub.request.yields(null, mockData);
-      this.message.search(["0D00000068264896"], function (err, data) {
+      this.message.search(["0D00000068264896"], function(err, data) {
         expect(err).to.eql(null);
         expect(data).to.eql(mockData);
         done();
       });
     });
 
-    it("returns an error when the connection fails", function (done) {
+    it("returns an error when the connection fails", function(done) {
       const mockError = {
         body: {
           "error-code": "401",
-          "error-code-label": "authentication failed",
+          "error-code-label": "authentication failed"
         },
         headers: {
           "content-type": "application/json;charset=UTF-8",
@@ -361,13 +361,13 @@ describe("Message", function () {
           "x-nexmo-trace-id": "91f401d459aa5050af280aee53288135",
           "x-xss-protection": "1; mode=block;",
           "content-length": "63",
-          connection: "close",
+          connection: "close"
         },
-        statusCode: 401,
+        statusCode: 401
       };
 
       this.httpClientStub.request.yields(mockError, null);
-      this.message.search("0D00000068264896", function (err, data) {
+      this.message.search("0D00000068264896", function(err, data) {
         expect(err).to.eql(mockError);
         expect(data).to.eql(null);
         done();
@@ -375,18 +375,18 @@ describe("Message", function () {
     });
   });
 
-  describe("#searchRejections", function () {
-    it("should call the correct endpoint (multiple)", function (done) {
+  describe("#searchRejections", function() {
+    it("should call the correct endpoint (multiple)", function(done) {
       this.httpClientStub.request.yields(null, {});
 
       var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/search/rejections?to=INVALID&date=2020-01-01",
+        path: "/search/rejections?to=INVALID&date=2020-01-01"
       });
 
       this.message.searchRejections(
         "INVALID",
         "2020-01-01",
-        function (err, data) {
+        function(err, data) {
           expect(this.httpClientStub.request).to.have.been.calledWith(
             sinon.match(expectedRequestArgs)
           );
@@ -396,7 +396,7 @@ describe("Message", function () {
       );
     });
 
-    it("returns data on a successful request", function (done) {
+    it("returns data on a successful request", function(done) {
       const mockData = {
         count: 1,
         items: [
@@ -406,20 +406,20 @@ describe("Message", function () {
             to: "INVALID",
             "date-received": "2020-01-01 12:00:00",
             "error-code": "3",
-            "error-code-label": "to address is not numeric",
-          },
-        ],
+            "error-code-label": "to address is not numeric"
+          }
+        ]
       };
 
       this.httpClientStub.request.yields(null, mockData);
-      this.message.search("0D00000068264896", function (err, data) {
+      this.message.search("0D00000068264896", function(err, data) {
         expect(err).to.eql(null);
         expect(data).to.eql(mockData);
         done();
       });
     });
 
-    it("returns an error when invalid parameters are provided", function (done) {
+    it("returns an error when invalid parameters are provided", function(done) {
       const mockError = {
         body: { "error-code": "400", "error-code-label": "wrong parameters" },
         headers: {
@@ -432,13 +432,13 @@ describe("Message", function () {
           "x-nexmo-trace-id": "38ad97a406aa8cc104cecf21feaf7da3",
           "x-xss-protection": "1; mode=block;",
           "content-length": "58",
-          connection: "close",
+          connection: "close"
         },
-        statusCode: 400,
+        statusCode: 400
       };
 
       this.httpClientStub.request.yields(mockError, null);
-      this.message.searchRejections("123456", null, function (err, data) {
+      this.message.searchRejections("123456", null, function(err, data) {
         expect(err).to.eql(mockError);
         expect(data).to.eql(null);
         done();

@@ -17,7 +17,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   apiKey: "some-key",
-  apiSecret: "some-secret",
+  apiSecret: "some-secret"
 });
 var emptyCallback = () => {};
 
@@ -30,8 +30,8 @@ describe("Voice", () => {
     var options = {
       httpClient: httpClientStub,
       logger: {
-        info: () => {},
-      },
+        info: () => {}
+      }
     };
     voice = new Voice(creds, options);
   });
@@ -131,7 +131,7 @@ describe("Voice", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/tts/json?to=123&text=message&api_key=some-key&api_secret=some-secret",
+          "/tts/json?to=123&text=message&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -143,7 +143,7 @@ describe("Voice", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/tts-prompt/json?to=123&text=message&max_digits=1&bye_text=bbye&api_key=some-key&api_secret=some-secret",
+          "/tts-prompt/json?to=123&text=message&max_digits=1&bye_text=bbye&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -155,7 +155,7 @@ describe("Voice", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/tts-prompt/json?to=123&text=message&max_digits=4&pin_code=1234&bye_text=bbye&failed_text=oops&api_key=some-key&api_secret=some-secret",
+          "/tts-prompt/json?to=123&text=message&max_digits=4&pin_code=1234&bye_text=bbye&failed_text=oops&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -167,7 +167,7 @@ describe("Voice", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path:
-          "/call/json?to=123&answer_url=http%3A%2F%2Fexample.com&api_key=some-key&api_secret=some-secret",
+          "/call/json?to=123&answer_url=http%3A%2F%2Fexample.com&api_key=some-key&api_secret=some-secret"
       })
     );
   });

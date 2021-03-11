@@ -37,8 +37,8 @@ class DtmfResource {
       headers: {
         "Content-Type": "application/json",
         "Content-Length": Buffer.byteLength(params),
-        Authorization: `Bearer ${this.creds.generateJwt()}`,
-      },
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
     };
     this.options.httpClient.request(config, callback);
   }

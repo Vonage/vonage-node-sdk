@@ -13,7 +13,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   apiKey: "some-key",
-  apiSecret: "some-secret",
+  apiSecret: "some-secret"
 });
 var emptyCallback = () => {};
 
@@ -26,8 +26,8 @@ describe("Verify", () => {
     var options = {
       httpClient: httpClientStub,
       logger: {
-        info: () => {},
-      },
+        info: () => {}
+      }
     };
     verify = new Verify(creds, options);
   });
@@ -79,7 +79,7 @@ describe("Verify", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/verify/json?number=123&brand=acme&api_key=some-key&api_secret=some-secret",
+          "/verify/json?number=123&brand=acme&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -94,7 +94,7 @@ describe("Verify", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/verify/psd2/json?number=123&payee=acme&amount=amount&api_key=some-key&api_secret=some-secret",
+          "/verify/psd2/json?number=123&payee=acme&amount=amount&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -106,7 +106,7 @@ describe("Verify", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/verify/check/json?request_id=123&code=1234&api_key=some-key&api_secret=some-secret",
+          "/verify/check/json?request_id=123&code=1234&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -118,7 +118,7 @@ describe("Verify", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/verify/control/json?request_id=123&cmd=test&api_key=some-key&api_secret=some-secret",
+          "/verify/control/json?request_id=123&cmd=test&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -130,7 +130,7 @@ describe("Verify", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/verify/search/json?request_id=123&api_key=some-key&api_secret=some-secret",
+          "/verify/search/json?request_id=123&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -142,7 +142,7 @@ describe("Verify", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/verify/search/json?request_id=123&api_key=some-key&api_secret=some-secret",
+          "/verify/search/json?request_id=123&api_key=some-key&api_secret=some-secret"
       })
     );
   });
@@ -154,7 +154,7 @@ describe("Verify", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/verify/search/json?request_ids=123&request_ids=456&api_key=some-key&api_secret=some-secret",
+          "/verify/search/json?request_ids=123&request_ids=456&api_key=some-key&api_secret=some-secret"
       })
     );
   });

@@ -58,8 +58,8 @@ class CallsResource {
       headers: {
         "Content-Type": "application/json",
         "Content-Length": Buffer.byteLength(params),
-        Authorization: `Bearer ${this.creds.generateJwt()}`,
-      },
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
     };
     this.options.httpClient.request(config, callback);
   }
@@ -92,8 +92,8 @@ class CallsResource {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`,
-      },
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
     };
     this.options.httpClient.request(config, callback);
   }
@@ -116,8 +116,8 @@ class CallsResource {
       headers: {
         "Content-Type": "application/json",
         "Content-Length": Buffer.byteLength(params),
-        Authorization: `Bearer ${this.creds.generateJwt()}`,
-      },
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
     };
     this.options.httpClient.request(config, callback);
   }

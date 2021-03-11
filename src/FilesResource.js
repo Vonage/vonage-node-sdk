@@ -40,8 +40,8 @@ class FilesResource {
       method: "GET",
       headers: {
         "Content-Type": "application/octet-stream",
-        Authorization: `Bearer ${this.creds.generateJwt()}`,
-      },
+        Authorization: `Bearer ${this.creds.generateJwt()}`
+      }
     };
 
     this.options.httpClient.request(config, callback);
@@ -65,7 +65,7 @@ class FilesResource {
   }
 
   __storeFile(data, file, callback) {
-    fs.writeFile(file, data, (error) => {
+    fs.writeFile(file, data, error => {
       if (error) {
         callback(error, null);
       } else {

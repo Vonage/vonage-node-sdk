@@ -74,7 +74,7 @@ class Credentials {
     privateKey = this.privateKey
   ) {
     var claims = {
-      application_id: applicationId,
+      application_id: applicationId
     };
     var token = this._jwtGenerator.generate(privateKey, claims);
     return token;

@@ -15,7 +15,7 @@ class ShortCode {
   static get ERROR_MESSAGES() {
     return {
       to: "Invalid to address",
-      msgParams: "Invalid shortcode message parameters",
+      msgParams: "Invalid shortcode message parameters"
     };
   }
 
@@ -36,7 +36,7 @@ class ShortCode {
       (endpoint.path.indexOf("?") > 0 ? "&" : "?") +
       querystring.stringify({
         api_key: this.creds.apiKey,
-        api_secret: this.creds.apiSecret,
+        api_secret: this.creds.apiSecret
       });
     this.options.httpClient.request(endpoint, method, callback);
   }
@@ -50,7 +50,7 @@ class ShortCode {
     }
     opts = opts || {};
     var path = ShortCode.PATH.replace("${type}", type);
-    Object.keys(messageParams).forEach(function (key) {
+    Object.keys(messageParams).forEach(function(key) {
       opts[key] = messageParams[key];
     });
     opts.to = recipient;
@@ -66,10 +66,10 @@ class ShortCode {
     this._sendRequest(
       {
         host: this.options.restHost || "rest.nexmo.com",
-        path: path,
+        path: path
       },
       "POST",
-      function (err, apiResponse) {
+      function(err, apiResponse) {
         if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
           Utils.sendError(
             callback,

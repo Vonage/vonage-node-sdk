@@ -1,44 +1,42 @@
 "use strict";
 import querystring from "querystring";
 
-module.exports = function (chai, utils) {
-  utils.addChainableMethod(chai.Assertion.prototype, "call", function () {});
+module.exports = function(chai, utils) {
+  utils.addChainableMethod(chai.Assertion.prototype, "call", function() {});
 
-  utils.addProperty(chai.Assertion.prototype, "get", function () {
+  utils.addProperty(chai.Assertion.prototype, "get", function() {
     this._httpMethod = "GET";
   });
 
-  utils.addProperty(chai.Assertion.prototype, "post", function () {
+  utils.addProperty(chai.Assertion.prototype, "post", function() {
     this._httpMethod = "POST";
   });
 
-  utils.addProperty(chai.Assertion.prototype, "postFile", function () {
+  utils.addProperty(chai.Assertion.prototype, "postFile", function() {
     this._httpMethod = "POST";
     this._isMultipartPost = true;
   });
 
-  utils.addProperty(chai.Assertion.prototype, "put", function () {
+  utils.addProperty(chai.Assertion.prototype, "put", function() {
     this._httpMethod = "PUT";
   });
 
-  utils.addProperty(chai.Assertion.prototype, "delete", function () {
+  utils.addProperty(chai.Assertion.prototype, "delete", function() {
     this._httpMethod = "DELETE";
   });
 
-  utils.addChainableMethod(
-    chai.Assertion.prototype,
-    "method",
-    function (method) {
-      this._classMethod = method;
-    }
-  );
-  utils.addChainableMethod(chai.Assertion.prototype, "withParams", function () {
+  utils.addChainableMethod(chai.Assertion.prototype, "method", function(
+    method
+  ) {
+    this._classMethod = method;
+  });
+  utils.addChainableMethod(chai.Assertion.prototype, "withParams", function() {
     this._params = Array.prototype.slice.call(arguments);
   });
   utils.addChainableMethod(
     chai.Assertion.prototype,
     "withJsonBody",
-    function () {
+    function() {
       this._expectedHeaders = this._expectedHeaders || {};
       this._expectedHeaders["Content-Type"] = "application/json";
       this._expectedJsonBody = JSON.stringify(
@@ -47,10 +45,10 @@ module.exports = function (chai, utils) {
     }
   );
 
-  utils.addMethod(chai.Assertion.prototype, "url", function (url) {
+  utils.addMethod(chai.Assertion.prototype, "url", function(url) {
     let spy;
 
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const callback = (err, data) => {
         if (!spy.args) {
           throw new Error("This assertion should only be used on Sinon spies");

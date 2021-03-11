@@ -24,7 +24,7 @@ class Redact {
     return this.options.api.postJson(
       `${Redact.PATH}/transaction`,
       { id, product, ...opts },
-      function (err, response, body) {
+      function(err, response, body) {
         if (err) {
           return callback(err);
         }

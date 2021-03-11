@@ -11,12 +11,12 @@ class ResourceTestHelper {
         : JSON.stringify(params),
       headers: overrides.headers || {
         "Content-Type": "application/json",
-        Authorization: "Bearer ",
-      },
+        Authorization: "Bearer "
+      }
     };
 
     // Removed undefined properties
-    Object.keys(callsArgs).forEach(function (key) {
+    Object.keys(callsArgs).forEach(function(key) {
       if (callsArgs[key] === undefined) {
         delete callsArgs[key];
       }
@@ -26,7 +26,7 @@ class ResourceTestHelper {
   }
 
   static requestArgsMatch(params, requestOverrides) {
-    return function (actual) {
+    return function(actual) {
       var expected;
       if (requestOverrides) {
         expected = ResourceTestHelper.getRequestArgs(params, requestOverrides);
@@ -47,7 +47,7 @@ class ResourceTestHelper {
       var match = true;
 
       // Check response parameters
-      ["host", "path", "method", "body"].forEach(function (k) {
+      ["host", "path", "method", "body"].forEach(function(k) {
         if (expected[k]) {
           match = match && expected[k] == actual[k];
         }
@@ -55,7 +55,7 @@ class ResourceTestHelper {
 
       // Also check for any headers that we're expecting
       expected.headers = expected.headers || {};
-      Object.keys(expected.headers).forEach(function (k) {
+      Object.keys(expected.headers).forEach(function(k) {
         // We have a special check for authorization
         if (k === "Authorization") {
           return true;

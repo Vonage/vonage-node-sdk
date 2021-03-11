@@ -10,29 +10,29 @@ chai.use(sinonChai);
 chai.use(vonageChai);
 
 const TestUtils = {
-  getCredentials: function () {
+  getCredentials: function() {
     var creds = Credentials.parse({
       apiKey: "myKey",
-      apiSecret: "mySecret",
+      apiSecret: "mySecret"
     });
 
     // Overwrite JWT generation for tests
-    creds.generateJwt = function () {
+    creds.generateJwt = function() {
       return "ThisIsAJWT";
     };
 
     return creds;
   },
-  getHttpClient: function () {
+  getHttpClient: function() {
     const httpClient = new HttpClient(
       {
-        logger: new NullLogger(),
+        logger: new NullLogger()
       },
       this.getCredentials()
     );
 
     return httpClient;
-  },
+  }
 };
 
 export { TestUtils, expect, sinon };

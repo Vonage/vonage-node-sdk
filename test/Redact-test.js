@@ -1,21 +1,21 @@
 import Redact from "../lib/Redact";
 import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
-describe("Redact", function () {
-  beforeEach(function () {
+describe("Redact", function() {
+  beforeEach(function() {
     this.httpClientStub = TestUtils.getHttpClient();
     sinon.stub(this.httpClientStub, "request");
     this.redact = new Redact(TestUtils.getCredentials(), {
-      api: this.httpClientStub,
+      api: this.httpClientStub
     });
   });
 
-  afterEach(function () {
+  afterEach(function() {
     this.httpClientStub.request.restore();
   });
 
-  describe("#transaction", function () {
-    it("should work with no optional fields", function () {
+  describe("#transaction", function() {
+    it("should work with no optional fields", function() {
       return expect(this.redact)
         .method("transaction")
         .withParams("ABC123", "voice")
@@ -23,14 +23,14 @@ describe("Redact", function () {
         .to.url(`${Redact.PATH}/transaction`);
     });
 
-    it("should pass through optional fields", function () {
+    it("should pass through optional fields", function() {
       return expect(this.redact)
         .method("transaction")
         .withParams("ABC123", "voice", { type: "outbound" })
         .to.post.withJsonBody({
           id: "ABC123",
           product: "voice",
-          type: "outbound",
+          type: "outbound"
         })
         .to.url(`${Redact.PATH}/transaction`);
     });
