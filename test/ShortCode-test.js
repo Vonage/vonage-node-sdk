@@ -11,7 +11,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   apiKey: "some-key",
-  apiSecret: "some-secret"
+  apiSecret: "some-secret",
 });
 var emptyCallback = () => {};
 
@@ -24,8 +24,8 @@ describe("ShortCode", () => {
     var options = {
       httpClient: httpClientStub,
       logger: {
-        info: () => {}
-      }
+        info: () => {},
+      },
     };
     shortcode = new ShortCode(creds, options);
   });
@@ -58,7 +58,7 @@ describe("ShortCode", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path:
-          "/sc/us/alert/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret"
+          "/sc/us/alert/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -73,8 +73,8 @@ describe("ShortCode", () => {
       httpClient: httpClientStub,
       restHost: "rest.example.com",
       logger: {
-        info: () => {}
-      }
+        info: () => {},
+      },
     };
     let shortcode = new ShortCode(creds, options);
     shortcode.shortcodeAlert(recipient, messageParams, opts, emptyCallback);
@@ -83,7 +83,7 @@ describe("ShortCode", () => {
       sinon.match({
         host: "rest.example.com",
         path:
-          "/sc/us/alert/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret"
+          "/sc/us/alert/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -99,7 +99,7 @@ describe("ShortCode", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path:
-          "/sc/us/2fa/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret"
+          "/sc/us/2fa/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -114,8 +114,8 @@ describe("ShortCode", () => {
       httpClient: httpClientStub,
       restHost: "rest.example.com",
       logger: {
-        info: () => {}
-      }
+        info: () => {},
+      },
     };
     let shortcode = new ShortCode(creds, options);
     shortcode.shortcode2FA(recipient, messageParams, opts, emptyCallback);
@@ -124,7 +124,7 @@ describe("ShortCode", () => {
       sinon.match({
         host: "rest.example.com",
         path:
-          "/sc/us/2fa/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret"
+          "/sc/us/2fa/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -140,7 +140,7 @@ describe("ShortCode", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path:
-          "/sc/us/marketing/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret"
+          "/sc/us/marketing/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -155,8 +155,8 @@ describe("ShortCode", () => {
       httpClient: httpClientStub,
       restHost: "rest.example.com",
       logger: {
-        info: () => {}
-      }
+        info: () => {},
+      },
     };
     let shortcode = new ShortCode(creds, options);
     shortcode.shortcodeMarketing(recipient, messageParams, opts, emptyCallback);
@@ -165,7 +165,7 @@ describe("ShortCode", () => {
       sinon.match({
         host: "rest.example.com",
         path:
-          "/sc/us/marketing/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret"
+          "/sc/us/marketing/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );

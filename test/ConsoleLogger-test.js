@@ -9,7 +9,7 @@ describe("ConsoleLogger", () => {
   describe(".log", () => {
     it("should log `info` using `console.log`", () => {
       var fakeConsole = {
-        log: () => {}
+        log: () => {},
       };
       var stub = sinon.stub(fakeConsole);
 
@@ -21,7 +21,7 @@ describe("ConsoleLogger", () => {
 
     it("should log `error` using `console.error`", () => {
       var fakeConsole = {
-        error: () => {}
+        error: () => {},
       };
       var stub = sinon.stub(fakeConsole);
 
@@ -33,7 +33,7 @@ describe("ConsoleLogger", () => {
 
     it("should log `warn` using `console.log`", () => {
       var fakeConsole = {
-        log: () => {}
+        log: () => {},
       };
       var stub = sinon.stub(fakeConsole);
 
@@ -45,7 +45,7 @@ describe("ConsoleLogger", () => {
 
     it("should log levels using `console.log`", () => {
       var fakeConsole = {
-        log: () => {}
+        log: () => {},
       };
       var stub = sinon.stub(fakeConsole);
 

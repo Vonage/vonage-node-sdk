@@ -13,7 +13,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   apiKey: "some-key",
-  apiSecret: "some-secret"
+  apiSecret: "some-secret",
 });
 var emptyCallback = () => {};
 
@@ -26,8 +26,8 @@ describe("NumberInsight", () => {
     var options = {
       httpClient: httpClientStub,
       logger: {
-        info: () => {}
-      }
+        info: () => {},
+      },
     };
     numberInsight = new NumberInsight(creds, options);
   });
@@ -87,7 +87,7 @@ describe("NumberInsight", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/ni/basic/json?number=123456789&api_key=some-key&api_secret=some-secret"
+          "/ni/basic/json?number=123456789&api_key=some-key&api_secret=some-secret",
       })
     );
   });
@@ -102,7 +102,7 @@ describe("NumberInsight", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/ni/standard/json?number=123456789&api_key=some-key&api_secret=some-secret"
+          "/ni/standard/json?number=123456789&api_key=some-key&api_secret=some-secret",
       })
     );
   });
@@ -112,7 +112,7 @@ describe("NumberInsight", () => {
       {
         level: "advanced",
         number: "123456789",
-        callback: "http://example.com"
+        callback: "http://example.com",
       },
       emptyCallback
     );
@@ -121,7 +121,7 @@ describe("NumberInsight", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/ni/advanced/async/json?number=123456789&callback=http%3A%2F%2Fexample.com&api_key=some-key&api_secret=some-secret"
+          "/ni/advanced/async/json?number=123456789&callback=http%3A%2F%2Fexample.com&api_key=some-key&api_secret=some-secret",
       })
     );
   });
@@ -136,7 +136,7 @@ describe("NumberInsight", () => {
       sinon.match({
         host: "api.nexmo.com",
         path:
-          "/ni/advanced/json?number=123456789&api_key=some-key&api_secret=some-secret"
+          "/ni/advanced/json?number=123456789&api_key=some-key&api_secret=some-secret",
       })
     );
   });

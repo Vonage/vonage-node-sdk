@@ -1,6 +1,7 @@
 {
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 5,
+        "ecmaVersion": 2015,
         "impliedStrict": true,
         "sourceType": "module",
         "ecmaFeatures": {
@@ -9,7 +10,8 @@
         }
     },
     "plugins": [
-        "prettier"
+        "prettier",
+        "@babel"
     ],
     "rules": {
         "prettier/prettier": "error"

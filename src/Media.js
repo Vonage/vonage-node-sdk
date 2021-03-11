@@ -27,7 +27,7 @@ class Media {
     return this.options.api.postFile(
       Media.PATH,
       opts,
-      function(err, response, body) {
+      function (err, response, body) {
         if (err) {
           return callback(err);
         }
@@ -100,7 +100,7 @@ class Media {
     headers = Object.assign(
       {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
       },
       headers
     );

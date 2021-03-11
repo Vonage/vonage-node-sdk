@@ -2,22 +2,22 @@ import Pricing from "../lib/Pricing";
 import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
 //
-describe("Pricing", function() {
-  beforeEach(function() {
+describe("Pricing", function () {
+  beforeEach(function () {
     this.sandbox = sinon.sandbox.create();
     this.httpClientStub = TestUtils.getHttpClient();
     this.sandbox.stub(this.httpClientStub, "request");
     this.pricing = new Pricing(TestUtils.getCredentials(), {
-      rest: this.httpClientStub
+      rest: this.httpClientStub,
     });
   });
 
-  afterEach(function() {
+  afterEach(function () {
     this.sandbox.restore();
   });
 
-  describe("get", function() {
-    it("should call the correct endpoint", function() {
+  describe("get", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.pricing)
         .method("get")
         .withParams("sms", "GB")
@@ -25,8 +25,8 @@ describe("Pricing", function() {
     });
   });
 
-  describe("getPrefix", function() {
-    it("should call the correct endpoint", function() {
+  describe("getPrefix", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.pricing)
         .method("getPrefix")
         .withParams("sms", "44")
@@ -34,8 +34,8 @@ describe("Pricing", function() {
     });
   });
 
-  describe("getFull", function() {
-    it("should call the correct endpoint", function() {
+  describe("getFull", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.pricing)
         .method("getFull")
         .withParams("sms")
@@ -43,8 +43,8 @@ describe("Pricing", function() {
     });
   });
 
-  describe("getPhone", function() {
-    it("should call the correct endpoint", function() {
+  describe("getPhone", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.pricing)
         .method("getPhone")
         .withParams("sms", "442038659460")
