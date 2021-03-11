@@ -14,7 +14,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: path.join(__dirname, "private-test.key")
+  privateKey: path.join(__dirname, "private-test.key"),
 });
 var emptyCallback = () => {};
 
@@ -25,7 +25,7 @@ describe("DtmfResource", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     dtmf = new DtmfResource(creds, options);
   });
@@ -33,7 +33,7 @@ describe("DtmfResource", () => {
   it("should be able to send DTMF to a call", () => {
     const callId = "2342342-lkjhlkjh-32423";
     var params = {
-      digits: [1, 2, 3, 4]
+      digits: [1, 2, 3, 4],
     };
     dtmf.send(callId, params, emptyCallback);
 
@@ -42,8 +42,8 @@ describe("DtmfResource", () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": 20
-      }
+        "Content-Length": 20,
+      },
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -55,7 +55,7 @@ describe("DtmfResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     let dtmf = new DtmfResource(creds, options);
     const callId = "2342342-lkjhlkjh-32423";
@@ -68,8 +68,8 @@ describe("DtmfResource", () => {
         method: "PUT",
         host: "api.example.com",
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     expect(httpClientStub.request).to.have.been.calledWith(

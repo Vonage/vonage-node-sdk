@@ -15,7 +15,7 @@ class Message {
       body: "Invalid Body value in Binary Message",
       udh: "Invalid udh value in Binary Message",
       title: "Invalid title in WAP Push message",
-      url: "Invalid url in WAP Push message"
+      url: "Invalid url in WAP Push message",
     };
   }
 
@@ -46,7 +46,7 @@ class Message {
       (endpoint.path.indexOf("?") > 0 ? "&" : "?") +
       querystring.stringify({
         api_key: this.creds.apiKey,
-        api_secret: this.creds.apiSecret
+        api_secret: this.creds.apiSecret,
       });
     this.options.httpClient.request(endpoint, method, callback);
   }
@@ -69,10 +69,10 @@ class Message {
       this._sendRequest(
         {
           host: this.options.restHost || "rest.nexmo.com",
-          path: path
+          path: path,
         },
         "POST",
-        function(err, apiResponse) {
+        function (err, apiResponse) {
           if (
             !err &&
             apiResponse.status &&
@@ -164,7 +164,7 @@ class Message {
       return this.options.rest.get(
         "/search/message",
         {
-          id: id
+          id: id,
         },
         callback
       );
@@ -174,7 +174,7 @@ class Message {
     return this.options.rest.get(
       "/search/messages",
       {
-        ids: id
+        ids: id,
       },
       callback
     );
@@ -185,7 +185,7 @@ class Message {
       "/search/rejections",
       {
         to,
-        date
+        date,
       },
       callback
     );

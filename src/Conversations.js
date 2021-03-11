@@ -60,8 +60,8 @@ class Conversations {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
     this.options.httpClient.request(config, callback);
   }
@@ -85,8 +85,8 @@ class Conversations {
       body: undefined,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
     this.options.httpClient.request(config, callback);
   }
@@ -140,8 +140,8 @@ class Conversations {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
 
     this.options.httpClient.request(config, callback);
@@ -164,8 +164,8 @@ class Conversations {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
 
     this.options.httpClient.request(config, callback);
@@ -184,8 +184,8 @@ class Conversations {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
 
     this.options.httpClient.request(config, callback);

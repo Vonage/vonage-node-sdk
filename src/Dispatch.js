@@ -24,11 +24,11 @@ class Dispatch {
   create(template, workflow, callback) {
     const params = {
       template: template,
-      workflow: workflow
+      workflow: workflow,
     };
 
     return this.options.api.post(Dispatch.PATH, params, callback, true, {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     });
   }
 }

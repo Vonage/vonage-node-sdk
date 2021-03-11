@@ -12,7 +12,7 @@ import Credentials from "../lib/Credentials";
 
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: __dirname + "/private-test.key"
+  privateKey: __dirname + "/private-test.key",
 });
 var emptyCallback = () => {};
 
@@ -23,7 +23,7 @@ describe("Events", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     events = new Events(creds, options);
   });
@@ -34,7 +34,7 @@ describe("Events", () => {
     events.create(conversationId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
-      path: `${Events.PATH.replace("{conversation_uuid}", conversationId)}`
+      path: `${Events.PATH.replace("{conversation_uuid}", conversationId)}`,
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -52,7 +52,7 @@ describe("Events", () => {
       path: `${Events.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}`
+      )}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -74,7 +74,7 @@ describe("Events", () => {
       path: `${Events.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}?some=query`
+      )}?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -106,7 +106,7 @@ describe("Events", () => {
       path: `${Events.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}?some=query`
+      )}?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -136,7 +136,7 @@ describe("Events", () => {
       path: `${Events.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}/${eventId}`
+      )}/${eventId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -156,7 +156,7 @@ describe("Events", () => {
       path: `${Events.PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}/${eventId}`
+      )}/${eventId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

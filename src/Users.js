@@ -43,8 +43,8 @@ class Users {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
     this.options.httpClient.request(config, callback);
   }
@@ -65,8 +65,8 @@ class Users {
       body: undefined,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
     this.options.httpClient.request(config, callback);
   }
@@ -144,8 +144,8 @@ class Users {
       body: undefined,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
     this.options.httpClient.request(config, callback);
   }
@@ -167,8 +167,8 @@ class Users {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
 
     this.options.httpClient.request(config, callback);
@@ -187,8 +187,8 @@ class Users {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
 
     this.options.httpClient.request(config, callback);

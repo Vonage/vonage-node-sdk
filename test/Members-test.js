@@ -12,7 +12,7 @@ import Credentials from "../lib/Credentials";
 
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: __dirname + "/private-test.key"
+  privateKey: __dirname + "/private-test.key",
 });
 var emptyCallback = () => {};
 
@@ -23,7 +23,7 @@ describe("Members", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     members = new Members(creds, options);
   });
@@ -34,7 +34,7 @@ describe("Members", () => {
     members.create(conversationId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
-      path: `${Members.PATH.replace("{conversation_uuid}", conversationId)}`
+      path: `${Members.PATH.replace("{conversation_uuid}", conversationId)}`,
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -48,7 +48,7 @@ describe("Members", () => {
     members.add(conversationId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
-      path: `${Members.PATH.replace("{conversation_uuid}", conversationId)}`
+      path: `${Members.PATH.replace("{conversation_uuid}", conversationId)}`,
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -66,7 +66,7 @@ describe("Members", () => {
       path: `${Members.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}`
+      )}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -88,7 +88,7 @@ describe("Members", () => {
       path: `${Members.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}?some=query`
+      )}?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -120,7 +120,7 @@ describe("Members", () => {
       path: `${Members.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}?some=query`
+      )}?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -150,7 +150,7 @@ describe("Members", () => {
       path: `${Members.BETA2_PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}/${memberId}`
+      )}/${memberId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -171,7 +171,7 @@ describe("Members", () => {
       path: `${Members.PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}/${memberId}`
+      )}/${memberId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -191,7 +191,7 @@ describe("Members", () => {
       path: `${Members.PATH.replace(
         "{conversation_uuid}",
         conversationId
-      )}/${memberId}`
+      )}/${memberId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

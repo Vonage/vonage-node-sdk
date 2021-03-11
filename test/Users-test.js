@@ -12,7 +12,7 @@ import Credentials from "../lib/Credentials";
 
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: __dirname + "/private-test.key"
+  privateKey: __dirname + "/private-test.key",
 });
 var emptyCallback = () => {};
 
@@ -23,7 +23,7 @@ describe("Users", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     users = new Users(creds, options);
   });
@@ -39,7 +39,7 @@ describe("Users", () => {
     users.create(params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
-      path: `${Users.PATH}`
+      path: `${Users.PATH}`,
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -53,7 +53,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.BETA2_PATH}`
+      path: `${Users.BETA2_PATH}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -68,7 +68,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.BETA2_PATH}?some=query`
+      path: `${Users.BETA2_PATH}?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -93,7 +93,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.BETA2_PATH}?some=query`
+      path: `${Users.BETA2_PATH}?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -119,7 +119,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.BETA2_PATH}/${userId}`
+      path: `${Users.BETA2_PATH}/${userId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -135,7 +135,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.BETA2_PATH}/${userId}/conversations`
+      path: `${Users.BETA2_PATH}/${userId}/conversations`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -151,7 +151,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.BETA2_PATH}/${userId}/conversations`
+      path: `${Users.BETA2_PATH}/${userId}/conversations`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -170,7 +170,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.BETA2_PATH}/${userId}/conversations?some=query`
+      path: `${Users.BETA2_PATH}/${userId}/conversations?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -189,7 +189,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Users.BETA2_PATH}/${userId}/conversations?some=query`
+      path: `${Users.BETA2_PATH}/${userId}/conversations?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -201,13 +201,13 @@ describe("Users", () => {
   it("should allow a user to be updated", () => {
     const userId = "USR-aaabbbccc-111222333";
     var params = {
-      action: "join"
+      action: "join",
     };
     users.update(userId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       method: "PUT",
-      path: `${Users.PATH}/${userId}`
+      path: `${Users.PATH}/${userId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -223,7 +223,7 @@ describe("Users", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "DELETE",
       body: undefined,
-      path: `${Users.PATH}/${userId}`
+      path: `${Users.PATH}/${userId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

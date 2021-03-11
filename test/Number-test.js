@@ -9,50 +9,50 @@ var numberAPIs = {
   searchNumbers: "search",
   buyNumber: "buy",
   cancelNumber: "cancel",
-  updateNumber: "update"
+  updateNumber: "update",
 };
 
 var pricingAPIs = {
   get: "getPricing",
-  getPhone: "getPhonePricing"
+  getPhone: "getPhonePricing",
 };
 
-describe("Number Object", function() {
-  it("should implement all v1 APIs", function() {
+describe("Number Object", function () {
+  it("should implement all v1 APIs", function () {
     VonageStub.checkAllFunctionsAreDefined(numberAPIs, Number);
   });
 
-  it("should implement legacy pricing APIs", function() {
+  it("should implement legacy pricing APIs", function () {
     VonageStub.checkAllFunctionsAreDefined(pricingAPIs, Number);
   });
 
-  it("should proxy the function call to the underlying `vonage` object", function() {
+  it("should proxy the function call to the underlying `vonage` object", function () {
     VonageStub.checkAllFunctionsAreCalled(numberAPIs, Number);
   });
 });
 
-describe("Number _pricing", function() {
-  beforeEach(function() {
+describe("Number _pricing", function () {
+  beforeEach(function () {
     this.sandbox = sinon.sandbox.create();
     this.httpClientStub = TestUtils.getHttpClient();
     this.sandbox.stub(this.httpClientStub, "request");
     this.number = new Number(TestUtils.getCredentials(), {
-      rest: this.httpClientStub
+      rest: this.httpClientStub,
     });
   });
 
-  afterEach(function() {
+  afterEach(function () {
     this.sandbox.restore();
   });
 
-  it("should call the correct endpoint for getPricing", function() {
+  it("should call the correct endpoint for getPricing", function () {
     return expect(this.number)
       .method("getPricing")
       .withParams("sms", "GB")
       .to.get.url("/account/get-pricing/outbound/sms?country=GB");
   });
 
-  it("should call the correct endpoint for getPhonePricing", function() {
+  it("should call the correct endpoint for getPhonePricing", function () {
     return expect(this.number)
       .method("getPhonePricing")
       .withParams("sms", "442038659460")

@@ -13,7 +13,7 @@ chai.use(sinonChai);
 
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: path.join(__dirname, "private-test.key")
+  privateKey: path.join(__dirname, "private-test.key"),
 });
 var emptyCallback = () => {};
 
@@ -24,7 +24,7 @@ describe("StreamResource", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     stream = new StreamResource(creds, options);
   });
@@ -32,7 +32,7 @@ describe("StreamResource", () => {
   it("should allow a stream to be started", () => {
     const callId = "2342342-lkjhlkjh-32423";
     var params = {
-      stream_url: "https://example.com/▶tést.mp3" // eslint-disable-line camelcase
+      stream_url: "https://example.com/▶tést.mp3", // eslint-disable-line camelcase
     }; // eslint-disable-line camelcase
     stream.start(callId, params, emptyCallback);
 
@@ -41,8 +41,8 @@ describe("StreamResource", () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": 49
-      }
+        "Content-Length": 49,
+      },
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -55,7 +55,7 @@ describe("StreamResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     let stream = new StreamResource(creds, options);
     const callId = "2342342-lkjhlkjh-32423";
@@ -68,8 +68,8 @@ describe("StreamResource", () => {
         method: "PUT",
         host: "api.example.com",
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
 
@@ -86,7 +86,7 @@ describe("StreamResource", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "DELETE",
       body: undefined,
-      path: StreamResource.PATH.replace("{call_uuid}", callId)
+      path: StreamResource.PATH.replace("{call_uuid}", callId),
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -99,7 +99,7 @@ describe("StreamResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     let stream = new StreamResource(creds, options);
     const callId = "2342342-lkjhlkjh-32423";
@@ -109,7 +109,7 @@ describe("StreamResource", () => {
       method: "DELETE",
       body: undefined,
       host: "api.example.com",
-      path: StreamResource.PATH.replace("{call_uuid}", callId)
+      path: StreamResource.PATH.replace("{call_uuid}", callId),
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

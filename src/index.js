@@ -4,55 +4,55 @@ var querystring = require("querystring");
 
 var msgpath = {
   host: "rest.nexmo.com",
-  path: "/sms/json"
+  path: "/sms/json",
 };
 var shortcodePath = {
   host: "rest.nexmo.com",
-  path: "/sc/us/${type}/json"
+  path: "/sc/us/${type}/json",
 };
 var ttsEndpoint = {
   host: "api.nexmo.com",
-  path: "/tts/json"
+  path: "/tts/json",
 };
 var ttsPromptEndpoint = {
   host: "api.nexmo.com",
-  path: "/tts-prompt/json"
+  path: "/tts-prompt/json",
 };
 var callEndpoint = {
   host: "rest.nexmo.com",
-  path: "/call/json"
+  path: "/call/json",
 };
 var verifyEndpoint = {
   host: "api.nexmo.com",
-  path: "/verify/json"
+  path: "/verify/json",
 };
 var checkVerifyEndpoint = {
   host: "api.nexmo.com",
-  path: "/verify/check/json"
+  path: "/verify/check/json",
 };
 var controlVerifyEndpoint = {
   host: "api.nexmo.com",
-  path: "/verify/control/json"
+  path: "/verify/control/json",
 };
 var searchVerifyEndpoint = {
   host: "api.nexmo.com",
-  path: "/verify/search/json"
+  path: "/verify/search/json",
 };
 var niEndpoint = {
   host: "api.nexmo.com",
-  path: "/ni/advanced/async/json"
+  path: "/ni/advanced/async/json",
 };
 var niBasicEndpoint = {
   host: "api.nexmo.com",
-  path: "/ni/basic/json"
+  path: "/ni/basic/json",
 };
 var niStandardEndpoint = {
   host: "api.nexmo.com",
-  path: "/ni/standard/json"
+  path: "/ni/standard/json",
 };
 var niAdvancedEndpoint = {
   host: "api.nexmo.com",
-  path: "/ni/advanced/json"
+  path: "/ni/advanced/json",
 };
 var up = {};
 var numberPattern = new RegExp("^[0-9 +()-]*$");
@@ -89,10 +89,10 @@ var ERROR_MESSAGES = {
     "Number can contain digits and may include any or all of the following: white space, -,+, (, ).",
   optionsNotAnObject:
     "Options parameter should be a dictionary. Check the docs for valid properties for options",
-  product: "Invalid product. Should be one of [voice, sms]"
+  product: "Invalid product. Should be one of [voice, sms]",
 };
 
-exports.initialize = function(pkey, psecret, options) {
+exports.initialize = function (pkey, psecret, options) {
   // These can default to empty as we may provide a private key for JWT auth
   // In that situation, private key and secret are not required. If you don't provide
   // A key/secret and try and make a request you'll get a 401 error back
@@ -101,7 +101,7 @@ exports.initialize = function(pkey, psecret, options) {
 
   up = {
     api_key: pkey,
-    api_secret: psecret
+    api_secret: psecret,
   };
   _options = options;
 
@@ -125,7 +125,7 @@ exports.initialize = function(pkey, psecret, options) {
   }
 };
 
-exports.sendBinaryMessage = function(sender, recipient, body, udh, callback) {
+exports.sendBinaryMessage = function (sender, recipient, body, udh, callback) {
   if (!body) {
     sendError(callback, new Error(ERROR_MESSAGES.body));
   } else if (!udh) {
@@ -137,14 +137,14 @@ exports.sendBinaryMessage = function(sender, recipient, body, udh, callback) {
         to: recipient,
         type: "binary",
         body: body,
-        udh: udh
+        udh: udh,
       },
       callback
     );
   }
 };
 
-exports.sendWapPushMessage = function(
+exports.sendWapPushMessage = function (
   sender,
   recipient,
   title,
@@ -168,14 +168,20 @@ exports.sendWapPushMessage = function(
         type: "wappush",
         title: title,
         validity: validity,
-        url: url
+        url: url,
       },
       callback
     );
   }
 };
 
-exports.sendTextMessage = function(sender, recipient, message, opts, callback) {
+exports.sendTextMessage = function (
+  sender,
+  recipient,
+  message,
+  opts,
+  callback
+) {
   if (!message) {
     sendError(callback, new Error(ERROR_MESSAGES.msg));
   } else {
@@ -190,7 +196,7 @@ exports.sendTextMessage = function(sender, recipient, message, opts, callback) {
   }
 };
 
-exports.sendMessage = function(opts, callback) {
+exports.sendMessage = function (opts, callback) {
   sendMessage(opts, callback);
 };
 function sendMessage(data, callback) {
@@ -209,7 +215,7 @@ function sendMessage(data, callback) {
         " with message " +
         data.text
     );
-    sendRequest(path, "POST", function(err, apiResponse) {
+    sendRequest(path, "POST", function (err, apiResponse) {
       if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
         sendError(
           callback,
@@ -233,7 +239,7 @@ function sendViaShortcode(type, recipient, messageParams, opts, callback) {
   opts = opts || {};
   var path = clone(shortcodePath);
   path.path = path.path.replace("${type}", type);
-  Object.keys(messageParams).forEach(function(key) {
+  Object.keys(messageParams).forEach(function (key) {
     opts[key] = messageParams[key];
   });
   opts.to = recipient;
@@ -246,7 +252,7 @@ function sendViaShortcode(type, recipient, messageParams, opts, callback) {
       " with parameters " +
       JSON.stringify(messageParams)
   );
-  sendRequest(path, "POST", function(err, apiResponse) {
+  sendRequest(path, "POST", function (err, apiResponse) {
     if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
       sendError(
         callback,
@@ -258,13 +264,13 @@ function sendViaShortcode(type, recipient, messageParams, opts, callback) {
     }
   });
 }
-exports.shortcodeAlert = function(recipient, messageParams, opts, callback) {
+exports.shortcodeAlert = function (recipient, messageParams, opts, callback) {
   sendViaShortcode("alert", recipient, messageParams, opts, callback);
 };
-exports.shortcode2FA = function(recipient, messageParams, opts, callback) {
+exports.shortcode2FA = function (recipient, messageParams, opts, callback) {
   sendViaShortcode("2fa", recipient, messageParams, opts, callback);
 };
-exports.shortcodeMarketing = function(
+exports.shortcodeMarketing = function (
   recipient,
   messageParams,
   opts,
@@ -289,12 +295,12 @@ function sendRequest(endpoint, method, callback) {
   _options.httpClient.request(endpoint, method, callback);
 }
 
-exports.checkBalance = function(callback) {
+exports.checkBalance = function (callback) {
   var balanceEndpoint = getEndpoint("/account/get-balance");
   sendRequest(balanceEndpoint, callback);
 };
 
-exports.getNumbers = function(options, callback) {
+exports.getNumbers = function (options, callback) {
   var numbersEndpoint = getEndpoint("/account/numbers");
   if (typeof options === "function") {
     callback = options;
@@ -311,7 +317,7 @@ exports.getNumbers = function(options, callback) {
   sendRequest(numbersEndpoint, callback);
 };
 
-exports.searchNumbers = function(countryCode, pattern, callback) {
+exports.searchNumbers = function (countryCode, pattern, callback) {
   if (!countryCode || countryCode.length !== 2) {
     sendError(callback, new Error(ERROR_MESSAGES.countrycode));
   } else {
@@ -332,7 +338,7 @@ exports.searchNumbers = function(countryCode, pattern, callback) {
   }
 };
 
-exports.buyNumber = function(countryCode, msisdn, callback) {
+exports.buyNumber = function (countryCode, msisdn, callback) {
   if (!countryCode || countryCode.length != 2) {
     sendError(callback, new Error(ERROR_MESSAGES.countrycode));
   } else if (!msisdn) {
@@ -344,7 +350,7 @@ exports.buyNumber = function(countryCode, msisdn, callback) {
   }
 };
 
-exports.cancelNumber = function(countryCode, msisdn, callback) {
+exports.cancelNumber = function (countryCode, msisdn, callback) {
   if (!countryCode || countryCode.length !== 2) {
     sendError(callback, new Error(ERROR_MESSAGES.countrycode));
   } else if (!msisdn) {
@@ -356,7 +362,7 @@ exports.cancelNumber = function(countryCode, msisdn, callback) {
   }
 };
 
-exports.cancelNumber = function(countryCode, msisdn, callback) {
+exports.cancelNumber = function (countryCode, msisdn, callback) {
   if (!countryCode || countryCode.length !== 2) {
     sendError(callback, new Error(ERROR_MESSAGES.countrycode));
   } else if (!msisdn) {
@@ -368,7 +374,7 @@ exports.cancelNumber = function(countryCode, msisdn, callback) {
   }
 };
 
-exports.updateNumber = function(countryCode, msisdn, params, callback) {
+exports.updateNumber = function (countryCode, msisdn, params, callback) {
   if (!countryCode || countryCode.length !== 2) {
     sendError(callback, new Error(ERROR_MESSAGES.countrycode));
   } else if (!msisdn) {
@@ -385,25 +391,25 @@ exports.updateNumber = function(countryCode, msisdn, params, callback) {
   }
 };
 
-exports.changePassword = function(newSecret, callback) {
+exports.changePassword = function (newSecret, callback) {
   var settingsEndpoint = getEndpoint("/account/settings");
   settingsEndpoint.path += "?newSecret=" + encodeURIComponent(newSecret);
   sendRequest(settingsEndpoint, "POST", callback);
 };
 
-exports.changeMoCallbackUrl = function(newUrl, callback) {
+exports.changeMoCallbackUrl = function (newUrl, callback) {
   var settingsEndpoint = getEndpoint("/account/settings");
   settingsEndpoint.path += "?moCallBackUrl=" + encodeURIComponent(newUrl);
   sendRequest(settingsEndpoint, "POST", callback);
 };
 
-exports.changeDrCallbackUrl = function(newUrl, callback) {
+exports.changeDrCallbackUrl = function (newUrl, callback) {
   var settingsEndpoint = getEndpoint("/account/settings");
   settingsEndpoint.path += "?drCallBackUrl=" + encodeURIComponent(newUrl);
   sendRequest(settingsEndpoint, "POST", callback);
 };
 
-exports.verifyNumber = function(inputParams, callback) {
+exports.verifyNumber = function (inputParams, callback) {
   if (!inputParams.number || !inputParams.brand) {
     sendError(callback, new Error(ERROR_MESSAGES.verifyValidation));
   } else {
@@ -413,7 +419,7 @@ exports.verifyNumber = function(inputParams, callback) {
   }
 };
 
-exports.checkVerifyRequest = function(inputParams, callback) {
+exports.checkVerifyRequest = function (inputParams, callback) {
   if (!inputParams.request_id || !inputParams.code) {
     sendError(callback, new Error(ERROR_MESSAGES.checkVerifyValidation));
   } else {
@@ -423,7 +429,7 @@ exports.checkVerifyRequest = function(inputParams, callback) {
   }
 };
 
-exports.controlVerifyRequest = function(inputParams, callback) {
+exports.controlVerifyRequest = function (inputParams, callback) {
   if (!inputParams.request_id || !inputParams.cmd) {
     sendError(callback, new Error(ERROR_MESSAGES.controlVerifyValidation));
   } else {
@@ -433,7 +439,7 @@ exports.controlVerifyRequest = function(inputParams, callback) {
   }
 };
 
-exports.searchVerifyRequest = function(requestIds, callback) {
+exports.searchVerifyRequest = function (requestIds, callback) {
   var requestIdParam = {};
   if (!requestIds) {
     sendError(callback, new Error(ERROR_MESSAGES.searchVerifyValidation));
@@ -453,23 +459,23 @@ exports.searchVerifyRequest = function(requestIds, callback) {
   }
 };
 
-exports.numberInsight = function(inputParams, callback) {
+exports.numberInsight = function (inputParams, callback) {
   numberInsightAsync(inputParams, callback);
 };
 
-exports.numberInsightBasic = function(inputParams, callback) {
+exports.numberInsightBasic = function (inputParams, callback) {
   numberInsightCommon(niBasicEndpoint, inputParams, callback);
 };
 
-exports.numberInsightStandard = function(inputParams, callback) {
+exports.numberInsightStandard = function (inputParams, callback) {
   numberInsightCommon(niStandardEndpoint, inputParams, callback);
 };
 
-exports.numberInsightAdvanced = function(inputParams, callback) {
+exports.numberInsightAdvanced = function (inputParams, callback) {
   numberInsightCommon(niAdvancedEndpoint, inputParams, callback);
 };
 
-exports.numberInsightAdvancedAsync = function(inputParams, callback) {
+exports.numberInsightAdvancedAsync = function (inputParams, callback) {
   numberInsightAsync(inputParams, callback);
 };
 
@@ -528,7 +534,7 @@ function sendVoiceMessage(voiceEndpoint, data, callback) {
     _options.logger.info(
       "sending TTS message to " + data.to + " with message " + data.text
     );
-    sendRequest(endpoint, "POST", function(err, apiResponse) {
+    sendRequest(endpoint, "POST", function (err, apiResponse) {
       if (!err && apiResponse.status && apiResponse.status > 0) {
         sendError(callback, new Error(apiResponse["error-text"]), apiResponse);
       } else {
@@ -538,7 +544,7 @@ function sendVoiceMessage(voiceEndpoint, data, callback) {
   }
 }
 
-exports.sendTTSMessage = function(recipient, message, opts, callback) {
+exports.sendTTSMessage = function (recipient, message, opts, callback) {
   if (!message) {
     sendError(callback, new Error(ERROR_MESSAGES.msg));
   } else {
@@ -551,7 +557,7 @@ exports.sendTTSMessage = function(recipient, message, opts, callback) {
   }
 };
 
-exports.sendTTSPromptWithCapture = function(
+exports.sendTTSPromptWithCapture = function (
   recipient,
   message,
   maxDigits,
@@ -577,7 +583,7 @@ exports.sendTTSPromptWithCapture = function(
   }
 };
 
-exports.sendTTSPromptWithConfirm = function(
+exports.sendTTSPromptWithConfirm = function (
   recipient,
   message,
   maxDigits,
@@ -611,7 +617,7 @@ exports.sendTTSPromptWithConfirm = function(
   }
 };
 
-exports.call = function(recipient, answerUrl, opts, callback) {
+exports.call = function (recipient, answerUrl, opts, callback) {
   if (!answerUrl) {
     sendError(callback, new Error(ERROR_MESSAGES.answerUrl));
   } else {

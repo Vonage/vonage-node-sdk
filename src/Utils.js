@@ -1,6 +1,6 @@
 var querystring = require("querystring");
 
-exports.createPathWithQuery = function(path, query) {
+exports.createPathWithQuery = function (path, query) {
   if (!query) {
     throw new Error('"query" is a required parameter');
   }
@@ -17,11 +17,11 @@ exports.createPathWithQuery = function(path, query) {
   return `${path}${pathExt}`;
 };
 
-exports.getQuery = function(path) {
+exports.getQuery = function (path) {
   return querystring.parse(path.split("?")[1]);
 };
 
-exports.sendError = function(callback, err, returnData) {
+exports.sendError = function (callback, err, returnData) {
   // Throw the error in case if there is no callback passed
   if (callback) {
     callback(err, returnData);
@@ -30,6 +30,6 @@ exports.sendError = function(callback, err, returnData) {
   }
 };
 
-exports.clone = function(a) {
+exports.clone = function (a) {
   return JSON.parse(JSON.stringify(a));
 };

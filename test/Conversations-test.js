@@ -13,7 +13,7 @@ import Credentials from "../lib/Credentials";
 
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: __dirname + "/private-test.key"
+  privateKey: __dirname + "/private-test.key",
 });
 var emptyCallback = () => {};
 
@@ -24,7 +24,7 @@ describe("Conversations", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     conversations = new Conversations(creds, options);
   });
@@ -33,7 +33,7 @@ describe("Conversations", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "example.com"
+      apiHost: "example.com",
     };
     let conversations = new Conversations(creds, options);
 
@@ -42,7 +42,7 @@ describe("Conversations", () => {
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       host: "example.com",
-      path: `${Conversations.PATH}`
+      path: `${Conversations.PATH}`,
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -61,7 +61,7 @@ describe("Conversations", () => {
     conversations.create(params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
-      path: `${Conversations.PATH}`
+      path: `${Conversations.PATH}`,
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -75,7 +75,7 @@ describe("Conversations", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Conversations.BETA2_PATH}`
+      path: `${Conversations.BETA2_PATH}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -93,7 +93,7 @@ describe("Conversations", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Conversations.BETA2_PATH}?some=query`
+      path: `${Conversations.BETA2_PATH}?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -121,7 +121,7 @@ describe("Conversations", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Conversations.BETA2_PATH}?some=query`
+      path: `${Conversations.BETA2_PATH}?some=query`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -147,7 +147,7 @@ describe("Conversations", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "GET",
       body: undefined,
-      path: `${Conversations.PATH}/${conversationId}`
+      path: `${Conversations.PATH}/${conversationId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -159,13 +159,13 @@ describe("Conversations", () => {
   it("should allow a conversation to be updated", () => {
     const conversationId = "CON-aaabbbccc-111222333";
     var params = {
-      action: "join"
+      action: "join",
     };
     conversations.update(conversationId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       method: "PUT",
-      path: `${Conversations.PATH}/${conversationId}`
+      path: `${Conversations.PATH}/${conversationId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -177,13 +177,13 @@ describe("Conversations", () => {
   it("should allow a conversation to be recorded", () => {
     const conversationId = "CON-aaabbbccc-111222333";
     var params = {
-      action: "start"
+      action: "start",
     };
     conversations.record(conversationId, params, emptyCallback);
 
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(params, {
       method: "PUT",
-      path: `${Conversations.V1_PATH}/${conversationId}/record`
+      path: `${Conversations.V1_PATH}/${conversationId}/record`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -199,7 +199,7 @@ describe("Conversations", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "DELETE",
       body: undefined,
-      path: `${Conversations.PATH}/${conversationId}`
+      path: `${Conversations.PATH}/${conversationId}`,
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

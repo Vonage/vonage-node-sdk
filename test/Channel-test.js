@@ -2,22 +2,22 @@ import Channel from "../lib/Channel";
 import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
 //
-describe("Channel", function() {
-  beforeEach(function() {
+describe("Channel", function () {
+  beforeEach(function () {
     this.sandbox = sinon.sandbox.create();
     this.httpClientStub = TestUtils.getHttpClient();
     this.sandbox.stub(this.httpClientStub, "request");
     this.channel = new Channel(TestUtils.getCredentials(), {
-      api: this.httpClientStub
+      api: this.httpClientStub,
     });
   });
 
-  afterEach(function() {
+  afterEach(function () {
     this.sandbox.restore();
   });
 
-  describe("send", function() {
-    it("should call the correct endpoint", function() {
+  describe("send", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.channel)
         .method("send")
         .withParams(
@@ -28,12 +28,12 @@ describe("Channel", function() {
         .to.post.to.url(Channel.PATH);
     });
 
-    it("formats the outgoing request correctly)", function(done) {
+    it("formats the outgoing request correctly)", function (done) {
       const to = { type: "sms", number: "1234567890" };
       const from = { type: "sms", number: "9876543210" };
       const message = {
         content: { type: "text", text: "Hello World" },
-        viber_service_msg: { ttl: 60 }
+        viber_service_msg: { ttl: 60 },
       };
 
       const postMock = this.sandbox.mock(this.httpClientStub);
@@ -43,7 +43,7 @@ describe("Channel", function() {
         .withArgs(Channel.PATH, {
           from: from,
           to: to,
-          message: message
+          message: message,
         })
         .yields(null, []);
 

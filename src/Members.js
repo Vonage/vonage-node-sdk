@@ -45,8 +45,8 @@ class Members {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
     this.options.httpClient.request(config, callback);
   }
@@ -76,8 +76,8 @@ class Members {
       body: undefined,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
     this.options.httpClient.request(config, callback);
   }
@@ -145,8 +145,8 @@ class Members {
       body: params,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
 
     this.options.httpClient.request(config, callback);
@@ -169,8 +169,8 @@ class Members {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.creds.generateJwt()}`
-      }
+        Authorization: `Bearer ${this.creds.generateJwt()}`,
+      },
     };
 
     this.options.httpClient.request(config, callback);

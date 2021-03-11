@@ -27,11 +27,11 @@ class Channel {
     const params = {
       to: to,
       from: from,
-      message: message
+      message: message,
     };
 
     return this.options.api.post(Channel.PATH, params, callback, true, {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     });
   }
 }

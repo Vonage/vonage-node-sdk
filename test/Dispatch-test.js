@@ -1,22 +1,22 @@
 import Dispatch from "../lib/Dispatch";
 import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
-describe("Dispatch", function() {
-  beforeEach(function() {
+describe("Dispatch", function () {
+  beforeEach(function () {
     this.sandbox = sinon.sandbox.create();
     this.httpClientStub = TestUtils.getHttpClient();
     this.sandbox.stub(this.httpClientStub, "request");
     this.dispatch = new Dispatch(TestUtils.getCredentials(), {
-      api: this.httpClientStub
+      api: this.httpClientStub,
     });
   });
 
-  afterEach(function() {
+  afterEach(function () {
     this.sandbox.restore();
   });
 
-  describe("create", function() {
-    it("should call the correct endpoint", function() {
+  describe("create", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.dispatch)
         .method("create")
         .withParams("failover", [
@@ -26,18 +26,18 @@ describe("Dispatch", function() {
             message: {
               content: {
                 type: "text",
-                text: "Hello World"
+                text: "Hello World",
               },
               viber_service_msg: {
-                ttl: 60
-              }
-            }
-          }
+                ttl: 60,
+              },
+            },
+          },
         ])
         .to.post.to.url(Dispatch.PATH);
     });
 
-    it("formats the outgoing request correctly)", function(done) {
+    it("formats the outgoing request correctly)", function (done) {
       const template = "failover";
       const workflow1 = {
         to: { type: "viber_service_msg", number: "1234567890" },
@@ -45,12 +45,12 @@ describe("Dispatch", function() {
         message: {
           content: {
             type: "text",
-            text: "Hello World"
+            text: "Hello World",
           },
           viber_service_msg: {
-            ttl: 60
-          }
-        }
+            ttl: 60,
+          },
+        },
       };
 
       const workflow2 = {
@@ -59,9 +59,9 @@ describe("Dispatch", function() {
         message: {
           content: {
             type: "text",
-            text: "Fallback to SMS from Viber"
-          }
-        }
+            text: "Fallback to SMS from Viber",
+          },
+        },
       };
 
       const postMock = this.sandbox.mock(this.httpClientStub);
@@ -70,7 +70,7 @@ describe("Dispatch", function() {
         .once()
         .withArgs(Dispatch.PATH, {
           template: template,
-          workflow: [workflow1, workflow2]
+          workflow: [workflow1, workflow2],
         })
         .yields(null, []);
 
