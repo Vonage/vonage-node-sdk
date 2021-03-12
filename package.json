@@ -37,7 +37,7 @@
     "test-coverage-html": "cross-env NODE_ENV=test nyc --reporter html mocha",
     "test-no-lint": "npm run compile && mocha --require ./node_modules/.bin/_mocha --require @babel/register ./test/*-test.js",
     "test-watch": "nodemon --watch src --watch test -x 'npm run test-no-lint'",
-    "lint": "eslint src test '**/*.js'",
+    "lint": "eslint src test",
     "lint-fix": "eslint --fix src test",
     "prepublish": "npm run compile",
     "pretest": "npm run lint"
