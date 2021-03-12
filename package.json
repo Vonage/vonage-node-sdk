@@ -57,7 +57,7 @@
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "eslint": "^7.21.0",
-    "eslint-config-prettier": "^6.2",
+    "eslint-config-prettier": "^8.1",
     "eslint-plugin-prettier": "^2.7",
     "expect.js": "^0.3.1",
     "mocha": "^7.2.0",
