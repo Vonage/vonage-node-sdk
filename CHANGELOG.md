@@ -2,10 +2,6 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## 2.10.8
-
-* Updated several dependencies.
-* Dropped testing for node 8.x
 
 ## 2.10.7
 * #429 Addressing typescript import bug
