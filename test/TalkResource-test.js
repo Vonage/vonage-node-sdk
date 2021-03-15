@@ -13,7 +13,7 @@ import Credentials from "../lib/Credentials";
 chai.use(sinonChai);
 var creds = Credentials.parse({
   applicationId: "some-id",
-  privateKey: path.join(__dirname, "private-test.key")
+  privateKey: path.join(__dirname, "private-test.key"),
 });
 var emptyCallback = () => {};
 
@@ -24,7 +24,7 @@ describe("TalkResource", () => {
   beforeEach(() => {
     httpClientStub = sinon.createStubInstance(HttpClient);
     var options = {
-      httpClient: httpClientStub
+      httpClient: httpClientStub,
     };
     talk = new TalkResource(creds, options);
   });
@@ -32,7 +32,7 @@ describe("TalkResource", () => {
   it("should be able to start a talk", () => {
     const callId = "2342342-lkjhlkjh-32423";
     var params = {
-      text: "Hello!"
+      text: "Hello!",
     };
     talk.start(callId, params, emptyCallback);
 
@@ -41,8 +41,8 @@ describe("TalkResource", () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": 17
-      }
+        "Content-Length": 17,
+      },
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -54,7 +54,7 @@ describe("TalkResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     let talk = new TalkResource(creds, options);
     const callId = "2342342-lkjhlkjh-32423";
@@ -67,8 +67,8 @@ describe("TalkResource", () => {
         method: "PUT",
         host: "api.example.com",
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -80,7 +80,7 @@ describe("TalkResource", () => {
   it("should be able to start a talk with unicode characters", () => {
     const callId = "2342342-lkjhlkjh-32423";
     var params = {
-      text: "Alô 😊!"
+      text: "Alô 😊!",
     };
     talk.start(callId, params, emptyCallback);
 
@@ -89,8 +89,8 @@ describe("TalkResource", () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Content-Length": 21
-      }
+        "Content-Length": 21,
+      },
     });
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match(expectedRequestArgs),
@@ -105,7 +105,7 @@ describe("TalkResource", () => {
     var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(null, {
       method: "DELETE",
       body: undefined,
-      path: TalkResource.PATH.replace("{call_uuid}", callId)
+      path: TalkResource.PATH.replace("{call_uuid}", callId),
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(
@@ -118,7 +118,7 @@ describe("TalkResource", () => {
     let httpClientStub = sinon.createStubInstance(HttpClient);
     let options = {
       httpClient: httpClientStub,
-      apiHost: "api.example.com"
+      apiHost: "api.example.com",
     };
     let talk = new TalkResource(creds, options);
     const callId = "2342342-lkjhlkjh-32423";
@@ -128,7 +128,7 @@ describe("TalkResource", () => {
       method: "DELETE",
       host: "api.example.com",
       body: undefined,
-      path: TalkResource.PATH.replace("{call_uuid}", callId)
+      path: TalkResource.PATH.replace("{call_uuid}", callId),
     });
 
     expect(httpClientStub.request).to.have.been.calledWith(

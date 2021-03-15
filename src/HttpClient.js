@@ -4,7 +4,7 @@ var request = require("request");
 var querystring = require("querystring");
 var URL = require("url").URL;
 
-const isValidUrl = s => {
+const isValidUrl = (s) => {
   if (!s || s === null) return false;
 
   try {
@@ -26,7 +26,7 @@ class HttpClient {
     this.http = options.http || http;
     this.headers = {
       "Content-Type": "application/x-www-form-urlencoded",
-      Accept: "application/json"
+      Accept: "application/json",
     };
     this.logger = options.logger;
     this.timeout = options.timeout;
@@ -62,7 +62,7 @@ class HttpClient {
       port: this.port,
       path: endpoint.path,
       method: endpoint.method,
-      headers: Object.assign({}, this.headers)
+      headers: Object.assign({}, this.headers),
     };
 
     if (this.timeout !== undefined) {
@@ -72,7 +72,7 @@ class HttpClient {
     // Allow existing headers to be overridden
     // Allow new headers to be added
     if (endpoint.headers) {
-      Object.keys(endpoint.headers).forEach(function(key) {
+      Object.keys(endpoint.headers).forEach(function (key) {
         options.headers[key] = endpoint.headers[key];
       });
     }
@@ -99,7 +99,7 @@ class HttpClient {
       // rebuild query
       Object.keys(params)
         .sort()
-        .forEach(key => {
+        .forEach((key) => {
           query += "&" + key + "=" + encodeURI(params[key]);
         });
 
@@ -124,14 +124,14 @@ class HttpClient {
     // depending on content type (binary or JSON) of response
     var responseData = [];
 
-    request.on("response", response => {
+    request.on("response", (response) => {
       var isBinary =
         response.headers["content-type"] === "application/octet-stream";
       if (!isBinary) {
         response.setEncoding("utf8");
       }
 
-      response.on("data", chunk => {
+      response.on("data", (chunk) => {
         responseData.push(chunk);
       });
 
@@ -152,7 +152,7 @@ class HttpClient {
           );
         }
       });
-      response.on("close", e => {
+      response.on("close", (e) => {
         if (e) {
           this.logger.error(
             "problem with API request detailed stacktrace below "
@@ -162,7 +162,7 @@ class HttpClient {
         }
       });
     });
-    request.on("error", e => {
+    request.on("error", (e) => {
       this.logger.error("problem with API request detailed stacktrace below ");
       this.logger.error(e);
       callback(e);
@@ -192,7 +192,7 @@ class HttpClient {
       if (status >= 500) {
         error = {
           message: "Server Error",
-          statusCode: status
+          statusCode: status,
         };
       } else if (
         httpResponse.headers["content-type"] === "application/octet-stream"
@@ -206,14 +206,14 @@ class HttpClient {
           headers["retry-after"] = retryAfterMillis;
         }
         error = {
-          body: data.join("")
+          body: data.join(""),
         };
       } else if (status === 204) {
         response = null;
       } else if (status >= 400 || status < 200) {
         error = {
           body: JSON.parse(data.join("")),
-          headers
+          headers,
         };
       } else if (method !== "DELETE") {
         if (!!skipJsonParsing) {
@@ -236,7 +236,7 @@ class HttpClient {
         status: status,
         message: "The API response could not be parsed.",
         body: data.join(""),
-        parseError: parseError
+        parseError: parseError,
       };
     }
 
@@ -257,7 +257,7 @@ class HttpClient {
   }
 
   _addLimitedAccessMessageToErrors(callback, limitedAccessStatus) {
-    return function(err, data) {
+    return function (err, data) {
       if (err && err.status == limitedAccessStatus) {
         err._INFO_ =
           "This endpoint may need activating on your account. Please email support@nexmo.com for more information";
@@ -284,7 +284,7 @@ class HttpClient {
     path = path + "?" + querystring.stringify(params);
 
     const headers = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     };
     if (useJwt) {
       headers["Authorization"] = `Bearer ${this.credentials.generateJwt()}`;
@@ -298,7 +298,7 @@ class HttpClient {
     this.request(
       {
         path: path,
-        headers
+        headers,
       },
       "GET",
       callback
@@ -324,7 +324,7 @@ class HttpClient {
     this.request(
       {
         path: path,
-        headers
+        headers,
       },
       "DELETE",
       callback
@@ -355,8 +355,8 @@ class HttpClient {
       formData["filedata"] = {
         value: file,
         options: {
-          filename: options.filename || null
-        }
+          filename: options.filename || null,
+        },
       };
     }
 
@@ -375,8 +375,8 @@ class HttpClient {
         url: protocol + this.host + path,
         formData: formData,
         headers: {
-          Authorization: `Bearer ${this.credentials.generateJwt()}`
-        }
+          Authorization: `Bearer ${this.credentials.generateJwt()}`,
+        },
       },
       callback
     );
@@ -399,7 +399,7 @@ class HttpClient {
     this.request(
       {
         path: path,
-        body: querystring.stringify(params)
+        body: querystring.stringify(params),
       },
       "POST",
       callback
@@ -421,7 +421,7 @@ class HttpClient {
     path = path + joinChar + querystring.stringify(qs);
 
     let headers = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     };
     if (useBasicAuth) {
       headers["Authorization"] = `Basic ${Buffer.from(
@@ -433,7 +433,7 @@ class HttpClient {
       {
         path: path,
         body: JSON.stringify(params),
-        headers
+        headers,
       },
       "POST",
       callback
@@ -451,7 +451,7 @@ class HttpClient {
 
     this.request(
       {
-        path: path
+        path: path,
       },
       "POST",
       callback

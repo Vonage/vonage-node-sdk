@@ -1,26 +1,26 @@
 import Account from "../lib/Account";
 import { expect, sinon, TestUtils } from "./VonageTestUtils";
 
-describe("Account", function() {
-  beforeEach(function() {
+describe("Account", function () {
+  beforeEach(function () {
     this.httpClientStub = TestUtils.getHttpClient();
     sinon.stub(this.httpClientStub, "request");
     this.account = new Account(TestUtils.getCredentials(), {
       rest: this.httpClientStub,
-      api: this.httpClientStub
+      api: this.httpClientStub,
     });
   });
 
-  describe("checkBalance", function() {
-    it("should call the correct endpoint", function() {
+  describe("checkBalance", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("checkBalance")
         .to.get.url("/account/get-balance");
     });
   });
 
-  describe("updatePassword", function() {
-    it("should call the correct endpoint", function() {
+  describe("updatePassword", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("updatePassword")
         .withParams("example_password")
@@ -28,8 +28,8 @@ describe("Account", function() {
     });
   });
 
-  describe("updateSMSCallback", function() {
-    it("should call the correct endpoint", function() {
+  describe("updateSMSCallback", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("updateSMSCallback")
         .withParams("http://example.com/sms_callback")
@@ -39,8 +39,8 @@ describe("Account", function() {
     });
   });
 
-  describe("updateDeliveryReceiptCallback", function() {
-    it("should call the correct endpoint", function() {
+  describe("updateDeliveryReceiptCallback", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("updateDeliveryReceiptCallback")
         .withParams("http://example.com/dr_callback")
@@ -50,19 +50,19 @@ describe("Account", function() {
     });
   });
 
-  describe("topUp", function() {
-    it("should call the correct endpoint", function() {
+  describe("topUp", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("topUp")
         .withParams("ABC123")
         .to.post.to.url("/account/top-up?trx=ABC123");
     });
 
-    it("returns data on a successful request", function(done) {
+    it("returns data on a successful request", function (done) {
       const mockData = {
         // This is not accurate response as there are no examples in the docs
         // This test just shows that a successful response is passed through as expected
-        success: true
+        success: true,
       };
 
       this.httpClientStub.request.yields(null, mockData);
@@ -73,11 +73,11 @@ describe("Account", function() {
       });
     });
 
-    it("returns an error on a failed request", function(done) {
+    it("returns an error on a failed request", function (done) {
       const mockData = {
         // This is not accurate response as there are no examples in the docs
         // This test just shows that a successful response is passed through as expected
-        success: false
+        success: false,
       };
 
       this.httpClientStub.request.yields(mockData, null);
@@ -89,8 +89,8 @@ describe("Account", function() {
     });
   });
 
-  describe("listSecrets", function() {
-    it("should call the correct endpoint", function() {
+  describe("listSecrets", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("listSecrets")
         .withParams("ABC123")
@@ -98,8 +98,8 @@ describe("Account", function() {
     });
   });
 
-  describe("getSecret", function() {
-    it("should call the correct endpoint", function() {
+  describe("getSecret", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("getSecret")
         .withParams("ABC123", "123")
@@ -107,8 +107,8 @@ describe("Account", function() {
     });
   });
 
-  describe("createSecret", function() {
-    it("should call the correct endpoint", function() {
+  describe("createSecret", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("createSecret")
         .withParams("ABC123", "123")
@@ -117,8 +117,8 @@ describe("Account", function() {
     });
   });
 
-  describe("deleteSecret", function() {
-    it("should call the correct endpoint", function() {
+  describe("deleteSecret", function () {
+    it("should call the correct endpoint", function () {
       return expect(this.account)
         .method("deleteSecret")
         .withParams("ABC123", "123")

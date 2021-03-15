@@ -14,7 +14,7 @@ class Number {
       optionsNotAnObject:
         "Options parameter should be a dictionary. Check the docs for valid properties for options",
       countrycode: "Invalid Country Code",
-      msisdn: "Invalid MSISDN passed"
+      msisdn: "Invalid MSISDN passed",
     };
   }
   /**
@@ -63,7 +63,7 @@ class Number {
 
     this.options.httpClient.request(
       {
-        path: Utils.createPathWithQuery(`/account${Number.PATH}s`, options)
+        path: Utils.createPathWithQuery(`/account${Number.PATH}s`, options),
       },
       callback
     );
@@ -75,7 +75,7 @@ class Number {
   search(countryCode, pattern, callback) {
     let params = {
       api_key: this.creds.apiKey,
-      api_secret: this.creds.apiSecret
+      api_secret: this.creds.apiSecret,
     };
     if (!countryCode || countryCode.length !== 2) {
       Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
@@ -92,7 +92,7 @@ class Number {
       }
       this.options.httpClient.request(
         {
-          path: Utils.createPathWithQuery(`${Number.PATH}/search`, params)
+          path: Utils.createPathWithQuery(`${Number.PATH}/search`, params),
         },
         callback
       );
@@ -112,7 +112,7 @@ class Number {
         country: countryCode,
         msisdn,
         api_key: this.creds.apiKey,
-        api_secret: this.creds.apiSecret
+        api_secret: this.creds.apiSecret,
       };
 
       if (targetApiKey instanceof Function) {
@@ -123,7 +123,7 @@ class Number {
 
       this.options.httpClient.request(
         {
-          path: Utils.createPathWithQuery(`${Number.PATH}/buy`, opts)
+          path: Utils.createPathWithQuery(`${Number.PATH}/buy`, opts),
         },
         "POST",
         callback
@@ -144,7 +144,7 @@ class Number {
         country: countryCode,
         msisdn,
         api_key: this.creds.apiKey,
-        api_secret: this.creds.apiSecret
+        api_secret: this.creds.apiSecret,
       };
 
       if (targetApiKey instanceof Function) {
@@ -155,7 +155,7 @@ class Number {
 
       this.options.httpClient.request(
         {
-          path: Utils.createPathWithQuery(`${Number.PATH}/cancel`, opts)
+          path: Utils.createPathWithQuery(`${Number.PATH}/cancel`, opts),
         },
         "POST",
         callback
@@ -179,7 +179,7 @@ class Number {
 
       this.options.httpClient.request(
         {
-          path: Utils.createPathWithQuery(`${Number.PATH}/update`, params)
+          path: Utils.createPathWithQuery(`${Number.PATH}/update`, params),
         },
         "POST",
         callback

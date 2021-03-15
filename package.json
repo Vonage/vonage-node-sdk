@@ -35,7 +35,7 @@
     "report-coverage": "cross-env NODE_ENV=test nyc --reporter=text-lcov mocha > coverage.lcov",
     "test-coverage": "cross-env NODE_ENV=test nyc mocha",
     "test-coverage-html": "cross-env NODE_ENV=test nyc --reporter html mocha",
-    "test-no-lint": "npm run compile && mocha --require ./node_modules/.bin/_mocha --require @babel/register ./test/*-test.js",
+    "test-no-lint": "npm run compile && mocha --require @babel/register ./test/*-test.js",
     "test-watch": "nodemon --watch src --watch test -x 'npm run test-no-lint'",
     "lint": "eslint src test",
     "lint-fix": "eslint --fix src test",
@@ -46,6 +46,7 @@
     "@babel/cli": "^7.13.10",
     "@babel/core": "^7.13.10",
     "@babel/eslint-parser": "^7.13.10",
+    "@babel/eslint-plugin": "^7.13.10",
     "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
     "@babel/register": "^7.13.8",
@@ -57,10 +58,10 @@
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "eslint": "^7.21.0",
-    "eslint-config-prettier": "^6.2",
-    "eslint-plugin-prettier": "^2.7",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "expect.js": "^0.3.1",
-    "mocha": "^7.2.0",
+    "mocha": "^8.3.1",
     "nodemon": "^2.0.4",
     "nyc": "^15.1.0",
     "prettier": "^2.2.1",
@@ -69,7 +70,6 @@
     "sinon-expect": "^0.3.0"
   },
   "dependencies": {
-    "@babel/eslint-plugin": "^7.13.10",
     "jsonwebtoken": "^8.4.0",
     "request": "^2.88.2",
     "uuid": "^8.3.0"
