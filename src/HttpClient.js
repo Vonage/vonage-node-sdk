@@ -51,18 +51,12 @@ class HttpClient {
       endpoint.method = method;
     }
 
-    if (endpoint.method === "POST" || endpoint.method === "DELETE") {
-      // TODO: verify the following fix is required
-      // Fix broken due ot 411 Content-Length error now sent by Vonage API
-      // PL 2016-Sept-6 - commented out Content-Length 0
-      // headers['Content-Length'] = 0;
-    }
     var options = {
       host: endpoint.host ? endpoint.host : this.host,
       port: this.port,
       path: endpoint.path,
       method: endpoint.method,
-      headers: Object.assign({}, this.headers),
+      headers: Object.assign({}, this.headers, endpoint.headers),
     };
 
     if (this.timeout !== undefined) {
@@ -110,6 +104,7 @@ class HttpClient {
     }
 
     this.logger.info("Request:", options, "\nBody:", endpoint.body);
+
     var request;
 
     if (options.port === 443) {
