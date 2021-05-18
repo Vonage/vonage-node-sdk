@@ -70,12 +70,6 @@ class Message {
     };
 
     let body = Object.assign({}, creds, data);
-    console.log({
-      host: this.options.restHost || "rest.nexmo.com",
-      path: Message.PATH,
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json" },
-    });
     this.options.httpClient.request(
       {
         host: this.options.restHost || "rest.nexmo.com",
