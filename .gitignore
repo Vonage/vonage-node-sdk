@@ -1,5 +1,4 @@
 node_modules
-package-lock.json
 /lib/
 test/.env
 examples/.env
@@ -18,3 +17,4 @@ test
 typings
 packages/**/dist
 tsconfig.tsbuildinfo
+lerna-debug.log
