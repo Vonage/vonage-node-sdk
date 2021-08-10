@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  mock_server:
+    image: stoplight/prism:4
+    ports: 
+      - 4010:4010
+    command: ["mock","-h", "0.0.0.0", "https://raw.githubusercontent.com/Nexmo/api-specification/master/definitions/numbers.yml"]
