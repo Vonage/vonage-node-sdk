@@ -1,10 +1,15 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "rootDir": "./lib"
+      "declaration": true,
+      "outDir": "dist",
+      "rootDir": "src",
+      "strict": false,
+      "lib": ["ES6"],
+      "module": "commonjs",
+      "target": "ES6",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "skipDefaultLibCheck": true
   },
-  "include": [
-    "lib/**/*"
-  ],
+  "include": ["src/**/*"]
 }

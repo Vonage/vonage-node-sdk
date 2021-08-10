@@ -1,20 +1,15 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "target": "es6",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "types": [
-      "node",
-      "jest"
-    ],
-    "baseUrl": "../",
+      "declaration": true,
+      "sourceMap": true,
+      "noImplicitReturns": true,
+      "noUnusedLocals": true,
+      "strict": false,
+      "esModuleInterop": true,
+      "target": "es6",
+      "moduleResolution": "node",
+      "module": "CommonJS",
+      "types": ["node", "jest"],
+      "baseUrl": "../"
   }
 }

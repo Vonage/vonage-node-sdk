@@ -28,5 +28,10 @@
   "dependencies": {
     "lodash.merge": "^4.6.2",
     "node-fetch": "^2.6.1"
+  },
+  "gitHead": "3d01d2557edea29b54610d7ff7b07d186affb0f8",
+  "devDependencies": {
+    "@types/lodash": "^4.14.172",
+    "@types/node-fetch": "^2.5.12"
   }
 }

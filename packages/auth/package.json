@@ -1,28 +1,28 @@
 {
-  "name": "@vonage/auth",
-  "version": "3.0.1-beta.0",
-  "description": "> TODO: description",
-  "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
-  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/auth#readme",
-  "license": "ISC",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "/dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
-  },
-  "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "../../node_modules/.bin/tsc -b --clean",
-    "compile": "../../node_modules/.bin/tsc -p tsconfig.json",
-    "lerna": "../../node_modules/.bin/lerna",
-    "prepare": "npm run build",
-    "test-watch": "../../node_modules/.bin/jest --watch"
-  },
-  "bugs": {
-    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
-  }
+    "name": "@vonage/auth",
+    "version": "3.0.1-beta.0",
+    "description": "> TODO: description",
+    "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
+    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/auth#readme",
+    "license": "ISC",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "/dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+    },
+    "scripts": {
+        "build": "npm run clean && npm run compile",
+        "clean": "tsc -b --clean",
+        "compile": "tsc -p tsconfig.json",
+        "prepare": "npm run build",
+        "test-watch": "../../node_modules/.bin/jest --watch"
+    },
+    "bugs": {
+        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+    },
+    "gitHead": "3d01d2557edea29b54610d7ff7b07d186affb0f8"
 }

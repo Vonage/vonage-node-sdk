@@ -16,9 +16,8 @@
   },
   "scripts": {
     "build": "npm run clean && npm run compile",
-    "clean": "../../node_modules/.bin/tsc -b --clean",
-    "compile": "../../node_modules/.bin/tsc -p tsconfig.json",
-    "lerna": "../../node_modules/.bin/lerna",
+    "clean": "tsc -b --clean",
+    "compile": "tsc -p tsconfig.json",
     "prepare": "npm run build",
     "test-watch": "../../node_modules/.bin/jest --watch"
   },
@@ -26,7 +25,11 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@types/uuid": "^8.3.0",
     "uuid": "^8.3.1"
+  },
+  "gitHead": "3d01d2557edea29b54610d7ff7b07d186affb0f8",
+  "devDependencies": {
+    "@types/node": "^16.4.13",
+    "@types/uuid": "^8.3.0"
   }
 }
