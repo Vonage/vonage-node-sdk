@@ -1,6 +1,6 @@
 {
   "name": "@vonage/numbers",
-  "version": "3.0.1-beta.0",
+  "version": "3.0.0-beta.0",
   "description": "> TODO: description",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
@@ -28,9 +28,11 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/auth": "^3.0.1-beta.0",
-    "@vonage/vetch": "^3.0.1-beta.0"
+    "@vonage/auth": "^3.0.0-beta.0",
+    "@vonage/vetch": "^3.0.0-beta.0"
   },
-  "devDependencies": {"typescript": "^4.3.5"},
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  },
   "gitHead": "3d01d2557edea29b54610d7ff7b07d186affb0f8"
 }
