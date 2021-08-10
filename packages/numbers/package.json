@@ -31,5 +31,6 @@
     "@vonage/auth": "^3.0.1-beta.0",
     "@vonage/vetch": "^3.0.1-beta.0"
   },
+  "devDependencies": {"typescript": "^4.3.5"},
   "gitHead": "3d01d2557edea29b54610d7ff7b07d186affb0f8"
 }

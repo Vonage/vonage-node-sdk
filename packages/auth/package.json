@@ -21,6 +21,9 @@
         "prepare": "npm run build",
         "test-watch": "../../node_modules/.bin/jest --watch"
     },
+    "devDependencies": {
+        "typescript": "^4.3.5"
+    },
     "bugs": {
         "url": "https://github.com/Vonage/vonage-node-sdk/issues"
     },

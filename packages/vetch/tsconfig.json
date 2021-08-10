@@ -2,7 +2,6 @@
   "compilerOptions": {
       "declaration": true,
       "outDir": "dist",
-      "rootDir": "src",
       "strict": false,
       "lib": ["ES6"],
       "module": "commonjs",
@@ -11,5 +10,5 @@
       "esModuleInterop": true,
       "skipDefaultLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["lib/**/*"]
 }

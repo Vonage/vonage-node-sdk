@@ -13,7 +13,7 @@
 
 import fetch, { Response as fetchResponse } from 'node-fetch'
 import { stringify } from 'querystring'
-import {merge} from 'lodash'
+import { merge } from 'lodash'
 
 import {
     VetchError,
@@ -47,8 +47,7 @@ export class Vetch {
 
             if (!opts.checkStatus!(formattedResponse.status)) {
                 throw new VetchError<T>(
-                    `Request failed with status code ${
-                        formattedResponse.status
+                    `Request failed with status code ${formattedResponse.status
                     }`,
                     opts,
                     formattedResponse
@@ -64,7 +63,7 @@ export class Vetch {
 
     private async getResponseData(
         opts: VetchOptions,
-        res: Response | fetchResponse
+        res: fetchResponse
     ): Promise<any> {
         switch (opts.responseType) {
             case 'json': {
@@ -129,7 +128,7 @@ export class Vetch {
 
     private createResponse<T>(
         opts: VetchOptions,
-        res: Response | fetchResponse,
+        res: fetchResponse,
         data?: T
     ): VetchResponse<T> {
         const headers = {} as Headers
