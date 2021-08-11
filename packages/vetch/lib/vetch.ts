@@ -85,7 +85,7 @@ export class Vetch {
 
         opts.headers = opts.headers || {}
         opts.checkStatus = this.checkStatus
-        opts.responseType = opts.responseType || 'json'
+        opts.responseType = opts.responseType
 
         if (!opts.url) {
             throw new Error('URL is required.')

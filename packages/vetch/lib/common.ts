@@ -47,6 +47,22 @@ export interface VetchResponse<T = any> {
     request: VetchHttpRequest
 }
 
+export enum HTTPMethods {
+    GET = 'GET',
+    HEAD = 'HEAD',
+    POST = 'POST',
+    DELETE = 'DELETE',
+    PUT = 'PUT',
+    CONNECT = 'CONNECT',
+    OPTIONS = 'OPTIONS',
+    TRACE = 'TRACE',
+    PATCH = 'PATCH'
+}
+
+export enum ResponseTypes {
+    json = 'json'
+}
+
 export interface VetchOptions {
     adapter?: <T = any>(
         options: VetchOptions,
@@ -55,24 +71,15 @@ export interface VetchOptions {
     url?: string
     baseUrl?: string
     baseURL?: string
-    method?:
-        | 'GET'
-        | 'HEAD'
-        | 'POST'
-        | 'DELETE'
-        | 'PUT'
-        | 'CONNECT'
-        | 'OPTIONS'
-        | 'TRACE'
-        | 'PATCH'
+    method?: HTTPMethods
     headers?: Headers
     data?: any
     body?: any
     params?: any
-    responseType?: 'json'
+    responseType?: ResponseTypes
     checkStatus?: (status: number) => boolean
     size?: number
 }
 
-export interface RetryConfig {}
+export interface RetryConfig { }
 
