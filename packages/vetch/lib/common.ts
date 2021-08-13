@@ -11,14 +11,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export class VetchError<T = any> extends Error {
+export class VetchError extends Error {
     code?: string
-    response?: VetchResponse<T>
+    response?: VetchResponse
     config: VetchOptions
     constructor(
         message: string,
         options: VetchOptions,
-        response: VetchResponse<T>
+        response: VetchResponse
     ) {
         super(message)
         this.response = response
@@ -35,12 +35,12 @@ export interface VetchHttpRequest {
     responseUrl: string
 }
 
-export type VetchPromise<T = any> = Promise<VetchResponse<T>>
+export type VetchPromise = Promise<VetchResponse>
 export const VetchPromise = Promise;
 
-export interface VetchResponse<T = any> {
+export interface VetchResponse {
     config: VetchOptions
-    data: T
+    data: any
     status: number
     statusText: string
     headers: Headers
@@ -66,8 +66,8 @@ export enum ResponseTypes {
 export interface VetchOptions {
     adapter?: <T = any>(
         options: VetchOptions,
-        defaultAdapter: (options: VetchOptions) => VetchPromise<T>
-    ) => VetchPromise<T>
+        defaultAdapter: (options: VetchOptions) => VetchPromise
+    ) => VetchPromise
     url?: string
     baseUrl?: string
     baseURL?: string
@@ -82,4 +82,3 @@ export interface VetchOptions {
 }
 
 export interface RetryConfig { }
-
