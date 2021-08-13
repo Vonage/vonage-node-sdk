@@ -30,23 +30,23 @@ export class Vetch {
         this.defaults = defaults || {}
     }
 
-    private async _defaultAdapter<T>(
+    private async _defaultAdapter(
         opts: VetchOptions
-    ): Promise<VetchResponse<T>> {
+    ): Promise<VetchResponse> {
         const res = await fetch(opts.url!, opts)
         const data = await this.getResponseData(opts, res)
-        return this.createResponse<T>(opts, res, data)
+        return this.createResponse(opts, res, data)
     }
 
-    async request<T = any>(opts: VetchOptions = {}): VetchPromise<T> {
+    async request<T = any>(opts: VetchOptions = {}): VetchPromise {
         opts = this.validateOpts(opts)
 
         try {
-            let formattedResponse: VetchResponse<T>
+            let formattedResponse: VetchResponse
             formattedResponse = await this._defaultAdapter(opts)
 
             if (!opts.checkStatus!(formattedResponse.status)) {
-                throw new VetchError<T>(
+                throw new VetchError(
                     `Request failed with status code ${formattedResponse.status
                     }`,
                     opts,
@@ -126,11 +126,11 @@ export class Vetch {
         return status >= 200 && status < 300
     }
 
-    private createResponse<T>(
+    private createResponse(
         opts: VetchOptions,
         res: fetchResponse,
-        data?: T
-    ): VetchResponse<T> {
+        data?: any
+    ): VetchResponse {
         const headers = {} as Headers
 
         res.headers.forEach((value, key) => {
@@ -139,7 +139,7 @@ export class Vetch {
 
         return {
             config: opts,
-            data: data as T,
+            data: data as any,
             headers,
             status: res.status,
             statusText: res.statusText,

@@ -29,7 +29,7 @@
     "lodash.merge": "^4.6.2",
     "node-fetch": "^2.6.1"
   },
-  "gitHead": "3d01d2557edea29b54610d7ff7b07d186affb0f8",
+  "gitHead": "b5818afa99349dec888eb9c7bc7c3ced3c10bece",
   "devDependencies": {
     "@types/lodash": "^4.14.172",
     "@types/node-fetch": "^2.5.12",
