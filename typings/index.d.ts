@@ -1,4 +1,5 @@
 /* general */
+declare namespace Vonage {
 export interface CredentialsObject {
 	apiKey: string;
 	apiSecret: string;
@@ -589,16 +590,18 @@ export class Voice {
 	__proto__: any;
 	[key: string]: any;
 }
-
-
-export default class Vonage {
-	constructor(credentials: CredentialsObject, options?: { [key: string]: any });
-	public readonlycredentials: CredentialsObject;
-	public readonlyoptions: VonageOptions;
-	public readonly message: Message
-	public readonly media: Media
-	public readonly number: Number
-	public readonly numberInsight: NumberInsight
-	public readonly verify: Verify
-	public readonly voice: Voice
 }
+
+declare class Vonage {
+	constructor(credentials: Vonage.CredentialsObject, options?: { [key: string]: any });
+	public readonlycredentials: Vonage.CredentialsObject;
+	public readonlyoptions: Vonage.VonageOptions;
+	public readonly message: Vonage.Message
+	public readonly media: Vonage.Media
+	public readonly number: Vonage.Number
+	public readonly numberInsight: Vonage.NumberInsight
+	public readonly verify: Vonage.Verify
+	public readonly voice: Vonage.Voice
+}
+
+export = Vonage;
