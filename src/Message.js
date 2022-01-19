@@ -40,7 +40,7 @@ class Message {
     this.shortcodeMarketing = _shortcode.shortcodeMarketing.bind(_shortcode);
   }
 
-  _checkToAndFrom(data) {
+  _checkToAndFrom(data, callback) {
     if (!data.from) {
       Utils.sendError(callback, new Error(Message.ERROR_MESSAGES.sender));
     } else if (!data.to) {
@@ -53,7 +53,7 @@ class Message {
   // _sendMessageCallback
 
   _sendMessage(data, callback) {
-    this._checkToAndFrom(data);
+    this._checkToAndFrom(data, callback);
 
     this.options.logger.info(
       "sending message from " +
