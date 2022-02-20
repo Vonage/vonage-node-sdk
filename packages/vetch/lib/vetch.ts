@@ -13,12 +13,11 @@
 
 import fetch, { Response as fetchResponse } from 'node-fetch'
 import { stringify } from 'querystring'
-import { merge } from 'lodash'
+import merge from 'lodash.merge'
 
 import {
     VetchError,
     VetchOptions,
-    VetchPromise,
     VetchResponse,
     Headers,
 } from './common'
@@ -38,7 +37,7 @@ export class Vetch {
         return this.createResponse(opts, res, data)
     }
 
-    async request<T = any>(opts: VetchOptions = {}): VetchPromise {
+    async request<T>(opts: VetchOptions = {}): Promise<VetchResponse> {
         opts = this.validateOpts(opts)
 
         try {
@@ -57,7 +56,7 @@ export class Vetch {
             return formattedResponse
         } catch (e) {
             const err = e as VetchError
-            throw err
+            throw err;
         }
     }
 

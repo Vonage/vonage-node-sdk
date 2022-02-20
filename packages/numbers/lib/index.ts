@@ -1,3 +1,1 @@
-import { Numbers } from './numbers';
-
-export { Numbers }
+export { Numbers } from './numbers';

@@ -15,11 +15,11 @@ import { VetchOptions } from './common'
 import { Vetch } from './vetch'
 
 export {
-    VetchError,
-    VetchPromise,
-    VetchResponse,
-    Headers,
-    RetryConfig,
+  VetchError,
+  VetchPromise,
+  VetchResponse,
+  Headers,
+  RetryConfig,
 } from './common'
 
 export { Vetch, VetchOptions }
@@ -27,5 +27,5 @@ export { Vetch, VetchOptions }
 export const instance = new Vetch()
 
 export async function request<T>(opts: VetchOptions) {
-  return instance.request<T>(opts)   
+  return instance.request<T>(opts)
 }

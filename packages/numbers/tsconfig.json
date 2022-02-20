@@ -4,7 +4,7 @@
       "outDir": "dist",
       "rootDir": "lib",
       "strict": false,
-      "lib": ["ES6"],
+      "lib": ["ES6", "DOM"],
       "module": "commonjs",
       "target": "ES6",
       "moduleResolution": "node",
