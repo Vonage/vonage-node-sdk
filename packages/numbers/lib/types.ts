@@ -5,19 +5,47 @@ export type NumbersClassParameters = AuthOpts & VetchOptions & {
     auth?: AuthInterface,
 }
 
-export type NumbersResponse<T> = NumbersSuccess<T> | NumbersError;
-
-export type NumbersSuccess<T> = VetchResponse & {
-    type: 'success';
-    data: T
-}
+export type NumbersPromise<T, E> = Promise<T | E>
+export const NumbersPromise = Promise;
 
 export type NumbersError = VetchError & {
-    type: 'error';
+    type?: 'error',
+    response: NumbersEmptyResponse & {
+        data: {
+            errorCode?: string;
+            errorCodeLabel?: string;
+        }
+    }
+}
+
+export type NumbersResponse = VetchResponse;
+
+export type NumbersAvailableListResponse = NumbersResponse & {
+    type?: 'success'
+    data: {
+        count?: number;
+        numbers?: Array<NumbersAvailableNumber>;
+    }
+}
+
+export type NumbersOwnedListResponse = NumbersResponse & {
+    type?: 'success'
+    data: {
+        count?: number;
+        numbers?: Array<NumbersOwnedNumber>;
+    }
+}
+
+export type NumbersOwnedNumberResponse = NumbersResponse & {
+    type?: 'success'
+    data: NumbersOwnedNumber
+}
+
+export type NumbersEmptyResponse = NumbersResponse & {
+    type?: 'success'
     data: {
         errorCode?: string;
         errorCodeLabel?: string;
-
     }
 }
 
@@ -26,18 +54,6 @@ export interface NumbersParams {
     msisdn: string;
     targetApiKey?: string;
 }
-
-export interface NumbersAvailableListResponse {
-    count?: number;
-    numbers?: Array<NumbersAvailableNumber>;
-}
-
-
-export interface NumbersOwnedListResponse {
-    count?: number;
-    numbers?: Array<NumbersOwnedNumber>;
-}
-
 
 export interface NumbersAvailableNumber {
     country?: Country;
@@ -48,7 +64,6 @@ export interface NumbersAvailableNumber {
 }
 
 export type Country = string
-
 
 export interface NumbersUpdateParams {
     country: Country;
@@ -70,6 +85,7 @@ export enum VoiceCallbackTypeEnum {
     Tel = <any>'tel',
     App = <any>'app'
 }
+
 export enum MessagesCallbackTypeEnum {
     App = <any>'app'
 }
@@ -85,8 +101,6 @@ export interface NumbersOwnedNumber {
     messagesCallbackType?: string;
     messagesCallbackValue?: string;
 }
-
-
 
 export interface NumbersSearchFilter {
     country: Country,

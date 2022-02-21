@@ -1,25 +1,26 @@
 
 import { Auth, AuthInterface } from '@vonage/auth';
-import { request } from "@vonage/vetch";
+import { request, Vetch } from "@vonage/vetch";
 import {
-    NumbersResponse,
     NumbersError,
+    NumbersResponse,
+    NumbersAvailableListResponse,
     NumbersOwnedFilter,
     NumbersOwnedListResponse,
-    NumbersOwnedNumber,
-    NumbersAvailableListResponse,
+    NumbersOwnedNumberResponse,
+    NumbersEmptyResponse,
     NumbersUpdateParams,
     NumbersSearchFilter,
     NumbersClassParameters,
-    NumbersSuccess,
-    NumbersParams
+    NumbersParams,
+    NumbersPromise
 } from './types';
 
 
-const runRequest = async <T>(options: NumbersClassParameters): Promise<NumbersResponse<T>> => {
+const runRequest = async <T extends NumbersResponse>(options: NumbersClassParameters): NumbersPromise<T, NumbersError> => {
     try {
         let result = await request(options);
-        return { type: 'success', ...result } as NumbersSuccess<T>;
+        return { type: 'success', ...result } as unknown as T;
     } catch (error) {
         return { type: 'error', ...error } as NumbersError;
     }
@@ -70,31 +71,6 @@ export const NumbersParamCreator = function (options?: NumbersClassParameters) {
     };
 };
 
-export const NumbersAPI_FP = (options?: NumbersClassParameters) => {
-    return {
-        buyNumber(params: NumbersParams): Promise<NumbersResponse<NumbersOwnedNumber> | NumbersError> {
-            const localVetchOptions = NumbersParamCreator(options).buyNumber(params);
-            return runRequest<NumbersOwnedNumber>(localVetchOptions);
-        },
-        cancelNumber(params?: NumbersParams): Promise<NumbersResponse<NumbersOwnedListResponse> | NumbersError> {
-            const localVetchOptions = NumbersParamCreator(options).cancelNumber(params);
-            return runRequest<NumbersOwnedListResponse>(localVetchOptions);
-        },
-        getAvailableNumbers(filter?: NumbersSearchFilter): Promise<NumbersResponse<NumbersAvailableListResponse> | NumbersError> {
-            const localVetchOptions = NumbersParamCreator(options).getAvailableNumbers(filter);
-            return runRequest<NumbersAvailableListResponse>(localVetchOptions);
-        },
-        getOwnedNumbers(filter?: NumbersOwnedFilter): Promise<NumbersResponse<NumbersOwnedListResponse> | NumbersError> {
-            const localVetchOptions = NumbersParamCreator(options).getOwnedNumbers(filter);
-            return runRequest<NumbersOwnedListResponse>(localVetchOptions);
-        },
-        updateNumber(params?: NumbersUpdateParams): Promise<NumbersResponse<NumbersOwnedNumber> | NumbersError> {
-            const localVetchOptions = NumbersParamCreator(options).updateNumber(params);
-            return runRequest<NumbersOwnedListResponse>(localVetchOptions);
-        },
-    }
-}
-
 export class BaseAPI {
     protected config: NumbersClassParameters;
     protected auth: AuthInterface;
@@ -112,18 +88,24 @@ export class BaseAPI {
 export class Numbers extends BaseAPI {
 
     public buyNumber(params?: NumbersParams) {
-        return NumbersAPI_FP(this.config).buyNumber(params);
+        const localVetchOptions = NumbersParamCreator(this.config).buyNumber(params);
+        return runRequest<NumbersEmptyResponse>(localVetchOptions);
     }
     public cancelNumber(params?: NumbersParams) {
-        return NumbersAPI_FP(this.config).cancelNumber(params);
+        const localVetchOptions = NumbersParamCreator(this.config).cancelNumber(params);
+        return runRequest<NumbersEmptyResponse>(localVetchOptions);
     }
     public getAvailableNumbers(filter?: NumbersSearchFilter) {
-        return NumbersAPI_FP(this.config).getAvailableNumbers(filter);
+        const localVetchOptions = NumbersParamCreator(this.config).getAvailableNumbers(filter);
+        return runRequest<NumbersAvailableListResponse>(localVetchOptions);
     }
     public getOwnedNumbers(filter?: NumbersOwnedFilter) {
-        return NumbersAPI_FP(this.config).getOwnedNumbers(filter);
+        const localVetchOptions = NumbersParamCreator(this.config).getOwnedNumbers(filter);
+        return runRequest<NumbersOwnedListResponse>(localVetchOptions);
+
     }
     public updateNumber(params?: NumbersUpdateParams) {
-        return NumbersAPI_FP(this.config).updateNumber(params);
+        const localVetchOptions = NumbersParamCreator(this.config).updateNumber(params);
+        return runRequest<NumbersOwnedNumberResponse>(localVetchOptions);
     }
 }
