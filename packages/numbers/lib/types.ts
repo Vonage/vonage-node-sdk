@@ -8,41 +8,33 @@ export type NumbersClassParameters = AuthOpts & VetchOptions & {
 export type NumbersPromise<T, E> = Promise<T | E>
 export const NumbersPromise = Promise;
 
-export type NumbersError = VetchError & {
-    type?: 'error',
-    response: NumbersEmptyResponse & {
-        data: {
-            errorCode?: string;
-            errorCodeLabel?: string;
-        }
-    }
+export interface NumbersError extends VetchError {
+    type: 'error'
 }
 
-export type NumbersResponse = VetchResponse;
-
-export type NumbersAvailableListResponse = NumbersResponse & {
-    type?: 'success'
+export interface NumbersAvailableListResponse extends VetchResponse {
+    type: 'success'
     data: {
         count?: number;
         numbers?: Array<NumbersAvailableNumber>;
     }
 }
 
-export type NumbersOwnedListResponse = NumbersResponse & {
-    type?: 'success'
+export interface NumbersOwnedListResponse extends VetchResponse {
+    type: 'success'
     data: {
         count?: number;
         numbers?: Array<NumbersOwnedNumber>;
     }
 }
 
-export type NumbersOwnedNumberResponse = NumbersResponse & {
-    type?: 'success'
+export interface NumbersOwnedNumberResponse extends VetchResponse {
+    type: 'success'
     data: NumbersOwnedNumber
 }
 
-export type NumbersEmptyResponse = NumbersResponse & {
-    type?: 'success'
+export interface NumbersEmptyResponse extends VetchResponse {
+    type: 'success'
     data: {
         errorCode?: string;
         errorCodeLabel?: string;

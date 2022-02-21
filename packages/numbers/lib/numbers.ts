@@ -1,9 +1,8 @@
 
 import { Auth, AuthInterface } from '@vonage/auth';
-import { request, Vetch } from "@vonage/vetch";
+import { request, VetchResponse } from "@vonage/vetch";
 import {
     NumbersError,
-    NumbersResponse,
     NumbersAvailableListResponse,
     NumbersOwnedFilter,
     NumbersOwnedListResponse,
@@ -17,7 +16,7 @@ import {
 } from './types';
 
 
-const runRequest = async <T extends NumbersResponse>(options: NumbersClassParameters): NumbersPromise<T, NumbersError> => {
+const runRequest = async <T extends VetchResponse>(options: NumbersClassParameters): NumbersPromise<T, NumbersError> => {
     try {
         let result = await request(options);
         return { type: 'success', ...result } as unknown as T;
