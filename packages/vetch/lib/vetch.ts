@@ -19,44 +19,42 @@ import {
     VetchError,
     VetchOptions,
     VetchResponse,
+    ResponseTypes,
     Headers,
-} from './common'
+} from './types'
 
 export class Vetch {
     defaults: VetchOptions
 
     constructor(defaults?: VetchOptions) {
-        this.defaults = defaults || {}
+        this.defaults = defaults || { responseType: ResponseTypes.json }
     }
 
-    private async _defaultAdapter(
+    private async _defaultAdapter<T>(
         opts: VetchOptions
-    ): Promise<VetchResponse> {
+    ): Promise<VetchResponse<T>> {
         const res = await fetch(opts.url!, opts)
         const data = await this.getResponseData(opts, res)
         return this.createResponse(opts, res, data)
     }
 
-    async request<T>(opts: VetchOptions = {}): Promise<VetchResponse> {
+    async request<T>(opts: VetchOptions = {}): Promise<VetchResponse<T>> {
         opts = this.validateOpts(opts)
 
         try {
-            let formattedResponse: VetchResponse
-            formattedResponse = await this._defaultAdapter(opts)
+            let formattedResponse: VetchResponse<T>
+            formattedResponse = await this._defaultAdapter<T>(opts)
 
             if (!opts.checkStatus!(formattedResponse.status)) {
                 throw new VetchError(
-                    `Request failed with status code ${formattedResponse.status
-                    }`,
-                    opts,
-                    formattedResponse
+                    `Request failed with status code ${formattedResponse.status}`,
+                    opts
                 )
             }
 
             return formattedResponse
         } catch (e) {
-            const err = e as VetchError
-            throw err;
+            throw e;
         }
     }
 
@@ -125,20 +123,21 @@ export class Vetch {
         return status >= 200 && status < 300
     }
 
-    private createResponse(
+    private createResponse<T>(
         opts: VetchOptions,
         res: fetchResponse,
-        data?: any
-    ): VetchResponse {
+        data?: T
+    ): VetchResponse<T> {
         const headers = {} as Headers
 
         res.headers.forEach((value, key) => {
             headers[key] = value
         })
 
+
         return {
             config: opts,
-            data: data as any,
+            data: data as T,
             headers,
             status: res.status,
             statusText: res.statusText,

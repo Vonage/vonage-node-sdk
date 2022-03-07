@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { VetchOptions } from './common'
+import { VetchOptions } from './types'
 import { Vetch } from './vetch'
 
 export {
@@ -20,7 +20,8 @@ export {
   VetchResponse,
   Headers,
   RetryConfig,
-} from './common'
+  ResponseTypes
+} from './types'
 
 export { Vetch, VetchOptions }
 

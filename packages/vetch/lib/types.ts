@@ -1,16 +1,12 @@
 export class VetchError extends Error {
     code?: string
-    response?: VetchResponse
     config: VetchOptions
     constructor(
         message: string,
         options: VetchOptions,
-        response: VetchResponse
     ) {
         super(message)
-        this.response = response
         this.config = options
-        this.code = response.status.toString()
     }
 }
 
@@ -22,12 +18,15 @@ export interface VetchHttpRequest {
     responseUrl: string
 }
 
-export type VetchPromise = Promise<VetchResponse>
+export type VetchPromise<T> = Promise<VetchResponse<T>>
 export const VetchPromise = Promise;
 
-export interface VetchResponse {
+export type NumbersResponse<T> = VetchResponse<T>
+
+export interface VetchResponse<T> {
     config: VetchOptions
-    data: any
+    data: T
+    error?: true
     status: number
     statusText: string
     headers: Headers
@@ -53,8 +52,8 @@ export enum ResponseTypes {
 export interface VetchOptions {
     adapter?: <T = any>(
         options: VetchOptions,
-        defaultAdapter: (options: VetchOptions) => VetchPromise
-    ) => VetchPromise
+        defaultAdapter: (options: VetchOptions) => VetchPromise<T>
+    ) => VetchPromise<T>
     url?: string
     baseUrl?: string
     baseURL?: string
