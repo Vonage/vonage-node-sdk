@@ -1,45 +1,29 @@
 import { AuthOpts, AuthInterface } from '@vonage/auth'
-import { VetchError, VetchResponse, VetchOptions } from '@vonage/vetch';
+import { VetchResponse, VetchOptions } from '@vonage/vetch';
 
 export type NumbersClassParameters = AuthOpts & VetchOptions & {
     auth?: AuthInterface,
 }
 
-export type NumbersPromise<T, E> = Promise<T | E>
-export const NumbersPromise = Promise;
+export interface NumbersResponse<T> extends VetchResponse<T> { }
 
-export interface NumbersError extends VetchError {
-    type: 'error'
+export interface NumbersAvailableList {
+    count?: number;
+    numbers?: Array<NumbersAvailableNumber>;
 }
 
-export interface NumbersAvailableListResponse extends VetchResponse {
-    type: 'success'
-    data: {
-        count?: number;
-        numbers?: Array<NumbersAvailableNumber>;
-    }
+
+export interface NumbersOwnedList {
+    count?: number;
+    numbers?: Array<NumbersOwnedNumber>;
 }
 
-export interface NumbersOwnedListResponse extends VetchResponse {
-    type: 'success'
-    data: {
-        count?: number;
-        numbers?: Array<NumbersOwnedNumber>;
-    }
+
+export interface NumbersEmptyResponse {
+    errorCode?: string;
+    errorCodeLabel?: string;
 }
 
-export interface NumbersOwnedNumberResponse extends VetchResponse {
-    type: 'success'
-    data: NumbersOwnedNumber
-}
-
-export interface NumbersEmptyResponse extends VetchResponse {
-    type: 'success'
-    data: {
-        errorCode?: string;
-        errorCodeLabel?: string;
-    }
-}
 
 export interface NumbersParams {
     country: Country;
