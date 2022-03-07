@@ -1,0 +1,41 @@
+{
+  "name": "@vonage/sms",
+  "version": "3.0.0-beta.3",
+  "description": "> TODO: description",
+  "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "tsc -b --clean",
+    "compile": "tsc -p tsconfig.json",
+    "test-watch": "npx jest --watch"
+  },
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "dependencies": {
+    "@vonage/auth": "^3.0.0-beta.0",
+    "@vonage/vetch": "^3.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "nock": "^13.2.4",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.3.5"
+  },
+  "gitHead": "b5818afa99349dec888eb9c7bc7c3ced3c10bece"
+}
