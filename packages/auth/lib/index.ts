@@ -5,6 +5,10 @@ export {
     AuthInterface,
     AuthQueryParams,
     AuthOpts,
-} from './common'
+    AlgorithmTypes,
+    SignedHashParams,
+    AuthSignedParams
+
+} from './types'
 
 export { Auth };
