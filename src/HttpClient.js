@@ -1,7 +1,7 @@
 var https = require("https");
 var http = require("http");
 var request = require("request");
-var querystring = require("querystring");
+var querystring = require("query-string");
 var URL = require("url").URL;
 
 const isValidUrl = (s) => {
@@ -71,36 +71,59 @@ class HttpClient {
       });
     }
 
-    if (this.credentials.signatureSecret && this.credentials.signatureMethod) {
-      const splitPath = options.path.split(/\?(.+)/);
-      const path = splitPath[0];
+    // the output here can returnn one of two options:
+    // - Using `sig` & `timestamp` in the JSON body
+    // - Using `sig` & `timestamp` in the query string
 
-      var params = querystring.decode(splitPath[1]);
+    if (this.credentials.signatureSecret && this.credentials.signatureMethod) {
+      // you must first add a timestamp
+      let params;
+      let splitPath;
+      let path;
+
+      // determine if the response should be querystring or JSON body
+      if (!endpoint.body) {
+        // this branch is for query string
+        splitPath = options.path.split(/\?(.+)/);
+        path = splitPath[0];
+
+        params = querystring.parse(splitPath[1]);
+        // params = {};
+        // queryObj.forEach((value, key) => (params[key] = value));
+      } else {
+        // this section is for JSON body
+        params = endpoint.body;
+      }
 
       // add timestamp if not already present
       if (!params.timestamp) {
-        params.timestamp = (new Date().getTime() / 1000) | 0; // floor to seconds
-        params.timestamp = params.timestamp.toString();
+        params.timestamp = ((new Date().getTime() / 1000) | 0).toString();
       }
 
       // strip API Secret
       delete params.api_secret;
 
-      const hash = this.credentials.generateSignature(params);
+      let hash = this.credentials.generateSignature(params);
+      params.sig = hash;
 
-      var query = "";
+      if (!endpoint.body) {
+        //this section is for querystring
+        let query = "";
 
-      // rebuild query
-      Object.keys(params)
-        .sort()
-        .forEach((key) => {
-          query += "&" + key + "=" + encodeURI(params[key]);
-        });
+        // rebuild query
+        Object.keys(params)
+          .sort()
+          .forEach((key) => {
+            query += "&" + key + "=" + encodeURI(params[key]);
+          });
 
-      // replace the first & with ?
-      query = query.replace(/&/i, "?");
+        // replace the first & with ?
+        query = query.replace(/&/i, "?");
 
-      options.path = `${path}${query}&sig=${hash}`;
+        options.path = `${path}${query}`;
+      } else {
+        endpoint.body = params;
+      }
     }
 
     this.logger.info("Request:", options, "\nBody:", endpoint.body);
@@ -443,7 +466,6 @@ class HttpClient {
     }
 
     path = path + "?" + querystring.stringify(params);
-
     this.request(
       {
         path: path,
