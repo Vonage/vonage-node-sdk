@@ -92,7 +92,7 @@ class HttpClient {
         // queryObj.forEach((value, key) => (params[key] = value));
       } else {
         // this section is for JSON body
-        params = endpoint.body;
+        params = JSON.parse(endpoint.body);
       }
 
       // add timestamp if not already present
@@ -122,7 +122,7 @@ class HttpClient {
 
         options.path = `${path}${query}`;
       } else {
-        endpoint.body = params;
+        endpoint.body = JSON.stringify(params);
       }
     }
 
