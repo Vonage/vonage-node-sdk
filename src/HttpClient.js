@@ -88,8 +88,6 @@ class HttpClient {
         path = splitPath[0];
 
         params = querystring.parse(splitPath[1]);
-        // params = {};
-        // queryObj.forEach((value, key) => (params[key] = value));
       } else {
         // this section is for JSON body
         params = JSON.parse(endpoint.body);
