@@ -392,13 +392,15 @@ describe("Message", function () {
       this.httpClientStub.request.yields(null, {});
 
       var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/search/rejections?to=INVALID&date=2020-01-01",
+        path: "/search/rejections?date=2020-01-01&to=INVALID",
+        headers: { "Content-Type": "application/json" },
       });
 
       this.message.searchRejections(
         "INVALID",
         "2020-01-01",
         function (err, data) {
+          console.log(this.httpClientStub.request.firstCall.args);
           expect(this.httpClientStub.request).to.have.been.calledWith(
             sinon.match(expectedRequestArgs)
           );

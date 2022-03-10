@@ -181,7 +181,7 @@ describe("HttpClient Object", function () {
         headers: defaultHeaders,
         host: "api.nexmo.com",
         method: "GET",
-        path: "/some_path?timestamp=1&sig=undefined",
+        path: `/some_path?sig=undefined&timestamp=1`,
         port: 80,
       })
       .returns(fakeRequest);
@@ -219,7 +219,7 @@ describe("HttpClient Object", function () {
         headers: defaultHeaders,
         host: "api.nexmo.com",
         method: "GET",
-        path: `/some_path?timestamp=${timestamp}&sig=undefined`,
+        path: `/some_path?sig=undefined&timestamp=${timestamp}`,
         port: 80,
       })
       .returns(fakeRequest);
@@ -255,7 +255,7 @@ describe("HttpClient Object", function () {
         headers: defaultHeaders,
         host: "api.nexmo.com",
         method: "GET",
-        path: `/some_path?message=some%20message&timestamp=1&sig=undefined`,
+        path: `/some_path?message=some%20message&sig=undefined&timestamp=1`,
         port: 80,
       })
       .returns(fakeRequest);
