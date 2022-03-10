@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.10.11
+
+- callback argument missing (#597)
+- Repair signatures, fix up tests, remove legacy querystring
+
+## 2.10.10
+
+Updating version. No changes.
+
 ## 2.10.9
 
 - Remove extraneous log output.
