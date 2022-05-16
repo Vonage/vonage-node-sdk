@@ -38,7 +38,7 @@ describe("Conversion", function () {
 
       var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
         path:
-          "/conversions/foo?message-id=1234&delivered=1&timestamp=1513254618",
+          "/conversions/foo?delivered=1&message-id=1234&timestamp=1513254618",
       });
 
       this.conversion.submit(

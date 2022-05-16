@@ -7,7 +7,6 @@ import App from "../lib/App";
 import HttpClient from "../lib/HttpClient";
 import Credentials from "../lib/Credentials";
 
-import VonageStub from "./VonageStub";
 import ResourceTestHelper from "./ResourceTestHelper";
 
 chai.use(sinonChai);
@@ -17,21 +16,6 @@ var creds = Credentials.parse({
   apiSecret: "someSecret",
 });
 var emptyCallback = () => {};
-
-var appAPIMapping = {
-  getApplications: "get|{}",
-  createApplication: "create",
-  getApplication: "get|someAppId",
-  updateApplication: "update",
-  deleteApplication: "delete",
-};
-
-describe("applications", function () {
-  it("should implement all v1 APIs", function () {
-    console.log(App);
-    VonageStub.checkAllFunctionsAreDefined(appAPIMapping, App);
-  });
-});
 
 describe("applications.create", function () {
   var httpClientStub = null;
@@ -438,6 +422,65 @@ describe("applications.get", function () {
       emptyCallback,
       false,
       null
+    );
+  });
+});
+
+describe("applications.delete", function () {
+  var httpClientStub = null;
+  var applications = null;
+
+  beforeEach(() => {
+    httpClientStub = sinon.createStubInstance(HttpClient);
+    var options = {
+      httpClient: httpClientStub,
+    };
+    applications = new App(creds, options);
+  });
+  it("should call the V2 API", function () {
+    applications.delete("app_id", emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "DELETE",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic ",
+        },
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
+    );
+  });
+
+  it("should allow host override", function () {
+    let httpClientStub = sinon.createStubInstance(HttpClient);
+    let options = {
+      httpClient: httpClientStub,
+      apiHost: "api.example.com",
+    };
+    let applications = new App(creds, options);
+    applications.delete("app_id", emptyCallback);
+
+    var expectedRequestArgs = ResourceTestHelper.requestArgsMatch(
+      {},
+      {
+        method: "DELETE",
+        host: "api.example.com",
+        path: `${App.PATH}/app_id`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic ",
+        },
+      }
+    );
+    expect(httpClientStub.request).to.have.been.calledWith(
+      sinon.match(expectedRequestArgs),
+      emptyCallback
     );
   });
 });

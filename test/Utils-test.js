@@ -1,7 +1,6 @@
 import Utils from "../src/Utils";
-import sinon from "sinon";
-
 import expect from "expect.js";
+import sinon from "sinon";
 
 describe("Utils", () => {
   describe(".createPathWithQuery", () => {

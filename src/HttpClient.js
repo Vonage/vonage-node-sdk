@@ -1,7 +1,7 @@
 var https = require("https");
 var http = require("http");
 var request = require("request");
-var querystring = require("querystring");
+var querystring = require("query-string");
 var URL = require("url").URL;
 
 const isValidUrl = (s) => {
@@ -51,18 +51,12 @@ class HttpClient {
       endpoint.method = method;
     }
 
-    if (endpoint.method === "POST" || endpoint.method === "DELETE") {
-      // TODO: verify the following fix is required
-      // Fix broken due ot 411 Content-Length error now sent by Vonage API
-      // PL 2016-Sept-6 - commented out Content-Length 0
-      // headers['Content-Length'] = 0;
-    }
     var options = {
       host: endpoint.host ? endpoint.host : this.host,
       port: this.port,
       path: endpoint.path,
       method: endpoint.method,
-      headers: Object.assign({}, this.headers),
+      headers: Object.assign({}, this.headers, endpoint.headers),
     };
 
     if (this.timeout !== undefined) {
@@ -77,39 +71,61 @@ class HttpClient {
       });
     }
 
-    if (this.credentials.signatureSecret && this.credentials.signatureMethod) {
-      const splitPath = options.path.split(/\?(.+)/);
-      const path = splitPath[0];
+    // the output here can returnn one of two options:
+    // - Using `sig` & `timestamp` in the JSON body
+    // - Using `sig` & `timestamp` in the query string
 
-      var params = querystring.decode(splitPath[1]);
+    if (this.credentials.signatureSecret && this.credentials.signatureMethod) {
+      // you must first add a timestamp
+      let params;
+      let splitPath;
+      let path;
+
+      // determine if the response should be querystring or JSON body
+      if (!endpoint.body) {
+        // this branch is for query string
+        splitPath = options.path.split(/\?(.+)/);
+        path = splitPath[0];
+
+        params = querystring.parse(splitPath[1]);
+      } else {
+        // this section is for JSON body
+        params = JSON.parse(endpoint.body);
+      }
 
       // add timestamp if not already present
       if (!params.timestamp) {
-        params.timestamp = (new Date().getTime() / 1000) | 0; // floor to seconds
-        params.timestamp = params.timestamp.toString();
+        params.timestamp = ((new Date().getTime() / 1000) | 0).toString();
       }
 
       // strip API Secret
       delete params.api_secret;
 
-      const hash = this.credentials.generateSignature(params);
+      let hash = this.credentials.generateSignature(params);
+      params.sig = hash;
 
-      var query = "";
+      if (!endpoint.body) {
+        //this section is for querystring
+        let query = "";
 
-      // rebuild query
-      Object.keys(params)
-        .sort()
-        .forEach((key) => {
-          query += "&" + key + "=" + encodeURI(params[key]);
-        });
+        // rebuild query
+        Object.keys(params)
+          .sort()
+          .forEach((key) => {
+            query += "&" + key + "=" + encodeURI(params[key]);
+          });
 
-      // replace the first & with ?
-      query = query.replace(/&/i, "?");
+        // replace the first & with ?
+        query = query.replace(/&/i, "?");
 
-      options.path = `${path}${query}&sig=${hash}`;
+        options.path = `${path}${query}`;
+      } else {
+        endpoint.body = JSON.stringify(params);
+      }
     }
 
     this.logger.info("Request:", options, "\nBody:", endpoint.body);
+
     var request;
 
     if (options.port === 443) {
@@ -453,7 +469,6 @@ class HttpClient {
     }
 
     path = path + "?" + querystring.stringify(params);
-
     this.request(
       {
         path: path,

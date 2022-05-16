@@ -22,7 +22,9 @@ describe("JwtGenerator Object", function () {
     });
 
     it("should generate a JWT", function () {
-      var testPrivateKey = fs.readFileSync(__dirname + "/private-test.key");
+      var testPrivateKey = fs.readFileSync(
+        path.join(__dirname, "private-test.key")
+      );
 
       var generator = new JwtGenerator();
       var token = generator.generate(testPrivateKey, {
@@ -34,8 +36,12 @@ describe("JwtGenerator Object", function () {
     });
 
     it("should add jti and iat claims by default", function () {
-      var testPrivateKey = fs.readFileSync(__dirname + "/private-test.key");
-      var testPublicKey = fs.readFileSync(__dirname + "/public-test.key");
+      var testPrivateKey = fs.readFileSync(
+        path.join(__dirname, "private-test.key")
+      );
+      var testPublicKey = fs.readFileSync(
+        path.join(__dirname, "public-test.key")
+      );
 
       var generator = new JwtGenerator();
       var token = generator.generate(testPrivateKey);
@@ -47,8 +53,12 @@ describe("JwtGenerator Object", function () {
     });
 
     it("should be possible to add additional claims", function () {
-      var testPrivateKey = fs.readFileSync(__dirname + "/private-test.key");
-      var testPublicKey = fs.readFileSync(__dirname + "/public-test.key");
+      var testPrivateKey = fs.readFileSync(
+        path.join(__dirname, "private-test.key")
+      );
+      var testPublicKey = fs.readFileSync(
+        path.join(__dirname, "public-test.key")
+      );
 
       var generator = new JwtGenerator();
       var appId = "app-id";

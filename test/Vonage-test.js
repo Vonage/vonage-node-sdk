@@ -1,4 +1,5 @@
 import chai, { expect } from "chai";
+import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import path from "path";
 import fs from "fs";
@@ -50,52 +51,82 @@ describe("Vonage definition", () => {
 
 describe("Vonage Object instance", function () {
   it("should expose a credentials object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.credentials).to.be.a("object");
   });
 
   it("should expose a message object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.message).to.be.a("object");
   });
 
   it("should expose a voice object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.voice).to.be.a("object");
   });
 
   it("should expose a number object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.number).to.be.a("object");
   });
 
   it("should expose a verify object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.verify).to.be.a("object");
   });
 
   it("should expose a numberInsight object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.numberInsight).to.be.a("object");
   });
 
-  it("should expose a app object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+  it("should expose an app object", function () {
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.app).to.be.a("object");
   });
 
-  it("should expose a applications object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+  it("should expose applications object", function () {
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.applications).to.be.a("object");
   });
 
   it("should alias apps to applications object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.applications).to.equal(vonage.app);
   });
 
   it("should expose a account object", function () {
-    var vonage = new Vonage({ apiKey: "test", apiSecret: "test" });
+    var vonage = new Vonage({
+      apiKey: "test",
+      apiSecret: "test",
+    });
     expect(vonage.account).to.be.a("object");
   });
 
@@ -161,7 +192,9 @@ describe("Vonage Object instance", function () {
         apiKey: "test",
         apiSecret: "test",
       },
-      { logger: logger }
+      {
+        logger: logger,
+      }
     );
     expect(vonage.options.logger).to.equal(logger);
   });
@@ -172,7 +205,9 @@ describe("Vonage Object instance", function () {
         apiKey: "test",
         apiSecret: "test",
       },
-      { debug: true }
+      {
+        debug: true,
+      }
     );
     expect(vonage.options.debug).to.be.true;
   });
@@ -263,7 +298,7 @@ describe("Vonage Object instance", function () {
     var vonage = new Vonage({
       apiKey: "test",
       apiSecret: "test",
-      privateKey: __dirname + "/private-test.key",
+      privateKey: path.join(__dirname, "private-test.key"),
       application_id: "app-id",
     });
     var token = vonage.generateJwt();
@@ -285,7 +320,7 @@ describe("Vonage Object instance", function () {
     var iat = parseInt(Date.now() / 1000, 10);
     var jti = "some_jti";
     var appId = "app_id";
-    var privateKey = __dirname + "/private-test.key";
+    var privateKey = path.join(__dirname, "private-test.key");
 
     var expectedJwt = Vonage.generateJwt(privateKey, {
       application_id: appId,

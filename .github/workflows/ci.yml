@@ -5,14 +5,14 @@ name: Vonage
 
 on:
   push:
-    branches: [ master ]
+    branches: [ 2.x ]
   pull_request:
 jobs:
   test:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [8.x, 10.x, 11.x, 12.x]
+        node: [10.x, 11.x, 12.x]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2

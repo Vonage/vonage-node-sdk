@@ -1,4 +1,4 @@
-var querystring = require("querystring");
+var querystring = require("query-string");
 
 exports.createPathWithQuery = function (path, query) {
   if (!query) {

@@ -115,8 +115,10 @@ describe("SMS", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.nexmo.com",
-        path:
-          "/sms/json?from=1234&to=1234&text=test&api_key=some-key&api_secret=some-secret",
+        path: "/sms/json",
+        body:
+          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","text":"test"}',
+        headers: { "Content-Type": "application/json" },
       }),
       "POST"
     );
@@ -137,8 +139,10 @@ describe("SMS", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.example.com",
-        path:
-          "/sms/json?from=1234&to=1234&text=test&api_key=some-key&api_secret=some-secret",
+        path: "/sms/json",
+        body:
+          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","text":"test"}',
+        headers: { "Content-Type": "application/json" },
       }),
       "POST"
     );
@@ -150,8 +154,10 @@ describe("SMS", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.nexmo.com",
-        path:
-          "/sms/json?from=1234&to=1234&type=binary&body=00&udh=ff&api_key=some-key&api_secret=some-secret",
+        path: "/sms/json",
+        body:
+          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"binary","body":"00","udh":"ff"}',
+        headers: { "Content-Type": "application/json" },
       }),
       "POST"
     );
@@ -172,8 +178,10 @@ describe("SMS", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.example.com",
-        path:
-          "/sms/json?from=1234&to=1234&type=binary&body=00&udh=ff&api_key=some-key&api_secret=some-secret",
+        path: "/sms/json",
+        body:
+          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"binary","body":"00","udh":"ff"}',
+        headers: { "Content-Type": "application/json" },
       }),
       "POST"
     );
@@ -193,8 +201,10 @@ describe("SMS", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.nexmo.com",
-        path:
-          "/sms/json?from=1234&to=1234&type=wappush&title=title&validity=validity&url=url&api_key=some-key&api_secret=some-secret",
+        path: "/sms/json",
+        body:
+          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"wappush","title":"title","validity":"validity","url":"url"}',
+        headers: { "Content-Type": "application/json" },
       }),
       "POST"
     );
@@ -223,8 +233,10 @@ describe("SMS", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.example.com",
-        path:
-          "/sms/json?from=1234&to=1234&type=wappush&title=title&validity=validity&url=url&api_key=some-key&api_secret=some-secret",
+        path: "/sms/json",
+        body:
+          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"wappush","title":"title","validity":"validity","url":"url"}',
+        headers: { "Content-Type": "application/json" },
       }),
       "POST"
     );
@@ -380,7 +392,8 @@ describe("Message", function () {
       this.httpClientStub.request.yields(null, {});
 
       var expectedRequestArgs = ResourceTestHelper.requestArgsMatch({
-        path: "/search/rejections?to=INVALID&date=2020-01-01",
+        path: "/search/rejections?date=2020-01-01&to=INVALID",
+        headers: { "Content-Type": "application/json" },
       });
 
       this.message.searchRejections(
