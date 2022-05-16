@@ -1,4 +1,5 @@
 import JwtGenerator from "../src/JwtGenerator";
+import path from "path";
 import fs from "fs";
 import expect from "expect.js";
 import jwt from "jsonwebtoken";

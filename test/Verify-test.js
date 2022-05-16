@@ -78,7 +78,7 @@ describe("Verify", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path: "/verify/json?number=123&brand=acme&api_key=some-key&api_secret=some-secret",
+        path: "/verify/json?api_key=some-key&api_secret=some-secret&brand=acme&number=123",
       })
     );
   });
@@ -92,7 +92,7 @@ describe("Verify", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path: "/verify/psd2/json?number=123&payee=acme&amount=amount&api_key=some-key&api_secret=some-secret",
+        path: "/verify/psd2/json?amount=amount&api_key=some-key&api_secret=some-secret&number=123&payee=acme",
       })
     );
   });
@@ -103,7 +103,7 @@ describe("Verify", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path: "/verify/check/json?request_id=123&code=1234&api_key=some-key&api_secret=some-secret",
+        path: "/verify/check/json?api_key=some-key&api_secret=some-secret&code=1234&request_id=123",
       })
     );
   });
@@ -114,7 +114,7 @@ describe("Verify", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path: "/verify/control/json?request_id=123&cmd=test&api_key=some-key&api_secret=some-secret",
+        path: "/verify/control/json?api_key=some-key&api_secret=some-secret&cmd=test&request_id=123",
       })
     );
   });
@@ -125,7 +125,7 @@ describe("Verify", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path: "/verify/search/json?request_id=123&api_key=some-key&api_secret=some-secret",
+        path: "/verify/search/json?api_key=some-key&api_secret=some-secret&request_id=123",
       })
     );
   });
@@ -136,7 +136,7 @@ describe("Verify", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path: "/verify/search/json?request_id=123&api_key=some-key&api_secret=some-secret",
+        path: "/verify/search/json?api_key=some-key&api_secret=some-secret&request_id=123",
       })
     );
   });
@@ -147,7 +147,7 @@ describe("Verify", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path: "/verify/search/json?request_ids=123&request_ids=456&api_key=some-key&api_secret=some-secret",
+        path: "/verify/search/json?api_key=some-key&api_secret=some-secret&request_ids=123&request_ids=456",
       })
     );
   });

@@ -1,7 +1,7 @@
 "use strict";
 
 import vonage from "./index";
-
+import Utils from "./Utils";
 import Pricing from "./Pricing";
 
 class Number {
@@ -130,9 +130,10 @@ class Number {
         opts.target_api_key = targetApiKey;
       }
 
+      const path = Utils.createPathWithQuery(`${Number.PATH}/buy`, opts);
       this.options.httpClient.request(
         {
-          path: Utils.createPathWithQuery(`${Number.PATH}/buy`, opts),
+          path: path,
         },
         "POST",
         callback
