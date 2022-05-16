@@ -116,8 +116,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path: "/sms/json",
-        body:
-          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","text":"test"}',
+        body: '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","text":"test"}',
         headers: { "Content-Type": "application/json" },
       }),
       "POST"
@@ -140,8 +139,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.example.com",
         path: "/sms/json",
-        body:
-          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","text":"test"}',
+        body: '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","text":"test"}',
         headers: { "Content-Type": "application/json" },
       }),
       "POST"
@@ -155,8 +153,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path: "/sms/json",
-        body:
-          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"binary","body":"00","udh":"ff"}',
+        body: '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"binary","body":"00","udh":"ff"}',
         headers: { "Content-Type": "application/json" },
       }),
       "POST"
@@ -179,8 +176,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.example.com",
         path: "/sms/json",
-        body:
-          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"binary","body":"00","udh":"ff"}',
+        body: '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"binary","body":"00","udh":"ff"}',
         headers: { "Content-Type": "application/json" },
       }),
       "POST"
@@ -202,8 +198,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.nexmo.com",
         path: "/sms/json",
-        body:
-          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"wappush","title":"title","validity":"validity","url":"url"}',
+        body: '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"wappush","title":"title","validity":"validity","url":"url"}',
         headers: { "Content-Type": "application/json" },
       }),
       "POST"
@@ -234,8 +229,7 @@ describe("SMS", () => {
       sinon.match({
         host: "rest.example.com",
         path: "/sms/json",
-        body:
-          '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"wappush","title":"title","validity":"validity","url":"url"}',
+        body: '{"api_key":"some-key","api_secret":"some-secret","from":"1234","to":"1234","type":"wappush","title":"title","validity":"validity","url":"url"}',
         headers: { "Content-Type": "application/json" },
       }),
       "POST"

@@ -130,8 +130,7 @@ describe("Number", () => {
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
-        path:
-          "/number/search?api_key=some-key&api_secret=some-secret&country=GB",
+        path: "/number/search?api_key=some-key&api_secret=some-secret&country=GB",
       })
     );
   });
@@ -141,8 +140,7 @@ describe("Number", () => {
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
-        path:
-          "/number/search?api_key=some-key&api_secret=some-secret&country=GB&pattern=222",
+        path: "/number/search?api_key=some-key&api_secret=some-secret&country=GB&pattern=222",
       })
     );
   });
@@ -152,8 +150,7 @@ describe("Number", () => {
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
-        path:
-          "/number/search?api_key=some-key&api_secret=some-secret&country=GB&pattern=222",
+        path: "/number/search?api_key=some-key&api_secret=some-secret&country=GB&pattern=222",
       })
     );
   });
@@ -163,8 +160,7 @@ describe("Number", () => {
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
-        path:
-          "/number/buy?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret",
+        path: "/number/buy?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret",
       })
     );
   });
@@ -174,8 +170,7 @@ describe("Number", () => {
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
-        path:
-          "/number/buy?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret&target_api_key=5678",
+        path: "/number/buy?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret&target_api_key=5678",
       })
     );
   });
@@ -185,8 +180,7 @@ describe("Number", () => {
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
-        path:
-          "/number/cancel?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret",
+        path: "/number/cancel?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret",
       })
     );
   });
@@ -196,8 +190,7 @@ describe("Number", () => {
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
-        path:
-          "/number/cancel?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret&target_api_key=5678",
+        path: "/number/cancel?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret&target_api_key=5678",
       })
     );
   });
@@ -207,8 +200,7 @@ describe("Number", () => {
 
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
-        path:
-          "/number/update?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret",
+        path: "/number/update?country=GB&msisdn=1234&api_key=some-key&api_secret=some-secret",
       })
     );
   });

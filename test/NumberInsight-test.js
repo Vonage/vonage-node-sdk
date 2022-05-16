@@ -86,8 +86,7 @@ describe("NumberInsight", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path:
-          "/ni/basic/json?number=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/ni/basic/json?number=123456789&api_key=some-key&api_secret=some-secret",
       })
     );
   });
@@ -101,8 +100,7 @@ describe("NumberInsight", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path:
-          "/ni/standard/json?number=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/ni/standard/json?number=123456789&api_key=some-key&api_secret=some-secret",
       })
     );
   });
@@ -120,8 +118,7 @@ describe("NumberInsight", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path:
-          "/ni/advanced/async/json?number=123456789&callback=http%3A%2F%2Fexample.com&api_key=some-key&api_secret=some-secret",
+        path: "/ni/advanced/async/json?number=123456789&callback=http%3A%2F%2Fexample.com&api_key=some-key&api_secret=some-secret",
       })
     );
   });
@@ -135,8 +132,7 @@ describe("NumberInsight", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "api.nexmo.com",
-        path:
-          "/ni/advanced/json?number=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/ni/advanced/json?number=123456789&api_key=some-key&api_secret=some-secret",
       })
     );
   });
