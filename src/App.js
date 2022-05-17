@@ -1,9 +1,6 @@
 "use strict";
 
-<<<<<<< HEAD
 import vonage from "./index";
-=======
->>>>>>> 2.x
 import Utils from "./Utils";
 
 class App {
@@ -22,12 +19,9 @@ class App {
   constructor(credentials, options = {}) {
     this.creds = credentials;
     this.options = options;
-<<<<<<< HEAD
 
     // Used to facilitate testing of the call to the underlying object
     this._vonage = this.options.vonageOverride || vonage;
-=======
->>>>>>> 2.x
   }
 
   _convertMethodSignature(name, type, answerUrl, eventUrl, options) {
