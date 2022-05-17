@@ -71,7 +71,7 @@ class HttpClient {
       });
     }
 
-    // the output here can returnn one of two options:
+    // the output here can return one of two options:
     // - Using `sig` & `timestamp` in the JSON body
     // - Using `sig` & `timestamp` in the query string
 
