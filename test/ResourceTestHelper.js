@@ -1,4 +1,4 @@
-import querystring from "querystring";
+import querystring from "query-string";
 
 class ResourceTestHelper {
   static getRequestArgs(params, overrides = {}) {

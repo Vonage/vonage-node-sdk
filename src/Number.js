@@ -1,10 +1,22 @@
 "use strict";
 
 import vonage from "./index";
-
+import Utils from "./Utils";
 import Pricing from "./Pricing";
 
 class Number {
+  static get PATH() {
+    return "/number";
+  }
+
+  static get ERROR_MESSAGES() {
+    return {
+      optionsNotAnObject:
+        "Options parameter should be a dictionary. Check the docs for valid properties for options",
+      countrycode: "Invalid Country Code",
+      msisdn: "Invalid MSISDN passed",
+    };
+  }
   /**
    * @param {Credentials} credentials
    *    credentials to be used when interacting with the API.
@@ -44,36 +56,145 @@ class Number {
   /**
    * TODO: document
    */
-  get() {
-    this._vonage.getNumbers.apply(this._vonage, arguments);
+  get(options, callback) {
+    if (typeof options === "function") {
+      callback = options;
+      options = {};
+    } else if (typeof options !== "object") {
+      Utils.sendError(
+        callback,
+        new Error(Number.ERROR_MESSAGES.optionsNotAnObject)
+      );
+    }
+
+    options.api_key = options.api_key || this.creds.apiKey;
+    options.api_secret = options.api_secret || this.creds.apiSecret;
+
+    this.options.httpClient.request(
+      {
+        path: Utils.createPathWithQuery(`/account${Number.PATH}s`, options),
+      },
+      callback
+    );
   }
 
   /**
    * TODO: document
    */
-  search() {
-    this._vonage.searchNumbers.apply(this._vonage, arguments);
+  search(countryCode, pattern, callback) {
+    let params = {
+      api_key: this.creds.apiKey,
+      api_secret: this.creds.apiSecret,
+    };
+    if (!countryCode || countryCode.length !== 2) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
+    } else {
+      params["country"] = countryCode;
+      if (typeof pattern === "function") {
+        callback = pattern;
+      } else if (typeof pattern === "object") {
+        for (var arg in pattern) {
+          params[arg] = pattern[arg];
+        }
+      } else {
+        params["pattern"] = pattern;
+      }
+      this.options.httpClient.request(
+        {
+          path: Utils.createPathWithQuery(`${Number.PATH}/search`, params),
+        },
+        callback
+      );
+    }
   }
 
   /**
    * TODO: document
    */
-  buy() {
-    this._vonage.buyNumber.apply(this._vonage, arguments);
+  buy(countryCode, msisdn, targetApiKey, callback) {
+    if (!countryCode || countryCode.length !== 2) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
+    } else if (!msisdn) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
+    } else {
+      let opts = {
+        country: countryCode,
+        msisdn,
+        api_key: this.creds.apiKey,
+        api_secret: this.creds.apiSecret,
+      };
+
+      if (targetApiKey instanceof Function) {
+        callback = targetApiKey;
+      } else {
+        opts.target_api_key = targetApiKey;
+      }
+
+      const path = Utils.createPathWithQuery(`${Number.PATH}/buy`, opts);
+      this.options.httpClient.request(
+        {
+          path: path,
+        },
+        "POST",
+        callback
+      );
+    }
   }
 
   /**
    * TODO: document
    */
-  cancel() {
-    this._vonage.cancelNumber.apply(this._vonage, arguments);
+  cancel(countryCode, msisdn, targetApiKey, callback) {
+    if (!countryCode || countryCode.length !== 2) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
+    } else if (!msisdn) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
+    } else {
+      let opts = {
+        country: countryCode,
+        msisdn,
+        api_key: this.creds.apiKey,
+        api_secret: this.creds.apiSecret,
+      };
+
+      if (targetApiKey instanceof Function) {
+        callback = targetApiKey;
+      } else {
+        opts.target_api_key = targetApiKey;
+      }
+
+      this.options.httpClient.request(
+        {
+          path: Utils.createPathWithQuery(`${Number.PATH}/cancel`, opts),
+        },
+        "POST",
+        callback
+      );
+    }
   }
 
   /**
    * TODO: document
    */
-  update() {
-    this._vonage.updateNumber.apply(this._vonage, arguments);
+  update(countryCode, msisdn, params, callback) {
+    if (!countryCode || countryCode.length !== 2) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.countrycode));
+    } else if (!msisdn) {
+      Utils.sendError(callback, new Error(Number.ERROR_MESSAGES.msisdn));
+    } else {
+      params["country"] = countryCode;
+      params["msisdn"] = msisdn;
+      params["api_key"] = this.creds.apiKey;
+      params["api_secret"] = this.creds.apiSecret;
+
+      this.options.httpClient.request(
+        {
+          path: Utils.createPathWithQuery(`${Number.PATH}/update`, params),
+        },
+        "POST",
+        callback
+      );
+    }
   }
 }
 

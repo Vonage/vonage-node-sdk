@@ -40,55 +40,56 @@ class Message {
     this.shortcodeMarketing = _shortcode.shortcodeMarketing.bind(_shortcode);
   }
 
-  _sendRequest(endpoint, method, callback) {
-    endpoint.path =
-      endpoint.path +
-      (endpoint.path.indexOf("?") > 0 ? "&" : "?") +
-      querystring.stringify({
-        api_key: this.creds.apiKey,
-        api_secret: this.creds.apiSecret,
-      });
-    this.options.httpClient.request(endpoint, method, callback);
-  }
-
-  _sendMessage(data, callback) {
+  _checkToAndFrom(data, callback) {
     if (!data.from) {
       Utils.sendError(callback, new Error(Message.ERROR_MESSAGES.sender));
     } else if (!data.to) {
       Utils.sendError(callback, new Error(Message.ERROR_MESSAGES.to));
     } else {
-      var path = Message.PATH + "?" + querystring.stringify(data);
-      this.options.logger.info(
-        "sending message from " +
-          data.from +
-          " to " +
-          data.to +
-          " with message " +
-          data.text
-      );
-      this._sendRequest(
-        {
-          host: this.options.restHost || "rest.nexmo.com",
-          path: path,
-        },
-        "POST",
-        function (err, apiResponse) {
-          if (
-            !err &&
-            apiResponse.status &&
-            apiResponse.messages[0].status > 0
-          ) {
-            Utils.sendError(
-              callback,
-              new Error(apiResponse.messages[0]["error-text"]),
-              apiResponse
-            );
-          } else {
-            if (callback) callback(err, apiResponse);
-          }
-        }
-      );
+      return;
     }
+  }
+
+  // _sendMessageCallback
+
+  _sendMessage(data, callback) {
+    this._checkToAndFrom(data, callback);
+
+    this.options.logger.info(
+      "sending message from " +
+        data.from +
+        " to " +
+        data.to +
+        " with message " +
+        data.text
+    );
+
+    let creds = {
+      api_key: this.creds.apiKey,
+      api_secret: this.creds.apiSecret,
+    };
+
+    let body = Object.assign({}, creds, data);
+    this.options.httpClient.request(
+      {
+        host: this.options.restHost || "rest.nexmo.com",
+        path: Message.PATH,
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json" },
+      },
+      "POST",
+      (err, apiResponse) => {
+        if (!err && apiResponse.status && apiResponse.messages[0].status > 0) {
+          Utils.sendError(
+            callback,
+            new Error(apiResponse.messages[0]["error-text"]),
+            apiResponse
+          );
+        } else {
+          if (callback) callback(err, apiResponse);
+        }
+      }
+    );
   }
 
   /**
