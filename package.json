@@ -1,7 +1,7 @@
 {
   "name": "@vonage/server-sdk",
   "author": "vonage",
-  "version": "2.11.0-beta",
+  "version": "2.12.0-beta.0",
   "main": "lib/Vonage",
   "types": "./typings/index.d.ts",
   "keywords": [
