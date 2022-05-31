@@ -1,9 +1,10 @@
 "use strict";
 
 import nexmo from "./index";
-import fs from "fs";
-import querystring from "querystring";
 
+/**
+ * @deprecated Use the Messages v1.0 API via the Messages object
+ */
 class Channel {
   static get PATH() {
     return "/v0.1/messages";

@@ -23,6 +23,23 @@ const TestUtils = {
 
     return creds;
   },
+
+  getApplicationCredentials: function () {
+    var creds = Credentials.parse({
+      apiKey: "myKey",
+      apiSecret: "mySecret",
+      applicationId: "8f484040-1cf1-4c0e-8b5a-ee47d15a3bec",
+      privateKey: __dirname + "/private-test.key",
+    });
+
+    // Overwrite JWT generation for tests
+    creds.generateJwt = function () {
+      return "ThisIsAJWT";
+    };
+
+    return creds;
+  },
+
   getHttpClient: function () {
     const httpClient = new HttpClient(
       {
