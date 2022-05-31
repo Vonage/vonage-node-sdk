@@ -5,6 +5,7 @@ import Credentials from "./Credentials";
 import JwtGenerator from "./JwtGenerator";
 import HashGenerator from "./HashGenerator";
 import Message from "./Message";
+import Messages from "./Messages";
 import Voice from "./Voice";
 import Number from "./Number";
 import Verify from "./Verify";
@@ -88,6 +89,7 @@ class Vonage {
     );
 
     this.message = new Message(this.credentials, this.options);
+    this.messages = new Messages(this.credentials, this.options);
     this.voice = new Voice(this.credentials, this.options);
     this.number = new Number(this.credentials, this.options);
     this.verify = new Verify(this.credentials, this.options);

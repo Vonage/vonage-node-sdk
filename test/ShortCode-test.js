@@ -57,8 +57,7 @@ describe("ShortCode", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.nexmo.com",
-        path:
-          "/sc/us/alert/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/sc/us/alert/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -82,8 +81,7 @@ describe("ShortCode", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.example.com",
-        path:
-          "/sc/us/alert/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/sc/us/alert/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -98,8 +96,7 @@ describe("ShortCode", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.nexmo.com",
-        path:
-          "/sc/us/2fa/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/sc/us/2fa/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -123,8 +120,7 @@ describe("ShortCode", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.example.com",
-        path:
-          "/sc/us/2fa/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/sc/us/2fa/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -139,8 +135,7 @@ describe("ShortCode", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.nexmo.com",
-        path:
-          "/sc/us/marketing/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/sc/us/marketing/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
@@ -164,8 +159,7 @@ describe("ShortCode", () => {
     expect(httpClientStub.request).to.have.been.calledWith(
       sinon.match({
         host: "rest.example.com",
-        path:
-          "/sc/us/marketing/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
+        path: "/sc/us/marketing/json?type=text&some=param&to=123456789&api_key=some-key&api_secret=some-secret",
       }),
       "POST"
     );
