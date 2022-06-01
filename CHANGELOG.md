@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.11.1
+
+- Fixed issue with HttpClient for JSON content
+
 ## 2.11.0
 
 - Added support for the Messages API v1.0
