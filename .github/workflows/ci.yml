@@ -23,6 +23,6 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Lint, Compile, Test
-      run: npx lerna run compile && npx lerna run test
+      run: npx lerna bootstrap && npx lerna run compile && npx lerna run test
     - name: Module smoketest
       run: node -e "const v = require('.'); new v({});"
