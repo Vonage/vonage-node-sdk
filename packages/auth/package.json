@@ -19,7 +19,8 @@
         "clean": "tsc -b --clean",
         "compile": "tsc -p tsconfig.json",
         "prepare": "npm run build",
-        "test-watch": "../../node_modules/.bin/jest --watch"
+        "test-watch": "npx jest --watch",
+        "test": "npx jest"
     },
     "bugs": {
         "url": "https://github.com/Vonage/vonage-node-sdk/issues"

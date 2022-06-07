@@ -36,6 +36,6 @@ export interface AuthInterface {
     apiKey: string
     apiSecret: string
     signature?: SignedHashParams
-    getQueryParams<T>(params: T): AuthQueryParams & T
+    getQueryParams<T>(params?: T): AuthQueryParams & T
     createSignatureHash<T>(params: T): AuthSignedParams & T
 }

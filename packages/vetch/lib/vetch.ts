@@ -28,6 +28,9 @@ export class Vetch {
 
     constructor(defaults?: VetchOptions) {
         this.defaults = defaults || { responseType: ResponseTypes.json }
+        if (!this.defaults.responseType) {
+            this.defaults.responseType = ResponseTypes.json;
+        }
     }
 
     private async _defaultAdapter<T>(
@@ -46,10 +49,13 @@ export class Vetch {
             formattedResponse = await this._defaultAdapter<T>(opts)
 
             if (!opts.checkStatus!(formattedResponse.status)) {
-                throw new VetchError(
+                let err = new VetchError(
                     `Request failed with status code ${formattedResponse.status}`,
                     opts
                 )
+                err.code = String(formattedResponse.status)
+                err.response = formattedResponse
+                throw err
             }
 
             return formattedResponse

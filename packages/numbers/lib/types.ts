@@ -31,6 +31,12 @@ export interface NumbersParams {
     targetApiKey?: string;
 }
 
+export interface NumbersQueryParams {
+    country: Country,
+    msisdn: string,
+    target_api_key?: string;
+}
+
 export interface NumbersAvailableNumber {
     country?: Country;
     msisdn?: string;
@@ -45,6 +51,21 @@ export interface NumbersUpdateParams {
     country: Country;
     msisdn: string;
     appId?: string;
+    moHttpUrl?: string;
+    moSmppSysType?: string;
+    voiceCallbackType?: VoiceCallbackTypeEnum;
+    voiceCallbackValue?: string;
+    voiceStatusCallback?: string;
+    /** @deprecated */
+    messagesCallbackType?: MessagesCallbackTypeEnum;
+    /** @deprecated */
+    messagesCallbackValue?: string;
+}
+
+export interface NumbersQueryUpdateParams {
+    country: Country;
+    msisdn: string;
+    app_id?: string;
     moHttpUrl?: string;
     moSmppSysType?: string;
     voiceCallbackType?: VoiceCallbackTypeEnum;
@@ -86,6 +107,14 @@ export interface NumbersSearchFilter {
     index?: number,
 }
 
+export interface NumbersQuerySearchFilter {
+    country: Country,
+    pattern?: string,
+    search_pattern?: number,
+    size?: number,
+    index?: number,
+}
+
 export interface NumbersOwnedFilter {
     country?: Country,
     applicationId?: string,
@@ -96,4 +125,12 @@ export interface NumbersOwnedFilter {
     index?: number,
 }
 
-
+export interface NumbersQueryOwnedFilter {
+    country?: Country,
+    application_id?: string,
+    has_application?: boolean,
+    pattern?: string,
+    search_pattern?: number,
+    size?: number,
+    index?: number,
+}

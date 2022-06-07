@@ -14,6 +14,7 @@
 import { Vetch, request } from '../lib'
 import { stringify } from 'querystring'
 import nock from 'nock'
+import { HTTPMethods } from '../lib/types'
 
 nock.disableNetConnect()
 
@@ -48,9 +49,9 @@ describe('option configuration', () => {
         nock(url)
             .head('/')
             .reply(200)
-        let inst = new Vetch({ method: 'HEAD' })
-        let res = await inst.request({ url })
-        expect(res.config.method).toEqual('HEAD')
+        const inst = new Vetch({ method: HTTPMethods.HEAD })
+        const res = await inst.request({ url })
+        expect(res.config.method).toEqual("HEAD")
     })
 
     test('should allow nested options passed in constructor', async () => {
@@ -142,7 +143,7 @@ describe('option configuration', () => {
     nock(url)
         .post('/', body)
         .reply(200)
-    let res = await request({ url, method: 'POST', data: body })
+      const res = await request({ url, method: HTTPMethods.POST, data: body })
     expect(res.config.data).toEqual(body)
   })
 })
@@ -155,9 +156,9 @@ describe('data handling', () => {
       .matchHeader('content-type', 'application/x-www-form-urlencoded')
       .post('/', encoded)
       .reply(200, {});
-    let res = await request({
+    const res = await request({
       url,
-      method: 'POST',
+        method: HTTPMethods.POST,
       data: encoded,
       headers: {'content-type': 'application/x-www-form-urlencoded'},
     });
@@ -170,9 +171,9 @@ describe('data handling', () => {
       .matchHeader('Content-Type', 'application/json')
       .post('/', JSON.stringify(body))
       .reply(200, {});
-    let res = await request({
+    const res = await request({
       url,
-      method: 'POST',
+        method: HTTPMethods.POST,
       data: body,
     });
 

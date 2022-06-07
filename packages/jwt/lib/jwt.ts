@@ -24,7 +24,7 @@ export class JWT implements JWTInterface{
         
         return sign(claims, privateKey, {
             algorithm: 'RS256',
-            header: { typ: 'JWT' },
+            header: { typ: 'JWT', alg: 'RS256' },
         })
     }
 
