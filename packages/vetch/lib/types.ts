@@ -1,6 +1,7 @@
 export class VetchError extends Error {
     code?: string
     config: VetchOptions
+    response: VetchResponse<any>
     constructor(
         message: string,
         options: VetchOptions,

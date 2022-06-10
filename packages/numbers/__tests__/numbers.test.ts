@@ -18,8 +18,6 @@ import nock from 'nock';
 const config: types.NumbersClassParameters = {}
 const BASE_URL = "https://rest.nexmo.com".replace(/\/+$/, "");
 
-
-
 describe("Numbers", () => {
     let client: api.Numbers
     beforeEach(function () {
@@ -31,72 +29,114 @@ describe("Numbers", () => {
     });
 
     test("buyNumber()", async () => {
-
         nock(BASE_URL)
-            .post(`/number/buy`, { apiKey: "12345", apiSecret: "ABCDE", country: "US", msisdn: "12345", targetApiKey: "67890" })
-            .reply(200);
+            .persist()
+            .post(`/number/buy`, { api_key: "12345", api_secret: "ABCDE", country: "US", msisdn: "12345", target_api_key: "67890" })
+            .reply(200, { "error-code": "200", "error-code-label": "success" });
 
-        let results = await client.buyNumber({ country: 'US', msisdn: '12345', targetApiKey: '67890' });
-        expect(results.type).toEqual('success');
+        const results = await client.buyNumber({ country: 'US', msisdn: '12345', targetApiKey: '67890' });
+        expect(results.errorCodeLabel).toEqual('success');
+    });
 
+    test("invalid credentials gets caught", async () => {
+        client = new api.Numbers({ apiKey: 'badkey', apiSecret: 'badsecret' })
         nock(BASE_URL)
-            .post(`/number/buy`, { apiKey: "12345", apiSecret: "ABCDE", country: "US", msisdn: "12345", targetApiKey: "67890" })
-            .reply(400);
+            .persist()
+            .post(`/number/buy`, { api_key: "badkey", api_secret: "badsecret", country: "US", msisdn: "12345", target_api_key: "67890" })
+            .reply(401, { "error-code": "401", "error-code-label": "authentication failed" });
 
-        results = await client.buyNumber({ country: 'US', msisdn: '12345', targetApiKey: '67890' });
-        expect(results.type).toEqual('error');
-
-    })
+        try {
+            const results = await client.buyNumber({ country: 'US', msisdn: '12345', targetApiKey: '67890' });
+        } catch (e) {
+            expect(e.code).toEqual("401");
+        }
+    });
 
     test("getOwnedNumbers()", async () => {
+        const resp = {
+            "count": 1,
+            "numbers": [
+                {
+                    "country": "GB",
+                    "msisdn": "447700900000",
+                    "moHttpUrl": "https://example.com/webhooks/inbound-sms",
+                    "type": "mobile-lvn",
+                    "features": [
+                        "VOICE",
+                        "SMS",
+                        "MMS"
+                    ],
+                    "messagesCallbackType": "app",
+                    "messagesCallbackValue": "aaaaaaaa-bbbb-cccc-dddd-0123456789ab",
+                    "voiceCallbackType": "app",
+                    "voiceCallbackValue": "aaaaaaaa-bbbb-cccc-dddd-0123456789ab"
+                }
+            ]
+        };
 
         nock(BASE_URL)
             .get(`/account/numbers`)
             .query({ api_key: '12345', api_secret: 'ABCDE' })
-            .reply(200);
+            .reply(200, resp);
 
         const results = await client.getOwnedNumbers({});
-        expect(results.type).toEqual('success');
-
+        expect(results.count).toEqual(1);
+        expect(results.numbers.length).toEqual(1);
+        expect(results.numbers[0].country).toEqual(resp.numbers[0].country);
     })
 
     test("getAvailableNumbers()", async () => {
+        const resp = {
+            "count": 1234,
+            "numbers": [
+                {
+                    "country": "GB",
+                    "msisdn": "447700900000",
+                    "type": "mobile-lvn",
+                    "cost": "1.25",
+                    "features": [
+                        "VOICE",
+                        "SMS",
+                        "MMS"
+                    ]
+                }
+            ]
+        };
 
         nock(BASE_URL)
             .get(`/number/search`)
-            .query({ api_key: '12345', api_secret: 'ABCDE' })
-            .reply(200);
+            .query({ api_key: '12345', api_secret: 'ABCDE', country: 'US' })
+            .reply(200, resp);
 
-        const results = await client.getAvailableNumbers();
-        expect(results.type).toEqual('success');
-
+        const results = await client.getAvailableNumbers({ country: 'US' });
+        expect(results.count).toEqual(1234);
+        expect(results.numbers.length).toEqual(1);
+        expect(results.numbers[0].country).toEqual(resp.numbers[0].country);
     })
 
     test("cancelNumber()", async () => {
-
         nock(BASE_URL)
-            .post(`/number/cancel`, { apiKey: "12345", apiSecret: "ABCDE", country: "US", msisdn: "12345", targetApiKey: "67890" })
-            .reply(200);
+            .post(`/number/cancel`, { api_key: "12345", api_secret: "ABCDE", country: "US", msisdn: "12345", target_api_key: "67890" })
+            .reply(200, { "error-code": "200", "error-code-label": "success" });
 
         const results = await client.cancelNumber({ country: 'US', msisdn: '12345', targetApiKey: '67890' });
-        expect(results.type).toEqual('success');
-
+        expect(results.errorCodeLabel).toEqual('success');
     })
 
     test("updateNumber()", async () => {
 
         nock(BASE_URL)
             .post(`/number/update`, {
-                apiKey: "12345",
-                apiSecret: "ABCDE",
+                api_key: "12345",
+                api_secret: "ABCDE",
                 country: "US",
                 msisdn: "12345",
-                appId: "123abc",
+                app_id: "123abc",
                 voiceCallbackType: "app",
                 voiceCallbackValue: "https://www.example.com/webhook",
                 voiceStatusCallback: "https://www.example.com/webhook/events"
             })
-            .reply(200);
+            .reply(200, { "error-code": "200", "error-code-label": "success" });
 
         const results = await client.updateNumber({
             country: "US",
@@ -106,8 +146,7 @@ describe("Numbers", () => {
             voiceCallbackValue: "https://www.example.com/webhook",
             voiceStatusCallback: "https://www.example.com/webhook/events"
         });
-        expect(results.type).toEqual('success');
-
+        expect(results.errorCodeLabel).toEqual('success');
     })
 })
 

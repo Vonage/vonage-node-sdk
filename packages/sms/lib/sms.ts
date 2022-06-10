@@ -5,7 +5,8 @@ import {
     SMSEmptyResponse,
     SMSResponse,
     SMSClassParameters,
-    SMSParams
+    SMSParams,
+    SMSGeneralResponse
 } from './types';
 
 
@@ -57,8 +58,13 @@ export class BaseAPI {
 };
 
 export class SMS extends BaseAPI {
-    public send(params?: SMSParams) {
+    public async send(params?: SMSParams) {
         const localVetchOptions = SMSParamCreator(this.config).send(params);
-        return runRequest<SMSEmptyResponse>(localVetchOptions, this.config);
+        const resp = await runRequest<SMSGeneralResponse>(localVetchOptions, this.config);
+
+        return {
+            'message-count': resp.data['message-count'],
+            messages: resp.data.messages
+        };
     }
 }

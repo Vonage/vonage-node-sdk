@@ -20,7 +20,8 @@
     "compile": "tsc -p tsconfig.json",
     "lerna": "../../node_modules/.bin/lerna",
     "prepare": "npm run build",
-    "test-watch": "../../node_modules/.bin/jest --watch"
+    "test-watch": "npx jest --watch",
+    "test": "npx jest"
   },
   "bugs": {
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
