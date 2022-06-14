@@ -5,6 +5,8 @@ export const Auth: AuthConstructor = class Auth implements AuthInterface {
 
   apiKey: string
   apiSecret: string
+  privateKey?: string
+  appId?: string
   signature: SignedHashParams
   constructor(opts?: AuthOpts) {
     // add additional methods to find auth
@@ -13,6 +15,8 @@ export const Auth: AuthConstructor = class Auth implements AuthInterface {
     this.apiKey = opts?.apiKey || ''
     this.apiSecret = opts?.apiSecret || ''
     this.signature = opts?.signature || null
+    this.privateKey = opts?.privateKey || null
+    this.appId = opts?.appId || null
   }
 
   getQueryParams = <T>(params: T): AuthQueryParams & T => {

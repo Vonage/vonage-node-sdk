@@ -125,7 +125,7 @@ export class BaseAPI {
 
     constructor(opts?: NumbersClassParameters) {
         if (opts) {
-            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, file: opts.file });
+            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey });
             opts['baseUrl'] = opts.baseUrl || BASE_URL;
             opts['responseType'] = opts.responseType || ResponseTypes.json;
             this.config = opts;

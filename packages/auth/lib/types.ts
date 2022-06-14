@@ -13,7 +13,8 @@ export enum AlgorithmTypes {
 export interface AuthOpts {
     apiKey?: string
     apiSecret?: string
-    file?: string,
+    privateKey?: string
+    appId?: string
     signature?: SignedHashParams
 }
 

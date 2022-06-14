@@ -1,0 +1,53 @@
+{
+  "name": "@vonage/messages",
+  "version": "3.0.0-beta.4",
+  "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
+  "keywords": [
+    "whatsapp",
+    "facebook",
+    "viber",
+    "sms",
+    "mms",
+    "messaging",
+    "messages"
+  ],
+  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "homepage": "https://developer.vonage.com",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "tsc -b --clean",
+    "compile": "tsc -p tsconfig.json",
+    "test-watch": "npx jest --watch",
+    "test": "npx jest"
+  },
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0",
+    "jest": "^26.0",
+    "nock": "^13.2.6",
+    "ts-jest": "^26.0",
+    "ts-loader": "^9.3.0",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  },
+  "dependencies": {
+    "@vonage/auth": "^3.0.0-beta.4",
+    "@vonage/vetch": "^3.0.0-beta.4"
+  }
+}

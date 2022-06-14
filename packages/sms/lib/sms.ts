@@ -49,7 +49,7 @@ export class BaseAPI {
 
     constructor(opts?: SMSClassParameters) {
         if (opts) {
-            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, file: opts.file, signature: opts.signature });
+            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey, signature: opts.signature });
             opts['baseUrl'] = opts.baseUrl || BASE_URL;
             opts['responseType'] = opts.responseType || ResponseTypes.json;
             this.config = opts;
