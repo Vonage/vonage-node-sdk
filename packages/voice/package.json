@@ -1,0 +1,44 @@
+{
+  "name": "@vonage/voice",
+  "version": "3.0.0-beta.4",
+  "description": "Vonage Voice API",
+  "keywords": [
+    "vonage",
+    "voice"
+  ],
+  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "homepage": "https://developer.vonage.com",
+  "license": "Apache-2.0",
+  "main": "lib/index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "tsc -b --clean",
+    "compile": "tsc -p tsconfig.json",
+    "test-watch": "npx jest --watch",
+    "test": "npx jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.0",
+    "nock": "^13.2.4",
+    "ts-jest": "^27.1.3",
+    "typescript": "^4.3.5"
+  },
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "dependencies": {
+    "@vonage/auth": "^3.0.0-beta.4",
+    "@vonage/vetch": "^3.0.0-beta.4"
+  }
+}
