@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+      "declaration": true,
+      "outDir": "dist",
+      "rootDir": "lib",
+      "strict": false,
+      "lib": ["ES6", "DOM"],
+      "module": "commonjs",
+      "target": "ES6",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "skipDefaultLibCheck": true
+  },
+  "include": ["lib/**/*"]
+}
