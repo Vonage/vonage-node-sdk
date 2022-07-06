@@ -36,13 +36,22 @@ export class JWT implements JWTInterface{
             iat: opts?.issued_at || now,
             exp: now + (opts?.ttl || 900)
         }
+        if (opts?.jti) { delete opts.jti }
+        if (opts?.issued_at) { delete opts.issued_at }
+        if (opts?.ttl) { delete opts.ttl }
 
         if (opts?.subject) {
             claims.sub = opts.subject
+            delete opts.subject
         }
 
         if (opts?.acl) {
             claims.acl = opts.acl
+            delete opts.acl
+        }
+
+        for(const property in opts) {
+            claims[property] = opts[property]
         }
 
         return claims
