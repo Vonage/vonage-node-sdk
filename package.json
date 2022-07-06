@@ -26,9 +26,11 @@
     "jest.config.js"
   ],
   "scripts": {
-    "test": "./node_modules/.bin/jest",
-    "test-watch": "./node_modules/.bin/jest --watch",
-    "lerna": "node_modules/.bin/lerna"
+    "bootstrap": "npx lerna bootstrap",
+    "lerna": "npx lerna",
+    "publish": "npx lerna publish",
+    "test": "npx lerna run test",
+    "test-watch": "./node_modules/.bin/jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
