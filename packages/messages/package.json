@@ -1,6 +1,6 @@
 {
   "name": "@vonage/messages",
-  "version": "3.0.0-beta.4",
+  "version": "0.1.0",
   "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
   "keywords": [
     "whatsapp",
@@ -21,8 +21,11 @@
     "test": "__tests__"
   },
   "files": [
-    "dist"
+    "/dist"
   ],
+  "publishConfig": {
+    "directory": "dist"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
@@ -47,7 +50,7 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
-    "@vonage/auth": "^3.0.0-beta.4",
-    "@vonage/vetch": "^3.0.0-beta.4"
+    "@vonage/auth": "^0.1.0",
+    "@vonage/vetch": "^0.1.0"
   }
 }

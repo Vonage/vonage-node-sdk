@@ -1,15 +1,18 @@
 {
   "name": "@vonage/jwt",
-  "version": "3.0.0-beta.4",
+  "version": "0.1.0",
   "description": "> TODO: description",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/jwt#readme",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "/dist"
   ],
+  "publishConfig": {
+      "directory": "dist"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
