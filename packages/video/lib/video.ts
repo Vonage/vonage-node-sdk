@@ -8,6 +8,11 @@ import { EmptyResponse } from "./interfaces/Response/EmptyResponse";
 import { MultiStreamLayoutResponse } from "./interfaces/Response/MultiStreamLayoutResponse";
 import { SingleStreamLayoutResponse } from "./interfaces/Response/SingleStreamLayoutResponse";
 import { ProjectDetailsResponse } from "./interfaces/Response/ProjectDetailsResponse";
+import { ArchiveOptions } from "./interfaces/ArchiveOptions";
+import { SingleArchiveResponse } from "./interfaces/Response/SingleArchiveResponse";
+import { MultiArchiveResponse } from "./interfaces/Response/MultiArchiveResponse";
+import { ArchiveSearchFilter } from "./interfaces/ArchiveSearchFilter";
+import { ArchiveLayout } from "./interfaces/ArchiveLayout";
 
 // export const BASE_URL = "https://video.api.vonage.com/".replace(/\/+$/, "");
 export const BASE_URL = "https://api.opentok.com/".replace(/\/+$/, "");
@@ -29,7 +34,21 @@ export class Video {
         }
     }
 
-    addArchiveStream(archiveId: string, streamId: string, audio: boolean = true, video: boolean = true) {}
+    public async addArchiveStream(archiveId: string, streamId: string, audio: boolean = true, video: boolean = true) {
+        const localVetchOptions = {};
+
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}/stream`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'PATCH';
+        localVetchOptions['data'] = {
+            addStream: streamId,
+            hasAudio: audio,
+            hasVideo: video
+        };
+
+        const resp = await runRequest<EmptyResponse>(localVetchOptions, this.config);
+        return resp.data;
+    }
 
     public async createSession(archiveMode?: string, location?: string, p2pPreference?: string) {
         const localVetchOptions = {};
@@ -49,7 +68,16 @@ export class Video {
         return resp.data;
     }
 
-    deleteArchive(archiveId: string) {}
+    public async deleteArchive(archiveId: string) {
+        const localVetchOptions = {};
+
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'DELETE';
+
+        const resp = await runRequest<EmptyResponse>(localVetchOptions, this.config);
+        return resp.data;
+    }
 
     public async disconnectClient(sessionId: string, connectionId: string) {
         const localVetchOptions = {};
@@ -72,7 +100,16 @@ export class Video {
         );
     }
 
-    getArchive(archiveId: string) {}
+    public async getArchive(archiveId: string) {
+        const localVetchOptions = {};
+
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'GET';
+
+        const resp = await runRequest<SingleArchiveResponse>(localVetchOptions, this.config);
+        return resp.data;
+    }
 
     public async getStreamInfo(sessionId: string, streamId?: string) {
         const localVetchOptions = {};
@@ -96,14 +133,13 @@ export class Video {
         return resp.data;
     }
 
-    listArchives(filter: {[key: string]: string}) {}
-
-    public async muteAllStreams(sessionId: string) {
+    public async muteAllStreams(sessionId: string, active: boolean, excludedStreamIds: string[] = []) {
         const localVetchOptions = {};
 
         localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/mute`;
         localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
         localVetchOptions['method'] = 'POST';
+        localVetchOptions['data'] = { active, excludedStreamIds };
 
         const resp = await runRequest<ProjectDetailsResponse>(localVetchOptions, this.config);
         return resp.data;
@@ -117,6 +153,30 @@ export class Video {
         localVetchOptions['method'] = 'POST';
 
         const resp = await runRequest<ProjectDetailsResponse>(localVetchOptions, this.config);
+        return resp.data;
+    }
+
+    public async removeArchiveStream(archiveId: string, streamId: string) {
+        const localVetchOptions = {};
+
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}/stream`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'PATCH';
+        localVetchOptions['data'] = { removeStream: streamId }
+
+        const resp = await runRequest<EmptyResponse>(localVetchOptions, this.config);
+        return resp.data;
+    }
+
+    public async searchArchives(filter?: ArchiveSearchFilter) {
+        const localVetchOptions = {};
+
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'GET';
+        if (filter) { localVetchOptions['params'] = filter }
+
+        const resp = await runRequest<MultiArchiveResponse>(localVetchOptions, this.config);
         return resp.data;
     }
 
@@ -136,9 +196,38 @@ export class Video {
         await runRequest<EmptyResponse>(localVetchOptions, this.config);
     }
 
-    startArchive(sessionId: string, options?: {[key: string]: string}) {}
+    public async startArchive(sessionId: string, options?: ArchiveOptions) {
+        const localVetchOptions = {};
 
-    stopArchive(archiveId: string) {}
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'POST';
+        localVetchOptions['data'] = Object.assign({}, { sessionId }, options);
 
-    updateArchiveLayout(archiveId: string, options?: {[key: string]: string}) {}
+        const resp = await runRequest<SingleArchiveResponse>(localVetchOptions, this.config);
+        return resp.data;
+    }
+
+    public async stopArchive(archiveId: string) {
+        const localVetchOptions = {};
+
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}/stop`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'POST';
+
+        const resp = await runRequest<SingleArchiveResponse>(localVetchOptions, this.config);
+        return resp.data;
+    }
+
+    public async updateArchiveLayout(archiveId: string, layout: ArchiveLayout) {
+        const localVetchOptions = {};
+
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}/layout`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'PUT';
+        localVetchOptions['data'] = layout;
+
+        const resp = await runRequest<EmptyResponse[]>(localVetchOptions, this.config);
+        return resp.data;
+    }
 }
