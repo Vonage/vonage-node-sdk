@@ -1,6 +1,6 @@
 {
   "name": "@vonage/jwt",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "> TODO: description",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/jwt#readme",
@@ -11,7 +11,7 @@
     "/dist"
   ],
   "publishConfig": {
-      "directory": "dist"
+    "directory": "dist"
   },
   "repository": {
     "type": "git",
