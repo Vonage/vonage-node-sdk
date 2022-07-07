@@ -15,8 +15,15 @@ export const Auth: AuthConstructor = class Auth implements AuthInterface {
     this.apiKey = opts?.apiKey || ''
     this.apiSecret = opts?.apiSecret || ''
     this.signature = opts?.signature || null
-    this.privateKey = opts?.privateKey || null
     this.applicationId = opts?.applicationId || null
+
+    if (opts?.privateKey) {
+      if (opts.privateKey instanceof Buffer) {
+        this.privateKey = opts.privateKey.toString();
+      } else {
+        this.privateKey = opts.privateKey;
+      }
+    }
   }
 
   getQueryParams = <T>(params: T): AuthQueryParams & T => {

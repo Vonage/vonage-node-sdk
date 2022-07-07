@@ -13,7 +13,7 @@ export enum AlgorithmTypes {
 export interface AuthOpts {
     apiKey?: string
     apiSecret?: string
-    privateKey?: string
+    privateKey?: string | Buffer
     applicationId?: string
     signature?: SignedHashParams
 }
@@ -37,6 +37,8 @@ export interface AuthInterface {
     apiKey: string
     apiSecret: string
     signature?: SignedHashParams
+    applicationId?: string
+    privateKey?: string
     getQueryParams<T>(params?: T): AuthQueryParams & T
     createSignatureHash<T>(params: T): AuthSignedParams & T
 }
