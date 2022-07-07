@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import requireModule from "require-module";
 
 import Credentials from "./Credentials";
 import JwtGenerator from "./JwtGenerator";
@@ -102,6 +103,22 @@ class Vonage {
     this.media = new Media(this.credentials, this.options);
     this.redact = new Redact(this.credentials, this.options);
     this.pricing = new Pricing(this.credentials, this.options);
+
+    const mapping = [
+      { service: "video", client: "Video", package: "@vonage/video" },
+    ];
+
+    for (let i = 0; i < mapping.length; i++) {
+      try {
+        let packageName = mapping[i].package;
+        const client = requireModule(packageName);
+        this[mapping[i].service] = new client[mapping[i].client](
+          this.credentials
+        );
+      } catch (err) {
+        // do nothing, if we can't load the package assume it's just not there
+      }
+    }
 
     /**
      * @deprecated Please use vonage.applications
