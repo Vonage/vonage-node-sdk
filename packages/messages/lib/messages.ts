@@ -37,8 +37,8 @@ export const MessagesParamCreator = function (options: MessagesClassParameters) 
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}`;
             localVetchOptions['headers'] = Object.assign({}, options.headers);
-            if (options.appId && options.privateKey) {
-                localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            if (options.applicationId && options.privateKey) {
+                localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             }
             localVetchOptions['data'] = _getAuthMethod(options, params);
             localVetchOptions['method'] = 'POST';
@@ -57,7 +57,7 @@ export class Messages {
 
     constructor(opts?: MessagesClassParameters) {
         if (opts) {
-            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey, appId: opts.appId, signature: opts.signature });
+            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey, applicationId: opts.applicationId, signature: opts.signature });
             opts['baseUrl'] = opts.baseUrl || BASE_URL;
             opts['responseType'] = opts.responseType || ResponseTypes.json;
             this.config = opts;

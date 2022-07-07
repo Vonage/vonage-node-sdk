@@ -46,7 +46,7 @@ describe('Messages', () => {
     });
 
     test("can send using JWT auth", async () => {
-        const client = new Messages({ appId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() });
+        const client = new Messages({ applicationId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() });
         const expectedBody = {
             text: 'This is a text message',
             to: '12225551234',

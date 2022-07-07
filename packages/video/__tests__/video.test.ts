@@ -7,7 +7,7 @@ describe('video', () => {
   let client;
 
   beforeEach(() => {
-      client = new Video({ appId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() });
+      client = new Video({ applicationId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() });
   });
 
   afterEach(() => {

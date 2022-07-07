@@ -4,7 +4,7 @@ import { VetchOptions, VetchResponse } from "@vonage/vetch";
 export interface VoiceResponse<T> extends VetchResponse<T> { }
 
 export type VoiceClassParameters = AuthOpts & VetchOptions & {
-    appId: string
+    applicationId: string
     privateKey: string
     auth?: AuthInterface
 }

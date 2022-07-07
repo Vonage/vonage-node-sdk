@@ -8,7 +8,7 @@ describe('voice', () => {
   let client;
 
   beforeEach(() => {
-      client = new Voice({ appId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() });
+      client = new Voice({ applicationId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() });
   });
 
   afterEach(() => {

@@ -50,7 +50,7 @@ export type Country = string
 export interface NumbersUpdateParams {
     country: Country;
     msisdn: string;
-    appId?: string;
+    applicationId?: string;
     moHttpUrl?: string;
     moSmppSysType?: string;
     voiceCallbackType?: VoiceCallbackTypeEnum;

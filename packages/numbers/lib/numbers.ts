@@ -100,7 +100,7 @@ export const NumbersParamCreator = function (options?: NumbersClassParameters) {
         },
         updateNumber(params?: NumbersUpdateParams) {
             const mapping = {
-                'app_id': 'appId',
+                'app_id': 'applicationId',
             }
             let data: NumbersQueryUpdateParams = {
                 country: params.country,

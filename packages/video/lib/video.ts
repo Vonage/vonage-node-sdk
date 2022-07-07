@@ -22,7 +22,7 @@ export class Video {
 
     constructor(opts?: VideoClassParameters) {
         if (opts) {
-            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey, appId: opts.appId, signature: opts.signature });
+            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey, applicationId: opts.applicationId, signature: opts.signature });
             opts['baseUrl'] = opts.baseUrl || BASE_URL;
             opts['responseType'] = opts.responseType || ResponseTypes.json;
             this.config = opts;
@@ -40,7 +40,7 @@ export class Video {
         if (p2pPreference) { data['p2p.preference'] = p2pPreference; }
 
         localVetchOptions['url'] = `${this.config.baseUrl}/session/create`;
-        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.appId, this.config.privateKey) });
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
         localVetchOptions['method'] = 'POST';
 
         if (Object.keys(data).length) { localVetchOptions['data'] = data; }
@@ -54,8 +54,8 @@ export class Video {
     public async disconnectClient(sessionId: string, connectionId: string) {
         const localVetchOptions = {};
 
-        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.appId}/session/${sessionId}/connection/${connectionId}`;
-        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.appId, this.config.privateKey) });
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/connection/${connectionId}`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
         localVetchOptions['method'] = 'DELETE';
 
         await runRequest<EmptyResponse>(localVetchOptions, this.config);
@@ -63,7 +63,7 @@ export class Video {
 
     generateClientToken(sessionId: string) {
         return tokenGenerate(
-            this.config.appId,
+            this.config.applicationId,
             this.config.privateKey,
             {
                 scope: 'session.connect',
@@ -77,13 +77,13 @@ export class Video {
     public async getStreamInfo(sessionId: string, streamId?: string) {
         const localVetchOptions = {};
 
-        let url = `${this.config.baseUrl}/v2/project/${this.config.appId}/session/${sessionId}/stream`
+        let url = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/stream`
         if (streamId) {
             url = url + `/${streamId}`
         }
 
         localVetchOptions['url'] = url;
-        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.appId, this.config.privateKey) });
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
         localVetchOptions['method'] = 'GET';
 
         let resp: VideoResponse<MultiStreamLayoutResponse | SingleStreamLayoutResponse>;
@@ -101,8 +101,8 @@ export class Video {
     public async muteAllStreams(sessionId: string) {
         const localVetchOptions = {};
 
-        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.appId}/session/${sessionId}/mute`;
-        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.appId, this.config.privateKey) });
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/mute`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
         localVetchOptions['method'] = 'POST';
 
         const resp = await runRequest<ProjectDetailsResponse>(localVetchOptions, this.config);
@@ -112,8 +112,8 @@ export class Video {
     public async muteStream(sessionId: string, streamId: string) {
         const localVetchOptions = {};
 
-        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.appId}/session/${sessionId}/stream/${streamId}/mute`;
-        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.appId, this.config.privateKey) });
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/stream/${streamId}/mute`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
         localVetchOptions['method'] = 'POST';
 
         const resp = await runRequest<ProjectDetailsResponse>(localVetchOptions, this.config);
@@ -123,13 +123,13 @@ export class Video {
     public async sendSignal(signal: {type: string, data: string}, sessionId: string, connectionId?: string) {
         const localVetchOptions = {};
 
-        let url = `${this.config.baseUrl}/v2/project/${this.config.appId}/session/${sessionId}/signal`
+        let url = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/signal`
         if (connectionId) {
-            url = `${this.config.baseUrl}/v2/project/${this.config.appId}/session/${sessionId}/connection/${connectionId}/signal`
+            url = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/connection/${connectionId}/signal`
         }
 
         localVetchOptions['url'] = url;
-        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.appId, this.config.privateKey) });
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
         localVetchOptions['method'] = 'POST';
         localVetchOptions['data'] = signal;
 

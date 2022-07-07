@@ -10,7 +10,7 @@ export interface GeneratorOptions {
     jti?: string
     notBefore?: number
     acl?: any
-    [key: string]: string | number
+    [key: string]: any
 }
 
 export interface Claims {

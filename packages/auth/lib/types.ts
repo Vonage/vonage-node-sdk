@@ -14,7 +14,7 @@ export interface AuthOpts {
     apiKey?: string
     apiSecret?: string
     privateKey?: string
-    appId?: string
+    applicationId?: string
     signature?: SignedHashParams
 }
 

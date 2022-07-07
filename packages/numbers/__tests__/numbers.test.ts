@@ -141,7 +141,7 @@ describe("Numbers", () => {
         const results = await client.updateNumber({
             country: "US",
             msisdn: "12345",
-            appId: "123abc",
+            applicationId: "123abc",
             voiceCallbackType: types.VoiceCallbackTypeEnum.App,
             voiceCallbackValue: "https://www.example.com/webhook",
             voiceStatusCallback: "https://www.example.com/webhook/events"

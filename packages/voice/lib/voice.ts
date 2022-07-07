@@ -28,7 +28,7 @@ export const VoiceParamCreator = function(options: VoiceClassParameters) {
         createOutboundCall(call: OutboundCall) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'POST';
             localVetchOptions['data'] = call;
             return localVetchOptions;
@@ -36,14 +36,14 @@ export const VoiceParamCreator = function(options: VoiceClassParameters) {
         getCall(uuid: string) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/${uuid}`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'GET';
             return localVetchOptions;
         },
         modifyCall(uuid: string, action: string) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/${uuid}`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'PUT';
             localVetchOptions['data'] = { action }
             return localVetchOptions;
@@ -51,7 +51,7 @@ export const VoiceParamCreator = function(options: VoiceClassParameters) {
         playDTMF(uuid: string, digits: string) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/${uuid}/dtmf`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'PUT';
             localVetchOptions['data'] = { digits: digits };
 
@@ -60,7 +60,7 @@ export const VoiceParamCreator = function(options: VoiceClassParameters) {
         playTTS(uuid: string, action: TalkAction) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/${uuid}/talk`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'PUT';
             localVetchOptions['data'] = action;
 
@@ -72,7 +72,7 @@ export const VoiceParamCreator = function(options: VoiceClassParameters) {
         search(filter?: CallListFilter) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'GET';
 
             if (filter) {
@@ -96,21 +96,21 @@ export const VoiceParamCreator = function(options: VoiceClassParameters) {
         stopStreamAudio(uuid: string) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/${uuid}/stream`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'DELETE';
             return localVetchOptions;
         },
         stopTTS(uuid: string) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/${uuid}/talk`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'DELETE';
             return localVetchOptions;
         },
         streamAudio(uuid: string, url: string, loop: number, volumeLevel: number) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/${uuid}/stream`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'PUT';
             localVetchOptions['data'] = {
                 stream_url: [url],
@@ -122,7 +122,7 @@ export const VoiceParamCreator = function(options: VoiceClassParameters) {
         transferCall(uuid: string, ncco: URLTransfer | NCCOTransfer) {
             const localVetchOptions = {};
             localVetchOptions['url'] = `${options.baseUrl}/v1/calls/${uuid}`;
-            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.appId, options.privateKey) });
+            localVetchOptions['headers'] = Object.assign({}, options.headers, { 'Authorization': 'Bearer ' + tokenGenerate(options.applicationId, options.privateKey) });
             localVetchOptions['method'] = 'PUT';
             localVetchOptions['data'] = ncco;
             return localVetchOptions;
@@ -135,7 +135,7 @@ export class Voice {
 
     constructor(opts?: VoiceClassParameters) {
         if (opts) {
-            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey, appId: opts.appId, signature: opts.signature });
+            opts['auth'] = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey, applicationId: opts.applicationId, signature: opts.signature });
             opts['baseUrl'] = opts.baseUrl || BASE_URL;
             opts['responseType'] = opts.responseType || ResponseTypes.json;
             this.config = opts;
