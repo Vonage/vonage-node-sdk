@@ -50,7 +50,7 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
-    "@vonage/auth": "^0.1.0",
+    "@vonage/auth": "^0.2.0",
     "@vonage/vetch": "^0.1.0"
   }
 }
