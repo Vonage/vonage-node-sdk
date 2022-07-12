@@ -65,6 +65,10 @@ class FilesResource {
   }
 
   __storeFile(data, file, callback) {
+    if (!Buffer.isBuffer(data)) {
+      data = JSON.stringify(data);
+    }
+
     fs.writeFile(file, data, (error) => {
       if (error) {
         callback(error, null);
