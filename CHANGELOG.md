@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file. This projec
 # 2.12.0-beta.1
 
 - Added first round of plugin support for beta APIs
+## 2.11.2
+
+- Corrected issue where downloading a voice recording transcript would throw an exception
+
+## 2.11.1
+
+- Fixed issue with HttpClient for JSON content
+
+## 2.11.0
+
+- Added support for the Messages API v1.0
 
 ## 2.10.11
 
