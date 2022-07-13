@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+# # 2.12.0-beta.2
+
+- Synced with 2.11.2 changes
+
 # 2.12.0-beta.1
 
 - Added first round of plugin support for beta APIs
