@@ -99,7 +99,7 @@ export class Video {
         await runRequest<EmptyResponse>(localVetchOptions, this.config);
     }
 
-    generateClientToken(sessionId: string) {
+    public generateClientToken(sessionId: string) {
         return tokenGenerate(
             this.config.applicationId,
             this.config.privateKey,
