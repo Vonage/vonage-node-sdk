@@ -3,6 +3,7 @@ import fs from  'fs';
 import { BASE_URL, Video } from '../lib/video';
 import { decode } from 'jsonwebtoken'
 import { ArchiveLayoutType } from '../lib/enums/ArchiveLayoutType';
+import { MediaMode } from '../lib/interfaces/MediaMode';
 
 describe('video', () => {
   let client;
@@ -29,6 +30,40 @@ describe('video', () => {
       ]);
 
     const results = await client.createSession();
+    expect(results[0].session_id).toEqual('the session ID');
+  });
+
+  test("can creating a server session properly sets correct p2p preference for relayed", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/session/create', {'p2p.preferences': 'enabled'})
+      .reply(200, [
+        {
+          "session_id": "the session ID",
+          "project_id": "your OpenTok API key",
+          "create_dt": "The creation date",
+          "media_server_url": "The URL of the OpenTok media router used by the session -- ignore this"
+        }
+      ]);
+
+    const results = await client.createSession({mediaMode: MediaMode.RELAYED});
+    expect(results[0].session_id).toEqual('the session ID');
+  });
+
+  test("can creating a server session properly sets correct p2p preference for routed", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/session/create', {'p2p.preferences': 'disabled'})
+      .reply(200, [
+        {
+          "session_id": "the session ID",
+          "project_id": "your OpenTok API key",
+          "create_dt": "The creation date",
+          "media_server_url": "The URL of the OpenTok media router used by the session -- ignore this"
+        }
+      ]);
+
+    const results = await client.createSession({mediaMode: MediaMode.ROUTED});
     expect(results[0].session_id).toEqual('the session ID');
   });
 

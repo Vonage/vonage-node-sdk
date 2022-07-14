@@ -13,6 +13,7 @@ import { SingleArchiveResponse } from "./interfaces/Response/SingleArchiveRespon
 import { MultiArchiveResponse } from "./interfaces/Response/MultiArchiveResponse";
 import { ArchiveSearchFilter } from "./interfaces/ArchiveSearchFilter";
 import { ArchiveLayout } from "./interfaces/ArchiveLayout";
+import { MediaMode } from "./interfaces/MediaMode";
 
 export const BASE_URL = "https://video.api.vonage.com/".replace(/\/+$/, "");
 
@@ -49,7 +50,7 @@ export class Video {
         return resp.data;
     }
 
-    public async createSession(sessionOptions?: { archiveMode?: string, location?: string, mediaMode?: string }) {
+    public async createSession(sessionOptions?: { archiveMode?: string, location?: string, mediaMode?: MediaMode }) {
         const localVetchOptions = {};
         const data = {};
 
