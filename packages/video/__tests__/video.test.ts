@@ -4,6 +4,7 @@ import { BASE_URL, Video } from '../lib/video';
 import { decode } from 'jsonwebtoken'
 import { ArchiveLayoutType } from '../lib/enums/ArchiveLayoutType';
 import { MediaMode } from '../lib/interfaces/MediaMode';
+import { ArchiveMode } from '../lib/interfaces/ArchiveMode';
 
 describe('video', () => {
   let client;
@@ -29,8 +30,11 @@ describe('video', () => {
         }
       ]);
 
-    const results = await client.createSession();
-    expect(results[0].session_id).toEqual('the session ID');
+    const session = await client.createSession();
+    expect(session.sessionId).toEqual('the session ID');
+    expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
+    expect(session.mediaMode).toEqual(MediaMode.ROUTED);
+    expect(session.location).toBeNull();
   });
 
   test("can creating a server session properly sets correct p2p preference for relayed", async () => {
@@ -46,8 +50,11 @@ describe('video', () => {
         }
       ]);
 
-    const results = await client.createSession({mediaMode: MediaMode.RELAYED});
-    expect(results[0].session_id).toEqual('the session ID');
+    const session = await client.createSession({mediaMode: MediaMode.RELAYED});
+    expect(session.sessionId).toEqual('the session ID');
+    expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
+    expect(session.mediaMode).toEqual(MediaMode.RELAYED);
+    expect(session.location).toBeNull();
   });
 
   test("can creating a server session properly sets correct p2p preference for routed", async () => {
@@ -63,8 +70,71 @@ describe('video', () => {
         }
       ]);
 
-    const results = await client.createSession({mediaMode: MediaMode.ROUTED});
-    expect(results[0].session_id).toEqual('the session ID');
+    const session = await client.createSession({mediaMode: MediaMode.ROUTED});
+    expect(session.sessionId).toEqual('the session ID');
+    expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
+    expect(session.mediaMode).toEqual(MediaMode.ROUTED);
+    expect(session.location).toBeNull();
+  });
+
+  test("can creating a server session properly sets correct archive mode for manual", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/session/create', {'p2p.preferences': 'disabled', 'archiveMode': 'manual'})
+      .reply(200, [
+        {
+          "session_id": "the session ID",
+          "project_id": "your OpenTok API key",
+          "create_dt": "The creation date",
+          "media_server_url": "The URL of the OpenTok media router used by the session -- ignore this"
+        }
+      ]);
+
+    const session = await client.createSession({ArchiveMode: ArchiveMode.MANUAL});
+    expect(session.sessionId).toEqual('the session ID');
+    expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
+    expect(session.mediaMode).toEqual(MediaMode.ROUTED);
+    expect(session.location).toBeNull();
+  });
+
+  test("can creating a server session properly sets correct archive mode for manual", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/session/create', {'p2p.preferences': 'disabled', 'archiveMode': 'always'})
+      .reply(200, [
+        {
+          "session_id": "the session ID",
+          "project_id": "your OpenTok API key",
+          "create_dt": "The creation date",
+          "media_server_url": "The URL of the OpenTok media router used by the session -- ignore this"
+        }
+      ]);
+
+    const session = await client.createSession({archiveMode: ArchiveMode.ALWAYS});
+    expect(session.sessionId).toEqual('the session ID');
+    expect(session.archiveMode).toEqual(ArchiveMode.ALWAYS);
+    expect(session.mediaMode).toEqual(MediaMode.ROUTED);
+    expect(session.location).toBeNull();
+  });
+
+  test("can creating a server session properly sets location", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/session/create', {'p2p.preferences': 'disabled', 'archiveMode': 'manual', 'location': '10.0.1.2'})
+      .reply(200, [
+        {
+          "session_id": "the session ID",
+          "project_id": "your OpenTok API key",
+          "create_dt": "The creation date",
+          "media_server_url": "The URL of the OpenTok media router used by the session -- ignore this"
+        }
+      ]);
+
+    const session = await client.createSession({location: '10.0.1.2'});
+    expect(session.sessionId).toEqual('the session ID');
+    expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
+    expect(session.mediaMode).toEqual(MediaMode.ROUTED);
+    expect(session.location).toEqual('10.0.1.2');
   });
 
   test("can generate a client JWT token", async () => {

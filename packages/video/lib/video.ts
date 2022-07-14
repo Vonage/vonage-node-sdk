@@ -14,6 +14,8 @@ import { MultiArchiveResponse } from "./interfaces/Response/MultiArchiveResponse
 import { ArchiveSearchFilter } from "./interfaces/ArchiveSearchFilter";
 import { ArchiveLayout } from "./interfaces/ArchiveLayout";
 import { MediaMode } from "./interfaces/MediaMode";
+import { ArchiveMode } from "./interfaces/ArchiveMode";
+import { Session } from "./interfaces/Session";
 
 export const BASE_URL = "https://video.api.vonage.com/".replace(/\/+$/, "");
 
@@ -50,13 +52,15 @@ export class Video {
         return resp.data;
     }
 
-    public async createSession(sessionOptions?: { archiveMode?: string, location?: string, mediaMode?: MediaMode }) {
+    public async createSession(sessionOptions?: { archiveMode?: ArchiveMode, location?: string, mediaMode?: MediaMode }): Promise<Session> {
         const localVetchOptions = {};
-        const data = {};
+        const data = {
+            archiveMode: sessionOptions?.archiveMode ?? ArchiveMode.MANUAL,
+            mediaMode: sessionOptions?.mediaMode ?? MediaMode.ROUTED,
+            location: sessionOptions?.location ?? null
+        };
 
-        if (sessionOptions?.archiveMode) { data['archiveMode'] = sessionOptions.archiveMode; }
         if (sessionOptions?.location) { data['location'] = sessionOptions.location; }
-        if (sessionOptions?.mediaMode) { data['p2p.preference'] = sessionOptions.mediaMode; }
 
         localVetchOptions['url'] = `${this.config.baseUrl}/session/create`;
         localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
@@ -65,7 +69,13 @@ export class Video {
         if (Object.keys(data).length) { localVetchOptions['data'] = data; }
 
         const resp = await runRequest<CreateSessionResponse[]>(localVetchOptions, this.config);
-        return resp.data;
+
+        return {
+            sessionId: resp.data[0].session_id,
+            archiveMode: data.archiveMode,
+            mediaMode: data.mediaMode,
+            location: data.location,
+        };
     }
 
     public async deleteArchive(archiveId: string) {

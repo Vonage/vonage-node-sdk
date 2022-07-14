@@ -1,4 +1,4 @@
 export enum MediaMode {
-    ROUTED="disabed",
+    ROUTED="disabled",
     RELAYED="enabled"
 }
