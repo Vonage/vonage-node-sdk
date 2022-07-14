@@ -49,13 +49,13 @@ export class Video {
         return resp.data;
     }
 
-    public async createSession(archiveMode?: string, location?: string, p2pPreference?: string) {
+    public async createSession(sessionOptions?: { archiveMode?: string, location?: string, mediaMode?: string }) {
         const localVetchOptions = {};
         const data = {};
 
-        if (archiveMode) { data['archiveMode'] = archiveMode; }
-        if (location) { data['location'] = location; }
-        if (p2pPreference) { data['p2p.preference'] = p2pPreference; }
+        if (sessionOptions?.archiveMode) { data['archiveMode'] = sessionOptions.archiveMode; }
+        if (sessionOptions?.location) { data['location'] = sessionOptions.location; }
+        if (sessionOptions?.mediaMode) { data['p2p.preference'] = sessionOptions.mediaMode; }
 
         localVetchOptions['url'] = `${this.config.baseUrl}/session/create`;
         localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
