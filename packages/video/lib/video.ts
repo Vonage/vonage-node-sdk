@@ -14,8 +14,7 @@ import { MultiArchiveResponse } from "./interfaces/Response/MultiArchiveResponse
 import { ArchiveSearchFilter } from "./interfaces/ArchiveSearchFilter";
 import { ArchiveLayout } from "./interfaces/ArchiveLayout";
 
-// export const BASE_URL = "https://video.api.vonage.com/".replace(/\/+$/, "");
-export const BASE_URL = "https://api.opentok.com/".replace(/\/+$/, "");
+export const BASE_URL = "https://video.api.vonage.com/".replace(/\/+$/, "");
 
 const runRequest = async <T>(options: any, config: any): Promise<VideoResponse<T>> => {
     let result = await request<T>(options);
