@@ -1,6 +1,6 @@
-import { SingleArchiveResponse } from "./SingleArchiveResponse"
+import { SingleArchiveResponse } from './SingleArchiveResponse';
 
 export interface MultiArchiveResponse {
-    count: number
-    items: SingleArchiveResponse[]
+  count: number;
+  items: SingleArchiveResponse[];
 }

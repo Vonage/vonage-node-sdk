@@ -1,4 +1,4 @@
 export interface StreamClassList {
-    id: string
-    layoutClassList: string[]
+  id: string;
+  layoutClassList: string[];
 }

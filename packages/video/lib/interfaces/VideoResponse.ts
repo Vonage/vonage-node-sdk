@@ -1,3 +1,3 @@
-import { VetchResponse } from "@vonage/vetch";
+import { VetchResponse } from '@vonage/vetch';
 
-export interface VideoResponse<T> extends VetchResponse<T> { }
+export interface VideoResponse<T> extends VetchResponse<T> {}

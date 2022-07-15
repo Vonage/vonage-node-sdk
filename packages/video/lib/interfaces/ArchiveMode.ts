@@ -1,4 +1,4 @@
 export enum ArchiveMode {
-    MANUAL="manual",
-    ALWAYS="always"
+  MANUAL = 'manual',
+  ALWAYS = 'always',
 }
