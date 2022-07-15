@@ -477,4 +477,13 @@ describe('video', () => {
     const resp = await client.muteStream('sess-1234', 'stream-user-1234');
     expect(resp.id).toEqual(expectedResponse.id);
   });
+
+  test("can set class list for streams", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .put('/v2/project/abcd-1234/session/sess-1234/stream', {items: [{id: 'stream-1234', layoutClassList: ["full"]}]})
+      .reply(200);
+
+    await client.setStreamClassLists('sess-1234', [{id: 'stream-1234', layoutClassList: ["full"]}]);
+  });
 });

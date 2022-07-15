@@ -16,6 +16,7 @@ import { ArchiveLayout } from "./interfaces/ArchiveLayout";
 import { MediaMode } from "./interfaces/MediaMode";
 import { ArchiveMode } from "./interfaces/ArchiveMode";
 import { Session } from "./interfaces/Session";
+import { StreamClassList } from "./interfaces/StreamClassList";
 
 export const BASE_URL = "https://video.api.vonage.com/".replace(/\/+$/, "");
 
@@ -202,6 +203,19 @@ export class Video {
         localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
         localVetchOptions['method'] = 'POST';
         localVetchOptions['data'] = signal;
+
+        await runRequest<EmptyResponse>(localVetchOptions, this.config);
+    }
+
+    public async setStreamClassLists(sessionId: string, settings: StreamClassList[]) {
+        const localVetchOptions = {};
+
+        localVetchOptions['url'] = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/stream`;
+        localVetchOptions['headers'] = Object.assign({}, this.config.headers, { 'Authorization': 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) });
+        localVetchOptions['method'] = 'PUT';
+        localVetchOptions['data'] = {
+            items: settings
+        };
 
         await runRequest<EmptyResponse>(localVetchOptions, this.config);
     }
