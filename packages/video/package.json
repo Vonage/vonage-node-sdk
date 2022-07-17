@@ -29,8 +29,13 @@
     "build": "npm run clean && npm run compile",
     "clean": "tsc -b --clean",
     "compile": "tsc -p tsconfig.json",
+    "format": "prettier --write \"lib/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepublishOnly": "npm run build && npm run test && npm run lint",
+    "preversion": "npm run lint",
     "test-watch": "npx jest --watch",
-    "test": "npx jest"
+    "test": "npx jest",
+    "version" : "npm run format && git add -A lib"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
