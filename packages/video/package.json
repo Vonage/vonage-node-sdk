@@ -1,6 +1,6 @@
 {
   "name": "@vonage/video",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Package to interact with the Vonage Video API (Not OpenTok Compatible)",
   "keywords": [
     "vonage",
@@ -35,7 +35,7 @@
     "preversion": "npm run lint",
     "test-watch": "npx jest --watch",
     "test": "npx jest",
-    "version" : "npm run format && git add -A lib"
+    "version": "npm run format && git add -A lib"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
