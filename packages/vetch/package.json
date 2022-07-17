@@ -11,7 +11,7 @@
     "/dist"
   ],
   "publishConfig": {
-      "directory": "dist"
+    "directory": "dist"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,9 @@
   "devDependencies": {
     "@types/lodash": "^4.14.172",
     "@types/node-fetch": "^2.5.12",
+    "prettier": "^2.7.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.3.5"
   }
 }
