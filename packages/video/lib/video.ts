@@ -87,6 +87,10 @@ export class Video {
     return resp.data;
   }
 
+  public async disableForceMute(sessionId: string, excludedStreamIds: string[] = []) {
+    return this.muteAllStreams(sessionId, false, excludedStreamIds);
+  }
+
   public async disconnectClient(sessionId: string, connectionId: string) {
     const localVetchOptions = {
       url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/connection/${connectionId}`,
@@ -95,6 +99,10 @@ export class Video {
     };
 
     await runRequest<void>(localVetchOptions, this.config);
+  }
+
+  public async forceMuteAll(sessionId: string, excludedStreamIds: string[] = []) {
+    return this.muteAllStreams(sessionId, true, excludedStreamIds);
   }
 
   public generateClientToken(sessionId: string) {
@@ -137,7 +145,7 @@ export class Video {
     return resp.data;
   }
 
-  public async muteAllStreams(sessionId: string, active: boolean, excludedStreamIds: string[] = []) {
+  protected async muteAllStreams(sessionId: string, active: boolean, excludedStreamIds: string[] = []) {
     const localVetchOptions = {
       url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/mute`,
       headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),

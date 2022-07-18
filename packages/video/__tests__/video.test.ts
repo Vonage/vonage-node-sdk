@@ -442,7 +442,7 @@ describe('video', () => {
     expect(resp.count).toEqual(expectedResponse.count);
   });
 
-  test("can mute all streams", async () => {
+  test("can mute streams", async () => {
     const expectedResponse = {
       "id":  "12312",
       "secret":  "567890",
@@ -456,7 +456,25 @@ describe('video', () => {
       .post('/v2/project/abcd-1234/session/sess-1234/mute', { active: true, excludedStreamIds: ['stream-pub-1234']})
       .reply(200, expectedResponse);
 
-    const resp = await client.muteAllStreams('sess-1234', true, ['stream-pub-1234']);
+    const resp = await client.forceMuteAll('sess-1234', ['stream-pub-1234']);
+    expect(resp.id).toEqual(expectedResponse.id);
+  });
+
+  test("can disable mute streams", async () => {
+    const expectedResponse = {
+      "id":  "12312",
+      "secret":  "567890",
+      "status": "ACTIVE",
+      "name": "Joe Montana",
+      "environment": "standard",
+      "createdAt": 1414642898000 // A UNIX timestamp (in milliseconds)
+    };
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/v2/project/abcd-1234/session/sess-1234/mute', { active: false, excludedStreamIds: []})
+      .reply(200, expectedResponse);
+
+    const resp = await client.disableForceMute('sess-1234');
     expect(resp.id).toEqual(expectedResponse.id);
   });
 
