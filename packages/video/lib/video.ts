@@ -16,6 +16,7 @@ import { MediaMode } from './interfaces/MediaMode';
 import { ArchiveMode } from './interfaces/ArchiveMode';
 import { Session } from './interfaces/Session';
 import { StreamClassList } from './interfaces/StreamClassList';
+import { ClientTokenOptions } from './interfaces/ClientTokenOptions';
 
 export const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
 
@@ -105,11 +106,18 @@ export class Video {
     return this.muteAllStreams(sessionId, true, excludedStreamIds);
   }
 
-  public generateClientToken(sessionId: string) {
-    return tokenGenerate(this.config.applicationId, this.config.privateKey, {
-      scope: 'session.connect',
-      session_id: sessionId,
-    });
+  public generateClientToken(sessionId: string, tokenOptions?: ClientTokenOptions) {
+    return tokenGenerate(
+      this.config.applicationId,
+      this.config.privateKey,
+      Object.assign(
+        {
+          scope: 'session.connect',
+          session_id: sessionId,
+        },
+        tokenOptions,
+      ),
+    );
   }
 
   public async getArchive(archiveId: string) {

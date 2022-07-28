@@ -146,6 +146,16 @@ describe('video', () => {
     expect(decoded.payload.session_id).toEqual('abcd');
   });
 
+  test("can generate a client JWT token with custom options", async () => {
+    const token = await client.generateClientToken('abcd', {role: 'publisher'});
+    const decoded: any = decode(token, {json: true, complete: true});
+
+    expect(decoded.payload.application_id).toEqual('abcd-1234');
+    expect(decoded.payload.scope).toEqual('session.connect');
+    expect(decoded.payload.session_id).toEqual('abcd');
+    expect(decoded.payload.role).toEqual('publisher');
+  });
+
   test("can send a signal to everyone", async () => {
     nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
       .persist()
