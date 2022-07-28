@@ -56,7 +56,7 @@ export class Video {
   public async createSession(sessionOptions?: { archiveMode?: ArchiveMode; location?: string; mediaMode?: MediaMode }): Promise<Session> {
     const data = {
       archiveMode: sessionOptions?.archiveMode ?? ArchiveMode.MANUAL,
-      mediaMode: sessionOptions?.mediaMode ?? MediaMode.ROUTED,
+      'p2p.preference': sessionOptions?.mediaMode ?? MediaMode.ROUTED,
       location: sessionOptions?.location ?? null,
     };
 
@@ -64,7 +64,7 @@ export class Video {
       url: `${this.config.baseUrl}/session/create`,
       headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
       method: 'POST',
-      data,
+      body: new URLSearchParams(data),
     };
 
     const resp = await runRequest<CreateSessionResponse[]>(localVetchOptions, this.config);
@@ -72,7 +72,7 @@ export class Video {
     return {
       sessionId: resp.data[0].session_id,
       archiveMode: data.archiveMode,
-      mediaMode: data.mediaMode,
+      mediaMode: data['p2p.preference'],
       location: data.location,
     };
   }

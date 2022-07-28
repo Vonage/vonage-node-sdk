@@ -20,7 +20,7 @@ describe('video', () => {
   test("can create a server session", async () => {
     nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
       .persist()
-      .post('/session/create')
+      .post('/session/create', /archiveMode=manual&p2p.preference=disabled&location=/)
       .reply(200, [
         {
           "session_id": "the session ID",
@@ -40,7 +40,7 @@ describe('video', () => {
   test("can creating a server session properly sets correct p2p preference for relayed", async () => {
     nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
       .persist()
-      .post('/session/create', {'p2p.preferences': 'enabled'})
+      .post('/session/create', /archiveMode=manual&p2p.preference=enabled&location=/)
       .reply(200, [
         {
           "session_id": "the session ID",
@@ -60,7 +60,7 @@ describe('video', () => {
   test("can creating a server session properly sets correct p2p preference for routed", async () => {
     nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
       .persist()
-      .post('/session/create', {'p2p.preferences': 'disabled'})
+      .post('/session/create', /archiveMode=manual&p2p.preference=disabled&location=/)
       .reply(200, [
         {
           "session_id": "the session ID",
@@ -80,7 +80,7 @@ describe('video', () => {
   test("can creating a server session properly sets correct archive mode for manual", async () => {
     nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
       .persist()
-      .post('/session/create', {'p2p.preferences': 'disabled', 'archiveMode': 'manual'})
+      .post('/session/create', /archiveMode=manual&p2p.preference=disabled&location=/)
       .reply(200, [
         {
           "session_id": "the session ID",
@@ -97,10 +97,10 @@ describe('video', () => {
     expect(session.location).toBeNull();
   });
 
-  test("can creating a server session properly sets correct archive mode for manual", async () => {
+  test("can creating a server session properly sets correct archive mode for always", async () => {
     nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
       .persist()
-      .post('/session/create', {'p2p.preferences': 'disabled', 'archiveMode': 'always'})
+      .post('/session/create', /archiveMode=always&p2p.preference=disabled&location=/)
       .reply(200, [
         {
           "session_id": "the session ID",
@@ -120,7 +120,7 @@ describe('video', () => {
   test("can creating a server session properly sets location", async () => {
     nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
       .persist()
-      .post('/session/create', {'p2p.preferences': 'disabled', 'archiveMode': 'manual', 'location': '10.0.1.2'})
+      .post('/session/create', /archiveMode=manual&p2p.preference=disabled&location=10.0.1.2/)
       .reply(200, [
         {
           "session_id": "the session ID",
