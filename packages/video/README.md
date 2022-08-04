@@ -38,7 +38,7 @@ yarn add @vonage/video
 The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if you only need to use the Video APIs. All you need to do is `require('@vonage/video')`, and use the returned object to create your own client.
 
 ```js
-const Video = require('@vonage/video');
+const { Video } = require('@vonage/video');
 
 const videoClient = new Video({
     applicationId: APP_ID,
