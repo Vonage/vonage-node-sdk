@@ -18,3 +18,4 @@ typings
 packages/**/dist
 tsconfig.tsbuildinfo
 lerna-debug.log
+.vscode/
