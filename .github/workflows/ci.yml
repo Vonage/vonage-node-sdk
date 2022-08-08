@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [8.x, 10.x, 12.x, 14.x, 16.x, 18.x]
+        node: [14.x, 16.x, 18.x]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
@@ -21,8 +21,6 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
     - name: Install dependencies
-      run: npm install
+      run: npx lerna bootstrap
     - name: Lint, Compile, Test
-      run: npx lerna bootstrap && npx lerna run compile && npx lerna run test
-    - name: Module smoketest
-      run: node -e "const v = require('.'); new v({});"
+      run: npx lerna run compile && npx lerna run test
