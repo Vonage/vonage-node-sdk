@@ -1,0 +1,1 @@
+export { Pricing } from './pricing'
