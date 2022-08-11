@@ -1,14 +1,12 @@
-export interface AuthConstructor {
-    new(opts?: AuthOpts): AuthInterface
-}
+export type AuthConstructor = new (opts?: AuthOpts) => AuthInterface
 
 // MD5 HASH, MD5 HMAC, SHA1 HMAC, SHA-256 HMAC and SHA-512 HMAC.
 export enum AlgorithmTypes {
-    md5hash = "MD5HASH",
-    md5hmac = "MD5HMAC",
-    sha1hmac = "SHA1HMAC",
-    sha256hmac = "SHA256HMAC",
-    sha512hmac = "SHA512HMAC"
+    md5hash = 'MD5HASH',
+    md5hmac = 'MD5HMAC',
+    sha1hmac = 'SHA1HMAC',
+    sha256hmac = 'SHA256HMAC',
+    sha512hmac = 'SHA512HMAC',
 }
 export interface AuthOpts {
     apiKey?: string
@@ -19,13 +17,14 @@ export interface AuthOpts {
 }
 
 export interface SignedHashParams {
-    secret: string,
+    secret: string
     algorithm: AlgorithmTypes
 }
 
 export interface AuthSignedParams {
     api_key: string
-    sig?: string
+    sig?: string,
+    timestamp?: string
 }
 
 export interface AuthQueryParams {
@@ -42,4 +41,5 @@ export interface AuthInterface {
     getQueryParams<T>(params?: T): AuthQueryParams & T
     createSignatureHash<T>(params: T): AuthSignedParams & T
     createBasicHeader(): string
+    createBearerHeader(): string
 }

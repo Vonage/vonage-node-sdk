@@ -1,4 +1,4 @@
-import { Auth } from './auth';
+import { Auth } from './auth'
 
 export {
     AuthConstructor,
@@ -7,8 +7,7 @@ export {
     AuthOpts,
     AlgorithmTypes,
     SignedHashParams,
-    AuthSignedParams
-
+    AuthSignedParams,
 } from './types'
 
-export { Auth };
+export { Auth }
