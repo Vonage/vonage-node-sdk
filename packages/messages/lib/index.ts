@@ -36,7 +36,4 @@ export {
 } from './types'
 
 // Main client
-export {
-    MessagesParamCreator,
-    Messages,
-} from './messages'
+export { Messages } from './messages'

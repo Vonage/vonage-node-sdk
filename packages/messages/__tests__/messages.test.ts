@@ -13,7 +13,7 @@
 
 import nock from 'nock';
 import fs from  'fs'
-import { BASE_URL, Messages } from "../lib/messages";
+import { Messages } from "../lib/messages";
 import { SMS } from '../lib/classes/SMS/SMS';
 import { Image as MMSImage } from '../lib/classes/MMS/Image';
 import { Image as WhatsAppImage } from '../lib/classes/WhatsApp/Image';
@@ -33,12 +33,15 @@ import { Text as MessengerText } from '../lib/classes/Messenger/Text';
 import { Text as ViberText } from '../lib/classes/Viber/Text';
 import { TemplateMessage } from '../lib/classes/WhatsApp/TemplateMessage';
 import { CustomMessage } from '../lib/classes/WhatsApp/CustomMessage';
+import { Auth } from '@vonage/auth';
+
+const BASE_URL = 'https://api.nexmo.com';
 
 describe('Messages', () => {
     let client;
     
     beforeEach(() => {
-        client = new Messages({ apiKey: '12345', apiSecret: 'ABCDE'});
+        client = new Messages(new Auth({ apiKey: '12345', apiSecret: 'ABCDE'}));
     });
 
     afterEach(() => {
@@ -46,7 +49,7 @@ describe('Messages', () => {
     });
 
     test("can send using JWT auth", async () => {
-        const client = new Messages({ applicationId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() });
+        const client = new Messages(new Auth({ applicationId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() }));
         const expectedBody = {
             text: 'This is a text message',
             to: '12225551234',
@@ -57,7 +60,7 @@ describe('Messages', () => {
 
         nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
             .persist()
-            .post("", expectedBody)
+            .post("/v1/messages", expectedBody)
             .reply(202, { message_uuid: 'aaaaaaaa-bbbb-cccc-dddd-0123456789ab'});
 
         const results = await client.send(new SMS(expectedBody.text, expectedBody.to, expectedBody.from));
@@ -105,7 +108,7 @@ describe('Messages', () => {
 
         nock(BASE_URL)
             .persist()
-            .post("", expectedBody)
+            .post("/v1/messages", expectedBody)
             .reply(202, { message_uuid: 'aaaaaaaa-bbbb-cccc-dddd-0123456789ab'});
 
         const results = await client.send(messageObject);
