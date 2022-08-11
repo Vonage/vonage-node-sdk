@@ -1,0 +1,39 @@
+{
+  "name": "@vonage/server-client",
+  "version": "0.1.0",
+  "description": "Core services related to talking to the Vonage APIs",
+  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "homepage": "https://developer.vonage.com",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "/dist"
+  ],
+  "publishConfig": {
+    "directory": "dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "tsc -b --clean",
+    "compile": "tsc -p tsconfig.json",
+    "test-watch": "npx jest --watch",
+    "test": "npx jest"
+  },
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "dependencies": {
+    "@vonage/auth": "^0.3.0",
+    "@vonage/jwt": "^0.2.0",
+    "@vonage/vetch": "^0.1.0"
+  }
+}
