@@ -85,6 +85,18 @@ export abstract class Client {
         return await this.sendRequest<T>(request);
     }
 
+    public async sendPutRequest<T>(url: string, payload?: {[key: string]: any}): Promise<VetchResponse<T>> {
+        const request = {
+            url: url,
+            data: payload,
+            method: 'PUT',
+        };
+
+        if (!payload) { delete request.data; }
+
+        return await this.sendRequest<T>(request);
+    }
+
     public async sendRequest<T>(request: any): Promise<VetchResponse<T>> {
         request = this.addAuthenticationToRequest(request);
         const result = await vetchRequest<T>(request);
