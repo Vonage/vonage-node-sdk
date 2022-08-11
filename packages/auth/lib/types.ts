@@ -41,4 +41,5 @@ export interface AuthInterface {
     privateKey?: string
     getQueryParams<T>(params?: T): AuthQueryParams & T
     createSignatureHash<T>(params: T): AuthSignedParams & T
+    createBasicHeader(): string
 }

@@ -30,6 +30,11 @@ export const Auth: AuthConstructor = class Auth implements AuthInterface {
     return { api_key: this.apiKey, api_secret: this.apiSecret, ...params }
   }
 
+  createBasicHeader = () => {
+    const buf = Buffer.from(`${this.apiKey}:${this.apiSecret}`);
+    return 'Basic ' + buf.toString('base64');
+  }
+
   createSignatureHash = <T>(params: T): AuthSignedParams & T => {
     let returnParams = Object.assign({ api_key: this.apiKey }, params);
 
@@ -76,23 +81,6 @@ export const Auth: AuthConstructor = class Auth implements AuthInterface {
       returnParams['sig'] = createHmac('sha512', this.signature.secret).update(stringifiedParamsforSigning).digest('hex');
     }
 
-
-
     return returnParams;
   }
 }
-
-
-
-// loop through ordered data keys here,
-
-// keys.on('readable', () => {
-//   // Only one element is going to be produced by the
-//   // hash stream.
-//   const data = input.read();
-//   if (data)
-//     hash.update(data);
-//   else {
-//     console.log(`${hash.digest('hex')} ${filename}`);
-//   }
-// });
