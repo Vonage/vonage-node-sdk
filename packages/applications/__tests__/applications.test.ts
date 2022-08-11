@@ -1,12 +1,15 @@
+import { Auth } from '@vonage/auth';
 import nock from 'nock';
-import { BASE_URL, Applications } from '../lib/applications';
+import { Applications } from '../lib/applications';
 import { Application } from '../lib/interfaces/Application';
+
+const BASE_URL = 'https://api.nexmo.com';
 
 describe('applications', () => {
   let client;
 
   beforeEach(() => {
-    client = new Applications({ apiKey: 'abcd', apiSecret: '1234' });
+    client = new Applications(new Auth({ apiKey: 'abcd', apiSecret: '1234' }));
   });
 
   afterEach(() => {
@@ -77,7 +80,7 @@ describe('applications', () => {
       },
     };
 
-    nock(BASE_URL).persist().get('/').reply(200, expectedResponse);
+    nock(BASE_URL).persist().get('/v2/applications').reply(200, expectedResponse);
 
     const resp = await client.listApplications();
     expect(resp.page_size).toEqual(10);
@@ -110,7 +113,7 @@ describe('applications', () => {
       },
     };
 
-    nock(BASE_URL).persist().post('/').reply(200, expectedResponse);
+    nock(BASE_URL).persist().post('/v2/applications').reply(200, expectedResponse);
 
     const app: Application = {
       name: 'Test App',
@@ -186,7 +189,7 @@ describe('applications', () => {
       },
     };
 
-    nock(BASE_URL).persist().get('/78d335fa-323d-0114-9c3d-d6f0d48968cf').reply(200, expectedResponse);
+    nock(BASE_URL).persist().get('/v2/applications/78d335fa-323d-0114-9c3d-d6f0d48968cf').reply(200, expectedResponse);
 
     const resp = await client.getApplication('78d335fa-323d-0114-9c3d-d6f0d48968cf');
     expect(resp.id).toEqual('78d335fa-323d-0114-9c3d-d6f0d48968cf');
@@ -215,7 +218,7 @@ describe('applications', () => {
       },
     };
 
-    nock(BASE_URL).persist().put('/78d335fa-323d-0114-9c3d-d6f0d48968cf').reply(200, expectedResponse);
+    nock(BASE_URL).persist().put('/v2/applications/78d335fa-323d-0114-9c3d-d6f0d48968cf').reply(200, expectedResponse);
 
     const app: Application = {
       id: '78d335fa-323d-0114-9c3d-d6f0d48968cf',
@@ -239,7 +242,7 @@ describe('applications', () => {
   });
 
   test('can delete an application', async () => {
-    nock(BASE_URL).persist().delete('/78d335fa-323d-0114-9c3d-d6f0d48968cf').reply(204);
+    nock(BASE_URL).persist().delete('/v2/applications/78d335fa-323d-0114-9c3d-d6f0d48968cf').reply(204);
 
     await client.deleteApplication('78d335fa-323d-0114-9c3d-d6f0d48968cf');
   });

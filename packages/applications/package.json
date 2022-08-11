@@ -50,7 +50,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/auth": "^0.2.0",
-    "@vonage/vetch": "^0.1.0"
+    "@vonage/server-client": "^0.1.0"
   }
 }
