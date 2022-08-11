@@ -4,7 +4,7 @@ import { ListApplicationResponse } from './interfaces/Response/ListApplicationRe
 
 export class Applications extends Client {
   protected authType = AuthenticationType.BASIC;
-  
+
   public async createApplication(application: Application): Promise<Application> {
     const resp = await this.sendPostRequest<Application>(`${this.config.apiHost}/v2/applications`, application);
     return resp.data;
@@ -20,7 +20,7 @@ export class Applications extends Client {
   }
 
   public async listApplications(filter: { page_size?: number; page?: number }): Promise<ListApplicationResponse> {
-    const resp = await this.sendGetRequest<ListApplicationResponse>(`${this.config.apiHost}/v2/applications`, filter)
+    const resp = await this.sendGetRequest<ListApplicationResponse>(`${this.config.apiHost}/v2/applications`, filter);
     return resp.data;
   }
 
