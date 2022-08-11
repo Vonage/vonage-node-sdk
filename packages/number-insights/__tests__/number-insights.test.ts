@@ -1,12 +1,14 @@
+import { Auth } from '@vonage/auth';
 import nock from 'nock';
 import { NumberInsights } from '../lib/index'
-import { BASE_URL } from '../lib/number-insights';
+
+const BASE_URL = 'https://api.nexmo.com';
 
 describe('number-insights', () => {
   let client;
 
   beforeEach(() => {
-      client = new NumberInsights({ apiKey: 'abcd', apiSecret: '1234' });
+      client = new NumberInsights(new Auth({ apiKey: 'abcd', apiSecret: '1234' }));
   });
 
   afterEach(() => {
@@ -28,7 +30,7 @@ describe('number-insights', () => {
 
     nock(BASE_URL)
       .persist()
-      .get('/basic/json')
+      .get('/ni/basic/json')
       .query({ api_key: 'abcd', api_secret: '1234', number: expectedResponse.international_format_number })
       .reply(200, expectedResponse);
 
@@ -85,7 +87,7 @@ describe('number-insights', () => {
 
     nock(BASE_URL)
       .persist()
-      .get('/standard/json')
+      .get('/ni/standard/json')
       .query({ api_key: 'abcd', api_secret: '1234', number: expectedResponse.international_format_number })
       .reply(200, expectedResponse);
 
@@ -163,7 +165,7 @@ describe('number-insights', () => {
 
     nock(BASE_URL)
       .persist()
-      .get('/advanced/json')
+      .get('/ni/advanced/json')
       .query({ api_key: 'abcd', api_secret: '1234', number: expectedResponse.international_format_number })
       .reply(200, expectedResponse);
 
@@ -204,7 +206,7 @@ describe('number-insights', () => {
 
     nock(BASE_URL)
       .persist()
-      .get('/advanced/async/json')
+      .get('/ni/advanced/async/json')
       .query({ api_key: 'abcd', api_secret: '1234', number: expectedResponse.number, callback: 'https://test.com/lookup/handler'})
       .reply(200, expectedResponse);
 
