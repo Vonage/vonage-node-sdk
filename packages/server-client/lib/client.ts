@@ -25,7 +25,7 @@ export abstract class Client {
      * Adds authentication to a request
      * By default we add key/secret. Individual clients may override this with whatever they want.
      */
-     protected addAuthenticationToRequest(request: any): any {
+     public addAuthenticationToRequest(request: any): any {
         switch(this.authType) {
             case AuthenticationType.BASIC:
                 request.headers = Object.assign({}, request.headers, { Authorization: this.auth.createBasicHeader() });
@@ -33,7 +33,7 @@ export abstract class Client {
             case AuthenticationType.KEY_SECRET:
             default:
                 request.params = request.params || {}
-                request.params = Object.assign(request.params, this.auth.getQueryParams());
+                request.params = Object.assign({}, request.params, this.auth.getQueryParams(request.params));
                 break;
         }
         
@@ -64,11 +64,11 @@ export abstract class Client {
     public async sendGetRequest<T>(url: string, queryParams?: {[key: string]: any}): Promise<VetchResponse<T>> {
         const request = {
             url: url,
-            query: queryParams,
+            params: queryParams,
             method: 'GET',
         };
 
-        if (!queryParams) { delete request.query; }
+        if (!queryParams) { delete request.params; }
 
         return await this.sendRequest<T>(request);
     }
