@@ -1,6 +1,6 @@
 {
   "name": "@vonage/messages",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
   "keywords": [
     "whatsapp",
@@ -58,6 +58,6 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.1.0"
+    "@vonage/server-client": "^0.2.0"
   }
 }

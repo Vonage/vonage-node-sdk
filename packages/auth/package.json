@@ -1,6 +1,6 @@
 {
     "name": "@vonage/auth",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "description": "> TODO: description",
     "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/auth#readme",
@@ -34,7 +34,7 @@
     },
     "gitHead": "3d01d2557edea29b54610d7ff7b07d186affb0f8",
     "dependencies": {
-        "@vonage/jwt": "^0.2.0"
+        "@vonage/jwt": "^0.3.0"
     },
     "devDependencies": {
         "@types/jest": "^28.1.6",

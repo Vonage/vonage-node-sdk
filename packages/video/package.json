@@ -1,6 +1,6 @@
 {
   "name": "@vonage/video",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Package to interact with the Vonage Video API (Not OpenTok Compatible)",
   "keywords": [
     "vonage",
@@ -51,6 +51,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.1.0"
+    "@vonage/server-client": "^0.2.0"
   }
 }

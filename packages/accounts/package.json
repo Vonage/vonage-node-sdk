@@ -1,6 +1,6 @@
 {
   "name": "@vonage/accounts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Vonage Account Management API",
   "author": "Chris Tankersley <chris@ctankersley.com>",
   "homepage": "https://developer.vonage.com",
@@ -37,6 +37,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.1.0"
+    "@vonage/server-client": "^0.2.0"
   }
 }
