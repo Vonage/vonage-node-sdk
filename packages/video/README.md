@@ -38,13 +38,13 @@ yarn add @vonage/video
 The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if you only need to use the Video APIs. All you need to do is `require('@vonage/video')`, and use the returned object to create your own client.
 
 ```js
+const { Auth } = require('@vonage/auth');
 const { Video } = require('@vonage/video');
 
-const videoClient = new Video({
+const videoClient = new Video(new Auth({
     applicationId: APP_ID,
     privateKey: PRIVATE_KEY_PATH,
-    baseUrl: string
-  }, options);
+  }), options);
 ```
 
 * `applicationId` - (optional) The Vonage API Application ID to be used when creating JWTs.
@@ -52,7 +52,9 @@ const videoClient = new Video({
     * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.
     * A String containing the path to the key file on disk.
     * A String containing the key itself.
-* `baseUrl` - (optional) A base URL to use instead of the default `https://video.api.vonage.com`
+
+`options` is an object that can contain:
+* `videoHost` - (optional) A base URL to use instead of the default `https://video.api.vonage.com`
 
 
 ## Promises
