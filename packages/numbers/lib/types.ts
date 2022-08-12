@@ -9,13 +9,13 @@ export interface NumbersResponse<T> extends VetchResponse<T> { }
 
 export interface NumbersAvailableList {
     count?: number;
-    numbers?: Array<NumbersAvailableNumber>;
+    numbers?: NumbersAvailableNumber[];
 }
 
 
 export interface NumbersOwnedList {
     count?: number;
-    numbers?: Array<NumbersOwnedNumber>;
+    numbers?: NumbersOwnedNumber[];
 }
 
 
@@ -42,7 +42,7 @@ export interface NumbersAvailableNumber {
     msisdn?: string;
     type?: string;
     cost?: string;
-    features?: Array<string>;
+    features?: string[];
 }
 
 export type Country = string
@@ -78,13 +78,13 @@ export interface NumbersQueryUpdateParams {
 }
 
 export enum VoiceCallbackTypeEnum {
-    Sip = <any>'sip',
-    Tel = <any>'tel',
-    App = <any>'app'
+    Sip = 'sip',
+    Tel = 'tel',
+    App = 'app'
 }
 
 export enum MessagesCallbackTypeEnum {
-    App = <any>'app'
+    App = 'app'
 }
 
 export interface NumbersOwnedNumber {
@@ -92,7 +92,7 @@ export interface NumbersOwnedNumber {
     msisdn?: string;
     moHttpUrl?: string;
     type?: string;
-    features?: Array<string>;
+    features?: string[];
     voiceCallbackType?: string;
     voiceCallbackValue?: string;
     messagesCallbackType?: string;

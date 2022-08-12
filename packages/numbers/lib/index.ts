@@ -1,4 +1,4 @@
-import { Numbers } from './numbers';
+export { Numbers } from './numbers';
 
 export {
     NumbersClassParameters,
@@ -15,5 +15,3 @@ export {
     NumbersOwnedNumber,
     NumbersOwnedFilter
 } from './types'
-
-export { Numbers };

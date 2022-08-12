@@ -11,17 +11,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as api from "../lib/numbers"
 import * as types from '../lib/types';
 import nock from 'nock';
+import { Auth } from "@vonage/auth";
+import { Numbers } from '../lib/index'
 
-const config: types.NumbersClassParameters = {}
 const BASE_URL = "https://rest.nexmo.com".replace(/\/+$/, "");
 
 describe("Numbers", () => {
-    let client: api.Numbers
+    let client: Numbers;
+
     beforeEach(function () {
-        client = new api.Numbers({ apiKey: '12345', apiSecret: 'ABCDE' })
+        client = new Numbers(new Auth({ apiKey: '12345', apiSecret: 'ABCDE' }))
     });
 
     afterEach(function () {
@@ -39,7 +40,7 @@ describe("Numbers", () => {
     });
 
     test("invalid credentials gets caught", async () => {
-        client = new api.Numbers({ apiKey: 'badkey', apiSecret: 'badsecret' })
+        client = new Numbers(new Auth({ apiKey: 'badkey', apiSecret: 'badsecret' }))
         nock(BASE_URL)
             .persist()
             .post(`/number/buy`, { api_key: "badkey", api_secret: "badsecret", country: "US", msisdn: "12345", target_api_key: "67890" })

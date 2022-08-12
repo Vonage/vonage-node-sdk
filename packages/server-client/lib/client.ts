@@ -31,11 +31,10 @@ export abstract class Client {
                 request.headers = Object.assign({}, request.headers, { Authorization: this.auth.createBasicHeader() });
                 break;
             case AuthenticationType.QUERY_KEY_SECRET:
-                break;
-            case AuthenticationType.KEY_SECRET:
                 request.params = request.params || {}
                 request.params = Object.assign({}, request.params, this.auth.getQueryParams(request.params));
                 break;
+            case AuthenticationType.KEY_SECRET:
             default:
                 if (request.method === "GET") {
                     request.params = request.params || {}
