@@ -30,10 +30,20 @@ export abstract class Client {
             case AuthenticationType.BASIC:
                 request.headers = Object.assign({}, request.headers, { Authorization: this.auth.createBasicHeader() });
                 break;
+            case AuthenticationType.QUERY_KEY_SECRET:
+                break;
             case AuthenticationType.KEY_SECRET:
-            default:
                 request.params = request.params || {}
                 request.params = Object.assign({}, request.params, this.auth.getQueryParams(request.params));
+                break;
+            default:
+                if (request.method === "GET") {
+                    request.params = request.params || {}
+                    request.params = Object.assign({}, request.params, this.auth.getQueryParams(request.params));
+                } else {
+                    request.data = request.data || {}
+                    request.data = Object.assign({}, request.data, this.auth.getQueryParams(request.data));
+                }
                 break;
         }
         
