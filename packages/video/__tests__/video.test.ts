@@ -1,16 +1,19 @@
 import nock from 'nock';
 import fs from  'fs';
-import { BASE_URL, Video } from '../lib/video';
+import { Video } from '../lib/video';
 import { decode } from 'jsonwebtoken'
 import { ArchiveLayoutType } from '../lib/enums/ArchiveLayoutType';
 import { MediaMode } from '../lib/interfaces/MediaMode';
 import { ArchiveMode } from '../lib/interfaces/ArchiveMode';
+import { Auth } from '@vonage/auth';
+
+export const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
 
 describe('video', () => {
   let client;
 
   beforeEach(() => {
-      client = new Video({ applicationId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() });
+      client = new Video(new Auth({ applicationId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() }));
   });
 
   afterEach(() => {

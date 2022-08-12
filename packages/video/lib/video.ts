@@ -1,9 +1,5 @@
-import { Auth } from '@vonage/auth';
-import { request, ResponseTypes } from '@vonage/vetch';
 import { tokenGenerate } from '@vonage/jwt';
-import { VideoClassParameters } from './parameters/VideoClassParameters';
 import { VideoResponse } from './interfaces/VideoResponse';
-import { CreateSessionResponse } from './interfaces/Response/CreateSessionResponse';
 import { MultiStreamLayoutResponse } from './interfaces/Response/MultiStreamLayoutResponse';
 import { SingleStreamLayoutResponse } from './interfaces/Response/SingleStreamLayoutResponse';
 import { ProjectDetailsResponse } from './interfaces/Response/ProjectDetailsResponse';
@@ -17,40 +13,19 @@ import { ArchiveMode } from './interfaces/ArchiveMode';
 import { Session } from './interfaces/Session';
 import { StreamClassList } from './interfaces/StreamClassList';
 import { ClientTokenOptions } from './interfaces/ClientTokenOptions';
+import { AuthenticationType, Client } from '@vonage/server-client';
 
-export const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
+export class Video extends Client {
+  protected authType = AuthenticationType.JWT;
 
-const runRequest = async <T>(options: any, config: any): Promise<VideoResponse<T>> => {
-  const result = await request<T>(options);
-  return result;
-};
-
-export class Video {
-  protected config: VideoClassParameters;
-
-  constructor(opts?: VideoClassParameters) {
-    if (opts) {
-      opts.auth = new Auth({ apiKey: opts.apiKey, apiSecret: opts.apiSecret, privateKey: opts.privateKey, applicationId: opts.applicationId, signature: opts.signature });
-      opts.baseUrl = opts.baseUrl || BASE_URL;
-      opts.responseType = opts.responseType || ResponseTypes.json;
-      this.config = opts;
-    }
-  }
-
-  public async addArchiveStream(archiveId: string, streamId: string, audio: boolean = true, video: boolean = true) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}/stream`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'PATCH',
-      data: {
-        addStream: streamId,
-        hasAudio: audio,
-        hasVideo: video,
-      },
+  public async addArchiveStream(archiveId: string, streamId: string, audio: boolean = true, video: boolean = true): Promise<void> {
+    const data = {
+      addStream: streamId,
+      hasAudio: audio,
+      hasVideo: video,
     };
 
-    const resp = await runRequest<void>(localVetchOptions, this.config);
-    return resp.data;
+    await this.sendPatchRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/stream`, data);
   }
 
   public async createSession(sessionOptions?: { archiveMode?: ArchiveMode; location?: string; mediaMode?: MediaMode }): Promise<Session> {
@@ -60,14 +35,7 @@ export class Video {
       location: sessionOptions?.location ?? null,
     };
 
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/session/create`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'POST',
-      body: new URLSearchParams(data),
-    };
-
-    const resp = await runRequest<CreateSessionResponse[]>(localVetchOptions, this.config);
+    const resp = await this.sendFormSubmitRequest(`${this.config.videoHost}/session/create`, data);
 
     return {
       sessionId: resp.data[0].session_id,
@@ -77,29 +45,16 @@ export class Video {
     };
   }
 
-  public async deleteArchive(archiveId: string) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'DELETE',
-    };
-
-    const resp = await runRequest<void>(localVetchOptions, this.config);
-    return resp.data;
+  public async deleteArchive(archiveId: string): Promise<void> {
+    await this.sendDeleteRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}`);
   }
 
   public async disableForceMute(sessionId: string, excludedStreamIds: string[] = []) {
     return this.muteAllStreams(sessionId, false, excludedStreamIds);
   }
 
-  public async disconnectClient(sessionId: string, connectionId: string) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/connection/${connectionId}`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'DELETE',
-    };
-
-    await runRequest<void>(localVetchOptions, this.config);
+  public async disconnectClient(sessionId: string, connectionId: string): Promise<void> {
+    await this.sendDeleteRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/connection/${connectionId}`);
   }
 
   public async forceMuteAll(sessionId: string, excludedStreamIds: string[] = []) {
@@ -108,8 +63,8 @@ export class Video {
 
   public generateClientToken(sessionId: string, tokenOptions?: ClientTokenOptions) {
     return tokenGenerate(
-      this.config.applicationId,
-      this.config.privateKey,
+      this.auth.applicationId,
+      this.auth.privateKey,
       Object.assign(
         {
           scope: 'session.connect',
@@ -120,149 +75,76 @@ export class Video {
     );
   }
 
-  public async getArchive(archiveId: string) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'GET',
-    };
-
-    const resp = await runRequest<SingleArchiveResponse>(localVetchOptions, this.config);
+  public async getArchive(archiveId: string): Promise<SingleArchiveResponse> {
+    const resp = await this.sendGetRequest<SingleArchiveResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}`);
     return resp.data;
   }
 
-  public async getStreamInfo(sessionId: string, streamId?: string) {
-    let url = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/stream`;
+  public async getStreamInfo(sessionId: string, streamId?: string): Promise<MultiStreamLayoutResponse | SingleStreamLayoutResponse> {
+    let url = `${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/stream`;
     if (streamId) {
       url = url + `/${streamId}`;
     }
 
-    const localVetchOptions = {
-      url,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'GET',
-    };
-
     let resp: VideoResponse<MultiStreamLayoutResponse | SingleStreamLayoutResponse>;
     if (streamId) {
-      resp = await runRequest<SingleStreamLayoutResponse>(localVetchOptions, this.config);
+      resp = await this.sendGetRequest<SingleStreamLayoutResponse>(url);
     } else {
-      resp = await runRequest<MultiStreamLayoutResponse>(localVetchOptions, this.config);
+      resp = await this.sendGetRequest<MultiStreamLayoutResponse>(url);
     }
 
     return resp.data;
   }
 
-  protected async muteAllStreams(sessionId: string, active: boolean, excludedStreamIds: string[] = []) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/mute`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'POST',
-      data: { active, excludedStreamIds },
-    };
-
-    const resp = await runRequest<ProjectDetailsResponse>(localVetchOptions, this.config);
+  protected async muteAllStreams(sessionId: string, active: boolean, excludedStreamIds: string[] = []): Promise<ProjectDetailsResponse> {
+    const resp = await this.sendPostRequest<ProjectDetailsResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/mute`, {
+      active,
+      excludedStreamIds,
+    });
     return resp.data;
   }
 
-  public async muteStream(sessionId: string, streamId: string) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/stream/${streamId}/mute`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'POST',
-    };
-
-    const resp = await runRequest<ProjectDetailsResponse>(localVetchOptions, this.config);
+  public async muteStream(sessionId: string, streamId: string): Promise<ProjectDetailsResponse> {
+    const resp = await this.sendPostRequest<ProjectDetailsResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/stream/${streamId}/mute`);
     return resp.data;
   }
 
-  public async removeArchiveStream(archiveId: string, streamId: string) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}/stream`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'PATCH',
-      data: { removeStream: streamId },
-    };
-
-    await runRequest<void>(localVetchOptions, this.config);
+  public async removeArchiveStream(archiveId: string, streamId: string): Promise<void> {
+    await this.sendPatchRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/stream`, { removeStream: streamId });
   }
 
-  public async searchArchives(filter?: ArchiveSearchFilter) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'GET',
-      params: filter,
-    };
-    if (!filter) {
-      delete localVetchOptions.params;
-    }
-
-    const resp = await runRequest<MultiArchiveResponse>(localVetchOptions, this.config);
+  public async searchArchives(filter?: ArchiveSearchFilter): Promise<MultiArchiveResponse> {
+    const resp = await this.sendGetRequest<MultiArchiveResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive`, filter);
     return resp.data;
   }
 
-  public async sendSignal(signal: { type: string; data: string }, sessionId: string, connectionId?: string) {
-    let url = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/signal`;
+  public async sendSignal(signal: { type: string; data: string }, sessionId: string, connectionId?: string): Promise<void> {
+    let url = `${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/signal`;
     if (connectionId) {
-      url = `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/connection/${connectionId}/signal`;
+      url = `${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/connection/${connectionId}/signal`;
     }
 
-    const localVetchOptions = {
-      url,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'POST',
-      data: signal,
-    };
-
-    await runRequest<void>(localVetchOptions, this.config);
+    await this.sendPostRequest<void>(url, signal);
   }
 
-  public async setStreamClassLists(sessionId: string, settings: StreamClassList[]) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/session/${sessionId}/stream`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'PUT',
-      data: {
-        items: settings,
-      },
-    };
-
-    await runRequest<void>(localVetchOptions, this.config);
+  public async setStreamClassLists(sessionId: string, settings: StreamClassList[]): Promise<void> {
+    await this.sendPutRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/stream`, { items: settings });
   }
 
-  public async startArchive(sessionId: string, options?: ArchiveOptions) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'POST',
-      data: Object.assign({}, { sessionId }, options),
-    };
+  public async startArchive(sessionId: string, options?: ArchiveOptions): Promise<SingleArchiveResponse> {
+    const data = Object.assign({}, { sessionId }, options);
 
-    const resp = await runRequest<SingleArchiveResponse>(localVetchOptions, this.config);
+    const resp = await this.sendPostRequest<SingleArchiveResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive`, data);
     return resp.data;
   }
 
-  public async stopArchive(archiveId: string) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}/stop`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'POST',
-    };
-
-    const resp = await runRequest<SingleArchiveResponse>(localVetchOptions, this.config);
+  public async stopArchive(archiveId: string): Promise<SingleArchiveResponse> {
+    const resp = await this.sendPostRequest<SingleArchiveResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/stop`);
     return resp.data;
   }
 
   public async updateArchiveLayout(archiveId: string, layout: ArchiveLayout) {
-    const localVetchOptions = {
-      url: `${this.config.baseUrl}/v2/project/${this.config.applicationId}/archive/${archiveId}/layout`,
-      headers: Object.assign({}, this.config.headers, { Authorization: 'Bearer ' + tokenGenerate(this.config.applicationId, this.config.privateKey) }),
-      method: 'PUT',
-      data: layout,
-    };
-
-    const resp = await runRequest<void>(localVetchOptions, this.config);
+    const resp = await this.sendPutRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/layout`, layout);
     return resp.data;
   }
 }

@@ -9,15 +9,17 @@ export abstract class Client {
     protected config: {
         restHost: string
         apiHost: string
+        videoHost: string
         responseType: string
     }
 
-    constructor(credentials: AuthInterface, options?: {restHost: string, apiHost: string, responseType: ResponseTypes}) {
+    constructor(credentials: AuthInterface, options?: {restHost: string, apiHost: string, videoHost: string, responseType: ResponseTypes}) {
         this.auth = credentials;
-        this.config = {restHost: null, apiHost: null, responseType: null};
+        this.config = {restHost: null, apiHost: null, videoHost: null, responseType: null};
 
         this.config.restHost = options?.restHost || 'https://rest.nexmo.com';
         this.config.apiHost = options?.apiHost || 'https://api.nexmo.com';
+        this.config.videoHost = options?.videoHost || 'https://video.api.vonage.com';
         this.config.responseType = options?.responseType || ResponseTypes.json;
     }
 
@@ -81,6 +83,18 @@ export abstract class Client {
         };
 
         if (!queryParams) { delete request.params; }
+
+        return await this.sendRequest<T>(request);
+    }
+
+    public async sendPatchRequest<T>(url: string, payload?: {[key: string]: any}): Promise<VetchResponse<T>> {
+        const request = {
+            url: url,
+            data: payload,
+            method: 'PATCH',
+        };
+
+        if (!payload) { delete request.data; }
 
         return await this.sendRequest<T>(request);
     }
