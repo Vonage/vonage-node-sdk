@@ -1,4 +1,4 @@
 export enum MachineDetection {
-    CONTINUE="continue",
-    HANGUP="hangup",
+    CONTINUE = 'continue',
+    HANGUP = 'hangup',
 }

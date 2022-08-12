@@ -1,4 +1,4 @@
-import { VBCEndpointObject } from "../../interfaces/Endpoint/VBCEndpointObject"
+import { VBCEndpointObject } from '../../interfaces/Endpoint/VBCEndpointObject'
 
 export class VBCEndpoint implements VBCEndpointObject {
     type: string = 'vbc'

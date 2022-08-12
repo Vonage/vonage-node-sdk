@@ -1,13 +1,15 @@
-import { PhoneEndpointObject } from "../../interfaces/Endpoint/PhoneEndpointObject"
+import { PhoneEndpointObject } from '../../interfaces/Endpoint/PhoneEndpointObject'
 
 export class PhoneEndpoint implements PhoneEndpointObject {
     type: string = 'phone'
     number: string
     dtmfAnswer?: string
 
-    constructor(number: string, dtmfAnswer?: string) {
-        this.number = number
+    constructor(phoneNumber: string, dtmfAnswer?: string) {
+        this.number = phoneNumber
 
-        if (dtmfAnswer) { this.dtmfAnswer = dtmfAnswer }
+        if (dtmfAnswer) {
+            this.dtmfAnswer = dtmfAnswer
+        }
     }
 }

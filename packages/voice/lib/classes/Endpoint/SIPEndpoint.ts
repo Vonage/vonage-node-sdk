@@ -1,5 +1,5 @@
-import { Headers } from "../../interfaces/Endpoint/Headers";
-import { SIPEndpointObject } from "../../interfaces/Endpoint/SIPEndpointObject";
+import { Headers } from '../../interfaces/Endpoint/Headers'
+import { SIPEndpointObject } from '../../interfaces/Endpoint/SIPEndpointObject'
 
 export class SIPEndpoint implements SIPEndpointObject {
     type: string = 'sip'
@@ -7,8 +7,10 @@ export class SIPEndpoint implements SIPEndpointObject {
     headers?: Headers[]
 
     constructor(uri: string, headers?: Headers[]) {
-        this.uri = uri;
+        this.uri = uri
 
-        if (headers) { this.headers = headers }
+        if (headers) {
+            this.headers = headers
+        }
     }
 }

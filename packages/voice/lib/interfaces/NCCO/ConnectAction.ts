@@ -1,6 +1,6 @@
-import { ConnectEventType } from "../../enums/NCCO/ConnectEventType";
-import { MachineDetection } from "../../enums/NCCO/MachineDetection";
-import { CallEndpoint } from "../../types/Endpoint/CallEndpoint";
+import { ConnectEventType } from '../../enums/NCCO/ConnectEventType'
+import { MachineDetection } from '../../enums/NCCO/MachineDetection'
+import { CallEndpoint } from '../../types/Endpoint/CallEndpoint'
 
 export interface ConnectAction {
     action: string

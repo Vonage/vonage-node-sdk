@@ -1,4 +1,4 @@
-import { RecordingFormat } from "../../enums/NCCO/RecordingFormat";
+import { RecordingFormat } from '../../enums/NCCO/RecordingFormat'
 
 export interface RecordAction {
     action: string

@@ -1,4 +1,4 @@
-import { Action } from "../../ncco"
+import { Action } from '../../ncco'
 
 export interface NCCOTransfer {
     action: string

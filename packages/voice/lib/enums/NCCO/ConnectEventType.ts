@@ -1,3 +1,3 @@
 export enum ConnectEventType {
-    SYNCHRONOUS="synchronous"
+    SYNCHRONOUS = 'synchronous',
 }

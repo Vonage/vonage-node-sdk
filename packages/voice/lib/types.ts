@@ -1,57 +1,53 @@
-import { AuthInterface, AuthOpts } from "@vonage/auth";
-import { VetchOptions, VetchResponse } from "@vonage/vetch";
+import { AuthInterface, AuthOpts } from '@vonage/auth'
+import { VetchOptions, VetchResponse } from '@vonage/vetch'
 
-export interface VoiceResponse<T> extends VetchResponse<T> { }
+export interface VoiceResponse<T> extends VetchResponse<T> {}
 
-export type VoiceClassParameters = AuthOpts & VetchOptions & {
-    applicationId: string
-    privateKey: string
-    auth?: AuthInterface
-}
+export type VoiceClassParameters = AuthOpts &
+    VetchOptions & {
+        applicationId: string
+        privateKey: string
+        auth?: AuthInterface
+    }
 
 export interface CallDetailResponse {
     _links: {
         self: {
             href: string
         }
-    },
-    uuid: string,
-    conversation_uuid: string,
+    }
+    uuid: string
+    conversation_uuid: string
     to: {
-        type: string,
-        number: string,
-    },
+        type: string
+        number: string
+    }
     from: {
-        type: string,
-        number: string,
-    },
-    status: string,
-    direction: string,
-    rate: string,
-    price: string,
-    duration: string,
-    start_time: string,
-    end_time: string,
-    network: string,
+        type: string
+        number: string
+    }
+    status: string
+    direction: string
+    rate: string
+    price: string
+    duration: string
+    start_time: string
+    end_time: string
+    network: string
 }
 
 export interface CallListResponse {
-    count: number,
-    page_size: number,
-    record_index: number,
+    count: number
+    page_size: number
+    record_index: number
     _links: {
         self: {
             href: string
         }
-    },
+    }
     _embedded: {
         calls: CallDetailResponse[]
     }
-}
-
-export interface VoiceEmptyResponse
-{
-    
 }
 
 export interface CallListFilter {
@@ -72,6 +68,6 @@ export interface CallCreateResponse {
 }
 
 export interface CallModifyResponse {
-    message: string,
+    message: string
     uuid: string
 }

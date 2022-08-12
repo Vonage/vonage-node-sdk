@@ -1,5 +1,5 @@
-import { DTMFSettings } from "./DTMFSettings"
-import { SpeechSettings } from "./SpeechSettings"
+import { DTMFSettings } from './DTMFSettings'
+import { SpeechSettings } from './SpeechSettings'
 
 export interface InputAction {
     action: string
