@@ -1,4 +1,4 @@
-import { MessageCategory } from "../../enums/Viber/MessageCategory"
+import { MessageCategory } from '../../enums/Viber/MessageCategory'
 
 export interface MessageConfig {
     category: MessageCategory

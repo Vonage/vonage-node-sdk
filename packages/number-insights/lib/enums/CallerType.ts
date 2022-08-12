@@ -1,5 +1,5 @@
 export enum CallerType {
-    UNKNOWN="unknown",
-    BUSINESS="business",
-    CONSUMER="consumer,"
+    UNKNOWN = 'unknown',
+    BUSINESS = 'business',
+    CONSUMER = 'consumer,',
 }

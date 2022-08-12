@@ -1,4 +1,4 @@
 export interface MessageTemplate {
     name: string
-    parameters: {key: string}[]
+    parameters: { key: string }[]
 }

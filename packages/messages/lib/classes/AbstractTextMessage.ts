@@ -1,17 +1,19 @@
-import { TextMessage } from "../interfaces/TextMessage";
+import { TextMessage } from '../interfaces/TextMessage'
 
 export abstract class AbstractTextMessageObject implements TextMessage {
-    public message_type: string = 'text';
-    public channel: string;
-    public text: string;
-    public to: string;
-    public from: string;
-    public client_ref?: string;
+    /* tslint:disable-next-line */
+    public message_type: string = 'text'
+    public channel: string
+    public text: string
+    public to: string
+    public from: string
+    /* tslint:disable-next-line */
+    public client_ref?: string
 
-    constructor(text: string, to: string, from: string, client_ref?: string) {
-        this.text = text;
-        this.to = to;
-        this.from = from;
-        this.client_ref = client_ref;
+    constructor(text: string, to: string, from: string, clientRef?: string) {
+        this.text = text
+        this.to = to
+        this.from = from
+        this.client_ref = clientRef
     }
 }

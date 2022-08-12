@@ -1,4 +1,4 @@
 export interface VideoObject {
-    url: string;
-    caption?: string;
+    url: string
+    caption?: string
 }

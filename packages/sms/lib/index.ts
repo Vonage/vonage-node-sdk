@@ -1,5 +1,4 @@
-
-import { SMS } from './sms';
+import { SMS } from './sms'
 
 export {
     SMSClassParameters,
@@ -14,7 +13,7 @@ export {
     ModelError,
     SMSParams,
     SMSGeneralResponse,
-    SMSXml
+    SMSXml,
 } from './types'
 
-export { SMS };
+export { SMS }

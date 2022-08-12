@@ -1,4 +1,4 @@
 export enum MessageCategory {
-    TRANSACTION="transaction",
-    PROMOTINO="promotion"
+    TRANSACTION = 'transaction',
+    PROMOTINO = 'promotion',
 }

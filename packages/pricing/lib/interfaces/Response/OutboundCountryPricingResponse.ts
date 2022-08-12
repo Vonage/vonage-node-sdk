@@ -1,4 +1,4 @@
-import { Network } from "../Network"
+import { Network } from '../Network'
 
 export interface OutboundCountryPricingResponse {
     countryCode: string

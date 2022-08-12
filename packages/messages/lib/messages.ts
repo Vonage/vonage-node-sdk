@@ -1,17 +1,17 @@
-import { Client } from '@vonage/server-client';
-import { MessageObject } from './interfaces/MessageObject';
-import { MessagesSendResponse } from './types';
+import { Client } from '@vonage/server-client'
+import { MessageObject } from './interfaces/MessageObject'
+import { MessagesSendResponse } from './types'
 
 const stripUndefined = (obj) => {
     for (const key in obj) {
         if (typeof obj[key] === 'object') {
-            obj[key] = stripUndefined(obj[key]);
+            obj[key] = stripUndefined(obj[key])
         } else if (!obj[key]) {
-            delete obj[key];
+            delete obj[key]
         }
     }
 
-    return obj;
+    return obj
 }
 
 export class Messages extends Client {
@@ -22,19 +22,30 @@ export class Messages extends Client {
      */
     public addAuthenticationToRequest(request: any) {
         if (this.auth.applicationId && this.auth.privateKey) {
-            request.headers = Object.assign({}, request.headers, { 'Authorization': this.auth.createBearerHeader() });
+            request.headers = Object.assign({}, request.headers, {
+                Authorization: this.auth.createBearerHeader(),
+            })
         } else if (this.auth.signature) {
-            request.data = Object.assign(request.data, this.auth.createSignatureHash(request.data));
+            request.data = Object.assign(
+                request.data,
+                this.auth.createSignatureHash(request.data)
+            )
         } else {
-            request.data = Object.assign(request.data, this.auth.getQueryParams(request.data));
+            request.data = Object.assign(
+                request.data,
+                this.auth.getQueryParams(request.data)
+            )
         }
 
-        return request;
+        return request
     }
 
     public async send(message: MessageObject) {
         const data = stripUndefined(message)
-        const resp = await this.sendPostRequest<MessagesSendResponse>(`${this.config.apiHost}/v1/messages`, data);
-        return resp.data;
+        const resp = await this.sendPostRequest<MessagesSendResponse>(
+            `${this.config.apiHost}/v1/messages`,
+            data
+        )
+        return resp.data
     }
 }

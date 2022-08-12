@@ -1,6 +1,6 @@
-import { AudioObject } from "./AudioObject";
-import { MessageObject } from "./MessageObject";
+import { AudioObject } from './AudioObject'
+import { MessageObject } from './MessageObject'
 
 export interface AudioMessage extends MessageObject {
-    audio: AudioObject;
+    audio: AudioObject
 }

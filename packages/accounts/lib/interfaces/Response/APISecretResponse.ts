@@ -3,7 +3,7 @@ export interface APISecretResponse {
         self: {
             href: string
         }
-    },
+    }
     id: string
     created_at: string
 }

@@ -47,7 +47,10 @@ export class Auth implements AuthInterface {
     }
 
     createSignatureHash = <T>(params: T): AuthSignedParams & T => {
-        const returnParams: AuthSignedParams & T = Object.assign({ api_key: this.apiKey }, params)
+        const returnParams: AuthSignedParams & T = Object.assign(
+            { api_key: this.apiKey },
+            params
+        )
 
         // Add the current timestamp to the parameters list with the key 'timestamp'.
         // This should be an integer containing the number of seconds since the epoch (UNIX time))

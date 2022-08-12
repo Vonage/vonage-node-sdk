@@ -1,4 +1,4 @@
-export { Numbers } from './numbers';
+export { Numbers } from './numbers'
 
 export {
     NumbersClassParameters,
@@ -13,5 +13,5 @@ export {
     VoiceCallbackTypeEnum,
     MessagesCallbackTypeEnum,
     NumbersOwnedNumber,
-    NumbersOwnedFilter
+    NumbersOwnedFilter,
 } from './types'

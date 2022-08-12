@@ -1,5 +1,5 @@
 export interface BasicResponse {
-    status: number,
+    status: number
     status_message: string
     request_id: string
     international_format_number: string

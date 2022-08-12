@@ -23,7 +23,7 @@ export interface SignedHashParams {
 
 export interface AuthSignedParams {
     api_key: string
-    sig?: string,
+    sig?: string
     timestamp?: string
 }
 
