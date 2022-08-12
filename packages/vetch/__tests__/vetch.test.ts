@@ -34,9 +34,7 @@ describe('option validation', () => {
 describe('error handling', () => {
     test('should throw on non-2xx responses by default', async () => {
         expect.assertions(1)
-        nock(url)
-            .get('/')
-            .reply(500)
+        nock(url).get('/').reply(500)
         await expect(request({ url })).rejects.toEqual(
             expect.objectContaining({ code: '500' })
         )
@@ -46,19 +44,15 @@ describe('error handling', () => {
 describe('option configuration', () => {
     test('should use options passed in constructor', async () => {
         expect.assertions(1)
-        nock(url)
-            .head('/')
-            .reply(200)
+        nock(url).head('/').reply(200)
         const inst = new Vetch({ method: HTTPMethods.HEAD })
         const res = await inst.request({ url })
-        expect(res.config.method).toEqual("HEAD")
+        expect(res.config.method).toEqual('HEAD')
     })
 
     test('should allow nested options passed in constructor', async () => {
         expect.assertions(2)
-        nock(url)
-            .get('/')
-            .reply(200)
+        nock(url).get('/').reply(200)
         let inst = new Vetch({ headers: { spiderman: 'Norman Osbourne' } })
         let res = await inst.request({ url, headers: { ironMan: 'Mandarin' } })
         expect(res.config.headers?.spiderman).toEqual('Norman Osbourne')
@@ -67,9 +61,7 @@ describe('option configuration', () => {
 
     test('should allow setting a base url', async () => {
         expect.assertions(1)
-        nock(url)
-            .get('/v1/thor')
-            .reply(200, {})
+        nock(url).get('/v1/thor').reply(200, {})
         let inst = new Vetch({ baseURL: `${url}/v1` })
         let res = await inst.request({ url: '/thor' })
         expect(res.data).toEqual({})
@@ -79,9 +71,7 @@ describe('option configuration', () => {
         expect.assertions(2)
         let qs = '?black=panther&captain=america'
         let opts = { url: `${url}/${qs}` }
-        nock(url)
-            .get(`/${qs}`)
-            .reply(200, {})
+        nock(url).get(`/${qs}`).reply(200, {})
         let res = await request(opts)
         expect(res.status).toEqual(200)
         expect(res.config.url).toEqual(`${url}/${qs}`)
@@ -96,9 +86,7 @@ describe('option configuration', () => {
             },
         }
         let qs = '?black=panther&captain=america'
-        nock(url)
-            .get(`/${qs}`)
-            .reply(200, {})
+        nock(url).get(`/${qs}`).reply(200, {})
         let res = await request(opts)
         expect(res.status).toEqual(200)
         expect(res.config.url).toEqual(`${url}${qs}`)
@@ -112,86 +100,78 @@ describe('option configuration', () => {
             },
         }
         let qs = '?black=panther&captain=america'
-        nock(url)
-            .get(`/${qs}`)
-            .reply(200, {})
+        nock(url).get(`/${qs}`).reply(200, {})
         let res = await request(opts)
         expect(res.status).toEqual(200)
         expect(res.config.url).toEqual(`${url}${qs}`)
     })
 
-  test('should return json by default', async () => {
-      let body = { avengers: 'assemble' }
-      nock(url)
-          .get('/')
-          .reply(200, body)
-      let res = await request({ url })
-      expect(res.data).toEqual(body)
-  })
+    test('should return json by default', async () => {
+        let body = { avengers: 'assemble' }
+        nock(url).get('/').reply(200, body)
+        let res = await request({ url })
+        expect(res.data).toEqual(body)
+    })
 
-  test('should default to application/json', async () => {
-      nock(url)
-          .matchHeader('accept', 'application/json')
-          .get('/')
-          .reply(200, {})
-      let res = await request({ url })
-      expect(res.data).toEqual({})
-  })
+    test('should default to application/json', async () => {
+        nock(url)
+            .matchHeader('accept', 'application/json')
+            .get('/')
+            .reply(200, {})
+        let res = await request({ url })
+        expect(res.data).toEqual({})
+    })
 
-  test('should include the request data in the response config', async () => {
-    let body = { avengers: 'assemble' }
-    nock(url)
-        .post('/', body)
-        .reply(200)
-      const res = await request({ url, method: HTTPMethods.POST, data: body })
-    expect(res.config.data).toEqual(body)
-  })
+    test('should include the request data in the response config', async () => {
+        let body = { avengers: 'assemble' }
+        nock(url).post('/', body).reply(200)
+        const res = await request({ url, method: HTTPMethods.POST, data: body })
+        expect(res.config.data).toEqual(body)
+    })
 })
 
 describe('data handling', () => {
-  test('should accept a string in the request data', async () => {
-    let body = { avengers: 'assemble' }
-    let encoded = stringify(body);
-    nock(url)
-      .matchHeader('content-type', 'application/x-www-form-urlencoded')
-      .post('/', encoded)
-      .reply(200, {});
-    const res = await request({
-      url,
-        method: HTTPMethods.POST,
-      data: encoded,
-      headers: {'content-type': 'application/x-www-form-urlencoded'},
-    });
-    expect(res.data).toEqual({})
-  })
+    test('should accept a string in the request data', async () => {
+        let body = { avengers: 'assemble' }
+        let encoded = stringify(body)
+        nock(url)
+            .matchHeader('content-type', 'application/x-www-form-urlencoded')
+            .post('/', encoded)
+            .reply(200, {})
+        const res = await request({
+            url,
+            method: HTTPMethods.POST,
+            data: encoded,
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        })
+        expect(res.data).toEqual({})
+    })
 
-  test('should default to application/json content-type with object request', async () => {
-    let body = { avengers: 'assemble' }
-    nock(url)
-      .matchHeader('Content-Type', 'application/json')
-      .post('/', JSON.stringify(body))
-      .reply(200, {});
-    const res = await request({
-      url,
-        method: HTTPMethods.POST,
-      data: body,
-    });
+    test('should default to application/json content-type with object request', async () => {
+        let body = { avengers: 'assemble' }
+        nock(url)
+            .matchHeader('Content-Type', 'application/json')
+            .post('/', JSON.stringify(body))
+            .reply(200, {})
+        const res = await request({
+            url,
+            method: HTTPMethods.POST,
+            data: body,
+        })
 
-    expect(res.data).toEqual({})
-  })
+        expect(res.data).toEqual({})
+    })
 })
 
 describe('defaults and instances', () => {
     test('should allow creating a new instance', () => {
-      let vetch = new Vetch()
-      expect(typeof vetch.request).toEqual('function')
+        let vetch = new Vetch()
+        expect(typeof vetch.request).toEqual('function')
     })
 
     it('should allow passing empty options', async () => {
         let body = { avengers: 'assemble' }
-        nock(url)
-            .get('/')
-            .reply(200, body)
+        nock(url).get('/').reply(200, body)
         let vetch = new Vetch({ url })
         let res = await vetch.request()
 

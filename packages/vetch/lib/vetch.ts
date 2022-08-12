@@ -29,7 +29,7 @@ export class Vetch {
     constructor(defaults?: VetchOptions) {
         this.defaults = defaults || { responseType: ResponseTypes.json }
         if (!this.defaults.responseType) {
-            this.defaults.responseType = ResponseTypes.json;
+            this.defaults.responseType = ResponseTypes.json
         }
     }
 
@@ -49,7 +49,7 @@ export class Vetch {
             formattedResponse = await this._defaultAdapter<T>(opts)
 
             if (!opts.checkStatus!(formattedResponse.status)) {
-                let err = new VetchError(
+                const err = new VetchError(
                     `Request failed with status code ${formattedResponse.status}`,
                     opts
                 )
@@ -60,7 +60,7 @@ export class Vetch {
 
             return formattedResponse
         } catch (e) {
-            throw e;
+            throw e
         }
     }
 
@@ -105,7 +105,7 @@ export class Vetch {
                 queryParams = queryParams.slice(1)
             }
 
-            let prefix = opts.url.includes('?') ? '&' : '?'
+            const prefix = opts.url.includes('?') ? '&' : '?'
             opts.url = `${opts.url}${prefix}${queryParams}`
         }
 
@@ -118,8 +118,8 @@ export class Vetch {
             }
         }
 
-        if (!opts.headers['Accept'] && opts.responseType === 'json') {
-            opts.headers['Accept'] = 'application/json'
+        if (!opts.headers.Accept && opts.responseType === 'json') {
+            opts.headers.Accept = 'application/json'
         }
 
         return opts
@@ -139,7 +139,6 @@ export class Vetch {
         res.headers.forEach((value, key) => {
             headers[key] = value
         })
-
 
         return {
             config: opts,

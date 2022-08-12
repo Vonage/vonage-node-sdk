@@ -2,10 +2,7 @@ export class VetchError extends Error {
     code?: string
     config: VetchOptions
     response: VetchResponse<any>
-    constructor(
-        message: string,
-        options: VetchOptions,
-    ) {
+    constructor(message: string, options: VetchOptions) {
         super(message)
         this.config = options
     }
@@ -20,7 +17,7 @@ export interface VetchHttpRequest {
 }
 
 export type VetchPromise<T> = Promise<VetchResponse<T>>
-export const VetchPromise = Promise;
+export const VetchPromise = Promise
 
 export type NumbersResponse<T> = VetchResponse<T>
 
@@ -43,11 +40,11 @@ export enum HTTPMethods {
     CONNECT = 'CONNECT',
     OPTIONS = 'OPTIONS',
     TRACE = 'TRACE',
-    PATCH = 'PATCH'
+    PATCH = 'PATCH',
 }
 
 export enum ResponseTypes {
-    json = 'json'
+    json = 'json',
 }
 
 export interface VetchOptions {
@@ -67,5 +64,3 @@ export interface VetchOptions {
     checkStatus?: (status: number) => boolean
     size?: number
 }
-
-export interface RetryConfig { }
