@@ -1,2 +1,1 @@
-import { JWT } from ".";
-
+import { JWT } from '.'

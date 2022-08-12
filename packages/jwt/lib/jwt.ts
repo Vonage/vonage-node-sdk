@@ -2,7 +2,7 @@ import { JWTInterface, GeneratorOptions, Claims } from './common'
 import { sign } from 'jsonwebtoken'
 import { v4 as uuidv4 } from 'uuid'
 
-export class JWT implements JWTInterface{
+export class JWT implements JWTInterface {
     tokenGenerate<T>(
         applicationId: string,
         privateKey: string | Buffer,
@@ -19,9 +19,9 @@ export class JWT implements JWTInterface{
             throw new Error('privateKey must be string or buffer')
         }
 
-        let claims = this.validateOptions(opts)
+        const claims = this.validateOptions(opts)
         claims.application_id = applicationId
-        
+
         return sign(claims, privateKey, {
             algorithm: 'RS256',
             header: { typ: 'JWT', alg: 'RS256' },
@@ -29,16 +29,22 @@ export class JWT implements JWTInterface{
     }
 
     private validateOptions(opts?: GeneratorOptions): Claims {
-        let now = parseInt((Date.now() / 1000).toString(), 10);
+        const now = parseInt((Date.now() / 1000).toString(), 10)
 
-        let claims: Claims = {
+        const claims: Claims = {
             jti: opts?.jti || uuidv4(),
             iat: opts?.issued_at || now,
-            exp: now + (opts?.ttl || 900)
+            exp: now + (opts?.ttl || 900),
         }
-        if (opts?.jti) { delete opts.jti }
-        if (opts?.issued_at) { delete opts.issued_at }
-        if (opts?.ttl) { delete opts.ttl }
+        if (opts?.jti) {
+            delete opts.jti
+        }
+        if (opts?.issued_at) {
+            delete opts.issued_at
+        }
+        if (opts?.ttl) {
+            delete opts.ttl
+        }
 
         if (opts?.subject) {
             claims.sub = opts.subject
@@ -50,8 +56,10 @@ export class JWT implements JWTInterface{
             delete opts.acl
         }
 
-        for(const property in opts) {
-            claims[property] = opts[property]
+        for (const property in opts) {
+            if (opts.hasOwnProperty(property)) {
+                claims[property] = opts[property]
+            }
         }
 
         return claims
