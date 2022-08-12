@@ -33,8 +33,13 @@
     "build": "npm run clean && npm run compile",
     "clean": "tsc -b --clean",
     "compile": "tsc -p tsconfig.json",
+    "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepublishOnly": "npm run build && npm run test && npm run lint",
+    "preversion": "npm run lint",
     "test-watch": "npx jest --watch",
-    "test": "npx jest"
+    "test": "npx jest",
+    "version": "npm run format && git add -A lib"
   },
   "devDependencies": {
     "@types/jest": "^28.1.6",
@@ -49,7 +54,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/auth": "^0.2.0",
-    "@vonage/vetch": "^0.1.0"
+    "@vonage/server-client": "^0.1.0"
   }
 }

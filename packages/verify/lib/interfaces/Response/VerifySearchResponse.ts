@@ -1,5 +1,5 @@
-import { CheckInformation } from "./CheckInformation"
-import { EventInformation } from "./EventInformation"
+import { CheckInformation } from './CheckInformation'
+import { EventInformation } from './EventInformation'
 
 export interface VerifySearchResponse {
     request_id: string
