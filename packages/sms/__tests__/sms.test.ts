@@ -12,10 +12,9 @@
 // limitations under the License.
 
 import * as api from "../lib/sms"
-import * as types from '../lib/types';
 import nock from 'nock';
+import { Auth } from "@vonage/auth";
 
-const config: types.SMSClassParameters = {}
 const BASE_URL = "https://rest.nexmo.com".replace(/\/+$/, "");
 
 
@@ -23,7 +22,7 @@ const BASE_URL = "https://rest.nexmo.com".replace(/\/+$/, "");
 describe("SMS", () => {
     let client: api.SMS
     beforeEach(function () {
-        client = new api.SMS({ apiKey: '12345', apiSecret: 'ABCDE' })
+        client = new api.SMS(new Auth({ apiKey: '12345', apiSecret: 'ABCDE' }))
     });
 
     afterEach(function () {

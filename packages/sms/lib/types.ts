@@ -15,7 +15,12 @@ export interface SMSEmptyResponse {
 
 export interface SMSGeneralResponse {
     messageCount?: string;
-    messages?: Array<Message>;
+    messages?: Message[];
+}
+
+export interface SendSMSResponse {
+    "message-count": string
+    messages: Message[]
 }
 
 export const COLLECTION_FORMATS = {
@@ -48,7 +53,7 @@ export interface ErrorMessage {
 }
 
 export interface ErrorXml {
-    messages?: Array<ErrorMessage>;
+    messages?: ErrorMessage[];
 }
 
 export interface InboundMessage {
@@ -83,7 +88,7 @@ export interface Message {
 
 export interface ModelError {
     messageCount?: string;
-    messages?: Array<ErrorMessage>;
+    messages?: ErrorMessage[];
 }
 
 export interface SMSParams {
@@ -93,8 +98,8 @@ export interface SMSParams {
     ttl?: number;
     statusReportReq?: boolean;
     callback?: string;
-    messageClass?: SMSParams.MessageClassEnum;
-    type?: SMSParams.TypeEnum;
+    messageClass?: MessageClassEnum;
+    type?: TypeEnum;
     vcard?: string;
     vcal?: string;
     body?: string;
@@ -110,27 +115,22 @@ export interface SMSParams {
 }
 
 
-export namespace SMSParams {
-
-    export enum MessageClassEnum {
-        NUMBER_0 = <any>0,
-        NUMBER_1 = <any>1,
-        NUMBER_2 = <any>2,
-        NUMBER_3 = <any>3
-    }
-
-    export enum TypeEnum {
-        Text = <any>'text',
-        Binary = <any>'binary',
-        Wappush = <any>'wappush',
-        Unicode = <any>'unicode',
-        Vcal = <any>'vcal',
-        Vcard = <any>'vcard'
-    }
+export enum MessageClassEnum {
+    NUMBER_0 = 0,
+    NUMBER_1 = 1,
+    NUMBER_2 = 2,
+    NUMBER_3 = 3
 }
 
-
+export enum TypeEnum {
+    Text = 'text',
+    Binary = 'binary',
+    Wappush = 'wappush',
+    Unicode = 'unicode',
+    Vcal = 'vcal',
+    Vcard = 'vcard'
+}
 
 export interface SMSXml {
-    messages?: Array<Message>;
+    messages?: Message[];
 }
