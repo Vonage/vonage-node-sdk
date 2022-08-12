@@ -1,13 +1,15 @@
+import { Auth } from '@vonage/auth';
 import nock from 'nock';
 import { ServiceType } from '../lib/enums/ServiceType';
 import { Pricing } from '../lib/index'
-import { BASE_URL } from '../lib/pricing';
+
+const BASE_URL = 'https://rest.nexmo.com/'.replace(/\/+$/, '');
 
 describe('pricing', () => {
   let client;
 
   beforeEach(() => {
-      client = new Pricing({ apiKey: 'abcd', apiSecret: '1234' });
+      client = new Pricing(new Auth({ apiKey: 'abcd', apiSecret: '1234' }));
   });
 
   afterEach(() => {
@@ -37,7 +39,7 @@ describe('pricing', () => {
 
     nock(BASE_URL)
       .persist()
-      .get('/get-pricing/outbound/sms')
+      .get('/account/get-pricing/outbound/sms')
       .query({ api_key: 'abcd', api_secret: '1234', country: 'CA' })
       .reply(200, expectedResponse);
 
@@ -78,7 +80,7 @@ describe('pricing', () => {
 
     nock(BASE_URL)
       .persist()
-      .get('/get-full-pricing/outbound/sms')
+      .get('/account/get-full-pricing/outbound/sms')
       .query({ api_key: 'abcd', api_secret: '1234'})
       .reply(200, expectedResponse);
 
@@ -114,7 +116,7 @@ describe('pricing', () => {
 
     nock(BASE_URL)
       .persist()
-      .get('/get-prefix-pricing/outbound/sms')
+      .get('/account/get-prefix-pricing/outbound/sms')
       .query({ api_key: 'abcd', api_secret: '1234', prefix: "1"})
       .reply(200, expectedResponse);
 
