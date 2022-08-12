@@ -20,7 +20,7 @@ export class Messages extends Client {
      * The Messages API handles both JWT (preferred) as well as Basic so we
      * cannot just set a local authType
      */
-    protected addAuthenticationToRequest(request: any) {
+    public addAuthenticationToRequest(request: any) {
         if (this.auth.applicationId && this.auth.privateKey) {
             request.headers = Object.assign({}, request.headers, { 'Authorization': this.auth.createBearerHeader() });
         } else if (this.auth.signature) {
