@@ -1,6 +1,6 @@
 {
   "name": "@vonage/messages",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
   "keywords": [
     "whatsapp",

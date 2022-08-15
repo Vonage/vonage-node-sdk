@@ -1,6 +1,6 @@
 {
   "name": "@vonage/number-insights",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Vonage Number Insights API",
   "author": "Chris Tankersley <chris@ctankersley.com>",
   "homepage": "https://developer.vonage.com",
