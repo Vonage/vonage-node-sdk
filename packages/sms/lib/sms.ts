@@ -1,4 +1,6 @@
 import { Client } from '@vonage/server-client'
+import { MessageSendAllFailure } from './classes/Error/MessageSendAllFailure'
+import { MessageSendPartialFailure } from './classes/Error/MessageSendPartialFailure'
 import { SMSParams, SendSMSResponse } from './types'
 
 export class SMS extends Client {
@@ -7,6 +9,29 @@ export class SMS extends Client {
             `${this.config.restHost}/sms/json`,
             params
         )
+
+        let failures: number = 0
+        const messageCount: number = parseInt(resp.data['message-count'], 10)
+        for (let i = 0; i < messageCount; i++) {
+            if (resp.data.messages[i].status !== '0') {
+                failures++
+            }
+        }
+
+        if (failures === messageCount) {
+            throw new MessageSendAllFailure(
+                'All SMS messages failed to send',
+                resp.data
+            )
+        }
+
+        if (failures > 0) {
+            throw new MessageSendPartialFailure(
+                'Some SMS messages failed to send',
+                resp.data
+            )
+        }
+
         return resp.data
     }
 }
