@@ -1,4 +1,4 @@
-import { Accounts } from '@vonage/accounts'
+import { Accounts, Secrets } from '@vonage/accounts'
 import { Applications } from '@vonage/applications'
 import { Auth, AuthInterface } from '@vonage/auth'
 import { Messages } from '@vonage/messages'
@@ -20,6 +20,7 @@ export class Vonage {
     public numberInsights: NumberInsights
     public numbers: Numbers
     public pricing: Pricing
+    public secrets: Secrets
     public sms: SMS
     public verify: Verify
     public voice: Voice
@@ -46,6 +47,7 @@ export class Vonage {
         this.numberInsights = new NumberInsights(this.credentials, this.options)
         this.numbers = new Numbers(this.credentials, this.options)
         this.pricing = new Pricing(this.credentials, this.options)
+        this.secrets = new Secrets(this.credentials, this.options)
         this.sms = new SMS(this.credentials, this.options)
         this.verify = new Verify(this.credentials, this.options)
         this.voice = new Voice(this.credentials, this.options)
