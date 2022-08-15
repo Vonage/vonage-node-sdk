@@ -1,4 +1,4 @@
-import { AuthInterface } from '@vonage/auth'
+import { Auth, AuthInterface } from '@vonage/auth'
 import {
     request as vetchRequest,
     ResponseTypes,
@@ -32,6 +32,10 @@ export abstract class Client {
             apiHost: null,
             videoHost: null,
             responseType: null,
+        }
+
+        if (typeof credentials.getQueryParams === 'undefined') {
+            credentials = new Auth(credentials)
         }
 
         this.config.restHost = options?.restHost || 'https://rest.nexmo.com'
