@@ -1,5 +1,6 @@
 import { tokenGenerate } from '@vonage/jwt'
 import { createHash, createHmac } from 'crypto'
+import { existsSync, readFileSync } from 'fs'
 import {
     AuthInterface,
     AuthOpts,
@@ -25,6 +26,10 @@ export class Auth implements AuthInterface {
         this.applicationId = opts?.applicationId || null
 
         if (opts?.privateKey) {
+            if (existsSync(opts.privateKey)) {
+                opts.privateKey = readFileSync(opts.privateKey).toString();
+            }
+
             if (opts.privateKey instanceof Buffer) {
                 this.privateKey = opts.privateKey.toString()
             } else {
