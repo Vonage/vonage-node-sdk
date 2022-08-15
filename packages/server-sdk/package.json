@@ -1,6 +1,6 @@
 {
   "name": "@vonage/server-sdk",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "description": "Node.js Client for the Vonage API Platform",
   "author": "Chris Tankersley <chris@ctankersley.com>",
   "homepage": "https://developer.vonage.com",
@@ -37,7 +37,7 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/accounts": "^0.2.2",
+    "@vonage/accounts": "^0.2.3",
     "@vonage/applications": "^0.3.2",
     "@vonage/messages": "^0.2.2",
     "@vonage/number-insights": "^0.2.2",

@@ -1,6 +1,6 @@
 {
   "name": "@vonage/accounts",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Vonage Account Management API",
   "author": "Chris Tankersley <chris@ctankersley.com>",
   "homepage": "https://developer.vonage.com",
