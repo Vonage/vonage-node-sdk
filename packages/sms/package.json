@@ -1,6 +1,6 @@
 {
   "name": "@vonage/sms",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "> TODO: description",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
