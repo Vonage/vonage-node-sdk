@@ -54,6 +54,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.3.0"
+    "@vonage/server-client": "^0.4.0"
   }
 }

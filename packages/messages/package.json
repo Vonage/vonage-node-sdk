@@ -58,6 +58,6 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.3.0"
+    "@vonage/server-client": "^0.4.0"
   }
 }

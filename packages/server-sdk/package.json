@@ -43,7 +43,7 @@
     "@vonage/number-insights": "^0.2.1",
     "@vonage/numbers": "^0.2.1",
     "@vonage/pricing": "^0.2.1",
-    "@vonage/server-client": "^0.3.0",
+    "@vonage/server-client": "^0.4.0",
     "@vonage/sms": "^0.3.1",
     "@vonage/verify": "^0.2.1",
     "@vonage/voice": "^0.2.1"
