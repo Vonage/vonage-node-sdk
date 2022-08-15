@@ -35,7 +35,7 @@ describe('secrets', () => {
       }
     };
 
-    nock("https://rest.nexmo.com", {reqheaders: {'Authorization': 'Basic YWJjZDoxMjM0'} })
+    nock("https://api.nexmo.com", {reqheaders: {'Authorization': 'Basic YWJjZDoxMjM0'} })
       .persist()
       .get('/accounts/abcd/secrets')
       .reply(200, expectedResponse);
@@ -56,7 +56,7 @@ describe('secrets', () => {
       "created_at": "2017-03-02T16:34:49Z"
     };
 
-    nock("https://rest.nexmo.com", {reqheaders: {'Authorization': 'Basic YWJjZDoxMjM0'} })
+    nock("https://api.nexmo.com", {reqheaders: {'Authorization': 'Basic YWJjZDoxMjM0'} })
       .persist()
       .post('/accounts/abcd/secrets', {secret: 'te5ts3cret!'})
       .reply(200, expectedResponse);
@@ -78,7 +78,7 @@ describe('secrets', () => {
       "created_at": "2017-03-02T16:34:49Z"
     };
 
-    nock("https://rest.nexmo.com", {reqheaders: {'Authorization': 'Basic YWJjZDoxMjM0'} })
+    nock("https://api.nexmo.com", {reqheaders: {'Authorization': 'Basic YWJjZDoxMjM0'} })
       .persist()
       .get('/accounts/abcd/secrets/ad6dc56f-07b5-46e1-a527-85530e625800')
       .reply(200, expectedResponse);
@@ -90,7 +90,7 @@ describe('secrets', () => {
   });
 
   test("get a secret", async () => {
-    nock("https://rest.nexmo.com", {reqheaders: {'Authorization': 'Basic YWJjZDoxMjM0'} })
+    nock("https://api.nexmo.com", {reqheaders: {'Authorization': 'Basic YWJjZDoxMjM0'} })
       .persist()
       .delete('/accounts/abcd/secrets/ad6dc56f-07b5-46e1-a527-85530e625800')
       .reply(204);

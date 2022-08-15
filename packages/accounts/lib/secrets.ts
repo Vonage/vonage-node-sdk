@@ -10,7 +10,7 @@ export class Secrets extends Client {
         secret: string
     ): Promise<APISecretResponse> {
         const response = await this.sendPostRequest<APISecretResponse>(
-            `${this.config.restHost}/accounts/${apiKey}/secrets`,
+            `${this.config.apiHost}/accounts/${apiKey}/secrets`,
             { secret }
         )
         return response.data
@@ -18,7 +18,7 @@ export class Secrets extends Client {
 
     public async deleteSecret(apiKey: string, id: string): Promise<void> {
         await this.sendDeleteRequest<void>(
-            `${this.config.restHost}/accounts/${apiKey}/secrets/${id}`
+            `${this.config.apiHost}/accounts/${apiKey}/secrets/${id}`
         )
     }
 
@@ -27,14 +27,14 @@ export class Secrets extends Client {
         id: string
     ): Promise<APISecretResponse> {
         const response = await this.sendGetRequest<APISecretResponse>(
-            `${this.config.restHost}/accounts/${apiKey}/secrets/${id}`
+            `${this.config.apiHost}/accounts/${apiKey}/secrets/${id}`
         )
         return response.data
     }
 
     public async listSecrets(apiKey: string): Promise<ListAPISecretsResponse> {
         const response = await this.sendGetRequest<ListAPISecretsResponse>(
-            `${this.config.restHost}/accounts/${apiKey}/secrets`
+            `${this.config.apiHost}/accounts/${apiKey}/secrets`
         )
         return response.data
     }
