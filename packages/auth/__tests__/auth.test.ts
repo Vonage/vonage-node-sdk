@@ -46,17 +46,19 @@ describe('Auth Object', () => {
         })
         expect(auth.applicationId).toEqual(applicationId)
         expect(auth.privateKey).toEqual(privateKeyString)
-    });
+    })
 
     test('should convert file path into private key string', () => {
-        const privateKeyString = fs.readFileSync(`${__dirname}/private.test.key`).toString();
+        const privateKeyString = fs
+            .readFileSync(`${__dirname}/private.test.key`)
+            .toString()
         const auth = new Auth({
             applicationId: '1234',
-            privateKey: `${__dirname}/private.test.key`
-        });
+            privateKey: `${__dirname}/private.test.key`,
+        })
         expect(auth.applicationId).toEqual(applicationId)
         expect(auth.privateKey).toEqual(privateKeyString)
-    });
+    })
 })
 
 describe('Auth Methods', () => {

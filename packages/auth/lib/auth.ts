@@ -27,7 +27,7 @@ export class Auth implements AuthInterface {
 
         if (opts?.privateKey) {
             if (existsSync(opts.privateKey)) {
-                opts.privateKey = readFileSync(opts.privateKey).toString();
+                opts.privateKey = readFileSync(opts.privateKey).toString()
             }
 
             if (opts.privateKey instanceof Buffer) {
