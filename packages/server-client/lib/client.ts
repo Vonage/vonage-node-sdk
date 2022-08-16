@@ -26,16 +26,16 @@ export abstract class Client {
             responseType: ResponseTypes
         }
     ) {
+        if (typeof credentials.getQueryParams === 'undefined') {
+            credentials = new Auth(credentials)
+        }
+
         this.auth = credentials
         this.config = {
             restHost: null,
             apiHost: null,
             videoHost: null,
             responseType: null,
-        }
-
-        if (typeof credentials.getQueryParams === 'undefined') {
-            credentials = new Auth(credentials)
         }
 
         this.config.restHost = options?.restHost || 'https://rest.nexmo.com'
