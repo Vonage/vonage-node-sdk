@@ -1,6 +1,6 @@
 {
   "name": "@vonage/numbers",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "> TODO: description",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
@@ -37,7 +37,7 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.4.0"
+    "@vonage/server-client": "^0.4.1"
   },
   "devDependencies": {
     "@types/jest": "^28.1.6",

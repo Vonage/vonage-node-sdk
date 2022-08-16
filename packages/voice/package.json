@@ -1,6 +1,6 @@
 {
   "name": "@vonage/voice",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Vonage Voice API",
   "keywords": [
     "vonage",
@@ -50,6 +50,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.4.0"
+    "@vonage/server-client": "^0.4.1"
   }
 }
