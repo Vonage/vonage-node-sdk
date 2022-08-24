@@ -69,7 +69,7 @@ export class Video extends Client {
       role: 'publisher',
       create_time: now,
       expire_time: now + 60 * 60 * 24,
-      none: Math.random(),
+      nonce: Math.random(),
       initial_layout_class_list: '',
     };
 
