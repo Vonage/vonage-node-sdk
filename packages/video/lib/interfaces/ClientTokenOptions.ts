@@ -4,5 +4,5 @@ export interface ClientTokenOptions {
   expireTime?: number;
   createTime?: number;
   nonce?: number;
-  initialLayoutClassList?: string[]
+  initialLayoutClassList?: string[];
 }

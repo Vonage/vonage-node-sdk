@@ -68,23 +68,31 @@ export class Video extends Client {
       session_id: sessionId,
       role: 'publisher',
       create_time: now,
-      expire_time: now + (60 * 60 * 24),
+      expire_time: now + 60 * 60 * 24,
       none: Math.random(),
       initial_layout_class_list: '',
     };
 
-    if (tokenOptions?.role) { claims.role = tokenOptions.role; }
-    if (tokenOptions?.nonce) { claims.nonce = tokenOptions.nonce; }
-    if (tokenOptions?.createTime) { claims.create_time = tokenOptions.createTime; }
-    if (tokenOptions?.expireTime) { claims.expire_time = tokenOptions.expireTime; }
-    if (tokenOptions?.data) { claims.connection_data = tokenOptions.data; }
-    if (tokenOptions?.initialLayoutClassList) { claims.initial_layout_class_list = tokenOptions.initialLayoutClassList.join(' '); }
+    if (tokenOptions?.role) {
+      claims.role = tokenOptions.role;
+    }
+    if (tokenOptions?.nonce) {
+      claims.nonce = tokenOptions.nonce;
+    }
+    if (tokenOptions?.createTime) {
+      claims.create_time = tokenOptions.createTime;
+    }
+    if (tokenOptions?.expireTime) {
+      claims.expire_time = tokenOptions.expireTime;
+    }
+    if (tokenOptions?.data) {
+      claims.connection_data = tokenOptions.data;
+    }
+    if (tokenOptions?.initialLayoutClassList) {
+      claims.initial_layout_class_list = tokenOptions.initialLayoutClassList.join(' ');
+    }
 
-    return tokenGenerate(
-      this.auth.applicationId,
-      this.auth.privateKey,
-      claims,
-    );
+    return tokenGenerate(this.auth.applicationId, this.auth.privateKey, claims);
   }
 
   public async getArchive(archiveId: string): Promise<SingleArchiveResponse> {
