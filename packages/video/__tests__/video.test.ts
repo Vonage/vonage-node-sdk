@@ -149,6 +149,25 @@ describe('video', () => {
     expect(decoded.payload.session_id).toEqual('abcd');
   });
 
+  test("can generate a client JWT token with renamed values", async () => {
+    const now = Math.round(new Date().getTime() / 1000);
+    const token = await client.generateClientToken('abcd', {
+      data: 'test',
+      createTime: now,
+      expireTime: now + 500,
+      initialLayoutClassList: ['foo', 'bar']
+    });
+    const decoded: any = decode(token, {json: true, complete: true});
+
+    expect(decoded.payload.application_id).toEqual('abcd-1234');
+    expect(decoded.payload.scope).toEqual('session.connect');
+    expect(decoded.payload.session_id).toEqual('abcd');
+    expect(decoded.payload.connection_data).toEqual('test');
+    expect(decoded.payload.create_time).toEqual(now);
+    expect(decoded.payload.expire_time).toEqual(now + 500);
+    expect(decoded.payload.initial_layout_class_list).toEqual('foo bar');
+  });
+
   test("can generate a client JWT token with custom options", async () => {
     const token = await client.generateClientToken('abcd', {role: 'publisher'});
     const decoded: any = decode(token, {json: true, complete: true});
