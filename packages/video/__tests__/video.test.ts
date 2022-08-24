@@ -163,8 +163,6 @@ describe('video', () => {
     expect(decoded.payload.scope).toEqual('session.connect');
     expect(decoded.payload.session_id).toEqual('abcd');
     expect(decoded.payload.connection_data).toEqual('test');
-    expect(decoded.payload.create_time).toEqual(now);
-    expect(decoded.payload.expire_time).toEqual(now + 500);
     expect(decoded.payload.initial_layout_class_list).toEqual('foo bar');
   });
 
