@@ -1,6 +1,6 @@
 {
   "name": "@vonage/video",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Package to interact with the Vonage Video API (Not OpenTok Compatible)",
   "keywords": [
     "vonage",
