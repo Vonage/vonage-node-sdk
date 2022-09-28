@@ -24,7 +24,7 @@ export abstract class Client {
             restHost: string
             apiHost: string
             videoHost: string
-            responseType: ResponseTypes,
+            responseType: ResponseTypes
             timeout: number
         }
     ) {
