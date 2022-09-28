@@ -1,6 +1,6 @@
 {
   "name": "@vonage/sms",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "> TODO: description",
   "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
@@ -37,7 +37,7 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.4.1"
+    "@vonage/server-client": "^0.4.2"
   },
   "devDependencies": {
     "@types/jest": "^28.1.6",

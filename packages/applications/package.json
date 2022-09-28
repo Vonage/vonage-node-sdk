@@ -1,6 +1,6 @@
 {
   "name": "@vonage/applications",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Vonage Applications API",
   "keywords": [
     "vonage"
@@ -50,6 +50,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.4.1"
+    "@vonage/server-client": "^0.4.2"
   }
 }

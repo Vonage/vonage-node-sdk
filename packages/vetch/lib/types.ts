@@ -66,7 +66,11 @@ export interface VetchOptions {
     params?: any
     responseType?: ResponseTypes
     checkStatus?: (status: number) => boolean
-    size?: number,
-    timeout?: number,
-    agent?: boolean | http.Agent | https.Agent | ((parsedUrl: URL) => boolean | https.Agent | http.Agent)
+    size?: number
+    timeout?: number
+    agent?:
+        | boolean
+        | http.Agent
+        | https.Agent
+        | ((parsedUrl: URL) => boolean | https.Agent | http.Agent)
 }

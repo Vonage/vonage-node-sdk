@@ -127,20 +127,25 @@ export class Vetch {
         }
 
         // Set our user agent
-        opts.headers['user-agent'] = `@vonage/server-sdk/3.0.0-alpha.6 node/${process.version.replace('v', '')}`;
+        opts.headers[
+            'user-agent'
+        ] = `@vonage/server-sdk/3.0.0-alpha.6 node/${process.version.replace(
+            'v',
+            ''
+        )}`
 
         // Allow a custom timeout to be used
         const httpAgent = new http.Agent({
-            timeout: this.defaults.timeout
-        });
+            timeout: this.defaults.timeout,
+        })
         const httpsAgent = new https.Agent({
-            timeout: this.defaults.timeout
-        });
-        opts.agent = (parsedUrl: URL): https.Agent|http.Agent => {
+            timeout: this.defaults.timeout,
+        })
+        opts.agent = (parsedUrl: URL): https.Agent | http.Agent => {
             if (parsedUrl.protocol === 'http:') {
-                return httpAgent;
+                return httpAgent
             } else {
-                return httpsAgent;
+                return httpsAgent
             }
         }
 

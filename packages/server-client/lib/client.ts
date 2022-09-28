@@ -188,7 +188,7 @@ export abstract class Client {
 
     public async sendRequest<T>(request: any): Promise<VetchResponse<T>> {
         request = this.addAuthenticationToRequest(request)
-        request.timeout = this.config.timeout;
+        request.timeout = this.config.timeout
         const result = await vetchRequest<T>(request)
         return result
     }

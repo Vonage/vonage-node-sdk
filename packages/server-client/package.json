@@ -1,6 +1,6 @@
 {
   "name": "@vonage/server-client",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Core services related to talking to the Vonage APIs",
   "author": "Chris Tankersley <chris@ctankersley.com>",
   "homepage": "https://developer.vonage.com",
@@ -39,6 +39,6 @@
   "dependencies": {
     "@vonage/auth": "^0.6.0",
     "@vonage/jwt": "^0.3.0",
-    "@vonage/vetch": "^0.2.0"
+    "@vonage/vetch": "^0.3.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@vonage/verify",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Verify package for Vonage",
   "keywords": [
     "vonage",
@@ -54,6 +54,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.4.1"
+    "@vonage/server-client": "^0.4.2"
   }
 }

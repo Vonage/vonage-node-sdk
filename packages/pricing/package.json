@@ -1,6 +1,6 @@
 {
   "name": "@vonage/pricing",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Vonage API for pricing",
   "author": "Chris Tankersley <chris@ctankersley.com>",
   "homepage": "https://developer.vonage.com",
@@ -37,6 +37,6 @@
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
   },
   "dependencies": {
-    "@vonage/server-client": "^0.4.1"
+    "@vonage/server-client": "^0.4.2"
   }
 }
