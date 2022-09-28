@@ -1,3 +1,7 @@
+import http from 'node:http'
+import https from 'node:https'
+import URL from 'url'
+
 export class VetchError extends Error {
     code?: string
     config: VetchOptions
@@ -62,5 +66,7 @@ export interface VetchOptions {
     params?: any
     responseType?: ResponseTypes
     checkStatus?: (status: number) => boolean
-    size?: number
+    size?: number,
+    timeout?: number,
+    agent?: boolean | http.Agent | https.Agent | ((parsedUrl: URL) => boolean | https.Agent | http.Agent)
 }

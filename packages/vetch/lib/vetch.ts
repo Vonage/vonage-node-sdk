@@ -14,6 +14,9 @@
 import fetch, { Response as fetchResponse } from 'node-fetch'
 import { stringify } from 'querystring'
 import merge from 'lodash.merge'
+import http from 'node:http'
+import https from 'node:https'
+import URL from 'url'
 
 import {
     VetchError,
@@ -22,6 +25,7 @@ import {
     ResponseTypes,
     Headers,
 } from './types'
+import { Url } from 'url'
 
 export class Vetch {
     defaults: VetchOptions
@@ -120,6 +124,24 @@ export class Vetch {
 
         if (!opts.headers.Accept && opts.responseType === 'json') {
             opts.headers.Accept = 'application/json'
+        }
+
+        // Set our user agent
+        opts.headers['user-agent'] = `@vonage/server-sdk/3.0.0-alpha.6 node/${process.version.replace('v', '')}`;
+
+        // Allow a custom timeout to be used
+        const httpAgent = new http.Agent({
+            timeout: this.defaults.timeout
+        });
+        const httpsAgent = new https.Agent({
+            timeout: this.defaults.timeout
+        });
+        opts.agent = (parsedUrl: URL): https.Agent|http.Agent => {
+            if (parsedUrl.protocol === 'http:') {
+                return httpAgent;
+            } else {
+                return httpsAgent;
+            }
         }
 
         return opts

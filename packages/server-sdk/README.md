@@ -22,19 +22,19 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 ### With NPM
 
 ```bash
-npm install @vonage/server-sdk@3.0.0-beta
+npm install @vonage/server-sdk@next
 ```
 
 ### With Yarn
 
 ```bash
-yarn add @vonage/server-sdk@3.0.0-beta
+yarn add @vonage/server-sdk@next
 ```
 
 ## Constructor
 
 ```js
-const Vonage = require('@vonage/server-sdk');
+const { Vonage } = require('@vonage/server-sdk');
 
 const vonage = new Vonage({
     apiKey: API_KEY,
@@ -72,12 +72,14 @@ Options are:
     info: function() {args...},
     warn: function() {args...}
   },
-  // Set a custom timeout for requests to Nexmo in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
+  // Set a custom timeout for requests to Vonage in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
   timeout: integer,
   // Set a custom host for requests instead of api.nexmo.com
   apiHost: string,
   // Set a custom host for requests instead of rest.nexmo.com
-  restHost: string
+  restHost: string,
+  // Set a custom host for requests instead of video.api.vonage.com
+  videoHost: string,
 }
 ```
 

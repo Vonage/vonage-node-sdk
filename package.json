@@ -1,5 +1,5 @@
 {
-  "name": "@vonage/server-sdk",
+  "name": "@vonage/server-sdk-monorepo",
   "author": "vonage",
   "keywords": [
     "sms",

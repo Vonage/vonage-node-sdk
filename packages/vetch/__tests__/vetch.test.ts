@@ -128,6 +128,20 @@ describe('option configuration', () => {
         const res = await request({ url, method: HTTPMethods.POST, data: body })
         expect(res.config.data).toEqual(body)
     })
+
+    test('should allow for our custom user agent', async () => {
+        const options = {
+            reqheaders: {
+                'user-agent': (val) => {
+                    return /^\@vonage\/server-sdk\/[\d].[\d].[\d].* node\/.*$/.test(val);
+                }
+            }
+        };
+
+        nock(url, options).get('/').reply(200)
+        let inst = new Vetch()
+        let res = await inst.request({ url })
+    })
 })
 
 describe('data handling', () => {
