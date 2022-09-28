@@ -133,10 +133,12 @@ describe('option configuration', () => {
         const options = {
             reqheaders: {
                 'user-agent': (val) => {
-                    return /^\@vonage\/server-sdk\/[\d].[\d].[\d].* node\/.*$/.test(val);
-                }
-            }
-        };
+                    return /^\@vonage\/server-sdk\/[\d].[\d].[\d].* node\/.*$/.test(
+                        val
+                    )
+                },
+            },
+        }
 
         nock(url, options).get('/').reply(200)
         let inst = new Vetch()

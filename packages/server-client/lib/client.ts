@@ -15,6 +15,7 @@ export abstract class Client {
         apiHost: string
         videoHost: string
         responseType: string
+        timeout: number
     }
 
     constructor(
@@ -23,7 +24,8 @@ export abstract class Client {
             restHost: string
             apiHost: string
             videoHost: string
-            responseType: ResponseTypes
+            responseType: ResponseTypes,
+            timeout: number
         }
     ) {
         if (typeof credentials.getQueryParams === 'undefined') {
@@ -36,6 +38,7 @@ export abstract class Client {
             apiHost: null,
             videoHost: null,
             responseType: null,
+            timeout: null,
         }
 
         this.config.restHost = options?.restHost || 'https://rest.nexmo.com'
