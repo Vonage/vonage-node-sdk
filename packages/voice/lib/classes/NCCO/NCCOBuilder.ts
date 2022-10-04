@@ -1,6 +1,5 @@
 import { isNCCOSerializable } from '../../interfaces/NCCO/Serializable'
 import { Action } from '../../ncco'
-import { Serializable } from '../../ncco'
 
 export class NCCOBuilder {
     protected actions = []

@@ -1,15 +1,11 @@
 {
-  "compilerOptions": {
-      "declaration": true,
-      "sourceMap": true,
-      "noImplicitReturns": true,
-      "noUnusedLocals": true,
-      "strict": false,
-      "esModuleInterop": true,
-      "target": "es6",
-      "moduleResolution": "node",
-      "module": "CommonJS",
-      "types": ["node", "jest"],
-      "baseUrl": "../"
-  }
+    "extends": "./tsconfig.build.json",
+
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@vonage/*": ["packages/*/lib"]
+        },
+        "noEmit": true
+    }
 }
