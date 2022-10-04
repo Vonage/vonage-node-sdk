@@ -68,7 +68,7 @@ describe('Numbers', () => {
             })
 
         try {
-            const results = await client.buyNumber({
+            await client.buyNumber({
                 country: 'US',
                 msisdn: '12345',
                 targetApiKey: '67890',

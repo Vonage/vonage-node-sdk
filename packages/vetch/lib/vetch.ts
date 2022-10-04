@@ -16,7 +16,6 @@ import { stringify } from 'querystring'
 import merge from 'lodash.merge'
 import http from 'node:http'
 import https from 'node:https'
-import URL from 'url'
 
 import {
     VetchError,
@@ -25,7 +24,6 @@ import {
     ResponseTypes,
     Headers,
 } from './types'
-import { Url } from 'url'
 
 export class Vetch {
     defaults: VetchOptions

@@ -13,11 +13,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Node.js ${{ matrix.node }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node }}
+
     - name: Install dependencies
       run: npx lerna bootstrap
+
     - name: Lint, Compile, Test
       run: npx lerna run compile && npm run test

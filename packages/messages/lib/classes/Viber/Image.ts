@@ -1,5 +1,4 @@
 import { ImageObject } from '../../interfaces/ImageObject'
-import { MessageType } from '../../interfaces/Messenger/MessageType'
 import { MessageConfig } from '../../interfaces/Viber/MessageConfig'
 import { AbstractImageMessage } from '../AbstractImageMessage'
 

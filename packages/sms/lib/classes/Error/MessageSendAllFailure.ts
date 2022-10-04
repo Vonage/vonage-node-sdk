@@ -1,4 +1,4 @@
-import { Message, SendSMSResponse } from '../../types'
+import { SendSMSResponse } from '../../types'
 
 export class MessageSendAllFailure extends Error {
     protected response: SendSMSResponse

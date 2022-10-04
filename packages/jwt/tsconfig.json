@@ -1,14 +1,6 @@
 {
-  "compilerOptions": {
-      "declaration": true,
-      "outDir": "dist",
-      "strict": false,
-      "lib": ["ES6"],
-      "module": "commonjs",
-      "target": "ES6",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "skipDefaultLibCheck": true
-  },
-  "include": ["lib/**/*"]
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "composite": true
+    }
 }

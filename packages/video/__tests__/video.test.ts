@@ -395,7 +395,7 @@ describe('video', () => {
       .delete('/v2/project/abcd-1234/archive/b40ef09b-3811-4726-b508-e41a0f96c68f')
       .reply(204);
 
-    const resp = await client.deleteArchive("b40ef09b-3811-4726-b508-e41a0f96c68f");
+    await client.deleteArchive("b40ef09b-3811-4726-b508-e41a0f96c68f");
   });
 
   test("can update an archive layout", async () => {

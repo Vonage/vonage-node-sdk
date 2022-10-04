@@ -1,5 +1,5 @@
 import { AuthOpts, AuthInterface } from '@vonage/auth'
-import { VetchError, VetchResponse, VetchOptions } from '@vonage/vetch'
+import { VetchResponse, VetchOptions } from '@vonage/vetch'
 
 export type SMSClassParameters = AuthOpts &
     VetchOptions & {

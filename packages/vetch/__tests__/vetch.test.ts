@@ -142,7 +142,7 @@ describe('option configuration', () => {
 
         nock(url, options).get('/').reply(200)
         let inst = new Vetch()
-        let res = await inst.request({ url })
+        await inst.request({ url })
     })
 })
 
