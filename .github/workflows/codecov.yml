@@ -1,18 +1,15 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Codecov Report
 
 on:
   push:
-    branches: [ master ]
+    branches: [ 3.x-wip ]
   pull_request:
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [12.x]
+        node: [14.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node }}
@@ -24,4 +21,10 @@ jobs:
     - name: Create codecov report
       run: npm run report-coverage
     - name: Run codecov
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage/clover.xml
+        flags: unittests
+        fail_ci_if_error: true
+        verbose: true

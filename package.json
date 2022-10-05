@@ -27,10 +27,12 @@
   ],
   "scripts": {
     "bootstrap": "npx lerna bootstrap",
-    "lerna": "npx lerna",
-    "publish": "npx lerna publish",
-    "test": "npx lerna run test",
-    "test-watch": "./node_modules/.bin/jest --watch"
+    "lerna": "./node_modules/.bin/lerna",
+    "publish": "npm run lerna publish",
+    "jest": "./node_modules/.bin/jest",
+    "test": "npm run jest",
+    "test:watch": "npm run jest -- --watch",
+    "report-coverage": "npm run jest -- --coverage"
   },
   "devDependencies": {
     "@types/jest": "^28.1.6",

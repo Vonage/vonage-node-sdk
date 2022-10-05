@@ -1,11 +1,8 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: Vonage
 
 on:
   push:
-    branches: [ master ]
+    branches: [ 3.x-wip ]
   pull_request:
 jobs:
   test:
@@ -23,4 +20,4 @@ jobs:
     - name: Install dependencies
       run: npx lerna bootstrap
     - name: Lint, Compile, Test
-      run: npx lerna run compile && npx lerna run test
+      run: npx lerna run compile && npm run test
