@@ -1,4 +1,4 @@
-export enum ArchiveResolution {
+export enum Resolution {
   FHD_LANDSCAPE = '1920x1080',
   FHD_PORTRAIT = '1080x1920',
   HD_LANDSCAPE = '1280x720',

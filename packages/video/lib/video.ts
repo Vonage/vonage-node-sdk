@@ -14,6 +14,11 @@ import { Session } from './interfaces/Session';
 import { StreamClassList } from './interfaces/StreamClassList';
 import { ClientTokenOptions } from './interfaces/ClientTokenOptions';
 import { AuthenticationType, Client } from '@vonage/server-client';
+import { BroadcastConfig } from './interfaces/BroadcastConfig';
+import { BroadcastDetailsResponse } from './interfaces/Response/BroadcastDetailsResponse';
+import { BroadcastSearchFilter } from './interfaces/BroadcastSearchFilter';
+import { MultiBroadcastResponse } from './interfaces/Response/MultiBroadcastResponse';
+import { BroadcastUpdateConfig } from './interfaces/BroadcastUpdateConfig';
 
 export class Video extends Client {
   protected authType = AuthenticationType.JWT;
@@ -26,6 +31,10 @@ export class Video extends Client {
     };
 
     await this.sendPatchRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/stream`, data);
+  }
+
+  public async addStreamToBroadcast(broadcastId: string, streamId: string): Promise<void> {
+    await this.updateBroadcast({broadcastId, addStream: streamId});
   }
 
   public async createSession(sessionOptions?: { archiveMode?: ArchiveMode; location?: string; mediaMode?: MediaMode }): Promise<Session> {
@@ -91,6 +100,11 @@ export class Video extends Client {
     return resp.data;
   }
 
+  public async getBroadcast(broadcastId: string): Promise<BroadcastDetailsResponse> {
+    const resp = await this.sendGetRequest<BroadcastDetailsResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/${broadcastId}`);
+    return resp.data;
+  }
+
   public async getStreamInfo(sessionId: string, streamId?: string): Promise<MultiStreamLayoutResponse | SingleStreamLayoutResponse> {
     let url = `${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/stream`;
     if (streamId) {
@@ -124,8 +138,17 @@ export class Video extends Client {
     await this.sendPatchRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/stream`, { removeStream: streamId });
   }
 
+  public async removeStreamFromBroadcast(broadcastId: string, streamId: string): Promise<void> {
+    await this.updateBroadcast({broadcastId, removeStream: streamId});
+  }
+
   public async searchArchives(filter?: ArchiveSearchFilter): Promise<MultiArchiveResponse> {
     const resp = await this.sendGetRequest<MultiArchiveResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive`, filter);
+    return resp.data;
+  }
+
+  public async searchBroadcasts(filter?: BroadcastSearchFilter): Promise<MultiBroadcastResponse> {
+    const resp = await this.sendGetRequest<MultiBroadcastResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/`, filter);
     return resp.data;
   }
 
@@ -149,13 +172,27 @@ export class Video extends Client {
     return resp.data;
   }
 
+  public async startBroadcast(config: BroadcastConfig): Promise<BroadcastDetailsResponse> {
+    const resp = await this.sendPostRequest<BroadcastDetailsResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/`);
+    return resp.data;
+  }
+
   public async stopArchive(archiveId: string): Promise<SingleArchiveResponse> {
     const resp = await this.sendPostRequest<SingleArchiveResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/stop`);
+    return resp.data;
+  }
+
+  public async stopBroadcast(broadcastId: string): Promise<BroadcastDetailsResponse> {
+    const resp = await this.sendPostRequest<BroadcastDetailsResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/${broadcastId}/stop`);
     return resp.data;
   }
 
   public async updateArchiveLayout(archiveId: string, layout: ArchiveLayout) {
     const resp = await this.sendPutRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/layout`, layout);
     return resp.data;
+  }
+
+  public async updateBroadcast(config: BroadcastUpdateConfig): Promise<void> {
+    await this.sendPatchRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/${config.broadcastId}/streams`, config);
   }
 }

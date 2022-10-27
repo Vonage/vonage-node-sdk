@@ -1,4 +1,4 @@
-export enum ArchiveLayoutType {
+export enum LayoutType {
   BEST_FIT = 'bestFit',
   CUSTOM = 'custom',
   HORIZONTAL_PRESENTATION = 'horizontalPresentation',

@@ -1,6 +1,6 @@
 import { ArchiveOutputMode } from '../enums/ArchiveOutputMode';
-import { ArchiveResolution } from '../enums/ArchiveResolution';
-import { ArchiveStreamMode } from '../enums/ArchiveStreamMode';
+import { Resolution } from '../enums/Resolution';
+import { StreamMode } from '../enums/StreamMode';
 import { ArchiveLayout } from './ArchiveLayout';
 
 export interface ArchiveOptions {
@@ -9,6 +9,6 @@ export interface ArchiveOptions {
   layout?: ArchiveLayout;
   name?: string;
   outputMode?: ArchiveOutputMode;
-  resolution?: ArchiveResolution;
-  streamMode?: ArchiveStreamMode;
+  resolution?: Resolution;
+  streamMode?: StreamMode;
 }

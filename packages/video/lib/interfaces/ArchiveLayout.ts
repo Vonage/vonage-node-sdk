@@ -1,7 +1,7 @@
-import { ArchiveLayoutType } from '../enums/ArchiveLayoutType';
+import { LayoutType } from '../enums/LayoutType';
 
 export interface ArchiveLayout {
-  type: ArchiveLayoutType;
+  type: LayoutType;
   stylesheet?: string;
   screenshareType?: string;
 }

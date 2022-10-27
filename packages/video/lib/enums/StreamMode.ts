@@ -1,4 +1,4 @@
-export enum ArchiveStreamMode {
+export enum StreamMode {
   AUTO = 'auto',
   MANUAL = 'manual',
 }

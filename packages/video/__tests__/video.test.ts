@@ -2,7 +2,7 @@ import nock from 'nock';
 import fs from  'fs';
 import { Video } from '../lib/video';
 import { decode } from 'jsonwebtoken'
-import { ArchiveLayoutType } from '../lib/enums/ArchiveLayoutType';
+import { LayoutType } from '../lib/enums/LayoutType';
 import { MediaMode } from '../lib/interfaces/MediaMode';
 import { ArchiveMode } from '../lib/interfaces/ArchiveMode';
 import { Auth } from '@vonage/auth';
@@ -401,10 +401,10 @@ describe('video', () => {
   test("can update an archive layout", async () => {
     nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
       .persist()
-      .put('/v2/project/abcd-1234/archive/b40ef09b-3811-4726-b508-e41a0f96c68f/layout', {type: ArchiveLayoutType.BEST_FIT})
+      .put('/v2/project/abcd-1234/archive/b40ef09b-3811-4726-b508-e41a0f96c68f/layout', {type: LayoutType.BEST_FIT})
       .reply(204);
 
-    await client.updateArchiveLayout('b40ef09b-3811-4726-b508-e41a0f96c68f', {type: ArchiveLayoutType.BEST_FIT});
+    await client.updateArchiveLayout('b40ef09b-3811-4726-b508-e41a0f96c68f', {type: LayoutType.BEST_FIT});
   });
 
   test("can add a stream to an archive", async () => {
