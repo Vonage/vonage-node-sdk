@@ -9,7 +9,6 @@ import { SMS } from '@vonage/sms'
 import { Verify } from '@vonage/verify'
 import { ResponseTypes } from '@vonage/vetch'
 import { Voice } from '@vonage/voice'
-import { Video } from '@vonage/video'
 
 export class Vonage {
     protected credentials: AuthInterface
@@ -24,7 +23,6 @@ export class Vonage {
     public secrets: Secrets
     public sms: SMS
     public verify: Verify
-    public video: Video
     public voice: Voice
 
     constructor(
@@ -53,7 +51,6 @@ export class Vonage {
         this.secrets = new Secrets(this.credentials, this.options)
         this.sms = new SMS(this.credentials, this.options)
         this.verify = new Verify(this.credentials, this.options)
-        this.video = new Video(this.credentials, this.options)
         this.voice = new Voice(this.credentials, this.options)
     }
 }
