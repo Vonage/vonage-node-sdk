@@ -80,7 +80,7 @@ export class Video extends Client {
       claims.initial_layout_class_list = tokenOptions.initialLayoutClassList.join(' ');
     }
     if (tokenOptions?.expireTime && tokenOptions.expireTime > now) {
-      claims.ext = tokenOptions.expireTime;
+      claims.exp = tokenOptions.expireTime;
     }
 
     return tokenGenerate(this.auth.applicationId, this.auth.privateKey, claims);
