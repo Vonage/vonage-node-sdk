@@ -34,7 +34,7 @@ export class Video extends Client {
   }
 
   public async addStreamToBroadcast(broadcastId: string, streamId: string): Promise<void> {
-    await this.updateBroadcast({broadcastId, addStream: streamId});
+    await this.updateBroadcast({ broadcastId, addStream: streamId });
   }
 
   public async createSession(sessionOptions?: { archiveMode?: ArchiveMode; location?: string; mediaMode?: MediaMode }): Promise<Session> {
@@ -139,7 +139,7 @@ export class Video extends Client {
   }
 
   public async removeStreamFromBroadcast(broadcastId: string, streamId: string): Promise<void> {
-    await this.updateBroadcast({broadcastId, removeStream: streamId});
+    await this.updateBroadcast({ broadcastId, removeStream: streamId });
   }
 
   public async searchArchives(filter?: ArchiveSearchFilter): Promise<MultiArchiveResponse> {

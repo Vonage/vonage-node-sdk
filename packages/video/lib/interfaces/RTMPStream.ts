@@ -1,5 +1,5 @@
 export interface RTMPStream {
-    id?: string;
-    serverUrl: string;
-    streamName: string;
+  id?: string;
+  serverUrl: string;
+  streamName: string;
 }
