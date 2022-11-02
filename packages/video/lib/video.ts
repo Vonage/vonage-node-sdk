@@ -172,8 +172,9 @@ export class Video extends Client {
     return resp.data;
   }
 
-  public async startBroadcast(config: BroadcastConfig): Promise<BroadcastDetailsResponse> {
-    const resp = await this.sendPostRequest<BroadcastDetailsResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/`);
+  public async startBroadcast(sessionId: string, config: BroadcastConfig): Promise<BroadcastDetailsResponse> {
+    const data = Object.assign({}, { sessionId }, config);
+    const resp = await this.sendPostRequest<BroadcastDetailsResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/`, data);
     return resp.data;
   }
 

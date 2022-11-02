@@ -4,7 +4,6 @@ import { StreamMode } from '../enums/StreamMode';
 import { RTMPStream } from './RTMPStream';
 
 export interface BroadcastConfig {
-  sessionId: string;
   multiBroadcastTag?: string;
   maxDuration?: number;
   maxBitrate?: number;
