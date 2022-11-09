@@ -1,63 +1,63 @@
 {
-  "name": "@vonage/messages",
-  "version": "0.2.5",
-  "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
-  "keywords": [
-    "whatsapp",
-    "facebook",
-    "viber",
-    "sms",
-    "mms",
-    "messaging",
-    "messages"
-  ],
-  "author": "Chris Tankersley <chris@ctankersley.com>",
-  "homepage": "https://developer.vonage.com",
-  "license": "Apache-2.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "directories": {
-    "lib": "dist",
-    "test": "__tests__"
-  },
-  "files": [
-    "/dist"
-  ],
-  "publishConfig": {
-    "directory": "dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
-  },
-  "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "tsc -b --clean",
-    "compile": "tsc -p tsconfig.json",
-    "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepublishOnly": "npm run build && npm run test && npm run lint",
-    "preversion": "npm run lint",
-    "test-watch": "npx jest --watch",
-    "test": "npx jest",
-    "version": "npm run format && git add -A lib"
-  },
-  "bugs": {
-    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
-  },
-  "devDependencies": {
-    "@types/jest": "^28.1",
-    "jest": "^28.1",
-    "nock": "^13.2.9",
-    "prettier": "^2.7.1",
-    "ts-jest": "^28.0",
-    "ts-loader": "^9.3.1",
-    "ts-node": "^10.9.1",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.7.4"
-  },
-  "dependencies": {
-    "@vonage/server-client": "^0.5.0"
-  }
+    "name": "@vonage/messages",
+    "version": "1.0.0",
+    "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
+    "keywords": [
+        "whatsapp",
+        "facebook",
+        "viber",
+        "sms",
+        "mms",
+        "messaging",
+        "messages"
+    ],
+    "homepage": "https://developer.vonage.com",
+    "bugs": {
+        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+    },
+    "license": "Apache-2.0",
+    "author": "Chris Tankersley <chris@ctankersley.com>",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "directories": {
+        "lib": "dist",
+        "test": "__tests__"
+    },
+    "files": [
+        "/dist"
+    ],
+    "scripts": {
+        "build": "npm run clean && npm run compile",
+        "clean": "tsc -b --clean",
+        "compile": "tsc -p tsconfig.json",
+        "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
+        "lint": "tslint -p tsconfig.json",
+        "prepublishOnly": "npm run build && npm run test && npm run lint",
+        "test": "npx jest",
+        "test-watch": "npx jest --watch",
+        "preversion": "npm run lint",
+        "version": "npm run format && git add -A lib"
+    },
+    "dependencies": {
+        "@vonage/server-client": "^1.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^28.1",
+        "jest": "^28.1",
+        "nock": "^13.2.9",
+        "prettier": "^2.7.1",
+        "ts-jest": "^28.0",
+        "ts-loader": "^9.3.1",
+        "ts-node": "^10.9.1",
+        "tslint": "^6.1.3",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^4.7.4"
+    },
+    "publishConfig": {
+        "directory": "dist"
+    }
 }

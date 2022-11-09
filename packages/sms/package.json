@@ -1,52 +1,52 @@
 {
-  "name": "@vonage/sms",
-  "version": "0.3.5",
-  "description": "> TODO: description",
-  "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
-  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
-  "license": "Apache-2.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "directories": {
-    "lib": "dist",
-    "test": "__tests__"
-  },
-  "files": [
-    "/dist"
-  ],
-  "publishConfig": {
-    "directory": "dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
-  },
-  "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "tsc -b --clean",
-    "compile": "tsc -p tsconfig.json",
-    "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepublishOnly": "npm run build && npm run test && npm run lint",
-    "preversion": "npm run lint",
-    "test-watch": "npx jest --watch",
-    "test": "npx jest",
-    "version": "npm run format && git add -A lib"
-  },
-  "bugs": {
-    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
-  },
-  "dependencies": {
-    "@vonage/server-client": "^0.5.0"
-  },
-  "devDependencies": {
-    "@types/jest": "^28.1.6",
-    "nock": "^13.2.9",
-    "prettier": "^2.7.1",
-    "ts-jest": "^28.0.7",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.7.4"
-  },
-  "gitHead": "b5818afa99349dec888eb9c7bc7c3ced3c10bece"
+    "name": "@vonage/sms",
+    "version": "1.0.0",
+    "description": "> TODO: description",
+    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
+    "bugs": {
+        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+    },
+    "license": "Apache-2.0",
+    "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "directories": {
+        "lib": "dist",
+        "test": "__tests__"
+    },
+    "files": [
+        "/dist"
+    ],
+    "scripts": {
+        "build": "npm run clean && npm run compile",
+        "clean": "tsc -b --clean",
+        "compile": "tsc -p tsconfig.json",
+        "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
+        "lint": "tslint -p tsconfig.json",
+        "prepublishOnly": "npm run build && npm run test && npm run lint",
+        "test": "npx jest",
+        "test-watch": "npx jest --watch",
+        "preversion": "npm run lint",
+        "version": "npm run format && git add -A lib"
+    },
+    "dependencies": {
+        "@vonage/server-client": "^1.0"
+    },
+    "devDependencies": {
+        "@types/jest": "^28.1.6",
+        "nock": "^13.2.9",
+        "prettier": "^2.7.1",
+        "ts-jest": "^28.0.7",
+        "tslint": "^6.1.3",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^4.7.4"
+    },
+    "publishConfig": {
+        "directory": "dist"
+    },
+    "gitHead": "b5818afa99349dec888eb9c7bc7c3ced3c10bece"
 }

@@ -1,42 +1,42 @@
 {
-  "name": "@vonage/number-insights",
-  "version": "0.2.5",
-  "description": "Vonage Number Insights API",
-  "author": "Chris Tankersley <chris@ctankersley.com>",
-  "homepage": "https://developer.vonage.com",
-  "license": "Apache-2.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "directories": {
-    "lib": "dist",
-    "test": "__tests__"
-  },
-  "files": [
-    "/dist"
-  ],
-  "publishConfig": {
-    "directory": "dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
-  },
-  "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "tsc -b --clean",
-    "compile": "tsc -p tsconfig.json",
-    "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepublishOnly": "npm run build && npm run test && npm run lint",
-    "preversion": "npm run lint",
-    "test-watch": "npx jest --watch",
-    "test": "npx jest",
-    "version": "npm run format && git add -A lib"
-  },
-  "bugs": {
-    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
-  },
-  "dependencies": {
-    "@vonage/server-client": "^0.5.0"
-  }
+    "name": "@vonage/number-insights",
+    "version": "1.0.0",
+    "description": "Vonage Number Insights API",
+    "homepage": "https://developer.vonage.com",
+    "bugs": {
+        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+    },
+    "license": "Apache-2.0",
+    "author": "Chris Tankersley <chris@ctankersley.com>",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "directories": {
+        "lib": "dist",
+        "test": "__tests__"
+    },
+    "files": [
+        "/dist"
+    ],
+    "scripts": {
+        "build": "npm run clean && npm run compile",
+        "clean": "tsc -b --clean",
+        "compile": "tsc -p tsconfig.json",
+        "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
+        "lint": "tslint -p tsconfig.json",
+        "prepublishOnly": "npm run build && npm run test && npm run lint",
+        "test": "npx jest",
+        "test-watch": "npx jest --watch",
+        "preversion": "npm run lint",
+        "version": "npm run format && git add -A lib"
+    },
+    "dependencies": {
+        "@vonage/server-client": "^1.0"
+    },
+    "publishConfig": {
+        "directory": "dist"
+    }
 }

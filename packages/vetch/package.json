@@ -1,47 +1,47 @@
 {
-  "name": "@vonage/vetch",
-  "version": "0.3.1",
-  "description": "Vonage package for server side fetch.",
-  "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
-  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/vetch#readme",
-  "license": "Apache-2.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "/dist"
-  ],
-  "publishConfig": {
-    "directory": "dist"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
-  },
-  "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "tsc -b --clean",
-    "compile": "tsc -p tsconfig.json",
-    "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepublishOnly": "npm run build && npm run test && npm run lint",
-    "preversion": "npm run lint",
-    "test-watch": "npx jest --watch",
-    "test": "npx jest",
-    "version": "npm run format && git add -A lib"
-  },
-  "bugs": {
-    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
-  },
-  "dependencies": {
-    "lodash.merge": "^4.6.2",
-    "node-fetch": "^2.6"
-  },
-  "gitHead": "b5818afa99349dec888eb9c7bc7c3ced3c10bece",
-  "devDependencies": {
-    "@types/lodash": "^4.14.182",
-    "prettier": "^2.7.1",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.7.4"
-  }
+    "name": "@vonage/vetch",
+    "version": "1.0.0",
+    "description": "Vonage package for server side fetch.",
+    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/vetch#readme",
+    "bugs": {
+        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+    },
+    "license": "Apache-2.0",
+    "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "/dist"
+    ],
+    "scripts": {
+        "build": "npm run clean && npm run compile",
+        "clean": "tsc -b --clean",
+        "compile": "tsc -p tsconfig.json",
+        "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
+        "lint": "tslint -p tsconfig.json",
+        "prepublishOnly": "npm run build && npm run test && npm run lint",
+        "test": "npx jest",
+        "test-watch": "npx jest --watch",
+        "preversion": "npm run lint",
+        "version": "npm run format && git add -A lib"
+    },
+    "dependencies": {
+        "lodash.merge": "^4.6.2",
+        "node-fetch": "^2.6"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.182",
+        "prettier": "^2.7.1",
+        "tslint": "^6.1.3",
+        "tslint-config-prettier": "^1.18.0",
+        "typescript": "^4.7.4"
+    },
+    "publishConfig": {
+        "directory": "dist"
+    },
+    "gitHead": "b5818afa99349dec888eb9c7bc7c3ced3c10bece"
 }
