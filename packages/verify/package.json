@@ -42,7 +42,7 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0"
+        "@vonage/server-client": "^1.0.0"
     },
     "devDependencies": {
         "@types/jest": "^28.1.6",

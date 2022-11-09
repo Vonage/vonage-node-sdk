@@ -34,16 +34,16 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/accounts": "^1.0",
-        "@vonage/applications": "^1.0",
-        "@vonage/messages": "^1.0",
-        "@vonage/number-insights": "^1.0",
-        "@vonage/numbers": "^1.0",
-        "@vonage/pricing": "^1.0",
-        "@vonage/server-client": "^1.0",
-        "@vonage/sms": "^1.0",
-        "@vonage/verify": "^1.0",
-        "@vonage/voice": "^1.0"
+        "@vonage/accounts": "^1.0.0",
+        "@vonage/applications": "^1.0.0",
+        "@vonage/messages": "^1.0.0",
+        "@vonage/number-insights": "^1.0.0",
+        "@vonage/numbers": "^1.0.0",
+        "@vonage/pricing": "^1.0.0",
+        "@vonage/server-client": "^1.0.0",
+        "@vonage/sms": "^1.0.0",
+        "@vonage/verify": "^1.0.0",
+        "@vonage/voice": "^1.0.0"
     },
     "publishConfig": {
         "directory": "dist"

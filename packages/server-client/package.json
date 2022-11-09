@@ -34,9 +34,9 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/auth": "^1.0",
-        "@vonage/jwt": "^1.0",
-        "@vonage/vetch": "^1.0"
+        "@vonage/auth": "^1.0.0",
+        "@vonage/jwt": "^1.0.0",
+        "@vonage/vetch": "^1.0.0"
     },
     "publishConfig": {
         "directory": "dist"
