@@ -26,7 +26,7 @@ npm install @vonage/server-sdk
 ## Constructor
 
 ```js
-const Vonage = require('@vonage/server-sdk');
+const { Vonage } = require('@vonage/server-sdk');
 
 const vonage = new Vonage({
     apiKey: API_KEY,
@@ -73,25 +73,17 @@ Options are:
 }
 ```
 
-## Callbacks
+## Promises
 
-All methods expect a `callback` function to be passed in, with a method signature of `(error, response)` where:
-
-* `error` - is an Error object if the API call returns an error, or `null` if the API call was successful.
-* `response` - is an Object, with the API response if the API call was successful, or `null` if there was an error.
+This SDK uses Promises to return data. Each method call will have a return value that can be
+manipulated in a `.then()` chain, and errors can be caught using `.catch()`.
 
 Example:
 
 ```js
-callback = (error, response) => {
-  if (error) {
-    console.error(error)
-  }
-
-  if (response) {
-    console.log(response)
-  }
-}
+await vonage.sms.send({to, from, text})
+  .then(resp => { console.log('Message sent successfully'); console.log(resp); })
+  .catch(err => { console.log('There was an error sending the messages.'); console.error(err); });
 ```
 
 ## Testing
@@ -99,13 +91,7 @@ callback = (error, response) => {
 Run:
 
 ```bash
-npm test
-```
-
-Or to continually watch and run tests as you change the code:
-
-```bash
-npm run test-watch
+lerna run test
 ```
 
 ## Examples
@@ -125,12 +111,12 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Conversation API | Beta |❌|
 | Dispatch API | Beta |❌|
 | External Accounts API | Beta |❌|
-| Media API | Beta |✅|
-| Messages API | Beta |❌|
+| Media API | Beta |❌|
+| Messages API | Beta |✅|
 | Number Insight API | General Availability |✅|
 | Number Management API | General Availability |✅|
 | Pricing API | General Availability |✅|
-| Redact API | Developer Preview |✅|
+| Redact API | Developer Preview |❌|
 | Reports API | Beta |❌|
 | SMS API | General Availability |✅|
 | Verify API | General Availability |✅|
