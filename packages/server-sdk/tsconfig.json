@@ -1,15 +1,30 @@
 {
-  "compilerOptions": {
-      "declaration": true,
-      "outDir": "dist",
-      "rootDir": "lib",
-      "strict": false,
-      "lib": ["ES6", "DOM"],
-      "module": "commonjs",
-      "target": "ES6",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "skipDefaultLibCheck": true
-  },
-  "include": ["lib/**/*"]
+    "extends": "../../tsconfig.json",
+
+    "compilerOptions": {
+        "outDir": "dist"
+    },
+
+    "exclude": [
+        "__tests__",
+        "jest.config.js",
+        "dist"
+    ],
+
+    "references": [
+        { "path": "../accounts" },
+        { "path": "../applications" },
+        { "path": "../messages" },
+        { "path": "../number-insights" },
+        { "path": "../numbers" },
+        { "path": "../pricing" },
+        { "path": "../server-client" },
+        { "path": "../sms" },
+        { "path": "../verify" },
+        { "path": "../voice" }
+    ],
+
+    "ts-node": {
+        "esm": true
+    }
 }

@@ -1,15 +1,22 @@
 {
-  "compilerOptions": {
-      "declaration": true,
-      "outDir": "dist",
-      "rootDir": "lib",
-      "strict": false,
-      "lib": ["ES6", "DOM"],
-      "module": "commonjs",
-      "target": "ES6",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "skipDefaultLibCheck": true
-  },
-  "include": ["lib/**/*"]
+    "extends": "../../tsconfig.json",
+
+    "compilerOptions": {
+        "outDir": "dist"
+    },
+
+    "exclude": [
+        "jest.config.js",
+        "dist"
+    ],
+
+    "references": [
+        { "path": "../auth" },
+        { "path": "../jwt" },
+        { "path": "../vetch" }
+    ],
+
+    "ts-node": {
+        "esm": true
+    }
 }
