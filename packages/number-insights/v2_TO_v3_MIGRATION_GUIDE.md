@@ -2,7 +2,7 @@
 
 ## Installation
 
-The package name has changed, and is now a companion to the core Vonage Node SDK. You can continue to use the `@vonage/server-sdk` package or now use the Messages SDK as a standalone package. If you would like to continue to use the full SDK, simply update the version number to `^3.0` and follow this migration guide.
+The package name has changed, and is now a companion to the core Vonage Node SDK. You can continue to use the `@vonage/server-sdk` package or now use the Number Insights SDK as a standalone package. If you would like to continue to use the full SDK, simply update the version number to `^3.0` and follow this migration guide.
 
 If you would like to use this SDK as a standalone package, you can install it using:
 
@@ -12,7 +12,7 @@ $ npm install @vonage/number-insights
 ## Setup
 
 ### With the Vonage Server SDK
-If you are using the main Vonage Node Server SDK, you will just need to configure it using a Vonage API Key and Secret. The messages client will then be available as `vonage.numberInsights`.
+If you are using the main Vonage Node Server SDK, you will just need to configure it using a Vonage API Key and Secret. The number insights client will then be available as `vonage.numberInsights`.
 
 ```js
 const Vonage = require('@vonage/server-sdk');
