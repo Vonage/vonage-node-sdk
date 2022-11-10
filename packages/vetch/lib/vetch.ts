@@ -14,8 +14,8 @@
 import fetch, { Response as fetchResponse } from 'node-fetch'
 import { stringify } from 'querystring'
 import merge from 'lodash.merge'
-import http from 'node:http'
-import https from 'node:https'
+import http from 'http'
+import https from 'https'
 import URL from 'url'
 
 import {
@@ -129,7 +129,7 @@ export class Vetch {
         // Set our user agent
         opts.headers[
             'user-agent'
-        ] = `@vonage/server-sdk/3.0.0-alpha.6 node/${process.version.replace(
+        ] = `@vonage/server-sdk/3.0.0 node/${process.version.replace(
             'v',
             ''
         )}`
