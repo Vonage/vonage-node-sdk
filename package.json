@@ -30,6 +30,8 @@
         "bootstrap": "npx lerna bootstrap",
         "jest": "npx jest",
         "lerna": "npx lerna",
+        "build": "npx lerna run --prefix --stream build",
+        "compile": "npx lerna run --prefix --stream compile",
         "publish": "npm run lerna publish",
         "test": "npm run jest",
         "test:watch": "npm run jest -- --watch"
