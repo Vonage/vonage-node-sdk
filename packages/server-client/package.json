@@ -22,16 +22,8 @@
         "/dist"
     ],
     "scripts": {
-        "build": "npm run clean && npm run compile",
-        "clean": "tsc -b --clean",
-        "compile": "tsc -p tsconfig.json",
-        "format": "prettier --write \"lib/**/*.ts\"",
-        "lint": "tslint -p tsconfig.json",
-        "prepublishOnly": "npm run build && npm run test && npm run lint",
-        "test": "npx jest",
-        "test-watch": "npx jest --watch",
-        "preversion": "npm run lint",
-        "version": "npm run format && git add -A lib"
+        "build": "tsc --build --clean",
+        "prepublishOnly": "npm run build"
     },
     "dependencies": {
         "@vonage/auth": "^1.0.0",

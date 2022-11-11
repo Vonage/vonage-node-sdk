@@ -22,19 +22,16 @@
         "/dist"
     ],
     "scripts": {
-        "build": "npm run clean && npm run compile",
-        "clean": "tsc -b --clean",
-        "compile": "tsc -p tsconfig.json",
-        "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
-        "lint": "tslint -p tsconfig.json",
-        "prepublishOnly": "npm run build && npm run test && npm run lint",
-        "test": "npx jest",
-        "test-watch": "npx jest --watch",
-        "preversion": "npm run lint",
-        "version": "npm run format && git add -A lib"
+        "build": "tsc --build --clean",
+        "prepublishOnly": "npm run build"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.1"
+        "@vonage/auth": "^1.0.0",
+        "@vonage/server-client": "^1.0.1",
+        "@vonage/vetch": "^1.0.1"
+    },
+    "devDependencies": {
+        "nock": "^13.2.9"
     },
     "publishConfig": {
         "directory": "dist"
