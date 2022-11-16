@@ -104,7 +104,7 @@ describe('Messages', () => {
         ${new MessengerVideo({ url: 'http://example.com/video.mp4' }, '12225551234', '13335551234')}                                          | ${'video'}
         ${new WhatsAppFile({ url: 'http://example.com/file.pdf' }, '12225551234', '13335551234')}                                             | ${'file'}
         ${new MessengerFile({ url: 'http://example.com/file.pdf' }, '12225551234', '13335551234')}                                            | ${'file'}
-        ${new TemplateMessage({ name: 'MyNamespace:MyTemplate', parameters: [{ key: 'Bob Smith' }] }, '12225551234', '13335551234', 'en-GB')} | ${['template', 'whatsapp']}
+        ${new TemplateMessage({ name: 'MyNamespace:MyTemplate', parameters: ['Bob Smith'] }, '12225551234', '13335551234', 'en-GB')} | ${['template', 'whatsapp']}
         ${new CustomMessage({ type: 'template', template: {} }, '12225551234', '13335551234')}                                                | ${'custom'}
     `(
         'can send various multimedia messages',
