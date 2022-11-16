@@ -1,6 +1,6 @@
 {
     "name": "@vonage/server-sdk",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "description": "Node.js Client for the Vonage API Platform",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -36,7 +36,7 @@
     "dependencies": {
         "@vonage/accounts": "^1.0.1",
         "@vonage/applications": "^1.0.1",
-        "@vonage/messages": "^1.0.1",
+        "@vonage/messages": "^1.0.2",
         "@vonage/number-insights": "^1.0.1",
         "@vonage/numbers": "^1.0.1",
         "@vonage/pricing": "^1.0.1",
