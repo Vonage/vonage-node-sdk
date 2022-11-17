@@ -15,6 +15,7 @@ import * as types from '../lib/types'
 import nock from 'nock'
 import { Auth } from '@vonage/auth'
 import { Numbers } from '../lib/index'
+import { Feature } from '../lib/enums/Feature'
 
 const BASE_URL = 'https://rest.nexmo.com'.replace(/\/+$/, '')
 
@@ -128,6 +129,105 @@ describe('Numbers', () => {
             .reply(200, resp)
 
         const results = await client.getAvailableNumbers({ country: 'US' })
+        expect(results.count).toEqual(1234)
+        expect(results.numbers.length).toEqual(1)
+        expect(results.numbers[0].country).toEqual(resp.numbers[0].country)
+    })
+
+    test('Searching for number features joins correctly with 1 element', async () => {
+        const resp = {
+            count: 1234,
+            numbers: [
+                {
+                    country: 'GB',
+                    msisdn: '447700900000',
+                    type: 'mobile-lvn',
+                    cost: '1.25',
+                    features: ['VOICE', 'SMS', 'MMS'],
+                },
+            ],
+        }
+
+        nock(BASE_URL)
+            .get(`/number/search`)
+            .query({
+                api_key: '12345',
+                api_secret: 'ABCDE',
+                country: 'US',
+                features: 'MMS',
+            })
+            .reply(200, resp)
+
+        const results = await client.getAvailableNumbers({
+            country: 'US',
+            features: [Feature.MMS],
+        })
+        expect(results.count).toEqual(1234)
+        expect(results.numbers.length).toEqual(1)
+        expect(results.numbers[0].country).toEqual(resp.numbers[0].country)
+    })
+
+    test('Searching for number features joins correctly with 2 elements', async () => {
+        const resp = {
+            count: 1234,
+            numbers: [
+                {
+                    country: 'GB',
+                    msisdn: '447700900000',
+                    type: 'mobile-lvn',
+                    cost: '1.25',
+                    features: ['VOICE', 'SMS', 'MMS'],
+                },
+            ],
+        }
+
+        nock(BASE_URL)
+            .get(`/number/search`)
+            .query({
+                api_key: '12345',
+                api_secret: 'ABCDE',
+                country: 'US',
+                features: 'VOICE,MMS',
+            })
+            .reply(200, resp)
+
+        const results = await client.getAvailableNumbers({
+            country: 'US',
+            features: [Feature.MMS, Feature.VOICE],
+        })
+        expect(results.count).toEqual(1234)
+        expect(results.numbers.length).toEqual(1)
+        expect(results.numbers[0].country).toEqual(resp.numbers[0].country)
+    })
+
+    test('Searching for number features joins correctly with 3 elements', async () => {
+        const resp = {
+            count: 1234,
+            numbers: [
+                {
+                    country: 'GB',
+                    msisdn: '447700900000',
+                    type: 'mobile-lvn',
+                    cost: '1.25',
+                    features: ['VOICE', 'SMS', 'MMS'],
+                },
+            ],
+        }
+
+        nock(BASE_URL)
+            .get(`/number/search`)
+            .query({
+                api_key: '12345',
+                api_secret: 'ABCDE',
+                country: 'US',
+                features: 'SMS,MMS,VOICE',
+            })
+            .reply(200, resp)
+
+        const results = await client.getAvailableNumbers({
+            country: 'US',
+            features: [Feature.MMS, Feature.VOICE, Feature.SMS],
+        })
         expect(results.count).toEqual(1234)
         expect(results.numbers.length).toEqual(1)
         expect(results.numbers[0].country).toEqual(resp.numbers[0].country)
