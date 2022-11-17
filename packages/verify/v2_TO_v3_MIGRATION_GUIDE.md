@@ -7,7 +7,7 @@ The package name has changed, and is now a companion to the core Vonage Node SDK
 If you would like to use this SDK as a standalone package, you can install it using:
 
 ```console
-$ npm install @vonage/voice
+$ npm install @vonage/verify
 ```
 ## Setup
 
