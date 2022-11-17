@@ -1,4 +1,4 @@
-import { NotifyAction } from '../../interfaces/NCCO/Notify'
+import { NotifyAction } from '../../interfaces/NCCO/NotifyAction'
 import { Serializable } from '../../ncco'
 
 export class Notify implements NotifyAction, Serializable {
