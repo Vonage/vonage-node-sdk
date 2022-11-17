@@ -53,4 +53,4 @@ The module is fully written in TypeScript. While the users will interact with th
 | `vonage.sms.sendBinaryMessage()` | _Removed_ |  This has been removed |
 | `vonage.sms.sendWapPushMessage()` | _Removed_ |  This has been removed |
 | `vonage.sms.search()` | _Removed_ |  This has been removed |
-| `vonage.sms.searchREjections()` | _Removed_ |  This has been removed |
+| `vonage.sms.searchRejections()` | _Removed_ |  This has been removed |
