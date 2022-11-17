@@ -1,4 +1,4 @@
 export interface VerifyControlResponse {
-    status: string
-    command: string
+    status: string;
+    command: string;
 }

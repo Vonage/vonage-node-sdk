@@ -1,4 +1,4 @@
-export { Numbers } from './numbers'
+export { Numbers } from './numbers';
 
 export {
     NumbersClassParameters,
@@ -14,4 +14,4 @@ export {
     MessagesCallbackTypeEnum,
     NumbersOwnedNumber,
     NumbersOwnedFilter,
-} from './types'
+} from './types';

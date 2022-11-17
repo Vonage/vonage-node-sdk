@@ -1,32 +1,33 @@
 export interface Token {
-    config: GeneratorOptions
-    token: string
+    config: GeneratorOptions;
+    token: string;
 }
 
 export interface GeneratorOptions {
-    ttl?: number
-    issued_at?: number
-    subject?: string
-    jti?: string
-    notBefore?: number
-    acl?: any
-    [key: string]: any
+    ttl?: number;
+    issued_at?: number;
+    subject?: string;
+    jti?: string;
+    notBefore?: number;
+    acl?: any;
+
+    [key: string]: any;
 }
 
 export interface Claims {
-    exp?: number
-    sub?: string
-    jti?: string
-    nbf?: number
-    acl?: object
-    iat?: number
-    application_id?: string
+    exp?: number;
+    sub?: string;
+    jti?: string;
+    nbf?: number;
+    acl?: object;
+    iat?: number;
+    application_id?: string;
 }
 
 export interface JWTInterface {
     tokenGenerate(
         applicationId: string,
         privateKey: string | Buffer,
-        opts?: GeneratorOptions
-    ): void
+        opts?: GeneratorOptions,
+    ): void;
 }

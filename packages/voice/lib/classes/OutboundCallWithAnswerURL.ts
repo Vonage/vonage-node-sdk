@@ -1,21 +1,24 @@
-import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject'
-import { OutboundCallWithAnswerURL as IOutboundCallWithAnswerURL } from '../interfaces/OutboundCallWithAnswerURL'
-import { CallEndpoint } from '../types/Endpoint/CallEndpoint'
-import { OutboundCall } from './OutboundCall'
+import {
+    PhoneEndpointObject,
+} from '../interfaces/Endpoint/PhoneEndpointObject';
+import {
+    OutboundCallWithAnswerURL as IOutboundCallWithAnswerURL,
+} from '../interfaces/OutboundCallWithAnswerURL';
+import { CallEndpoint } from '../types/Endpoint/CallEndpoint';
+import { OutboundCall } from './OutboundCall';
 
 export class OutboundCallWithAnswerURL
     extends OutboundCall
-    implements IOutboundCallWithAnswerURL
-{
+    implements IOutboundCallWithAnswerURL {
     /* tslint:disable-next-line */
-    public answer_url: string[]
+    public answer_url: string[];
 
     constructor(
         answerUrl: string,
         to: CallEndpoint,
-        from?: PhoneEndpointObject
+        from?: PhoneEndpointObject,
     ) {
-        super(to, from)
-        this.answer_url = [answerUrl]
+        super(to, from);
+        this.answer_url = [answerUrl];
     }
 }

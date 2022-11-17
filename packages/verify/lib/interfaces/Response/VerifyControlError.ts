@@ -1,4 +1,4 @@
 export interface VerifyControlError {
-    status: string
-    error_text: string
+    status: string;
+    error_text: string;
 }

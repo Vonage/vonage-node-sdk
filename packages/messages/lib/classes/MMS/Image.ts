@@ -1,15 +1,15 @@
-import { ImageObject } from '../../interfaces/ImageObject'
-import { AbstractImageMessage } from '../AbstractImageMessage'
+import { ImageObject } from '../../interfaces/ImageObject';
+import { AbstractImageMessage } from '../AbstractImageMessage';
 
 export class Image extends AbstractImageMessage {
-    public channel = 'mms'
+    public channel = 'mms';
 
     constructor(
         image: ImageObject,
         to: string,
         from: string,
-        clientRef?: string
+        clientRef?: string,
     ) {
-        super(image, to, from, clientRef)
+        super(image, to, from, clientRef);
     }
 }

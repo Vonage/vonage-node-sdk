@@ -1,15 +1,15 @@
-import { AudioObject } from '../../interfaces/AudioObject'
-import { AbstractAudioMessageObject } from '../AbstractAudioMessage'
+import { AudioObject } from '../../interfaces/AudioObject';
+import { AbstractAudioMessageObject } from '../AbstractAudioMessage';
 
 export class Audio extends AbstractAudioMessageObject {
-    public channel = 'whatsapp'
+    public channel = 'whatsapp';
 
     constructor(
         audio: AudioObject,
         to: string,
         from: string,
-        clientRef?: string
+        clientRef?: string,
     ) {
-        super(audio, to, from, clientRef)
+        super(audio, to, from, clientRef);
     }
 }

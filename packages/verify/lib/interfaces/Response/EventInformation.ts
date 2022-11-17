@@ -1,4 +1,4 @@
 export interface EventInformation {
-    type: string
-    id: string
+    type: string;
+    id: string;
 }

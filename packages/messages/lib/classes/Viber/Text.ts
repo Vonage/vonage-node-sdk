@@ -1,19 +1,19 @@
-import { MessageConfig } from '../../interfaces/Viber/MessageConfig'
-import { AbstractTextMessageObject } from '../AbstractTextMessage'
+import { MessageConfig } from '../../interfaces/Viber/MessageConfig';
+import { AbstractTextMessageObject } from '../AbstractTextMessage';
 
 export class Text extends AbstractTextMessageObject {
-    public channel = 'viber_service'
+    public channel = 'viber_service';
     /* tslint:disable-next-line */
-    public viber_service?: MessageConfig
+    public viber_service?: MessageConfig;
 
     constructor(
         text: string,
         to: string,
         from: string,
         viberService?: MessageConfig,
-        clientRef?: string
+        clientRef?: string,
     ) {
-        super(text, to, from, clientRef)
-        this.viber_service = viberService
+        super(text, to, from, clientRef);
+        this.viber_service = viberService;
     }
 }

@@ -1,38 +1,39 @@
-import http from 'node:http'
-import https from 'node:https'
-import URL from 'url'
+import http from 'node:http';
+import https from 'node:https';
+import URL from 'url';
 
 export class VetchError extends Error {
-    code?: string
-    config: VetchOptions
-    response: VetchResponse<any>
+    code?: string;
+    config: VetchOptions;
+    response: VetchResponse<any>;
+
     constructor(message: string, options: VetchOptions) {
-        super(message)
-        this.config = options
+        super(message);
+        this.config = options;
     }
 }
 
 export interface Headers {
-    [index: string]: any
+    [index: string]: any;
 }
 
 export interface VetchHttpRequest {
-    responseUrl: string
+    responseUrl: string;
 }
 
 export type VetchPromise<T> = Promise<VetchResponse<T>>
-export const VetchPromise = Promise
+export const VetchPromise = Promise;
 
 export type NumbersResponse<T> = VetchResponse<T>
 
 export interface VetchResponse<T> {
-    config: VetchOptions
-    data: T
-    error?: true
-    status: number
-    statusText: string
-    headers: Headers
-    request: VetchHttpRequest
+    config: VetchOptions;
+    data: T;
+    error?: true;
+    status: number;
+    statusText: string;
+    headers: Headers;
+    request: VetchHttpRequest;
 }
 
 export enum HTTPMethods {
@@ -54,23 +55,23 @@ export enum ResponseTypes {
 export interface VetchOptions {
     adapter?: <T = any>(
         options: VetchOptions,
-        defaultAdapter: (options: VetchOptions) => VetchPromise<T>
-    ) => VetchPromise<T>
-    url?: string
-    baseUrl?: string
-    baseURL?: string
-    method?: HTTPMethods
-    headers?: Headers
-    data?: any
-    body?: any
-    params?: any
-    responseType?: ResponseTypes
-    checkStatus?: (status: number) => boolean
-    size?: number
-    timeout?: number
+        defaultAdapter: (options: VetchOptions) => VetchPromise<T>,
+    ) => VetchPromise<T>;
+    url?: string;
+    baseUrl?: string;
+    baseURL?: string;
+    method?: HTTPMethods;
+    headers?: Headers;
+    data?: any;
+    body?: any;
+    params?: any;
+    responseType?: ResponseTypes;
+    checkStatus?: (status: number) => boolean;
+    size?: number;
+    timeout?: number;
     agent?:
         | boolean
         | http.Agent
         | https.Agent
-        | ((parsedUrl: URL) => boolean | https.Agent | http.Agent)
+        | ((parsedUrl: URL) => boolean | https.Agent | http.Agent);
 }

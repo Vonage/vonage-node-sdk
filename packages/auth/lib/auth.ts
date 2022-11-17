@@ -1,78 +1,79 @@
-import { tokenGenerate } from '@vonage/jwt'
-import { createHash, createHmac } from 'crypto'
-import { existsSync, readFileSync } from 'fs'
+import { tokenGenerate } from '@vonage/jwt';
+import { createHash, createHmac } from 'crypto';
+import { existsSync, readFileSync } from 'fs';
 import {
+    AlgorithmTypes,
     AuthInterface,
     AuthOpts,
     AuthQueryParams,
-    SignedHashParams,
     AuthSignedParams,
-    AlgorithmTypes,
-} from './types'
+    SignedHashParams,
+} from './types';
 
 export class Auth implements AuthInterface {
-    apiKey: string
-    apiSecret: string
-    privateKey?: string
-    applicationId?: string
-    signature: SignedHashParams
+    apiKey: string;
+    apiSecret: string;
+    privateKey?: string;
+    applicationId?: string;
+    signature: SignedHashParams;
+
     constructor(opts?: AuthOpts) {
         // add additional methods to find auth
         // also needs to handle private key, etc
 
-        this.apiKey = opts?.apiKey || ''
-        this.apiSecret = opts?.apiSecret || ''
-        this.signature = opts?.signature || null
-        this.applicationId = opts?.applicationId || null
+        this.apiKey = opts?.apiKey || '';
+        this.apiSecret = opts?.apiSecret || '';
+        this.signature = opts?.signature || null;
+        this.applicationId = opts?.applicationId || null;
 
         if (opts?.privateKey) {
             if (existsSync(opts.privateKey)) {
-                opts.privateKey = readFileSync(opts.privateKey).toString()
+                opts.privateKey = readFileSync(opts.privateKey).toString();
             }
 
             if (opts.privateKey instanceof Buffer) {
-                this.privateKey = opts.privateKey.toString()
+                this.privateKey = opts.privateKey.toString();
             } else {
-                this.privateKey = opts.privateKey
+                this.privateKey = opts.privateKey;
             }
         }
     }
 
     getQueryParams = <T>(params?: T): AuthQueryParams & T => {
-        return { api_key: this.apiKey, api_secret: this.apiSecret, ...params }
-    }
+        return { api_key: this.apiKey, api_secret: this.apiSecret, ...params };
+    };
 
     createBasicHeader = () => {
-        const buf = Buffer.from(`${this.apiKey}:${this.apiSecret}`)
-        return 'Basic ' + buf.toString('base64')
-    }
+        const buf = Buffer.from(`${this.apiKey}:${this.apiSecret}`);
+        return 'Basic ' + buf.toString('base64');
+    };
 
     createBearerHeader = () => {
-        return 'Bearer ' + tokenGenerate(this.applicationId, this.privateKey)
-    }
+        return 'Bearer ' + tokenGenerate(this.applicationId, this.privateKey);
+    };
 
     createSignatureHash = <T>(params: T): AuthSignedParams & T => {
         const returnParams: AuthSignedParams & T = Object.assign(
             { api_key: this.apiKey },
-            params
-        )
+            params,
+        );
 
         // Add the current timestamp to the parameters list with the key 'timestamp'.
         // This should be an integer containing the number of seconds since the epoch (UNIX time))
-        returnParams.timestamp = Math.floor(Date.now() / 1000).toString()
+        returnParams.timestamp = Math.floor(Date.now() / 1000).toString();
 
         // Loop through each of the parameters, sorted by key.
         // For every value in the parameter list, replace all instances of & and = with an underscore _.
-        const keys = Object.keys(returnParams)
+        const keys = Object.keys(returnParams);
         const stringifiedParamsforSigning = keys
             .sort()
             .map((keyName) => {
                 // Generate a string consisting of &akey=value
                 return `&${keyName}=${returnParams[keyName]
                     .toString()
-                    .replace(/(&|=)/gi, '_')}`
+                    .replace(/(&|=)/gi, '_')}`;
             }, [])
-            .join('')
+            .join('');
 
         // For hash
         // Add signature secret to the end of the string, directly after the last value.
@@ -84,7 +85,7 @@ export class Auth implements AuthInterface {
         if (this.signature.algorithm === AlgorithmTypes.md5hash) {
             returnParams.sig = createHash('md5')
                 .update(stringifiedParamsforSigning + this.signature.secret)
-                .digest('hex')
+                .digest('hex');
         }
 
         // For HMAC
@@ -96,24 +97,24 @@ export class Auth implements AuthInterface {
         if (this.signature.algorithm === AlgorithmTypes.md5hmac) {
             returnParams.sig = createHmac('md5', this.signature.secret)
                 .update(stringifiedParamsforSigning)
-                .digest('hex')
+                .digest('hex');
         }
         if (this.signature.algorithm === AlgorithmTypes.sha1hmac) {
             returnParams.sig = createHmac('sha1', this.signature.secret)
                 .update(stringifiedParamsforSigning)
-                .digest('hex')
+                .digest('hex');
         }
         if (this.signature.algorithm === AlgorithmTypes.sha256hmac) {
             returnParams.sig = createHmac('sha256', this.signature.secret)
                 .update(stringifiedParamsforSigning)
-                .digest('hex')
+                .digest('hex');
         }
         if (this.signature.algorithm === AlgorithmTypes.sha512hmac) {
             returnParams.sig = createHmac('sha512', this.signature.secret)
                 .update(stringifiedParamsforSigning)
-                .digest('hex')
+                .digest('hex');
         }
 
-        return returnParams
-    }
+        return returnParams;
+    };
 }

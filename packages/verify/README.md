@@ -6,9 +6,11 @@
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
-This is the Vonage Verify SDK for Node.js for use with [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free at vonage.com][signup].
+This is the Vonage Verify SDK for Node.js for use with [Vonage APIs](https://www.vonage.com/). To use it you will need a
+Vonage account. Sign up [for free at vonage.com][signup].
 
-We recommend using this package as part of the overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). 
+We recommend using this package as part of the
+overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk).
 
 For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
 
@@ -21,9 +23,12 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 
 ## Installation
 
-We recommend using this SDK as part of the overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). Please see the main package for installation.
+We recommend using this SDK as part of the
+overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). Please see the main package for
+installation.
 
 You can also use this SDK standalone if you only need access to just the Verify API.
+
 ### With NPM
 
 ```bash
@@ -40,7 +45,8 @@ yarn add @vonage/verify
 
 ### As part of the Vonage Server SDK
 
-If you are using this SDK as part of the Vonage Server SDK, you can access it as the `verify` property off of the client that you instantiate.
+If you are using this SDK as part of the Vonage Server SDK, you can access it as the `verify` property off of the client
+that you instantiate.
 
 ```js
 const { Vonage } = require('@vonage/server-sdk');
@@ -57,7 +63,9 @@ vonage.verify.check(VERIFY_REQUEST_ID, CODE)
 
 ### Standalone
 
-The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if you only need to use the Messages API. All you need to do is `require('@vonage/verify')`, and use the returned object to create your own client.
+The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
+if you only need to use the Messages API. All you need to do is `require('@vonage/verify')`, and use the returned object
+to create your own client.
 
 ```js
 const { Auth } = require('@vonage/auth');
@@ -117,4 +125,5 @@ npm run test
 ```
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
+
 [license]: ../../LICENSE.txt

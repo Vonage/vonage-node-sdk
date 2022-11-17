@@ -2,19 +2,25 @@
 
 ## Installation
 
-The package name has changed, and is now a companion to the core Vonage Node SDK. You can continue to use the `@vonage/server-sdk` package or now use the Voice SDK as a standalone package. If you would like to continue to use the full SDK, simply update the version number to `^3.0` and follow this migration guide.
+The package name has changed, and is now a companion to the core Vonage Node SDK. You can continue to use
+the `@vonage/server-sdk` package or now use the Voice SDK as a standalone package. If you would like to continue to use
+the full SDK, simply update the version number to `^3.0` and follow this migration guide.
 
 If you would like to use this SDK as a standalone package, you can install it using:
 
 ```console
 $ npm install @vonage/voice
 ```
+
 ## Setup
 
-Please note that the accessor has changed from `vonage.calls` to `vonage.voice`, and that many of the 2.x `vonage.voice` methods have been removed.
+Please note that the accessor has changed from `vonage.calls` to `vonage.voice`, and that many of the 2.x `vonage.voice`
+methods have been removed.
 
 ### With the Vonage Server SDK
-If you are using the main Vonage Node Server SDK, you will just need to configure it using a Vonage API Key and Secret. The messages client will then be available as `vonage.voice`.
+
+If you are using the main Vonage Node Server SDK, you will just need to configure it using a Vonage API Key and Secret.
+The messages client will then be available as `vonage.voice`.
 
 ```js
 const Vonage = require('@vonage/server-sdk');
@@ -30,7 +36,9 @@ vonage.voice.getCall(CALL_UUID)
 ```
 
 ### Standalone
-This module is also capable of working as a standalone module. The only difference is that you create an `Voice` object and pass the credentials there.
+
+This module is also capable of working as a standalone module. The only difference is that you create an `Voice` object
+and pass the credentials there.
 
 ```js
 const { Voice } = require('@vonage/voice');
@@ -40,15 +48,20 @@ Functionality-wise, the standalone version works just as the wrapped SDK version
 
 ## Callbacks vs Promises
 
-The Node SDK v3.x uses Promises instead of callbacks. Customers will need to convert their callbacks to work with the responses returned from the calls. 
+The Node SDK v3.x uses Promises instead of callbacks. Customers will need to convert their callbacks to work with the
+responses returned from the calls.
 
 ## TypeScript
 
-The module is fully written in TypeScript. While the users will be interacting with the transpiled JavaScript code, IDEs and TypeScript compilers should provide a better experience than previous versions of the Vonage Node Server SDK.
+The module is fully written in TypeScript. While the users will be interacting with the transpiled JavaScript code, IDEs
+and TypeScript compilers should provide a better experience than previous versions of the Vonage Node Server SDK.
 
 ## Changed Methods
 
-In the 2.x version of the SDK, `vonage.voice` was connected to an older API that no longer exists. This prompted the accessor `vonage.calls` for the modern Vonage Voice API. As this API handles much more than just making calls, the `vonage.voice` accessor has dropped support for the older API and now emcompasses what the `vonage.calls` accessor used to, to better align with the current name of the API.
+In the 2.x version of the SDK, `vonage.voice` was connected to an older API that no longer exists. This prompted the
+accessor `vonage.calls` for the modern Vonage Voice API. As this API handles much more than just making calls,
+the `vonage.voice` accessor has dropped support for the older API and now emcompasses what the `vonage.calls` accessor
+used to, to better align with the current name of the API.
 
 | 2.x Method | 3.x Method | Notes |
 |----------------|---------------|-------|

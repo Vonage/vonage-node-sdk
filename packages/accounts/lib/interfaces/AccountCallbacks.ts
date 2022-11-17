@@ -1,4 +1,4 @@
 export interface AccountCallbacks {
-    moCallBackUrl?: string
-    drCallBackUrl?: string
+    moCallBackUrl?: string;
+    drCallBackUrl?: string;
 }

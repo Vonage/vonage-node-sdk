@@ -1,36 +1,36 @@
-import { Message, SendSMSResponse } from '../../types'
+import { Message, SendSMSResponse } from '../../types';
 
 export class MessageSendPartialFailure extends Error {
-    protected response: SendSMSResponse
+    protected response: SendSMSResponse;
 
     constructor(message: string, response: SendSMSResponse) {
-        super(message)
+        super(message);
 
-        Object.setPrototypeOf(this, MessageSendPartialFailure.prototype)
-        this.response = response
+        Object.setPrototypeOf(this, MessageSendPartialFailure.prototype);
+        this.response = response;
     }
 
     public getFailedMessages(): Message[] {
-        const messages = []
+        const messages = [];
         for (const message in this.response.messages) {
             if (this.response.messages[message].status !== '0') {
-                messages.push(this.response.messages[message])
+                messages.push(this.response.messages[message]);
             }
         }
-        return messages
+        return messages;
     }
 
     public getResponse(): SendSMSResponse {
-        return this.response
+        return this.response;
     }
 
     public getSuccessfulMessages(): Message[] {
-        const messages = []
+        const messages = [];
         for (const message in this.response.messages) {
             if (this.response.messages[message].status === '0') {
-                messages.push(this.response.messages[message])
+                messages.push(this.response.messages[message]);
             }
         }
-        return messages
+        return messages;
     }
 }

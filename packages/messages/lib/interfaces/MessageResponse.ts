@@ -1,3 +1,3 @@
-import { VetchResponse } from '@vonage/vetch'
+import { VetchResponse } from '@vonage/vetch';
 
-export interface MessagesResponse<T> extends VetchResponse<T> {}
+export type MessagesResponse<T> = VetchResponse<T>

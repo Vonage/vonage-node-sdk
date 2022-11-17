@@ -1,29 +1,29 @@
-import { StreamAction } from '../../interfaces/NCCO/StreamAction'
-import { Serializable } from '../../ncco'
+import { StreamAction } from '../../interfaces/NCCO/StreamAction';
+import { Serializable } from '../../ncco';
 
 export class Stream implements StreamAction, Serializable {
-    action: 'stream'
-    streamUrl: string[]
-    level?: number
-    bargeIn?: boolean
-    loop?: number
+    action: 'stream';
+    streamUrl: string[];
+    level?: number;
+    bargeIn?: boolean;
+    loop?: number;
 
     constructor(
         streamUrl: string,
         level?: number,
         bargeIn?: boolean,
-        loop?: number
+        loop?: number,
     ) {
-        this.streamUrl = [streamUrl]
+        this.streamUrl = [streamUrl];
 
         if (level) {
-            this.level = level
+            this.level = level;
         }
         if (bargeIn) {
-            this.bargeIn = bargeIn
+            this.bargeIn = bargeIn;
         }
         if (loop) {
-            this.loop = loop
+            this.loop = loop;
         }
     }
 
@@ -31,18 +31,18 @@ export class Stream implements StreamAction, Serializable {
         const data: StreamAction = {
             action: this.action,
             streamUrl: this.streamUrl,
-        }
+        };
 
         if (this.level) {
-            data.level = this.level
+            data.level = this.level;
         }
         if (this.bargeIn) {
-            data.bargeIn = this.bargeIn
+            data.bargeIn = this.bargeIn;
         }
         if (this.loop) {
-            data.loop = this.loop
+            data.loop = this.loop;
         }
 
-        return data
+        return data;
     }
 }

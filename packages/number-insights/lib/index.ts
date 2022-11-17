@@ -1,1 +1,1 @@
-export { NumberInsights } from './number-insights'
+export { NumberInsights } from './number-insights';

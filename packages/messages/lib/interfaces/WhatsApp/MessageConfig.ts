@@ -1,3 +1,3 @@
 export interface MessageConfig {
-    locale: string
+    locale: string;
 }

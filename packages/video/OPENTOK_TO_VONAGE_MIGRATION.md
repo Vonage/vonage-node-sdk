@@ -2,19 +2,24 @@
 
 ## Installation
 
-The package name has changed, and is now a companion to the core Vonage Node SDK. You will need to remove the old `opentok` package and install `@vonage/server-sdk@beta` and `@vonage/video`
+The package name has changed, and is now a companion to the core Vonage Node SDK. You will need to remove the
+old `opentok` package and install `@vonage/server-sdk@beta` and `@vonage/video`
 
 ```console
 $ npm uninstall opentok
 $ npm install -s @vonage/server-sdk@beta @vonage/video
 ```
 
-If you are not planning on using any of the additional Vonage APIs, or need to use a custom URL (for example, accessing dev or QA environments), you can also just install `@vonage/video` and configure it as a standalon client.
+If you are not planning on using any of the additional Vonage APIs, or need to use a custom URL (for example, accessing
+dev or QA environments), you can also just install `@vonage/video` and configure it as a standalon client.
 
 ## Setup
 
 ### With the Vonage Server SDK
-If you are using the main Vonage Node Server SDK, you will just need to configure it using a Vonage Application that has video capabilities enabled. Setup is the same for any other application-based application. The video client will then be available as `vonage.video`.
+
+If you are using the main Vonage Node Server SDK, you will just need to configure it using a Vonage Application that has
+video capabilities enabled. Setup is the same for any other application-based application. The video client will then be
+available as `vonage.video`.
 
 ```js
 const Vonage = require('@vonage/server-sdk');
@@ -27,7 +32,10 @@ const session = await vonage.video.createSession();
 ```
 
 ### Standalone
-This module is also capable of working as a standalone module. The only difference is that the private key must be passed in as a string (as of 0.6.0), and that you can provide an additional `baseUrl` option in the constructor options. By default, the SDK points to production, but if you need to access dev or QA, the standalone setup is recommended.
+
+This module is also capable of working as a standalone module. The only difference is that the private key must be
+passed in as a string (as of 0.6.0), and that you can provide an additional `baseUrl` option in the constructor options.
+By default, the SDK points to production, but if you need to access dev or QA, the standalone setup is recommended.
 
 ```js
 const { Video } = require('@vonage/video');
@@ -44,11 +52,14 @@ Functionality-wise, the standalone version works just as the wrapped SDK version
 
 ## Callbacks vs Promises
 
-The new Video Node SDK uses Promises instead of callbacks, as the next version of the Vonage Node Server SDK will be promise-based. Customers will need to convert their callbacks to work with the responses returned from the calls. 
+The new Video Node SDK uses Promises instead of callbacks, as the next version of the Vonage Node Server SDK will be
+promise-based. Customers will need to convert their callbacks to work with the responses returned from the calls.
 
 ## TypeScript
 
-The module is fully written in TypeScript. While the users will be interacting with the transpiled JavaScript code, IDEs and TypeScript compilers should provide a better experience than previous versions of the Vonage Node Server SDK. Please note that the core SDK is still JavaScript, only the video module is TypeScript.
+The module is fully written in TypeScript. While the users will be interacting with the transpiled JavaScript code, IDEs
+and TypeScript compilers should provide a better experience than previous versions of the Vonage Node Server SDK. Please
+note that the core SDK is still JavaScript, only the video module is TypeScript.
 
 ## Changed Methods
 
@@ -63,12 +74,11 @@ The module is fully written in TypeScript. While the users will be interacting w
 | `getStream()` | `getStreamInfo()` | This method was renamed to better reflect what it does  |
 | `listStreams()` | `getStreamInfo()` | This method was removed, `getStreamInfo()` will return all streams if one is not supplied as a second argument |
 
-
 ## Supported APIs
 
 The following is a list of Vonage Video APIs and whether the SDK provides support for them:
 
-| API   |  Supported?
+| API   |  Supported?|
 |----------|:-------------:|
 | Session Creation | ✅ |
 | Signaling | ✅ |

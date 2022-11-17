@@ -1,3 +1,3 @@
 export interface CustomPayload {
-    [key: string]: any
+    [key: string]: any;
 }

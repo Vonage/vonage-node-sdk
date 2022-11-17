@@ -1,18 +1,19 @@
-import { PSD2, Verification, Verify } from '../lib/index'
-import nock from 'nock'
-import { Auth } from '@vonage/auth'
+import { PSD2, Verification, Verify } from '../lib/index';
+import nock from 'nock';
+import { Auth } from '@vonage/auth';
 
-const BASE_URL = 'https://api.nexmo.com'.replace(/\/+$/, '')
+const BASE_URL = 'https://api.nexmo.com'.replace(/\/+$/, '');
 
 describe('Verify', () => {
-    let client
-    beforeEach(function () {
-        client = new Verify(new Auth({ apiKey: '12345', apiSecret: 'ABCDE' }))
-    })
+    let client;
 
-    afterEach(function () {
-        client = null
-    })
+    beforeEach(function() {
+        client = new Verify(new Auth({ apiKey: '12345', apiSecret: 'ABCDE' }));
+    });
+
+    afterEach(function() {
+        client = null;
+    });
 
     test('can check a verify request', async () => {
         const resp = {
@@ -22,7 +23,7 @@ describe('Verify', () => {
             price: '0.10000000',
             currency: 'EUR',
             estimated_price_messages_sent: '0.03330000',
-        }
+        };
         nock(BASE_URL)
             .persist()
             .post('/verify/check/json', {
@@ -31,14 +32,14 @@ describe('Verify', () => {
                 request_id: 'abcdef0123456789abcdef0123456789',
                 code: '1234',
             })
-            .reply(200, resp)
+            .reply(200, resp);
 
         const results = await client.check(
             'abcdef0123456789abcdef0123456789',
-            '1234'
-        )
-        expect(results['event_id']).toEqual('0A00000012345678')
-    })
+            '1234',
+        );
+        expect(results['event_id']).toEqual('0A00000012345678');
+    });
 
     test('can search for a verify request', async () => {
         const resp = {
@@ -68,7 +69,7 @@ describe('Verify', () => {
                 },
             ],
             estimated_price_messages_sent: '0.03330000',
-        }
+        };
         nock(BASE_URL)
             .persist()
             .get('/verify/search/json')
@@ -77,17 +78,17 @@ describe('Verify', () => {
                 api_secret: 'ABCDE',
                 request_id: 'abcdef0123456789abcdef0123456789',
             })
-            .reply(200, resp)
+            .reply(200, resp);
 
-        const results = await client.search('abcdef0123456789abcdef0123456789')
-        expect(results['sender_id']).toEqual('mySenderId')
-    })
+        const results = await client.search('abcdef0123456789abcdef0123456789');
+        expect(results['sender_id']).toEqual('mySenderId');
+    });
 
     test('can cancel a verify request', async () => {
         const resp = {
             status: '0',
             command: 'cancel',
-        }
+        };
         nock(BASE_URL)
             .persist()
             .post('/verify/control/json', {
@@ -96,17 +97,17 @@ describe('Verify', () => {
                 request_id: 'abcdef0123456789abcdef0123456789',
                 cmd: 'cancel',
             })
-            .reply(200, resp)
+            .reply(200, resp);
 
-        const results = await client.cancel('abcdef0123456789abcdef0123456789')
-        expect(results['status']).toEqual('0')
-    })
+        const results = await client.cancel('abcdef0123456789abcdef0123456789');
+        expect(results['status']).toEqual('0');
+    });
 
     test('can trigger the next event in a verify request', async () => {
         const resp = {
             status: '0',
             command: 'trigger_next_event',
-        }
+        };
         nock(BASE_URL)
             .persist()
             .post('/verify/control/json', {
@@ -115,17 +116,18 @@ describe('Verify', () => {
                 request_id: 'abcdef0123456789abcdef0123456789',
                 cmd: 'trigger_next_event',
             })
-            .reply(200, resp)
+            .reply(200, resp);
 
-        const results = await client.trigger('abcdef0123456789abcdef0123456789')
-        expect(results['status']).toEqual('0')
-    })
+        const results = await client
+            .trigger('abcdef0123456789abcdef0123456789');
+        expect(results['status']).toEqual('0');
+    });
 
     test('can request a verification', async () => {
         const resp = {
             request_id: 'abcdef0123456789abcdef0123456789',
             status: '0',
-        }
+        };
         nock(BASE_URL)
             .persist()
             .post('/verify/json', {
@@ -133,17 +135,17 @@ describe('Verify', () => {
                 api_secret: 'ABCDE',
                 number: '15556661234',
             })
-            .reply(200, resp)
+            .reply(200, resp);
 
-        const results = await client.start(new Verification('15556661234'))
-        expect(results['status']).toEqual('0')
-    })
+        const results = await client.start(new Verification('15556661234'));
+        expect(results['status']).toEqual('0');
+    });
 
     test('can request a PSD2 request', async () => {
         const resp = {
             request_id: 'abcdef0123456789abcdef0123456789',
             status: '0',
-        }
+        };
         nock(BASE_URL)
             .persist()
             .post('/verify/psd2/json', {
@@ -153,11 +155,11 @@ describe('Verify', () => {
                 payee: 'Acme Inc',
                 amount: '10.50',
             })
-            .reply(200, resp)
+            .reply(200, resp);
 
         const results = await client.start(
-            new PSD2('15556661234', 'Acme Inc', '10.50')
-        )
-        expect(results['status']).toEqual('0')
-    })
-})
+            new PSD2('15556661234', 'Acme Inc', '10.50'),
+        );
+        expect(results['status']).toEqual('0');
+    });
+});

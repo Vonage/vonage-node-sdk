@@ -31,6 +31,8 @@
         "jest": "./node_modules/.bin/jest",
         "lerna": "./node_modules/.bin/lerna",
         "publish": "npm run lerna publish",
+        "lint": "eslint 'packages/**/*.{js,ts}'",
+        "lint:fix": "eslint 'packages/**/*.{js,ts}' --fix",
         "report-coverage": "npm run jest -- --coverage",
         "test": "npm run jest",
         "test:watch": "npm run jest -- --watch"

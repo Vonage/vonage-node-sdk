@@ -4,19 +4,19 @@ import { StreamMode } from '../enums/StreamMode';
 import { RTMPStream } from './RTMPStream';
 
 export interface BroadcastConfig {
-  multiBroadcastTag?: string;
-  maxDuration?: number;
-  maxBitrate?: number;
-  layout?: LayoutType;
-  hasAudio?: boolean;
-  hasVideo?: boolean;
-  outputs: {
-    hls?: {
-      lowLatency?: boolean;
-      dvr?: boolean;
+    multiBroadcastTag?: string;
+    maxDuration?: number;
+    maxBitrate?: number;
+    layout?: LayoutType;
+    hasAudio?: boolean;
+    hasVideo?: boolean;
+    outputs: {
+        hls?: {
+            lowLatency?: boolean;
+            dvr?: boolean;
+        };
+        rtmp: RTMPStream[];
     };
-    rtmp: RTMPStream[];
-  };
-  streamMode?: StreamMode;
-  resolution?: Resolution;
+    streamMode?: StreamMode;
+    resolution?: Resolution;
 }

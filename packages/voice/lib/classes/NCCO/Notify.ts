@@ -1,24 +1,24 @@
-import { NotifyAction } from '../../interfaces/NCCO/Notify'
-import { Serializable } from '../../ncco'
+import { NotifyAction } from '../../interfaces/NCCO/Notify';
+import { Serializable } from '../../ncco';
 
 export class Notify implements NotifyAction, Serializable {
-    action: 'notify'
+    action: 'notify';
     payload: {
         [key: string]: string
-    }
-    eventUrl: string[]
-    eventMethod?: string
+    };
+    eventUrl: string[];
+    eventMethod?: string;
 
     constructor(
         payload: { [key: string]: string },
         eventUrl: string,
-        eventMethod?: string
+        eventMethod?: string,
     ) {
-        this.payload = payload
-        this.eventUrl = [eventUrl]
+        this.payload = payload;
+        this.eventUrl = [eventUrl];
 
         if (eventMethod) {
-            this.eventMethod = eventMethod
+            this.eventMethod = eventMethod;
         }
     }
 
@@ -27,12 +27,12 @@ export class Notify implements NotifyAction, Serializable {
             action: this.action,
             payload: this.payload,
             eventUrl: this.eventUrl,
-        }
+        };
 
         if (this.eventMethod) {
-            data.eventMethod = this.eventMethod
+            data.eventMethod = this.eventMethod;
         }
 
-        return data
+        return data;
     }
 }

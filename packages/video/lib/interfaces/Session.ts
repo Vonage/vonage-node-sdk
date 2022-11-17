@@ -1,6 +1,6 @@
 export interface Session {
-  sessionId: string;
-  location: string;
-  mediaMode: string;
-  archiveMode: string;
+    sessionId: string;
+    location: string;
+    mediaMode: string;
+    archiveMode: string;
 }

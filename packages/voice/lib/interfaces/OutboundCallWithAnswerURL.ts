@@ -1,5 +1,5 @@
-import { OutboundCall } from './OutboundCall'
+import { OutboundCall } from './OutboundCall';
 
 export interface OutboundCallWithAnswerURL extends OutboundCall {
-    answer_url: string[]
+    answer_url: string[];
 }

@@ -1,5 +1,5 @@
-import { NCCOBuilder } from '../lib'
-import { Conversation, Input, Talk } from '../lib/ncco'
+import { NCCOBuilder } from '../lib';
+import { Conversation, Input, Talk } from '../lib/ncco';
 
 describe('voice', () => {
     test('can add a single action', async () => {
@@ -8,13 +8,13 @@ describe('voice', () => {
                 action: 'talk',
                 text: 'This call was transferred',
             },
-        ]
+        ];
 
-        const ncco = new NCCOBuilder()
-        ncco.addAction(new Talk('This call was transferred'))
+        const ncco = new NCCOBuilder();
+        ncco.addAction(new Talk('This call was transferred'));
 
-        expect(ncco.build()).toEqual(expectedBody)
-    })
+        expect(ncco.build()).toEqual(expectedBody);
+    });
 
     test('can combine multiple actions', async () => {
         const expectedBody = [
@@ -30,15 +30,15 @@ describe('voice', () => {
                     maxDigits: 1,
                 },
             },
-        ]
+        ];
 
-        const ncco = new NCCOBuilder()
+        const ncco = new NCCOBuilder();
         ncco.addAction(new Talk('This call was transferred')).addAction(
-            new Input({ maxDigits: 1 }, undefined, 'https://example.com/ivr')
-        )
+            new Input({ maxDigits: 1 }, undefined, 'https://example.com/ivr'),
+        );
 
-        expect(ncco.build()).toEqual(expectedBody)
-    })
+        expect(ncco.build()).toEqual(expectedBody);
+    });
 
     test('can build my own NCCO', async () => {
         const expectedBody = [
@@ -46,21 +46,21 @@ describe('voice', () => {
                 action: 'talk',
                 text: 'This call was transferred',
             },
-        ]
+        ];
 
-        const ncco = new NCCOBuilder()
-        ncco.addAction({ action: 'talk', text: 'This call was transferred' })
+        const ncco = new NCCOBuilder();
+        ncco.addAction({ action: 'talk', text: 'This call was transferred' });
 
-        expect(ncco.build()).toEqual(expectedBody)
-    })
+        expect(ncco.build()).toEqual(expectedBody);
+    });
 
     test('conversation will serialize', async () => {
-        let conv = new Conversation('Test Conversation')
-        conv.canHear = ['test']
+        const conv = new Conversation('Test Conversation');
+        conv.canHear = ['test'];
 
         expect(conv.serializeToNCCO()).toEqual({
             name: 'Test Conversation',
             canHear: ['test'],
-        })
-    })
-})
+        });
+    });
+});

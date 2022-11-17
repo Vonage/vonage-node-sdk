@@ -11,41 +11,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { MessageSendPartialFailure } from '../../../lib/classes/Error/MessageSendPartialFailure'
+import {
+    MessageSendPartialFailure,
+} from '../../../lib/classes/Error/MessageSendPartialFailure';
 
 describe('SMS Partial Failure Error', () => {
     test('can get messages', async () => {
         const resp = {
             'message-count': '2',
-            messages: [
+            'messages': [
                 {
-                    to: '447700900000',
+                    'to': '447700900000',
                     'message-id': '0A0000000123ABCD1',
-                    status: '0',
+                    'status': '0',
                     'remaining-balance': '3.14159265',
                     'message-price': '0.03330000',
-                    network: '12345',
+                    'network': '12345',
                     'client-ref': 'my-personal-reference',
                     'account-ref': 'customer1234',
                 },
                 {
-                    to: '447700900002',
+                    'to': '447700900002',
                     'message-id': '0A0000000123ABCD2',
-                    status: '2',
+                    'status': '2',
                     'remaining-balance': '3.14159265',
                     'message-price': '0.03330000',
-                    network: '12345',
+                    'network': '12345',
                     'client-ref': 'my-personal-reference',
                     'account-ref': 'customer1234',
                 },
             ],
-        }
+        };
 
         const err = new MessageSendPartialFailure(
             'One or more messages failed to send',
-            resp
-        )
-        expect(resp.messages[1]).toEqual(err.getFailedMessages()[0])
-        expect(resp.messages[0]).toEqual(err.getSuccessfulMessages()[0])
-    })
-})
+            resp,
+        );
+        expect(resp.messages[1]).toEqual(err.getFailedMessages()[0]);
+        expect(resp.messages[0]).toEqual(err.getSuccessfulMessages()[0]);
+    });
+});

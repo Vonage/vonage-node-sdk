@@ -6,7 +6,8 @@
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
-This is the Vonage Video SDK for Node.js for use with [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free at vonage.com][signup].
+This is the Vonage Video SDK for Node.js for use with [Vonage APIs](https://www.vonage.com/). To use it you will need a
+Vonage account. Sign up [for free at vonage.com][signup].
 
 For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
 
@@ -35,7 +36,9 @@ yarn add @vonage/video
 
 ### Standalone
 
-The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if you only need to use the Video APIs. All you need to do is `require('@vonage/video')`, and use the returned object to create your own client.
+The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
+if you only need to use the Video APIs. All you need to do is `require('@vonage/video')`, and use the returned object to
+create your own client.
 
 ```js
 const { Auth } = require('@vonage/auth');
@@ -48,18 +51,20 @@ const videoClient = new Video(new Auth({
 ```
 
 * `applicationId` - (optional) The Vonage API Application ID to be used when creating JWTs.
-* `privateKey` - (optional) The Private Key to be used when creating JWTs. You can specify the key as any of the following:
-    * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.
+* `privateKey` - (optional) The Private Key to be used when creating JWTs. You can specify the key as any of the
+  following:
+    * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file
+      contents.
     * A String containing the path to the key file on disk.
     * A String containing the key itself.
 
 `options` is an object that can contain:
-* `videoHost` - (optional) A base URL to use instead of the default `https://video.api.vonage.com`
 
+* `videoHost` - (optional) A base URL to use instead of the default `https://video.api.vonage.com`
 
 ## Promises
 
-This SDK uses Promises to return data. 
+This SDK uses Promises to return data.
 
 ```js
 const session = await videoClient.createSession();
@@ -81,7 +86,7 @@ Forthcoming.
 
 The following is a list of Vonage Video APIs and whether the SDK provides support for them:
 
-| API   |  Supported?
+| API   |  Supported?|
 |----------|:-------------:|
 | Session Creation | ✅ |
 | Signaling | ✅ |
@@ -93,6 +98,6 @@ The following is a list of Vonage Video APIs and whether the SDK provides suppor
 | Experience Composer | ❌ |
 | Account Management | ❌ |
 
-
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
+
 [license]: ../../LICENSE.txt

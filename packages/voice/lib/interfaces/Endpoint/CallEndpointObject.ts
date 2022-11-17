@@ -1,3 +1,3 @@
 export interface CallEndpointObject {
-    type: string
+    type: string;
 }

@@ -6,7 +6,8 @@
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
-This is the Node.JS Server SDK for [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free at vonage.com][signup].
+This is the Node.JS Server SDK for [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account.
+Sign up [for free at vonage.com][signup].
 
 For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
 
@@ -43,43 +44,67 @@ const vonage = new Vonage({
     privateKey: PRIVATE_KEY_PATH,
     signatureSecret: SIGNATURE_SECRET,
     signatureMethod: SIGNATURE_METHOD
-  }, options);
+}, options);
 ```
 
 * `apiKey` - API Key from Vonage API. If `applicationId` and `privateKey` are present, `apiKey` is optional.
 * `apiSecret` - API SECRET from Vonage API. If `applicationId` and `privateKey` are present, `apiSecret` is optional.
 * `applicationId` - (optional) The Vonage API Application ID to be used when creating JWTs.
-* `privateKey` - (optional) The Private Key to be used when creating JWTs. You can specify the key as any of the following:
-    * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.
+* `privateKey` - (optional) The Private Key to be used when creating JWTs. You can specify the key as any of the
+  following:
+    * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file
+      contents.
     * A String containing the path to the key file on disk.
     * A String containing the key itself.
 * `signatureSecret` - (optional) API signature secret from Vonage API, used for signing SMS message requests
-* `signatureMethod` - (optional) signature method matching the one you gave Vonage API, used for signing SMS message requests. Must be one of "md5hash", "md5", "sha1", "sha256", or "sha512"
+* `signatureMethod` - (optional) signature method matching the one you gave Vonage API, used for signing SMS message
+  requests. Must be one of "md5hash", "md5", "sha1", "sha256", or "sha512"
 * `options` - (optional) Additional options for the constructor.
 
 Options are:
 
 ```js
 {
-  // If true, log information to the console
-  debug: true|false,
-  // append info the the User-Agent sent to Nexmo
-  // e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
-  appendToUserAgent: string,
-  // Set a custom logger
-  logger: {
-    log: function() {level, args...}
-    info: function() {args...},
-    warn: function() {args...}
-  },
-  // Set a custom timeout for requests to Vonage in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
-  timeout: integer,
-  // Set a custom host for requests instead of api.nexmo.com
-  apiHost: string,
-  // Set a custom host for requests instead of rest.nexmo.com
-  restHost: string,
-  // Set a custom host for requests instead of video.api.vonage.com
-  videoHost: string,
+    // If true, log information to the console
+    debug: true | false,
+        // append info the the User-Agent sent to Nexmo
+        // e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
+        appendToUserAgent
+:
+    string,
+        // Set a custom logger
+        logger
+:
+    {
+        log: function() {
+            level, args
+        ...
+        }
+        info: function() {
+            args
+        ...
+        }
+    ,
+        warn: function() {
+            args
+        ...
+        }
+    }
+,
+    // Set a custom timeout for requests to Vonage in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
+    timeout: integer,
+        // Set a custom host for requests instead of api.nexmo.com
+        apiHost
+:
+    string,
+        // Set a custom host for requests instead of rest.nexmo.com
+        restHost
+:
+    string,
+        // Set a custom host for requests instead of video.api.vonage.com
+        videoHost
+:
+    string,
 }
 ```
 
@@ -89,7 +114,7 @@ Most methods that interact with the Vonage API uses Promises. You can either res
 wait for a response.
 
 ```js
-const resp = await vonage.sms.send({to: '15552220000', from: '15559992222', 'This is a test'});
+const resp = await vonage.sms.send({ to: '15552220000', from: '15559992222', 'This is a test' });
 ```
 
 ## Testing
@@ -114,7 +139,7 @@ See the [Vonage Node Quickstarts repo](https://github.com/Vonage/vonage-node-cod
 
 The following is a list of Vonage APIs and whether the Node Server SDK provides support for them:
 
-| API   | API Release Status |  Supported?
+| API   | API Release Status |  Supported?|
 |----------|:---------:|:-------------:|
 | Account API | General Availability |✅|
 | Alerts API | General Availability |✅|
@@ -135,4 +160,5 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Voice API | General Availability |✅|
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
+
 [license]: LICENSE.txt

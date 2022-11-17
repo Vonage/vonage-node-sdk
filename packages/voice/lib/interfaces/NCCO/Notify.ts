@@ -1,8 +1,8 @@
 export interface NotifyAction {
-    action: string
+    action: string;
     payload: {
         [key: string]: string
-    }
-    eventUrl: string[]
-    eventMethod?: string
+    };
+    eventUrl: string[];
+    eventMethod?: string;
 }

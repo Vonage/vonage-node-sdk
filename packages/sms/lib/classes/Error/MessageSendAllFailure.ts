@@ -1,16 +1,16 @@
-import { Message, SendSMSResponse } from '../../types'
+import { SendSMSResponse } from '../../types';
 
 export class MessageSendAllFailure extends Error {
-    protected response: SendSMSResponse
+    protected response: SendSMSResponse;
 
     constructor(message: string, response: SendSMSResponse) {
-        super(message)
+        super(message);
 
-        Object.setPrototypeOf(this, MessageSendAllFailure.prototype)
-        this.response = response
+        Object.setPrototypeOf(this, MessageSendAllFailure.prototype);
+        this.response = response;
     }
 
     public getResponse(): SendSMSResponse {
-        return this.response
+        return this.response;
     }
 }

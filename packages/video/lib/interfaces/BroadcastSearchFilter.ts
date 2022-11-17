@@ -1,5 +1,5 @@
 export interface BroadcastSearchFilter {
-  offset?: number;
-  count?: number;
-  sessionId?: string;
+    offset?: number;
+    count?: number;
+    sessionId?: string;
 }

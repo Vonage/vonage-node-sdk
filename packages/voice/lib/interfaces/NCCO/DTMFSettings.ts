@@ -1,5 +1,5 @@
 export interface DTMFSettings {
-    timeOut?: number
-    maxDigits?: number
-    submitOnHash?: boolean
+    timeOut?: number;
+    maxDigits?: number;
+    submitOnHash?: boolean;
 }

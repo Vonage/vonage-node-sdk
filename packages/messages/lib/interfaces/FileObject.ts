@@ -1,4 +1,4 @@
 export interface FileObject {
-    url: string
-    caption?: string
+    url: string;
+    caption?: string;
 }

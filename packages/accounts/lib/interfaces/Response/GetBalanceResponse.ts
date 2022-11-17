@@ -1,4 +1,4 @@
 export interface GetBalanceResponse {
-    value: number
-    autoReload: boolean
+    value: number;
+    autoReload: boolean;
 }

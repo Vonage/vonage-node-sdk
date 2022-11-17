@@ -1,4 +1,4 @@
 export enum ArchiveOutputMode {
-  COMPOSED = 'composed',
-  INDIVIDUAL = 'individual',
+    COMPOSED = 'composed',
+    INDIVIDUAL = 'individual',
 }

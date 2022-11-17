@@ -1,4 +1,4 @@
 export enum StreamMode {
-  AUTO = 'auto',
-  MANUAL = 'manual',
+    AUTO = 'auto',
+    MANUAL = 'manual',
 }

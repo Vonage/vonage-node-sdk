@@ -1,3 +1,3 @@
 export interface BasicLookupOptions {
-    country?: string
+    country?: string;
 }

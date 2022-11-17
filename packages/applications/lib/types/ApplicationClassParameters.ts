@@ -1,8 +1,7 @@
-import { AuthOpts } from '@vonage/auth';
-import { AuthInterface } from '@vonage/auth';
+import { AuthInterface, AuthOpts } from '@vonage/auth';
 import { VetchOptions } from '@vonage/vetch';
 
 export type ApplicationClassParameters = AuthOpts &
-  VetchOptions & {
+    VetchOptions & {
     auth?: AuthInterface;
-  };
+};

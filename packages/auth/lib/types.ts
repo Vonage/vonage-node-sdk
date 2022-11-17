@@ -8,38 +8,43 @@ export enum AlgorithmTypes {
     sha256hmac = 'SHA256HMAC',
     sha512hmac = 'SHA512HMAC',
 }
+
 export interface AuthOpts {
-    apiKey?: string
-    apiSecret?: string
-    privateKey?: string | Buffer
-    applicationId?: string
-    signature?: SignedHashParams
+    apiKey?: string;
+    apiSecret?: string;
+    privateKey?: string | Buffer;
+    applicationId?: string;
+    signature?: SignedHashParams;
 }
 
 export interface SignedHashParams {
-    secret: string
-    algorithm: AlgorithmTypes
+    secret: string;
+    algorithm: AlgorithmTypes;
 }
 
 export interface AuthSignedParams {
-    api_key: string
-    sig?: string
-    timestamp?: string
+    api_key: string;
+    sig?: string;
+    timestamp?: string;
 }
 
 export interface AuthQueryParams {
-    api_key: string
-    api_secret: string
+    api_key: string;
+    api_secret: string;
 }
 
 export interface AuthInterface {
-    apiKey: string
-    apiSecret: string
-    signature?: SignedHashParams
-    applicationId?: string
-    privateKey?: string
-    getQueryParams<T>(params?: T): AuthQueryParams & T
-    createSignatureHash<T>(params: T): AuthSignedParams & T
-    createBasicHeader(): string
-    createBearerHeader(): string
+    apiKey: string;
+    apiSecret: string;
+    signature?: SignedHashParams;
+    applicationId?: string;
+    privateKey?: string;
+
+    getQueryParams<T>(params?: T): AuthQueryParams & T;
+
+    createSignatureHash<T>(params: T): AuthSignedParams & T;
+
+    createBasicHeader(): string;
+
+    createBearerHeader(): string;
 }

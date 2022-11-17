@@ -1,4 +1,4 @@
 export interface TopUpBalanceResponse {
-    'error-code': string
-    'error-code-label': string
+    'error-code': string;
+    'error-code-label': string;
 }

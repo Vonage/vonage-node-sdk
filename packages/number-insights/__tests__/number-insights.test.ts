@@ -1,21 +1,21 @@
-import { Auth } from '@vonage/auth'
-import nock from 'nock'
-import { NumberInsights } from '../lib/index'
+import { Auth } from '@vonage/auth';
+import nock from 'nock';
+import { NumberInsights } from '../lib/index';
 
-const BASE_URL = 'https://api.nexmo.com'
+const BASE_URL = 'https://api.nexmo.com';
 
 describe('number-insights', () => {
-    let client
+    let client;
 
     beforeEach(() => {
         client = new NumberInsights(
-            new Auth({ apiKey: 'abcd', apiSecret: '1234' })
-        )
-    })
+            new Auth({ apiKey: 'abcd', apiSecret: '1234' }),
+        );
+    });
 
     afterEach(() => {
-        client = null
-    })
+        client = null;
+    });
 
     test('do a basic lookup', async () => {
         const expectedResponse = {
@@ -28,7 +28,7 @@ describe('number-insights', () => {
             country_code_iso3: 'GBR',
             country_name: 'United Kingdom',
             country_prefix: '44',
-        }
+        };
 
         nock(BASE_URL)
             .persist()
@@ -38,25 +38,25 @@ describe('number-insights', () => {
                 api_secret: '1234',
                 number: expectedResponse.international_format_number,
             })
-            .reply(200, expectedResponse)
+            .reply(200, expectedResponse);
 
-        const lookup = await client.basicLookup('447700900000')
-        expect(lookup.status).toEqual(expectedResponse.status)
-        expect(lookup.status_message).toEqual(expectedResponse.status_message)
-        expect(lookup.request_id).toEqual(expectedResponse.request_id)
+        const lookup = await client.basicLookup('447700900000');
+        expect(lookup.status).toEqual(expectedResponse.status);
+        expect(lookup.status_message).toEqual(expectedResponse.status_message);
+        expect(lookup.request_id).toEqual(expectedResponse.request_id);
         expect(lookup.international_format_number).toEqual(
-            expectedResponse.international_format_number
-        )
+            expectedResponse.international_format_number,
+        );
         expect(lookup.national_format_number).toEqual(
-            expectedResponse.national_format_number
-        )
-        expect(lookup.country_code).toEqual(expectedResponse.country_code)
+            expectedResponse.national_format_number,
+        );
+        expect(lookup.country_code).toEqual(expectedResponse.country_code);
         expect(lookup.country_code_iso3).toEqual(
-            expectedResponse.country_code_iso3
-        )
-        expect(lookup.country_name).toEqual(expectedResponse.country_name)
-        expect(lookup.country_prefix).toEqual(expectedResponse.country_prefix)
-    })
+            expectedResponse.country_code_iso3,
+        );
+        expect(lookup.country_name).toEqual(expectedResponse.country_name);
+        expect(lookup.country_prefix).toEqual(expectedResponse.country_prefix);
+    });
 
     test('do a standard lookup', async () => {
         const expectedResponse = {
@@ -95,7 +95,7 @@ describe('number-insights', () => {
             last_name: 'Smith',
             first_name: 'John',
             caller_type: 'consumer',
-        }
+        };
 
         nock(BASE_URL)
             .persist()
@@ -105,40 +105,42 @@ describe('number-insights', () => {
                 api_secret: '1234',
                 number: expectedResponse.international_format_number,
             })
-            .reply(200, expectedResponse)
+            .reply(200, expectedResponse);
 
-        const lookup = await client.standardLookup('447700900000')
-        expect(lookup.status).toEqual(expectedResponse.status)
-        expect(lookup.status_message).toEqual(expectedResponse.status_message)
-        expect(lookup.request_id).toEqual(expectedResponse.request_id)
+        const lookup = await client.standardLookup('447700900000');
+        expect(lookup.status).toEqual(expectedResponse.status);
+        expect(lookup.status_message).toEqual(expectedResponse.status_message);
+        expect(lookup.request_id).toEqual(expectedResponse.request_id);
         expect(lookup.international_format_number).toEqual(
-            expectedResponse.international_format_number
-        )
+            expectedResponse.international_format_number,
+        );
         expect(lookup.national_format_number).toEqual(
-            expectedResponse.national_format_number
-        )
-        expect(lookup.country_code).toEqual(expectedResponse.country_code)
+            expectedResponse.national_format_number,
+        );
+        expect(lookup.country_code).toEqual(expectedResponse.country_code);
         expect(lookup.country_code_iso3).toEqual(
-            expectedResponse.country_code_iso3
-        )
-        expect(lookup.country_name).toEqual(expectedResponse.country_name)
-        expect(lookup.country_prefix).toEqual(expectedResponse.country_prefix)
-        expect(lookup.request_price).toEqual(expectedResponse.request_price)
-        expect(lookup.refund_price).toEqual(expectedResponse.refund_price)
+            expectedResponse.country_code_iso3,
+        );
+        expect(lookup.country_name).toEqual(expectedResponse.country_name);
+        expect(lookup.country_prefix).toEqual(expectedResponse.country_prefix);
+        expect(lookup.request_price).toEqual(expectedResponse.request_price);
+        expect(lookup.refund_price).toEqual(expectedResponse.refund_price);
         expect(lookup.remaining_balance).toEqual(
-            expectedResponse.remaining_balance
-        )
-        expect(lookup.current_carrier).toEqual(expectedResponse.current_carrier)
+            expectedResponse.remaining_balance,
+        );
+        expect(lookup.current_carrier)
+            .toEqual(expectedResponse.current_carrier);
         expect(lookup.original_carrier).toEqual(
-            expectedResponse.original_carrier
-        )
-        expect(lookup.ported).toEqual(expectedResponse.ported)
-        expect(lookup.caller_identity).toEqual(expectedResponse.caller_identity)
-        expect(lookup.caller_name).toEqual(expectedResponse.caller_name)
-        expect(lookup.last_name).toEqual(expectedResponse.last_name)
-        expect(lookup.first_name).toEqual(expectedResponse.first_name)
-        expect(lookup.caller_type).toEqual(expectedResponse.caller_type)
-    })
+            expectedResponse.original_carrier,
+        );
+        expect(lookup.ported).toEqual(expectedResponse.ported);
+        expect(lookup.caller_identity)
+            .toEqual(expectedResponse.caller_identity);
+        expect(lookup.caller_name).toEqual(expectedResponse.caller_name);
+        expect(lookup.last_name).toEqual(expectedResponse.last_name);
+        expect(lookup.first_name).toEqual(expectedResponse.first_name);
+        expect(lookup.caller_type).toEqual(expectedResponse.caller_type);
+    });
 
     test('do an advanced lookup', async () => {
         const expectedResponse = {
@@ -187,7 +189,7 @@ describe('number-insights', () => {
                 active_status: 'true',
                 handset_status: 'On',
             },
-        }
+        };
 
         nock(BASE_URL)
             .persist()
@@ -197,44 +199,46 @@ describe('number-insights', () => {
                 api_secret: '1234',
                 number: expectedResponse.international_format_number,
             })
-            .reply(200, expectedResponse)
+            .reply(200, expectedResponse);
 
-        const lookup = await client.advancedLookup('447700900000')
-        expect(lookup.status).toEqual(expectedResponse.status)
-        expect(lookup.status_message).toEqual(expectedResponse.status_message)
-        expect(lookup.request_id).toEqual(expectedResponse.request_id)
+        const lookup = await client.advancedLookup('447700900000');
+        expect(lookup.status).toEqual(expectedResponse.status);
+        expect(lookup.status_message).toEqual(expectedResponse.status_message);
+        expect(lookup.request_id).toEqual(expectedResponse.request_id);
         expect(lookup.international_format_number).toEqual(
-            expectedResponse.international_format_number
-        )
+            expectedResponse.international_format_number,
+        );
         expect(lookup.national_format_number).toEqual(
-            expectedResponse.national_format_number
-        )
-        expect(lookup.country_code).toEqual(expectedResponse.country_code)
+            expectedResponse.national_format_number,
+        );
+        expect(lookup.country_code).toEqual(expectedResponse.country_code);
         expect(lookup.country_code_iso3).toEqual(
-            expectedResponse.country_code_iso3
-        )
-        expect(lookup.country_name).toEqual(expectedResponse.country_name)
-        expect(lookup.country_prefix).toEqual(expectedResponse.country_prefix)
-        expect(lookup.request_price).toEqual(expectedResponse.request_price)
-        expect(lookup.refund_price).toEqual(expectedResponse.refund_price)
+            expectedResponse.country_code_iso3,
+        );
+        expect(lookup.country_name).toEqual(expectedResponse.country_name);
+        expect(lookup.country_prefix).toEqual(expectedResponse.country_prefix);
+        expect(lookup.request_price).toEqual(expectedResponse.request_price);
+        expect(lookup.refund_price).toEqual(expectedResponse.refund_price);
         expect(lookup.remaining_balance).toEqual(
-            expectedResponse.remaining_balance
-        )
-        expect(lookup.current_carrier).toEqual(expectedResponse.current_carrier)
+            expectedResponse.remaining_balance,
+        );
+        expect(lookup.current_carrier)
+            .toEqual(expectedResponse.current_carrier);
         expect(lookup.original_carrier).toEqual(
-            expectedResponse.original_carrier
-        )
-        expect(lookup.ported).toEqual(expectedResponse.ported)
-        expect(lookup.caller_identity).toEqual(expectedResponse.caller_identity)
-        expect(lookup.roaming).toEqual(expectedResponse.roaming)
-        expect(lookup.lookup_outcome).toEqual(expectedResponse.lookup_outcome)
+            expectedResponse.original_carrier,
+        );
+        expect(lookup.ported).toEqual(expectedResponse.ported);
+        expect(lookup.caller_identity)
+            .toEqual(expectedResponse.caller_identity);
+        expect(lookup.roaming).toEqual(expectedResponse.roaming);
+        expect(lookup.lookup_outcome).toEqual(expectedResponse.lookup_outcome);
         expect(lookup.lookup_outcome_message).toEqual(
-            expectedResponse.lookup_outcome_message
-        )
-        expect(lookup.valid_number).toEqual(expectedResponse.valid_number)
-        expect(lookup.reachable).toEqual(expectedResponse.reachable)
-        expect(lookup.real_time_data).toEqual(expectedResponse.real_time_data)
-    })
+            expectedResponse.lookup_outcome_message,
+        );
+        expect(lookup.valid_number).toEqual(expectedResponse.valid_number);
+        expect(lookup.reachable).toEqual(expectedResponse.reachable);
+        expect(lookup.real_time_data).toEqual(expectedResponse.real_time_data);
+    });
 
     test('do an async advanced lookup', async () => {
         const expectedResponse = {
@@ -244,7 +248,7 @@ describe('number-insights', () => {
             request_price: '0.01500000',
             status: 0,
             error_text: 'Success',
-        }
+        };
 
         nock(BASE_URL)
             .persist()
@@ -255,19 +259,19 @@ describe('number-insights', () => {
                 number: expectedResponse.number,
                 callback: 'https://test.com/lookup/handler',
             })
-            .reply(200, expectedResponse)
+            .reply(200, expectedResponse);
 
         const lookup = await client.asyncAdvancedLookup(
             '447700900000',
-            'https://test.com/lookup/handler'
-        )
-        expect(lookup.status).toEqual(expectedResponse.status)
-        expect(lookup.request_id).toEqual(expectedResponse.request_id)
-        expect(lookup.number).toEqual(expectedResponse.number)
+            'https://test.com/lookup/handler',
+        );
+        expect(lookup.status).toEqual(expectedResponse.status);
+        expect(lookup.request_id).toEqual(expectedResponse.request_id);
+        expect(lookup.number).toEqual(expectedResponse.number);
         expect(lookup.remaining_balance).toEqual(
-            expectedResponse.remaining_balance
-        )
-        expect(lookup.request_price).toEqual(expectedResponse.request_price)
-        expect(lookup.error_text).toEqual(expectedResponse.error_text)
-    })
-})
+            expectedResponse.remaining_balance,
+        );
+        expect(lookup.request_price).toEqual(expectedResponse.request_price);
+        expect(lookup.error_text).toEqual(expectedResponse.error_text);
+    });
+});
