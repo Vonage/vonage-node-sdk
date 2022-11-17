@@ -49,7 +49,7 @@ The module is fully written in TypeScript. While the users will interact with th
 
 | 2.x Method | 3.x Method | Notes |
 |----------------|---------------|-------|
-| `vonage.pricing.get()` | `vonage.pricing.listCountryPriving` | This method has been renamed |
+| `vonage.pricing.get()` | `vonage.pricing.listCountryPricing` | This method has been renamed |
 | `vonage.pricing.getFull()` |  `vonage.pricing.listAllCountriesPricing()` | This method has been renamed |
 | `vonage.pricing.getPrefix()` |  `vonage.pricing.listPrefixPricing()` | This method has been renamed |
 | `vonage.pricing.getPhone()` | _Removed_ |  This has been removed |
