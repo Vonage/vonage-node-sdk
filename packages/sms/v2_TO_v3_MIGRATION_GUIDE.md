@@ -19,11 +19,15 @@ If you are using the main Vonage Node Server SDK, you will need to configure it 
 const Vonage = require('@vonage/server-sdk');
 
 const vonage = new Vonage({
-    applicationId: APP_ID,
-    privateKey: PRIVATE_KEY_PATH,
+    apKey: API_KEY,
+    apiSecret: API_SECRET,
 });
 
-vonage.sms.listCountryPricing()
+vonage.sms.({
+    to: TO_NUMBER,
+    from: FROM_NUMBER,
+    text: 'Sample SMS Text',
+  })
     .then(resp => console.log(resp))
     .catch(err => console.error(err));
 ```
@@ -39,7 +43,7 @@ Functionality-wise, the standalone version works just as the wrapped SDK version
 
 ## Callbacks vs. Promises
 
-The Node SDK v3.x uses Promises instead of callbacks. Customers need to convert their callbacks to work with the responses returned from the calls. 
+The Node SDK v3.x uses Promises instead of callbacks. Customers need to convert their callbacks to work with the responses returned from the calls.
 
 ## TypeScript
 
