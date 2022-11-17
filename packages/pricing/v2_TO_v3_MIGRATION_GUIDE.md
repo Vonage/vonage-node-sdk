@@ -29,7 +29,7 @@ vonage.pricing.listCountryPricing()
 ```
 
 ### Standalone
-This module is also capable of working as a standalone module. The only difference is that you create an `Applications` object and pass the credentials there.
+This module is also capable of working as a standalone module. The only difference is that you create an `Pricing` object and pass the credentials there.
 
 ```js
 const { pricing } = require('@vonage/pricing');
