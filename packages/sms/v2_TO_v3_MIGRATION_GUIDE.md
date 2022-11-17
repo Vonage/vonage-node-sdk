@@ -29,7 +29,7 @@ vonage.sms.listCountryPricing()
 ```
 
 ### Standalone
-This module is also capable of working as a standalone module. The only difference is that you create an `Applications` object and pass the credentials there.
+This module is also capable of working as a standalone module. The only difference is that you create a `SMS` object and pass the credentials there.
 
 ```js
 const { SMS } = require('@vonage/sms');
