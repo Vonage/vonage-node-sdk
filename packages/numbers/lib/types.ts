@@ -1,5 +1,8 @@
 import { AuthOpts, AuthInterface } from '@vonage/auth'
 import { VetchResponse, VetchOptions } from '@vonage/vetch'
+import { Feature } from './enums/Feature'
+import { SearchPattern } from './enums/SearchPattern'
+import { LineType } from './enums/LineType'
 
 export type NumbersClassParameters = AuthOpts &
     VetchOptions & {
@@ -38,9 +41,9 @@ export interface NumbersQueryParams {
 export interface NumbersAvailableNumber {
     country?: Country
     msisdn?: string
-    type?: string
+    type?: LineType
     cost?: string
-    features?: string[]
+    features?: Feature[]
 }
 
 export type Country = string
@@ -89,8 +92,8 @@ export interface NumbersOwnedNumber {
     country?: Country
     msisdn?: string
     moHttpUrl?: string
-    type?: string
-    features?: string[]
+    type?: LineType
+    features?: Feature[]
     voiceCallbackType?: string
     voiceCallbackValue?: string
     messagesCallbackType?: string
@@ -99,8 +102,10 @@ export interface NumbersOwnedNumber {
 
 export interface NumbersSearchFilter {
     country: Country
+    type?: LineType
     pattern?: string
-    searchPattern?: number
+    searchPattern?: SearchPattern
+    features?: Feature[]
     size?: number
     index?: number
 }
@@ -118,7 +123,7 @@ export interface NumbersOwnedFilter {
     applicationId?: string
     hasApplication?: boolean
     pattern?: string
-    searchPattern?: number
+    searchPattern?: SearchPattern
     size?: number
     index?: number
 }

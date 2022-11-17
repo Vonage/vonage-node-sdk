@@ -1,4 +1,5 @@
 import { Client } from '@vonage/server-client'
+import { Feature } from './enums/Feature'
 import {
     NumbersAvailableList,
     NumbersOwnedFilter,
@@ -60,7 +61,33 @@ export class Numbers extends Client {
         const mapping = {
             search_pattern: 'searchPattern',
         }
-        const data = remapObjects(mapping, {}, filter)
+        const data: any = remapObjects(mapping, {}, filter)
+
+        // API expects these as a CSV in a specific order
+        if (data.features) {
+            if (data.features.length === 1) {
+                data.features = data.features.join()
+            } else if (data.features.length === 2) {
+                const newOrder = []
+                if (data.features.includes(Feature.SMS)) {
+                    newOrder.push(Feature.SMS)
+                }
+                if (data.features.includes(Feature.VOICE)) {
+                    newOrder.push(Feature.VOICE)
+                }
+                if (data.features.includes(Feature.MMS)) {
+                    newOrder.push(Feature.MMS)
+                }
+                data.features = newOrder.join(',')
+            } else if (data.features.length === 3) {
+                data.features = [Feature.SMS, Feature.MMS, Feature.VOICE].join(
+                    ','
+                )
+            } else {
+                throw new Error('Invalid number of features request')
+            }
+        }
+
         const resp = await this.sendGetRequest<NumbersAvailableList>(
             `${this.config.restHost}/number/search`,
             data
