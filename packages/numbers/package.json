@@ -1,6 +1,6 @@
 {
     "name": "@vonage/numbers",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "> TODO: description",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
     "bugs": {
