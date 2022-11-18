@@ -33,13 +33,14 @@ describe('Numbers', () => {
     test('buyNumber()', async () => {
         nock(BASE_URL)
             .persist()
-            .post(`/number/buy`, {
-                api_key: '12345',
-                api_secret: 'ABCDE',
-                country: 'US',
-                msisdn: '12345',
-                target_api_key: '67890',
-            })
+            .post(
+                `/number/buy?api_key=12345&api_secret=ABCDE`,
+                new URLSearchParams([
+                    ['target_api_key', '67890'],
+                    ['country', 'US'],
+                    ['msisdn', '12345'],
+                ]).toString()
+            )
             .reply(200, { 'error-code': '200', 'error-code-label': 'success' })
 
         const results = await client.buyNumber({
@@ -56,13 +57,14 @@ describe('Numbers', () => {
         )
         nock(BASE_URL)
             .persist()
-            .post(`/number/buy`, {
-                api_key: 'badkey',
-                api_secret: 'badsecret',
-                country: 'US',
-                msisdn: '12345',
-                target_api_key: '67890',
-            })
+            .post(
+                `/number/buy?api_key=badkey&api_secret=badsecret`,
+                new URLSearchParams([
+                    ['target_api_key', '67890'],
+                    ['country', 'US'],
+                    ['msisdn', '12345'],
+                ]).toString()
+            )
             .reply(401, {
                 'error-code': '401',
                 'error-code-label': 'authentication failed',
@@ -235,13 +237,14 @@ describe('Numbers', () => {
 
     test('cancelNumber()', async () => {
         nock(BASE_URL)
-            .post(`/number/cancel`, {
-                api_key: '12345',
-                api_secret: 'ABCDE',
-                country: 'US',
-                msisdn: '12345',
-                target_api_key: '67890',
-            })
+            .post(
+                `/number/cancel?api_key=12345&api_secret=ABCDE`,
+                new URLSearchParams([
+                    ['target_api_key', '67890'],
+                    ['country', 'US'],
+                    ['msisdn', '12345'],
+                ]).toString()
+            )
             .reply(200, { 'error-code': '200', 'error-code-label': 'success' })
 
         const results = await client.cancelNumber({
@@ -254,16 +257,20 @@ describe('Numbers', () => {
 
     test('updateNumber()', async () => {
         nock(BASE_URL)
-            .post(`/number/update`, {
-                api_key: '12345',
-                api_secret: 'ABCDE',
-                country: 'US',
-                msisdn: '12345',
-                app_id: '123abc',
-                voiceCallbackType: 'app',
-                voiceCallbackValue: 'https://www.example.com/webhook',
-                voiceStatusCallback: 'https://www.example.com/webhook/events',
-            })
+            .post(
+                `/number/update?api_key=12345&api_secret=ABCDE`,
+                new URLSearchParams([
+                    ['app_id', '123abc'],
+                    ['country', 'US'],
+                    ['msisdn', '12345'],
+                    ['voiceCallbackType', 'app'],
+                    ['voiceCallbackValue', 'https://www.example.com/webhook'],
+                    [
+                        'voiceStatusCallback',
+                        'https://www.example.com/webhook/events',
+                    ],
+                ]).toString()
+            )
             .reply(200, { 'error-code': '200', 'error-code-label': 'success' })
 
         const results = await client.updateNumber({
