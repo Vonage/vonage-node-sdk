@@ -1,4 +1,4 @@
-import { Client } from '@vonage/server-client'
+import { AuthenticationType, Client } from '@vonage/server-client'
 import { Feature } from './enums/Feature'
 import {
     NumbersAvailableList,
@@ -23,12 +23,14 @@ const remapObjects = <T, O>(mapping, newObject: T, oldObject: O): T => {
 }
 
 export class Numbers extends Client {
+    protected authType = AuthenticationType.QUERY_KEY_SECRET
+
     public async buyNumber(
         params?: NumbersParams
     ): Promise<NumbersEmptyResponse> {
         const mapping = { target_api_key: 'targetApiKey' }
         const data = remapObjects(mapping, {}, params)
-        const resp = await this.sendPostRequest<NumbersEmptyResponse>(
+        const resp = await this.sendFormSubmitRequest<NumbersEmptyResponse>(
             `${this.config.restHost}/number/buy`,
             data
         )
@@ -44,7 +46,7 @@ export class Numbers extends Client {
     ): Promise<NumbersEmptyResponse> {
         const mapping = { target_api_key: 'targetApiKey' }
         const data = remapObjects(mapping, {}, params)
-        const resp = await this.sendPostRequest<NumbersEmptyResponse>(
+        const resp = await this.sendFormSubmitRequest<NumbersEmptyResponse>(
             `${this.config.restHost}/number/cancel`,
             data
         )
@@ -119,7 +121,7 @@ export class Numbers extends Client {
             app_id: 'applicationId',
         }
         const data = remapObjects(mapping, {}, params)
-        const resp = await this.sendPostRequest<NumbersOwnedNumber>(
+        const resp = await this.sendFormSubmitRequest<NumbersOwnedNumber>(
             `${this.config.restHost}/number/update`,
             data
         )
