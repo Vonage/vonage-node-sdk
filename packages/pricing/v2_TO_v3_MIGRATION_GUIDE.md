@@ -1,4 +1,4 @@
-# Migration guide from Vonage Node SDK 2.x to 3.x
+[#](#) Migration guide from Vonage Node SDK 2.x to 3.x
 
 ## Installation
 
@@ -19,8 +19,8 @@ If you are using the main Vonage Node Server SDK, you will need to configure it 
 const Vonage = require('@vonage/server-sdk');
 
 const vonage = new Vonage({
-    applicationId: APP_ID,
-    privateKey: PRIVATE_KEY_PATH,
+    apKey: API_KEY,
+    apiSecret: API_SECRET,
 });
 
 vonage.pricing.listCountryPricing()
@@ -39,7 +39,7 @@ Functionality-wise, the standalone version works just as the wrapped SDK version
 
 ## Callbacks vs. Promises
 
-The Node SDK v3.x uses Promises instead of callbacks. Customers need to convert their callbacks to work with the responses returned from the calls. 
+The Node SDK v3.x uses Promises instead of callbacks. Customers need to convert their callbacks to work with the responses returned from the calls.
 
 ## TypeScript
 
