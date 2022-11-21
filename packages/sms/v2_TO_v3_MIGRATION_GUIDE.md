@@ -2,7 +2,7 @@
 
 ## Installation
 
-The package name has changed and is now a companion to the core Vonage Node SDK. You can continue to use the `@vonage/server-sdk` package or now use the Numbers SDK as a standalone package. If you would like to continue to use the full SDK, update the version number to `^3.0` and follow this migration guide.
+The package name has changed and is now a companion to the core Vonage Node SDK. You can continue to use the `@vonage/server-sdk` package or now use the SMS SDK as a standalone package. If you would like to continue to use the full SDK, update the version number to `^3.0` and follow this migration guide.
 
 If you would like to use this SDK as a standalone package, you can install it using:
 
@@ -23,7 +23,7 @@ const vonage = new Vonage({
     apiSecret: API_SECRET,
 });
 
-vonage.sms.({
+vonage.sms.send({
     to: TO_NUMBER,
     from: FROM_NUMBER,
     text: 'Sample SMS Text',
