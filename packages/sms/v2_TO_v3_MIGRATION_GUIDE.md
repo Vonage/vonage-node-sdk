@@ -19,7 +19,7 @@ If you are using the main Vonage Node Server SDK, you will need to configure it 
 const Vonage = require('@vonage/server-sdk');
 
 const vonage = new Vonage({
-    apKey: API_KEY,
+    apiKey: API_KEY,
     apiSecret: API_SECRET,
 });
 
