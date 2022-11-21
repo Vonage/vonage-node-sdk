@@ -28,10 +28,9 @@
     ],
     "scripts": {
         "bootstrap": "npx lerna bootstrap",
-        "jest": "./node_modules/.bin/jest",
-        "lerna": "./node_modules/.bin/lerna",
+        "jest": "npx jest",
+        "lerna": "npx lerna",
         "publish": "npm run lerna publish",
-        "report-coverage": "npm run jest -- --coverage",
         "test": "npm run jest",
         "test:watch": "npm run jest -- --watch"
     },
