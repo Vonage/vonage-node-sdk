@@ -18,6 +18,6 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
     - name: Install dependencies
-      run: npx lerna bootstrap
+      run: npm install -g typescript && npm ci
     - name: Lint, Compile, Test
-      run: npx lerna run compile && npm run test
+      run: npx lerna run bootstrap && npx lerna run compile && npm run test
