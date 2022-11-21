@@ -20,4 +20,4 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Lint, Compile, Test
-      run: npx lerna run compile && npm run test
+      run: npx lerna bootstrap && npx lerna run compile && npm run test
