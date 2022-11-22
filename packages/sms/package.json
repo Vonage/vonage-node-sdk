@@ -1,6 +1,6 @@
 {
     "name": "@vonage/sms",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "> TODO: description",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
     "bugs": {
@@ -34,7 +34,7 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.2"
+        "@vonage/server-client": "^1.0.3"
     },
     "devDependencies": {
         "@types/jest": "^28.1.6",
