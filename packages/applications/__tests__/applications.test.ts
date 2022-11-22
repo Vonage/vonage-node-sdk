@@ -218,7 +218,14 @@ describe('applications', () => {
       },
     };
 
-    nock(BASE_URL).persist().put('/v2/applications/78d335fa-323d-0114-9c3d-d6f0d48968cf').reply(200, expectedResponse);
+    nock(BASE_URL, {
+      reqheaders: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .persist()
+      .put('/v2/applications/78d335fa-323d-0114-9c3d-d6f0d48968cf')
+      .reply(200, expectedResponse);
 
     const app: Application = {
       id: '78d335fa-323d-0114-9c3d-d6f0d48968cf',
