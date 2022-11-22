@@ -112,6 +112,9 @@ export abstract class Client {
             url,
             body: new URLSearchParams(payload),
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
         }
 
         if (!payload) {
@@ -146,6 +149,9 @@ export abstract class Client {
             url,
             data: payload,
             method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         }
 
         if (!payload) {
@@ -163,6 +169,9 @@ export abstract class Client {
             url,
             data: payload,
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         }
 
         if (!payload) {
@@ -180,6 +189,9 @@ export abstract class Client {
             url,
             data: payload,
             method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         }
 
         if (!payload) {
