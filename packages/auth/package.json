@@ -1,6 +1,6 @@
 {
     "name": "@vonage/auth",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "> TODO: description",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/auth#readme",
     "bugs": {
@@ -30,7 +30,7 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/jwt": "^1.0.1"
+        "@vonage/jwt": "^1.0.2"
     },
     "devDependencies": {
         "@types/jest": "^28.1.6",

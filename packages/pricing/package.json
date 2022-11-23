@@ -1,6 +1,6 @@
 {
     "name": "@vonage/pricing",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Vonage API for pricing",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -34,7 +34,7 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.3"
+        "@vonage/server-client": "^1.0.4"
     },
     "publishConfig": {
         "directory": "dist"
