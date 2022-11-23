@@ -1,6 +1,6 @@
 {
     "name": "@vonage/messages",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
     "keywords": [
         "whatsapp",
@@ -43,7 +43,7 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.4"
+        "@vonage/server-client": "^1.0.5"
     },
     "devDependencies": {
         "@types/jest": "^28.1",

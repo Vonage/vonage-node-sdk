@@ -1,6 +1,6 @@
 {
     "name": "@vonage/server-client",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Core services related to talking to the Vonage APIs",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -34,9 +34,9 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/auth": "^1.0.2",
-        "@vonage/jwt": "^1.0.2",
-        "@vonage/vetch": "^1.0.2"
+        "@vonage/auth": "^1.0.3",
+        "@vonage/jwt": "^1.0.3",
+        "@vonage/vetch": "^1.0.3"
     },
     "publishConfig": {
         "directory": "dist"

@@ -1,6 +1,6 @@
 {
     "name": "@vonage/number-insights",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Vonage Number Insights API",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -34,7 +34,7 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.4"
+        "@vonage/server-client": "^1.0.5"
     },
     "publishConfig": {
         "directory": "dist"
