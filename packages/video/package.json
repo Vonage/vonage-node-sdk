@@ -1,6 +1,6 @@
 {
     "name": "@vonage/video",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Package to interact with the Vonage Video API (Not OpenTok Compatible)",
     "keywords": [
         "vonage",
@@ -38,7 +38,7 @@
         "version": "npm run format && git add -A lib"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.5"
+        "@vonage/server-client": "^1.0.6"
     },
     "devDependencies": {
         "@types/jest": "^28.1.6",
