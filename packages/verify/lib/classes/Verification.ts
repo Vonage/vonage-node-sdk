@@ -2,6 +2,7 @@ import { VerificationRequest } from '../interfaces/VerificationRequest'
 
 export class Verification implements VerificationRequest {
     number: string
+    brand:string
     country?: string
     senderId?: string
     codeLength?: number
@@ -12,6 +13,7 @@ export class Verification implements VerificationRequest {
 
     constructor(
         phoneNumber: string,
+        brand: string,
         country?: string,
         senderId?: string,
         codeLength?: number,
@@ -21,6 +23,7 @@ export class Verification implements VerificationRequest {
         workflowId?: number
     ) {
         this.number = phoneNumber
+        this.brand = brand
 
         if (country) {
             this.country = country

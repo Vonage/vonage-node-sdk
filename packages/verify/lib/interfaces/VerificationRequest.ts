@@ -1,5 +1,6 @@
 export interface VerificationRequest {
     number: string
+    brand: string
     country?: string
     senderId?: string
     codeLength?: number
