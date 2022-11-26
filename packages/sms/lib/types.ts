@@ -19,7 +19,11 @@ export interface SMSGeneralResponse {
 }
 
 export interface SendSMSResponse {
+    /**
+     * @deprecated Use messageCount instead
+     */
     'message-count': string
+    messageCount: number
     messages: Message[]
 }
 
@@ -78,12 +82,32 @@ export interface InboundMessage {
 export interface Message {
     to?: string
     messageId?: string
+    /**
+     * @deprecated Use messageId instead
+     */
+    'message-id'?: string
     status?: string
     remainingBalance?: string
+    /**
+     * @deprecated Use remainingBalance instead
+     */
+    'remaining-balance'?: string
     messagePrice?: string
+    /**
+     * @deprecated Use messagePrice
+     */
+    'message-price'?: string
     network?: string
     clientRef?: string
+    /**
+     * @deprecated Use clientRef instead
+     */
+    'client-ref'?: string
     accountRef?: string
+    /**
+     * @deprecated Use accountRef instead
+     */
+    'account-ref'?: string
 }
 
 export interface ModelError {
