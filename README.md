@@ -4,11 +4,11 @@
 
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/server-sdk?label=License&style=flat-square)][license]
 
-<img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
+<img src="https://developer.vonage.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
 This is the Node.JS Server SDK for [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free at vonage.com][signup].
 
-For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
+For full API documentation refer to [developer.vonage.com](https://developer.vonage.com/).
 
 * [Installation](#installation)
 * [Constructor](#constructor)
@@ -55,8 +55,8 @@ Options are:
 {
   // If true, log information to the console
   debug: true|false,
-  // append info the the User-Agent sent to Nexmo
-  // e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
+  // append info the the User-Agent sent to Vonage
+  // e.g. pass 'my-app' for /vonage-node/1.0.0/4.2.7/my-app
   appendToUserAgent: string,
   // Set a custom logger
   logger: {
@@ -64,11 +64,11 @@ Options are:
     info: function() {args...},
     warn: function() {args...}
   },
-  // Set a custom timeout for requests to Nexmo in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
+  // Set a custom timeout for requests to Vonage in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
   timeout: integer,
-  // Set a custom host for requests instead of api.nexmo.com
+  // Set a custom host for requests instead of api.vonage.com
   apiHost: string,
-  // Set a custom host for requests instead of rest.nexmo.com
+  // Set a custom host for requests instead of rest.vonage.com
   restHost: string
 }
 ```
@@ -122,5 +122,5 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Verify API | General Availability |✅|
 | Voice API | General Availability |✅|
 
-[signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
+[signup]: https://dashboard.vonage.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 [license]: LICENSE.txt
