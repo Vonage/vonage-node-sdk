@@ -132,10 +132,11 @@ describe('Verify', () => {
                 api_key: '12345',
                 api_secret: 'ABCDE',
                 number: '15556661234',
+                brand: 'Acme Inc',
             })
             .reply(200, resp)
 
-        const results = await client.start(new Verification('15556661234'))
+        const results = await client.start(new Verification('15556661234', 'Acme Inc'))
         expect(results['status']).toEqual('0')
     })
 
