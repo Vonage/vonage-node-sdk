@@ -27,11 +27,7 @@
         "node-fetch": "^2.6"
     },
     "devDependencies": {
-        "@types/lodash": "^4.14.182",
-        "prettier": "^2.7.1",
-        "tslint": "^6.1.3",
-        "tslint-config-prettier": "^1.18.0",
-        "typescript": "^4.7.4"
+        "@types/lodash": "^4.14.190"
     },
     "publishConfig": {
         "directory": "dist"
