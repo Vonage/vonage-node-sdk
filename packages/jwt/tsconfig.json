@@ -1,14 +1,18 @@
 {
-  "compilerOptions": {
-      "declaration": true,
-      "outDir": "dist",
-      "strict": false,
-      "lib": ["ES6"],
-      "module": "commonjs",
-      "target": "ES6",
-      "moduleResolution": "node",
-      "esModuleInterop": true,
-      "skipDefaultLibCheck": true
-  },
-  "include": ["lib/**/*"]
+    "extends": "../../tsconfig.json",
+
+    "compilerOptions": {
+        "rootDir": "lib",
+        "outDir": "dist"
+    },
+
+    "exclude": [
+        "__tests__",
+        "jest.config.js",
+        "dist"
+    ],
+
+    "ts-node": {
+        "esm": true
+    }
 }

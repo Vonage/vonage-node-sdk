@@ -19,26 +19,15 @@
     ],
     "scripts": {
         "build": "npm run clean && npm run compile",
-        "clean": "tsc -b --clean",
-        "compile": "tsc -p tsconfig.json",
-        "format": "prettier --write \"lib/**/*.ts\" \"__tests__/**/*.ts\"",
-        "lint": "tslint -p tsconfig.json",
-        "prepublishOnly": "npm run build && npm run test && npm run lint",
-        "test": "npx jest",
-        "test-watch": "npx jest --watch",
-        "preversion": "npm run lint",
-        "version": "npm run format && git add -A lib"
+        "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+        "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
         "lodash.merge": "^4.6.2",
         "node-fetch": "^2.6"
     },
     "devDependencies": {
-        "@types/lodash": "^4.14.182",
-        "prettier": "^2.7.1",
-        "tslint": "^6.1.3",
-        "tslint-config-prettier": "^1.18.0",
-        "typescript": "^4.7.4"
+        "@types/lodash": "^4.14.190"
     },
     "publishConfig": {
         "directory": "dist"
