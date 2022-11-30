@@ -1,6 +1,6 @@
 {
     "name": "@vonage/verify",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Verify package for Vonage",
     "keywords": [
         "vonage",

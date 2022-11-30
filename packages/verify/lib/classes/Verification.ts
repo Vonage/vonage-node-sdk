@@ -2,7 +2,7 @@ import { VerificationRequest } from '../interfaces/VerificationRequest'
 
 export class Verification implements VerificationRequest {
     number: string
-    brand:string
+    brand: string
     country?: string
     senderId?: string
     codeLength?: number
