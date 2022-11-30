@@ -58,7 +58,7 @@ export class Numbers extends Client {
     }
 
     public async getAvailableNumbers(
-        filter?: NumbersSearchFilter
+        filter: NumbersSearchFilter
     ): Promise<NumbersAvailableList> {
         const mapping = {
             search_pattern: 'searchPattern',
@@ -101,6 +101,10 @@ export class Numbers extends Client {
     public async getOwnedNumbers(
         filter?: NumbersOwnedFilter
     ): Promise<NumbersOwnedList> {
+        if (!filter) {
+            filter = {}
+        }
+
         const mapping = {
             application_id: 'applicationId',
             has_application: 'hasApplication',

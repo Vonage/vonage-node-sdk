@@ -111,6 +111,36 @@ describe('Numbers', () => {
         expect(results.numbers[0].country).toEqual(resp.numbers[0].country)
     })
 
+    test('can get all owned numbers with no filter', async () => {
+        const resp = {
+            count: 1,
+            numbers: [
+                {
+                    country: 'GB',
+                    msisdn: '447700900000',
+                    moHttpUrl: 'https://example.com/webhooks/inbound-sms',
+                    type: 'mobile-lvn',
+                    features: ['VOICE', 'SMS', 'MMS'],
+                    messagesCallbackType: 'app',
+                    messagesCallbackValue:
+                        'aaaaaaaa-bbbb-cccc-dddd-0123456789ab',
+                    voiceCallbackType: 'app',
+                    voiceCallbackValue: 'aaaaaaaa-bbbb-cccc-dddd-0123456789ab',
+                },
+            ],
+        }
+
+        nock(BASE_URL)
+            .get(`/account/numbers`)
+            .query({ api_key: '12345', api_secret: 'ABCDE' })
+            .reply(200, resp)
+
+        const results = await client.getOwnedNumbers()
+        expect(results.count).toEqual(1)
+        expect(results.numbers.length).toEqual(1)
+        expect(results.numbers[0].country).toEqual(resp.numbers[0].country)
+    })
+
     test('getAvailableNumbers()', async () => {
         const resp = {
             count: 1234,
