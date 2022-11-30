@@ -17,6 +17,7 @@ describe('SMS Partial Failure Error', () => {
     test('can get messages', async () => {
         const resp = {
             'message-count': '2',
+            messageCount: 2,
             messages: [
                 {
                     to: '447700900000',

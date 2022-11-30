@@ -60,5 +60,44 @@ describe('SMS', () => {
             text: 'Sample SMS Text',
         })
         expect(results['message-count']).toEqual('1')
+        expect(results.messageCount).toEqual(1)
+        for (let i = 0; i < results.messages.length; i++) {
+            expect(resp.messages[i].to).toEqual(results.messages[i].to)
+            expect(resp.messages[i]['message-id']).toEqual(
+                results.messages[i].messageId
+            )
+            expect(resp.messages[i]['message-id']).toEqual(
+                results.messages[i]['message-id']
+            )
+            expect(resp.messages[i].status).toEqual(results.messages[i].status)
+            expect(resp.messages[i]['remaining-balance']).toEqual(
+                results.messages[i].remainingBalance
+            )
+            expect(resp.messages[i]['remaining-balance']).toEqual(
+                results.messages[i]['remaining-balance']
+            )
+            expect(resp.messages[i]['message-price']).toEqual(
+                results.messages[i].messagePrice
+            )
+            expect(resp.messages[i]['message-price']).toEqual(
+                results.messages[i]['message-price']
+            )
+            expect(resp.messages[i].network).toEqual(
+                results.messages[i].network
+            )
+            expect(resp.messages[i]['client-ref']).toEqual(
+                results.messages[i]['client-ref']
+            )
+            expect(resp.messages[i]['client-ref']).toEqual(
+                results.messages[i].clientRef
+            )
+            expect(resp.messages[i]['account-ref']).toEqual(
+                results.messages[i].accountRef
+            )
+            expect(resp.messages[i]['account-ref']).toEqual(
+                results.messages[i]['account-ref']
+            )
+        }
+        expect(results.messageCount).toEqual(1)
     })
 })
