@@ -1,6 +1,43 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
+All notable changes to this project will be documented in this file. The main package `@vonage/server-sdk` adheres to [Semantic Versioning](http://semver.org/) which will be the main version for this project. All other packages will be verisoned independantly. 
+
+## 3.0.1 - 3.0.10
+
+* #666 Fixed all the tests
+* #687 Update README.md 
+* #720 Added verify and voice, and fixed a few typos in Number Insights
+* #722 Change the import from node-specific to just request `http`/`https`
+* #730 Fixed issue with WA Template interface from older, incorrect spec 
+* #731 Allow features to be searched in available numbers 
+* #732 Exported additional NCCO classes and interfaces that weren't before
+* #734 Change Numbers API to make URL Form Encoded requests
+* #738 Set the proper content type when we send put/patch/post
+* #741 types using node:http for import
+
+## 3.0.0
+
+>This version is a complete rewrite of version 2. Written in Typescript and broken out into smaller packages to reduce package size. Callbacks have been removed, and most functions will take in param objects instead of using positional params. SMS and Messages have been broken out to mirror the API.
+
+You can find migration guides for each package here:
+
+- [Accounts](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/accounts/v2_TO_v3_MIGRATION_GUIDE.md)
+- [Applications](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/applications/v2_TO_v3_MIGRATION_GUIDE.md)
+- [Messages](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/messages/v2_TO_v3_MIGRATION_GUIDE.md)
+- [Number Insights](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/number-insights/v2_TO_v3_MIGRATION_GUIDE.md)
+- [Numbers](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/numbers/v2_TO_v3_MIGRATION_GUIDE.md)
+- [Pricing](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/pricing/v2_TO_v3_MIGRATION_GUIDE.md)
+- [SMS](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/sms/v2_TO_v3_MIGRATION_GUIDE.md)
+- [Verify](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/verify/v2_TO_v3_MIGRATION_GUIDE.md)
+- [Voice](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/voice/v2_TO_v3_MIGRATION_GUIDE.md)
+
+## 2.11.2
+
+ -   Corrected issue where downloading a voice recording transcript would throw an exception.
+
+## 2.11.0
+
+-   Added support for the Messages API v1.0
 
 ## 2.10.2
 
@@ -25,7 +62,7 @@ All notable changes to this project will be documented in this file. This projec
 
 ## 2.10.0
 
->This version serves as the change from the Nexmo namespace to the Vonage namespace. The module now resides on NPM as `@vonage/server-sdk`. Prior versions under the Nexmo namespace will remain in maintenance mode for the next 12 months and recieve bug and security fixes. All new functionality will only be added to the @vonage namespace.
+>This version serves as the change from the Nexmo namespace to the Vonage namespace. The module now resides on NPM as `@vonage/server-sdk`. Prior versions under the Nexmo namespace will remain in maintenance mode for the next 12 months and receive bug and security fixes. All new functionality will only be added to the @vonage namespace.
 
 ### Updated
 
