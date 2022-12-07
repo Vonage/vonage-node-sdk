@@ -2,7 +2,7 @@
 
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/vonage/vonage-node-sdk/Vonage/3.x?logo=github&style=flat-square&label=Workflow%20Build) [![Codecov](https://img.shields.io/codecov/c/github/vonage/vonage-node-sdk?label=Codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/Vonage/vonage-server-sdk) ![Latest Release](https://img.shields.io/github/v/release/vonage/vonage-node-sdk?logo=npm&style=flat-square)
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/server-sdk?label=License&style=flat-square)][../../LICENSE.TXT]
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/accounts?label=License&style=flat-square)][license]
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
@@ -27,13 +27,13 @@ You can also use this SDK standalone if you only need access to just the Account
 ### With NPM
 
 ```bash
-npm install @vonage/account
+npm install @vonage/accounts
 ```
 
 ### With Yarn
 
 ```bash
-yarn add @vonage/account
+yarn add @vonage/accounts
 ```
 
 ## Using the Vonage Accounts SDK
@@ -63,7 +63,7 @@ The SDK can be used standalone from the main [Vonage Server SDK for Node.js](htt
 
 ```js
 const { Auth } = require('@vonage/auth');
-const { Accounts } = require('@vonage/account');
+const { Accounts } = require('@vonage/accounts');
 
 const accountClient = new Accounts(new Auth({
     apiKey: API_KEY,
