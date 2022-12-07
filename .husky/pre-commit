@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Lint all the staged files
+echo "Linting Staged files"
+npx lint-staged
+
+# Check all packages have correct dependencies
+echo "Checking packge dependencies"
+npm run depcheck
+
+# Remove any build files (Helps ensure we are running tests correctly)
+echo "Cleaning up build files"
+npm run clean
+
+# Run tests
+echo "Testing"
+npm test

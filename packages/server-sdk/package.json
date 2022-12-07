@@ -29,13 +29,14 @@
     "dependencies": {
         "@vonage/accounts": "^1.0.6",
         "@vonage/applications": "^1.0.6",
+        "@vonage/auth": "^1.0.3",
         "@vonage/messages": "^1.0.7",
         "@vonage/number-insights": "^1.0.6",
         "@vonage/numbers": "^1.0.9",
         "@vonage/pricing": "^1.0.6",
-        "@vonage/server-client": "^1.0.6",
         "@vonage/sms": "^1.0.7",
         "@vonage/verify": "^1.0.8",
+        "@vonage/vetch": "^1.0.4",
         "@vonage/voice": "^1.0.7"
     },
     "publishConfig": {

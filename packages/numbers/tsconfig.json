@@ -12,6 +12,12 @@
         "dist"
     ],
 
+    "references": [
+        { "path": "../auth" },
+        { "path": "../server-client" },
+        { "path": "../vetch" }
+    ],
+
     "ts-node": {
         "esm": true
     }
