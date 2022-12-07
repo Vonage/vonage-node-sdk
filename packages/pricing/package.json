@@ -27,7 +27,12 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.6"
+        "@vonage/auth": "^1.0.3",
+        "@vonage/server-client": "^1.0.6",
+        "@vonage/vetch": "^1.0.4"
+    },
+    "devDependencies": {
+        "nock": "^13.2.9"
     },
     "publishConfig": {
         "directory": "dist"

@@ -13,7 +13,9 @@
     ],
 
     "references": [
-        { "path": "../server-client" }
+        { "path": "../server-client" },
+        { "path": "../auth" },
+        { "path": "../vetch" }
     ],
 
     "ts-node": {

@@ -31,10 +31,12 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.6"
+        "@vonage/auth": "^1.0.3",
+        "@vonage/jwt": "^1.0.3",
+        "@vonage/server-client": "^1.0.6",
+        "@vonage/vetch": "^1.0.4"
     },
     "devDependencies": {
-        "@types/jest": "^29.2.3",
         "jsonwebtoken": "^8.5.1",
         "nock": "^13.2.9"
     },

@@ -1,3 +1,4 @@
+// eslint-disable-file
 module.exports = {
     presets: [
         [
@@ -16,7 +17,7 @@ module.exports = {
             'module-resolver',
             {
                 alias: {
-                    '^@vonage/jwt': './packages/jwt/lib',
+                    '^@vonage/(.+)': './packages/\\1/lib',
                 },
             },
         ],

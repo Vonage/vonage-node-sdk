@@ -13,15 +13,17 @@
     ],
 
     "references": [
+        { "path": "../server-client" },
         { "path": "../accounts" },
         { "path": "../applications" },
+        { "path": "../auth" },
         { "path": "../messages" },
         { "path": "../number-insights" },
         { "path": "../numbers" },
         { "path": "../pricing" },
-        { "path": "../server-client" },
         { "path": "../sms" },
         { "path": "../verify" },
+        { "path": "../vetch" },
         { "path": "../voice" }
     ],
 

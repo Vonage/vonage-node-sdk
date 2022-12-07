@@ -13,7 +13,10 @@
     ],
 
     "references": [
-        { "path": "../server-client" }
+        { "path": "../auth" },
+        { "path": "../jwt" },
+        { "path": "../server-client" },
+        { "path": "../vetch" }
     ],
 
     "ts-node": {
