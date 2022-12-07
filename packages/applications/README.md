@@ -2,7 +2,7 @@
 
 ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/vonage/vonage-node-sdk/Vonage/3.x?logo=github&style=flat-square&label=Workflow%20Build) [![Codecov](https://img.shields.io/codecov/c/github/vonage/vonage-node-sdk?label=Codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/Vonage/vonage-server-sdk) ![Latest Release](https://img.shields.io/github/v/release/vonage/vonage-node-sdk?logo=npm&style=flat-square)
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/server-sdk?label=License&style=flat-square)][../../LICENSE.TXT]
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/applications?label=License&style=flat-square)][license]
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
@@ -79,7 +79,7 @@ const applicationsClient = new Applications(new Auth({
 {
   // If true, log information to the console
   debug: true|false,
-  // append info the the User-Agent sent to Nexmo
+  // append info the the User-Agent sent to Vonage
   // e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
   appendToUserAgent: string,
   // Set a custom logger
