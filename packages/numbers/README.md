@@ -69,8 +69,8 @@ vonage.numbers.getAvailableNumbers()
 
 The SDK can be used standalone from the main
 [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if
-you only need to use the Messages API. All you need to do is
-`require('@vonage/messages')`, and use the returned object to create your own
+you only need to use the Numbers API. All you need to do is
+`require('@vonage/numbers')`, and use the returned object to create your own
 client.
 
 ```js
