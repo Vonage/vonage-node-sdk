@@ -20,10 +20,8 @@ For full API documentation refer to
 
 * [Installation](#installation)
 * [Usage](#using-the-vonage-voice-sdk)
-* [Callbacks](#callbacks)
+* [Promises](#promises)
 * [Testing](#testing)
-* [Examples](#examples)
-* [Supported APIs](#supported-apis)
 
 ## Installation
 
