@@ -1,7 +1,7 @@
 {
     "name": "@vonage/jwt",
     "version": "1.0.3",
-    "description": "> TODO: description",
+    "description": "Vonage JWT package. Creates JWT tokens for Vonage API's",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/jwt#readme",
     "bugs": {
         "url": "https://github.com/Vonage/vonage-node-sdk/issues"
