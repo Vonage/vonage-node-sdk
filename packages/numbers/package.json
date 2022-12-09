@@ -1,7 +1,7 @@
 {
     "name": "@vonage/numbers",
     "version": "1.0.9",
-    "description": "> TODO: description",
+    "description": "Vonage Numbers SDK Package",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
     "bugs": {
         "url": "https://github.com/Vonage/vonage-node-sdk/issues"
