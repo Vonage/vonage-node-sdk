@@ -1,7 +1,7 @@
 {
     "name": "@vonage/sms",
     "version": "1.0.7",
-    "description": "> TODO: description",
+    "description": "Vonage SMS API SDK package",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
     "bugs": {
         "url": "https://github.com/Vonage/vonage-node-sdk/issues"
