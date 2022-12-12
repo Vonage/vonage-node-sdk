@@ -51,7 +51,8 @@ If you are using this SDK as part of the Vonage Server SDK, you can access it
 as the `sms` property off of the client that you instantiate.
 
 ```js
-const { Vonage, Auth } = require('@vonage/server-sdk');
+const { Auth } = require('@vonage/auth');
+const { Vonage } = require('@vonage/server-sdk');
 
 const credentials = new Auth({
     apiKey: API_KEY,
