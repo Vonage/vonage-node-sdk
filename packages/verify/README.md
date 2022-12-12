@@ -8,12 +8,14 @@
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
-This is the Vonage Verify SDK for Node.js for use with
+This is the Vonage Verify (for version 1) SDK for Node.js for use with
 [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage
 account. Sign up [for free at vonage.com][signup].
 
 We recommend using this package as part of the overall
 [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk).
+
+Note: This package is only compatible with verify V1.
 
 For full API documentation refer to
 [developer.vonage.com](https://developer.vonage.com/).
