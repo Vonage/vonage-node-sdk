@@ -81,7 +81,7 @@ const credentials = new Auth({
     apiSecret: API_SECRET,
 });
 
-const options = { timeout: 1500 }
+const options = {}
 
 const accountClient = new Accounts(credentials, options);
 ```
