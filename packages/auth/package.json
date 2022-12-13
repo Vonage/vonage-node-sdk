@@ -1,7 +1,7 @@
 {
     "name": "@vonage/auth",
     "version": "1.0.3",
-    "description": "> TODO: description",
+    "description": "Vonage Auth Package adds the correct authentication headers to requests to Vonage API's",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/auth#readme",
     "bugs": {
         "url": "https://github.com/Vonage/vonage-node-sdk/issues"
@@ -30,6 +30,5 @@
     },
     "publishConfig": {
         "directory": "dist"
-    },
-    "gitHead": "3d01d2557edea29b54610d7ff7b07d186affb0f8"
+    }
 }
