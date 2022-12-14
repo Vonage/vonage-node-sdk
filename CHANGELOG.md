@@ -1,15 +1,36 @@
-# Changelog
+# changelog
 
-All notable changes to this project will be documented in this file. The main package `@vonage/server-sdk` adheres to [Semantic Versioning](http://semver.org/) which will be the main version for this project. All other packages will be verisoned independantly. 
+all notable changes to this project will be documented in this file. The main package `@vonage/server-sdk` adheres to [Semantic Versioning](http://semver.org/) which will be the main version for this project. All other packages will be verisoned independantly.
+
+## What's Changed
+
+## 3.0.10 - 3.0.11
+
+* #753 Adding husky with testing and lint fix
+* #771 Updating sdk readme
+* #770 Adding jwt readme
+* #768 Updating voice readme
+* #767 Updating video readme
+* #757 Adding auth docs
+* #759 Updating server-client readme
+* #761 Updating applications readme
+* #763 Adding numbers readme
+* #764 Adding pricing readme
+* #765 Adding sms readme
+* #766 Updating verify readme
+* #772 Updating main readme
+* #758 Adding vetch readme
+* #762 Updating number insights readme
+* #760 Updating account readme
 
 ## 3.0.1 - 3.0.10
 
 * #666 Fixed all the tests
-* #687 Update README.md 
+* #687 Update README.md
 * #720 Added verify and voice, and fixed a few typos in Number Insights
 * #722 Change the import from node-specific to just request `http`/`https`
-* #730 Fixed issue with WA Template interface from older, incorrect spec 
-* #731 Allow features to be searched in available numbers 
+* #730 Fixed issue with WA Template interface from older, incorrect spec
+* #731 Allow features to be searched in available numbers
 * #732 Exported additional NCCO classes and interfaces that weren't before
 * #734 Change Numbers API to make URL Form Encoded requests
 * #738 Set the proper content type when we send put/patch/post
@@ -90,7 +111,7 @@ You can find migration guides for each package here:
 ## 2.9.0
 
 * FIXED: #295 - Nexmo constructor changes of given options object
-* ADDED: Optional `target_api_key` parameter for the `number.buy()` and `number.cancel()` methods.  
+* ADDED: Optional `target_api_key` parameter for the `number.buy()` and `number.cancel()` methods.
 * ADDED: Typings for Messages API
 * UPDATED: Private Key strings now replaces `\n` with newlines for easier usage in environment variables.
 
