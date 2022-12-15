@@ -7,7 +7,7 @@ import { MediaMode } from '../lib/interfaces/MediaMode';
 import { ArchiveMode } from '../lib/interfaces/ArchiveMode';
 import { Auth } from '@vonage/auth';
 
-export const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
+const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
 
 describe('video', () => {
   let client;
@@ -533,5 +533,51 @@ describe('video', () => {
       .reply(200);
 
     await client.setStreamClassLists('sess-1234', [{id: 'stream-1234', layoutClassList: ["full"]}]);
+  });
+
+  test("can initiate a SIP call", async () => {
+    const options = {
+      token: client.generateClientToken(),
+      sip: {
+        uri: 'sip:user@sip.partner.com;transport=tls'
+      }
+    }
+
+    const expectedResponse = {
+      id: "b0a5a8c7-dc38-459f-a48d-a7f2008da853",
+      connectionId: "e9f8c166-6c67-440d-994a-04fb6dfed007",
+      streamId: "482bce73-f882-40fd-8ca5-cb74ff416036",
+    };
+
+    const expectedBody = Object.assign({}, { sessionId: "2_MX40NTMyODc3Mn5-fg" }, options);
+
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/v2/project/abcd-1234/dial', expectedBody)
+      .reply(200, expectedResponse);
+
+    const resp = await client.intiateSIPCall("2_MX40NTMyODc3Mn5-fg", options);
+
+    expect(resp.id).toEqual(expectedResponse.id);
+    expect(resp.connectionId).toEqual(expectedResponse.connectionId);
+    expect(resp.streamId).toEqual(expectedResponse.streamId);
+  });
+
+  test("can play DTMF digits to everyone", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/v2/project/abcd-1234/session/2_MX40NTMyODc3Mn5-fg/play-dtmf', { digits: '1234#'})
+      .reply(200);
+
+    await client.playDTMF("2_MX40NTMyODc3Mn5-fg", "1234#");
+  });
+
+  test("can play DTMF digits into one connection", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/v2/project/abcd-1234/session/2_MX40NTMyODc3Mn5-fg/connection/396edda0-fc30-41fd-8e63/play-dtmf', {digits: "1234#"})
+      .reply(200);
+
+      await client.playDTMF("2_MX40NTMyODc3Mn5-fg", "1234#", "396edda0-fc30-41fd-8e63");
   });
 });
