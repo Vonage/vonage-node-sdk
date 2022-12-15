@@ -11,7 +11,8 @@
         "google",
         "plugin:@typescript-eslint/recommended",
         "plugin:jest/recommended",
-        "plugin:jest-formatting/recommended"
+        "plugin:jest-formatting/recommended",
+        "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -23,7 +24,8 @@
         "deprecation",
         "jest",
         "jest-extended",
-        "jest-formatting"
+        "jest-formatting",
+        "prettier"
     ],
     "rules": {
         "semi": "warn",
@@ -39,7 +41,7 @@
         ],
         "indent": [
             "error",
-            4
+            2
         ],
         "object-curly-spacing": [
             "error",
