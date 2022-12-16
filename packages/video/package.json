@@ -34,7 +34,8 @@
         "@vonage/auth": "^1.0.4",
         "@vonage/jwt": "^1.0.4",
         "@vonage/server-client": "^1.0.7",
-        "@vonage/vetch": "^1.0.5"
+        "@vonage/vetch": "^1.0.5",
+        "tslib": "^2.4.1"
     },
     "devDependencies": {
         "jsonwebtoken": "^8.5.1",
