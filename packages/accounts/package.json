@@ -1,6 +1,6 @@
 {
     "name": "@vonage/accounts",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Vonage Account Management API",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -27,11 +27,11 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.7",
+        "@vonage/server-client": "^1.0.8",
         "tslib": "^2.4.1"
     },
     "devDependencies": {
-        "@vonage/auth": "^1.0.4",
+        "@vonage/auth": "^1.0.5",
         "nock": "^13.2.9"
     },
     "publishConfig": {
