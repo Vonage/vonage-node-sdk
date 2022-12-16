@@ -1,5 +1,6 @@
 {
     "name": "@vonage/server-sdk-monorepo",
+    "version": "0.0.1",
     "private": true,
     "description": "Vonage Server SDK for Node.js. API support for SMS, Voice Calls, Text-to-Speech, Numbers, Verify (2FA) and more.",
     "keywords": [
