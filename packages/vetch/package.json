@@ -24,7 +24,8 @@
     },
     "dependencies": {
         "lodash.merge": "^4.6.2",
-        "node-fetch": "^2.6"
+        "node-fetch": "^2.6",
+        "tslib": "^2.4.1"
     },
     "devDependencies": {
         "nock": "^13.2.9"
