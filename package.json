@@ -46,11 +46,11 @@
             "npx sort-package-json"
         ],
         "*.js": [
-            "npm run format",
+            "prettier -w",
             "eslint --fix"
         ],
         "*.ts": [
-            "npm run format",
+            "prettier -w",
             "eslint --fix"
         ]
     },

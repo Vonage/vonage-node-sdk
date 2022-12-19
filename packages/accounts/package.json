@@ -27,8 +27,7 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/server-client": "^1.0.8",
-        "tslib": "^2.4.1"
+        "@vonage/server-client": "^1.0.8"
     },
     "devDependencies": {
         "@vonage/auth": "^1.0.5",
