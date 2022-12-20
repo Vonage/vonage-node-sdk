@@ -1,15 +1,15 @@
-import { AuthOpts, AuthInterface } from '@vonage/auth'
-import { VetchResponse, VetchOptions } from '@vonage/vetch'
-import { Feature } from './enums/Feature'
-import { SearchPattern } from './enums/SearchPattern'
-import { LineType } from './enums/LineType'
+import { AuthOpts, AuthInterface } from '@vonage/auth';
+import { VetchResponse, VetchOptions } from '@vonage/vetch';
+import { Feature } from './enums/Feature';
+import { SearchPattern } from './enums/SearchPattern';
+import { LineType } from './enums/LineType';
 
 export type NumbersClassParameters = AuthOpts &
     VetchOptions & {
         auth?: AuthInterface
     }
 
-export interface NumbersResponse<T> extends VetchResponse<T> {}
+export type NumbersResponse<T> = VetchResponse<T>
 
 export interface NumbersAvailableList {
     count?: number
@@ -108,6 +108,12 @@ export interface NumbersSearchFilter {
     features?: Feature[]
     size?: number
     index?: number
+}
+
+export interface NumbersSearchSimple {
+    startsWith?: string
+    endsWith?: string
+    contains?: string
 }
 
 export interface NumbersQuerySearchFilter {

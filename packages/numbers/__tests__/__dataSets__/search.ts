@@ -83,4 +83,144 @@ export default [
     ],
     expected: validResponse,
   },
+  {
+    label: 'search with "startsWith"',
+    clientMethod: CLIENT_METHOD,
+    request: {
+      url: BASE_URL,
+      intercept: [
+        `/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=0&country=US`,
+        'GET',
+      ],
+      reply: [200, validResponse],
+    },
+    parameters: [
+      {
+        startsWith: '1234',
+        country: 'US',
+      },
+    ],
+    expected: validResponse,
+  },
+  {
+    label: 'serach with "endsWith"',
+    clientMethod: CLIENT_METHOD,
+    request: {
+      url: BASE_URL,
+      intercept: [
+        `/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=2&country=US`,
+        'GET',
+      ],
+      reply: [200, validResponse],
+    },
+    parameters: [
+      {
+        endsWith: '1234',
+        country: 'US',
+      },
+    ],
+    expected: validResponse,
+  },
+  {
+    label: 'serach with "contains"',
+    clientMethod: CLIENT_METHOD,
+    request: {
+      url: BASE_URL,
+      intercept: [
+        `/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=1&country=US`,
+        'GET',
+      ],
+      reply: [200, validResponse],
+    },
+    parameters: [
+      {
+        contains: '1234',
+        country: 'US',
+      },
+    ],
+    expected: validResponse,
+  },
+  {
+    label: 'search with "contains" taking precedent',
+    clientMethod: CLIENT_METHOD,
+    request: {
+      url: BASE_URL,
+      intercept: [
+        `/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=1&country=US`,
+        'GET',
+      ],
+      reply: [200, validResponse],
+    },
+    parameters: [
+      {
+        endsWith: '0987',
+        startsWith: '6543',
+        contains: '1234',
+        country: 'US',
+      },
+    ],
+    expected: validResponse,
+  },
+  {
+    label: 'search with "endsWith" taking precedent',
+    clientMethod: CLIENT_METHOD,
+    request: {
+      url: BASE_URL,
+      intercept: [
+        `/number/search?api_key=12345&api_secret=ABCDE&pattern=0987&search_pattern=2&country=US`,
+        'GET',
+      ],
+      reply: [200, validResponse],
+    },
+    parameters: [
+      {
+        endsWith: '0987',
+        startsWith: '6543',
+        country: 'US',
+      },
+    ],
+    expected: validResponse,
+  },
+  {
+    label: 'search with "pattern" overriding easy search',
+    clientMethod: CLIENT_METHOD,
+    request: {
+      url: BASE_URL,
+      intercept: [
+        `/number/search?api_key=12345&api_secret=ABCDE&pattern=5309&search_pattern=0&country=US`,
+        'GET',
+      ],
+      reply: [200, validResponse],
+    },
+    parameters: [
+      {
+        endsWith: '0987',
+        startsWith: '6543',
+        contains: '1234',
+        searchPattern: 0,
+        pattern: '5309',
+        country: 'US',
+      },
+    ],
+    expected: validResponse,
+  },
+  {
+    label: 'search using default "contains" for "search_pattern"',
+    clientMethod: CLIENT_METHOD,
+    request: {
+      url: BASE_URL,
+      intercept: [
+        `/number/search?api_key=12345&api_secret=ABCDE&pattern=5309&search_pattern=1&country=US`,
+        'GET',
+      ],
+      reply: [200, validResponse],
+    },
+    parameters: [
+      {
+        pattern: '5309',
+        country: 'US',
+      },
+    ],
+    expected: validResponse,
+  },
 ];

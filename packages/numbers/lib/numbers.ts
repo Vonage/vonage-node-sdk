@@ -9,7 +9,11 @@ import {
   NumbersUpdateParams,
   NumbersSearchFilter,
   NumbersParams,
+  NumbersQuerySearchFilter,
+  NumbersSearchSimple,
 } from './types';
+import { SearchPattern } from './enums/SearchPattern';
+import omit from 'lodash.omit';
 
 const remapObjects = <T, O>(mapping, newObject: T, oldObject: O): T => {
   for (const key in mapping) {
@@ -20,6 +24,84 @@ const remapObjects = <T, O>(mapping, newObject: T, oldObject: O): T => {
   }
   newObject = { ...newObject, ...oldObject };
   return newObject;
+};
+
+const buildSearch = ({
+  endsWith,
+  startsWith,
+  contains,
+  searchPattern,
+  pattern,
+  country,
+}: NumbersSearchFilter & NumbersSearchSimple):
+    | NumbersQuerySearchFilter
+    | Record<string, never> => {
+  searchPattern = searchPattern ?? SearchPattern.CONTAINS;
+
+  if (pattern) {
+    return {
+      search_pattern: searchPattern,
+      pattern: pattern,
+      country: country,
+    };
+  }
+
+  // order of precdent contains, endsWith, startsWith
+  if (contains) {
+    return {
+      search_pattern: SearchPattern.CONTAINS,
+      pattern: contains,
+      country: country,
+    };
+  }
+
+  if (endsWith) {
+    return {
+      search_pattern: SearchPattern.ENDS_WITH,
+      pattern: endsWith,
+      country: country,
+    };
+  }
+
+  if (startsWith) {
+    return {
+      search_pattern: SearchPattern.START_WITH,
+      pattern: startsWith,
+      country: country,
+    };
+  }
+
+  return {};
+};
+
+const sortFeatures = (features: string[]): string => {
+  // API expects these as a CSV in a specific order
+  if (features.length > 4) {
+    throw new Error('Invalid number of features request');
+  }
+
+  if (features.length === 1) {
+    return features.join();
+  }
+
+  if (features.length === 3) {
+    return [Feature.SMS, Feature.MMS, Feature.VOICE].join(',');
+  }
+
+  const newOrder = [];
+  if (features.includes(Feature.SMS)) {
+    newOrder.push(Feature.SMS);
+  }
+
+  if (features.includes(Feature.VOICE)) {
+    newOrder.push(Feature.VOICE);
+  }
+
+  if (features.includes(Feature.MMS)) {
+    newOrder.push(Feature.MMS);
+  }
+
+  return newOrder.join(',');
 };
 
 export class Numbers extends Client {
@@ -63,31 +145,13 @@ export class Numbers extends Client {
     const mapping = {
       search_pattern: 'searchPattern',
     };
-    const data: any = remapObjects(mapping, {}, filter);
+    const data: any = omit(
+      remapObjects(mapping, {}, { ...filter, ...buildSearch(filter) }),
+      ['startsWith', 'contains', 'endsWith', 'searchPattern'],
+    );
 
-    // API expects these as a CSV in a specific order
-    if (data.features) {
-      if (data.features.length === 1) {
-        data.features = data.features.join();
-      } else if (data.features.length === 2) {
-        const newOrder = [];
-        if (data.features.includes(Feature.SMS)) {
-          newOrder.push(Feature.SMS);
-        }
-        if (data.features.includes(Feature.VOICE)) {
-          newOrder.push(Feature.VOICE);
-        }
-        if (data.features.includes(Feature.MMS)) {
-          newOrder.push(Feature.MMS);
-        }
-        data.features = newOrder.join(',');
-      } else if (data.features.length === 3) {
-        data.features = [Feature.SMS, Feature.MMS, Feature.VOICE].join(
-          ',',
-        );
-      } else {
-        throw new Error('Invalid number of features request');
-      }
+    if (data.features?.length > 0) {
+      data.features = sortFeatures(data.features);
     }
 
     const resp = await this.sendGetRequest<NumbersAvailableList>(
