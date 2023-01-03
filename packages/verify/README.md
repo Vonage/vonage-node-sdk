@@ -20,10 +20,10 @@ Note: This package is only compatible with verify V1.
 For full API documentation refer to
 [developer.vonage.com](https://developer.vonage.com/).
 
-* [Installation](#installation)
-* [Usage](#using-the-vonage-verify-sdk)
-* [Promises](#promises)
-* [Testing](#testing)
+-   [Installation](#installation)
+-   [Usage](#using-the-vonage-verify-sdk)
+-   [Promises](#promises)
+-   [Testing](#testing)
 
 ## Installation
 
@@ -54,18 +54,19 @@ If you are using this SDK as part of the Vonage Server SDK, you can access it
 as the `verify` property off of the client that you instantiate.
 
 ```js
-const { Vonage } = require('@vonage/server-sdk');
+const { Vonage } = require('@vonage/server-sdk')
 
 const credentials = {
     apiKey: API_KEY,
-    apiSecret: API_SECRET
-};
-const options = {};
-const vonage = new Vonage(credentials, options);
+    apiSecret: API_SECRET,
+}
+const options = {}
+const vonage = new Vonage(credentials, options)
 
-vonage.verify.check(VERIFY_REQUEST_ID, CODE)
-  .then(resp => console.log(resp))
-  .catch(err => console.error(err));
+vonage.verify
+    .check(VERIFY_REQUEST_ID, CODE)
+    .then((resp) => console.log(resp))
+    .catch((err) => console.error(err))
 ```
 
 ### Standalone
@@ -77,15 +78,15 @@ you only need to use the Messages API. All you need to do is
 client.
 
 ```js
-const { Auth } = require('@vonage/auth');
-const { Verify } = require('@vonage/verify');
+const { Auth } = require('@vonage/auth')
+const { Verify } = require('@vonage/verify')
 
 const credentials = new Auth({
     apiKey: API_KEY,
-    apiSecret: API_SECRET
-});
-const options = {};
-const verifyClient = new Verify(credentials, options);
+    apiSecret: API_SECRET,
+})
+const options = {}
+const verifyClient = new Verify(credentials, options)
 ```
 
 Where `credentials` is any option from [`@vonage/auth`](https://github.com/Vonage/vonage-node-sdk/tree/3.x/readme/packages/auth#options),
@@ -97,11 +98,12 @@ Most methods that interact with the Vonage API uses Promises. You can either
 resolve these yourself, or use `await` to wait for a response.
 
 ```js
-const resp = await vonage.vrify.check(VERIFY_REQUEST_ID, CODE);
+const resp = await vonage.vrify.check(VERIFY_REQUEST_ID, CODE)
 
-vonage.verify.check(VERIFY_REQUEST_ID, CODE)
-  .then(resp => console.log(resp))
-  .catch(err => console.error(err));
+vonage.verify
+    .check(VERIFY_REQUEST_ID, CODE)
+    .then((resp) => console.log(resp))
+    .catch((err) => console.error(err))
 ```
 
 ## Testing

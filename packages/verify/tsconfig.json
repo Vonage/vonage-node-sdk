@@ -6,11 +6,7 @@
         "outDir": "dist"
     },
 
-    "exclude": [
-        "__tests__",
-        "jest.config.js",
-        "dist"
-    ],
+    "exclude": ["__tests__", "jest.config.js", "dist"],
 
     "references": [
         { "path": "../server-client" },
