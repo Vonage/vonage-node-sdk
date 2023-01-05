@@ -23,7 +23,7 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "jsonwebtoken": "^8.5.1",
+        "jsonwebtoken": "^9.0.0",
         "uuid": "^9.0.0"
     },
     "devDependencies": {
