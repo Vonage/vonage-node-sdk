@@ -28,7 +28,7 @@
         "build": "lerna run build",
         "clean": "lerna run clean",
         "compile": "lerna run compile",
-        "depcheck": "lerna exec --no-bail --stream --prefix npx depcheck",
+        "depcheck": "lerna exec --no-bail --stream --prefix npx depcheck -- --ignore-dirs=dist",
         "eslint": "eslint",
         "format": "prettier -- -w",
         "jest": "jest",
