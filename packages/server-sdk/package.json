@@ -1,6 +1,6 @@
 {
     "name": "@vonage/server-sdk",
-    "version": "3.0.12",
+    "version": "3.0.13",
     "description": "Node.js Client for the Vonage API Platform",
     "homepage": "https://developer.vonage.com",
     "bugs": {
