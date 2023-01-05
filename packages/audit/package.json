@@ -1,0 +1,41 @@
+{
+    "name": "@vonage/audit",
+    "version": "1.0.0",
+    "description": "Vonage Audit SDK Package",
+    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
+    "bugs": {
+        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+    },
+    "license": "Apache-2.0",
+    "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "directories": {
+        "lib": "dist",
+        "test": "__tests__"
+    },
+    "files": [
+        "/dist"
+    ],
+    "scripts": {
+        "build": "npm run clean && npm run compile",
+        "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+        "compile": "npx tsc --build --verbose"
+    },
+    "dependencies": {
+        "@vonage/auth": "^1.0.5",
+        "@vonage/server-client": "^1.0.8",
+        "@vonage/vetch": "^1.0.6"
+    },
+    "devDependencies": {
+        "nock": "^13.2.9"
+    },
+    "publishConfig": {
+        "directory": "dist"
+    },
+    "gitHead": "328f18e5c8a458cb4d06d7955ec2399a6ce6f5d8"
+}
