@@ -3,11 +3,11 @@
         "sourceMap": true,
         "removeComments": true,
         "lib": [
-            "ES6"
+            "ES2022"
         ],
 
         "strict": false,
-        "target": "ES6",
+        "target": "ES2022",
         "module": "CommonJS",
         "moduleResolution": "node",
         "esModuleInterop": true,
