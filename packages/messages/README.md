@@ -110,9 +110,9 @@ Most methods that interact with the Vonage API uses Promises. You can either res
 wait for a response.
 
 ```js
-const resp = await messagesClient.send({to: TO_NUMBER, from: FROM_NUMBER: channel: 'sms', text: MESSAGE});
+const resp = await messagesClient.send({to: TO_NUMBER, from: FROM_NUMBER: channel: 'sms', message_type: 'text', text: MESSAGE});
 
-messagesClient.send({to: TO_NUMBER, from: FROM_NUMBER: channel: 'sms', text: MESSAGE})
+messagesClient.send({to: TO_NUMBER, from: FROM_NUMBER: channel: 'sms', message_type: 'text', text: MESSAGE})
   .then(resp => console.log(resp))
   .catch(err => console.error(err));
 ```
