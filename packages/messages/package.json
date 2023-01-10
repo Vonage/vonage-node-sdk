@@ -37,7 +37,7 @@
     },
     "dependencies": {
         "@vonage/auth": "^1.0.5",
-        "@vonage/server-client": "^1.0.8",
+        "@vonage/server-client": "^1.0.11",
         "@vonage/vetch": "^1.0.6"
     },
     "devDependencies": {

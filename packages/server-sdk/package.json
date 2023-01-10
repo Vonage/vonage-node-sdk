@@ -35,7 +35,7 @@
         "@vonage/numbers": "^1.0.11",
         "@vonage/pricing": "^1.0.8",
         "@vonage/sms": "^1.0.9",
-        "@vonage/verify": "^1.0.10",
+        "@vonage/verify": "^1.0.12",
         "@vonage/vetch": "^1.0.6",
         "@vonage/voice": "^1.0.9"
     },
