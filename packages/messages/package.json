@@ -1,6 +1,6 @@
 {
     "name": "@vonage/messages",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
     "keywords": [
         "whatsapp",
@@ -36,9 +36,9 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.0.5",
-        "@vonage/server-client": "^1.0.11",
-        "@vonage/vetch": "^1.0.6"
+        "@vonage/auth": "^1.0.6",
+        "@vonage/server-client": "^1.0.12",
+        "@vonage/vetch": "^1.0.7"
     },
     "devDependencies": {
         "nock": "^13.2.9"
