@@ -24,7 +24,6 @@
 
         "noImplicitAny": false,
         "noUnusedLocals": false,
-        "importHelpers": true,
 
         "declaration": true,
         "composite": true,
