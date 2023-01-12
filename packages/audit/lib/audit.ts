@@ -5,7 +5,9 @@ export class Audit extends Client {
   protected BASE_PATH = 'beta';
   protected authType = AuthenticationType.BASIC;
 
-  async *getEvents(params: AuditParams): AsyncGenerator<AuditEvent> {
+  async *getEvents(
+    params: AuditParams,
+  ): AsyncGenerator<AuditEvent, void, undefined> {
     let totalPages = 0;
     let page = params?.page || 1;
     do {
@@ -25,7 +27,7 @@ export class Audit extends Client {
         yield* events;
         page++;
       } catch (error) {
-        // TODO Logging
+        // TODO Logging or re throw?
         return;
       }
     } while (page <= totalPages);
