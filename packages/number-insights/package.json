@@ -1,6 +1,6 @@
 {
     "name": "@vonage/number-insights",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "description": "Vonage Number Insights API",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -27,9 +27,9 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.0.7",
-        "@vonage/server-client": "^1.0.13",
-        "@vonage/vetch": "^1.0.8"
+        "@vonage/auth": "^1.0.8",
+        "@vonage/server-client": "^1.0.14",
+        "@vonage/vetch": "^1.0.9"
     },
     "devDependencies": {
         "nock": "^13.2.9"
