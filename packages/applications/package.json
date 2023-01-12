@@ -1,6 +1,6 @@
 {
     "name": "@vonage/applications",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Vonage Applications API",
     "keywords": [
         "vonage"
@@ -30,9 +30,9 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.0.6",
-        "@vonage/server-client": "^1.0.12",
-        "@vonage/vetch": "^1.0.7"
+        "@vonage/auth": "^1.0.7",
+        "@vonage/server-client": "^1.0.13",
+        "@vonage/vetch": "^1.0.8"
     },
     "devDependencies": {
         "nock": "^13.2.9"
