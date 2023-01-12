@@ -20,6 +20,7 @@ information for each package below:
 
 * [Accounts](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/accounts/README.md)
 * [Applications](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/applications/README.md)
+* [Audit](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/audit/README.md)
 * [Auth](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/auth/README.md)
 * [JWT](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/jwt/README.md)
 * [Messages](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/messages/README.md)
@@ -43,7 +44,7 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Account API | General Availability |✅|
 | Alerts API | General Availability |✅|
 | Application API | General Availability |✅|
-| Audit API | Beta |❌|
+| Audit API | Beta |✅|
 | Conversation API | Beta |❌|
 | Dispatch API | Beta |❌|
 | External Accounts API | Beta |❌|

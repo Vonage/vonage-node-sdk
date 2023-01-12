@@ -2,7 +2,7 @@
     "name": "@vonage/audit",
     "version": "1.0.0",
     "description": "Vonage Audit SDK Package",
-    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
+    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/audit#readme",
     "bugs": {
         "url": "https://github.com/Vonage/vonage-node-sdk/issues"
     },
@@ -11,7 +11,7 @@
         "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
     },
     "license": "Apache-2.0",
-    "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
+    "author": "Chuck \"MANCHUCK\" Reeves",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "directories": {
@@ -36,6 +36,5 @@
     },
     "publishConfig": {
         "directory": "dist"
-    },
-    "gitHead": "328f18e5c8a458cb4d06d7955ec2399a6ce6f5d8"
+    }
 }

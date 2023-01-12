@@ -78,6 +78,27 @@ npm run test-watch
 
 See the [Vonage Node Quickstarts repo](https://github.com/Vonage/vonage-node-code-snippets).
 
+## References
+
+You can find more information for each product below:
+
+* [Accounts](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/accounts/README.md)
+* [Applications](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/applications/README.md)
+* [Audit](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/audit/README.md)
+* [Auth](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/auth/README.md)
+* [JWT](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/jwt/README.md)
+* [Messages](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/messages/README.md)
+* [Number Insights](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/number-insights/README.md)
+* [Numbers](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/numbers/README.md)
+* [Pricing](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/pricing/README.md)
+* [Server Client](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-client/README.md)
+* [Server SDK](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-sdk/README.md)
+* [SMS](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/sms/README.md)
+* [Verify](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/verify/README.md)
+* [Vetch](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/vetch/README.md)
+* [Video](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/video/README.md)
+* [Voice](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/voice/README.md)
+
 ## Supported APIs
 
 The following is a list of Vonage APIs and whether the Node Server SDK provides support for them:
@@ -87,7 +108,7 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Account API | General Availability |✅|
 | Alerts API | General Availability |✅|
 | Application API | General Availability |✅|
-| Audit API | Beta |❌|
+| Audit API | Beta |✅|
 | Conversation API | Beta |❌|
 | Dispatch API | Beta |❌|
 | External Accounts API | Beta |❌|
@@ -101,25 +122,5 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | SMS API | General Availability |✅|
 | Verify API | General Availability |✅|
 | Voice API | General Availability |✅|
-
-## References
-
-You can find more information for each product below:
-
-* [Accounts](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/accounts/README.md)
-* [Applications](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/applications/README.md)
-* [Auth](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/auth/README.md)
-* [JWT](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/jwt/README.md)
-* [Messages](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/messages/README.md)
-* [Number Insights](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/number-insights/README.md)
-* [Numbers](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/numbers/README.md)
-* [Pricing](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/pricing/README.md)
-* [Server Client](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-client/README.md)
-* [SMS](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/sms/README.md)
-* [Verify](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/verify/README.md)
-* [Vetch](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/vetch/README.md)
-* [Video](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/video/README.md)
-* [Voice](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/voice/README.md)
-
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 [license]: LICENSE.txt
