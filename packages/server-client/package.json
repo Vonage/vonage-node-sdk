@@ -1,6 +1,6 @@
 {
     "name": "@vonage/server-client",
-    "version": "1.0.14",
+    "version": "1.0.15",
     "description": "Core services related to talking to the Vonage APIs",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -27,8 +27,8 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.0.8",
-        "@vonage/vetch": "^1.0.9"
+        "@vonage/auth": "^1.0.9",
+        "@vonage/vetch": "^1.0.10"
     },
     "publishConfig": {
         "directory": "dist"

@@ -1,6 +1,6 @@
 {
     "name": "@vonage/pricing",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "description": "Vonage API for pricing",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -27,9 +27,9 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.0.8",
-        "@vonage/server-client": "^1.0.14",
-        "@vonage/vetch": "^1.0.9"
+        "@vonage/auth": "^1.0.9",
+        "@vonage/server-client": "^1.0.15",
+        "@vonage/vetch": "^1.0.10"
     },
     "devDependencies": {
         "nock": "^13.2.9"

@@ -1,6 +1,6 @@
 {
     "name": "@vonage/vetch",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Vonage package for server side fetch.",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/vetch#readme",
     "bugs": {
