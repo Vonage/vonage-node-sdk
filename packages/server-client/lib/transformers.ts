@@ -11,7 +11,7 @@ export const transformObjectKeys = (
   const transformedObject = {};
 
   for (const prop in objectToTransform) {
-    if (!Object.hasOwn(objectToTransform, prop)) {
+    if (!Object.prototype.hasOwnProperty.call(objectToTransform, prop)) {
       continue;
     }
 
