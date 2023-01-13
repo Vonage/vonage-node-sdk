@@ -11,25 +11,20 @@ export class Audit extends Client {
     let totalPages = 0;
     let page = params?.page || 1;
     do {
-      try {
-        const resp = await this.sendGetRequest<AuditEventListResponse>(
-          `${this.config.apiHost}/${this.BASE_PATH}/audit/events`,
-          Client.transformers.snakeCaseObjectKeys(params),
-        );
+      params.page = page;
+      const resp = await this.sendGetRequest<AuditEventListResponse>(
+        `${this.config.apiHost}/${this.BASE_PATH}/audit/events`,
+        Client.transformers.snakeCaseObjectKeys(params),
+      );
 
-        const events = (resp.data?._embedded.events || []).map(
-          (event) =>
-            Client.transformers.camelCaseObjectKeys(event, true),
-        );
+      const events = (resp.data?._embedded.events || []).map((event) =>
+        Client.transformers.camelCaseObjectKeys(event, true),
+      );
 
-        totalPages = resp.data?.page?.totalPages || 0;
+      totalPages = resp.data?.page?.totalPages || 0;
 
-        yield* events;
-        page++;
-      } catch (error) {
-        // TODO Logging or re throw?
-        return;
-      }
+      yield* events;
+      page++;
     } while (page <= totalPages);
   }
 
