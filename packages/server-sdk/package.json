@@ -29,6 +29,7 @@
     "dependencies": {
         "@vonage/accounts": "^1.0.13",
         "@vonage/applications": "^1.0.12",
+        "@vonage/audit": "^1.0.0",
         "@vonage/auth": "^1.0.9",
         "@vonage/messages": "^1.0.13",
         "@vonage/number-insights": "^1.0.12",

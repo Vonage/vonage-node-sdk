@@ -1,8 +1,8 @@
 {
-    "name": "@vonage/server-client",
-    "version": "1.0.15",
-    "description": "Core services related to talking to the Vonage APIs",
-    "homepage": "https://developer.vonage.com",
+    "name": "@vonage/audit",
+    "version": "1.0.0",
+    "description": "Vonage Audit SDK Package",
+    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/audit#readme",
     "bugs": {
         "url": "https://github.com/Vonage/vonage-node-sdk/issues"
     },
@@ -11,7 +11,7 @@
         "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
     },
     "license": "Apache-2.0",
-    "author": "Chris Tankersley <chris@ctankersley.com>",
+    "author": "Chuck \"MANCHUCK\" Reeves",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "directories": {
@@ -27,14 +27,14 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.0.9",
-        "@vonage/vetch": "^1.0.10",
-        "lodash.camelcase": "^4.3.0",
-        "lodash.partial": "^4.2.1",
-        "lodash.snakecase": "^4.1.1"
+        "@vonage/auth": "^1.0.5",
+        "@vonage/server-client": "^1.0.8",
+        "@vonage/vetch": "^1.0.6"
+    },
+    "devDependencies": {
+        "nock": "^13.2.9"
     },
     "publishConfig": {
         "directory": "dist"
-    },
-    "gitHead": "328f18e5c8a458cb4d06d7955ec2399a6ce6f5d8"
+    }
 }
