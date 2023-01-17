@@ -1,5 +1,7 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
-import { AuditParams, AuditEvent, AuditEventListResponse } from './types';
+import { AuditParams } from './types/auditParams';
+import { AuditEvent } from './types/auditEvent';
+import { AuditEventListResponse } from './interfaces/auditEventListResponse';
 
 export class Audit extends Client {
   protected BASE_PATH = 'beta';
