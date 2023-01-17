@@ -11,21 +11,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { VetchOptions } from './types'
-import { Vetch } from './vetch'
+import { Vetch } from './vetch';
+import { VetchOptions } from './interfaces/vetchOptions';
 
-export {
-    VetchError,
-    VetchPromise,
-    VetchResponse,
-    Headers,
-    ResponseTypes,
-} from './types'
+export { Vetch, VetchOptions };
 
-export { Vetch, VetchOptions }
-
-export const instance = new Vetch()
+export const instance = new Vetch();
 
 export async function request<T>(opts: VetchOptions) {
-    return instance.request<T>(opts)
+  return instance.request<T>(opts);
 }
+export { VetchError } from './types/vetchError';
+export { Headers } from './interfaces/headers';
+export { VetchPromise } from './types/vetchPromise';
+export { VetchResponse } from './interfaces/vetchResponse';
+export { ResponseTypes } from './enums/responseTypes';
