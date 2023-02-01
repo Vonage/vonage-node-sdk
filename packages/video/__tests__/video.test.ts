@@ -580,4 +580,26 @@ describe('video', () => {
 
       await client.playDTMF("2_MX40NTMyODc3Mn5-fg", "1234#", "396edda0-fc30-41fd-8e63");
   });
+
+  test("can connect to a websocket", async () => {
+    const token = client.generateClientToken();
+
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {sessionId: "2_MX40NTMyODc3Mn5-fg", token, websocket: {uri: 'wss://mydomain.com/websocket/'}})
+      .reply(200, {id: 'CALLID', connectionId: 'CONNECTIONID'});
+
+      const resp = await client.connectToWebsocket("2_MX40NTMyODc3Mn5-fg", token, {uri: 'wss://mydomain.com/websocket/'});
+      expect(resp.id).toEqual('CALLID')
+      expect(resp.connectionId).toEqual('CONNECTIONID')
+  });
+
+  test("can disconnect a websocket", async () => {
+    nock(BASE_URL, {reqheaders: {'Authorization': value => value.startsWith('Bearer ') && value.length > 10 }})
+      .persist()
+      .post('/v2/project/abcd-1234/connect/CALLID/stop')
+      .reply(200);
+
+      await client.disconnectWebsocket('CALLID');
+  });
 });

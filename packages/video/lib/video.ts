@@ -21,6 +21,8 @@ import { MultiBroadcastResponse } from './interfaces/Response/MultiBroadcastResp
 import { BroadcastUpdateConfig } from './interfaces/BroadcastUpdateConfig';
 import { SIPCallOptions } from './interfaces/SIPCallOptions';
 import { SIPCallResponse } from './interfaces/Response/SIPCallResponse';
+import { WebsocketConfig } from './interfaces/WebsocketConfig';
+import { WebsocketConnectResponse } from './interfaces/Response/WebsocketConnectResponse';
 
 export class Video extends Client {
     protected authType = AuthenticationType.JWT;
@@ -37,6 +39,17 @@ export class Video extends Client {
 
     public async addStreamToBroadcast(broadcastId: string, streamId: string): Promise<void> {
         await this.updateBroadcast({ broadcastId, addStream: streamId });
+    }
+
+    public async connectToWebsocket(sessionId: string, clientToken: string, config: WebsocketConfig): Promise<WebsocketConnectResponse> {
+        const data = {
+            sessionId,
+            token: clientToken,
+            websocket: config
+        }
+
+        const resp = await this.sendPostRequest<WebsocketConnectResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/connect`, data);
+        return resp.data;
     }
 
     public async createSession(sessionOptions?: { archiveMode?: ArchiveMode; location?: string; mediaMode?: MediaMode }): Promise<Session> {
@@ -66,6 +79,10 @@ export class Video extends Client {
 
     public async disconnectClient(sessionId: string, connectionId: string): Promise<void> {
         await this.sendDeleteRequest<void>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/connection/${connectionId}`);
+    }
+
+    public async disconnectWebsocket(callId: string): Promise<void> {
+        await this.sendPostRequest<WebsocketConnectResponse>(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/connect/${callId}/stop`);
     }
 
     public async forceMuteAll(sessionId: string, excludedStreamIds: string[] = []) {
