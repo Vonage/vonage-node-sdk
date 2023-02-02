@@ -1,6 +1,6 @@
 import { AudioRate } from '../enums/AudioRate';
 
-export interface WebsocketConfig {
+export interface WebSocketConfig {
     uri: string
     streams?: string[]
     headers?: {
