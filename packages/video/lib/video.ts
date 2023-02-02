@@ -21,8 +21,8 @@ import { MultiBroadcastResponse } from './interfaces/Response/MultiBroadcastResp
 import { BroadcastUpdateConfig } from './interfaces/BroadcastUpdateConfig';
 import { SIPCallOptions } from './interfaces/SIPCallOptions';
 import { SIPCallResponse } from './interfaces/Response/SIPCallResponse';
-import { WebsocketConfig } from './interfaces/WebsocketConfig';
-import { WebsocketConnectResponse } from './interfaces/Response/WebsocketConnectResponse';
+import { WebsocketConfig } from './interfaces/WebsocketConfig2';
+import { WebsocketConnectResponse } from './interfaces/Response/WebsocketConnectResponse2';
 
 export class Video extends Client {
     protected authType = AuthenticationType.JWT;
