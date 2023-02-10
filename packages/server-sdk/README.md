@@ -44,8 +44,8 @@ const { Vonage } = require('@vonage/server-sdk');
 const vonage = new Vonage(credentials, options);
 ```
 
-Where `credentials` is any option from [`@vonage/auth`](https://github.com/Vonage/vonage-node-sdk/tree/3.x/readme/packages/auth#options),
-and `options` is any option from [`@vonage/server-client`](https://github.com/Vonage/vonage-node-sdk/tree/3.x/readme/packages/server-client#options)
+Where `credentials` is any option from [`@vonage/auth`](https://github.com/Vonage/vonage-node-sdk/tree/3.x/packages/auth#options),
+and `options` is any option from [`@vonage/server-client`](https://github.com/Vonage/vonage-node-sdk/tree/3.x/packages/server-client#options)
 
 ## Promises
 
@@ -56,7 +56,7 @@ resolve these yourself, or use `await` to wait for a response.
 const resp = await vonage.sms.send({
     to: '15552220000',
     from: '15559992222',
-    'This is a test',
+    text: 'This is a test',
 });
 ```
 
