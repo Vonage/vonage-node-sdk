@@ -107,4 +107,26 @@ export default [
       fooBar: null,
     },
   },
+  {
+    label: 'Transform to camel deep array only',
+    transformFn: 'camelCaseObjectKeys',
+    original: {
+      foo_bar: [
+        {
+          fizz_buzz: 'baz_bat',
+        },
+      ],
+    },
+    parameters: [
+      true, // deep
+      false, // preserve
+    ],
+    expected: {
+      fooBar: [
+        {
+          fizzBuzz: 'baz_bat',
+        },
+      ],
+    },
+  },
 ];

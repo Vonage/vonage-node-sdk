@@ -1,11 +1,6 @@
-export interface VerificationRequest {
-    number: string
-    brand: string
-    country?: string
-    senderId?: string
-    codeLength?: number
-    language?: string
-    pinExpiry?: number
-    nextEventWait?: number
-    workflowId?: number
-}
+import { VerificationParameters } from '../types/index';
+
+/**
+ * @deprecated please use VerificationParameters
+ */
+export type VerificationRequest = VerificationParameters

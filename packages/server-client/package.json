@@ -30,6 +30,7 @@
         "@vonage/auth": "^1.0.9",
         "@vonage/vetch": "^1.0.10",
         "lodash.camelcase": "^4.3.0",
+        "lodash.isobject": "3.0.2",
         "lodash.partial": "^4.2.1",
         "lodash.snakecase": "^4.1.1"
     },

@@ -1,6 +1,7 @@
 import camelCase from 'lodash.camelcase';
 import snakeCase from 'lodash.snakecase';
 import partial from 'lodash.partial';
+import isObject from 'lodash.isobject';
 
 export const transformObjectKeys = (
   transformFn: (key: string | number) => string,
@@ -8,32 +9,44 @@ export const transformObjectKeys = (
   deep = false,
   preserve = false,
 ): Record<string | number, unknown> => {
-  const transformedObject = {};
+  const transformedObject = {
+    ...(preserve ? objectToTransform : {}),
+  };
 
   for (const prop in objectToTransform) {
     if (!Object.prototype.hasOwnProperty.call(objectToTransform, prop)) {
       continue;
     }
-
+    const newKey = transformFn(prop);
     const value = objectToTransform[prop];
-    transformedObject[transformFn(prop)]
-            = deep
-            && typeof value === 'object'
-            && value !== null
-            && !Array.isArray(value)
-        ? transformObjectKeys(
-          transformFn,
-                      value as Record<string | number, unknown>,
-                      deep,
-                      preserve,
-        )
-        : value;
+    if (!deep || !isObject(value)) {
+      transformedObject[newKey] = value;
+      continue;
+    }
+
+    if (Array.isArray(value)) {
+      transformedObject[newKey] = value.map((t) =>
+        isObject(t)
+          ? transformObjectKeys(
+            transformFn,
+                          t as Record<string | number, unknown>,
+                          deep,
+                          preserve,
+          )
+          : t,
+      );
+      continue;
+    }
+
+    transformedObject[newKey] = transformObjectKeys(
+      transformFn,
+            value as Record<string | number, unknown>,
+            deep,
+            preserve,
+    );
   }
 
-  return {
-    ...transformedObject,
-    ...(preserve ? objectToTransform : {}),
-  };
+  return transformedObject;
 };
 
 export const camelCaseObjectKeys = partial(transformObjectKeys, camelCase);
