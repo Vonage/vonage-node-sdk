@@ -1,5 +1,5 @@
 import { VerifySearchResponse } from './Response/index';
-import { VerifySearchCheck } from './verifySearchCheck';
+import { VerifySearchCheck } from './VerifySearchCheck';
 
 export interface VerifySearch extends Omit<VerifySearchResponse, 'checks'> {
     requestId: string

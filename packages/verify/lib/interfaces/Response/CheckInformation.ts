@@ -1,4 +1,4 @@
-import { SearchEventInformationResponse } from './searchEventInformationResponse';
+import { SearchEventInformationResponse } from './SearchEventInformationResponse';
 
 /**
  * @deprecated Please use SearchEventInformation instead

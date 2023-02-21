@@ -1,5 +1,5 @@
-import { SearchCheckInformationResponse } from './searchCheckInformationResponse';
-import { SearchEventInformationResponse } from './searchEventInformationResponse';
+import { SearchCheckInformationResponse } from './SearchCheckInformationResponse';
+import { SearchEventInformationResponse } from './SearchEventInformationResponse';
 import { SearchStatus } from './../../enums/index';
 
 export interface VerifySearchResponse {
