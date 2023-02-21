@@ -6,6 +6,7 @@ export * from './SearchEventInformationResponse';
 export * from './UnblockRequestResponse';
 export * from './VerifyCancelResponse';
 export * from './VerifyCheckError';
+export * from './VerifyCheckErrorResponse';
 export * from './VerifyCheckResponse';
 export * from './VerifyControlError';
 export * from './VerifyControlResponse';
