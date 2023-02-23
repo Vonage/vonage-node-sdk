@@ -9,6 +9,9 @@ import { Headers } from './interfaces/headers';
 import { VetchResponse } from './interfaces/vetchResponse';
 import { ResponseTypes } from './enums/responseTypes';
 import { VetchOptions } from './interfaces/vetchOptions';
+import debug from 'debug';
+
+const log = debug('vonage:vetch');
 
 export class Vetch {
   defaults: VetchOptions;
@@ -30,6 +33,8 @@ export class Vetch {
 
   async request<T>(opts: VetchOptions = {}): Promise<VetchResponse<T>> {
     opts = this.validateOpts(opts);
+
+    log('api request', opts);
 
     const formattedResponse = await this._defaultAdapter<T>(opts);
 
