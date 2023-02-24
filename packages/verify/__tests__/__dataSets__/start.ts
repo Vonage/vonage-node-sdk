@@ -10,6 +10,7 @@ import {
   VerifyError,
 } from '../../lib/interfaces/index';
 import { PSD2Parameters, VerificationParameters } from '../../lib/types/index';
+import { PSD2, Verification } from '../../lib/classes/index';
 
 export default [
   {
@@ -38,6 +39,44 @@ export default [
               number: '12128675309',
               brand: 'My Brand',
             } as VerificationParameters,
+    ],
+    expected: {
+      request_id: 'abcdef0123456789abcdef0123456789',
+      requestId: 'abcdef0123456789abcdef0123456789',
+      status: CheckStatus.SUCCESS,
+    } as VerifyRequest,
+  },
+  {
+    label: 'request a verification using class',
+    request: [
+      '/verify/json',
+      'POST',
+      {
+        api_key: '12345',
+        api_secret: 'ABCDE',
+        number: '12128675309',
+        brand: 'My Brand',
+        lg: VerifyLanguages.WELSH_UK,
+      },
+    ],
+    response: [
+      200,
+            {
+              request_id: 'abcdef0123456789abcdef0123456789',
+              status: CheckStatus.SUCCESS,
+            } as VerifyRequestResponse,
+    ],
+    method: 'post',
+    clientMethod: 'start',
+    parameters: [
+      new Verification(
+        '12128675309',
+        'My Brand',
+        null,
+        null,
+        null,
+        VerifyLanguages.WELSH_UK,
+      ),
     ],
     expected: {
       request_id: 'abcdef0123456789abcdef0123456789',
@@ -133,7 +172,46 @@ export default [
     } as VerifyError,
   },
   {
-    label: 'request a PSD2 verification ',
+    label: 'request a PSD2 verification',
+    request: [
+      '/verify/psd2/json',
+      'POST',
+      {
+        api_key: '12345',
+        api_secret: 'ABCDE',
+        number: '12128675309',
+        payee: 'My Payee',
+        amount: 42.0,
+        lg: VerifyLanguages.SWEDISH,
+      },
+    ],
+    response: [
+      200,
+            {
+              request_id: 'abcdef0123456789abcdef0123456789',
+              status: CheckStatus.SUCCESS,
+            } as VerifyRequestResponse,
+    ],
+    method: 'post',
+    clientMethod: 'start',
+    parameters: [
+      new PSD2(
+        '12128675309',
+        'My Payee',
+        42.0,
+        null,
+        null,
+        VerifyLanguages.SWEDISH,
+      ),
+    ],
+    expected: {
+      request_id: 'abcdef0123456789abcdef0123456789',
+      requestId: 'abcdef0123456789abcdef0123456789',
+      status: CheckStatus.SUCCESS,
+    } as VerifyRequest,
+  },
+  {
+    label: 'request a PSD2 verification with class',
     request: [
       '/verify/psd2/json',
       'POST',

@@ -7,6 +7,10 @@ export class Verification implements VerificationParameters {
   country?: string;
   senderId?: string;
   codeLength?: number;
+  /**
+     * @deprecated
+     */
+  language?: string;
   lg?: VerifyLanguages;
   pinExpiry?: number;
   nextEventWait?: number;
@@ -19,6 +23,7 @@ export class Verification implements VerificationParameters {
     senderId?: string,
     codeLength?: number,
     language?: VerifyLanguages,
+    lg?: VerifyLanguages,
     pinExpiry?: number,
     nextEventWait?: number,
     workflowId?: VerifyWorkflows,
@@ -37,6 +42,7 @@ export class Verification implements VerificationParameters {
     }
     if (language) {
       this.lg = language;
+      this.language = language;
     }
     if (pinExpiry) {
       this.pinExpiry = pinExpiry;

@@ -8,6 +8,9 @@ export class PSD2 implements PSD2Parameters {
   country?: string;
   codeLength?: number;
   lg?: VerifyLanguages;
+  /**
+     * @deprecated
+     */
   language?: string;
   pinExpiry?: number;
   nextEventWait?: number;
@@ -20,6 +23,7 @@ export class PSD2 implements PSD2Parameters {
     country?: string,
     codeLength?: number,
     language?: VerifyLanguages,
+    lg?: VerifyLanguages,
     pinExpiry?: number,
     nextEventWait?: number,
     workflowId?: VerifyWorkflows,
@@ -40,6 +44,7 @@ export class PSD2 implements PSD2Parameters {
     }
     if (language) {
       this.lg = language;
+      this.language = language;
     }
     if (pinExpiry) {
       this.pinExpiry = pinExpiry;

@@ -17,6 +17,7 @@ import {
   VerifyRequest,
 } from './interfaces/index';
 import { VerificationParameters, PSD2Parameters } from './types/index';
+import omit from 'lodash.omit';
 
 export class Verify extends Client {
   public async sendControl(
@@ -83,7 +84,7 @@ export class Verify extends Client {
 
     const resp = await this.sendPostRequest<VerifyCheckResponse>(
       url,
-      Client.transformers.snakeCaseObjectKeys(request),
+      Client.transformers.snakeCaseObjectKeys(omit(request, ['language'])),
     );
 
     return Client.transformers.camelCaseObjectKeys(resp.data, true, true);
