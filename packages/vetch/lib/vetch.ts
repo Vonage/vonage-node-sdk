@@ -38,6 +38,7 @@ export class Vetch {
 
     const formattedResponse = await this._defaultAdapter<T>(opts);
 
+    log('api response', formattedResponse);
     if (!opts.checkStatus(formattedResponse.status)) {
       const err = new VetchError(
         `Request failed with status code ${formattedResponse.status}`,
@@ -60,7 +61,8 @@ export class Vetch {
       let data = await res.text();
       try {
         data = JSON.parse(data);
-      } catch {
+      } catch (error) {
+        log('Invalid JSON from API', error);
         // continue
       }
       return data;
