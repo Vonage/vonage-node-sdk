@@ -61,8 +61,7 @@ export class Vetch {
       let data = await res.text();
       try {
         data = JSON.parse(data);
-      } catch (error) {
-        log('Invalid JSON from API', error);
+      } catch {
         // continue
       }
       return data;
