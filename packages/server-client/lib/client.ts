@@ -6,6 +6,9 @@ import {
 } from '@vonage/vetch';
 import { AuthenticationType } from './enums/AuthenticationType';
 import * as transfomers from './transformers';
+import debug from 'debug';
+
+const log = debug('vonage:server-client');
 
 export abstract class Client {
   protected authType?: AuthenticationType;
@@ -52,6 +55,7 @@ export abstract class Client {
   public static transformers = transfomers;
 
   public addAuthenticationToRequest(request: any): any {
+    log(`adding ${this.authType || 'api key/secret'} to request`);
     switch (this.authType) {
     case AuthenticationType.BASIC:
       request.headers = Object.assign({}, request.headers, {

@@ -18,10 +18,6 @@ const config: Config.InitialOptions = {
       testMatch: ['<rootDir>/packages/audit/__tests__/**/*.test.ts'],
     },
     {
-      displayName: 'AUDIT',
-      testMatch: ['<rootDir>/packages/audit/tests__/**/*.test.ts'],
-    },
-    {
       displayName: 'AUTH',
       testMatch: ['<rootDir>/packages/auth/__tests__/**/*.test.ts'],
     },

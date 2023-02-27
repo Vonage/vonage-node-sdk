@@ -23,6 +23,7 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
+        "debug": "^4.3.4",
         "lodash.merge": "^4.6.2",
         "node-fetch": "^2.6"
     },
