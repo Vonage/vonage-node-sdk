@@ -12,7 +12,7 @@ jobs:
         node: [14.x, 16.x, 18.x]
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Node.js ${{ matrix.node }}
       uses: actions/setup-node@v1
       with:
