@@ -39,25 +39,25 @@ information for each package below:
 
 The following is a list of Vonage APIs and whether the Node Server SDK provides support for them:
 
-| API   | API Release Status |  Supported?|
-|----------|:---------:|:-------------:|
-| Account API | General Availability |✅|
-| Alerts API | General Availability |✅|
-| Application API | General Availability |✅|
-| Audit API | Beta |✅|
-| Conversation API | Beta |❌|
-| Dispatch API | Beta |❌|
-| External Accounts API | Beta |❌|
-| Media API | Beta |❌|
-| Messages API | Beta |✅|
-| Number Insight API | General Availability |✅|
-| Number Management API | General Availability |✅|
-| Pricing API | General Availability |✅|
-| Redact API | Developer Preview |❌|
-| Reports API | Beta |❌|
-| SMS API | General Availability |✅|
-| Verify API | General Availability |✅|
-| Voice API | General Availability |✅|
+| API                   |  API Release Status  | Supported? |
+|-----------------------|:--------------------:|:----------:|
+| Account API           | General Availability |     ✅     |
+| Alerts API            | General Availability |     ✅     |
+| Application API       | General Availability |     ✅     |
+| Audit API             |         Beta         |     ✅     |
+| Conversation API      |         Beta         |     ❌     |
+| Dispatch API          |         Beta         |     ❌     |
+| External Accounts API |         Beta         |     ❌     |
+| Media API             |         Beta         |     ❌     |
+| Messages API          |         Beta         |     ✅     |
+| Number Insight API    | General Availability |     ✅     |
+| Number Management API | General Availability |     ✅     |
+| Pricing API           | General Availability |     ✅     |
+| Redact API            |  Developer Preview   |     ✅     |
+| Reports API           |         Beta         |     ❌     |
+| SMS API               | General Availability |     ✅     |
+| Verify API            | General Availability |     ✅     |
+| Voice API             | General Availability |     ✅     |
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 [license]: LICENSE.txt
