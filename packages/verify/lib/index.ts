@@ -1,3 +1,5 @@
-export { PSD2 } from './classes/PSD2'
-export { Verification } from './classes/Verification'
-export { Verify } from './verify'
+export { Verify } from './verify';
+export * from './classes/index';
+export * from './enums/index';
+export * from './interfaces/index';
+export * from './types/index';

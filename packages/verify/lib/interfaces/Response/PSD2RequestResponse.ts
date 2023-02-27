@@ -1,4 +1,3 @@
-export interface VerifyRequestResponse {
-    request_id: string
-    status: string
-}
+import { VerifyRequestResponse } from './VerifyRequestResponse';
+
+export type VerifyPDS2Response = VerifyRequestResponse

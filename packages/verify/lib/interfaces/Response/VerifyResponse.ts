@@ -1,3 +1,5 @@
-import { VetchResponse } from '@vonage/vetch'
-
-export interface VoiceResponse<T> extends VetchResponse<T> {}
+import { CheckStatus } from '../../enums/index';
+export interface VerifyResponse {
+    request_id: string
+    status: CheckStatus
+}

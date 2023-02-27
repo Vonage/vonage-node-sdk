@@ -1,11 +1,6 @@
-export interface PSD2Request {
-    number: string
-    payee: string
-    amount: string
-    country?: string
-    codeLength?: number
-    language?: string
-    pinExpiry?: number
-    nextEventWait?: number
-    workflowId?: number
-}
+import { PSD2Parameters } from '../types/index';
+
+/**
+ * @deprecated please use PSD2Parameters
+ */
+export type PSD2Request = PSD2Parameters

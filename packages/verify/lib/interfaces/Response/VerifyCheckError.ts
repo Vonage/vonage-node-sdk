@@ -1,5 +1,6 @@
-export interface VerifyRequestError {
-    request_id: string
-    status: string
-    error_text: string
-}
+import { VerifyCheckResponse } from './VerifyCheckResponse';
+
+/**
+ * @deprecated Please use VerifyCheckResponse instead
+ */
+export type VerifyRequestError = VerifyCheckResponse
