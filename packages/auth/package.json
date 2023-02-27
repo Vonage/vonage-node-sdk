@@ -1,6 +1,6 @@
 {
     "name": "@vonage/auth",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "description": "Vonage Auth Package adds the correct authentication headers to requests to Vonage API's",
     "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/auth#readme",
     "bugs": {
@@ -23,7 +23,7 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/jwt": "^1.0.10",
+        "@vonage/jwt": "^1.0.12",
         "debug": "^4.3.4"
     },
     "devDependencies": {
