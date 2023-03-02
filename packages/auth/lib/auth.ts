@@ -41,22 +41,24 @@ export class Auth implements AuthInterface {
     }
   }
 
-  getQueryParams = <T>(params?: T): AuthQueryParams & T => {
+  getQueryParams = async <T>(params?: T): Promise<AuthQueryParams & T> => {
     return { api_key: this.apiKey, api_secret: this.apiSecret, ...params };
   };
 
-  createBasicHeader = () => {
+  createBasicHeader = async () => {
     log('Creating basic auth header');
     const buf = Buffer.from(`${this.apiKey}:${this.apiSecret}`);
     return 'Basic ' + buf.toString('base64');
   };
 
-  createBearerHeader = () => {
+  createBearerHeader = async () => {
     log('Creating bearer header');
     return 'Bearer ' + tokenGenerate(this.applicationId, this.privateKey);
   };
 
-  createSignatureHash = <T>(params: T): AuthSignedParams & T => {
+  createSignatureHash = async <T>(
+    params: T,
+  ): Promise<AuthSignedParams & T> => {
     log('Creating signature hash');
     const returnParams: AuthSignedParams & T = Object.assign(
       { api_key: this.apiKey },

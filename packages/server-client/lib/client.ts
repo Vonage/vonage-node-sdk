@@ -54,17 +54,18 @@ export abstract class Client {
 
   public static transformers = transfomers;
 
-  public addAuthenticationToRequest(request: any): any {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public async addAuthenticationToRequest(request: any): Promise<any> {
     log(`adding ${this.authType || 'api key/secret'} to request`);
     switch (this.authType) {
     case AuthenticationType.BASIC:
       request.headers = Object.assign({}, request.headers, {
-        Authorization: this.auth.createBasicHeader(),
+        Authorization: await this.auth.createBasicHeader(),
       });
       break;
     case AuthenticationType.JWT:
       request.headers = Object.assign({}, request.headers, {
-        Authorization: this.auth.createBearerHeader(),
+        Authorization: await this.auth.createBearerHeader(),
       });
       break;
     case AuthenticationType.QUERY_KEY_SECRET:
@@ -72,7 +73,7 @@ export abstract class Client {
       request.params = Object.assign(
         {},
         request.params,
-        this.auth.getQueryParams(request.params),
+        await this.auth.getQueryParams(request.params),
       );
       break;
     case AuthenticationType.KEY_SECRET:
@@ -82,14 +83,14 @@ export abstract class Client {
         request.params = Object.assign(
           {},
           request.params,
-          this.auth.getQueryParams(request.params),
+          await this.auth.getQueryParams(request.params),
         );
       } else {
         request.data = request.data || {};
         request.data = Object.assign(
           {},
           request.data,
-          this.auth.getQueryParams(request.data),
+          await this.auth.getQueryParams(request.data),
         );
       }
       break;
@@ -109,6 +110,7 @@ export abstract class Client {
 
   public async sendFormSubmitRequest<T>(
     url: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     const request = {
@@ -129,6 +131,7 @@ export abstract class Client {
 
   public async sendGetRequest<T>(
     url: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     queryParams?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     const request = {
@@ -146,6 +149,7 @@ export abstract class Client {
 
   public async sendPatchRequest<T>(
     url: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     const request = {
@@ -166,6 +170,7 @@ export abstract class Client {
 
   public async sendPostRequest<T>(
     url: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     const request = {
@@ -186,6 +191,7 @@ export abstract class Client {
 
   public async sendPutRequest<T>(
     url: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     const request = {
@@ -204,8 +210,9 @@ export abstract class Client {
     return await this.sendRequest<T>(request);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public async sendRequest<T>(request: any): Promise<VetchResponse<T>> {
-    request = this.addAuthenticationToRequest(request);
+    request = await this.addAuthenticationToRequest(request);
     request.timeout = this.config.timeout;
     const result = await vetchRequest<T>(request);
     return result;

@@ -24,7 +24,7 @@ describe('server client', () => {
     const client = new MockClient(
       new Auth({ apiKey: 'abcd', apiSecret: '1234' }),
     );
-    const request = client.addAuthenticationToRequest({
+    const request = await client.addAuthenticationToRequest({
       method: 'GET',
       params: { foo: 'bar' },
     });
@@ -38,7 +38,7 @@ describe('server client', () => {
     const client = new MockClient(
       new Auth({ apiKey: 'abcd', apiSecret: '1234' }),
     );
-    const request = client.addAuthenticationToRequest({
+    const request = await client.addAuthenticationToRequest({
       method: 'POST',
       data: { foo: 'bar' },
     });
