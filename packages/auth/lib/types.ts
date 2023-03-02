@@ -38,8 +38,8 @@ export interface AuthInterface {
     signature?: SignedHashParams
     applicationId?: string
     privateKey?: string
-    getQueryParams<T>(params?: T): AuthQueryParams & T
-    createSignatureHash<T>(params: T): AuthSignedParams & T
-    createBasicHeader(): string
-    createBearerHeader(): string
+    getQueryParams<T>(params?: T): Promise<AuthQueryParams & T>
+    createSignatureHash<T>(params: T): Promise<AuthSignedParams & T>
+    createBasicHeader(): Promise<string>
+    createBearerHeader(): Promise<string>
 }
