@@ -1,159 +1,34 @@
-import { AuthOpts, AuthInterface } from '@vonage/auth'
-import { VetchError, VetchResponse, VetchOptions } from '@vonage/vetch'
+export * from './classes/index';
+export * from './enums/index';
+export * from './interfaces/index';
+export * from './types/index';
 
-export type SMSClassParameters = AuthOpts &
-    VetchOptions & {
-        auth?: AuthInterface
-    }
+import { ErrorMessage } from './interfaces/ErrorMessage';
+import { Message } from './interfaces/Message';
+import debug from 'debug';
 
-export interface SMSResponse<T> extends VetchResponse<T> {}
+const log = debug('vonage:sms');
 
-export interface SMSEmptyResponse {
-    errorCode?: string
-    errorCodeLabel?: string
-}
+log('Importing from the types.ts is depreacted and will be removed');
 
-export interface SMSGeneralResponse {
-    messageCount?: string
-    messages?: Message[]
-}
-
-export interface SendSMSResponse {
-    /**
-     * @deprecated Use messageCount instead
-     */
-    'message-count': string
-    messageCount: number
-    messages: Message[]
-}
-
-export const COLLECTION_FORMATS = {
-    csv: ',',
-    ssv: ' ',
-    tsv: '\t',
-    pipes: '|',
-}
-
-export interface DeliveryReceipt {
-    msisdn?: string
-    to?: string
-    networkCode?: string
-    messageId?: string
-    price?: string
-    status?: string
-    scts?: string
-    errCode?: string
-    apiKey?: string
-    clientRef?: string
-    messageTimestamp?: string
-    timestamp?: string
-    nonce?: string
-    sig?: string
-}
-
-export interface ErrorMessage {
-    status?: string
-    errorText?: string
-}
-
+/**
+ * @deprecated no replacement for this
+ */
 export interface ErrorXml {
     messages?: ErrorMessage[]
 }
 
-export interface InboundMessage {
-    apiKey: string
-    msisdn: string
-    to: string
-    messageId: string
-    text: string
-    type: string
-    keyword: string
-    messageTimestamp: string
-    timestamp?: string
-    nonce?: string
-    concat?: string
-    concatRef?: string
-    concatTotal?: string
-    concatPart?: string
-    data?: Blob
-    udh?: string
-}
-
-export interface Message {
-    to?: string
-    messageId?: string
-    /**
-     * @deprecated Use messageId instead
-     */
-    'message-id'?: string
-    status?: string
-    remainingBalance?: string
-    /**
-     * @deprecated Use remainingBalance instead
-     */
-    'remaining-balance'?: string
-    messagePrice?: string
-    /**
-     * @deprecated Use messagePrice
-     */
-    'message-price'?: string
-    network?: string
-    clientRef?: string
-    /**
-     * @deprecated Use clientRef instead
-     */
-    'client-ref'?: string
-    accountRef?: string
-    /**
-     * @deprecated Use accountRef instead
-     */
-    'account-ref'?: string
-}
-
+/**
+ * @deprecated no replacement for this
+ */
 export interface ModelError {
     messageCount?: string
     messages?: ErrorMessage[]
 }
 
-export interface SMSParams {
-    from: string
-    to: string
-    text?: string
-    ttl?: number
-    statusReportReq?: boolean
-    callback?: string
-    messageClass?: MessageClassEnum
-    type?: TypeEnum
-    vcard?: string
-    vcal?: string
-    body?: string
-    udh?: string
-    protocolId?: number
-    title?: string
-    url?: string
-    validity?: string
-    clientRef?: string
-    accountRef?: string
-    entityId?: string
-    contentId?: string
-}
-
-export enum MessageClassEnum {
-    NUMBER_0 = 0,
-    NUMBER_1 = 1,
-    NUMBER_2 = 2,
-    NUMBER_3 = 3,
-}
-
-export enum TypeEnum {
-    Text = 'text',
-    Binary = 'binary',
-    Wappush = 'wappush',
-    Unicode = 'unicode',
-    Vcal = 'vcal',
-    Vcard = 'vcard',
-}
-
+/**
+ * @deprecated no replacement for this
+ */
 export interface SMSXml {
     messages?: Message[]
 }

@@ -1,62 +1,38 @@
-import { Client } from '@vonage/server-client'
-import { MessageSendAllFailure } from './classes/Error/MessageSendAllFailure'
-import { MessageSendPartialFailure } from './classes/Error/MessageSendPartialFailure'
-import { SMSParams, SendSMSResponse, Message } from './types'
+import { Client } from '@vonage/server-client';
+import {
+  MessageSendAllFailure,
+  MessageSendPartialFailure,
+} from './classes/index';
+import { SMSMessages, SMSResponse, Message } from './interfaces/index';
+import { SMSParams } from './types/index';
+import { SMSStatus } from './enums/index';
 
 export class SMS extends Client {
-    public async send(params?: SMSParams): Promise<SendSMSResponse> {
-        const resp = await this.sendPostRequest<SendSMSResponse>(
-            `${this.config.restHost}/sms/json`,
-            params
-        )
+  public async send(params?: SMSParams): Promise<SMSMessages> {
+    const resp = await this.sendPostRequest<SMSResponse>(
+      `${this.config.restHost}/sms/json`,
+      Client.transformers.kebabCaseObjectKeys(params),
+    );
 
-        let failures: number = 0
-        const messageCount: number = parseInt(resp.data['message-count'], 10)
-        const messageData: SendSMSResponse = {
-            messageCount,
-            'message-count': resp.data['message-count'],
-            messages: [],
-        }
-        for (const element of resp.data.messages) {
-            const message: Message = element
-            if (element['message-id']) {
-                message.messageId = element['message-id']
-            }
-            if (element['remaining-balance']) {
-                message.remainingBalance = element['remaining-balance']
-            }
-            if (element['message-price']) {
-                message.messagePrice = element['message-price']
-            }
-            if (element['client-ref']) {
-                message.clientRef = element['client-ref']
-            }
-            if (element['account-ref']) {
-                message.accountRef = element['account-ref']
-            }
-            messageData.messages.push(message)
-        }
+    const messageData: SMSMessages
+            = Client.transformers.camelCaseObjectKeys(resp.data, true, true);
 
-        for (let i = 0; i < messageCount; i++) {
-            if (messageData.messages[i].status !== '0') {
-                failures++
-            }
-        }
+    const totalMessages = messageData.messageCount || 0;
+    const messages = (messageData.messages as Array<Message>) || [];
+    const failures = messages.reduce<number>(
+      (failures: number, { status }: Message) =>
+        status !== SMSStatus.SUCCESS ? failures + 1 : failures,
+      0,
+    );
 
-        if (failures === messageCount) {
-            throw new MessageSendAllFailure(
-                'All SMS messages failed to send',
-                messageData
-            )
-        }
-
-        if (failures > 0) {
-            throw new MessageSendPartialFailure(
-                'Some SMS messages failed to send',
-                messageData
-            )
-        }
-
-        return messageData
+    if (failures < 1) {
+      return messageData;
     }
+
+    if (failures === totalMessages) {
+      throw new MessageSendAllFailure(messageData);
+    }
+
+    throw new MessageSendPartialFailure(messageData);
+  }
 }

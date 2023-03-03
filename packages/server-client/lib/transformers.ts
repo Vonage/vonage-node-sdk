@@ -1,5 +1,6 @@
 import camelCase from 'lodash.camelcase';
 import snakeCase from 'lodash.snakecase';
+import kebabCase from 'lodash.kebabcase';
 import partial from 'lodash.partial';
 import isObject from 'lodash.isobject';
 
@@ -52,3 +53,5 @@ export const transformObjectKeys = (
 export const camelCaseObjectKeys = partial(transformObjectKeys, camelCase);
 
 export const snakeCaseObjectKeys = partial(transformObjectKeys, snakeCase);
+
+export const kebabCaseObjectKeys = partial(transformObjectKeys, kebabCase);

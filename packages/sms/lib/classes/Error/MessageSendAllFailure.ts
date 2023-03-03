@@ -1,16 +1,8 @@
-import { Message, SendSMSResponse } from '../../types'
+import { SMSMessages } from '../../interfaces';
+import { SMSFailure } from './SMSFailure';
 
-export class MessageSendAllFailure extends Error {
-    protected response: SendSMSResponse
-
-    constructor(message: string, response: SendSMSResponse) {
-        super(message)
-
-        Object.setPrototypeOf(this, MessageSendAllFailure.prototype)
-        this.response = response
-    }
-
-    public getResponse(): SendSMSResponse {
-        return this.response
-    }
+export class MessageSendAllFailure extends SMSFailure {
+  constructor(response: SMSMessages) {
+    super('All SMS messages failed to send', response);
+  }
 }
