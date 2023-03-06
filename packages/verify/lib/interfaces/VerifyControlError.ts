@@ -1,4 +1,4 @@
-import { CheckStatus } from '../../lib/enums/index';
+import { CheckStatus } from '../enums/index';
 
 export type VerifyControlError = {
     status: CheckStatus
