@@ -1,6 +1,6 @@
 {
     "name": "@vonage/voice",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "Vonage Voice API",
     "keywords": [
         "vonage",
@@ -31,9 +31,9 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.1.0",
-        "@vonage/server-client": "^1.1.0",
-        "@vonage/vetch": "^1.1.0"
+        "@vonage/auth": "^1.1.2",
+        "@vonage/server-client": "^1.1.2",
+        "@vonage/vetch": "^1.1.2"
     },
     "devDependencies": {
         "nock": "^13.2.9"

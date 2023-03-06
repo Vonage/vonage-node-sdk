@@ -1,6 +1,6 @@
 {
     "name": "@vonage/verify",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "Verify package for Vonage",
     "keywords": [
         "vonage",
@@ -35,9 +35,9 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.1.0",
-        "@vonage/server-client": "^1.1.0",
-        "@vonage/vetch": "^1.1.0",
+        "@vonage/auth": "^1.1.2",
+        "@vonage/server-client": "^1.1.2",
+        "@vonage/vetch": "^1.1.2",
         "lodash.omit": "^4.5.0"
     },
     "devDependencies": {

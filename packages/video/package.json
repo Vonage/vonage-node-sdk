@@ -1,6 +1,6 @@
 {
     "name": "@vonage/video",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Package to interact with the Vonage Video API (Not OpenTok Compatible)",
     "keywords": [
         "vonage",
@@ -31,10 +31,10 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/auth": "^1.1.0",
-        "@vonage/jwt": "^1.1.0",
-        "@vonage/server-client": "^1.1.0",
-        "@vonage/vetch": "^1.1.0"
+        "@vonage/auth": "^1.1.2",
+        "@vonage/jwt": "^1.1.2",
+        "@vonage/server-client": "^1.1.2",
+        "@vonage/vetch": "^1.1.2"
     },
     "devDependencies": {
         "jsonwebtoken": "^9.0.0",
