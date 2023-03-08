@@ -44,6 +44,10 @@ const config: Config.InitialOptions = {
       testMatch: ['<rootDir>/packages/pricing/__tests__/**/*.test.ts'],
     },
     {
+      displayName: 'REDACT',
+      testMatch: ['<rootDir>/packages/redact/__tests__/**/*.test.ts'],
+    },
+    {
       displayName: 'SERVER CLIENT',
       testMatch: [
         '<rootDir>/packages/server-client/__tests__/**/*.test.ts',

@@ -1,0 +1,38 @@
+{
+    "name": "@vonage/redact",
+    "version": "1.0.0",
+    "description": "Delete data from the Vonage platform.",
+    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/redact#readme",
+    "bugs": {
+        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+    },
+    "license": "Apache-2.0",
+    "author": "Chuck MANCHUCK Reeves <chuck@manchuck.com>",
+    "main": "dist/index.js",
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "/dist"
+    ],
+    "scripts": {
+        "build": "npm run clean && npm run compile",
+        "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+        "compile": "npx tsc --build --verbose"
+    },
+    "dependencies": {
+        "@vonage/server-client": "^1.0.16"
+    },
+    "devDependencies": {
+        "@vonage/auth": "^1.0.10",
+        "nock": "^13.3.0"
+    },
+    "publishConfig": {
+        "directory": "dist"
+    }
+}
