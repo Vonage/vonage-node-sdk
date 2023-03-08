@@ -1,19 +1,5 @@
-import { SMS } from './sms'
-
-export {
-    SMSClassParameters,
-    SMSResponse,
-    SMSEmptyResponse,
-    COLLECTION_FORMATS,
-    DeliveryReceipt,
-    ErrorMessage,
-    ErrorXml,
-    InboundMessage,
-    Message,
-    ModelError,
-    SMSParams,
-    SMSGeneralResponse,
-    SMSXml,
-} from './types'
-
-export { SMS }
+export * from './classes/index';
+export * from './enums/index';
+export * from './interfaces/index';
+export * from './sms';
+export * from './types/index';
