@@ -1,6 +1,6 @@
 {
     "name": "@vonage/applications",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "description": "Vonage Applications API",
     "keywords": [
         "vonage"
@@ -31,7 +31,7 @@
     },
     "dependencies": {
         "@vonage/auth": "^1.1.2",
-        "@vonage/server-client": "^1.1.2",
+        "@vonage/server-client": "^1.2.0",
         "@vonage/vetch": "^1.1.2"
     },
     "devDependencies": {

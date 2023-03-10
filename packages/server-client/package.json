@@ -1,6 +1,6 @@
 {
     "name": "@vonage/server-client",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "description": "Core services related to talking to the Vonage APIs",
     "homepage": "https://developer.vonage.com",
     "bugs": {
