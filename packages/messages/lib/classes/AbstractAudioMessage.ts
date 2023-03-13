@@ -1,25 +1,18 @@
-import { AudioMessage } from '../interfaces/AudioMessage'
-import { AudioObject } from '../interfaces/AudioObject'
+import { AbstractMessage } from './AbsctractMessage';
+import { MessageAudioInterface } from '../interfaces';
+import { MessageParamsAudio } from '../types';
+import { MessageAudioType } from '../types';
 
-export abstract class AbstractAudioMessageObject implements AudioMessage {
-    /* tslint:disable-next-line */
-    public message_type: string = 'audio'
-    public channel: string
-    public audio: AudioObject
-    public to: string
-    public from: string
-    /* tslint:disable-next-line */
-    public client_ref?: string
+export abstract class AbstractAudioMessage
+  extends AbstractMessage
+  implements MessageAudioInterface
+{
+  public messageType: 'audio';
+  public audio: MessageAudioType;
 
-    constructor(
-        audio: AudioObject,
-        to: string,
-        from: string,
-        clientRef?: string
-    ) {
-        this.audio = audio
-        this.to = to
-        this.from = from
-        this.client_ref = clientRef
-    }
+  public constructor(params: MessageParamsAudio) {
+    super(params);
+    this.audio = params.audio;
+    this.messageType = 'audio';
+  }
 }

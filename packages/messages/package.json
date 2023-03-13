@@ -37,8 +37,8 @@
     },
     "dependencies": {
         "@vonage/auth": "^1.1.2",
-        "@vonage/server-client": "^1.2.0",
-        "@vonage/vetch": "^1.1.2"
+        "@vonage/server-client": "^1.1.2",
+        "debug": "^4.3.4"
     },
     "devDependencies": {
         "nock": "^13.2.9"

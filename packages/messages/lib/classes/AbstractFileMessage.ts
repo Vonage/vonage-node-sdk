@@ -1,25 +1,17 @@
-import { FileMessage } from '../interfaces/FileMessage'
-import { FileObject } from '../interfaces/FileObject'
+import { AbstractMessage } from './AbsctractMessage';
+import { MessageFileInterface } from '../interfaces';
+import { MessageFileType, MessageParamsFile } from '../types';
 
-export abstract class AbstractFileMessage implements FileMessage {
-    /* tslint:disable-next-line */
-    public message_type: string = 'file'
-    public channel: string
-    public file: FileObject
-    public to: string
-    public from: string
-    /* tslint:disable-next-line */
-    public client_ref?: string
+export abstract class AbstractFileMessage
+  extends AbstractMessage
+  implements MessageFileInterface
+{
+  public messageType: 'file';
+  public file: MessageFileType;
 
-    constructor(
-        file: FileObject,
-        to: string,
-        from: string,
-        clientRef?: string
-    ) {
-        this.file = file
-        this.to = to
-        this.from = from
-        this.client_ref = clientRef
-    }
+  protected constructor(params: MessageParamsFile) {
+    super(params);
+    this.file = params.file;
+    this.messageType = 'file';
+  }
 }

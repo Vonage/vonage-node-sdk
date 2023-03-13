@@ -1,18 +1,14 @@
 import { Client } from '@vonage/server-client';
-import { MessageObject } from './interfaces/MessageObject';
-import { MessagesSendResponse } from './types';
+import { MessageSuccess } from './interfaces';
+import { SendMessageParams, MessageSuccessResponse } from './types';
+import debug from 'debug';
 
-const stripUndefined = (obj) => {
-  for (const key in obj) {
-    if (typeof obj[key] === 'object') {
-      obj[key] = stripUndefined(obj[key]);
-    } else if (!obj[key]) {
-      delete obj[key];
-    }
-  }
+const log = debug('vonage:messages');
 
-  return obj;
-};
+type VonageRequest = {
+    data: { [key: string]: unknown }
+    headers: { Authorization: string }
+}
 
 export class Messages extends Client {
   /**
@@ -22,33 +18,45 @@ export class Messages extends Client {
      *
      * @param {any} request - Object containing request data
      */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async addAuthenticationToRequest(request: any) {
+  public async addAuthenticationToRequest(
+    request: VonageRequest,
+  ): Promise<VonageRequest & unknown> {
+    log('Auth config', this.auth);
     if (this.auth.applicationId && this.auth.privateKey) {
-      request.headers = Object.assign({}, request.headers, {
-        Authorization: await this.auth.createBearerHeader(),
-      });
-    } else if (this.auth.signature) {
-      request.data = Object.assign(
-        request.data,
-        await this.auth.createSignatureHash(request.data),
-      );
-    } else {
-      request.data = Object.assign(
-        request.data,
-        await this.auth.getQueryParams(request.data),
-      );
+      log('Adding JWT token to request');
+      request.headers.Authorization = await this.auth.createBearerHeader();
+      return request;
     }
 
+    if (this.auth.signature) {
+      log('Signing the request');
+      request.data = {
+        ...request.data,
+        ...(await this.auth.createSignatureHash(request.data)),
+      };
+      return request;
+    }
+
+    log('Adding query parameters to request');
+    request.data = {
+      ...request.data,
+      ...(await this.auth.getQueryParams(request?.data)),
+    };
     return request;
   }
 
-  public async send(message: MessageObject) {
-    const data = stripUndefined(message);
-    const resp = await this.sendPostRequest<MessagesSendResponse>(
+  public async send(message: SendMessageParams): Promise<MessageSuccess> {
+    const resp = await this.sendPostRequest<MessageSuccessResponse>(
       `${this.config.apiHost}/v1/messages`,
-      data,
+      JSON.parse(
+        JSON.stringify(
+          Client.transformers.snakeCaseObjectKeys(message, true),
+        ),
+      ),
     );
-    return resp.data;
+
+    return {
+      messageUUID: resp.data?.message_uuid,
+    };
   }
 }

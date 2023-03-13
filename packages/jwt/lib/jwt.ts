@@ -12,7 +12,7 @@ export class JWT implements JWTInterface {
     opts?: GeneratorOptions,
   ): string {
     log(`Application id: ${applicationId}`);
-    log(`Provate key: ${privateKey}`);
+    log(`Private key: ${privateKey}`);
     if (!applicationId || !privateKey) {
       throw new Error('Missing applicationId or privateKey');
     }
