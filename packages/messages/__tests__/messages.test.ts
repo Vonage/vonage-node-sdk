@@ -10,19 +10,6 @@ describe.each(testDataSets)('$label', ({ tests }) => {
   const successTests = tests
     .filter(({ error }) => !error)
     .map((test) => [
-      // {
-      //   ...test,
-      //   authType: AuthType.SIG,
-      //   request: [
-      //     test.request[0],
-      //     test.request[1],
-      //     {
-      //       ...test.request[2] as object,
-      //       api_key: '12345',
-      //       sig: sigAuth.createSignatureHash(test.request[2]),
-      //     },
-      //   ],
-      // },
       {
         ...test,
         authType: AuthType.QUERY,
@@ -57,7 +44,6 @@ describe.each(testDataSets)('$label', ({ tests }) => {
     }) => {
       const scope = getScope(authType);
       const client = getClient(authType);
-      // request[2] = await request[2]?.sig;
       scope.intercept(...request).reply(...response);
 
       const results = await client[clientMethod](...parameters);
