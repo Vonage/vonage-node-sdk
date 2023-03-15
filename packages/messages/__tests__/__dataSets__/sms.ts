@@ -1,6 +1,7 @@
 import { SMS } from '../../lib';
 import { MessageSuccess } from '../../lib';
 import { MessageParamsText, SMSMessageRequest } from '../../lib';
+import { AuthType } from '../common';
 
 export default [
   {
@@ -68,5 +69,42 @@ export default [
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
     } as MessageSuccess,
+  },
+  {
+    label: 'send SMS message',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              text: 'too many secrets',
+              channel: 'sms',
+              message_type: 'text',
+            } as SMSMessageRequest,
+    ],
+    response: [
+      401,
+      {
+        type: 'https://developer.nexmo.com/api-errors/#unathorized',
+        title: 'You did not provide correct credentials.',
+        detail: `Check that you're using the correct credentials, and that your account has this feature enabled`,
+        instance: 'bf0ca0bf927b3b52e3cb03217e1a1ddf',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new SMS({
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+      } as MessageParamsText),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+    error: 'Request failed with status code 401',
+    authType: AuthType.JWT,
   },
 ];
