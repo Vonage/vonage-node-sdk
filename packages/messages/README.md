@@ -54,28 +54,29 @@ the `messages` property off of the client that you instantiate.
 
 ```js
 const {Vonage} = require('@vonage/server-sdk');
+import { Auth, AlgorithmTypes } from '@vonage/auth';
 
-const vonage = new Vonage({
+const vonage = new Vonage(new Auth({
   apiKey: API_KEY,
   apiSecret: API_SECRET,
   applicationId: APP_ID,
   privateKey: PRIVATE_KEY_PATH,
-  signatureSecret: SIGNATURE_SECRET,
-  signatureMethod: SIGNATURE_METHOD
-}, options);
+  signature: {
+    secret: 'ABCDE',
+    algorithm: AlgorithmTypes.md5hash,
+  },
+}), options);
 
 vonage.messages.send(new SMS({
   to: TO_NUMBER,
   from: FROM_NUMBER,
-  channel: 'sms',
   text: MESSAGE
 }));
 ```
 
 ### Standalone
 
-The SDK can be used standalone from the
-main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
+The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
 if you only need to use the Messages API. All you need to do
 is `require('@vonage/messages')`, and use the returned object to create your own
 client.
@@ -98,6 +99,8 @@ const messagesClient = new Messages(new Auth({
   are present, `apiSecret` is optional.
 * `applicationId` - (optional) The Vonage API Application ID to be used when
   creating JWTs.
+* `signature` - (optional) [deprecated] An object containg the secret and HASH
+  algroithm to use for signing the request.
 * `privateKey` - (optional) The Private Key to be used when creating JWTs. You
   can specify the key as any of the following:
   * A String containing the path to the key file on disk.
@@ -123,26 +126,18 @@ resolve these yourself, or use `await` to
 wait for a response.
 
 ```js
-const resp = await messagesClient.send({to: TO_NUMBER, from: FROM_NUMBER
-:
-channel: 'sms', message_type
-:
-'text', text
-:
-MESSAGE
-})
-;
+const resp = await messagesClient.send(new SMS({
+  to: TO_NUMBER,
+  from: FROM_NUMBER,
+  text: MESSAGE
+}));
 
-messagesClient.send({to: TO_NUMBER, from: FROM_NUMBER
-:
-channel: 'sms', message_type
-:
-'text', text
-:
-MESSAGE
-})
-.
-then(resp => console.log(resp))
+messagesClient.send(new SMS({
+  to: TO_NUMBER,
+  from: FROM_NUMBER:
+  text: MESSAGE
+}))
+  .then(resp => console.log(resp))
   .catch(err => console.error(err));
 ```
 
