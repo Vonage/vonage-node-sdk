@@ -21,7 +21,9 @@
     "lib"
   ],
   "scripts": {
-    "test": "node ./__tests__/verify2.test.js"
+    "build": "npm run clean && npm run compile",
+    "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+    "compile": "npx tsc --build --verbose"
   },
   "dependencies": {
     "@vonage/server-client": "^1.2.0"

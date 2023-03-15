@@ -1,6 +1,6 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
 import {
-  VerificationRequest,
+  Request,
   VerificationRequestParams,
   VerificationResponse,
 } from './types';
@@ -10,7 +10,7 @@ export class Verify2 extends Client {
 
   public async newRequest(
     params: VerificationRequestParams,
-  ): Promise<VerificationRequest> {
+  ): Promise<Request> {
     const resp = await this.sendPostRequest<VerificationResponse>(
       `${this.config.apiHost}/v2/verify`,
       Client.transformers.snakeCaseObjectKeys(params, true),
