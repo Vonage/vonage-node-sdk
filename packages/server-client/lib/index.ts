@@ -1,3 +1,3 @@
 export { Client } from './client';
-export { AuthenticationType } from './enums/AuthenticationType';
-export { APILink, APILinks } from './types';
+export * from './enums/';
+export * from './types';
