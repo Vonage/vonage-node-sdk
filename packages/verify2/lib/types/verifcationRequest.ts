@@ -1,6 +1,6 @@
 import { VerifyLocale } from '../enums';
 import { EmailWorkflow } from './emailWorkflow';
-import { SMSWorkflow } from './sMSWorkflow';
+import { SMSWorkflow } from './smsWorkflow';
 import { SilentAuthWorkflow } from './silentAuthWorkflow';
 import { VoiceWorkflow } from './voiceWorkflow';
 import { WhatsAppInteractiveWorkflow } from './whatsAppInteractiveWorkflow';

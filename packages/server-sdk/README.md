@@ -121,7 +121,7 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Reports API           | Beta                 | ❌         |
 | SMS API               | General Availability | ✅         |
 | Verify API            | General Availability | ✅         |
-| Verify v2 API         | Beta         |     ✅     |
+| Verify v2 API         | Beta                 | ✅         |
 | Voice API             | General Availability | ✅         |
 
 
