@@ -1,4 +1,4 @@
-import { AbstractMessage } from './AbsctractMessage';
+import { AbstractMessage } from './AbstractMessage';
 import { MessageVideoType } from '../types';
 import { MessageVideoInterface } from '../interfaces';
 import { MessageParamsVideo } from '../types';

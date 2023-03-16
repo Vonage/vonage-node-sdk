@@ -1,4 +1,4 @@
-import { AbstractMessage } from '../AbsctractMessage';
+import { AbstractMessage } from '../AbstractMessage';
 import { WhatsAppTemplateInterface } from '../../interfaces';
 import { WhatsAppTemplateParams } from '../../types';
 import { WhatsAppPolicyType } from '../../types';

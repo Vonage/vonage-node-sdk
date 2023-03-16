@@ -54,7 +54,8 @@ the `messages` property off of the client that you instantiate.
 
 ```js
 const {Vonage} = require('@vonage/server-sdk');
-import { Auth, AlgorithmTypes } from '@vonage/auth';
+const { Auth, AlgorithmTypes } = require('@vonage/auth');
+const { SMS } = require('@vonage/messages');
 
 const vonage = new Vonage(new Auth({
   apiKey: API_KEY,

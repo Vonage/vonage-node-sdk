@@ -1,4 +1,4 @@
-import { AbstractMessage } from './AbsctractMessage';
+import { AbstractMessage } from './AbstractMessage';
 import { MessageFileInterface } from '../interfaces';
 import { MessageFileType, MessageParamsFile } from '../types';
 

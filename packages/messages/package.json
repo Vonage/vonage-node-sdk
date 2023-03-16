@@ -37,7 +37,7 @@
     },
     "dependencies": {
         "@vonage/auth": "^1.1.2",
-        "@vonage/server-client": "^1.1.2",
+        "@vonage/server-client": "^1.2.0",
         "debug": "^4.3.4"
     },
     "devDependencies": {
@@ -45,6 +45,5 @@
     },
     "publishConfig": {
         "directory": "dist"
-    },
-    "gitHead": "328f18e5c8a458cb4d06d7955ec2399a6ce6f5d8"
+    }
 }

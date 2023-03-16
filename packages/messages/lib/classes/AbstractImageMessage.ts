@@ -1,5 +1,5 @@
 import { MessageImageInterface } from '../interfaces';
-import { AbstractMessage } from './AbsctractMessage';
+import { AbstractMessage } from './AbstractMessage';
 import { MessageImageType } from '../types';
 import { MessageParamsImage } from '../types';
 

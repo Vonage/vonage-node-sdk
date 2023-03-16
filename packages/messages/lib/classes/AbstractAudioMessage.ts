@@ -1,4 +1,4 @@
-import { AbstractMessage } from './AbsctractMessage';
+import { AbstractMessage } from './AbstractMessage';
 import { MessageAudioInterface } from '../interfaces';
 import { MessageParamsAudio } from '../types';
 import { MessageAudioType } from '../types';

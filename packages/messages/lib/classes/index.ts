@@ -1,4 +1,4 @@
-export * from './AbsctractMessage';
+export * from './AbstractMessage';
 export * from './AbstractAudioMessage';
 export * from './AbstractFileMessage';
 export * from './AbstractImageMessage';

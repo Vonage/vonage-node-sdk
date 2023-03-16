@@ -1,4 +1,4 @@
-import { AbstractMessage } from './AbsctractMessage';
+import { AbstractMessage } from './AbstractMessage';
 import { MessageVCardInterface } from '../interfaces';
 import { MessageVcardType } from '../types';
 import { MessageParamsVcard } from '../types';
