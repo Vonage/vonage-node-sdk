@@ -1,25 +1,18 @@
-import { VideoMessage } from '../interfaces/VideoMessage'
-import { VideoObject } from '../interfaces/VideoObject'
+import { AbstractMessage } from './AbstractMessage';
+import { MessageVideoType } from '../types';
+import { MessageVideoInterface } from '../interfaces';
+import { MessageParamsVideo } from '../types';
 
-export abstract class AbstractVideoMessage implements VideoMessage {
-    /* tslint:disable-next-line */
-    public message_type: string = 'video'
-    public channel: string
-    public video: VideoObject
-    public to: string
-    public from: string
-    /* tslint:disable-next-line */
-    public client_ref?: string
+export abstract class AbstractVideoMessage
+  extends AbstractMessage
+  implements MessageVideoInterface
+{
+  public messageType: 'video';
+  public video: MessageVideoType;
 
-    constructor(
-        video: VideoObject,
-        to: string,
-        from: string,
-        clientRef?: string
-    ) {
-        this.video = video
-        this.to = to
-        this.from = from
-        this.client_ref = clientRef
-    }
+  constructor(params: MessageParamsVideo) {
+    super(params);
+    this.video = params.video;
+    this.messageType = 'video';
+  }
 }

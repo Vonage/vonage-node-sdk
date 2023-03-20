@@ -6,11 +6,16 @@
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
-This is the Vonage Messages SDK for Node.js for use with [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free at vonage.com][signup].
+This is the Vonage Messages SDK for Node.js for use
+with [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage
+account. Sign up [for free at vonage.com][signup].
 
-We recommend using this package as part of the overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). 
+We recommend using this package as part of the
+overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk)
+.
 
-For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
+For full API documentation refer
+to [developer.nexmo.com](https://developer.nexmo.com/).
 
 * [Installation](#installation)
 * [Constructor](#constructor)
@@ -21,9 +26,13 @@ For full API documentation refer to [developer.nexmo.com](https://developer.nexm
 
 ## Installation
 
-We recommend using this SDK as part of the overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). Please see the main package for installation.
+We recommend using this SDK as part of the
+overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk)
+. Please see the main package for installation.
 
-You can also use this SDK standalone if you only need access to just the Messages API.
+You can also use this SDK standalone if you only need access to just the
+Messages API.
+
 ### With NPM
 
 ```bash
@@ -40,61 +49,68 @@ yarn add @vonage/messages
 
 ### As part of the Vonage Server SDK
 
-If you are using this SDK as part of the Vonage Server SDK, you can access it as the `messages` property off of the client that you instantiate.
+If you are using this SDK as part of the Vonage Server SDK, you can access it as
+the `messages` property off of the client that you instantiate.
 
 ```js
-const { Vonage } = require('@vonage/server-sdk');
+const {Vonage} = require('@vonage/server-sdk');
+const { Auth, AlgorithmTypes } = require('@vonage/auth');
+const { SMS } = require('@vonage/messages');
 
-const vonage = new Vonage({
-    apiKey: API_KEY,
-    apiSecret: API_SECRET,
-    applicationId: APP_ID,
-    privateKey: PRIVATE_KEY_PATH,
-    signatureSecret: SIGNATURE_SECRET,
-    signatureMethod: SIGNATURE_METHOD
-  }, options);
+const vonage = new Vonage(new Auth({
+  apiKey: API_KEY,
+  apiSecret: API_SECRET,
+  applicationId: APP_ID,
+  privateKey: PRIVATE_KEY_PATH,
+  signature: {
+    secret: 'ABCDE',
+    algorithm: AlgorithmTypes.md5hash,
+  },
+}), options);
 
-vonage.messages.send({to: TO_NUMBER, from: FROM_NUMBER: channel: 'sms', text: MESSAGE});
+vonage.messages.send(new SMS({
+  to: TO_NUMBER,
+  from: FROM_NUMBER,
+  text: MESSAGE
+}));
 ```
 
 ### Standalone
 
-The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if you only need to use the Messages API. All you need to do is `require('@vonage/messages')`, and use the returned object to create your own client.
+The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
+if you only need to use the Messages API. All you need to do
+is `require('@vonage/messages')`, and use the returned object to create your own
+client.
 
 ```js
-const { Auth } = require('@vonage/auth');
-const { Messages } = require('@vonage/messages');
+const {Auth} = require('@vonage/auth');
+const {Messages} = require('@vonage/messages');
 
 const messagesClient = new Messages(new Auth({
-    apiKey: API_KEY,
-    apiSecret: API_SECRET,
-    applicationId: APP_ID,
-    privateKey: PRIVATE_KEY_PATH,
-  }), options);
+  apiKey: API_KEY,
+  apiSecret: API_SECRET,
+  applicationId: APP_ID,
+  privateKey: PRIVATE_KEY_PATH,
+}), options);
 ```
 
-* `apiKey` - API Key from Vonage API. If `applicationId` and `privateKey` are present, `apiKey` is optional.
-* `apiSecret` - API Secret from Vonage API. If `applicationId` and `privateKey` are present, `apiSecret` is optional.
-* `applicationId` - (optional) The Vonage API Application ID to be used when creating JWTs.
-* `privateKey` - (optional) The Private Key to be used when creating JWTs. You can specify the key as any of the following:
-    * A [Buffer](https://nodejs.org/api/buffer.html#buffer_class_method_buffer_from_string_encoding) containing the file contents.
-    * A String containing the path to the key file on disk.
-    * A String containing the key itself.
+* `apiKey` - API Key from Vonage API. If `applicationId` and `privateKey` are
+  present, `apiKey` is optional.
+* `apiSecret` - API Secret from Vonage API. If `applicationId` and `privateKey`
+  are present, `apiSecret` is optional.
+* `applicationId` - (optional) The Vonage API Application ID to be used when
+  creating JWTs.
+* `signature` - (optional) [deprecated] An object containg the secret and HASH
+  algroithm to use for signing the request.
+* `privateKey` - (optional) The Private Key to be used when creating JWTs. You
+  can specify the key as any of the following:
+  * A String containing the path to the key file on disk.
+  * A String containing the key itself.
+  * A Buffer containing the file contents.
 * `options` is an object that can contain:
 
-```js
+```json5
 {
-  // If true, log information to the console
-  debug: true|false,
-  // append info the the User-Agent sent to Nexmo
-  // e.g. pass 'my-app' for /nexmo-node/1.0.0/4.2.7/my-app
-  appendToUserAgent: string,
-  // Set a custom logger
-  logger: {
-    log: function() {level, args...}
-    info: function() {args...},
-    warn: function() {args...}
-  },
   // Set a custom timeout for requests to Nexmo in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
   timeout: integer,
   // Set a custom host for requests instead of api.nexmo.com
@@ -106,13 +122,22 @@ const messagesClient = new Messages(new Auth({
 
 ## Promises
 
-Most methods that interact with the Vonage API uses Promises. You can either resolve these yourself, or use `await` to
+Most methods that interact with the Vonage API uses Promises. You can either
+resolve these yourself, or use `await` to
 wait for a response.
 
 ```js
-const resp = await messagesClient.send({to: TO_NUMBER, from: FROM_NUMBER: channel: 'sms', message_type: 'text', text: MESSAGE});
+const resp = await messagesClient.send(new SMS({
+  to: TO_NUMBER,
+  from: FROM_NUMBER,
+  text: MESSAGE
+}));
 
-messagesClient.send({to: TO_NUMBER, from: FROM_NUMBER: channel: 'sms', message_type: 'text', text: MESSAGE})
+messagesClient.send(new SMS({
+  to: TO_NUMBER,
+  from: FROM_NUMBER:
+  text: MESSAGE
+}))
   .then(resp => console.log(resp))
   .catch(err => console.error(err));
 ```
@@ -126,4 +151,5 @@ npm run test
 ```
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
+
 [license]: ../../LICENSE.txt

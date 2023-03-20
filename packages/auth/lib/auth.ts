@@ -74,6 +74,7 @@ export class Auth implements AuthInterface {
     // For every value in the parameter list, replace all instances of &
     // and = with an underscore _.
     const keys = Object.keys(returnParams);
+    // TODO update to use URLParams
     const stringifiedParamsforSigning = keys
       .sort()
       .map((keyName) => {

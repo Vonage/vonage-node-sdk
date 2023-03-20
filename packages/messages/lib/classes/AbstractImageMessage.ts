@@ -1,25 +1,18 @@
-import { ImageMessage } from '../interfaces/ImageMessage'
-import { ImageObject } from '../interfaces/ImageObject'
+import { MessageImageInterface } from '../interfaces';
+import { AbstractMessage } from './AbstractMessage';
+import { MessageImageType } from '../types';
+import { MessageParamsImage } from '../types';
 
-export abstract class AbstractImageMessage implements ImageMessage {
-    /* tslint:disable-next-line */
-    public message_type: string = 'image'
-    public channel: string
-    public image: ImageObject
-    public to: string
-    public from: string
-    /* tslint:disable-next-line */
-    public client_ref?: string
+export abstract class AbstractImageMessage
+  extends AbstractMessage
+  implements MessageImageInterface
+{
+  public messageType: 'image';
+  public image: MessageImageType;
 
-    constructor(
-        image: ImageObject,
-        to: string,
-        from: string,
-        clientRef?: string
-    ) {
-        this.image = image
-        this.to = to
-        this.from = from
-        this.client_ref = clientRef
-    }
+  constructor(params: MessageParamsImage) {
+    super(params);
+    this.image = params.image;
+    this.messageType = 'image';
+  }
 }

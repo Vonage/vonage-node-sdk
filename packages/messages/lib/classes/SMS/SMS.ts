@@ -1,9 +1,12 @@
-import { AbstractTextMessageObject } from '../AbstractTextMessage'
+import { AbstractTextMessage } from '../AbstractTextMessage';
+import { SMSTextInterface } from '../../interfaces';
+import { MessageParamsText } from '../../types';
 
-export class SMS extends AbstractTextMessageObject {
-    public channel = 'sms'
+export class SMS extends AbstractTextMessage implements SMSTextInterface {
+  public channel: 'sms';
 
-    constructor(text: string, to: string, from: string, clientRef?: string) {
-        super(text, to, from, clientRef)
-    }
+  constructor(params: MessageParamsText) {
+    super(params);
+    this.channel = 'sms';
+  }
 }
