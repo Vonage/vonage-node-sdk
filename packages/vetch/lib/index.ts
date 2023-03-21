@@ -13,3 +13,4 @@ export { Headers } from './interfaces/headers';
 export { VetchPromise } from './types/vetchPromise';
 export { VetchResponse } from './interfaces/vetchResponse';
 export { ResponseTypes } from './enums/responseTypes';
+export * from './enums/HTTPMethods';

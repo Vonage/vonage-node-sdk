@@ -1,14 +1,14 @@
-import { tokenGenerate } from '@vonage/jwt';
+import { tokenGenerate, GeneratorOptions } from '@vonage/jwt';
 import { createHash, createHmac } from 'crypto';
 import { existsSync, readFileSync } from 'fs';
 import {
-  AuthInterface,
-  AuthOpts,
+  AuthParams,
   AuthQueryParams,
   SignedHashParams,
   AuthSignedParams,
-  AlgorithmTypes,
-} from './types';
+} from './types/index';
+import { AuthInterface } from './interfaces/index';
+import { AlgorithmTypes } from './enums';
 import debug from 'debug';
 
 const log = debug('vonage:auth');
@@ -19,114 +19,106 @@ export class Auth implements AuthInterface {
   privateKey?: string;
   applicationId?: string;
   signature: SignedHashParams;
-  constructor(opts?: AuthOpts) {
-    // add additional methods to find auth
-    // also needs to handle private key, etc
+  jwtOptions: GeneratorOptions;
 
+  constructor(opts?: AuthParams) {
     this.apiKey = opts?.apiKey || '';
     this.apiSecret = opts?.apiSecret || '';
     this.signature = opts?.signature || null;
     this.applicationId = opts?.applicationId || null;
+    this.jwtOptions = opts?.jwtOptions || {};
 
-    if (opts?.privateKey) {
-      if (existsSync(opts.privateKey)) {
-        opts.privateKey = readFileSync(opts.privateKey).toString();
-      }
-
-      if (opts.privateKey instanceof Buffer) {
-        this.privateKey = opts.privateKey.toString();
-      } else {
-        this.privateKey = opts.privateKey;
-      }
+    if (!opts?.privateKey) {
+      log('No private key set');
+      return;
     }
+
+    if (existsSync(opts.privateKey)) {
+      log('Reading private key file');
+      opts.privateKey = readFileSync(opts.privateKey).toString();
+    }
+
+    this.privateKey = opts.privateKey instanceof Buffer
+      ? opts.privateKey.toString()
+      : opts.privateKey;
   }
 
-  getQueryParams = async <T>(params?: T): Promise<AuthQueryParams & T> => {
-    return { api_key: this.apiKey, api_secret: this.apiSecret, ...params };
-  };
+  getQueryParams = async <T>(
+    params?: AuthQueryParams & T,
+  ): Promise<AuthQueryParams & T> => ({
+    ...params,
+    api_key: this.apiKey,
+    api_secret: this.apiSecret,
+  });
 
-  createBasicHeader = async () => {
+  createBasicHeader = async (): Promise<string> => {
     log('Creating basic auth header');
     const buf = Buffer.from(`${this.apiKey}:${this.apiSecret}`);
-    return 'Basic ' + buf.toString('base64');
+    return `Basic ${buf.toString('base64')}`;
   };
 
-  createBearerHeader = async () => {
+  createBearerHeader = async (): Promise<string> => {
     log('Creating bearer header');
-    return 'Bearer ' + tokenGenerate(this.applicationId, this.privateKey);
+    return `Bearer ${tokenGenerate(this.applicationId, this.privateKey, this.jwtOptions)}`;
   };
 
   createSignatureHash = async <T>(
-    params: T,
+    params: AuthSignedParams & T,
   ): Promise<AuthSignedParams & T> => {
     log('Creating signature hash');
-    const returnParams: AuthSignedParams & T = Object.assign(
-      { api_key: this.apiKey },
-      params,
-    );
+    const returnParams: AuthSignedParams & T = {
+      ...params,
+      api_key: this.apiKey,
+    };
 
     // Add the current timestamp to the parameters list with the key
     // 'timestamp'. This should be an integer containing the number of seconds
     // since the epoch (UNIX time))
-    returnParams.timestamp = Math.floor(Date.now() / 1000).toString();
-
-    // Loop through each of the parameters, sorted by key.
-    // For every value in the parameter list, replace all instances of &
-    // and = with an underscore _.
-    const keys = Object.keys(returnParams);
-    // TODO update to use URLParams
-    const stringifiedParamsforSigning = keys
-      .sort()
-      .map((keyName) => {
-        // Generate a string consisting of &akey=value
-        return `&${keyName}=${returnParams[keyName]
-          .toString()
-          .replace(/(&|=)/gi, '_')}`;
-      }, [])
-      .join('');
-
-    // For hash
-    // Add signature secret to the end of the string, directly after the last
-    // value. It should now look something like this:
-    // '&akey=value&bkey=value${your_signature_secret}'
-    // Now run the string through an md5 hash function
-    // convert the resulting bytes to a string of hexadecimal digits.
-    // This is your MD5 hash signature,
-    // Should be added to the HTTP parameters of your request as the 'sig'
-    // parameter.
-    if (this.signature.algorithm === AlgorithmTypes.md5hash) {
-      returnParams.sig = createHash('md5')
-        .update(stringifiedParamsforSigning + this.signature.secret)
-        .digest('hex');
+    if (!returnParams.timestamp) {
+      returnParams.timestamp = Math.floor(Date.now() / 1000).toString();
     }
 
-    // For HMAC
-    // Create an HMAC generator with your desired algorithm and your
-    // signature secret as the key.
-    // Now run the string through an hmac generator
-    // convert the resulting bytes to a string of hexadecimal digits.
-    // This is your HMAC signature,
-    // Should be added to the HTTP parameters of your request as the sig
-    // parameter
-    if (this.signature.algorithm === AlgorithmTypes.md5hmac) {
+    const sortedParams = new URLSearchParams(returnParams);
+    sortedParams.sort();
+
+    const stringifiedParamsforSigning = sortedParams
+      .toString()
+      .replace(/(&|=)/gi, '_');
+
+    switch (this.signature.algorithm) {
+    case AlgorithmTypes.md5hash:
+      returnParams.sig = createHash('md5')
+        .update(
+          `${stringifiedParamsforSigning}${this.signature.secret}`,
+        )
+        .digest('hex');
+      break;
+
+    case AlgorithmTypes.md5hmac:
       returnParams.sig = createHmac('md5', this.signature.secret)
         .update(stringifiedParamsforSigning)
         .digest('hex');
-    }
-    if (this.signature.algorithm === AlgorithmTypes.sha1hmac) {
+      break;
+
+    case AlgorithmTypes.sha1hmac:
       returnParams.sig = createHmac('sha1', this.signature.secret)
         .update(stringifiedParamsforSigning)
         .digest('hex');
-    }
-    if (this.signature.algorithm === AlgorithmTypes.sha256hmac) {
+      break;
+
+    case AlgorithmTypes.sha256hmac:
       returnParams.sig = createHmac('sha256', this.signature.secret)
         .update(stringifiedParamsforSigning)
         .digest('hex');
-    }
-    if (this.signature.algorithm === AlgorithmTypes.sha512hmac) {
+      break;
+
+    case AlgorithmTypes.sha512hmac:
       returnParams.sig = createHmac('sha512', this.signature.secret)
         .update(stringifiedParamsforSigning)
         .digest('hex');
+      break;
+    default:
+      throw new Error(`Cannot sign request! Invalid algorithm: ${this.signature.algorithm}`);
     }
 
     return returnParams;
