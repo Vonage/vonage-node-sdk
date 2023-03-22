@@ -6,9 +6,41 @@ import { LayoutType } from '../lib/enums/LayoutType';
 import { MediaMode } from '../lib/interfaces/MediaMode';
 import { ArchiveMode } from '../lib/interfaces/ArchiveMode';
 import { Auth } from '@vonage/auth';
+import testDataSets from './__dataSets__/index'
 
 const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
 
+describe.each(testDataSets)('$label', ({ tests }) => {
+  let client;
+  let scope;
+
+  beforeEach(() => {
+    client = new Video(new Auth({ applicationId: 'abcd-1234', privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString() }));
+    scope = nock(BASE_URL, {
+      reqheaders: {
+        authorization: value => value.startsWith('Bearer ') && value.length > 10
+      }
+    }).persist()
+  });
+
+  afterEach(() => {
+    client = null;
+    scope = null;
+    nock.cleanAll();
+  })
+
+  test.each(tests)(
+    'Can $label using: $clientMethod',
+    async ({ request, response, clientMethod, expected, parameters }) => {
+      scope.intercept(...request).reply(...response);
+      const results = await client[clientMethod](...parameters);
+      expect(results).toEqual(expected);
+      expect(nock.isDone()).toBeTruthy();
+    }
+  )
+})
+
+// Legacy unit tests
 describe('video', () => {
   let client;
 

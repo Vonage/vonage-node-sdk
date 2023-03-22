@@ -86,9 +86,9 @@ The following is a list of Vonage Video APIs and whether the SDK provides suppor
 | Force Muting | ✅ |
 | Archiving | ✅ |
 | Custom S3/Azure buckets | ❌ |
-| SIP Interconnect | ❌ |
-| Live Streaming Broadcasts | ❌ |
-| Experience Composer | ❌ |
+| SIP Interconnect | ✅ |
+| Live Streaming Broadcasts | ✅ |
+| Experience Composer | ✅ |
 | Account Management | ❌ |
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
