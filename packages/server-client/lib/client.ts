@@ -1,219 +1,176 @@
-import { Auth, AuthInterface } from '@vonage/auth';
+import { Auth, AuthInterface, AuthParams } from '@vonage/auth';
 import {
   request as vetchRequest,
   ResponseTypes,
   VetchResponse,
+  VetchOptions,
+  HTTPMethods,
 } from '@vonage/vetch';
 import { AuthenticationType } from './enums/AuthenticationType';
 import * as transfomers from './transformers';
 import debug from 'debug';
+import { ConfigParams } from './types/index';
 
 const log = debug('vonage:server-client');
 
 export abstract class Client {
+  public static transformers = transfomers;
+
   protected authType?: AuthenticationType;
 
   protected auth: AuthInterface;
-  protected config: {
-        restHost: string
-        apiHost: string
-        videoHost: string
-        responseType: string
-        timeout: number
-    };
+
+  protected config: ConfigParams;
 
   constructor(
-    credentials: AuthInterface,
-    options?: {
-            restHost: string
-            apiHost: string
-            videoHost: string
-            responseType: ResponseTypes
-            timeout: number
-        },
+    credentials: AuthInterface | AuthParams,
+    options?: ConfigParams,
   ) {
-    if (typeof credentials.getQueryParams === 'undefined') {
-      credentials = new Auth(credentials);
-    }
+    this.auth = !Object.hasOwn(credentials, 'getQueryParams')
+      ? new Auth(credentials)
+      : (credentials as AuthInterface);
 
-    this.auth = credentials;
     this.config = {
-      restHost: null,
-      apiHost: null,
-      videoHost: null,
-      responseType: null,
+      restHost: options?.restHost || 'https://rest.nexmo.com',
+      apiHost: options?.apiHost || 'https://api.nexmo.com',
+      videoHost: options?.videoHost || 'https://video.api.vonage.com',
+      responseType: options?.responseType || ResponseTypes.json,
       timeout: null,
-    };
-
-    this.config.restHost = options?.restHost || 'https://rest.nexmo.com';
-    this.config.apiHost = options?.apiHost || 'https://api.nexmo.com';
-    this.config.videoHost
-            = options?.videoHost || 'https://video.api.vonage.com';
-    this.config.responseType = options?.responseType || ResponseTypes.json;
+    } as ConfigParams;
   }
 
-  public static transformers = transfomers;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async addAuthenticationToRequest(request: any): Promise<any> {
+  public async addAuthenticationToRequest(
+    request: VetchOptions,
+  ): Promise<VetchOptions> {
+    let requestPath = 'data';
     log(`adding ${this.authType || 'api key/secret'} to request`);
     switch (this.authType) {
     case AuthenticationType.BASIC:
       request.headers = Object.assign({}, request.headers, {
         Authorization: await this.auth.createBasicHeader(),
       });
-      break;
+      return request;
+
     case AuthenticationType.JWT:
       request.headers = Object.assign({}, request.headers, {
         Authorization: await this.auth.createBearerHeader(),
       });
-      break;
+      return request;
+
     case AuthenticationType.QUERY_KEY_SECRET:
-      request.params = request.params || {};
-      request.params = Object.assign(
-        {},
-        request.params,
-        await this.auth.getQueryParams(request.params),
-      );
-      break;
+      requestPath = 'params';
+      // falls through
     case AuthenticationType.KEY_SECRET:
     default:
-      if (request.method === 'GET') {
-        request.params = request.params || {};
-        request.params = Object.assign(
-          {},
-          request.params,
-          await this.auth.getQueryParams(request.params),
-        );
-      } else {
-        request.data = request.data || {};
-        request.data = Object.assign(
-          {},
-          request.data,
-          await this.auth.getQueryParams(request.data),
-        );
-      }
-      break;
     }
 
+    if (['GET', 'DELETE'].includes(request.method)) {
+      requestPath = 'params';
+    }
+
+    const authParams = await this.auth.getQueryParams({});
+    let params = {
+      ...request[requestPath],
+      ...authParams,
+    };
+
+    // This is most likely web-form
+    if (
+      !request[requestPath]
+            && this.authType !== AuthenticationType.QUERY_KEY_SECRET
+    ) {
+      requestPath = 'body';
+      params = new URLSearchParams({
+        ...Object.fromEntries(request.body.entries()),
+        ...authParams,
+      });
+    }
+
+    request[requestPath] = params;
     return request;
   }
 
   public async sendDeleteRequest<T>(url: string): Promise<VetchResponse<T>> {
     const request = {
       url,
-      method: 'DELETE',
-    };
+      method: HTTPMethods.DELETE,
+    } as VetchOptions;
 
     return await this.sendRequest<T>(request);
   }
 
   public async sendFormSubmitRequest<T>(
     url: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload?: { [key: string]: any },
+    payload?: Record<string, string>,
   ): Promise<VetchResponse<T>> {
     const request = {
       url,
-      body: new URLSearchParams(payload),
-      method: 'POST',
+      method: HTTPMethods.POST,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-    };
-
-    if (!payload) {
-      delete request.body;
-    }
+      ...(payload ? { body: new URLSearchParams(payload) } : {}),
+    } as VetchOptions;
 
     return await this.sendRequest<T>(request);
   }
 
   public async sendGetRequest<T>(
     url: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    queryParams?: { [key: string]: any },
+    queryParams?: { [key: string]: unknown },
   ): Promise<VetchResponse<T>> {
     const request = {
       url,
-      params: queryParams,
-      method: 'GET',
-    };
-
-    if (!queryParams) {
-      delete request.params;
-    }
+      method: HTTPMethods.GET,
+      ...(queryParams ? { params: queryParams } : {}),
+    } as VetchOptions;
 
     return await this.sendRequest<T>(request);
   }
 
   public async sendPatchRequest<T>(
     url: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload?: { [key: string]: any },
+    payload?: { [key: string]: unknown },
   ): Promise<VetchResponse<T>> {
-    const request = {
-      url,
-      data: payload,
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
-    if (!payload) {
-      delete request.data;
-    }
-
-    return await this.sendRequest<T>(request);
+    return this.sendRequestWithData(HTTPMethods.PATCH, url, payload);
   }
 
   public async sendPostRequest<T>(
     url: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload?: { [key: string]: any },
+    payload?: { [key: string]: unknown },
   ): Promise<VetchResponse<T>> {
-    const request = {
-      url,
-      data: payload,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-
-    if (!payload) {
-      delete request.data;
-    }
-
-    return await this.sendRequest<T>(request);
+    return this.sendRequestWithData(HTTPMethods.POST, url, payload);
   }
 
-  public async sendPutRequest<T>(
+  public sendPutRequest<T>(
     url: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    payload?: { [key: string]: any },
+    payload?: { [key: string]: unknown },
+  ): Promise<VetchResponse<T>> {
+    return this.sendRequestWithData(HTTPMethods.PUT, url, payload);
+  }
+
+  public async sendRequestWithData<T>(
+    method: HTTPMethods,
+    url: string,
+    payload?: { [key: string]: unknown },
   ): Promise<VetchResponse<T>> {
     const request = {
       url,
-      data: payload,
-      method: 'PUT',
+      method: method,
       headers: {
         'Content-Type': 'application/json',
       },
-    };
-
-    if (!payload) {
-      delete request.data;
-    }
+      ...(payload ? { data: payload } : {}),
+    } as VetchOptions;
 
     return await this.sendRequest<T>(request);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public async sendRequest<T>(request: any): Promise<VetchResponse<T>> {
-    request = await this.addAuthenticationToRequest(request);
+  public async sendRequest<T>(
+    request: VetchOptions,
+  ): Promise<VetchResponse<T>> {
     request.timeout = this.config.timeout;
+    request = await this.addAuthenticationToRequest(request);
     const result = await vetchRequest<T>(request);
     return result;
   }
