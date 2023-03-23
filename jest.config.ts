@@ -66,6 +66,10 @@ const config: Config.InitialOptions = {
       testMatch: ['<rootDir>/packages/verify/__tests__/**/*.test.ts'],
     },
     {
+      displayName: 'VERIFY 2',
+      testMatch: ['<rootDir>/packages/verify2/__tests__/**/*.test.ts'],
+    },
+    {
       displayName: 'VETCH',
       testMatch: ['<rootDir>/packages/vetch/__tests__/**/*.test.ts'],
     },
