@@ -28,6 +28,9 @@ import { ExperienceComposerResponse } from './interfaces/Response/ExperienceComp
 import { ExperienceComposerOptions } from './interfaces/ExperienceComposerOptions';
 import { ExperienceComposerListFilter } from './interfaces/ExperienceComposerListFilter';
 import { ClientTokenClaims } from './interfaces/ClientTokenClaims';
+import { CaptionOptions } from './interfaces/CaptionOptions';
+import { EnableCaptionResponse } from './interfaces/Response/EnableCaptionResponse';
+import { CaptionStatusResponse } from './interfaces/Response/CaptionStatusResponse';
 
 export class Video extends Client {
   protected authType = AuthenticationType.JWT;
@@ -105,6 +108,14 @@ export class Video extends Client {
     );
   }
 
+  public async disableCaptions(
+    captionId: string,
+  ): Promise<void> {
+    await this.sendPostRequest<EnableCaptionResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/captions/${captionId}/stop`,
+    );
+  }
+
   public async disableForceMute(
     sessionId: string,
     excludedStreamIds: string[] = [],
@@ -125,6 +136,23 @@ export class Video extends Client {
     await this.sendPostRequest<WebSocketConnectResponse>(
       `${this.config.videoHost}/v2/project/${this.auth.applicationId}/connect/${callId}/stop`,
     );
+  }
+
+  public async enableCaptions(
+    sessionId: string,
+    clientToken: string,
+    captionOptions: CaptionOptions = {},
+  ): Promise<EnableCaptionResponse> {
+    const data = Object.assign(
+      {},
+      { sessionId, token: clientToken },
+      captionOptions,
+    );
+    const resp = await this.sendPostRequest<EnableCaptionResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/captions`,
+      data,
+    );
+    return resp.data;
   }
 
   public async forceMuteAll(
@@ -179,6 +207,15 @@ export class Video extends Client {
   ): Promise<BroadcastDetailsResponse> {
     const resp = await this.sendGetRequest<BroadcastDetailsResponse>(
       `${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/${broadcastId}`,
+    );
+    return resp.data;
+  }
+
+  public async getCaptionStatus(
+    captionId: string,
+  ): Promise<CaptionStatusResponse> {
+    const resp = await this.sendGetRequest<CaptionStatusResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/captions/${captionId}`,
     );
     return resp.data;
   }

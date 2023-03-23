@@ -1,5 +1,6 @@
 import { ExperienceComposerResolution } from '../../lib/enums/ExperienceComposerResolution'
 import { ExperienceComposerOptions } from '../../lib/interfaces/ExperienceComposerOptions'
+import { CaptionOptions } from '../../lib/interfaces/CaptionOptions'
 
 const renderInformation = {
     "id": "1248e7070b81464c9789f46ad10e7764",
@@ -28,6 +29,23 @@ const mutliRenderResponse = {
     count: 2,
     items: [renderInformation, renderInformation2]
 }
+
+const enableCaptionsResponse = {
+    "captionsId": "7c0680fc-6274-4de5-a66f-d0648e8d3ac2"
+}
+
+const captionInfoResponse = {
+    "captionId": "7c0680fc-6274-4de5-a66f-d0648e8d3ac2",
+    "projectId": "100",
+    "sessionId": "2_MX4xMDB-flR1ZSBOb3YgMTkgMTE6MDk6NTggUFNUIDIwMTN-MC4zNzQxNzIxNX4",
+    "status": "failed",
+    "createdAt": 1628115911,
+    "updatedAt": 1628115911,
+    "duration": 300,
+    "languageCode": "en-US",
+    "reason": "Quota exceeded for Amazon Transcribe",
+    "provider": "aws-transcribe"
+  }
 
 export default [
     {
@@ -114,5 +132,71 @@ export default [
         clientMethod: 'listExperienceComposerRenders',
         parameters: [],
         expected: mutliRenderResponse
+    },
+    {
+        label: "Enable captions for a session",
+        request: [
+            '/v2/project/abcd-1234/captions',
+            'POST',
+            {
+                sessionId: "1234",
+                token: "q34h9uit",
+                statusCallbackUrl: "https://example.com",
+                maxDuration: 1800,
+                partialCaptions: "true",
+                languageCode: "en-us"
+            }
+        ],
+        response: [
+            200,
+            enableCaptionsResponse
+        ],
+        method: 'post',
+        clientMethod: 'enableCaptions',
+        parameters: [
+            "1234",
+            "q34h9uit",
+            {
+                statusCallbackUrl: "https://example.com",
+                maxDuration: 1800,
+                partialCaptions: "true",
+                languageCode: "en-us"
+
+            } as CaptionOptions
+        ],
+        expected: enableCaptionsResponse
+    },
+    {
+        label: "Disable captions for a session",
+        request: [
+            '/v2/project/abcd-1234/captions/7c0680fc-6274-4de5-a66f-d0648e8d3ac2/stop',
+            'POST'
+        ],
+        response: [
+            200
+        ],
+        method: 'post',
+        clientMethod: 'disableCaptions',
+        parameters: [
+            "7c0680fc-6274-4de5-a66f-d0648e8d3ac2"
+        ],
+        expected: undefined
+    },
+    {
+        label: "Get information about a session caption",
+        request: [
+            '/v2/project/abcd-1234/captions/7c0680fc-6274-4de5-a66f-d0648e8d3ac2',
+            'GET'
+        ],
+        response: [
+            200,
+            captionInfoResponse
+        ],
+        method: 'get',
+        clientMethod: 'getCaptionStatus',
+        parameters: [
+            "7c0680fc-6274-4de5-a66f-d0648e8d3ac2"
+        ],
+        expected: captionInfoResponse
     }
 ]
