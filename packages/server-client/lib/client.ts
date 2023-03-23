@@ -101,7 +101,7 @@ export abstract class Client {
 
   public async sendFormSubmitRequest<T>(
     url: string,
-    payload?: Record<string, string>,
+    payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     const request = {
       url,
@@ -117,7 +117,7 @@ export abstract class Client {
 
   public async sendGetRequest<T>(
     url: string,
-    queryParams?: { [key: string]: unknown },
+    queryParams?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     const request = {
       url,
@@ -130,21 +130,21 @@ export abstract class Client {
 
   public async sendPatchRequest<T>(
     url: string,
-    payload?: { [key: string]: unknown },
+    payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     return this.sendRequestWithData(HTTPMethods.PATCH, url, payload);
   }
 
   public async sendPostRequest<T>(
     url: string,
-    payload?: { [key: string]: unknown },
+    payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     return this.sendRequestWithData(HTTPMethods.POST, url, payload);
   }
 
   public sendPutRequest<T>(
     url: string,
-    payload?: { [key: string]: unknown },
+    payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     return this.sendRequestWithData(HTTPMethods.PUT, url, payload);
   }
@@ -152,7 +152,7 @@ export abstract class Client {
   public async sendRequestWithData<T>(
     method: HTTPMethods,
     url: string,
-    payload?: { [key: string]: unknown },
+    payload?: { [key: string]: any },
   ): Promise<VetchResponse<T>> {
     const request = {
       url,
