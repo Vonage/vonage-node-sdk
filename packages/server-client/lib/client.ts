@@ -26,7 +26,11 @@ export abstract class Client {
     credentials: AuthInterface | AuthParams,
     options?: ConfigParams,
   ) {
-    this.auth = !Object.hasOwn(credentials, 'getQueryParams')
+    // eslint-disable-next-line max-len
+    this.auth = !Object.prototype.hasOwnProperty.call(
+      credentials,
+      'getQueryParams',
+    )
       ? new Auth(credentials)
       : (credentials as AuthInterface);
 
