@@ -36,6 +36,9 @@
         "lodash.partial": "^4.2.1",
         "lodash.snakecase": "^4.1.1"
     },
+    "devDependencies": {
+        "nock": "^13.3.0"
+    },
     "publishConfig": {
         "directory": "dist"
     },
