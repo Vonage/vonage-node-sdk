@@ -23,6 +23,14 @@ import { SIPCallOptions } from './interfaces/SIPCallOptions';
 import { SIPCallResponse } from './interfaces/Response/SIPCallResponse';
 import { WebSocketConfig } from './interfaces/WebSocketConfig';
 import { WebSocketConnectResponse } from './interfaces/Response/WebSocketConnectResponse';
+import { MultiExperienceComposerResponse } from './interfaces/Response/MultiExperienceComposerResponse';
+import { ExperienceComposerResponse } from './interfaces/Response/ExperienceComposerResponse';
+import { ExperienceComposerOptions } from './interfaces/ExperienceComposerOptions';
+import { ExperienceComposerListFilter } from './interfaces/ExperienceComposerListFilter';
+import { ClientTokenClaims } from './interfaces/ClientTokenClaims';
+import { CaptionOptions } from './interfaces/CaptionOptions';
+import { EnableCaptionResponse } from './interfaces/Response/EnableCaptionResponse';
+import { CaptionStatusResponse } from './interfaces/Response/CaptionStatusResponse';
 
 export class Video extends Client {
   protected authType = AuthenticationType.JWT;
@@ -100,6 +108,14 @@ export class Video extends Client {
     );
   }
 
+  public async disableCaptions(
+    captionId: string,
+  ): Promise<void> {
+    await this.sendPostRequest<EnableCaptionResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/captions/${captionId}/stop`,
+    );
+  }
+
   public async disableForceMute(
     sessionId: string,
     excludedStreamIds: string[] = [],
@@ -122,6 +138,23 @@ export class Video extends Client {
     );
   }
 
+  public async enableCaptions(
+    sessionId: string,
+    clientToken: string,
+    captionOptions: CaptionOptions = {},
+  ): Promise<EnableCaptionResponse> {
+    const data = Object.assign(
+      {},
+      { sessionId, token: clientToken },
+      captionOptions,
+    );
+    const resp = await this.sendPostRequest<EnableCaptionResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/captions`,
+      data,
+    );
+    return resp.data;
+  }
+
   public async forceMuteAll(
     sessionId: string,
     excludedStreamIds: string[] = [],
@@ -134,7 +167,7 @@ export class Video extends Client {
     tokenOptions?: ClientTokenOptions,
   ) {
     const now = Math.round(new Date().getTime() / 1000);
-    const claims: any = {
+    const claims: ClientTokenClaims = {
       scope: 'session.connect',
       session_id: sessionId,
       role: 'publisher',
@@ -178,6 +211,24 @@ export class Video extends Client {
     return resp.data;
   }
 
+  public async getCaptionStatus(
+    captionId: string,
+  ): Promise<CaptionStatusResponse> {
+    const resp = await this.sendGetRequest<CaptionStatusResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/captions/${captionId}`,
+    );
+    return resp.data;
+  }
+
+  public async getExperienceComposerRender(
+    renderId: string,
+  ): Promise<ExperienceComposerResponse> {
+    const resp = await this.sendGetRequest<ExperienceComposerResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/render/${renderId}`,
+    );
+    return resp.data;
+  }
+
   public async getStreamInfo(
     sessionId: string,
     streamId?: string,
@@ -207,6 +258,16 @@ export class Video extends Client {
     const url = `${this.config.videoHost}/v2/project/${this.auth.applicationId}/dial`;
 
     const resp = await this.sendPostRequest<SIPCallResponse>(url, data);
+    return resp.data;
+  }
+
+  public async listExperienceComposerRenders(
+    filter: ExperienceComposerListFilter,
+  ): Promise<MultiExperienceComposerResponse> {
+    const resp = await this.sendGetRequest<MultiExperienceComposerResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/render`,
+      filter,
+    );
     return resp.data;
   }
 
@@ -333,6 +394,19 @@ export class Video extends Client {
     return resp.data;
   }
 
+  public async startExperienceComposerRender(
+    sessionId: string,
+    token: string,
+    config: ExperienceComposerOptions,
+  ): Promise<ExperienceComposerResponse> {
+    const data = Object.assign({}, { sessionId, token }, config);
+    const resp = await this.sendPostRequest<ExperienceComposerResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/render`,
+      data,
+    );
+    return resp.data;
+  }
+
   public async stopArchive(
     archiveId: string,
   ): Promise<SingleArchiveResponse> {
@@ -349,6 +423,10 @@ export class Video extends Client {
       `${this.config.videoHost}/v2/project/${this.auth.applicationId}/broadcast/${broadcastId}/stop`,
     );
     return resp.data;
+  }
+
+  public async stopExperienceComposerRender(renderId: string): Promise<void> {
+    await this.sendDeleteRequest(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/render/${renderId}`);
   }
 
   public async updateArchiveLayout(archiveId: string, layout: ArchiveLayout) {
