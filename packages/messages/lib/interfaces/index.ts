@@ -1,3 +1,5 @@
+export * from './AudioObject';
+export * from './ImageObject';
 export * from './MMS/index';
 export * from './MessageAudioInterface';
 export * from './MessageFileInterface';
@@ -10,4 +12,5 @@ export * from './MessageVideoInterface';
 export * from './Messenger/index';
 export * from './SMS/index';
 export * from './Viber/index';
+export * from './VideoObject';
 export * from './WhatsApp/index';

@@ -1,6 +1,6 @@
-import { MMSImageInterface } from '../../interfaces';
+import { ImageObject, MMSImageInterface } from '../../interfaces';
 import { AbstractImageMessage } from '../AbstractImageMessage';
-import { MessageParamsImage } from '../../types';
+import { MessageImageType, MessageParamsImage } from '../../types';
 
 export class MMSImage
   extends AbstractImageMessage
@@ -8,8 +8,21 @@ export class MMSImage
 {
   public channel: 'mms';
 
-  constructor(params: MessageParamsImage) {
-    super(params);
+  constructor(
+    params: MessageParamsImage | ImageObject,
+    to?: string,
+    from?: string,
+    clientRef?: string,
+  ) {
+    if (to) {
+      params = {
+        image: params as MessageImageType,
+        to: to,
+        from: from,
+        clientRef: clientRef,
+      };
+    }
+    super(params as MessageParamsImage);
     this.channel = 'mms';
   }
 }
