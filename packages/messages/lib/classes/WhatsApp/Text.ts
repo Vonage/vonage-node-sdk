@@ -4,7 +4,7 @@ import debug from 'debug';
 const log = debug('vonage:messages:whatsapp');
 
 /**
- * @deprecated
+ * @deprecated please use WhatsAppText instead
  */
 export class Text extends WhatsAppText {
   constructor(text: string, to: string, from: string, clientRef?: string) {

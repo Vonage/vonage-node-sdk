@@ -9,7 +9,7 @@ export class MMSImage
   public channel: 'mms';
 
   constructor(params: MessageParamsImage) {
-    super(params as MessageParamsImage);
+    super(params);
     this.channel = 'mms';
   }
 }

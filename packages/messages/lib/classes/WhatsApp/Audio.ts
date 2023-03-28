@@ -5,7 +5,7 @@ import debug from 'debug';
 const log = debug('vonage:messages:whatsapp');
 
 /**
- * @deprecated please use Whats App Audio
+ * @deprecated please use WhatsAppAudio instead
  */
 export class Audio extends WhatsAppAudio {
   constructor(

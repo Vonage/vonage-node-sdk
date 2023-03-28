@@ -22,7 +22,7 @@ export class Audio extends MessengerAudio {
     messenger?: MessageType,
     clientRef?: string,
   ) {
-    log('Please update to use the MessengerVideo class instead');
+    log('Please update to use the MessengerAudio class instead');
     super({
       audio: audio as MessageAudioType,
       to: to,
