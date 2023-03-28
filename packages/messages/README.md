@@ -1,37 +1,22 @@
 # Vonage Messages SDK for Node.js
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/vonage/vonage-node-sdk/Vonage/3.x?logo=github&style=flat-square&label=Workflow%20Build) [![Codecov](https://img.shields.io/codecov/c/github/vonage/vonage-node-sdk?label=Codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/Vonage/vonage-server-sdk) ![Latest Release](https://img.shields.io/github/v/release/vonage/vonage-node-sdk?logo=npm&style=flat-square)
-
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/server-sdk?label=License&style=flat-square)][../../LICENSE.TXT]
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Vonage/vonage-node-sdk/ci.yml?branch=3.x) [![Codecov](https://img.shields.io/codecov/c/github/vonage/vonage-node-sdk?label=Codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/Vonage/vonage-server-sdk) ![Latest Release](https://img.shields.io/github/v/release/vonage/vonage-node-sdk?logo=npm&style=flat-square) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/server-sdk?label=License&style=flat-square)](../../LICENSE.TXT)
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
-This is the Vonage Messages SDK for Node.js for use
-with [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage
-account. Sign up [for free at vonage.com][signup].
+This is the Vonage Messages SDK for Node.js for use with [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free][signup] at vonage.com.
 
-We recommend using this package as part of the
-overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk)
-.
-
-For full API documentation refer
-to [developer.nexmo.com](https://developer.nexmo.com/).
+For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
 
 * [Installation](#installation)
-* [Constructor](#constructor)
-* [Callbacks](#callbacks)
-* [Testing](#testing)
-* [Examples](#examples)
-* [Supported APIs](#supported-apis)
+* [Usage](#usage)
+* [Promises](#promises)
 
 ## Installation
 
-We recommend using this SDK as part of the
-overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk)
-. Please see the main package for installation.
+We recommend using this SDK as part of the overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). Please see the main package for installation.
 
-You can also use this SDK standalone if you only need access to just the
-Messages API.
+You can also use this SDK standalone if you only need access to just the Messages API.
 
 ### With NPM
 
@@ -45,12 +30,11 @@ npm install @vonage/messages
 yarn add @vonage/messages
 ```
 
-## Using the Vonage Messages SDK
+## Usage
 
 ### As part of the Vonage Server SDK
 
-If you are using this SDK as part of the Vonage Server SDK, you can access it as
-the `messages` property off of the client that you instantiate.
+If you are using this SDK as part of the Vonage Server SDK, you can access it as the `messages` property off of the client that you instantiate.
 
 ```js
 const {Vonage} = require('@vonage/server-sdk');
@@ -94,36 +78,9 @@ const messagesClient = new Messages(new Auth({
 }), options);
 ```
 
-* `apiKey` - API Key from Vonage API. If `applicationId` and `privateKey` are
-  present, `apiKey` is optional.
-* `apiSecret` - API Secret from Vonage API. If `applicationId` and `privateKey`
-  are present, `apiSecret` is optional.
-* `applicationId` - (optional) The Vonage API Application ID to be used when
-  creating JWTs.
-* `signature` - (optional) [deprecated] An object containg the secret and HASH
-  algroithm to use for signing the request.
-* `privateKey` - (optional) The Private Key to be used when creating JWTs. You
-  can specify the key as any of the following:
-  * A String containing the path to the key file on disk.
-  * A String containing the key itself.
-  * A Buffer containing the file contents.
-* `options` is an object that can contain:
-
-```json5
-{
-  // Set a custom timeout for requests to Nexmo in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
-  timeout: integer,
-  // Set a custom host for requests instead of api.nexmo.com
-  apiHost: string,
-  // Set a custom host for requests instead of rest.nexmo.com
-  restHost: string
-}
-```
-
 ## Promises
 
-Most methods that interact with the Vonage API uses Promises. You can either
-resolve these yourself, or use `await` to
+Most methods that interact with the Vonage API uses Promises. You can either resolve these yourself, or use `await` to
 wait for a response.
 
 ```js

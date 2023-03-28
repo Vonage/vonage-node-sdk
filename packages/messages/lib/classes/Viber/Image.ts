@@ -1,6 +1,6 @@
 import { ImageObject } from '../../interfaces/ImageObject';
 import { MessageConfig } from '../../interfaces/Viber/MessageConfig';
-import { ViberImageParams } from '../../types';
+import { ViberImageParams, ViberService } from '../../types';
 import { ViberImage } from './ViberImage';
 import debug from 'debug';
 
@@ -23,7 +23,7 @@ export class Image extends ViberImage {
       to: to,
       from: from,
       clientRef: clientRef,
-      viberService: viberService,
+      viberService: viberService as unknown as ViberService,
     } as ViberImageParams);
   }
 }
