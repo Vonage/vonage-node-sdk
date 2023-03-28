@@ -4,7 +4,13 @@ import { MessageType } from '../../interfaces/Messenger/MessageType';
 import { MessengerType } from '../../types';
 import { AbstractImageMessage } from '../AbstractImageMessage';
 import { MessengerImage } from './MessengerImage';
+import debug from 'debug';
 
+const log = debug('vonage:messages:messenger');
+
+/**
+ * @deprecated please use MessengerImage instead
+ */
 export class Image extends MessengerImage {
   constructor(
     image: ImageObject,
@@ -13,6 +19,7 @@ export class Image extends MessengerImage {
     messenger?: MessageType,
     clientRef?: string,
   ) {
+    log('Please update to use the MessengerImage class instead');
     super({
       image: image,
       to: to,

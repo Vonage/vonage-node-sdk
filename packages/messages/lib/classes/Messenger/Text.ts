@@ -1,9 +1,14 @@
 import { MessengerCategory } from '../../enums';
 import { MessageType } from '../../interfaces/Messenger/MessageType';
 import { MessengerType } from '../../types';
-import { AbstractTextMessageObject } from '../AbstractTextMessage';
 import { MessengerText } from './MessengerText';
+import debug from 'debug';
 
+const log = debug('vonage:messages:messenger');
+
+/**
+ * @deprecated please use MessengerText instead
+ */
 export class Text extends MessengerText {
   constructor(
     text: string,
@@ -12,6 +17,7 @@ export class Text extends MessengerText {
     messenger?: MessageType,
     clientRef?: string,
   ) {
+    log('Please update to use the MessengerText class instead');
     super({
       text: text,
       to: to,

@@ -1,10 +1,14 @@
 import { ImageObject } from '../../interfaces/ImageObject';
-import { MessageType } from '../../interfaces/Messenger/MessageType';
 import { MessageConfig } from '../../interfaces/Viber/MessageConfig';
 import { ViberImageParams } from '../../types';
-import { AbstractImageMessage } from '../AbstractImageMessage';
 import { ViberImage } from './ViberImage';
+import debug from 'debug';
 
+const log = debug('vonage:messages:viber');
+
+/**
+ * @deprecated please use ViberImage instead
+ */
 export class Image extends ViberImage {
   constructor(
     image: ImageObject,
@@ -13,6 +17,7 @@ export class Image extends ViberImage {
     viberService?: MessageConfig,
     clientRef?: string,
   ) {
+    log('Please update to use the ViberImage class instead');
     super({
       image: image,
       to: to,

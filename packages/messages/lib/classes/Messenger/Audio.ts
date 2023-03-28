@@ -7,7 +7,13 @@ import {
   MessengerType,
 } from '../../types';
 import { MessengerAudio } from './MessengerAudio';
+import debug from 'debug';
 
+const log = debug('vonage:messages:messenger');
+
+/**
+ * @deprecated please use MessengerAudio instead
+ */
 export class Audio extends MessengerAudio {
   constructor(
     audio: AudioObject,
@@ -16,6 +22,7 @@ export class Audio extends MessengerAudio {
     messenger?: MessageType,
     clientRef?: string,
   ) {
+    log('Please update to use the MessengerVideo class instead');
     super({
       audio: audio as MessageAudioType,
       to: to,

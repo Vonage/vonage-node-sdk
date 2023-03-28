@@ -1,6 +1,12 @@
 import { VideoObject } from '../../interfaces/VideoObject';
 import { WhatsAppVideo } from './WhatsAppVideo';
+import debug from 'debug';
 
+const log = debug('vonage:messages:whatsapp');
+
+/**
+ * @deprecated please use WhatsAppVideo instead
+ */
 export class Video extends WhatsAppVideo {
   constructor(
     video: VideoObject,
@@ -8,6 +14,7 @@ export class Video extends WhatsAppVideo {
     from: string,
     clientRef?: string,
   ) {
+    log('Please update to use the WhatsAppVideo class instead');
     super({
       to: to,
       from: from,

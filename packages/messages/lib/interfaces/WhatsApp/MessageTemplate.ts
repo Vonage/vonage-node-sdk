@@ -1,5 +1,5 @@
 /**
- * @deprecated
+ * @deprecated please use WhatsAppTemplate instead
  */
 export interface MessageTemplate {
     name: string
