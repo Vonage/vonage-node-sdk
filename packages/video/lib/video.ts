@@ -172,6 +172,11 @@ export class Video extends Client {
       session_id: sessionId,
       role: 'publisher',
       initial_layout_class_list: '',
+      acl: {
+        paths: {
+          "/video/**": {}
+        }
+      }
     };
 
     if (tokenOptions?.role) {
