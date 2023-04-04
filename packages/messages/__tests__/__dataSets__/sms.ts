@@ -71,7 +71,36 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send SMS message',
+    label: 'send SMS message with old params',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              text: 'too many secrets',
+              client_ref: 'nsa-1',
+              channel: 'sms',
+              message_type: 'text',
+            } as SMSMessageRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new SMS('too many secrets', '14152739164', '12126875309', 'nsa-1'),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send SMS message with error response',
     request: [
       '/v1/messages',
       'POST',

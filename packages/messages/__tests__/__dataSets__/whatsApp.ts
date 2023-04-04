@@ -1,4 +1,6 @@
 import {
+  MessageSuccess,
+  WhatsAppLanguageCode,
   WhatsAppAudio,
   WhatsAppCustom,
   WhatsAppFile,
@@ -8,10 +10,6 @@ import {
   WhatsAppImage,
   WhatsAppVideo,
   WhatsAppPolicyType,
-} from '../../lib';
-import { WhatsAppLanguageCode } from '../../lib';
-import { MessageSuccess } from '../../lib';
-import {
   WhatsAppAudioParams,
   WhatsAppAudioRequest,
   WhatsAppCustomParams,
@@ -29,8 +27,15 @@ import {
   WhatsAppImageRequest,
   WhatsAppVideoParams,
   WhatsAppVideoRequest,
-  WhatsAppTemplateType,
 } from '../../lib';
+
+import { Audio } from '../../lib/classes/WhatsApp/Audio';
+import { CustomMessage } from '../../lib/classes/WhatsApp/CustomMessage';
+import { File } from '../../lib/classes/WhatsApp/File';
+import { Image } from '../../lib/classes/WhatsApp/Image';
+import { TemplateMessage } from '../../lib/classes/WhatsApp/TemplateMessage';
+import { Text } from '../../lib/classes/WhatsApp/Text';
+import { Video } from '../../lib/classes/WhatsApp/Video';
 
 export default [
   {
@@ -94,6 +99,40 @@ export default [
         clientRef: 'my-ref',
         text: 'Too many secrets',
       } as WhatsAppTextParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send WhatsApp text with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'whatsapp',
+              message_type: 'text',
+              client_ref: 'my-ref',
+              text: 'Too many secrets',
+            } as WhatsAppTextRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new Text(
+        'Too many secrets', // text
+        '14152739164', // to
+        '12126875309', // from
+        'my-ref', // Client ref
+      ),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
@@ -188,6 +227,51 @@ export default [
           parameters: ['foo', 'bar'],
         },
       } as WhatsAppTemplateParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send WhatsApp template with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'whatsapp',
+              message_type: 'template',
+              client_ref: 'my-ref',
+              whatsapp: {
+                policy: 'deterministic',
+                locale: WhatsAppLanguageCode.ENGLISH_US,
+              } as WhatsAppPolicyType,
+              template: {
+                name: '9b6b4fcb_da19_4a26_8fe8_78074a91b584:verify',
+                parameters: ['foo', 'bar'],
+              },
+            } as WhatsAppTemplateRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new TemplateMessage(
+        {
+          name: '9b6b4fcb_da19_4a26_8fe8_78074a91b584:verify',
+          parameters: ['foo', 'bar'],
+        },
+        '14152739164', // to
+        '12126875309', // from
+        WhatsAppLanguageCode.ENGLISH_US, // locale
+        'my-ref', // client ref
+      ),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
@@ -419,6 +503,46 @@ export default [
     } as MessageSuccess,
   },
   {
+    label: 'send WhatsApp file with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'whatsapp',
+              message_type: 'file',
+              client_ref: 'my-ref',
+              file: {
+                url: 'https://example.com/my-file.png',
+                caption: 'a snake on a plane',
+              },
+            } as WhatsAppFileRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new File(
+        {
+          url: 'https://example.com/my-file.png',
+          caption: 'a snake on a plane',
+        },
+        '14152739164', // to
+        '12126875309', // from
+        'my-ref', // client ref
+      ),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
     label: 'send WhatsApp custom',
     request: [
       '/v1/messages',
@@ -487,6 +611,44 @@ export default [
           foo: 'bar',
         } as Record<string, unknown>,
       } as WhatsAppCustomParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send WhatsApp custom with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'whatsapp',
+              message_type: 'custom',
+              client_ref: 'my-ref',
+              custom: {
+                foo: 'bar',
+              } as Record<string, unknown>,
+            } as WhatsAppCustomRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new CustomMessage(
+                {
+                  foo: 'bar',
+                } as Record<string, unknown>,
+                '14152739164', // to
+                '12126875309', // from
+                'my-ref', // client ref
+      ),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
@@ -569,6 +731,46 @@ export default [
     } as MessageSuccess,
   },
   {
+    label: 'send WhatsApp image with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'whatsapp',
+              client_ref: 'my-ref',
+              message_type: 'image',
+              image: {
+                url: 'https://example.com',
+                caption: 'A cat',
+              },
+            } as WhatsAppImageRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new Image(
+        {
+          url: 'https://example.com',
+          caption: 'A cat',
+        },
+        '14152739164', // to
+        '12126875309', // from
+        'my-ref', // client reg
+      ),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
     label: 'send WhatsApp audio',
     request: [
       '/v1/messages',
@@ -645,6 +847,46 @@ export default [
     } as MessageSuccess,
   },
   {
+    label: 'send WhatsApp audio with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'whatsapp',
+              message_type: 'audio',
+              client_ref: 'my-ref',
+              audio: {
+                url: 'https://example.com',
+                caption: 'A cool track',
+              },
+            } as WhatsAppAudioRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new Audio(
+        {
+          url: 'https://example.com',
+          caption: 'A cool track',
+        },
+        '14152739164', // to
+        '12126875309', // from
+        'my-ref', // client ref
+      ),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
     label: 'send WhatsApp video',
     request: [
       '/v1/messages',
@@ -715,6 +957,46 @@ export default [
           caption: 'Click me',
         },
       } as WhatsAppVideoParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send WhatsApp video with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'whatsapp',
+              message_type: 'video',
+              client_ref: 'my-ref',
+              video: {
+                url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                caption: 'Click me',
+              },
+            } as WhatsAppVideoRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new Video(
+        {
+          url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          caption: 'Click me',
+        },
+        '14152739164', // to
+        '12126875309', // from
+        'my-ref', // client ref
+      ),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',

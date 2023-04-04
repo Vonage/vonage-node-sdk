@@ -20,6 +20,13 @@ import {
   MessengerFileParams,
 } from '../../lib';
 
+import { Audio } from '../../lib/classes/Messenger/Audio';
+import { File } from '../../lib/classes/Messenger/File';
+import { Image } from '../../lib/classes/Messenger/Image';
+import { Text } from '../../lib/classes/Messenger/Text';
+import { Video } from '../../lib/classes/Messenger/Video';
+import { MessageCategory } from '../../lib/enums/Messenger/MessageCategory';
+
 export default [
   {
     label: 'send Messenger text',
@@ -90,6 +97,48 @@ export default [
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
       } as MessengerTextParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send Messenger text with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              text: 'too many secrets',
+              channel: 'messenger',
+              message_type: 'text',
+              client_ref: 'my-ref',
+              messenger: {
+                category: MessengerCategory.RESPONSE,
+                tag: MessengerTags.ACCOUNT_UPDATE,
+              },
+            } as MessengerTextRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new Text(
+        'too many secrets', // text
+        '14152739164', // to
+        '12126875309', // from
+        {
+          category: MessageCategory.RESPONSE,
+          tag: MessengerTags.ACCOUNT_UPDATE,
+        },
+        'my-ref', // client ref
+      ),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
@@ -178,6 +227,52 @@ export default [
     } as MessageSuccess,
   },
   {
+    label: 'send Messenger image with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'messenger',
+              client_ref: 'my-ref',
+              message_type: 'image',
+              image: {
+                url: 'https://example.com',
+              },
+              messenger: {
+                category: MessengerCategory.RESPONSE,
+                tag: MessengerTags.ACCOUNT_UPDATE,
+              },
+            } as MessengerImageRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new Image(
+        {
+          url: 'https://example.com',
+        },
+        '14152739164', // to
+        '12126875309', // from
+        {
+          category: MessageCategory.RESPONSE,
+          tag: MessengerTags.ACCOUNT_UPDATE,
+        },
+        'my-ref', // client ref
+      ),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
     label: 'send Messenger audio',
     request: [
       '/v1/messages',
@@ -254,6 +349,52 @@ export default [
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
       } as MessengerAudioParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send Messenger audio with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'messenger',
+              message_type: 'audio',
+              client_ref: 'my-ref',
+              audio: {
+                url: 'https://example.com',
+              },
+              messenger: {
+                category: MessengerCategory.RESPONSE,
+                tag: MessengerTags.ACCOUNT_UPDATE,
+              },
+            } as MessengerAudioRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new Audio(
+        {
+          url: 'https://example.com',
+        },
+        '14152739164', // to
+        '12126875309', // from
+        {
+          category: MessageCategory.RESPONSE,
+          tag: MessengerTags.ACCOUNT_UPDATE,
+        },
+        'my-ref',
+      ),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
@@ -342,6 +483,52 @@ export default [
     } as MessageSuccess,
   },
   {
+    label: 'send Messenger video with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'messenger',
+              message_type: 'video',
+              client_ref: 'my-ref',
+              video: {
+                url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+              },
+              messenger: {
+                category: MessengerCategory.RESPONSE,
+                tag: MessengerTags.ACCOUNT_UPDATE,
+              },
+            } as MessengerVideoRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new Video(
+        {
+          url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        },
+        '14152739164', // to
+        '12126875309', // from
+        {
+          category: MessengerCategory.RESPONSE,
+          tag: MessengerTags.ACCOUNT_UPDATE,
+        },
+        'my-ref', // client ref
+      ),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
     label: 'send Messenger file',
     request: [
       '/v1/messages',
@@ -418,6 +605,52 @@ export default [
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
       } as MessengerFileParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send Messenger file with old class',
+    request: [
+      '/v1/messages',
+      'POST',
+            {
+              from: '12126875309',
+              to: '14152739164',
+              channel: 'messenger',
+              message_type: 'file',
+              client_ref: 'my-ref',
+              file: {
+                url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+              },
+              messenger: {
+                category: MessengerCategory.RESPONSE,
+                tag: MessengerTags.ACCOUNT_UPDATE,
+              },
+            } as MessengerFileRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new File(
+        {
+          url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        },
+        '14152739164', // to
+        '12126875309', // from
+        {
+          category: MessengerCategory.RESPONSE,
+          tag: MessengerTags.ACCOUNT_UPDATE,
+        },
+        'my-ref', // client ref
+      ),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
