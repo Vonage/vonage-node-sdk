@@ -16,6 +16,7 @@ export type VerificationRequestParams = {
         | WhatsAppInteractiveWorkflow
         | WhatsAppWorkflow
     >
+    code?: string
     locale?: VerifyLocale
     channelTimeout?: number
     clientRef?: string

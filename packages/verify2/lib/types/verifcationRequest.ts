@@ -6,20 +6,17 @@ import { VoiceWorkflow } from './voiceWorkflow';
 import { WhatsAppInteractiveWorkflow } from './whatsAppInteractiveWorkflow';
 import { WhatsAppWorkflow } from './whatsAppWorkflow';
 
-type SMSWorkFlowRequest = {
-    app_has: string
-} & Omit<SMSWorkflow, 'appHash'>
-
 export type VerificationRequest = {
     brand: string
     workflow: Array<
         | EmailWorkflow
-        | SMSWorkFlowRequest
+        | (Omit<SMSWorkflow, 'appHash'> & { app_hash: string })
         | SilentAuthWorkflow
         | VoiceWorkflow
         | WhatsAppInteractiveWorkflow
         | WhatsAppWorkflow
     >
+    code?: string
     locale?: VerifyLocale
     channel_timeout?: number
     client_ref?: string
