@@ -4,4 +4,5 @@ export type ConfigParams = {
     videoHost: string
     responseType: string
     timeout: number
+    proactiveHost: string
 }
