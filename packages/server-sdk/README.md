@@ -1,26 +1,20 @@
 # Vonage Server SDK for Node.js
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/vonage/vonage-node-sdk/Vonage/3.x?logo=github&style=flat-square&label=Workflow%20Build)
-[![Codecov](https://img.shields.io/codecov/c/github/vonage/vonage-node-sdk?label=Codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/Vonage/vonage-server-sdk)
-![Latest Release](https://img.shields.io/npm/v/@vonage/server-sdk)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md)
-[![License](https://img.shields.io/npm/l/@vonage/server-sdk?label=License&style=flat-square)][license]
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vonage/vonage-node-sdk/ci.yml?branch=3.x) [![Codecov](https://img.shields.io/codecov/c/github/vonage/vonage-node-sdk?label=Codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/Vonage/vonage-server-sdk) ![Latest Release](https://img.shields.io/npm/v/@vonage/server-sdk?label=%40vonage%2Fserver-sdk&style=flat-square) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/accounts?label=License&style=flat-square)][license]
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
-This is the Node.JS Server SDK for [Vonage APIs](https://www.vonage.com/). To
-use it you will need a Vonage account. Sign up [for free at vonage.com][signup].
+This is the Node.JS Server SDK for [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free at vonage.com][signup].
 
-For full API documentation refer to
-[developer.vonage.com](https://developer.vonage.com/).
+For full API documentation refer to [developer.vonage.com](https://developer.vonage.com/).
 
 * [Installation](#installation)
 * [Constructor](#constructor)
-* [Callbacks](#callbacks)
+* [Promises](#promises)
 * [Testing](#testing)
 * [Examples](#examples)
-* [Supported APIs](#supported-apis)
 * [References](#references)
+
 
 ## Installation
 
@@ -44,13 +38,11 @@ const { Vonage } = require('@vonage/server-sdk');
 const vonage = new Vonage(credentials, options);
 ```
 
-Where `credentials` is any option from [`@vonage/auth`](https://github.com/Vonage/vonage-node-sdk/tree/3.x/packages/auth#options),
-and `options` is any option from [`@vonage/server-client`](https://github.com/Vonage/vonage-node-sdk/tree/3.x/packages/server-client#options)
+Where `credentials` is any option from [`@vonage/auth`](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/auth/README.md#options), and `options` is any option from [`@vonage/server-client`](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-client/README.md#options)
 
 ## Promises
 
-Most methods that interact with the Vonage API uses Promises. You can either
-resolve these yourself, or use `await` to wait for a response.
+Most methods that interact with the Vonage API uses Promises. You can either resolve these yourself, or use `await` to wait for a response.
 
 ```js
 const resp = await vonage.sms.send({
