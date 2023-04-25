@@ -259,6 +259,7 @@ export default [
               channel_timeout: 300,
               client_ref: 'my-ref',
               code_length: 4,
+              code: '4242',
             } as VerificationRequest,
     ],
     response: [
@@ -283,6 +284,7 @@ export default [
               channelTimeout: 300,
               clientRef: 'my-ref',
               codeLength: 4,
+              code: '4242',
             } as VerificationRequestParams,
     ],
     expected: {
@@ -306,6 +308,7 @@ export default [
               channel_timeout: 300,
               client_ref: 'my-ref',
               code_length: 4,
+              code: '4242',
             } as VerificationRequest,
     ],
     response: [
@@ -329,6 +332,7 @@ export default [
               channelTimeout: 300,
               clientRef: 'my-ref',
               codeLength: 4,
+              code: '4242',
             } as VerificationRequestParams,
     ],
     expected: {
@@ -352,6 +356,7 @@ export default [
               channel_timeout: 300,
               client_ref: 'my-ref',
               code_length: 4,
+              code: '4242',
             } as VerificationRequest,
     ],
     response: [
@@ -375,6 +380,7 @@ export default [
               channelTimeout: 300,
               clientRef: 'my-ref',
               codeLength: 4,
+              code: '4242',
             } as VerificationRequestParams,
     ],
     expected: {
@@ -398,6 +404,7 @@ export default [
               channel_timeout: 300,
               client_ref: 'my-ref',
               code_length: 4,
+              code: '4242',
             } as VerificationRequest,
     ],
     response: [
@@ -421,6 +428,7 @@ export default [
               channelTimeout: 300,
               clientRef: 'my-ref',
               codeLength: 4,
+              code: '4242',
             } as VerificationRequestParams,
     ],
     expected: {
@@ -444,6 +452,7 @@ export default [
               channel_timeout: 300,
               client_ref: 'my-ref',
               code_length: 4,
+              code: '4242',
             } as VerificationRequest,
     ],
     response: [
@@ -467,6 +476,7 @@ export default [
               channelTimeout: 300,
               clientRef: 'my-ref',
               codeLength: 4,
+              code: '4242',
             } as VerificationRequestParams,
     ],
     expected: {
@@ -490,6 +500,7 @@ export default [
               channel_timeout: 300,
               client_ref: 'my-ref',
               code_length: 4,
+              code: '4242',
             } as VerificationRequest,
     ],
     response: [
@@ -513,6 +524,7 @@ export default [
               channelTimeout: 300,
               clientRef: 'my-ref',
               codeLength: 4,
+              code: '4242',
             } as VerificationRequestParams,
     ],
     expected: {
