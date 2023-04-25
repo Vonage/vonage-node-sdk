@@ -6,22 +6,14 @@ import { NumberInsights } from '@vonage/number-insights';
 import { Numbers } from '@vonage/numbers';
 import { Pricing } from '@vonage/pricing';
 import { Redact } from '@vonage/redact';
-import { ResponseTypes } from '@vonage/vetch';
 import { SMS } from '@vonage/sms';
 import { Verify } from '@vonage/verify';
 import { Voice } from '@vonage/voice';
-
-type VonageOptions = {
-    timeout: number
-    restHost: string
-    apiHost: string
-    videoHost: string
-    responseType: ResponseTypes
-}
+import { ConfigParams } from '@vonage/server-client';
 
 export class Vonage {
   protected credentials: AuthInterface;
-  protected options: VonageOptions;
+  protected options: ConfigParams;
 
   public accounts: Accounts;
   public applications: Applications;
@@ -35,7 +27,7 @@ export class Vonage {
   public verify: Verify;
   public voice: Voice;
 
-  constructor(credentials: AuthInterface, options?: VonageOptions) {
+  constructor(credentials: AuthInterface, options?: ConfigParams) {
     if (typeof credentials.getQueryParams === 'undefined') {
       credentials = new Auth(credentials);
     }

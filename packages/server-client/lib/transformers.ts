@@ -18,6 +18,7 @@ export const transformObjectKeys = (
     if (!Object.prototype.hasOwnProperty.call(objectToTransform, prop)) {
       continue;
     }
+
     const newKey = transformFn(prop);
     const value = objectToTransform[prop];
     if (!deep || !isObject(value)) {
