@@ -1,8 +1,11 @@
-import { AuthParams, AuthQueryParams } from '../../lib/types/index';
 import {
-  apiKey,
-  apiSecret,
-} from '../common';
+  MissingApiKeyError,
+  MissingApiSecretError,
+  InvalidApiKeyError,
+  InvalidApiSecretError,
+} from '../../lib/errors/index';
+import { AuthParams, AuthQueryParams } from '../../lib/types/index';
+import { apiKey, apiSecret } from '../common';
 
 export default [
   {
@@ -37,7 +40,7 @@ export default [
     } as AuthQueryParams,
   },
   {
-    label: 'add key and secret without being overiddend',
+    label: 'add key and secret without being overidden',
     method: 'getQueryParams',
     authParameters: {
       apiKey,
@@ -54,6 +57,42 @@ export default [
       api_secret: apiSecret,
     } as AuthQueryParams,
   },
+  {
+    label: 'when apiKey is missing',
+    method: 'getQueryParams',
+    authParameters: {
+      apiSecret,
+    },
+    parameters: [],
+    error: new MissingApiKeyError(),
+  },
+  {
+    label: 'when apiKey is invalid',
+    method: 'getQueryParams',
+    authParameters: {
+      apiKey: 12345,
+      apiSecret,
+    },
+    parameters: [],
+    error: new InvalidApiKeyError(),
+  },
+  {
+    label: 'when apiSecret is missing',
+    method: 'getQueryParams',
+    authParameters: {
+      apiKey,
+    },
+    parameters: [],
+    error: new MissingApiSecretError(),
+  },
+  {
+    label: 'when apiSecret is invalid',
+    method: 'getQueryParams',
+    authParameters: {
+      apiKey,
+      apiSecret: 12345,
+    },
+    parameters: [],
+    error: new InvalidApiSecretError(),
+  },
 ];
-
-

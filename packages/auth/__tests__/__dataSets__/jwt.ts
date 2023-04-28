@@ -1,10 +1,6 @@
 import { tokenGenerate } from '@vonage/jwt';
 import { AuthParams } from '../../lib/types/index';
-import {
-  applicationId,
-  privateKeyString,
-  privateKeyPath,
-} from '../common';
+import { applicationId, privateKeyString, privateKeyPath } from '../common';
 
 jest.useFakeTimers({
   now: 10907902800000,
@@ -22,7 +18,9 @@ export default [
       },
     } as AuthParams,
     parameters: [],
-    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, { jti: 'foo' })}`,
+    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, {
+      jti: 'foo',
+    })}`,
   },
   {
     label: 'create bearer header with private key file',
@@ -35,7 +33,9 @@ export default [
       },
     } as AuthParams,
     parameters: [],
-    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, { jti: 'foo' })}`,
+    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, {
+      jti: 'foo',
+    })}`,
   },
   {
     label: 'create bearer header with custom claims',
@@ -49,6 +49,9 @@ export default [
       },
     } as AuthParams,
     parameters: [],
-    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, { jti: 'foo', fizz: 'buzz' })}`,
+    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, {
+      jti: 'foo',
+      fizz: 'buzz',
+    })}`,
   },
 ];

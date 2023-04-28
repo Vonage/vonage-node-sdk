@@ -13,12 +13,7 @@ describe.each(testDataSets)('$label', ({ tests }) => {
 
   test.each(successTests)(
     'Can $label by calling: [$method]',
-    async ({
-      method,
-      authParameters,
-      parameters,
-      expected,
-    }) => {
+    async ({ method, authParameters, parameters, expected }) => {
       const auth = new Auth(authParameters);
       const results = await auth[method](...parameters);
       expect(results).toEqual(expected);
@@ -31,18 +26,11 @@ describe.each(testDataSets)('$label', ({ tests }) => {
 
   test.each(failureTests)(
     'Will throw $label for method: $clientMethod',
-    async ({
-      method,
-      authParameters,
-      parameters,
-      error,
-      expected,
-    }) => {
+    async ({ method, authParameters, parameters, error }) => {
       const auth = new Auth(authParameters);
-      await expect(() =>
-        auth[method](...parameters),
-      ).rejects.toThrow(error);
+      await expect(() => auth[method](...parameters)).rejects.toThrow(
+        error,
+      );
     },
   );
 });
-

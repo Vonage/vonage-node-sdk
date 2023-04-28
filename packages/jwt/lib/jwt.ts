@@ -1,6 +1,12 @@
 import { JWTInterface, GeneratorOptions, Claims } from './common';
 import { sign } from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  MissingApplicationIdError,
+  MissingPrivateKeyError,
+  InvalidPrivateKeyError,
+  InvalidApplicationIdError,
+} from './errors/index';
 import debug from 'debug';
 
 const log = debug('vonage:jwt');
@@ -13,16 +19,20 @@ export class JWT implements JWTInterface {
   ): string {
     log(`Application id: ${applicationId}`);
     log(`Private key: ${privateKey}`);
-    if (!applicationId || !privateKey) {
-      throw new Error('Missing applicationId or privateKey');
+    if (!applicationId) {
+      throw new MissingApplicationIdError();
+    }
+
+    if (!privateKey) {
+      throw new MissingPrivateKeyError();
     }
 
     if (typeof applicationId !== 'string') {
-      throw new Error('applicationId must be string');
+      throw new InvalidApplicationIdError();
     }
 
     if (typeof privateKey !== 'string' && !(privateKey instanceof Buffer)) {
-      throw new Error('privateKey must be string or buffer');
+      throw new InvalidPrivateKeyError();
     }
 
     const claims = this.validateOptions(opts);

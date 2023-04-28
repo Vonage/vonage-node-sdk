@@ -1,2 +1,2 @@
-export * from './AuthInterface';
 export * from './AuthConstructor';
+export * from './AuthInterface';
