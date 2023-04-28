@@ -51,7 +51,6 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Number Insight API    | General Availability |     ✅     |
 | Number Management API | General Availability |     ✅     |
 | Pricing API           | General Availability |     ✅     |
-| Proactive Connect API |          Beta        |     ✅     |
 | Redact API            |  Developer Preview   |     ✅     |
 | Reports API           |         Beta         |     ❌     |
 | SMS API               | General Availability |     ✅     |
