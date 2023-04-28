@@ -1,12 +1,14 @@
 import { JWT } from './jwt';
 import { GeneratorOptions } from './common';
 
+export * from './errors/index';
+
 export { JWT, GeneratorOptions };
 export * from './acl';
 
 const instance = new JWT();
 
-export function tokenGenerate<T>(
+export function tokenGenerate(
   applicationId: string,
   privateKey: string | Buffer,
   opts?: GeneratorOptions,

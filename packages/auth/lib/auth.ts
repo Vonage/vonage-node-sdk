@@ -9,6 +9,14 @@ import {
 } from './types/index';
 import { AuthInterface } from './interfaces/index';
 import { AlgorithmTypes } from './enums';
+import {
+  MissingApiKeyError,
+  MissingApiSecretError,
+  InvalidApiKeyError,
+  InvalidApiSecretError,
+  MissingSignatureError,
+  InvalidSignatureAlgorithmError,
+} from './errors/index';
 import debug from 'debug';
 
 const log = debug('vonage:auth');
@@ -28,44 +36,98 @@ export class Auth implements AuthInterface {
     this.applicationId = opts?.applicationId || null;
     this.jwtOptions = opts?.jwtOptions || {};
 
-    if (!opts?.privateKey) {
-      log('No private key set');
-      return;
-    }
-
     if (existsSync(opts.privateKey)) {
       log('Reading private key file');
       opts.privateKey = readFileSync(opts.privateKey).toString();
     }
 
-    this.privateKey = opts.privateKey instanceof Buffer
-      ? opts.privateKey.toString()
-      : opts.privateKey;
+    this.privateKey
+            = opts.privateKey instanceof Buffer
+        ? opts.privateKey.toString()
+        : opts.privateKey;
   }
 
   getQueryParams = async <T>(
     params?: AuthQueryParams & T,
-  ): Promise<AuthQueryParams & T> => ({
-    ...params,
-    api_key: this.apiKey,
-    api_secret: this.apiSecret,
-  });
+  ): Promise<AuthQueryParams & T> => {
+    if (!this.apiKey) {
+      throw new MissingApiKeyError();
+    }
+
+    if (!this.apiSecret) {
+      throw new MissingApiSecretError();
+    }
+
+    if (typeof this.apiKey !== 'string') {
+      throw new InvalidApiKeyError();
+    }
+
+    if (typeof this.apiSecret !== 'string') {
+      throw new InvalidApiSecretError();
+    }
+
+    return {
+      ...params,
+      api_key: this.apiKey,
+      api_secret: this.apiSecret,
+    };
+  };
 
   createBasicHeader = async (): Promise<string> => {
     log('Creating basic auth header');
+    if (!this.apiKey) {
+      throw new MissingApiKeyError();
+    }
+
+    if (!this.apiSecret) {
+      throw new MissingApiSecretError();
+    }
+
+    if (typeof this.apiKey !== 'string') {
+      throw new InvalidApiKeyError();
+    }
+
+    if (typeof this.apiSecret !== 'string') {
+      throw new InvalidApiSecretError();
+    }
+
     const buf = Buffer.from(`${this.apiKey}:${this.apiSecret}`);
     return `Basic ${buf.toString('base64')}`;
   };
 
   createBearerHeader = async (): Promise<string> => {
     log('Creating bearer header');
-    return `Bearer ${tokenGenerate(this.applicationId, this.privateKey, this.jwtOptions)}`;
+    return `Bearer ${tokenGenerate(
+      this.applicationId,
+      this.privateKey,
+      this.jwtOptions,
+    )}`;
   };
 
   createSignatureHash = async <T>(
     params: AuthSignedParams & T,
   ): Promise<AuthSignedParams & T> => {
     log('Creating signature hash');
+    if (!this.apiKey) {
+      throw new MissingApiKeyError();
+    }
+
+    if (typeof this.apiKey !== 'string') {
+      throw new InvalidApiKeyError();
+    }
+
+    if (!this.signature.algorithm) {
+      throw new MissingSignatureError();
+    }
+
+    if (!this.signature.secret) {
+      throw new MissingApiSecretError();
+    }
+
+    if (typeof this.signature.secret !== 'string') {
+      throw new InvalidApiSecretError();
+    }
+
     const returnParams: AuthSignedParams & T = {
       ...params,
       api_key: this.apiKey,
@@ -118,7 +180,7 @@ export class Auth implements AuthInterface {
         .digest('hex');
       break;
     default:
-      throw new Error(`Cannot sign request! Invalid algorithm: ${this.signature.algorithm}`);
+      throw new InvalidSignatureAlgorithmError();
     }
 
     return returnParams;
