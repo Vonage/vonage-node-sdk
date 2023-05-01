@@ -1,6 +1,6 @@
 {
     "name": "@vonage/server-sdk",
-    "version": "3.3.0",
+    "version": "3.4.0",
     "description": "Node.js Client for the Vonage API Platform",
     "homepage": "https://developer.vonage.com",
     "bugs": {
@@ -27,18 +27,18 @@
         "compile": "npx tsc --build --verbose"
     },
     "dependencies": {
-        "@vonage/accounts": "^1.3.0",
-        "@vonage/applications": "^1.3.0",
-        "@vonage/auth": "^1.2.0",
-        "@vonage/messages": "^1.3.0",
-        "@vonage/number-insights": "^1.3.0",
-        "@vonage/numbers": "^1.3.0",
-        "@vonage/pricing": "^1.3.0",
-        "@vonage/redact": "^1.2.0",
-        "@vonage/server-client": "^1.3.0",
-        "@vonage/sms": "^1.3.0",
-        "@vonage/verify": "^1.3.0",
-        "@vonage/voice": "^1.3.0"
+        "@vonage/accounts": "^1.4.0",
+        "@vonage/applications": "^1.4.0",
+        "@vonage/auth": "^1.3.0",
+        "@vonage/messages": "^1.4.0",
+        "@vonage/number-insights": "^1.4.0",
+        "@vonage/numbers": "^1.4.0",
+        "@vonage/pricing": "^1.4.0",
+        "@vonage/redact": "^1.3.0",
+        "@vonage/server-client": "^1.4.0",
+        "@vonage/sms": "^1.4.0",
+        "@vonage/verify": "^1.4.0",
+        "@vonage/voice": "^1.4.0"
     },
     "publishConfig": {
         "directory": "dist"
