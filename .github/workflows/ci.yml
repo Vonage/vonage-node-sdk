@@ -6,24 +6,40 @@ on:
   pull_request:
 jobs:
   test:
+    continue-on-error: ${{ matrix.experimental }}
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [14.x, 16.x, 18.x]
-    runs-on: ${{ matrix.os }}
+        node: [16.x, 18.x, 20.x]
+        experimental: [false]
+        include:
+          - os: ubuntu-latest
+            node: 14
+            experimental: true
+            npm_version: "@8.3.1"
+          - os: windows-latest
+            node: 14
+            experimental: true
+            npm_version: "@8.3.1"
+          - os: macos-latest
+            node: 14
+            experimental: true
+            npm_version: "@8.3.1"
     steps:
     - uses: actions/checkout@v3
 
     - name: Set up Node.js ${{ matrix.node }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node }}
 
-    - name: Install dependencies
-      run: npm install -g typescript npm@8.3.1 && npm install
+    - name: Install typescript
+      run: npm install -g typescript npm${{ matrix.npm_version }} && npm install
 
     - name: Lint, Compile, Test
-      run: npm run compile && npm run test -- --coverage
+      run: npm run compile && npm run test -- --coverage --verbose
 
     - name: Run codecov
       uses: codecov/codecov-action@v3
