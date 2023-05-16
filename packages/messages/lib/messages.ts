@@ -1,4 +1,4 @@
-import { Client } from '@vonage/server-client';
+import { Client, AuthenticationType } from '@vonage/server-client';
 import { MessageSuccess } from './interfaces';
 import { SendMessageParams, MessageSuccessResponse } from './types';
 import debug from 'debug';
@@ -22,27 +22,19 @@ export class Messages extends Client {
     request: VonageRequest,
   ): Promise<VonageRequest & unknown> {
     log('Auth config', this.auth);
+    this.authType = AuthenticationType.KEY_SECRET;
+
     if (this.auth.applicationId && this.auth.privateKey) {
       log('Adding JWT token to request');
-      request.headers.Authorization = await this.auth.createBearerHeader();
-      return request;
+      this.authType = AuthenticationType.JWT;
     }
 
     if (this.auth.signature) {
       log('Signing the request');
-      request.data = {
-        ...request.data,
-        ...(await this.auth.createSignatureHash(request.data)),
-      };
-      return request;
+      this.authType = AuthenticationType.signature;
     }
 
-    log('Adding query parameters to request');
-    request.data = {
-      ...request.data,
-      ...(await this.auth.getQueryParams(request?.data)),
-    };
-    return request;
+    return super.addAuthenticationToRequest(request);
   }
 
   public async send(message: SendMessageParams): Promise<MessageSuccess> {
