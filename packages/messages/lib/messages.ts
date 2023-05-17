@@ -1,14 +1,10 @@
 import { Client, AuthenticationType } from '@vonage/server-client';
+import { VetchOptions } from '@vonage/vetch';
 import { MessageSuccess } from './interfaces';
 import { SendMessageParams, MessageSuccessResponse } from './types';
 import debug from 'debug';
 
 const log = debug('vonage:messages');
-
-type VonageRequest = {
-    data: { [key: string]: unknown }
-    headers: { Authorization: string }
-}
 
 export class Messages extends Client {
   /**
@@ -19,8 +15,8 @@ export class Messages extends Client {
      * @param {any} request - Object containing request data
      */
   public async addAuthenticationToRequest(
-    request: VonageRequest,
-  ): Promise<VonageRequest & unknown> {
+    request: VetchOptions,
+  ): Promise<VetchOptions & unknown> {
     log('Auth config', this.auth);
     this.authType = AuthenticationType.KEY_SECRET;
 
@@ -31,7 +27,7 @@ export class Messages extends Client {
 
     if (this.auth.signature) {
       log('Signing the request');
-      this.authType = AuthenticationType.signature;
+      this.authType = AuthenticationType.SIGNATURE;
     }
 
     return super.addAuthenticationToRequest(request);

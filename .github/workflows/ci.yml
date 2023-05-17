@@ -31,7 +31,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Set up Node.js ${{ matrix.node }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node }}
 
@@ -39,7 +39,7 @@ jobs:
       run: npm install -g typescript npm${{ matrix.npm_version }} && npm install
 
     - name: Lint, Compile, Test
-      run: npm run compile && npm run test -- --coverage --verbose
+      run: npm run compile && npm run test -- --coverage --verbose --maxWorkers=2
 
     - name: Run codecov
       uses: codecov/codecov-action@v3
