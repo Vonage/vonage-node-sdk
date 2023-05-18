@@ -1,4 +1,4 @@
-import { CheckCodeRequest } from '../../lib/types';
+import { CheckCodeRequest, CheckRequestResponse } from '../../lib/types';
 
 export default [
   {
@@ -10,11 +10,17 @@ export default [
               code: '123456',
             } as CheckCodeRequest,
     ],
-    response: [200],
+    response: [
+      200,
+            {
+              request_id: '091e717f-8715-41a0-a3f0-cc04912deaa1',
+              status: 'complete',
+            } as CheckRequestResponse,
+    ],
     method: 'post',
     clientMethod: 'checkCode',
     parameters: ['091e717f-8715-41a0-a3f0-cc04912deaa1', '123456'],
-    expected: true,
+    expected: 'complete',
   },
   {
     label: 'error when request not found',
