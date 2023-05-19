@@ -3,6 +3,7 @@ import {
   Request,
   VerificationRequestParams,
   VerificationResponse,
+  CheckRequestResponse,
 } from './types';
 
 export class Verify2 extends Client {
@@ -21,14 +22,14 @@ export class Verify2 extends Client {
     };
   }
 
-  public async checkCode(requestId: string, code: string): Promise<true> {
-    await this.sendPostRequest(
+  public async checkCode(requestId: string, code: string): Promise<string> {
+    const resp = await this.sendPostRequest<CheckRequestResponse>(
       `${this.config.apiHost}/v2/verify/${requestId}`,
       {
         code: code,
       },
     );
 
-    return true;
+    return resp.data.status;
   }
 }

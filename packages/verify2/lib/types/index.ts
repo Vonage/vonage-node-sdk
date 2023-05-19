@@ -1,4 +1,5 @@
 export * from './checkCodeRequest';
+export * from './checkRequestResponse';
 export * from './emailWorkflow';
 export * from './eventCallback';
 export * from './request';
