@@ -32,4 +32,15 @@ export class Verify2 extends Client {
 
     return resp.data.status;
   }
+
+  public async cancel(requestId: string): Promise<boolean> {
+    try {
+      await this.sendDeleteRequest(
+        `${this.config.apiHost}/v2/verify/${requestId}`,
+      );
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }
