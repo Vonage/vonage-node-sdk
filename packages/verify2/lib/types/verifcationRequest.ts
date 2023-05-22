@@ -21,4 +21,5 @@ export type VerificationRequest = {
     channel_timeout?: number
     client_ref?: string
     code_length?: 4 | 5 | 6 | 7 | 8 | 9 | 10
+    fraud_check?: boolean
 }
