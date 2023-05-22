@@ -8,6 +8,7 @@ import { Pricing } from '@vonage/pricing';
 import { Redact } from '@vonage/redact';
 import { SMS } from '@vonage/sms';
 import { Verify } from '@vonage/verify';
+import { Verify2 } from '@vonage/verify2';
 import { Voice } from '@vonage/voice';
 import { ConfigParams } from '@vonage/server-client';
 
@@ -25,6 +26,7 @@ export class Vonage {
   public secrets: Secrets;
   public sms: SMS;
   public verify: Verify;
+  public verify2: Verify2;
   public voice: Voice;
 
   constructor(credentials: AuthInterface, options?: ConfigParams) {
@@ -45,6 +47,7 @@ export class Vonage {
     this.secrets = new Secrets(this.credentials, this.options);
     this.sms = new SMS(this.credentials, this.options);
     this.verify = new Verify(this.credentials, this.options);
+    this.verify2 = new Verify2(this.credentials, this.options);
     this.voice = new Voice(this.credentials, this.options);
   }
 }

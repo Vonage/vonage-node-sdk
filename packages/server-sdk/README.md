@@ -87,6 +87,7 @@ You can find more information for each product below:
 * [Server SDK](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-sdk/README.md)
 * [SMS](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/sms/README.md)
 * [Verify](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/verify/README.md)
+* [Verify V2](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/verify2/README.md)
 * [Vetch](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/vetch/README.md)
 * [Video](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/video/README.md)
 * [Voice](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/voice/README.md)
@@ -114,7 +115,7 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Reports API           |         Beta         |     ❌     |
 | SMS API               | General Availability |     ✅     |
 | Verify API            | General Availability |     ✅     |
-| Verify v2 API         |         Beta         |     ✅     |
+| Verify v2 API         | General Availability |     ✅     |
 | Voice API             | General Availability |     ✅     |
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk

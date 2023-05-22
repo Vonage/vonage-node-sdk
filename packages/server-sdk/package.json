@@ -38,6 +38,7 @@
         "@vonage/server-client": "^1.4.0",
         "@vonage/sms": "^1.4.0",
         "@vonage/verify": "^1.4.0",
+        "@vonage/verify2": "^1.2.0",
         "@vonage/voice": "^1.4.0"
     },
     "publishConfig": {

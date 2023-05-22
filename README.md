@@ -55,7 +55,7 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Reports API           |         Beta         |     ❌     |
 | SMS API               | General Availability |     ✅     |
 | Verify API            | General Availability |     ✅     |
-| Verify v2 API         |         Beta         |     ✅     |
+| Verify v2 API         | General Availability |     ✅     |
 | Voice API             | General Availability |     ✅     |
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
