@@ -1,3 +1,6 @@
 import { VetchResponse } from '@vonage/vetch';
 
-export interface ApplicationResponse<T> extends VetchResponse<T> {}
+/**
+ * @deprecated.Please use the type instead
+ */
+export type ApplicationResponse<T> = VetchResponse<T>;

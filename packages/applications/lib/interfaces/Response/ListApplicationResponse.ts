@@ -1,11 +1,6 @@
-import { Application } from '../Application';
+import { ApplicationPageResponse } from '../../types';
 
-export interface ListApplicationResponse {
-  page_size: number;
-  page: number;
-  total_items: number;
-  total_pages: number;
-  _embedded: {
-    applications: Application[];
-  };
-}
+/**
+ * @deprecated please use ApplicationPageResponse
+ */
+export type ListApplicationResponse = ApplicationPageResponse;
