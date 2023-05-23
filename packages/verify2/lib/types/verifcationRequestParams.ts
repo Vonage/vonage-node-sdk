@@ -21,4 +21,5 @@ export type VerificationRequestParams = {
     channelTimeout?: number
     clientRef?: string
     codeLength?: 4 | 5 | 6 | 7 | 8 | 9 | 10
+    fraudCheck?: boolean
 }

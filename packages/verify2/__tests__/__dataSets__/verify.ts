@@ -578,6 +578,86 @@ export default [
     },
   },
   {
+    label: 'start request with fruad_check to true',
+    request: [
+      '/v2/verify',
+      'POST',
+            {
+              brand: 'Vonage',
+              fraud_check: true,
+              workflow: [
+                {
+                  channel: Channels.SMS,
+                  to: '14152739164',
+                },
+              ],
+            } as VerificationRequest,
+    ],
+    response: [
+      202,
+            {
+              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+            } as VerificationResponse,
+    ],
+    method: 'post',
+    clientMethod: 'newRequest',
+    parameters: [
+            {
+              brand: 'Vonage',
+              fraudCheck: true,
+              workflow: [
+                    {
+                      channel: Channels.SMS,
+                      to: '14152739164',
+                    } as SMSWorkflow,
+              ],
+            } as VerificationRequestParams,
+    ],
+    expected: {
+      requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
+    },
+  },
+  {
+    label: 'start request with fruad_check to false',
+    request: [
+      '/v2/verify',
+      'POST',
+            {
+              brand: 'Vonage',
+              fraud_check: false,
+              workflow: [
+                {
+                  channel: Channels.SMS,
+                  to: '14152739164',
+                },
+              ],
+            } as VerificationRequest,
+    ],
+    response: [
+      202,
+            {
+              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+            } as VerificationResponse,
+    ],
+    method: 'post',
+    clientMethod: 'newRequest',
+    parameters: [
+            {
+              brand: 'Vonage',
+              fraudCheck: false,
+              workflow: [
+                    {
+                      channel: Channels.SMS,
+                      to: '14152739164',
+                    } as SMSWorkflow,
+              ],
+            } as VerificationRequestParams,
+    ],
+    expected: {
+      requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
+    },
+  },
+  {
     label: 'error when request returns conflict',
     request: [
       '/v2/verify',
