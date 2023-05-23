@@ -31,6 +31,7 @@ import { ClientTokenClaims } from './interfaces/ClientTokenClaims';
 import { CaptionOptions } from './interfaces/CaptionOptions';
 import { EnableCaptionResponse } from './interfaces/Response/EnableCaptionResponse';
 import { CaptionStatusResponse } from './interfaces/Response/CaptionStatusResponse';
+import { InitiateSIPCallRequest } from './interfaces/Request/InitiateSIPCallRequest';
 
 export class Video extends Client {
   protected authType = AuthenticationType.JWT;
@@ -108,9 +109,7 @@ export class Video extends Client {
     );
   }
 
-  public async disableCaptions(
-    captionId: string,
-  ): Promise<void> {
+  public async disableCaptions(captionId: string): Promise<void> {
     await this.sendPostRequest<EnableCaptionResponse>(
       `${this.config.videoHost}/v2/project/${this.auth.applicationId}/captions/${captionId}/stop`,
     );
@@ -174,9 +173,9 @@ export class Video extends Client {
       initial_layout_class_list: '',
       acl: {
         paths: {
-          "/video/**": {}
-        }
-      }
+          '/video/**': {},
+        },
+      },
     };
 
     if (tokenOptions?.role) {
@@ -255,12 +254,31 @@ export class Video extends Client {
     return resp.data;
   }
 
+  private stripBlankValues<T>(obj: T): T {
+    for (const key in obj) {
+      if (typeof obj[key] === 'object' && obj[key] !== null) {
+        this.stripBlankValues(obj[key]);
+      } else if (obj[key] === '') {
+        delete obj[key];
+      }
+    }
+    return obj;
+  }
+
   public async intiateSIPCall(
     sessionId: string,
     options: SIPCallOptions,
   ): Promise<SIPCallResponse> {
-    const data = Object.assign({}, { sessionId }, options);
+    let data: InitiateSIPCallRequest = Object.assign(
+      {},
+      { sessionId },
+      options,
+    );
     const url = `${this.config.videoHost}/v2/project/${this.auth.applicationId}/dial`;
+
+    // Fixes a bug found during integration
+    // where blank values are treated differently than null values
+    data = this.stripBlankValues<InitiateSIPCallRequest>(data);
 
     const resp = await this.sendPostRequest<SIPCallResponse>(url, data);
     return resp.data;
@@ -431,7 +449,9 @@ export class Video extends Client {
   }
 
   public async stopExperienceComposerRender(renderId: string): Promise<void> {
-    await this.sendDeleteRequest(`${this.config.videoHost}/v2/project/${this.auth.applicationId}/render/${renderId}`);
+    await this.sendDeleteRequest(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/render/${renderId}`,
+    );
   }
 
   public async updateArchiveLayout(archiveId: string, layout: ArchiveLayout) {
