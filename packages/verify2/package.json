@@ -1,35 +1,35 @@
 {
-    "name": "@vonage/verify2",
-    "version": "1.3.0",
-    "description": "Verify API provides a choice of routes for sending a code to a user. You can use this to confirm a user's contact information, as a second factor when authenticating users, or for step-up authentication.",
-    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/verify2#readme",
-    "bugs": {
-        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
-    },
-    "license": "Apache-2.0",
-    "author": "Chuck MANCHUCK Reeves <chuck@manchuck.com>",
-    "main": "dist/index.js",
-    "directories": {
-        "lib": "lib",
-        "test": "__tests__"
-    },
-    "files": [
-        "dist"
-    ],
-    "scripts": {
-        "build": "npm run clean && npm run compile",
-        "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-        "compile": "npx tsc --build --verbose"
-    },
-    "dependencies": {
-        "@vonage/server-client": "^1.4.0"
-    },
-    "devDependencies": {
-        "@vonage/auth": "^1.3.0",
-        "nock": "^13.3.0"
-    }
+  "name": "@vonage/verify2",
+  "version": "1.3.1",
+  "description": "Verify API provides a choice of routes for sending a code to a user. You can use this to confirm a user's contact information, as a second factor when authenticating users, or for step-up authentication.",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/verify2#readme",
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Chuck MANCHUCK Reeves <chuck@manchuck.com>",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+    "compile": "npx tsc --build --verbose"
+  },
+  "dependencies": {
+    "@vonage/server-client": "^1.4.0"
+  },
+  "devDependencies": {
+    "@vonage/auth": "^1.3.0",
+    "nock": "^13.3.0"
+  }
 }
