@@ -1,8 +1,6 @@
-export interface RTCCapabilities {
-  webhooks: {
-    event_url?: {
-      address?: string;
-      http_method?: string;
-    };
-  };
-}
+import { CapabilityRTC } from '../types';
+
+/**
+ * @deprecated Please use CapabilityRTC instead
+ */
+export type RTCCapabilities = CapabilityRTC;
