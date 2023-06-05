@@ -10,7 +10,7 @@ import {
   SilentAuthWorkflow,
 } from '../../lib/types';
 
-import { VerifyLocale, Channels, SilenAuthChannel } from '../../lib/enums';
+import { VerifyLocale, Channels, SilentAuthChannel } from '../../lib/enums';
 
 export default [
   {
@@ -18,34 +18,34 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.SMS,
-                  to: '14152739164',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.SMS,
-                      to: '14152739164',
-                    } as SMSWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          } as SMSWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -56,34 +56,34 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.WHATSAPP,
-                  to: '14152739164',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.WHATSAPP,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.WHATSAPP,
-                      to: '14152739164',
-                    } as WhatsAppWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.WHATSAPP,
+            to: '14152739164',
+          } as WhatsAppWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -94,34 +94,34 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.WHATSAPP_INTERACTIVE,
-                  to: '14152739164',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.WHATSAPP_INTERACTIVE,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.WHATSAPP_INTERACTIVE,
-                      to: '14152739164',
-                    } as WhatsAppInteractiveWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.WHATSAPP_INTERACTIVE,
+            to: '14152739164',
+          } as WhatsAppInteractiveWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -132,34 +132,34 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.VOICE,
-                  to: '14152739164',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.VOICE,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.VOICE,
-                      to: '14152739164',
-                    } as VoiceWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.VOICE,
+            to: '14152739164',
+          } as VoiceWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -170,34 +170,34 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.EMAIL,
-                  to: 'alice@company.com',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.EMAIL,
+            to: 'alice@company.com',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.EMAIL,
-                      to: 'alice@company.com',
-                    } as EmailWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.EMAIL,
+            to: 'alice@company.com',
+          } as EmailWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -208,34 +208,34 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: SilenAuthChannel.SILENT_AUTH,
-                  to: '14152739164',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: SilentAuthChannel.SILENT_AUTH,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: SilenAuthChannel.SILENT_AUTH,
-                      to: '14152739164',
-                    } as SilentAuthWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: SilentAuthChannel.SILENT_AUTH,
+            to: '14152739164',
+          } as SilentAuthWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -246,46 +246,46 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.SMS,
-                  to: '14152739164',
-                  app_hash: 'C0FFEE',
-                },
-              ],
-              locale: VerifyLocale.EN_GB,
-              channel_timeout: 300,
-              client_ref: 'my-ref',
-              code_length: 4,
-              code: '4242',
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+            app_hash: 'C0FFEE',
+          },
+        ],
+        locale: VerifyLocale.EN_GB,
+        channel_timeout: 300,
+        client_ref: 'my-ref',
+        code_length: 4,
+        code: '4242',
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.SMS,
-                      to: '14152739164',
-                      appHash: 'C0FFEE',
-                    } as SMSWorkflow,
-              ],
-              locale: VerifyLocale.EN_GB,
-              channelTimeout: 300,
-              clientRef: 'my-ref',
-              codeLength: 4,
-              code: '4242',
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+            appHash: 'C0FFEE',
+          } as SMSWorkflow,
+        ],
+        locale: VerifyLocale.EN_GB,
+        channelTimeout: 300,
+        clientRef: 'my-ref',
+        codeLength: 4,
+        code: '4242',
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -296,44 +296,44 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.WHATSAPP,
-                  to: '14152739164',
-                },
-              ],
-              locale: VerifyLocale.EN_GB,
-              channel_timeout: 300,
-              client_ref: 'my-ref',
-              code_length: 4,
-              code: '4242',
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.WHATSAPP,
+            to: '14152739164',
+          },
+        ],
+        locale: VerifyLocale.EN_GB,
+        channel_timeout: 300,
+        client_ref: 'my-ref',
+        code_length: 4,
+        code: '4242',
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.WHATSAPP,
-                      to: '14152739164',
-                    } as WhatsAppWorkflow,
-              ],
-              locale: VerifyLocale.EN_GB,
-              channelTimeout: 300,
-              clientRef: 'my-ref',
-              codeLength: 4,
-              code: '4242',
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.WHATSAPP,
+            to: '14152739164',
+          } as WhatsAppWorkflow,
+        ],
+        locale: VerifyLocale.EN_GB,
+        channelTimeout: 300,
+        clientRef: 'my-ref',
+        codeLength: 4,
+        code: '4242',
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -344,44 +344,44 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.WHATSAPP_INTERACTIVE,
-                  to: '14152739164',
-                },
-              ],
-              locale: VerifyLocale.EN_GB,
-              channel_timeout: 300,
-              client_ref: 'my-ref',
-              code_length: 4,
-              code: '4242',
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.WHATSAPP_INTERACTIVE,
+            to: '14152739164',
+          },
+        ],
+        locale: VerifyLocale.EN_GB,
+        channel_timeout: 300,
+        client_ref: 'my-ref',
+        code_length: 4,
+        code: '4242',
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.WHATSAPP_INTERACTIVE,
-                      to: '14152739164',
-                    } as WhatsAppInteractiveWorkflow,
-              ],
-              locale: VerifyLocale.EN_GB,
-              channelTimeout: 300,
-              clientRef: 'my-ref',
-              codeLength: 4,
-              code: '4242',
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.WHATSAPP_INTERACTIVE,
+            to: '14152739164',
+          } as WhatsAppInteractiveWorkflow,
+        ],
+        locale: VerifyLocale.EN_GB,
+        channelTimeout: 300,
+        clientRef: 'my-ref',
+        codeLength: 4,
+        code: '4242',
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -392,44 +392,44 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.VOICE,
-                  to: '14152739164',
-                },
-              ],
-              locale: VerifyLocale.EN_GB,
-              channel_timeout: 300,
-              client_ref: 'my-ref',
-              code_length: 4,
-              code: '4242',
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.VOICE,
+            to: '14152739164',
+          },
+        ],
+        locale: VerifyLocale.EN_GB,
+        channel_timeout: 300,
+        client_ref: 'my-ref',
+        code_length: 4,
+        code: '4242',
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.VOICE,
-                      to: '14152739164',
-                    } as VoiceWorkflow,
-              ],
-              locale: VerifyLocale.EN_GB,
-              channelTimeout: 300,
-              clientRef: 'my-ref',
-              codeLength: 4,
-              code: '4242',
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.VOICE,
+            to: '14152739164',
+          } as VoiceWorkflow,
+        ],
+        locale: VerifyLocale.EN_GB,
+        channelTimeout: 300,
+        clientRef: 'my-ref',
+        codeLength: 4,
+        code: '4242',
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -440,44 +440,44 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.EMAIL,
-                  to: 'alice@company.com',
-                },
-              ],
-              locale: VerifyLocale.EN_GB,
-              channel_timeout: 300,
-              client_ref: 'my-ref',
-              code_length: 4,
-              code: '4242',
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.EMAIL,
+            to: 'alice@company.com',
+          },
+        ],
+        locale: VerifyLocale.EN_GB,
+        channel_timeout: 300,
+        client_ref: 'my-ref',
+        code_length: 4,
+        code: '4242',
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.EMAIL,
-                      to: 'alice@company.com',
-                    } as EmailWorkflow,
-              ],
-              locale: VerifyLocale.EN_GB,
-              channelTimeout: 300,
-              clientRef: 'my-ref',
-              codeLength: 4,
-              code: '4242',
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.EMAIL,
+            to: 'alice@company.com',
+          } as EmailWorkflow,
+        ],
+        locale: VerifyLocale.EN_GB,
+        channelTimeout: 300,
+        clientRef: 'my-ref',
+        codeLength: 4,
+        code: '4242',
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -488,44 +488,44 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: SilenAuthChannel.SILENT_AUTH,
-                  to: '14152739164',
-                },
-              ],
-              locale: VerifyLocale.EN_GB,
-              channel_timeout: 300,
-              client_ref: 'my-ref',
-              code_length: 4,
-              code: '4242',
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: SilentAuthChannel.SILENT_AUTH,
+            to: '14152739164',
+          },
+        ],
+        locale: VerifyLocale.EN_GB,
+        channel_timeout: 300,
+        client_ref: 'my-ref',
+        code_length: 4,
+        code: '4242',
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: SilenAuthChannel.SILENT_AUTH,
-                      to: '14152739164',
-                    } as SilentAuthWorkflow,
-              ],
-              locale: VerifyLocale.EN_GB,
-              channelTimeout: 300,
-              clientRef: 'my-ref',
-              codeLength: 4,
-              code: '4242',
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: SilentAuthChannel.SILENT_AUTH,
+            to: '14152739164',
+          } as SilentAuthWorkflow,
+        ],
+        locale: VerifyLocale.EN_GB,
+        channelTimeout: 300,
+        clientRef: 'my-ref',
+        codeLength: 4,
+        code: '4242',
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -536,42 +536,42 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.SMS,
-                  to: '14152739164',
-                },
-                    {
-                      channel: Channels.WHATSAPP,
-                      to: '14152739164',
-                    } as WhatsAppWorkflow,
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          },
+          {
+            channel: Channels.WHATSAPP,
+            to: '14152739164',
+          } as WhatsAppWorkflow,
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.SMS,
-                      to: '14152739164',
-                    } as SMSWorkflow,
-                    {
-                      channel: Channels.WHATSAPP,
-                      to: '14152739164',
-                    } as WhatsAppWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          } as SMSWorkflow,
+          {
+            channel: Channels.WHATSAPP,
+            to: '14152739164',
+          } as WhatsAppWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -582,36 +582,36 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              fraud_check: true,
-              workflow: [
-                {
-                  channel: Channels.SMS,
-                  to: '14152739164',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        fraud_check: true,
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              fraudCheck: true,
-              workflow: [
-                    {
-                      channel: Channels.SMS,
-                      to: '14152739164',
-                    } as SMSWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        fraudCheck: true,
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          } as SMSWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -622,36 +622,36 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              fraud_check: false,
-              workflow: [
-                {
-                  channel: Channels.SMS,
-                  to: '14152739164',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        fraud_check: false,
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       202,
-            {
-              request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
-            } as VerificationResponse,
+      {
+        request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      } as VerificationResponse,
     ],
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              fraudCheck: false,
-              workflow: [
-                    {
-                      channel: Channels.SMS,
-                      to: '14152739164',
-                    } as SMSWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        fraudCheck: false,
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          } as SMSWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
@@ -662,15 +662,15 @@ export default [
     request: [
       '/v2/verify',
       'POST',
-            {
-              brand: 'Vonage',
-              workflow: [
-                {
-                  channel: Channels.SMS,
-                  to: '14152739164',
-                },
-              ],
-            } as VerificationRequest,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequest,
     ],
     response: [
       422,
@@ -685,15 +685,15 @@ export default [
     method: 'post',
     clientMethod: 'newRequest',
     parameters: [
-            {
-              brand: 'Vonage',
-              workflow: [
-                    {
-                      channel: Channels.SMS,
-                      to: '14152739164',
-                    } as SMSWorkflow,
-              ],
-            } as VerificationRequestParams,
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.SMS,
+            to: '14152739164',
+          } as SMSWorkflow,
+        ],
+      } as VerificationRequestParams,
     ],
     error: 'Request failed with status code 422',
   },
