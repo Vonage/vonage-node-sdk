@@ -1,6 +1,5 @@
 import { CallEndpoint } from '../types/Endpoint/CallEndpoint';
 import { PhoneEndpointObject } from './Endpoint/PhoneEndpointObject';
-
 import debug from 'debug';
 
 debug('@vonage/voice')(

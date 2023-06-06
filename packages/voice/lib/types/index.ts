@@ -1,3 +1,4 @@
+export * from './AdvancedMachineDetection';
 export * from './BasicCallDetail';
 export * from './CallDetail';
 export * from './CallResult';
