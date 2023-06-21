@@ -179,7 +179,8 @@ describe('video', () => {
     expect(decoded.payload.application_id).toEqual('abcd-1234');
     expect(decoded.payload.scope).toEqual('session.connect');
     expect(decoded.payload.session_id).toEqual('abcd');
-    expect(decoded.payload.acl.paths).toEqual({'/video/**': {}});
+    expect(decoded.payload.sub).toEqual('video');
+    expect(decoded.payload.acl.paths).toEqual({'/session/**': {}});
   });
 
   test("can generate a client JWT token with renamed values", async () => {

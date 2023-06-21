@@ -6,6 +6,7 @@ export interface ClientTokenClaims {
     data?: string
     exp?: number
     connection_data?: string
+    sub: string,
     acl: {
         paths: {
             [key: string]: object
