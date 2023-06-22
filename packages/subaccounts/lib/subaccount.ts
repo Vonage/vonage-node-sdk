@@ -13,7 +13,7 @@ import {
   CreditTransferParameters,
   BalanceTransferListParameters,
   BalanceTransfer,
-  BalanceTransferResponsePage,
+  BalanceTransferPageResponse,
   BalanceTransferResponse,
   BalanceTransferParameters,
   NumberTransfer,
@@ -103,7 +103,7 @@ export class SubAccounts extends Client {
   async listBalanceTransfers(
     params: BalanceTransferListParameters,
   ): Promise<Array<BalanceTransfer>> {
-    const resp = await this.sendGetRequest<BalanceTransferResponsePage>(
+    const resp = await this.sendGetRequest<BalanceTransferPageResponse>(
       `${this.config.apiHost}/accounts/${this.auth.apiKey}/balance-transfers`,
       Client.transformers.snakeCaseObjectKeys(params),
     );
