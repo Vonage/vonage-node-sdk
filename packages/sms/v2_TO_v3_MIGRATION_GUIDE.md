@@ -16,7 +16,7 @@ $ npm install @vonage/sms
 If you are using the main Vonage Node Server SDK, you will need to configure it using a Vonage API Key and Secret. The setup is the same for any other key/secret-based application. The SMS client will then be available as `vonage.sms`.
 
 ```js
-const Vonage = require('@vonage/server-sdk');
+const {Vonage} = require('@vonage/server-sdk');
 
 const vonage = new Vonage({
     apiKey: API_KEY,
