@@ -5,4 +5,5 @@ export type ConfigParams = {
     responseType: string
     timeout: number
     proactiveHost: string
+    meetingsHost: string
 }

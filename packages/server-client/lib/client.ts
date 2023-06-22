@@ -38,6 +38,7 @@ export abstract class Client {
       restHost: options?.restHost || 'https://rest.nexmo.com',
       apiHost: options?.apiHost || 'https://api.nexmo.com',
       videoHost: options?.videoHost || 'https://video.api.vonage.com',
+      meetingsHost: options?.meetingsHost || 'https://api-eu.vonage.com',
       proactiveHost:
                 options?.proactiveHost || 'https://api-eu.vonage.com',
       responseType: options?.responseType || ResponseTypes.json,

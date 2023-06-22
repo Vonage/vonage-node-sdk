@@ -40,6 +40,11 @@ const config: Config.InitialOptions = {
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {
+      displayName: 'MEETINGS',
+      testMatch: ['<rootDir>/packages/meetings/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
       displayName: 'NUMBER INSIGHTS',
       testMatch: [
         '<rootDir>/packages/number-insights/__tests__/**/*.test.ts',
