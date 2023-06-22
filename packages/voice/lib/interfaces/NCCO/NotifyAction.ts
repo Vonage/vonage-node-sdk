@@ -1,8 +1,12 @@
-export interface NotifyAction {
-    action: string
-    payload: {
-        [key: string]: string
-    }
-    eventUrl: string[]
-    eventMethod?: string
-}
+import { NotifyAction as NotifyActionType } from '../../types/index';
+import debug from 'debug';
+
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type NotifyAction = NotifyActionType;

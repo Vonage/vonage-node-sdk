@@ -1,7 +1,12 @@
-import { CallEndpointObject } from './CallEndpointObject'
-import { Headers } from './Headers'
+import { SIPEndpoint } from '../../types/index';
+import debug from 'debug';
 
-export interface SIPEndpointObject extends CallEndpointObject {
-    uri: string
-    headers?: Headers[]
-}
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type SIPEndpointObject = SIPEndpoint;

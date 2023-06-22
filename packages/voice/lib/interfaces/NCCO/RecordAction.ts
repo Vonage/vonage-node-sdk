@@ -1,14 +1,12 @@
-import { RecordingFormat } from '../../enums/NCCO/RecordingFormat'
+import { RecordAction as RecordActionType } from '../../types/index';
+import debug from 'debug';
 
-export interface RecordAction {
-    action: string
-    format?: RecordingFormat
-    split?: string
-    channels?: number
-    endOnSilence?: number
-    endOnKey?: string
-    timeOut?: number
-    beepStart?: boolean
-    eventUrl?: string[]
-    eventMethod?: string
-}
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type RecordAction = RecordActionType;

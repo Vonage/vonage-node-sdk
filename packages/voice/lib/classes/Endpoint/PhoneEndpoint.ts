@@ -1,15 +1,24 @@
-import { PhoneEndpointObject } from '../../interfaces/Endpoint/PhoneEndpointObject'
+import { PSTNEndpoint } from '../../types/Endpoint/PSTNEndpoint';
+import debug from 'debug';
 
-export class PhoneEndpoint implements PhoneEndpointObject {
-    type: string = 'phone'
-    number: string
-    dtmfAnswer?: string
+debug('@vonage/voice')(
+  'This class is deprecated. Please update to use the appropriate type',
+);
 
-    constructor(phoneNumber: string, dtmfAnswer?: string) {
-        this.number = phoneNumber
+/**
+ * @deprecated This class is deprecated. Please update to use the
+ *             appropriate type
+ */
+export class PhoneEndpoint implements PSTNEndpoint {
+  type: 'phone';
+  number: string;
+  dtmfAnswer?: string;
 
-        if (dtmfAnswer) {
-            this.dtmfAnswer = dtmfAnswer
-        }
+  constructor(phoneNumber: string, dtmfAnswer?: string) {
+    this.number = phoneNumber;
+
+    if (dtmfAnswer) {
+      this.dtmfAnswer = dtmfAnswer;
     }
+  }
 }

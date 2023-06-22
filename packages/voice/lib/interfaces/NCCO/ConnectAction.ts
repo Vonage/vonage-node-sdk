@@ -1,17 +1,12 @@
-import { ConnectEventType } from '../../enums/NCCO/ConnectEventType'
-import { MachineDetection } from '../../enums/NCCO/MachineDetection'
-import { CallEndpoint } from '../../types/Endpoint/CallEndpoint'
+import { ConnectAction as ConnectActionType } from '../../types/index';
+import debug from 'debug';
 
-export interface ConnectAction {
-    action: string
-    endpoint: CallEndpoint[]
-    from?: string
-    randomFromNumber?: boolean
-    eventType?: ConnectEventType
-    timeout?: number
-    limit?: number
-    machineDetection?: MachineDetection
-    eventUrl?: string[]
-    eventMethod?: string
-    ringbackTone?: string
-}
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type ConnectAction = ConnectActionType;

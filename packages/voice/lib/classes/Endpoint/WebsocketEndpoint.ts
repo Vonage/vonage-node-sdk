@@ -1,23 +1,32 @@
-import { WebsocketBitrate } from '../../enums/Endpoint/WebsocketBitrate'
-import { Headers } from '../../interfaces/Endpoint/Headers'
-import { WebsocketEndpointObject } from '../../interfaces/Endpoint/WebsocketEndpointObject'
+import { WebsocketBitrate } from '../../enums/Endpoint/WebsocketBitrate';
+import { WebsocketEndpoint as WebsocketEndpointType } from '../../types/Endpoint/WebsocketEndpoint';
+import debug from 'debug';
 
-export class WebsocketEndpoint implements WebsocketEndpointObject {
-    type: string = 'websocket'
-    uri: string
-    contentType: WebsocketBitrate
-    headers?: Headers[]
+debug('@vonage/voice')(
+  'This class is deprecated. Please update to use the appropriate type',
+);
 
-    constructor(
-        uri: string,
-        contentType: WebsocketBitrate,
-        headers?: Headers[]
-    ) {
-        this.uri = uri
-        this.contentType = contentType
+/**
+ * @deprecated This class is deprecated. Please update to use the
+ *             appropriate type
+ */
+export class WebsocketEndpoint implements WebsocketEndpointType {
+  type: 'websocket';
+  uri: string;
+  contentType: WebsocketBitrate;
+  headers?: Array<Record<string, unknown>>;
 
-        if (headers) {
-            this.headers = headers
-        }
+  constructor(
+    uri: string,
+    contentType: WebsocketBitrate,
+    headers?: Array<Record<string, unknown>>,
+  ) {
+    this.uri = uri;
+    this.contentType = contentType;
+
+    if (headers) {
+      this.headers = headers;
     }
+  }
+  url: string;
 }

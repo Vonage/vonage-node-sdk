@@ -1,11 +1,12 @@
-import { DTMFSettings } from './DTMFSettings'
-import { SpeechSettings } from './SpeechSettings'
+import { InputAction as InputActionType } from '../../types/index';
+import debug from 'debug';
 
-export interface InputAction {
-    action: string
-    type: string[]
-    dtmf?: DTMFSettings
-    speech?: SpeechSettings
-    eventUrl?: string[]
-    eventMethod?: string
-}
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type InputAction = InputActionType;

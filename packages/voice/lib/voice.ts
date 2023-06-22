@@ -1,190 +1,189 @@
-import { AuthenticationType, Client } from '@vonage/server-client'
-import { Action, TalkAction } from './ncco'
+import { AuthenticationType, Client } from '@vonage/server-client';
 import {
-    CallCreateResponse,
-    CallDetailResponse,
-    CallListFilter,
-    CallListResponse,
-    CallModifyResponse,
-} from './types'
-import { OutboundCall } from './types/OutboundCall'
+  GetCallDetailsParameters,
+  CallPageResponse,
+  CallDetailResponse,
+  CallDetail,
+  CreateCallResponse,
+  CallResult,
+  CallUpdateResult,
+  UpdateCallResponse,
+  Action,
+  TalkAction,
+  OutboundCall,
+} from './types/index';
 
-const remapObjects = <T, O>(mapping, newObject: T, oldObject: O): T => {
-    for (const key in mapping) {
-        if (oldObject[mapping[key]]) {
-            newObject[key] = oldObject[mapping[key]]
-            delete oldObject[mapping[key]]
-        }
-    }
-    newObject = { ...newObject, ...oldObject }
-    return newObject
-}
+import { CallListFilter } from './types';
+
+const apiCallsToCalls = (call: CallDetailResponse): CallDetail => {
+  delete call._links;
+  const transformedCall = Client.transformers.camelCaseObjectKeys(
+    call,
+    true,
+    true,
+  );
+  delete transformedCall.conversationUuid;
+  return {
+    ...transformedCall,
+    conversationUUID: call.conversation_uuid,
+  };
+};
+
+type NCCODestination = {
+  type: 'ncco';
+  url?: Array<string>;
+  ncco?: Array<Action>;
+};
 
 export class Voice extends Client {
-    protected authType = AuthenticationType.JWT
+  protected authType = AuthenticationType.JWT;
 
-    public async createOutboundCall(
-        call: OutboundCall
-    ): Promise<CallCreateResponse> {
-        const resp = await this.sendPostRequest<CallCreateResponse>(
-            `${this.config.apiHost}/v1/calls/`,
-            call
-        )
-        return resp.data
-    }
+  async *getAllCalls(
+    params: GetCallDetailsParameters = {},
+  ): AsyncGenerator<CallDetail, void & CallDetail, undefined> {
+    let next: URL | null = null;
+    params.recordIndex = params?.recordIndex || 0;
+    do {
+      const resp = await this.getCallsPage(params);
 
-    public async earmuffCall(uuid: string): Promise<void> {
-        await this.sendPutRequest<void>(
-            `${this.config.apiHost}/v1/calls/${uuid}`,
-            { action: 'earmuff' }
-        )
-    }
+      yield* resp?._embedded?.calls.map(apiCallsToCalls);
+      next = resp?._links?.next ? new URL(resp._links.next.href) : null;
+      if (next) {
+        params.recordIndex = parseInt(next.searchParams.get('record_index'));
+      }
+    } while (next);
+  }
 
-    public async getCall(uuid: string): Promise<CallDetailResponse> {
-        const resp = await this.sendGetRequest<CallDetailResponse>(
-            `${this.config.apiHost}/v1/calls/${uuid}`
-        )
-        return resp.data
-    }
+  async getCallsPage(
+    params: GetCallDetailsParameters,
+  ): Promise<CallPageResponse> {
+    const resp = await this.sendGetRequest<CallPageResponse>(
+      `${this.config.apiHost}/v1/calls`,
+      Client.transformers.snakeCaseObjectKeys(params),
+    );
+    return {
+      ...resp.data,
+    };
+  }
 
-    public async hangupCall(uuid: string): Promise<void> {
-        await this.sendPutRequest<void>(
-            `${this.config.apiHost}/v1/calls/${uuid}`,
-            { action: 'hangup' }
-        )
-    }
+  async search(filter?: CallListFilter): Promise<CallPageResponse> {
+    return this.getCallsPage(filter);
+  }
 
-    public async muteCall(uuid: string): Promise<void> {
-        await this.sendPutRequest<void>(
-            `${this.config.apiHost}/v1/calls/${uuid}`,
-            { action: 'mute' }
-        )
-    }
+  async getCall(uuid: string): Promise<CallDetail> {
+    const resp = await this.sendGetRequest<CallDetailResponse>(
+      `${this.config.apiHost}/v1/calls/${uuid}`,
+    );
+    return apiCallsToCalls(resp.data);
+  }
 
-    public async playDTMF(
-        uuid: string,
-        digits: string
-    ): Promise<CallModifyResponse> {
-        const resp = await this.sendPutRequest<CallModifyResponse>(
-            `${this.config.apiHost}/v1/calls/${uuid}/dtmf`,
-            { digits }
-        )
-        return resp.data
-    }
+  async createOutboundCall(call: OutboundCall): Promise<CallResult> {
+    const resp = await this.sendPostRequest<CreateCallResponse>(
+      `${this.config.apiHost}/v1/calls`,
+      Client.transformers.snakeCaseObjectKeys(call, true),
+    );
+    const result = Client.transformers.camelCaseObjectKeys(
+      resp.data,
+      true,
+      true,
+    );
+    delete result.conversationUuid;
+    result.conversationUUID = resp.data.conversation_uuid;
+    return result;
+  }
 
-    public async playTTS(
-        uuid: string,
-        action: TalkAction
-    ): Promise<CallModifyResponse> {
-        delete action.action
+  async playDTMF(uuid: string, digits: string): Promise<CallUpdateResult> {
+    const resp = await this.sendPutRequest<UpdateCallResponse>(
+      `${this.config.apiHost}/v1/calls/${uuid}/dtmf`,
+      { digits: digits },
+    );
+    return Client.transformers.snakeCaseObjectKeys(resp.data, true, true);
+  }
 
-        const resp = await this.sendPutRequest<CallModifyResponse>(
-            `${this.config.apiHost}/v1/calls/${uuid}/talk`,
-            action
-        )
-        return resp.data
-    }
+  async playTTS(uuid: string, action: TalkAction): Promise<CallUpdateResult> {
+    delete action.action;
+    delete action.bargeIn;
 
-    public async search(filter?: CallListFilter): Promise<CallListResponse> {
-        if (filter) {
-            filter = remapObjects(
-                {
-                    status: 'status',
-                    date_start: 'dateStart',
-                    date_end: 'dateEnd',
-                    page_size: 'pageSize',
-                    record_index: 'recordIndex',
-                    order: 'order',
-                    conversation_uuid: 'conversationUUID',
-                },
-                {},
-                filter
-            )
-        }
+    const resp = await this.sendPutRequest<UpdateCallResponse>(
+      `${this.config.apiHost}/v1/calls/${uuid}/talk`,
+      Client.transformers.snakeCaseObjectKeys(action),
+    );
+    return Client.transformers.snakeCaseObjectKeys(resp.data, true, true);
+  }
 
-        const resp = await this.sendGetRequest<CallListResponse>(
-            `${this.config.apiHost}/v1/calls`,
-            filter
-        )
-        return resp.data
-    }
+  async stopTTS(uuid: string): Promise<CallUpdateResult> {
+    const resp = await this.sendDeleteRequest<UpdateCallResponse>(
+      `${this.config.apiHost}/v1/calls/${uuid}/talk`,
+    );
+    return Client.transformers.snakeCaseObjectKeys(resp.data, true, true);
+  }
 
-    public async stopStreamAudio(uuid: string): Promise<CallModifyResponse> {
-        const resp = await this.sendDeleteRequest<CallModifyResponse>(
-            `${this.config.apiHost}/v1/calls/${uuid}/stream`
-        )
-        return resp.data
-    }
+  async streamAudio(
+    uuid: string,
+    url: string,
+    loop = 1,
+    volumeLevel = 0.0,
+  ): Promise<UpdateCallResponse> {
+    const resp = await this.sendPutRequest<UpdateCallResponse>(
+      `${this.config.apiHost}/v1/calls/${uuid}/stream`,
+      {
+        stream_url: [url],
+        loop,
+        level: String(volumeLevel),
+      },
+    );
+    return Client.transformers.snakeCaseObjectKeys(resp.data, true, true);
+  }
 
-    public async stopTTS(uuid: string): Promise<CallModifyResponse> {
-        const resp = await this.sendDeleteRequest<CallModifyResponse>(
-            `${this.config.apiHost}/v1/calls/${uuid}/talk`
-        )
-        return resp.data
-    }
+  async stopStreamAudio(uuid: string): Promise<CallUpdateResult> {
+    const resp = await this.sendDeleteRequest<UpdateCallResponse>(
+      `${this.config.apiHost}/v1/calls/${uuid}/stream`,
+    );
+    return Client.transformers.snakeCaseObjectKeys(resp.data, true, true);
+  }
 
-    public async streamAudio(
-        uuid: string,
-        url: string,
-        loop: number = 1,
-        volumeLevel: number = 0.0
-    ): Promise<CallModifyResponse> {
-        const data = {
-            stream_url: [url],
-            loop,
-            level: String(volumeLevel),
-        }
+  async transferCallWithNCCO(uuid: string, ncco: Action[]): Promise<void> {
+    return this.callAction(uuid, 'transfer', {
+      type: 'ncco',
+      ncco: ncco,
+    });
+  }
 
-        const resp = await this.sendPutRequest<CallModifyResponse>(
-            `${this.config.apiHost}/v1/calls/${uuid}/stream`,
-            data
-        )
-        return resp.data
-    }
+  async transferCallWithURL(uuid: string, url: string): Promise<void> {
+    return this.callAction(uuid, 'transfer', {
+      type: 'ncco',
+      url: [url],
+    });
+  }
 
-    public async transferCallWithNCCO(
-        uuid: string,
-        ncco: Action[]
-    ): Promise<void> {
-        const action = {
-            action: 'transfer',
-            destination: {
-                type: 'ncco',
-                ncco,
-            },
-        }
+  async hangupCall(uuid: string): Promise<void> {
+    return this.callAction(uuid, 'hangup');
+  }
 
-        await this.sendPutRequest<void>(
-            `${this.config.apiHost}/v1/calls/${uuid}`,
-            action
-        )
-    }
+  async muteCall(uuid: string): Promise<void> {
+    return this.callAction(uuid, 'mute');
+  }
 
-    public async transferCallWithURL(uuid: string, url: string): Promise<void> {
-        const action = {
-            action: 'transfer',
-            destination: {
-                type: 'ncco',
-                url: [url],
-            },
-        }
-        await this.sendPutRequest<void>(
-            `${this.config.apiHost}/v1/calls/${uuid}`,
-            action
-        )
-    }
+  async unmuteCall(uuid: string): Promise<void> {
+    return this.callAction(uuid, 'unmute');
+  }
 
-    public async unearmuffCall(uuid: string): Promise<void> {
-        await this.sendPutRequest<void>(
-            `${this.config.apiHost}/v1/calls/${uuid}`,
-            { action: 'unearmuff' }
-        )
-    }
+  async earmuffCall(uuid: string): Promise<void> {
+    return this.callAction(uuid, 'earmuff');
+  }
 
-    public async unmuteCall(uuid: string): Promise<void> {
-        await this.sendPutRequest<void>(
-            `${this.config.apiHost}/v1/calls/${uuid}`,
-            { action: 'unmute' }
-        )
-    }
+  async unearmuffCall(uuid: string): Promise<void> {
+    return this.callAction(uuid, 'unearmuff');
+  }
+
+  protected async callAction(
+    uuid: string,
+    action: string,
+    destination?: NCCODestination,
+  ): Promise<void> {
+    await this.sendPutRequest<void>(`${this.config.apiHost}/v1/calls/${uuid}`, {
+      action: action,
+      ...(destination ? { destination: destination } : {}),
+    });
+  }
 }

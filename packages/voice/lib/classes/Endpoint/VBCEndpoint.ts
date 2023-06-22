@@ -1,10 +1,19 @@
-import { VBCEndpointObject } from '../../interfaces/Endpoint/VBCEndpointObject'
+import { VBCEndpoint as VBCEndpointType } from '../../types/Endpoint/VBCEndpoint';
+import debug from 'debug';
 
-export class VBCEndpoint implements VBCEndpointObject {
-    type: string = 'vbc'
-    extension: string
+debug('@vonage/voice')(
+  'This class is deprecated. Please update to use the appropriate type',
+);
 
-    constructor(extension: string) {
-        this.extension = extension
-    }
+/**
+ * @deprecated This class is deprecated. Please update to use the
+ *             appropriate type
+ */
+export class VBCEndpoint implements VBCEndpointType {
+  type: 'vbc';
+  extension: string;
+
+  constructor(extension: string) {
+    this.extension = extension;
+  }
 }

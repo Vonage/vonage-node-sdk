@@ -1,10 +1,10 @@
-import { PhoneEndpointObject } from '../../interfaces/Endpoint/PhoneEndpointObject'
-import { SIPEndpointObject } from '../../interfaces/Endpoint/SIPEndpointObject'
-import { VBCEndpointObject } from '../../interfaces/Endpoint/VBCEndpointObject'
-import { WebsocketEndpointObject } from '../../interfaces/Endpoint/WebsocketEndpointObject'
+import { PhoneEndpoint } from './PhoneEndpoint';
+import { SIPEndpoint } from './SIPEndpoint';
+import { VBCEndpoint } from './VBCEndpoint';
+import { WebsocketEndpoint } from './WebsocketEndpoint';
 
 export type CallEndpoint =
-    | PhoneEndpointObject
-    | SIPEndpointObject
-    | VBCEndpointObject
-    | WebsocketEndpointObject
+  | WebsocketEndpoint
+  | PhoneEndpoint
+  | SIPEndpoint
+  | VBCEndpoint;

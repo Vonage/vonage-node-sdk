@@ -1,6 +1,12 @@
-import { CallEndpointObject } from './CallEndpointObject'
+import { PhoneEndpoint } from '../../types/index';
+import debug from 'debug';
 
-export interface PhoneEndpointObject extends CallEndpointObject {
-    number: string
-    dtmfAnswer?: string
-}
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type PhoneEndpointObject = PhoneEndpoint;

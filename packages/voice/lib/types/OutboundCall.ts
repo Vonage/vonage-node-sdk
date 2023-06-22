@@ -1,4 +1,4 @@
-import { OutboundCallWithAnswerURL } from '../interfaces/OutboundCallWithAnswerURL'
-import { OutboundCallWithNCCO } from '../interfaces/OutboundCallWithNCCO'
+import { CallWithAnswerURL } from './CallWithAnswerURL';
+import { CallWithNCCO } from './CallWithNCCO';
 
-export type OutboundCall = OutboundCallWithAnswerURL | OutboundCallWithNCCO
+export type OutboundCall = CallWithNCCO | CallWithAnswerURL;
