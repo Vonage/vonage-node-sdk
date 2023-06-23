@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Client } from '@vonage/server-client';
 import { Meetings } from '../lib/index';
-import { BASE_PATH, getClient, getScope } from './common';
+import { getClient, getScope } from './common';
 import { RecordingStatus } from '../lib/enums';
 
 const session = {
@@ -33,9 +33,7 @@ describe('Meetings > Recordings', () => {
   });
 
   test('Can get recording by id', async () => {
-    scope
-      .get(`${BASE_PATH}/meetings/recordings/my-awesome-recording`)
-      .reply(200, session);
+    scope.get(`/meetings/recordings/my-awesome-recording`).reply(200, session);
 
     expect(await client.getRecording('my-awesome-recording')).toEqual({
       ...Client.transformers.camelCaseObjectKeys(session, true),
@@ -46,7 +44,7 @@ describe('Meetings > Recordings', () => {
   });
 
   test('Can get recordings for session', async () => {
-    scope.get(`${BASE_PATH}/meetings/sessions/my-session`).reply(200, {
+    scope.get(`/meetings/sessions/my-session`).reply(200, {
       _embedded: {
         recordings: [session],
       },
@@ -63,9 +61,7 @@ describe('Meetings > Recordings', () => {
   });
 
   test('Can delete recording by id', async () => {
-    scope
-      .delete(`${BASE_PATH}/meetings/recordings/my-awesome-recording`)
-      .reply(204);
+    scope.delete(`/meetings/recordings/my-awesome-recording`).reply(204);
 
     await client.deleteRecording('my-awesome-recording');
 

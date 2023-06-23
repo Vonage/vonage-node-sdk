@@ -3,7 +3,6 @@ import { Client } from '@vonage/server-client';
 import { Meetings } from '../lib/index';
 import {
   BASE_URL,
-  BASE_PATH,
   getClient,
   getScope,
   roomOne,
@@ -28,7 +27,7 @@ describe('Meetings > Themes', () => {
   });
 
   test('Can get empty themes', async () => {
-    scope.get(`${BASE_PATH}/meetings/themes`).reply(200, []);
+    scope.get(`/meetings/themes`).reply(200, []);
 
     const results = [];
     for await (const room of client.getThemes()) {
@@ -41,7 +40,7 @@ describe('Meetings > Themes', () => {
 
   test('Can get themes', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/themes`)
+      .get(`/meetings/themes`)
       .reply(200, [
         Client.transformers.snakeCaseObjectKeys(themeOne),
         Client.transformers.snakeCaseObjectKeys(themeTwo),
@@ -58,7 +57,7 @@ describe('Meetings > Themes', () => {
 
   test('Can get theme', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/themes/my-theme`)
+      .get(`/meetings/themes/my-theme`)
       .reply(200, Client.transformers.snakeCaseObjectKeys(themeOne));
 
     expect(await client.getTheme('my-theme')).toEqual(themeOne);
@@ -67,7 +66,7 @@ describe('Meetings > Themes', () => {
 
   test('Can delete theme', async () => {
     scope
-      .delete(`${BASE_PATH}/meetings/themes/my-theme`)
+      .delete(`/meetings/themes/my-theme`)
       .reply(200, Client.transformers.snakeCaseObjectKeys(themeOne));
 
     await client.deleteTheme('my-theme');
@@ -76,7 +75,7 @@ describe('Meetings > Themes', () => {
 
   test('Can force delete theme', async () => {
     scope
-      .delete(`${BASE_PATH}/meetings/themes/my-theme?force=true`)
+      .delete(`/meetings/themes/my-theme?force=true`)
       .reply(200, Client.transformers.snakeCaseObjectKeys(themeOne));
 
     await client.deleteTheme('my-theme', true);
@@ -84,7 +83,7 @@ describe('Meetings > Themes', () => {
   });
 
   test('Will throw when theme in use', async () => {
-    scope.delete(`${BASE_PATH}/meetings/themes/my-theme`).reply(400, {
+    scope.delete(`/meetings/themes/my-theme`).reply(400, {
       message: 'could not delete theme',
       name: 'BadRequestError',
       errors: [
@@ -102,7 +101,7 @@ describe('Meetings > Themes', () => {
   test('Will create a theme', async () => {
     scope
       .post(
-        `${BASE_PATH}/meetings/themes`,
+        `/meetings/themes`,
         pick(
           Client.transformers.snakeCaseObjectKeys(themeOne, true),
           client.THEME_WRITE_KEYS,
@@ -116,7 +115,7 @@ describe('Meetings > Themes', () => {
 
   test('Will update a theme', async () => {
     scope
-      .patch(`${BASE_PATH}/meetings/themes/my-theme`, {
+      .patch(`/meetings/themes/my-theme`, {
         update_details: pick(
           Client.transformers.snakeCaseObjectKeys(themeOne, true),
           client.THEME_WRITE_KEYS,
@@ -129,7 +128,7 @@ describe('Meetings > Themes', () => {
   });
 
   test('Can get one page of theme rooms', async () => {
-    scope.get(`${BASE_PATH}/meetings/themes/my-theme/rooms?`).reply(200, {
+    scope.get(`/meetings/themes/my-theme/rooms?`).reply(200, {
       _embedded: [
         {
           ...roomOne,
@@ -138,7 +137,7 @@ describe('Meetings > Themes', () => {
       ],
       _links: {
         self: {
-          href: `${BASE_URL}${BASE_PATH}/meetings/rooms`,
+          href: `${BASE_URL}/meetings/rooms`,
         },
       },
       page_size: 20,
@@ -156,7 +155,7 @@ describe('Meetings > Themes', () => {
 
   test('Can get two pages of theme rooms', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/themes/my-theme/rooms?page_size=1`)
+      .get(`/meetings/themes/my-theme/rooms?page_size=1`)
       .reply(200, {
         _embedded: [
           {
@@ -166,18 +165,16 @@ describe('Meetings > Themes', () => {
         ],
         _links: {
           self: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms`,
+            href: `${BASE_URL}/meetings/rooms`,
           },
           next: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms?start_id=42`,
+            href: `${BASE_URL}/meetings/rooms?start_id=42`,
           },
         },
         page_size: 20,
         total_items: 1,
       })
-      .get(
-        `${BASE_PATH}/meetings/themes/my-theme/rooms?page_size=1&start_id=42`,
-      )
+      .get(`/meetings/themes/my-theme/rooms?page_size=1&start_id=42`)
       .reply(200, {
         _embedded: [
           {
@@ -187,7 +184,7 @@ describe('Meetings > Themes', () => {
         ],
         _links: {
           self: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms`,
+            href: `${BASE_URL}/meetings/rooms`,
           },
         },
         page_size: 20,
@@ -210,21 +207,21 @@ describe('Meetings > Themes', () => {
 
   test('Will throw error when call to theme rooms fails', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/themes/my-theme/rooms?`)
+      .get(`/meetings/themes/my-theme/rooms?`)
       .reply(200, {
         _embedded: [roomOne],
         _links: {
           self: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms`,
+            href: `${BASE_URL}/meetings/rooms`,
           },
           next: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms?start_id=42`,
+            href: `${BASE_URL}/meetings/rooms?start_id=42`,
           },
         },
         page_size: 20,
         total_items: 1,
       })
-      .get(`${BASE_PATH}/meetings/themes/my-theme/rooms?start_id=42`)
+      .get(`/meetings/themes/my-theme/rooms?start_id=42`)
       .reply(401, {
         status: 401,
         error: 'Unauthorized',
@@ -244,7 +241,7 @@ describe('Meetings > Themes', () => {
 
   test('Will set default theme', async () => {
     scope
-      .patch(`${BASE_PATH}/meetings/applications`, {
+      .patch(`/meetings/applications`, {
         update_details: {
           default_theme_id: 'my-theme',
         },

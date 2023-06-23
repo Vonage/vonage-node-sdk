@@ -1,8 +1,6 @@
 import nock from 'nock';
-import { Client } from '@vonage/server-client';
 import { Meetings } from '../lib/index';
-import { BASE_URL, BASE_PATH, getClient, getScope, themeOne } from './common';
-import pick from 'lodash.pick';
+import { getClient, getScope, themeOne } from './common';
 import { UrlResponse } from '../lib/types/index';
 import { LogoType } from '../lib/enums';
 import { parse } from '@amvijay/multipart-parser';
@@ -101,9 +99,9 @@ describe('Meetings > File uploads', () => {
       const { url, fields } = awsExpected;
       const awsUrl = new URL(url);
       scope
-        .get(`${BASE_PATH}/meetings/themes/logos-upload-urls`)
+        .get(`/meetings/themes/logos-upload-urls`)
         .reply(200, urlResponses)
-        .put(`${BASE_PATH}/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
+        .put(`/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
           keys: [fields.key],
         })
         .reply(200, 'OK');
@@ -143,9 +141,7 @@ describe('Meetings > File uploads', () => {
   });
 
   test('Will throw error when AWS fails', async () => {
-    scope
-      .get(`${BASE_PATH}/meetings/themes/logos-upload-urls`)
-      .reply(200, urlResponses);
+    scope.get(`/meetings/themes/logos-upload-urls`).reply(200, urlResponses);
 
     const awsUrl = new URL(urlResponses[0].url);
     awsScope
@@ -174,9 +170,9 @@ describe('Meetings > File uploads', () => {
 
   test('Will throw error when apply fails', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/themes/logos-upload-urls`)
+      .get(`/meetings/themes/logos-upload-urls`)
       .reply(200, urlResponses)
-      .put(`${BASE_PATH}/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
+      .put(`/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
         keys: [urlResponses[0].fields.key],
       })
       .reply(400, {
@@ -202,9 +198,9 @@ describe('Meetings > File uploads', () => {
 
   test('Will throw error when apply fails with no message', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/themes/logos-upload-urls`)
+      .get(`/meetings/themes/logos-upload-urls`)
       .reply(200, urlResponses)
-      .put(`${BASE_PATH}/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
+      .put(`/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
         keys: [urlResponses[0].fields.key],
       })
       .reply(400);

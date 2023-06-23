@@ -4,7 +4,6 @@ import { Meetings } from '../lib/index';
 import pick from 'lodash.pick';
 import {
   BASE_URL,
-  BASE_PATH,
   getClient,
   getScope,
   roomOne,
@@ -26,7 +25,7 @@ describe('Meetings > Rooms', () => {
   });
 
   test('Can get one page of data', async () => {
-    scope.get(`${BASE_PATH}/meetings/rooms?`).reply(200, {
+    scope.get(`/meetings/rooms?`).reply(200, {
       _embedded: [
         {
           ...roomOne,
@@ -35,7 +34,7 @@ describe('Meetings > Rooms', () => {
       ],
       _links: {
         self: {
-          href: `${BASE_URL}${BASE_PATH}/meetings/rooms`,
+          href: `${BASE_URL}/meetings/rooms`,
         },
       },
       page_size: 20,
@@ -53,7 +52,7 @@ describe('Meetings > Rooms', () => {
 
   test('Can get two pages of data', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/rooms?page_size=1`)
+      .get(`/meetings/rooms?page_size=1`)
       .reply(200, {
         _embedded: [
           {
@@ -63,16 +62,16 @@ describe('Meetings > Rooms', () => {
         ],
         _links: {
           self: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms`,
+            href: `${BASE_URL}/meetings/rooms`,
           },
           next: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms?start_id=42`,
+            href: `${BASE_URL}/meetings/rooms?start_id=42`,
           },
         },
         page_size: 20,
         total_items: 1,
       })
-      .get(`${BASE_PATH}/meetings/rooms?page_size=1&start_id=42`)
+      .get(`/meetings/rooms?page_size=1&start_id=42`)
       .reply(200, {
         _embedded: [
           {
@@ -82,7 +81,7 @@ describe('Meetings > Rooms', () => {
         ],
         _links: {
           self: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms`,
+            href: `${BASE_URL}/meetings/rooms`,
           },
         },
         page_size: 20,
@@ -103,7 +102,7 @@ describe('Meetings > Rooms', () => {
 
   test('Will throw error when call fails', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/rooms?`)
+      .get(`/meetings/rooms?`)
       .reply(200, {
         _embedded: [
           {
@@ -113,16 +112,16 @@ describe('Meetings > Rooms', () => {
         ],
         _links: {
           self: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms`,
+            href: `${BASE_URL}/meetings/rooms`,
           },
           next: {
-            href: `${BASE_URL}${BASE_PATH}/meetings/rooms?start_id=42`,
+            href: `${BASE_URL}/meetings/rooms?start_id=42`,
           },
         },
         page_size: 20,
         total_items: 1,
       })
-      .get(`${BASE_PATH}/meetings/rooms?start_id=42`)
+      .get(`/meetings/rooms?start_id=42`)
       .reply(401, {
         status: 401,
         error: 'Unauthorized',
@@ -141,7 +140,7 @@ describe('Meetings > Rooms', () => {
   });
 
   test('Can get room by id', async () => {
-    scope.get(`${BASE_PATH}/meetings/rooms/my-awesome-room`).reply(200, {
+    scope.get(`/meetings/rooms/my-awesome-room`).reply(200, {
       ...roomOne,
       _links: roomLinks,
     });
@@ -156,7 +155,7 @@ describe('Meetings > Rooms', () => {
   test('Can create room', async () => {
     scope
       .post(
-        `${BASE_PATH}/meetings/rooms`,
+        `/meetings/rooms`,
         pick(
           Client.transformers.snakeCaseObjectKeys(roomOne, true),
           client.ROOM_WRITE_KEYS,
@@ -176,7 +175,7 @@ describe('Meetings > Rooms', () => {
 
   test('Can Update an existing room', async () => {
     scope
-      .patch(`${BASE_PATH}/meetings/rooms/my-awesome-room`, {
+      .patch(`/meetings/rooms/my-awesome-room`, {
         update_options: pick(
           Client.transformers.snakeCaseObjectKeys(roomOne, true),
           client.ROOM_WRITE_KEYS,

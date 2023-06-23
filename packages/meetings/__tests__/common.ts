@@ -16,7 +16,6 @@ const testKey = readFileSync(`${__dirname}/private.test.key`).toString();
 const checkAuth = (value) => value.startsWith('Bearer ') && value.length > 10;
 
 export const BASE_URL = 'https://api-eu.vonage.com';
-export const BASE_PATH = '/beta';
 
 export const roomLinks = {
   host_url: {
@@ -45,7 +44,6 @@ export const getScope = (): nock =>
 export const roomOne: MeetingRoom = {
   id: '3ff993a8-deb0-4bd2-8fed-e190ee6114c4',
   displayName: 'Room 1',
-  metadata: null,
   type: MeetingType.LONG_TERM,
   expiresAt: '2024-01-17T15:53:03.377Z',
   recordingOptions: {
@@ -56,7 +54,6 @@ export const roomOne: MeetingRoom = {
   createdAt: '2023-01-17T15:54:07.299Z',
   isAvailable: true,
   expireAfterUse: true,
-  themeId: null,
   initialJoinOptions: {
     microphoneState: MicrophoneSate.OFF,
   },
@@ -77,7 +74,6 @@ export const roomOne: MeetingRoom = {
 export const roomTwo: MeetingRoom = {
   id: 'b52c4ded-fc4c-4bed-bada-6ad33fa37b76',
   displayName: 'Room 2',
-  metadata: null,
   type: MeetingType.INSTANT,
   expiresAt: '2024-01-17T15:53:03.377Z',
   recordingOptions: {
@@ -88,7 +84,6 @@ export const roomTwo: MeetingRoom = {
   createdAt: '2023-01-17T15:54:07.299Z',
   isAvailable: true,
   expireAfterUse: true,
-  themeId: null,
   initialJoinOptions: {
     microphoneState: MicrophoneSate.OFF,
   },
@@ -115,12 +110,6 @@ export const themeOne: Theme = {
   mainColor: '#2a2a2a',
   shortCompanyUrl: 'vonage',
   brandText: 'Node SDK',
-  brandImageColored: null,
-  brandImageWhite: null,
-  brandedFavicon: null,
-  brandImageWhiteUrl: null,
-  brandImageColoredUrl: null,
-  brandedFaviconUrl: null,
 };
 
 export const themeTwo: Theme = {
@@ -132,10 +121,4 @@ export const themeTwo: Theme = {
   mainColor: '#2a2a2a',
   shortCompanyUrl: 'vonage',
   brandText: 'Node SDK',
-  brandImageColored: null,
-  brandImageWhite: null,
-  brandedFavicon: null,
-  brandImageWhiteUrl: null,
-  brandImageColoredUrl: null,
-  brandedFaviconUrl: null,
 };

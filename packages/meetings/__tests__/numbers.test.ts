@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Client } from '@vonage/server-client';
 import { Meetings } from '../lib/index';
-import { BASE_PATH, getClient, getScope } from './common';
+import { getClient, getScope } from './common';
 
 const dialInNumberOne = {
   number: '12128675309',
@@ -32,7 +32,7 @@ describe('Meetings > Numbers', () => {
 
   test('Can get recording by id', async () => {
     scope
-      .get(`${BASE_PATH}/meetings/dial-in-numbers`)
+      .get(`/meetings/dial-in-numbers`)
       .reply(200, [
         Client.transformers.snakeCaseObjectKeys(dialInNumberOne),
         Client.transformers.snakeCaseObjectKeys(dialInNumberTwo),
