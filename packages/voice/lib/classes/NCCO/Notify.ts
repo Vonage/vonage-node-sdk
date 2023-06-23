@@ -2,7 +2,7 @@ import { NotifyAction } from '../../interfaces/NCCO/NotifyAction'
 import { Serializable } from '../../ncco'
 
 export class Notify implements NotifyAction, Serializable {
-    action: 'notify'
+    action: string = 'notify'
     payload: {
         [key: string]: string
     }

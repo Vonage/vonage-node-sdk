@@ -5,7 +5,7 @@ import { Serializable } from '../../ncco'
 import { CallEndpoint } from '../../types/Endpoint/CallEndpoint'
 
 export class Connect implements ConnectAction, Serializable {
-    action: 'connect'
+    action: string = 'connect'
     endpoint: CallEndpoint[]
     from?: string
     randomFromNumber?: boolean

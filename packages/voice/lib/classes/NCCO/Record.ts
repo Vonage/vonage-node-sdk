@@ -2,7 +2,7 @@ import { RecordingFormat } from '../../enums/NCCO/RecordingFormat'
 import { RecordAction } from '../../interfaces/NCCO/RecordAction'
 
 export class Record implements RecordAction {
-    action: 'record'
+    action: string = 'record'
     format?: RecordingFormat
     protected wrappedSplit?: string
     protected wrappedChannels?: number

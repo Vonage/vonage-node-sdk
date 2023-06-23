@@ -2,7 +2,7 @@ import { ConversationAction } from '../../interfaces/NCCO/ConversationAction'
 import { Serializable } from '../../ncco'
 
 export class Conversation implements ConversationAction, Serializable {
-    action: 'conversation'
+    action: string = 'conversation'
     name: string
     musicOnHoldUrl?: string[]
     startOnEnter?: boolean
