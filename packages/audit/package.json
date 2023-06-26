@@ -1,40 +1,40 @@
 {
-    "name": "@vonage/audit",
-    "version": "1.4.0",
-    "description": "Vonage Audit SDK Package",
-    "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/audit#readme",
-    "bugs": {
-        "url": "https://github.com/Vonage/vonage-node-sdk/issues"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
-    },
-    "license": "Apache-2.0",
-    "author": "Chuck \"MANCHUCK\" Reeves",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "directories": {
-        "lib": "dist",
-        "test": "__tests__"
-    },
-    "files": [
-        "/dist"
-    ],
-    "scripts": {
-        "build": "npm run clean && npm run compile",
-        "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-        "compile": "npx tsc --build --verbose"
-    },
-    "dependencies": {
-        "@vonage/auth": "^1.3.0",
-        "@vonage/server-client": "^1.4.0",
-        "@vonage/vetch": "^1.3.0"
-    },
-    "devDependencies": {
-        "nock": "^13.3.1"
-    },
-    "publishConfig": {
-        "directory": "dist"
-    }
+  "name": "@vonage/audit",
+  "version": "1.5.0",
+  "description": "Vonage Audit SDK Package",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/audit#readme",
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Chuck \"MANCHUCK\" Reeves",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+    "compile": "npx tsc --build --verbose"
+  },
+  "dependencies": {
+    "@vonage/auth": "^1.4.0",
+    "@vonage/server-client": "^1.5.0",
+    "@vonage/vetch": "^1.4.0"
+  },
+  "devDependencies": {
+    "nock": "^13.3.1"
+  },
+  "publishConfig": {
+    "directory": "dist"
+  }
 }
