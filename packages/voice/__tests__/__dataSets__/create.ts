@@ -1,4 +1,5 @@
 import {
+  AdvancedMachineDetectionMode,
   CallDirection,
   CallStatus,
   HttpMethod,
@@ -41,6 +42,11 @@ export default [
           event_url: ['example.com'],
           event_method: HttpMethod.GET,
           machine_detection: MachineDetectionBehavior.CONTINUE,
+          advanced_machine_detection: {
+            behavior: MachineDetectionBehavior.HANGUP,
+            mode: AdvancedMachineDetectionMode.DETECT,
+            beep_timeout: 42,
+          },
           length_timer: 84,
           ringing_timer: 126,
         },
@@ -80,6 +86,11 @@ export default [
         eventUrl: ['example.com'],
         eventMethod: HttpMethod.GET,
         machineDetection: MachineDetectionBehavior.CONTINUE,
+        advancedMachineDetection: {
+          behavior: MachineDetectionBehavior.HANGUP,
+          mode: AdvancedMachineDetectionMode.DETECT,
+          beepTimeout: 42,
+        },
         lengthTimer: 84,
         ringingTimer: 126,
       } as CallWithNCCO,
@@ -117,6 +128,11 @@ export default [
           event_url: ['example.com'],
           event_method: HttpMethod.GET,
           machine_detection: MachineDetectionBehavior.CONTINUE,
+          advanced_machine_detection: {
+            behavior: MachineDetectionBehavior.HANGUP,
+            mode: AdvancedMachineDetectionMode.DETECT,
+            beep_timeout: 42,
+          },
           length_timer: 84,
           ringing_timer: 126,
         },
@@ -152,6 +168,11 @@ export default [
         eventUrl: ['example.com'],
         eventMethod: HttpMethod.GET,
         machineDetection: MachineDetectionBehavior.CONTINUE,
+        advancedMachineDetection: {
+          behavior: MachineDetectionBehavior.HANGUP,
+          mode: AdvancedMachineDetectionMode.DETECT,
+          beepTimeout: 42,
+        },
         lengthTimer: 84,
         ringingTimer: 126,
       } as CallWithAnswerURL,
