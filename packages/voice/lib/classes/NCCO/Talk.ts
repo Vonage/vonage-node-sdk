@@ -3,7 +3,7 @@ import { TalkAction } from '../../types/NCCO/TalkAction';
 import { Serializable } from '../../ncco';
 
 export class Talk implements TalkAction, Serializable {
-  action: NCCOActions.TALK;
+  action: NCCOActions.TALK = NCCOActions.TALK;
   text: string;
   bargeIn?: boolean;
   loop?: number;

@@ -5,7 +5,7 @@ import { SpeechSettings } from '../../types/NCCO/SpeechSettings';
 import { Serializable } from '../../ncco';
 
 export class Input implements InputAction, Serializable {
-  action: NCCOActions.INPUT;
+  action: NCCOActions.INPUT = NCCOActions.INPUT;
   type: string[] = [];
   dtmf?: DTMFSettings;
   speech?: SpeechSettings;

@@ -3,7 +3,7 @@ import { ConversationAction } from '../../interfaces/NCCO/ConversationAction';
 import { Serializable } from '../../ncco';
 
 export class Conversation implements ConversationAction, Serializable {
-  action: NCCOActions.CONVERSATION;
+  action: NCCOActions.CONVERSATION = NCCOActions.CONVERSATION;
   name: string;
   musicOnHoldUrl?: string[];
   startOnEnter?: boolean;

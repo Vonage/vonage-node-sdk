@@ -3,7 +3,7 @@ import { RecordingFormat } from '../../enums/NCCO/RecordingFormat';
 import { RecordAction } from '../../types/NCCO/RecordAction';
 
 export class Record implements RecordAction {
-  action: NCCOActions.RECORD;
+  action: NCCOActions.RECORD = NCCOActions.RECORD;
   format?: RecordingFormat;
   protected wrappedSplit?: string;
   protected wrappedChannels?: number;

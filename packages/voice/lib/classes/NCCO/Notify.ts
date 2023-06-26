@@ -3,7 +3,7 @@ import { Serializable } from '../../ncco';
 import { NCCOActions } from '../../enums';
 
 export class Notify implements NotifyAction, Serializable {
-  action: NCCOActions.NOTIFY;
+  action: NCCOActions.NOTIFY = NCCOActions.NOTIFY;
   payload: {
     [key: string]: string;
   };

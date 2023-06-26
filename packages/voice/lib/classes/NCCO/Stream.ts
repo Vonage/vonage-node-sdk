@@ -3,7 +3,7 @@ import { StreamAction } from '../../interfaces/NCCO/StreamAction';
 import { Serializable } from '../../ncco';
 
 export class Stream implements StreamAction, Serializable {
-  action: NCCOActions.STREAM;
+  action: NCCOActions.STREAM = NCCOActions.STREAM;
   streamUrl: string[];
   level?: number;
   bargeIn?: boolean;

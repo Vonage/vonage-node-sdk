@@ -6,7 +6,7 @@ import { Serializable } from '../../ncco';
 import { CallEndpoint } from '../../types/Endpoint/CallEndpoint';
 
 export class Connect implements ConnectAction, Serializable {
-  action: NCCOActions.CONNECT;
+  action: NCCOActions.CONNECT = NCCOActions.CONNECT;
   endpoint: CallEndpoint[];
   from?: string;
   randomFromNumber?: boolean;

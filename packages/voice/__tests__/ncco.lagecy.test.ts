@@ -51,7 +51,10 @@ describe('voice', () => {
     ];
 
     const ncco = new NCCOBuilder();
-    ncco.addAction({ action: 'talk', text: 'This call was transferred' });
+    ncco.addAction({
+      action: 'talk',
+      text: 'This call was transferred',
+    });
 
     expect(ncco.build()).toEqual(expectedBody);
   });
@@ -61,6 +64,7 @@ describe('voice', () => {
     conv.canHear = ['test'];
 
     expect(conv.serializeToNCCO()).toEqual({
+      action: 'conversation',
       name: 'Test Conversation',
       canHear: ['test'],
     });
