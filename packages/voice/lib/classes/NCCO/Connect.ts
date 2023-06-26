@@ -4,16 +4,7 @@ import { MachineDetection } from '../../enums/NCCO/MachineDetection';
 import { ConnectAction } from '../../types/NCCO/ConnectAction';
 import { Serializable } from '../../ncco';
 import { CallEndpoint } from '../../types/Endpoint/CallEndpoint';
-import debug from 'debug';
 
-debug('@vonage/voice')(
-  'This class is deprecated. Please update to use the appropriate type',
-);
-
-/**
- * @deprecated This class is deprecated. Please update to use the
- *             appropriate type
- */
 export class Connect implements ConnectAction, Serializable {
   action: NCCOActions.CONNECT;
   endpoint: CallEndpoint[];

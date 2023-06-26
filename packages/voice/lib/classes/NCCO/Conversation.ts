@@ -1,16 +1,7 @@
 import { NCCOActions } from '../../enums';
 import { ConversationAction } from '../../interfaces/NCCO/ConversationAction';
 import { Serializable } from '../../ncco';
-import debug from 'debug';
 
-debug('@vonage/voice')(
-  'This class is deprecated. Please update to use the appropriate type',
-);
-
-/**
- * @deprecated This class is deprecated. Please update to use the
- *             appropriate type
- */
 export class Conversation implements ConversationAction, Serializable {
   action: NCCOActions.CONVERSATION;
   name: string;

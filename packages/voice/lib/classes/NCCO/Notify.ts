@@ -1,16 +1,7 @@
 import { NotifyAction } from '../../types/NCCO/NotifyAction';
 import { Serializable } from '../../ncco';
 import { NCCOActions } from '../../enums';
-import debug from 'debug';
 
-debug('@vonage/voice')(
-  'This class is deprecated. Please update to use the appropriate type',
-);
-
-/**
- * @deprecated This class is deprecated. Please update to use the
- *             appropriate type
- */
 export class Notify implements NotifyAction, Serializable {
   action: NCCOActions.NOTIFY;
   payload: {

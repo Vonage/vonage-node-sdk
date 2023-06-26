@@ -4,16 +4,6 @@ import { InputAction } from '../../types/NCCO/InputAction';
 import { SpeechSettings } from '../../types/NCCO/SpeechSettings';
 import { Serializable } from '../../ncco';
 
-import debug from 'debug';
-
-debug('@vonage/voice')(
-  'This class is deprecated. Please update to use the appropriate type',
-);
-
-/**
- * @deprecated This class is deprecated. Please update to use the
- *             appropriate type
- */
 export class Input implements InputAction, Serializable {
   action: NCCOActions.INPUT;
   type: string[] = [];
