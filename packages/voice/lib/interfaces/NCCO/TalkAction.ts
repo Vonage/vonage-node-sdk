@@ -1,10 +1,12 @@
-export interface TalkAction {
-    action: string
-    text: string
-    bargeIn?: boolean
-    loop?: number
-    level?: number
-    language?: string
-    style?: string
-    premium?: boolean
-}
+import { TalkAction as TalkActionType } from '../../types/index';
+import debug from 'debug';
+
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type TalkAction = TalkActionType;

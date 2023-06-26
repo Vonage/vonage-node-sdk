@@ -1,73 +1,37 @@
-import { AuthInterface, AuthOpts } from '@vonage/auth'
-import { VetchOptions, VetchResponse } from '@vonage/vetch'
+import { VetchResponse } from '@vonage/vetch';
+import { VoiceClassParameters as VoiceClassParametersType } from './types/Parameters/VoiceClassParameters';
+import { CallDetailResponse as CallDetailResponseType } from './types/Responses';
+import {
+  CallPageResponse,
+  CreateCallResponse,
+  UpdateCallResponse,
+} from './types/Responses';
+import { GetCallDetailsParameters } from './types/Parameters/GetCallsDetailsParameters';
+import debug from 'debug';
 
-export interface VoiceResponse<T> extends VetchResponse<T> {}
+debug('@vonage/voice')(
+  'This file is deprecated please update to use the core package',
+);
 
-export type VoiceClassParameters = AuthOpts &
-    VetchOptions & {
-        applicationId: string
-        privateKey: string
-        auth?: AuthInterface
-    }
+export type VoiceResponse<T> = VetchResponse<T>;
 
-export interface CallDetailResponse {
-    _links: {
-        self: {
-            href: string
-        }
-    }
-    uuid: string
-    conversation_uuid: string
-    to: {
-        type: string
-        number: string
-    }
-    from: {
-        type: string
-        number: string
-    }
-    status: string
-    direction: string
-    rate: string
-    price: string
-    duration: string
-    start_time: string
-    end_time: string
-    network: string
-}
+export type VoiceClassParameters = VoiceClassParametersType;
 
-export interface CallListResponse {
-    count: number
-    page_size: number
-    record_index: number
-    _links: {
-        self: {
-            href: string
-        }
-    }
-    _embedded: {
-        calls: CallDetailResponse[]
-    }
-}
+export type CallDetailResponse = CallDetailResponseType;
 
-export interface CallListFilter {
-    status?: string
-    dateStart?: string
-    dateEnd?: string
-    pageSize?: number
-    recordIndex?: number
-    order?: string
-    conversationUUID?: string
-}
+export type CallListResponse = CallPageResponse;
 
-export interface CallCreateResponse {
-    uuid: string
-    status: string
-    direction: string
-    conversation_uuid: string
-}
+/**
+ * @deprecated Pelease use GetCallDetailsParameters instead
+ */
+export type CallListFilter = {
+  date_start?: string;
+  date_end?: string;
+  page_size?: string;
+  record_index?: string;
+  conversation_uuid?: string;
+} & GetCallDetailsParameters;
 
-export interface CallModifyResponse {
-    message: string
-    uuid: string
-}
+export type CallCreateResponse = CreateCallResponse;
+
+export type CallModifyResponse = UpdateCallResponse;

@@ -1,9 +1,12 @@
-import { WebsocketBitrate } from '../../enums/Endpoint/WebsocketBitrate'
-import { CallEndpointObject } from './CallEndpointObject'
-import { Headers } from './Headers'
+import { WebsocketEndpoint } from '../../types/index';
+import debug from 'debug';
 
-export interface WebsocketEndpointObject extends CallEndpointObject {
-    uri: string
-    contentType: WebsocketBitrate
-    headers?: Headers[]
-}
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type WebsocketEndpointObject = WebsocketEndpoint;

@@ -1,6 +1,12 @@
-import { Action } from '../ncco'
-import { OutboundCall } from './OutboundCall'
+import { CallWithNCCO } from '../types/index';
+import debug from 'debug';
 
-export interface OutboundCallWithNCCO extends OutboundCall {
-    ncco: Action[]
-}
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type OutboundCallWithNCCO = CallWithNCCO;

@@ -1,11 +1,12 @@
-export interface ConversationAction {
-    action: string
-    name: string
-    musicOnHoldUrl?: string[]
-    startOnEnter?: boolean
-    endOnExit?: boolean
-    record?: boolean
-    canSpeak?: string[]
-    canHear?: string[]
-    mute?: boolean
-}
+import { ConversationAction as ConnectionActionType } from '../../types/index';
+import debug from 'debug';
+
+debug('@vonage/voice')(
+  'This interface is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This interface is deprecated. Please update to use the
+ *             appropriate type
+ */
+export type ConversationAction = ConnectionActionType;

@@ -1,23 +1,33 @@
-import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject'
-import { CallEndpoint } from '../types/Endpoint/CallEndpoint'
+import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject';
+import { CallEndpoint } from '../types/Endpoint/CallEndpoint';
+import debug from 'debug';
+import { HttpMethod, MachineDetectionBehavior } from '../enums';
 
+debug('@vonage/voice')(
+  'This class is deprecated. Please update to use the appropriate type',
+);
+
+/**
+ * @deprecated This class is deprecated. Please update to use the
+ *             appropriate type
+ */
 export abstract class OutboundCall {
-    public to: CallEndpoint[]
-    public from?: PhoneEndpointObject
-    public randomFromNumber?: boolean
-    public eventUrl?: string[]
-    public eventMethod?: string
-    public machineDetection?: boolean
-    public lengthTimer?: number
-    public ringingTimer?: number
+  to: CallEndpoint[];
+  from: PhoneEndpointObject;
+  randomFromNumber?: boolean;
+  eventUrl?: string[];
+  eventMethod?: HttpMethod;
+  machineDetection?: MachineDetectionBehavior;
+  lengthTimer?: number;
+  ringingTimer?: number;
 
-    constructor(to: CallEndpoint, from?: PhoneEndpointObject) {
-        this.to = [to]
+  constructor(to: CallEndpoint, from?: PhoneEndpointObject) {
+    this.to = [to];
 
-        if (from) {
-            this.from = from
-        } else {
-            this.randomFromNumber = true
-        }
+    if (from) {
+      this.from = from;
+    } else {
+      this.randomFromNumber = true;
     }
+  }
 }
