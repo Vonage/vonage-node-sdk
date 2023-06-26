@@ -54,6 +54,7 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Redact API            |  Developer Preview   |     ✅     |
 | Reports API           |         Beta         |     ❌     |
 | SMS API               | General Availability |     ✅     |
+| Sub Accounts          |         Beta         |     ✅     |
 | Verify API            | General Availability |     ✅     |
 | Verify v2 API         | General Availability |     ✅     |
 | Voice API             | General Availability |     ✅     |
