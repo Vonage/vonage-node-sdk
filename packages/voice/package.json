@@ -1,6 +1,6 @@
 {
   "name": "@vonage/voice",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Vonage Voice API",
   "keywords": [
     "vonage",
@@ -32,8 +32,8 @@
   },
   "dependencies": {
     "@types/debug": "^4.1.8",
-    "@vonage/auth": "^1.4.0",
-    "@vonage/server-client": "^1.5.0",
+    "@vonage/auth": "^1.5.0",
+    "@vonage/server-client": "^1.6.0",
     "@vonage/vetch": "^1.4.0",
     "debug": "^4.3.4",
     "ts-xor": "^1.1.0"
