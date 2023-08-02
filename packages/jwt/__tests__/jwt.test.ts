@@ -89,6 +89,7 @@ describe('Token Generator', () => {
     const decoded = verify(token, privateKey, { algorithms: ['RS256'] });
     expect(decoded.exp).toEqual(decoded.iat + ttl);
     expect(decoded.sub).toEqual(subject);
+    expect(decoded).not.toHaveProperty('ttl');
     expect(decoded.acl).toMatchObject(acl);
   });
 });
