@@ -49,7 +49,9 @@ export class JWT implements JWTInterface {
     const now = parseInt((Date.now() / 1000).toString(), 10);
 
     const ttl = opts?.ttl || 900;
-    delete opts.ttl;
+    if (opts.ttl) {
+      delete opts.ttl;
+    }
 
     const claims: Claims = {
       ...opts,
