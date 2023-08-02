@@ -48,11 +48,16 @@ export class JWT implements JWTInterface {
   private validateOptions(opts?: GeneratorOptions): Claims {
     const now = parseInt((Date.now() / 1000).toString(), 10);
 
+    const ttl = opts?.ttl || 900;
+    if (opts?.ttl) {
+      delete opts.ttl;
+    }
+
     const claims: Claims = {
       ...opts,
       jti: opts?.jti || uuidv4(),
       iat: opts?.issued_at || now,
-      exp: now + (opts?.ttl || 900),
+      exp: now + ttl,
     };
 
     if (opts?.subject) {
