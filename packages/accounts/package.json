@@ -1,6 +1,6 @@
 {
   "name": "@vonage/accounts",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Vonage Account Management API",
   "homepage": "https://developer.vonage.com",
   "bugs": {
