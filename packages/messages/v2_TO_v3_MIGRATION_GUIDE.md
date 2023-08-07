@@ -73,7 +73,7 @@ There are no differences to the methods used for sending messages from 2.x to
 If you used the classes that were made available for different messages types in
 2.x, you will want to update the require statements to use:
 
-    `@vonage/messages/dist/classes/`
+    `@vonage/messages`
 
 instead of the older:
 

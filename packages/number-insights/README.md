@@ -8,6 +8,8 @@ This is the Vonage Number Insights SDK for Node.js for use with [Vonage APIs](ht
 
 For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
 
+If you are updating from V2 to V3, please check the migration guide found [here](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/number-insights/v2_TO_v3_MIGRATION_GUIDE.md)
+
 * [Installation](#installation)
 * [Usage](#usage)
 * [Promises](#promises)

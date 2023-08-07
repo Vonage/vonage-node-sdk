@@ -8,6 +8,8 @@ This is the Vonage Account SDK for Node.js for use with [Vonage APIs](https://ww
 
 For full API documentation refer to [developer.vonage.com](https://developer.vonage.com/).
 
+If you are updating from V2 to V3, please check the migration guide found [here](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/accounts/v2_TO_v3_MIGRATION_GUIDE.md)
+
 * [Installation](#installation)
 * [Usage](#usage)
 * [Promises](#promises)
@@ -95,6 +97,8 @@ Run:
 ```bash
 npm run test
 ```
+
+
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 [license]: ../../LICENSE.txt
