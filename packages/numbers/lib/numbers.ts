@@ -34,8 +34,8 @@ const buildSearch = ({
   pattern,
   country,
 }: NumbersSearchFilter & NumbersSearchSimple):
-    | NumbersQuerySearchFilter
-    | Record<string, never> => {
+  | NumbersQuerySearchFilter
+  | Record<string, never> => {
   searchPattern = searchPattern ?? SearchPattern.CONTAINS;
 
   if (pattern) {
@@ -168,16 +168,9 @@ export class Numbers extends Client {
     if (!filter) {
       filter = {};
     }
-
-    const mapping = {
-      application_id: 'applicationId',
-      has_application: 'hasApplication',
-      search_pattern: 'searchPattern',
-    };
-    const data = remapObjects(mapping, {}, filter);
     const resp = await this.sendGetRequest<NumbersOwnedList>(
       `${this.config.restHost}/account/numbers`,
-      data,
+      Client.transformers.snakeCaseObjectKeys(filter),
     );
     return resp.data;
   }
