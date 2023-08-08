@@ -14,12 +14,12 @@ export class WebsocketEndpoint implements WebsocketEndpointType {
   type: 'websocket';
   uri: string;
   contentType: WebsocketBitrate;
-  headers?: Array<Record<string, unknown>>;
+  headers?: Record<string, unknown>;
 
   constructor(
     uri: string,
     contentType: WebsocketBitrate,
-    headers?: Array<Record<string, unknown>>,
+    headers?: Record<string, unknown>,
   ) {
     this.uri = uri;
     this.contentType = contentType;
