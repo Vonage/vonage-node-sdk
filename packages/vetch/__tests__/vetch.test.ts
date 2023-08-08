@@ -131,6 +131,23 @@ describe('option configuration', () => {
     expect(nock.isDone()).toBeTruthy();
   });
 
+  test('should append to user agent', async () => {
+    const options = {
+      reqheaders: {
+        'user-agent': (val: string) => {
+          return /^@vonage\/server-sdk\/[\d].[\d].[\d].* node\/.* foo$/.test(
+            val,
+          );
+        },
+      },
+    };
+
+    nock(url, options).get('/').reply(200);
+    const inst = new Vetch();
+    await inst.request({ url, appendUserAgent: 'foo' });
+    expect(nock.isDone()).toBeTruthy();
+  });
+
   test('should timeout', async () => {
     nock(url).get('/').delayConnection(5).reply(200);
     const inst = new Vetch({ timeout: 1 });

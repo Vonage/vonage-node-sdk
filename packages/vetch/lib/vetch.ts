@@ -122,9 +122,11 @@ export class Vetch {
     }
 
     // Set our user agent
-    opts.headers[
-      'user-agent'
-    ] = `@vonage/server-sdk/3.0.0 node/${process.version.replace('v', '')}`;
+    opts.headers['user-agent'] = [
+      `@vonage/server-sdk/3.0.0`,
+      ` node/${process.version.replace('v', '')}`,
+      opts.appendUserAgent ? ` ${opts.appendUserAgent}` : '',
+    ].join('');
 
     // Allow a custom timeout to be used
     const httpAgent = new http.Agent({
