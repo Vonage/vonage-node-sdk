@@ -1,9 +1,8 @@
-import fetch, { Response as fetchResponse } from 'node-fetch';
+import fetch, { Response as fetchResponse, options } from 'node-fetch';
 import { stringify } from 'querystring';
 import merge from 'lodash.merge';
 import http from 'http';
 import https from 'https';
-import URL from 'url';
 import { VetchError } from './types/vetchError';
 import { Headers } from './interfaces/headers';
 import { VetchResponse } from './interfaces/vetchResponse';
@@ -26,9 +25,22 @@ export class Vetch {
   private async _defaultAdapter<T>(
     opts: VetchOptions,
   ): Promise<VetchResponse<T>> {
-    const res = await fetch(opts.url, opts);
-    const data = await this.getResponseData(opts, res);
-    return this.createResponse(opts, res, data);
+    const { timeout } = opts;
+    let timeoutId = null;
+    const fetchConfig: options = opts;
+    if (timeout) {
+      const controller = new AbortController();
+      timeoutId = setTimeout(() => controller.abort(), timeout);
+      fetchConfig.signal = controller.signal;
+    }
+
+    try {
+      const res = await fetch(opts.url, fetchConfig);
+      const data = await this.getResponseData(opts, res);
+      return this.createResponse(opts, res, data);
+    } finally {
+      clearTimeout(timeoutId);
+    }
   }
 
   async request<T>(opts: VetchOptions = {}): Promise<VetchResponse<T>> {
@@ -116,10 +128,10 @@ export class Vetch {
 
     // Allow a custom timeout to be used
     const httpAgent = new http.Agent({
-      timeout: this.defaults.timeout,
+      timeout: opts.timeout,
     });
     const httpsAgent = new https.Agent({
-      timeout: this.defaults.timeout,
+      timeout: opts.timeout,
     });
     opts.agent = (parsedUrl: URL): https.Agent | http.Agent => {
       if (parsedUrl.protocol === 'http:') {

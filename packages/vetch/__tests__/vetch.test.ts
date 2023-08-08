@@ -104,10 +104,7 @@ describe('option configuration', () => {
   });
 
   test('should default to application/json', async () => {
-    nock(url)
-      .matchHeader('accept', 'application/json')
-      .get('/')
-      .reply(200, {});
+    nock(url).matchHeader('accept', 'application/json').get('/').reply(200, {});
     const res = await request({ url });
     expect(res.data).toEqual({});
   });
@@ -122,18 +119,24 @@ describe('option configuration', () => {
   test('should allow for our custom user agent', async () => {
     const options = {
       reqheaders: {
-        'user-agent': (val) => {
-          return /^@vonage\/server-sdk\/[\d].[\d].[\d].* node\/.*$/.test(
-            val,
-          );
+        'user-agent': (val: string) => {
+          return /^@vonage\/server-sdk\/[\d].[\d].[\d].* node\/.*$/.test(val);
         },
       },
     };
 
     nock(url, options).get('/').reply(200);
     const inst = new Vetch();
-    const res = await inst.request({ url });
+    await inst.request({ url });
     expect(nock.isDone()).toBeTruthy();
+  });
+
+  test('should timeout', async () => {
+    nock(url).get('/').delayConnection(5).reply(200);
+    const inst = new Vetch({ timeout: 1 });
+    await expect(inst.request({ url })).rejects.toThrow(
+      'The user aborted a request',
+    );
   });
 });
 
