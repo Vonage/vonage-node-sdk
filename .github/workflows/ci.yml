@@ -6,7 +6,6 @@ on:
   pull_request:
 jobs:
   test:
-    continue-on-error: ${{ matrix.experimental }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -22,7 +21,10 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install typescript
-        run: npm install -g typescript npm${{ matrix.npm_version }} && npm install
+        run: npm install -g typescript npm${{ matrix.npm_version }}
+
+      - name: Install packages
+        run: npm install
 
       - name: Lint, Compile, Test
         run: npm run compile && npm run test -- --coverage --verbose --maxWorkers=2
