@@ -50,7 +50,7 @@ export class Conversation implements ConversationAction, Serializable {
 
   serializeToNCCO() {
     const data: ConversationAction = {
-      action: this.action,
+      action: NCCOActions.CONVERSATION,
       name: this.name,
     };
 

@@ -30,7 +30,7 @@ export class Stream implements StreamAction, Serializable {
 
   serializeToNCCO() {
     const data: StreamAction = {
-      action: this.action,
+      action: NCCOActions.STREAM,
       streamUrl: this.streamUrl,
     };
 

@@ -63,7 +63,7 @@ export class Connect implements ConnectAction, Serializable {
 
   serializeToNCCO() {
     const data: ConnectAction = {
-      action: this.action,
+      action: NCCOActions.CONNECT,
       endpoint: this.endpoint,
     };
 

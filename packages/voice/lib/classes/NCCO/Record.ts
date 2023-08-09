@@ -127,7 +127,7 @@ export class Record implements RecordAction {
 
   serializeToNCCO(): RecordAction {
     const data: RecordAction = {
-      action: this.action,
+      action: NCCOActions.RECORD,
     };
 
     if (this.format) {
