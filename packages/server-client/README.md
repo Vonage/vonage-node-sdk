@@ -62,6 +62,7 @@ The constructor for the client takes in two parameters `credentials` and `option
 * `apiHost: string` (optional) - Allows overwriting the default `https://api.nexmo.com`.
 * `videoHost: string` (optional) - Allows overwriting the default `https://video.api.vonage.com`.
 * `timeout: int` (optional) - Set a custom timeout for requests to Vonage in milliseconds. Defaults to the standard for Node http requests, which is 120,000 ms.
+* `appendUserAgent: string` (optional) - Set a custom string to be added to the `user-agent` header for the request
 
 ## Testing
 

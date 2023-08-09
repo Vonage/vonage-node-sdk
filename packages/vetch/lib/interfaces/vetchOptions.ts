@@ -7,25 +7,26 @@ import URL from 'url';
 import { VetchPromise } from '../types/vetchPromise';
 
 export interface VetchOptions {
-    adapter?: <T = any>(
-        options: VetchOptions,
-        defaultAdapter: (options: VetchOptions) => VetchPromise<T>
-    ) => VetchPromise<T>
-    url?: string
-    baseUrl?: string
-    baseURL?: string
-    method?: HTTPMethods
-    headers?: Headers
-    data?: any
-    body?: any
-    params?: any
-    responseType?: ResponseTypes
-    checkStatus?: (status: number) => boolean
-    size?: number
-    timeout?: number
-    agent?:
-        | boolean
-        | http.Agent
-        | https.Agent
-        | ((parsedUrl: URL) => boolean | https.Agent | http.Agent)
+  adapter?: <T = any>(
+    options: VetchOptions,
+    defaultAdapter: (options: VetchOptions) => VetchPromise<T>
+  ) => VetchPromise<T>;
+  url?: string;
+  baseUrl?: string;
+  baseURL?: string;
+  method?: HTTPMethods;
+  headers?: Headers;
+  data?: any;
+  body?: any;
+  params?: any;
+  responseType?: ResponseTypes;
+  checkStatus?: (status: number) => boolean;
+  size?: number;
+  timeout?: number;
+  appendUserAgent?: string;
+  agent?:
+    | boolean
+    | http.Agent
+    | https.Agent
+    | ((parsedUrl: URL) => boolean | https.Agent | http.Agent);
 }
