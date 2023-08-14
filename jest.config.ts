@@ -90,6 +90,11 @@ const config: Config.InitialOptions = {
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {
+      displayName: 'USER',
+      testMatch: ['<rootDir>/packages/user/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
       displayName: 'VERIFY',
       testMatch: ['<rootDir>/packages/verify/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
