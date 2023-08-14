@@ -76,7 +76,7 @@ const userToAPI = (user: UserType): UserResponse => {
   return apiUser;
 };
 
-export class User extends Client {
+export class Users extends Client {
   protected authType = AuthenticationType.JWT;
 
   async *listAllUsers(

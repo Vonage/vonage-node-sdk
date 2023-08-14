@@ -13,7 +13,6 @@
     ],
 
     "references": [
-        { "path": "../server-client" },
         { "path": "../accounts" },
         { "path": "../applications" },
         { "path": "../auth" },
@@ -21,8 +20,12 @@
         { "path": "../number-insights" },
         { "path": "../numbers" },
         { "path": "../pricing" },
+        { "path": "../server-client" },
         { "path": "../sms" },
+        { "path": "../users" },
+        { "path": "../redact" },
         { "path": "../verify" },
+        { "path": "../verify2" },
         { "path": "../vetch" },
         { "path": "../voice" }
     ],

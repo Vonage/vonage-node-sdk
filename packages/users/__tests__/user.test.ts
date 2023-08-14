@@ -1,4 +1,4 @@
-import { User } from '../lib/index';
+import { Users } from '../lib/index';
 import nock from 'nock';
 import { Auth } from '@vonage/auth';
 import { BASE_URL } from './common';
@@ -9,7 +9,7 @@ const key = readFileSync(`${__dirname}/private.test.key`).toString();
 
 const getResults = async (
   generator: boolean,
-  client: User,
+  client: Users,
   clientMethod: string,
   parameters: Array<unknown>,
 ): Promise<unknown | Array<unknown>> => {
@@ -26,11 +26,11 @@ const getResults = async (
 };
 
 describe.each(testDataSets)('$label', ({ tests }) => {
-  let client: User | null;
+  let client: Users | null;
   let scope;
 
   beforeEach(function () {
-    client = new User(
+    client = new Users(
       new Auth({
         privateKey: key,
         applicationId: 'my-application',

@@ -37,6 +37,7 @@
     "@vonage/redact": "^1.5.0",
     "@vonage/server-client": "^1.6.0",
     "@vonage/sms": "^1.6.1",
+    "@vonage/users": "^1.0.0",
     "@vonage/verify": "^1.6.1",
     "@vonage/verify2": "^1.5.0",
     "@vonage/voice": "^1.6.1"
