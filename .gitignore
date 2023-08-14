@@ -18,4 +18,4 @@ typings
 packages/**/dist
 tsconfig.tsbuildinfo
 lerna-debug.log
-.vscode/
+package-lock.json

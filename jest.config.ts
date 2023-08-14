@@ -91,7 +91,7 @@ const config: Config.InitialOptions = {
     },
     {
       displayName: 'USER',
-      testMatch: ['<rootDir>/packages/user/__tests__/**/*.test.ts'],
+      testMatch: ['<rootDir>/packages/users/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {

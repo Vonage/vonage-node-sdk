@@ -1,16 +1,17 @@
 import { Accounts, Secrets } from '@vonage/accounts';
 import { Applications } from '@vonage/applications';
 import { Auth, AuthInterface } from '@vonage/auth';
+import { ConfigParams } from '@vonage/server-client';
 import { Messages } from '@vonage/messages';
 import { NumberInsights } from '@vonage/number-insights';
 import { Numbers } from '@vonage/numbers';
 import { Pricing } from '@vonage/pricing';
 import { Redact } from '@vonage/redact';
 import { SMS } from '@vonage/sms';
+import { Users } from '@vonage/users';
 import { Verify } from '@vonage/verify';
 import { Verify2 } from '@vonage/verify2';
 import { Voice } from '@vonage/voice';
-import { ConfigParams } from '@vonage/server-client';
 
 export class Vonage {
   protected credentials: AuthInterface;
@@ -25,8 +26,9 @@ export class Vonage {
   public redact: Redact;
   public secrets: Secrets;
   public sms: SMS;
-  public verify: Verify;
+  public users: Users;
   public verify2: Verify2;
+  public verify: Verify;
   public voice: Voice;
 
   constructor(credentials: AuthInterface, options?: ConfigParams) {
@@ -46,6 +48,7 @@ export class Vonage {
     this.redact = new Redact(this.credentials, this.options);
     this.secrets = new Secrets(this.credentials, this.options);
     this.sms = new SMS(this.credentials, this.options);
+    this.users = new Users(this.credentials, this.options);
     this.verify = new Verify(this.credentials, this.options);
     this.verify2 = new Verify2(this.credentials, this.options);
     this.voice = new Voice(this.credentials, this.options);
