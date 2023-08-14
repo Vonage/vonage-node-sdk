@@ -1,6 +1,6 @@
 {
   "name": "@vonage/verify2",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Verify API provides a choice of routes for sending a code to a user. You can use this to confirm a user's contact information, as a second factor when authenticating users, or for step-up authentication.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/verify2#readme",
   "bugs": {
@@ -26,7 +26,7 @@
     "compile": "npx tsc --build --verbose"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.6.0"
+    "@vonage/server-client": "^1.7.0"
   },
   "devDependencies": {
     "@vonage/auth": "^1.5.0",
