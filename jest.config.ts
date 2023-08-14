@@ -33,6 +33,11 @@ const config: Config.InitialOptions = {
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {
+      displayName: 'MEDIA',
+      testMatch: ['<rootDir>/packages/media/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
       displayName: 'MESSAGES',
       testMatch: ['<rootDir>/packages/messages/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
