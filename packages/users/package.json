@@ -12,13 +12,14 @@
   },
   "license": "Apache-2.0",
   "author": "Chuck MANCHUCK Reeves <chuck@manchuck.com>",
-  "main": "lib/user.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "directories": {
-    "lib": "lib",
+    "lib": "dist",
     "test": "__tests__"
   },
   "files": [
-    "lib"
+    "/dist"
   ],
   "scripts": {
     "build": "npm run clean && npm run compile",
