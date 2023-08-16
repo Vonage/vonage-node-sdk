@@ -22,10 +22,7 @@ export abstract class Client {
 
   protected config: ConfigParams;
 
-  constructor(
-    credentials: AuthInterface | AuthParams,
-    options?: ConfigParams,
-  ) {
+  constructor(credentials: AuthInterface | AuthParams, options?: ConfigParams) {
     // eslint-disable-next-line max-len
     this.auth = !Object.prototype.hasOwnProperty.call(
       credentials,
@@ -39,8 +36,7 @@ export abstract class Client {
       apiHost: options?.apiHost || 'https://api.nexmo.com',
       videoHost: options?.videoHost || 'https://video.api.vonage.com',
       meetingsHost: options?.meetingsHost || 'https://api-eu.vonage.com',
-      proactiveHost:
-                options?.proactiveHost || 'https://api-eu.vonage.com',
+      proactiveHost: options?.proactiveHost || 'https://api-eu.vonage.com',
       responseType: options?.responseType || ResponseTypes.json,
       timeout: null,
     } as ConfigParams;
@@ -84,7 +80,7 @@ export abstract class Client {
     // This is most likely web-form
     if (
       !request[requestPath]
-            && this.authType !== AuthenticationType.QUERY_KEY_SECRET
+      && this.authType !== AuthenticationType.QUERY_KEY_SECRET
     ) {
       requestPath = 'body';
       params = new URLSearchParams({
