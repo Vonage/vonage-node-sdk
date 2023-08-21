@@ -1,6 +1,6 @@
 {
   "name": "@vonage/meetings",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Vonage Meetings Management API",
   "homepage": "httsp://developer.vonage.com",
   "bugs": {

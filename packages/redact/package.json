@@ -1,6 +1,6 @@
 {
   "name": "@vonage/redact",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Delete data from the Vonage platform.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/redact#readme",
   "bugs": {
