@@ -1,5 +1,5 @@
-import { tokenGenerate } from '../lib';
-import { verify } from 'jsonwebtoken';
+import { tokenGenerate, verifySignature } from '../lib';
+import { verify, sign } from 'jsonwebtoken';
 import { readFileSync } from 'fs';
 import {
   MissingApplicationIdError,
@@ -32,21 +32,19 @@ const acl = {
 describe('Token Generator', () => {
   test('Will throw when missing applicationId', () => {
     // eslint-disable-next-line
-        // @ts-ignore
+    // @ts-ignore
     expect(() => tokenGenerate()).toThrow(new MissingApplicationIdError());
   });
 
   test('Will throw when missing privateKey', () => {
     // eslint-disable-next-line
-        // @ts-ignore
-    expect(() => tokenGenerate('app-id')).toThrow(
-      new MissingPrivateKeyError(),
-    );
+    // @ts-ignore
+    expect(() => tokenGenerate('app-id')).toThrow(new MissingPrivateKeyError());
   });
 
   test('Will throw when applicationId not a string', () => {
     // eslint-disable-next-line
-        // @ts-ignore
+    // @ts-ignore
     expect(() => tokenGenerate(12345, privateKey)).toThrow(
       new InvalidApplicationIdError(),
     );
@@ -54,7 +52,7 @@ describe('Token Generator', () => {
 
   test('Will throw when privateKey not a string or buffer', () => {
     // eslint-disable-next-line
-        // @ts-ignore
+    // @ts-ignore
     expect(() => tokenGenerate(applicationId, 56789)).toThrow(
       new InvalidPrivateKeyError(),
     );
@@ -91,5 +89,39 @@ describe('Token Generator', () => {
     expect(decoded.sub).toEqual(subject);
     expect(decoded).not.toHaveProperty('ttl');
     expect(decoded.acl).toMatchObject(acl);
+  });
+
+  test('Can Verify signature', () => {
+    const token = tokenGenerate(applicationId, privateKey, {
+      ttl,
+      subject,
+      acl,
+    });
+
+    // eslint-disable-next-line
+    expect(verifySignature(token, privateKey)).toEqual(true);
+  });
+
+  test('Will not validate with invalid key', () => {
+    const token = tokenGenerate(applicationId, privateKey, {
+      ttl,
+      subject,
+      acl,
+    });
+
+    // eslint-disable-next-line
+    expect(verifySignature(token, 'fizz-buzz')).toEqual(false);
+  });
+
+  test('Will not validate with invalid JWT token', () => {
+    const token = sign({}, 'fizzBuzz');
+
+    // eslint-disable-next-line
+    expect(verifySignature(token, privateKey)).toEqual(false);
+  });
+
+  test('Will not validate with non JWT token', () => {
+    // eslint-disable-next-line
+    expect(verifySignature('fizz-buzz', privateKey)).toEqual(false);
   });
 });

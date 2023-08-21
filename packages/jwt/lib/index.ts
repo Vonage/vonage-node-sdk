@@ -15,3 +15,7 @@ export function tokenGenerate(
 ) {
   return instance.tokenGenerate(applicationId, privateKey, opts);
 }
+
+export function verifySignature(token: string, privateKey: string | Buffer) {
+  return instance.verifySignature(token, privateKey);
+}

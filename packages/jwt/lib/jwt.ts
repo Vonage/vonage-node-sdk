@@ -1,5 +1,5 @@
 import { JWTInterface, GeneratorOptions, Claims } from './common';
-import { sign } from 'jsonwebtoken';
+import { sign, verify } from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import {
   MissingApplicationIdError,
@@ -45,6 +45,19 @@ export class JWT implements JWTInterface {
     });
   }
 
+  verifySignature(jwt: string, privateKey: string | Buffer): boolean {
+    try {
+      verify(jwt, privateKey, {
+        algorithms: ['RS256'],
+      });
+      return true;
+    } catch (error) {
+      log('Error when verifying token', error);
+    }
+
+    return false;
+  }
+
   private validateOptions(opts?: GeneratorOptions): Claims {
     const now = parseInt((Date.now() / 1000).toString(), 10);
 
@@ -70,7 +83,7 @@ export class JWT implements JWTInterface {
 
     for (const property in opts) {
       // eslint-disable-next-line
-            if (opts.hasOwnProperty(property)) {
+      if (opts.hasOwnProperty(property)) {
         claims[property] = opts[property];
       }
     }
