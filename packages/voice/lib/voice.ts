@@ -1,4 +1,4 @@
-import { AuthenticationType, Client } from '@vonage/server-client';
+import { AuthenticationType, Client, FileClient } from '@vonage/server-client';
 import {
   GetCallDetailsParameters,
   CallPageResponse,
@@ -174,6 +174,12 @@ export class Voice extends Client {
 
   async unearmuffCall(uuid: string): Promise<void> {
     return this.callAction(uuid, 'unearmuff');
+  }
+
+  async downloadRecording(file: string, path: string): Promise<void> {
+    const client = new FileClient(this.auth, this.config);
+
+    return await client.downloadFile(file, path);
   }
 
   protected async callAction(

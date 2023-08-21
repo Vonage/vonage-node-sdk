@@ -84,7 +84,7 @@ You can find more information for each product below:
 * [Number Insights](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/number-insights/README.md)
 * [Numbers](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/numbers/README.md)
 * [Pricing](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/pricing/README.md)
-* [Server Client](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-client/README.md)
+* [Server Client][server-client]
 * [Server SDK](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-sdk/README.md)
 * [SMS][sms]
 * [Sub Accounts](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/subaccounts/README.md)
@@ -124,28 +124,29 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 
 ### V2 Migrations
 
-While most of the V2 functions have been ported into their own package, some of the functions have not been ported or were removed. Below is a list of those changes: 
+While most of the V2 functions have been ported into their own package, some of the functions have not been ported or were removed. Below is a list of those changes:
 
 | V2 Function                 | Status          | Note                                                   |
 |-----------------------------|:---------------:|:------------------------------------------------------:|
 | `vonage.conversion`         | _REMOVED_       |                                                        |
 | `vonage.conversation`       | Not Implemented | This was only released as a beta package               |
-| `vonage.app`                | _REMOVED_       | Moved to [Applications][applications]                  |
-| `vonage.files`              | Not ported      | Has not been ported to V3 at this time                 |
+| `vonage.app`                | Moved           | Moved to [Applications][applications]                  |
+| `vonage.files`              | Moved           | Move to [ServerClient][server-client]                  |
 | `vonage.message`            | Moved           | Moved to [SMS][sms]                                    |
-| `vonage.generateJwt`        | Moved           |  Was moved to [JWT][jwt]                               |
+| `vonage.generateJwt`        | Moved           | Was moved to [JWT][jwt]                                |
 | `vonage.generateSignature`  | Not Ported      | Has not been ported to V3 at this time                 |
 | `vonage.calls`              | Moved           | Was moved to [Voice][voice]                            |
 | `vonage.credentials`        | Updated         | Options can be found in [Server Client][server-client] |
 | `vonage.options`            | Updated         | Options can be found in [Server Client][server-client] |
 | `vonage.options.httpClient` | _Removed_       |                                                        |
-| `vonage.options.userAgent`  | Not Ported      | Has not been ported to V3 at this time                 |
- 
+| `vonage.options.userAgent`  | Moved           | Options can be found in [Server Client][server-client] |
+
 For more information, check out each packages migration guide.
 
 [applications]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/applications/README.md
 [auth]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/auth/README.md
 [sms]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/sms/README.md
+[server-client]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-client/README.md
 [jwt]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/jwt/README.md
 [voice]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/voice/README.md
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
