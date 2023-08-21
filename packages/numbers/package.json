@@ -1,6 +1,6 @@
 {
   "name": "@vonage/numbers",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Vonage Numbers SDK Package",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
   "bugs": {
@@ -27,8 +27,8 @@
     "compile": "npx tsc --build --verbose"
   },
   "dependencies": {
-    "@vonage/auth": "^1.5.0",
-    "@vonage/server-client": "^1.7.0",
+    "@vonage/auth": "^1.6.0",
+    "@vonage/server-client": "^1.8.0",
     "@vonage/vetch": "^1.5.0",
     "lodash.omit": "^4.5.0"
   },
