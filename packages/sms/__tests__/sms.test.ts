@@ -3,6 +3,7 @@ import nock from 'nock';
 import { Auth } from '@vonage/auth';
 import { BASE_URL } from './common';
 import testDataSets from './__dataSets__/index';
+import testSignatureDataSets from './__dataSets__/signature';
 
 describe.each(testDataSets)('$label', ({ tests }) => {
   let client;
@@ -42,10 +43,19 @@ describe.each(testDataSets)('$label', ({ tests }) => {
     async ({ request, response, clientMethod, parameters, error }) => {
       scope.intercept(...request).reply(...response);
 
-      await expect(() =>
-        client[clientMethod](...parameters),
-      ).rejects.toThrow(error);
+      await expect(() => client[clientMethod](...parameters)).rejects.toThrow(
+        error,
+      );
       expect(nock.isDone()).toBeTruthy();
+    },
+  );
+
+  test.each(testSignatureDataSets)(
+    'Testing signature using $algorithm',
+    async ({ expected, params, algorithm, signature, signatureSecret }) => {
+      expect(
+        client.verifySignature(signature, params, signatureSecret, algorithm),
+      ).toEqual(expected);
     },
   );
 });
