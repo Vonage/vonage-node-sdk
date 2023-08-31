@@ -38,7 +38,7 @@ export abstract class Client {
       meetingsHost: options?.meetingsHost || 'https://api-eu.vonage.com',
       proactiveHost: options?.proactiveHost || 'https://api-eu.vonage.com',
       responseType: options?.responseType || ResponseTypes.json,
-      timeout: null,
+      timeout: options?.timeout || null,
     } as ConfigParams;
   }
 
