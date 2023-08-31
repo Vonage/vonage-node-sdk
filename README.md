@@ -134,7 +134,7 @@ While most of the V2 functions have been ported into their own package, some of 
 | `vonage.files`              | Moved           | Move to [ServerClient][server-client]                  |
 | `vonage.message`            | Moved           | Moved to [SMS][sms]                                    |
 | `vonage.generateJwt`        | Moved           | Was moved to [JWT][jwt]                                |
-| `vonage.generateSignature`  | Not Ported      | Has not been ported to V3 at this time                 |
+| `vonage.generateSignature`  | Moved           | Was moved to [SMS][sms] and [Voice][voice]             |
 | `vonage.calls`              | Moved           | Was moved to [Voice][voice]                            |
 | `vonage.credentials`        | Updated         | Options can be found in [Server Client][server-client] |
 | `vonage.options`            | Updated         | Options can be found in [Server Client][server-client] |
