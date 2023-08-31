@@ -1,6 +1,6 @@
 {
   "name": "@vonage/audit",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Vonage Audit SDK Package",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/audit#readme",
   "bugs": {
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@vonage/auth": "^1.6.0",
-    "@vonage/server-client": "^1.8.0",
+    "@vonage/server-client": "^1.8.1",
     "@vonage/vetch": "^1.5.0"
   },
   "devDependencies": {
