@@ -21,7 +21,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install typescript
-        run: npm install -g typescript npm${{ matrix.npm_version }}
+        run: npm install -g typescript
 
       - name: Install packages
         run: npm install
