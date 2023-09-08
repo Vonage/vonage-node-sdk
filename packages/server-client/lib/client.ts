@@ -5,6 +5,7 @@ import {
   VetchResponse,
   VetchOptions,
   HTTPMethods,
+  Vetch,
 } from '@vonage/vetch';
 import { AuthenticationType } from './enums/AuthenticationType';
 import * as transfomers from './transformers';
@@ -174,7 +175,8 @@ export abstract class Client {
   ): Promise<VetchResponse<T>> {
     request.timeout = this.config.timeout;
     request = await this.addAuthenticationToRequest(request);
-    const result = await vetchRequest<T>(request);
+    const vetch = new Vetch(this.config);
+    const result = await vetch.request<T>(request);
     return result;
   }
 }

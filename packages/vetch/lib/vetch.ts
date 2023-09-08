@@ -69,6 +69,8 @@ export class Vetch {
     res: fetchResponse,
   ): Promise<any> {
     switch (opts.responseType) {
+    case 'stream':
+      return res.buffer();
     case 'json': {
       let data = await res.text();
       try {

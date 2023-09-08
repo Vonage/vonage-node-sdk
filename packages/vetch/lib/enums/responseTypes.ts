@@ -1,3 +1,5 @@
 export enum ResponseTypes {
-    json = 'json',
+  json = 'json',
+  stream = 'stream',
+  text = 'text',
 }

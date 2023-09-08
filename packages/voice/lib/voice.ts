@@ -14,6 +14,7 @@ import {
 } from './types/index';
 
 import { CallListFilter } from './types';
+import { ResponseTypes } from '@vonage/vetch';
 
 const apiCallsToCalls = (call: CallDetailResponse): CallDetail => {
   delete call._links;
@@ -177,8 +178,18 @@ export class Voice extends Client {
   }
 
   async downloadRecording(file: string, path: string): Promise<void> {
-    const client = new FileClient(this.auth, this.config);
+    const config = this.config;
+    config.responseType = ResponseTypes.stream;
 
+    const client = new FileClient(this.auth, config);
+    return await client.downloadFile(file, path);
+  }
+
+  async downloadTranscription(file: string, path: string): Promise<void> {
+    const config = this.config;
+    config.responseType = ResponseTypes.text;
+
+    const client = new FileClient(this.auth, config);
     return await client.downloadFile(file, path);
   }
 
