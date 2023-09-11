@@ -1,6 +1,6 @@
 {
   "name": "@vonage/redact",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "Delete data from the Vonage platform.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/redact#readme",
   "bugs": {
@@ -27,7 +27,7 @@
     "compile": "npx tsc --build --verbose"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.8.1"
+    "@vonage/server-client": "^1.8.2"
   },
   "devDependencies": {
     "@vonage/auth": "^1.6.0",

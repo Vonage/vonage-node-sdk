@@ -1,6 +1,6 @@
 {
   "name": "@vonage/sms",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Vonage SMS API SDK package",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
   "bugs": {
@@ -27,7 +27,7 @@
     "compile": "npx tsc --build --verbose"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.8.1",
+    "@vonage/server-client": "^1.8.2",
     "debug": "^4.3.4"
   },
   "devDependencies": {

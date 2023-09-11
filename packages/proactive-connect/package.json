@@ -1,6 +1,6 @@
 {
   "name": "@vonage/proactive-connect",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Send large scale outreach campaigns using any channels available through the Vonage APIs",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/proactive-connect#readme",
   "bugs": {
@@ -27,7 +27,7 @@
     "compile": "npx tsc --build --verbose"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.8.1",
+    "@vonage/server-client": "^1.8.2",
     "form-data": "^4.0.0",
     "lodash.pick": "^4.4.0"
   },
