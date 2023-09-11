@@ -33,7 +33,9 @@ describe('Meetings > Recordings', () => {
   });
 
   test('Can get recording by id', async () => {
-    scope.get(`/meetings/recordings/my-awesome-recording`).reply(200, session);
+    scope
+      .get(`/v1/meetings/recordings/my-awesome-recording`)
+      .reply(200, session);
 
     expect(await client.getRecording('my-awesome-recording')).toEqual({
       ...Client.transformers.camelCaseObjectKeys(session, true),
@@ -44,7 +46,7 @@ describe('Meetings > Recordings', () => {
   });
 
   test('Can get recordings for session', async () => {
-    scope.get(`/meetings/sessions/my-session`).reply(200, {
+    scope.get(`/v1/meetings/sessions/my-session`).reply(200, {
       _embedded: {
         recordings: [session],
       },
@@ -61,7 +63,7 @@ describe('Meetings > Recordings', () => {
   });
 
   test('Can delete recording by id', async () => {
-    scope.delete(`/meetings/recordings/my-awesome-recording`).reply(204);
+    scope.delete(`/v1/meetings/recordings/my-awesome-recording`).reply(204);
 
     await client.deleteRecording('my-awesome-recording');
 

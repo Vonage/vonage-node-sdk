@@ -99,9 +99,9 @@ describe('Meetings > File uploads', () => {
       const { url, fields } = awsExpected;
       const awsUrl = new URL(url);
       scope
-        .get(`/meetings/themes/logos-upload-urls`)
+        .get(`/v1/meetings/themes/logos-upload-urls`)
         .reply(200, urlResponses)
-        .put(`/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
+        .put(`/v1/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
           keys: [fields.key],
         })
         .reply(200, 'OK');
@@ -141,7 +141,7 @@ describe('Meetings > File uploads', () => {
   });
 
   test('Will throw error when AWS fails', async () => {
-    scope.get(`/meetings/themes/logos-upload-urls`).reply(200, urlResponses);
+    scope.get(`/v1/meetings/themes/logos-upload-urls`).reply(200, urlResponses);
 
     const awsUrl = new URL(urlResponses[0].url);
     awsScope
@@ -170,9 +170,9 @@ describe('Meetings > File uploads', () => {
 
   test('Will throw error when apply fails', async () => {
     scope
-      .get(`/meetings/themes/logos-upload-urls`)
+      .get(`/v1/meetings/themes/logos-upload-urls`)
       .reply(200, urlResponses)
-      .put(`/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
+      .put(`/v1/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
         keys: [urlResponses[0].fields.key],
       })
       .reply(400, {
@@ -198,9 +198,9 @@ describe('Meetings > File uploads', () => {
 
   test('Will throw error when apply fails with no message', async () => {
     scope
-      .get(`/meetings/themes/logos-upload-urls`)
+      .get(`/v1/meetings/themes/logos-upload-urls`)
       .reply(200, urlResponses)
-      .put(`/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
+      .put(`/v1/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
         keys: [urlResponses[0].fields.key],
       })
       .reply(400);

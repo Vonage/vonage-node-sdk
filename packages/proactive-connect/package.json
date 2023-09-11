@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@vonage/server-client": "^1.8.2",
+    "@vonage/vetch": "1.5.1",
     "form-data": "^4.0.0",
     "lodash.pick": "^4.4.0"
   },
