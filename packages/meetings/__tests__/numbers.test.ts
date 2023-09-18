@@ -32,7 +32,7 @@ describe('Meetings > Numbers', () => {
 
   test('Can get recording by id', async () => {
     scope
-      .get(`/meetings/dial-in-numbers`)
+      .get(`/v1/meetings/dial-in-numbers`)
       .reply(200, [
         Client.transformers.snakeCaseObjectKeys(dialInNumberOne),
         Client.transformers.snakeCaseObjectKeys(dialInNumberTwo),

@@ -93,7 +93,7 @@ export class Meetings extends Client {
     params: MeetingRoomParams = {},
   ): Promise<MeetingRoomPageResponse> {
     const resp = await this.sendGetRequest<MeetingRoomPageResponse>(
-      `${this.config.meetingsHost}/meetings/rooms`,
+      `${this.config.meetingsHost}/v1/meetings/rooms`,
       Client.transformers.snakeCaseObjectKeys(params),
     );
 
@@ -102,7 +102,7 @@ export class Meetings extends Client {
 
   async getRoom(roomId: string): Promise<MeetingRoom> {
     const resp = await this.sendGetRequest<MeetingRoomResponse>(
-      `${this.config.meetingsHost}/meetings/rooms/${roomId}`,
+      `${this.config.meetingsHost}/v1/meetings/rooms/${roomId}`,
     );
 
     return apiRoomToSdk(resp.data);
@@ -110,7 +110,7 @@ export class Meetings extends Client {
 
   async createRoom(room: MeetingRoom): Promise<MeetingRoom> {
     const resp = await this.sendPostRequest<MeetingRoomResponse>(
-      `${this.config.meetingsHost}/meetings/rooms`,
+      `${this.config.meetingsHost}/v1/meetings/rooms`,
       pick(
         Client.transformers.snakeCaseObjectKeys(room, true),
         this.ROOM_WRITE_KEYS,
@@ -122,7 +122,7 @@ export class Meetings extends Client {
 
   async updateRoom(roomId: string, room: MeetingRoom): Promise<MeetingRoom> {
     const resp = await this.sendPatchRequest<MeetingRoomResponse>(
-      `${this.config.meetingsHost}/meetings/rooms/${roomId}`,
+      `${this.config.meetingsHost}/v1/meetings/rooms/${roomId}`,
       {
         update_options: pick(
           Client.transformers.snakeCaseObjectKeys(room, true),
@@ -136,7 +136,7 @@ export class Meetings extends Client {
 
   async getRecording(recordingId: string): Promise<Recording> {
     const resp = await this.sendGetRequest<RecordingResponse>(
-      `${this.config.meetingsHost}/meetings/recordings/${recordingId}`,
+      `${this.config.meetingsHost}/v1/meetings/recordings/${recordingId}`,
     );
 
     return apiRecordingToSdk(resp.data);
@@ -146,7 +146,7 @@ export class Meetings extends Client {
     sessionId: string,
   ): AsyncGenerator<Recording, void & Recording, undefined> {
     const resp = await this.sendGetRequest<RecordingResponsePage>(
-      `${this.config.meetingsHost}/meetings/sessions/${sessionId}`,
+      `${this.config.meetingsHost}/v1/meetings/sessions/${sessionId}`,
     );
 
     const recordings = (resp.data?._embedded?.recordings || []).map(
@@ -158,7 +158,7 @@ export class Meetings extends Client {
 
   async deleteRecording(recordingId: string): Promise<void> {
     await this.sendDeleteRequest(
-      `${this.config.meetingsHost}/meetings/recordings/${recordingId}`,
+      `${this.config.meetingsHost}/v1/meetings/recordings/${recordingId}`,
     );
   }
 
@@ -168,7 +168,7 @@ export class Meetings extends Client {
     undefined
     > {
     const resp = await this.sendGetRequest<DialInNumber[]>(
-      `${this.config.meetingsHost}/meetings/dial-in-numbers`,
+      `${this.config.meetingsHost}/v1/meetings/dial-in-numbers`,
     );
 
     const numbers = (resp.data || []).map((number) =>
@@ -180,7 +180,7 @@ export class Meetings extends Client {
 
   async *getThemes(): AsyncGenerator<Theme, void & Theme, undefined> {
     const resp = await this.sendGetRequest<ThemeResponse[]>(
-      `${this.config.meetingsHost}/meetings/themes`,
+      `${this.config.meetingsHost}/v1/meetings/themes`,
     );
 
     const themes = (resp.data || []).map((theme) =>
@@ -192,7 +192,7 @@ export class Meetings extends Client {
 
   async getTheme(themeId: string): Promise<Theme> {
     const resp = await this.sendGetRequest<ThemeResponse>(
-      `${this.config.meetingsHost}/meetings/themes/${themeId}`,
+      `${this.config.meetingsHost}/v1/meetings/themes/${themeId}`,
     );
 
     return Client.transformers.camelCaseObjectKeys(resp.data);
@@ -200,7 +200,7 @@ export class Meetings extends Client {
 
   async deleteTheme(themeId: string, force = false): Promise<void> {
     await this.sendRequest({
-      url: `${this.config.meetingsHost}/meetings/themes/${themeId}`,
+      url: `${this.config.meetingsHost}/v1/meetings/themes/${themeId}`,
       params: force ? { force: true } : null,
       method: HTTPMethods.DELETE,
     });
@@ -208,7 +208,7 @@ export class Meetings extends Client {
 
   async createTheme(theme: Theme): Promise<Theme> {
     const resp = await this.sendPostRequest<ThemeResponse>(
-      `${this.config.meetingsHost}/meetings/themes`,
+      `${this.config.meetingsHost}/v1/meetings/themes`,
       pick(
         Client.transformers.snakeCaseObjectKeys(theme, true),
         this.THEME_WRITE_KEYS,
@@ -220,7 +220,7 @@ export class Meetings extends Client {
 
   async updateTheme(themeId: string, theme: Theme): Promise<Theme> {
     const resp = await this.sendPatchRequest<ThemeResponse>(
-      `${this.config.meetingsHost}/meetings/themes/${themeId}`,
+      `${this.config.meetingsHost}/v1/meetings/themes/${themeId}`,
       {
         update_details: pick(
           Client.transformers.snakeCaseObjectKeys(theme, true),
@@ -261,7 +261,7 @@ export class Meetings extends Client {
     params: MeetingRoomParams = {},
   ): Promise<MeetingRoomPageResponse> {
     const resp = await this.sendGetRequest<MeetingRoomPageResponse>(
-      `${this.config.meetingsHost}/meetings/themes/${themeId}/rooms`,
+      `${this.config.meetingsHost}/v1/meetings/themes/${themeId}/rooms`,
       Client.transformers.snakeCaseObjectKeys(params),
     );
 
@@ -270,7 +270,7 @@ export class Meetings extends Client {
 
   async setDefaultTheme(themeId: string): Promise<true> {
     await this.sendPatchRequest<ThemeResponse>(
-      `${this.config.meetingsHost}/meetings/applications`,
+      `${this.config.meetingsHost}/v1/meetings/applications`,
       {
         update_details: {
           default_theme_id: themeId,
@@ -297,7 +297,7 @@ export class Meetings extends Client {
     let error;
     try {
       await this.sendPutRequest<ThemeResponse>(
-        `${this.config.meetingsHost}/meetings/themes/${themeId}/finalizeLogos`,
+        `${this.config.meetingsHost}/v1/meetings/themes/${themeId}/finalizeLogos`,
         {
           keys: [urlResponse.fields.key],
         },
@@ -344,7 +344,7 @@ export class Meetings extends Client {
 
   protected async _getIconUploadUrl(logo: LogoType): Promise<UrlResponse> {
     const resp = await this.sendGetRequest<UrlResponse[]>(
-      `${this.config.meetingsHost}/meetings/themes/logos-upload-urls`,
+      `${this.config.meetingsHost}/v1/meetings/themes/logos-upload-urls`,
     );
 
     const matchingUrl = (resp.data || []).filter(
