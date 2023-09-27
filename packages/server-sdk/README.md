@@ -81,6 +81,7 @@ You can find more information for each product below:
 * [Auth][auth]
 * [JWT][jwt]
 * [Messages](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/messages/README.md)
+* [Number Insight V2](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/number-insight-v2/README.md)
 * [Number Insights](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/number-insights/README.md)
 * [Numbers](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/numbers/README.md)
 * [Pricing](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/pricing/README.md)
@@ -109,7 +110,8 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | External Accounts API |         Beta         |     ❌     |
 | Media API             |         Beta         |     ❌     |
 | Messages API          |         Beta         |     ✅     |
-| Number Insight API    | General Availability |     ✅     |
+| Number Insight V2 API |         Beta         |     ✅     |
+| Number Insights API   | General Availability |     ✅     |
 | Number Management API | General Availability |     ✅     |
 | Pricing API           | General Availability |     ✅     |
 | Proactive Connect API |          Beta        |     ✅     |
