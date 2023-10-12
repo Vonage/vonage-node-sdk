@@ -1,0 +1,14 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "includeVersion": true,
+  "entryPointStrategy": "packages",
+  "entryPoints": [
+    "packages/*"
+  ],
+  "out": "doc",
+  "logLevel": "Verbose",
+  "copyAssets": {
+    "onlyImages": false,
+    "include": [".(md)\\)$"]
+  }
+}

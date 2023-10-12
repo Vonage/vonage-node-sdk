@@ -62,10 +62,11 @@
             "error",
             {
                 "code": 80,
+                "comments": 120,
                 "ignoreUrls": true,
                 "ignoreTemplateLiterals": true,
                 "ignoreRegExpLiterals": true,
-                "ignorePattern": "^import.+|test"
+                "ignorePattern": "^import.+|test|@"
             }
         ]
     }
