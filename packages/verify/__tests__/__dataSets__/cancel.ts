@@ -1,9 +1,10 @@
-import { Command, CheckStatus } from '../../lib/enums/index';
+import { Command, CheckStatus } from '../../lib/enums';
 import {
   VerifyCancelResponse,
   VerifyControlErrorResponse,
-} from '../../lib/interfaces/Response/index';
-import { VerifyControl, VerifyControlError } from '../../lib/interfaces/index';
+  VerifyControl,
+  VerifyControlError,
+} from '../../lib/types';
 
 export default [
   {

@@ -1,4 +1,14 @@
+/**
+ * Enum representing the types of events that can occur during Verify search.
+ */
 export enum SearchEventTypes {
-    TTS = 'TTS',
-    SMS = 'SMS',
+  /**
+   * Text-to-Speech event.
+   */
+  TTS = 'TTS',
+
+  /**
+   * Short Message Service (SMS) event.
+   */
+  SMS = 'SMS',
 }

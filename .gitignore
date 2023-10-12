@@ -19,3 +19,4 @@ packages/**/dist
 tsconfig.tsbuildinfo
 lerna-debug.log
 package-lock.json
+docs

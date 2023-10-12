@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/messages",
   "version": "1.10.0",
   "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
@@ -20,7 +21,16 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "contributors": [
+    {
+      "name": "Chris Tankersley",
+      "url": "https://github.com/dragonmantank"
+    },
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "url": "https://github.com/manchuck"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -33,7 +43,8 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-    "compile": "npx tsc --build --verbose"
+    "compile": "npx tsc --build --verbose",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@vonage/auth": "^1.7.0",

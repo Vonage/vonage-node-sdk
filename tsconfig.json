@@ -1,37 +1,14 @@
 {
-    "compilerOptions": {
-        "sourceMap": true,
-        "removeComments": false,
-        "lib": [
-            "ES2022"
-        ],
+  "$schema": "https://json.schemastore.org/tsconfig",
 
-        "strict": false,
-        "target": "ES2022",
-        "module": "CommonJS",
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "allowJs": true,
-        "pretty": true,
-        "preserveSymlinks": true,
-        "resolveJsonModule": true,
+  "extends": "@tsconfig/node16/tsconfig.json",
 
-        "types": [
-            "jest",
-            "node"
-        ],
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "composite": true
+  },
 
-        "noImplicitAny": false,
-        "noUnusedLocals": false,
-
-        "declaration": true,
-        "composite": true,
-        "noEmit": false,
-        "baseUrl": "."
-    },
-
-    "ts-node": {
-        "esm": true
-    }
+  "ts-node": {
+      "esm": true
+  }
 }

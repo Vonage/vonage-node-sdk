@@ -1,3 +1,3 @@
-import { Theme } from '../../types/index';
+import { Theme } from '../theme';
 
 export type ThemeResponse = Theme

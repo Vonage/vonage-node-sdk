@@ -1,3 +1,9 @@
+/**
+ * Enum representing different event types for the Connect NCCO action.
+ */
 export enum ConnectEventType {
-    SYNCHRONOUS = 'synchronous',
+  /**
+   * Synchronous event type.
+   */
+  SYNCHRONOUS = 'synchronous',
 }

@@ -1,5 +1,19 @@
+/**
+ * Enumeration of line types for virtual numbers.
+ */
 export enum LineType {
-    'LANDLINE' = 'landline',
-    'MOBILE-LVN' = 'mobile-lvn',
-    'LANDLINE-TOLL-FREE' = 'landline-toll-free',
+  /**
+   * Landline type.
+   */
+  LANDLINE = 'landline',
+
+  /**
+   * Mobile LVN (Local Virtual Number) type.
+   */
+  MOBILE_LVN = 'mobile-lvn',
+
+  /**
+   * Landline toll-free type.
+   */
+  LANDLINE_TOLL_FREE = 'landline-toll-free',
 }

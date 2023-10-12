@@ -1,36 +1,37 @@
 {
-    "extends": "../../tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
 
-    "compilerOptions": {
-        "rootDir": "lib",
-        "outDir": "dist"
-    },
+  "extends": "../../tsconfig.json",
 
-    "exclude": [
-        "__tests__",
-        "jest.config.js",
-        "dist"
-    ],
+  "compilerOptions": {
+    "rootDir": "lib",
+    "outDir": "dist"
+  },
 
-    "references": [
-        { "path": "../accounts" },
-        { "path": "../applications" },
-        { "path": "../auth" },
-        { "path": "../messages" },
-        { "path": "../number-insights" },
-        { "path": "../numbers" },
-        { "path": "../pricing" },
-        { "path": "../server-client" },
-        { "path": "../sms" },
-        { "path": "../users" },
-        { "path": "../redact" },
-        { "path": "../verify" },
-        { "path": "../verify2" },
-        { "path": "../vetch" },
-        { "path": "../voice" }
-    ],
+  "exclude": [
+    "__tests__",
+    "dist"
+  ],
 
-    "ts-node": {
-        "esm": true
-    }
+  "references": [
+    { "path": "../accounts" },
+    { "path": "../applications" },
+    { "path": "../auth" },
+    { "path": "../messages" },
+    { "path": "../number-insights" },
+    { "path": "../numbers" },
+    { "path": "../pricing" },
+    { "path": "../server-client" },
+    { "path": "../sms" },
+    { "path": "../users" },
+    { "path": "../redact" },
+    { "path": "../verify" },
+    { "path": "../verify2" },
+    { "path": "../vetch" },
+    { "path": "../voice" }
+  ],
+
+  "ts-node": {
+      "esm": true
+  }
 }

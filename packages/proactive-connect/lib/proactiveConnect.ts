@@ -1,15 +1,15 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
-import { HTTPMethods } from '@vonage/vetch';
+import { HTTPMethods, VetchOptions } from '@vonage/vetch';
 import {
   FindListItemParams,
   FindListParams,
+  ImportFileResponse,
   List,
   ListItem,
-  ListPageResponse,
   ListItemPageResponse,
   ListItemResponse,
+  ListPageResponse,
   ListResponse,
-  ImportFileResponse,
 } from './types';
 import pick from 'lodash.pick';
 import { readFileSync, writeFileSync } from 'fs';
@@ -17,15 +17,20 @@ import FormData from 'form-data';
 
 const apiListToList = (list: ListResponse): List => {
   delete list?._links;
-  return Client.transformers.camelCaseObjectKeys(list, true);
+  return Client.transformers.camelCaseObjectKeys(list, true) as List;
 };
 
 const apiItemToItem = <T>(item: ListItemResponse<T>): ListItem<T> => {
   delete item?._links;
   // do not deep transform as the data property has to remain the same
-  return Client.transformers.camelCaseObjectKeys(item);
+  return Client.transformers.camelCaseObjectKeys(item) as ListItem<T>;
 };
 
+/**
+ * Represents an API client for interacting with the Vonage Proactive Connect
+ * API. This client provides methods for managing lists, list items, and
+ * performing import/export operations.
+ */
 export class ProactiveConnect extends Client {
   public FORM_BOUNDARY = '-------------------------Vonage-Node_SDK';
 
@@ -39,6 +44,14 @@ export class ProactiveConnect extends Client {
     'datasource',
   ];
 
+  /**
+   * Retrieves all lists available in the Vonage Proactive Connect API.
+   *
+   * @param {FindListParams} params - Optional parameters for pagination and filtering.
+   * @return {AsyncGenerator<List, void, undefined>} An async generator that yields lists as they are retrieved.
+   *
+   * @throws {Error} If there's an issue with the API request.
+   */
   async *findAllLists(
     params: FindListParams = {},
   ): AsyncGenerator<List, void & List, undefined> {
@@ -56,6 +69,14 @@ export class ProactiveConnect extends Client {
     } while (next);
   }
 
+  /**
+   * Creates a new list in the Vonage Proactive Connect API.
+   *
+   * @param {List} list - The list object representing the list to be created.
+   * @return {Promise<List>} A promise that resolves to the newly created list.
+   *
+   * @throws {Error} If there's an issue with the API request or the list creation fails.
+   */
   async createList(list: List): Promise<List> {
     const resp = await this.sendPostRequest<ListResponse>(
       `${this.config.proactiveHost}/v0.1/bulk/lists`,
@@ -68,11 +89,19 @@ export class ProactiveConnect extends Client {
     return apiListToList(resp.data);
   }
 
+  /**
+   * Retrieves a list by its unique identifier from the Vonage Proactive Connect API.
+   *
+   * @param {string} listId - The unique identifier of the list to retrieve.
+   * @return {Promise<List>} A promise that resolves to the retrieved list.
+   *
+   * @throws {Error} If there's an issue with the API request or the list retrieval fails.
+   */
   async getListById(listId: string): Promise<List> {
     const resp = await this.sendGetRequest<ListResponse>(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}`,
     );
-    return apiListToList(resp?.data);
+    return apiListToList(resp.data);
   }
 
   async updateList(listId: string, list: List): Promise<List> {
@@ -87,6 +116,14 @@ export class ProactiveConnect extends Client {
     return apiListToList(resp.data);
   }
 
+  /**
+   * Updates an existing list in the Vonage Proactive Connect API by its unique identifier.
+   *
+   * @param {string} listId - The unique identifier of the list to update.
+   * @return {Promise<List>} A promise that resolves to the updated list.
+   *
+   * @throws {Error} If there's an issue with the API request or the list update fails.
+   */
   async deleteList(listId: string): Promise<true> {
     await this.sendDeleteRequest(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}`,
@@ -94,6 +131,14 @@ export class ProactiveConnect extends Client {
     return true;
   }
 
+  /**
+   * Clears all data from an existing list in the Vonage Proactive Connect API by its unique identifier.
+   *
+   * @param {string} listId - The unique identifier of the list to clear.
+   * @return {Promise<true>} A promise that resolves to `true` if the list is successfully cleared.
+   *
+   * @throws {Error} If there's an issue with the API request or the list clearing fails.
+   */
   async clearList(listId: string): Promise<true> {
     await this.sendPostRequest(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/clear`,
@@ -101,6 +146,15 @@ export class ProactiveConnect extends Client {
     return true;
   }
 
+  /**
+   * Retrieves all list items from a specific list in the Vonage Proactive Connect API.
+   *
+   * @param {string} listId - The unique identifier of the list to retrieve items from.
+   * @param {FindListItemParams} params - Optional parameters for pagination and filtering.
+   * @return {AsyncGenerator<ListItem, void, undefined>} An async generator that yields list items as they are retrieved.
+   *
+   * @throws {Error} If there's an issue with the API request.
+   */
   async *findAllListItems<T>(
     listId: string,
     params: FindListItemParams = {},
@@ -119,6 +173,15 @@ export class ProactiveConnect extends Client {
     } while (next);
   }
 
+  /**
+   * Creates a new list item in a specific list of the Vonage Proactive Connect API.
+   *
+   * @param {string} listId - The unique identifier of the list to add the item to.
+   * @param {ListItem} item - The list item object representing the item to be created.
+   * @return {Promise<ListItem>} A promise that resolves to the newly created list item.
+   *
+   * @throws {Error} If there's an issue with the API request or the list item creation fails.
+   */
   async createListItem<T>(
     listId: string,
     item: ListItem<T>,
@@ -133,6 +196,15 @@ export class ProactiveConnect extends Client {
     return apiItemToItem<T>(resp.data);
   }
 
+  /**
+   * Retrieves a specific list item by its unique identifier from a list in the Vonage Proactive Connect API.
+   *
+   * @param {string} listId - The unique identifier of the list containing the item.
+   * @param {string} itemId - The unique identifier of the list item to retrieve.
+   * @return {Promise<ListItem>} A promise that resolves to the retrieved list item.
+   *
+   * @throws {Error} If there's an issue with the API request or the list item retrieval fails.
+   */
   async getListItemById<T>(
     listId: string,
     itemId: string,
@@ -144,6 +216,16 @@ export class ProactiveConnect extends Client {
     return apiItemToItem<T>(resp.data);
   }
 
+  /**
+   * Updates an existing list item in a specific list of the Vonage Proactive Connect API by its unique identifier.
+   *
+   * @param {string} listId - The unique identifier of the list containing the item.
+   * @param {string} itemId - The unique identifier of the list item to update.
+   * @param {ListItem} item - The list item object representing the updated item.
+   * @return {Promise<ListItem>} A promise that resolves to the updated list item.
+   *
+   * @throws {Error} If there's an issue with the API request or the list item update fails.
+   */
   async updateListItem<T>(
     listId: string,
     itemId: string,
@@ -159,6 +241,15 @@ export class ProactiveConnect extends Client {
     return apiItemToItem<T>(resp.data);
   }
 
+  /**
+   * Deletes a specific list item by its unique identifier from a list in the Vonage Proactive Connect API.
+   *
+   * @param {string} listId - The unique identifier of the list containing the item to delete.
+   * @param {string} itemId - The unique identifier of the list item to delete.
+   * @return {Promise<true>} A promise that resolves to `true` if the list item is successfully deleted.
+   *
+   * @throws {Error} If there's an issue with the API request or the list item deletion fails.
+   */
   async deleteListItem(listId: string, itemId: string): Promise<true> {
     await this.sendDeleteRequest(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/items/${itemId}`,
@@ -166,6 +257,15 @@ export class ProactiveConnect extends Client {
     return true;
   }
 
+  /**
+   * Downloads a file containing all list items from a specific list in the Vonage Proactive Connect API.
+   *
+   * @param {string} listId - The unique identifier of the list to download items from.
+   * @param {string} file - The path to the file where the list items will be saved.
+   * @return {Promise<true>} A promise that resolves to `true` if the list items are successfully downloaded and saved to the file.
+   *
+   * @throws {Error} If there's an issue with the API request or the file download fails.
+   */
   async downloadListItems(listId: string, file: string): Promise<true> {
     const resp = await this.sendGetRequest<string>(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/items/download`,
@@ -175,6 +275,15 @@ export class ProactiveConnect extends Client {
     return true;
   }
 
+  /**
+   * Imports list items from a CSV file into a specific list in the Vonage Proactive Connect API.
+   *
+   * @param {string} listId - The unique identifier of the list to import items into.
+   * @param {string} file - The path to the CSV file containing the list items to import.
+   * @return {Promise<ImportFileResponse>} A promise that resolves to an import response containing details on the number of items inserted, updated, and deleted.
+   *
+   * @throws {Error} If there's an issue with the API request or the import process fails.
+   */
   async importListItems(
     listId: string,
     file: string,
@@ -185,9 +294,9 @@ export class ProactiveConnect extends Client {
 
     const resp = await this.sendRequest<ImportFileResponse>({
       url: `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/items/download`,
-      body: itemsForm,
+      data: itemsForm.toString(),
       method: HTTPMethods.POST,
-    });
+    } as VetchOptions);
 
     return resp.data;
   }

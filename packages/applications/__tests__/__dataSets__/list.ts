@@ -2,7 +2,6 @@ import { Client } from '@vonage/server-client';
 import {
   ApplicationResponse,
   Application,
-  ApplicationPageList,
   ApplicationPageResponse,
 } from '../../lib';
 
@@ -11,7 +10,6 @@ import {
   testApplication,
   testApplicationOne,
   testApplicationTwo,
-  capabilitiesToTest,
 } from '../common';
 
 const appToApi = (application: Application): ApplicationResponse => ({
@@ -68,12 +66,12 @@ export default [
           Client.transformers.snakeCaseObjectKeys(
             testApplicationOne,
             true,
-            true,
+            true
           ),
           Client.transformers.snakeCaseObjectKeys(
             testApplicationTwo,
             true,
-            true,
+            true
           ),
         ],
       },

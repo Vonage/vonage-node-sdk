@@ -1,0 +1,36 @@
+---
+name: Documentation
+
+on:
+  push:
+    branches:
+      - 3.x
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install packages
+        run: npm install
+
+      - name: Build Typedoc
+        run: npm run typedoc
+
+      - name: Build example markdown
+        run: node scripts/generateExample.mjs
+
+
+      - name: Upload Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "docs"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_WIKI_PERSONAL_ACCESS_TOKEN }}

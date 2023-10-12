@@ -1,7 +1,8 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/voice",
   "version": "1.9.0",
-  "description": "Vonage Voice API",
+  "description": "The Voice API lets you create outbound calls, control in-progress calls and get information about historical calls.",
   "keywords": [
     "vonage",
     "voice"
@@ -15,7 +16,16 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "contributors": [
+    {
+      "name": "Chris Tankersley",
+      "url": "https://github.com/dragonmantank"
+    },
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "url": "https://github.com/manchuck"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -28,7 +38,8 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-    "compile": "npx tsc --build --verbose"
+    "compile": "npx tsc --build --verbose",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@types/debug": "^4.1.9",
@@ -45,6 +56,5 @@
   },
   "publishConfig": {
     "directory": "dist"
-  },
-  "gitHead": "328f18e5c8a458cb4d06d7955ec2399a6ce6f5d8"
+  }
 }

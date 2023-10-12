@@ -139,7 +139,7 @@ export default [
         '14152739164', // to
         '12126875309', // from
         {
-          category: MessageCategory.PROMOTINO,
+          category: MessageCategory.PROMOTION,
           ttl: 42,
           type: 'type',
         },

@@ -1,5 +1,4 @@
 export * from './Application';
-export * from './ApplicationClassParameters';
 export * from './ApplicationPageList';
 export * from './CapabilityBulk';
 export * from './CapabilityMeetings';

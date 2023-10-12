@@ -1,7 +1,18 @@
 /**
- * @deprecated use message params type instead
+ * Represents a video object with an optional caption.
+ *
+ * @deprecated Please use types instead of interfaces
+ *
+ * @ignore
  */
 export interface VideoObject {
-    url: string
-    caption?: string
+  /**
+   * The URL of the video.
+   */
+  url: string;
+
+  /**
+   * An optional caption for the video.
+   */
+  caption?: string;
 }

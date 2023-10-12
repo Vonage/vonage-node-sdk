@@ -1,7 +1,7 @@
 import { ExperienceComposerResolution } from '../../lib/enums/ExperienceComposerResolution';
-import { ExperienceComposerOptions } from '../../lib/interfaces/ExperienceComposerOptions';
-import { CaptionOptions } from '../../lib/interfaces/CaptionOptions';
-import { SIPCallOptions } from '../../lib/interfaces/SIPCallOptions';
+import { ExperienceComposerOptions } from '../../lib/types/ExperienceComposerOptions';
+import { CaptionOptions } from '../../lib/types/CaptionOptions';
+import { SIPCallOptions } from '../../lib/types/SIPCallOptions';
 
 const renderInformation = {
   id: '1248e7070b81464c9789f46ad10e7764',

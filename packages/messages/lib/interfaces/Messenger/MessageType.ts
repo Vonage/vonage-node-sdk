@@ -1,9 +1,10 @@
-import { MessageCategory } from '../../enums/Messenger/MessageCategory';
+import { MessengerType } from "../../types";
 
 /**
- * @deprecated please use messenger interfaces
+ * Represents a message type for the Messenger category.
+ *
+ * @deprecated Please use messenger types.
+ *
+ * @ignore
  */
-export interface MessageType {
-    category: MessageCategory
-    tag?: string
-}
+export interface MessageType extends MessengerType {}

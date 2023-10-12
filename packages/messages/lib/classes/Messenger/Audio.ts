@@ -1,5 +1,4 @@
-import { MessengerCategory } from '../../enums';
-import { AudioObject } from '../../interfaces/AudioObject';
+import { AudioObject  } from '../../interfaces';
 import { MessageType } from '../../interfaces/Messenger/MessageType';
 import {
   MessageAudioType,
@@ -12,9 +11,21 @@ import debug from 'debug';
 const log = debug('vonage:messages:messenger');
 
 /**
- * @deprecated please use MessengerAudio instead
+ * @deprecated please use the MessengerAudio class instead
+ *
+ * @group Messenger
  */
 export class Audio extends MessengerAudio {
+  /**
+   * @deprecated Please use MessengerAudio instead.
+   * Represents an audio message for the Messenger platform.
+   *
+   * @param {AudioObject} audio - The audio object containing the audio URL and an optional caption.
+   * @param {string} to - The recipient's ID.
+   * @param {string} from - The sender's ID.
+   * @param {MessageType} messenger - The Messenger message type and category.
+   * @param {string} clientRef - An optional client reference.
+   */
   constructor(
     audio: AudioObject,
     to: string,
@@ -28,8 +39,8 @@ export class Audio extends MessengerAudio {
       to: to,
       from: from,
       messenger: {
-        category: messenger.category as unknown as MessengerCategory,
-        tag: messenger.tag,
+        category: messenger?.category,
+        tag: messenger?.tag,
       } as MessengerType,
       clientRef: clientRef,
     } as MessengerAudioParams);

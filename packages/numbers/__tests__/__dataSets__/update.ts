@@ -1,4 +1,4 @@
-import * as types from '../../lib/types';
+import { VoiceCallbackTypeEnum } from "../../lib";
 
 const BASE_URL = 'https://rest.nexmo.com';
 const CLIENT_METHOD = 'updateNumber';
@@ -33,7 +33,7 @@ export default [
         country: 'US',
         msisdn: '12345',
         applicationId: '123abc',
-        voiceCallbackType: types.VoiceCallbackTypeEnum.App,
+        voiceCallbackType: VoiceCallbackTypeEnum.App,
         voiceCallbackValue: 'https://www.example.com/webhook',
         voiceStatusCallback: 'https://www.example.com/webhook/events',
       },

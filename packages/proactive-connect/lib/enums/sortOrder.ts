@@ -1,4 +1,14 @@
+/**
+ * Enumeration representing sorting order.
+ */
 export enum SortOrder {
-    ASC = 'asc',
-    DESC = 'desc',
+  /**
+   * Ascending order.
+   */
+  ASC = 'asc',
+
+  /**
+   * Descending order.
+   */
+  DESC = 'desc',
 }

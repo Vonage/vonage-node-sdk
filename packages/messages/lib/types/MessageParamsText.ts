@@ -1,5 +1,11 @@
 import { MessageParams } from './MessageParams';
 
+/**
+ * Represents the parameters for a text message.
+ */
 export type MessageParamsText = {
-    text: string
-} & MessageParams
+  /**
+   * The text content of the message.
+   */
+  text: string;
+} & MessageParams;

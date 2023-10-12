@@ -1,3 +1,9 @@
+/**
+ * Represents a vCard message type.
+ */
 export type MessageVcardType = {
-    url: string
-}
+  /**
+   * The URL of the vCard attachment.
+   */
+  url: string;
+};

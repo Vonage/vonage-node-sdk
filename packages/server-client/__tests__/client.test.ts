@@ -8,13 +8,10 @@ describe.each(transfomTests)('$label', ({ tests }) => {
     'Can $label [using $transformFn]',
     async ({ transformFn, original, parameters, expected }) => {
       expect(Client.transformers[transformFn]).toBeDefined();
-      const results = Client.transformers[transformFn](
-        original,
-        ...parameters,
-      );
+      const results = Client.transformers[transformFn](original, ...parameters);
 
       expect(results).toEqual(expected);
-    },
+    }
   );
 });
 
@@ -27,7 +24,7 @@ describe.each(requestTests)('$label', ({ tests }) => {
     .filter(({ error }) => !error)
     .map((test) => {
       const request = test.request;
-      // Add on quey testing
+      // Add on query testing
       const url = new URL(`${BASE_URL}${request[0]}`);
       url.searchParams.append('api_key', API_KEY);
       url.searchParams.append('api_secret', API_SECRET);
@@ -45,6 +42,16 @@ describe.each(requestTests)('$label', ({ tests }) => {
         authType: AuthenticationType.KEY_SECRET,
       };
 
+      if (test.form && request[2]) {
+        const params = new URLSearchParams(request[2]);
+        params.sort();
+        request[2] = params.toString();
+
+        const keyParams = new URLSearchParams(keyTest.request[2]);
+        keyParams.sort();
+        keyTest.request[2] = keyParams.toString();
+      }
+
       const bodyMethods = ['PUT', 'POST', 'PATCH'];
       const method = request[1];
 
@@ -59,10 +66,7 @@ describe.each(requestTests)('$label', ({ tests }) => {
         },
         {
           ...test,
-          request: [
-            `${url.pathname}${url.search}`,
-            ...request.slice(1),
-          ],
+          request: [`${url.pathname}${url.search}`, ...request.slice(1)],
           authType: AuthenticationType.QUERY_KEY_SECRET,
         },
         bodyMethods.includes(method) ? keyTest : null,
@@ -89,7 +93,7 @@ describe.each(requestTests)('$label', ({ tests }) => {
       const results = await client[clientMethod](...parameters);
       expect(results).toEqual(expected);
       expect(nock.isDone()).toBeTruthy();
-    },
+    }
   );
 
   if (failureTests.length < 1) {
@@ -101,10 +105,10 @@ describe.each(requestTests)('$label', ({ tests }) => {
     async ({ request, response, clientMethod, parameters, error }) => {
       scope.intercept(...request).reply(...response);
 
-      await expect(() =>
-        client[clientMethod](...parameters),
-      ).rejects.toThrow(error);
+      await expect(() => client[clientMethod](...parameters)).rejects.toThrow(
+        error
+      );
       expect(nock.isDone()).toBeTruthy();
-    },
+    }
   );
 });

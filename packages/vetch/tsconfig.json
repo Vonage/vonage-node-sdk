@@ -1,18 +1,20 @@
 {
-    "extends": "../../tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
 
-    "compilerOptions": {
-        "rootDir": "lib",
-        "outDir": "dist"
-    },
+  "extends": "../../tsconfig.json",
 
-    "exclude": [
-        "__tests__",
-        "jest.config.js",
-        "dist"
-    ],
+  "compilerOptions": {
+    "rootDir": "lib",
+    "outDir": "dist"
+  },
 
-    "ts-node": {
-        "esm": true
-    }
+  "exclude": [
+    "__tests__",
+    "jest.config.js",
+    "dist"
+  ],
+
+  "ts-node": {
+    "esm": true
+  }
 }

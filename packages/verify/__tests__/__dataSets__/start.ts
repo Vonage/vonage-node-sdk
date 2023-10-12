@@ -8,8 +8,9 @@ import {
   VerifyRequest,
   VerifyRequestErrorResponse,
   VerifyError,
-} from '../../lib/interfaces/index';
-import { PSD2Parameters, VerificationParameters } from '../../lib/types/index';
+  PSD2Parameters,
+  VerificationParameters,
+} from '../../lib/types/index';
 import { PSD2, Verification } from '../../lib/classes/index';
 
 export default [

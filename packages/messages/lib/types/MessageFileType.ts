@@ -1,4 +1,14 @@
+/**
+ * Represents a file message type.
+ */
 export type MessageFileType = {
-    url: string
-    caption?: string
-}
+  /**
+   * The URL of the file attachment.
+   */
+  url: string;
+
+  /**
+   * An optional caption to accompany the file.
+   */
+  caption?: string;
+};

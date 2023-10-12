@@ -1,7 +1,10 @@
+import { WhatsAppTemplateType } from "../../types";
+
 /**
- * @deprecated please use WhatsAppTemplate instead
+ * Represents a message template.
+ *
+ * @deprecated Please use types instead of interfaces.
+ *
+ * @ignore
  */
-export interface MessageTemplate {
-    name: string
-    parameters: string[]
-}
+export interface MessageTemplate extends WhatsAppTemplateType {}
