@@ -37,8 +37,8 @@
     "@vonage/vetch": "^1.5.1"
   },
   "devDependencies": {
-    "jsonwebtoken": "^9.0.0",
-    "nock": "^13.3.1"
+    "jsonwebtoken": "^9.0.2",
+    "nock": "^13.3.4"
   },
   "publishConfig": {
     "directory": "dist"

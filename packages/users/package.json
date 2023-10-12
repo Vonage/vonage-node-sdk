@@ -31,6 +31,6 @@
   },
   "devDependencies": {
     "@vonage/auth": "^1.6.0",
-    "nock": "^13.3.2"
+    "nock": "^13.3.4"
   }
 }
