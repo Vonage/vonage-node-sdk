@@ -1,7 +1,8 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/vetch",
   "version": "1.6.0",
-  "description": "Vonage package for server side fetch.",
+  "description": "Vonage's type and enum definitions module for server-side HTTP interactions.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/vetch#readme",
   "bugs": {
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
@@ -11,24 +12,30 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Kelly J Andrews <kelly@kellyjandrews.com>",
+  "contributors": [
+    {
+      "name": "Kelly J Andrews",
+      "email": "kelly@kellyjandrews.com"
+    },
+    {
+      "name": "Chris Tankersley",
+      "email": "chris@ctankersley.com"
+    },
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "email": "chuck@manchuck.com"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "/dist"
   ],
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "npm run clean && npm run compile",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
     "compile": "npx tsc --build --verbose"
-  },
-  "dependencies": {
-    "debug": "^4.3.4",
-    "lodash.merge": "^4.6.2",
-    "node-fetch": "^2.2"
-  },
-  "devDependencies": {
-    "nock": "^13.3.4"
   },
   "publishConfig": {
     "directory": "dist"
