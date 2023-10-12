@@ -24,11 +24,11 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "jsonwebtoken": "^9.0.0",
-    "uuid": "^9.0.0"
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/uuid": "^9.0.2"
+    "@types/uuid": "^9.0.5"
   },
   "publishConfig": {
     "directory": "dist"

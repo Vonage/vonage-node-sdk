@@ -2,10 +2,10 @@ import nock from 'nock';
 import { FileClient } from '../lib';
 import { BASE_URL } from './common';
 import { Auth } from '@vonage/auth';
-import mockFs from 'mock-fs';
-import { readFileSync, existsSync } from 'fs';
+import { mkdirSync, readFileSync, existsSync } from 'fs';
+import { rm } from 'fs/promises';
 
-const FILE_PATH = '/path';
+const FILE_PATH = `${process.cwd()}/path`;
 
 const key = readFileSync(`${__dirname}/private.test.key`).toString();
 
@@ -13,11 +13,10 @@ describe('File tests', () => {
   let client;
   let scope;
 
-  beforeEach(function () {
-    mockFs({
-      [FILE_PATH]: {},
-    });
-
+  beforeEach(() => {
+    if (!existsSync(FILE_PATH)) {
+      mkdirSync(FILE_PATH);
+    }
     client = new FileClient(
       new Auth({
         privateKey: key,
@@ -32,11 +31,15 @@ describe('File tests', () => {
     }).persist();
   });
 
-  afterEach(function () {
+  afterEach(async () => {
     client = null;
     scope = null;
     nock.cleanAll();
-    mockFs.restore();
+
+    await rm(FILE_PATH, {
+      force: true,
+      recursive: true,
+    });
   });
 
   test('Can download file with url', async () => {

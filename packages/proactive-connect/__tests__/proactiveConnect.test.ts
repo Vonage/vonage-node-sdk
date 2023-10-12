@@ -3,13 +3,13 @@ import nock from 'nock';
 import { Auth } from '@vonage/auth';
 import { BASE_URL } from './common';
 import testDataSets from './__dataSets__/index';
-import { readFileSync, existsSync } from 'fs';
-import mockFs from 'mock-fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
+import { rm } from 'fs/promises';
 import { parse } from '@amvijay/multipart-parser';
 
 const key = readFileSync(`${__dirname}/private.test.key`).toString();
 
-const CSV_DIR = '/tmp';
+const CSV_DIR = `${process.cwd()}/path`;
 
 const getResults = async (
   generator: boolean,
@@ -90,9 +90,9 @@ describe.each(testDataSets)('$label', ({ tests }) => {
     async ({ request, response, clientMethod, parameters, error }) => {
       scope.intercept(...request).reply(...response);
 
-      await expect(() =>
-        client[clientMethod](...parameters),
-      ).rejects.toThrow(error);
+      await expect(() => client[clientMethod](...parameters)).rejects.toThrow(
+        error,
+      );
       expect(nock.isDone()).toBeTruthy();
     },
   );
@@ -102,13 +102,11 @@ describe('File tests', () => {
   let client;
   let scope;
 
-  beforeEach(function () {
-    mockFs({
-      [CSV_DIR]: {},
-      [`${CSV_DIR}/upload`]: {
-        'upload-file.csv': `fizz,buzz\nfoo,bar`,
-      },
-    });
+  beforeEach(() => {
+    if (!existsSync(CSV_DIR)) {
+      mkdirSync(CSV_DIR);
+    }
+    writeFileSync(`${CSV_DIR}/upload-file.csv`, `fizz,buzz\nfoo,bar`);
     client = new ProactiveConnect(
       new Auth({
         privateKey: key,
@@ -122,11 +120,14 @@ describe('File tests', () => {
     }).persist();
   });
 
-  afterEach(function () {
+  afterEach(async () => {
     client = null;
     scope = null;
     nock.cleanAll();
-    mockFs.restore();
+    await rm(CSV_DIR, {
+      force: true,
+      recursive: true,
+    });
   });
 
   test('Can download CSV file', async () => {
@@ -153,21 +154,17 @@ describe('File tests', () => {
   });
 
   test('Can upload CSV File', async () => {
-    const file = `${CSV_DIR}/upload/upload-file.csv`;
+    const file = `${CSV_DIR}/upload-file.csv`;
+    expect(existsSync(file)).toBeTruthy();
     const fileBuf = readFileSync(file);
     scope
       .post(
         `/v0.1/bulk/lists/10000000-0000-0000-0000-000000000000/items/download`,
         (body) => {
-          const parts = parse(
-            Buffer.from(body, 'hex'),
-            client.FORM_BOUNDARY,
-          );
+          const parts = parse(Buffer.from(body, 'hex'), client.FORM_BOUNDARY);
           return parts.reduce((acc, part) => {
             if (part.name === 'file') {
-              return (
-                acc && !!Buffer.compare(parts.content, fileBuf)
-              );
+              return acc && !!Buffer.compare(parts.content, fileBuf);
             }
 
             return true;

@@ -26,8 +26,8 @@ jobs:
       - name: Install packages
         run: npm install
 
-      - name: Lint, Compile, Test
-        run: npm run compile && npm run test -- --coverage --verbose --maxWorkers=2
+      - name: Compile, Test
+        run: npm run compile && npm run test -- --coverage --verbose --maxWorkers=1
 
       - name: Run codecov
         uses: codecov/codecov-action@v3
