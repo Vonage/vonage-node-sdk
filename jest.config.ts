@@ -43,6 +43,13 @@ const config: Config.InitialOptions = {
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {
+      displayName: 'NUMBER INSIGHT V2',
+      testMatch: [
+        '<rootDir>/packages/number-insight-v2/__tests__/**/*.test.ts',
+      ],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
       displayName: 'NUMBER INSIGHTS',
       testMatch: ['<rootDir>/packages/number-insights/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],

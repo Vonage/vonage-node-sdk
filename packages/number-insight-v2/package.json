@@ -1,0 +1,36 @@
+{
+  "name": "@vonage/number-insight-v2",
+  "version": "1.0.0",
+  "description": "Number Insight v2 is designed to give fraud scores for Application Integrations.",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/number-insight-v2#readme",
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Chuck MANCHUCK Reeves <chuck@manchuck.com>",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+    "compile": "npx tsc --build --verbose"
+  },
+  "dependencies": {
+    "@vonage/server-client": "1.8.2"
+  },
+  "devDependencies": {
+    "@vonage/auth": "1.6.0",
+    "nock": "13.3.3"
+  }
+}
