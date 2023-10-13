@@ -1,6 +1,6 @@
 {
   "name": "@vonage/meetings",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "description": "Vonage Meetings Management API",
   "homepage": "httsp://developer.vonage.com",
   "bugs": {
@@ -27,15 +27,15 @@
     "compile": "npx tsc --build --verbose"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.8.2",
-    "@vonage/vetch": "^1.5.1",
+    "@vonage/server-client": "^1.9.0",
+    "@vonage/vetch": "^1.6.0",
     "fast-xml-parser": "^4.3.2",
     "form-data": "^4.0.0",
     "lodash.pick": "^4.4.0"
   },
   "devDependencies": {
     "@amvijay/multipart-parser": "^1.0.2",
-    "@vonage/auth": "^1.6.0",
+    "@vonage/auth": "^1.7.0",
     "nock": "^13.3.4"
   }
 }
