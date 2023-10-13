@@ -1,0 +1,33 @@
+{
+  "name": "@vonage/media",
+  "version": "1.0.0",
+  "description": "The Media API can be used to query, download and delete media items such as audio files for use with other Vonage APIs.",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/media#readme",
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Chuck MANCHUCK Reeves <chuck@manchuck.com>",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/media.test.js"
+  },
+  "dependencies": {
+    "@vonage/server-client": "1.6.0"
+  },
+  "devDependencies": {
+    "@vonage/auth": "1.5.0",
+    "nock": "13.3.2"
+  }
+}
