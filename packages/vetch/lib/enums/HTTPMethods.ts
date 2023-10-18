@@ -1,11 +1,21 @@
+/**
+ * Enum representing the HTTP methods that can be used for Vonage API requests.
+ *
+ * @enum {string}
+ */
 export enum HTTPMethods {
+    /** Represents an HTTP GET request. */
     GET = 'GET',
-    HEAD = 'HEAD',
+
+    /** Represents an HTTP POST request. */
     POST = 'POST',
+
+    /** Represents an HTTP DELETE request. */
     DELETE = 'DELETE',
+
+    /** Represents an HTTP PUT request. */
     PUT = 'PUT',
-    CONNECT = 'CONNECT',
-    OPTIONS = 'OPTIONS',
-    TRACE = 'TRACE',
+
+    /** Represents an HTTP PATCH request. */
     PATCH = 'PATCH',
 }

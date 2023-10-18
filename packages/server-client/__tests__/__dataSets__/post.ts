@@ -49,6 +49,7 @@ export default [
         fizz: 'buzz',
       },
     ],
+    form: true,
     clientMethod: 'sendFormSubmitRequest',
     parameters: [
       `${BASE_URL}/my/path`,

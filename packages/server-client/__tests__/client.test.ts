@@ -2,6 +2,7 @@ import nock from 'nock';
 import { Client, AuthenticationType } from '../lib/index';
 import { requestTests, transfomTests } from './__dataSets__/index';
 import { getScope, getClient, BASE_URL, API_SECRET, API_KEY } from './common';
+import { urlToHttpOptions } from 'url';
 
 describe.each(transfomTests)('$label', ({ tests }) => {
   test.each(tests)(
@@ -27,7 +28,7 @@ describe.each(requestTests)('$label', ({ tests }) => {
     .filter(({ error }) => !error)
     .map((test) => {
       const request = test.request;
-      // Add on quey testing
+      // Add on query testing
       const url = new URL(`${BASE_URL}${request[0]}`);
       url.searchParams.append('api_key', API_KEY);
       url.searchParams.append('api_secret', API_SECRET);
@@ -44,6 +45,14 @@ describe.each(requestTests)('$label', ({ tests }) => {
         ],
         authType: AuthenticationType.KEY_SECRET,
       };
+
+      if (test.form && request[2]) {
+        const params = new URLSearchParams(request[2]);
+        request[2] = params.toString();
+
+        const keyParams = new URLSearchParams(keyTest.request[2]);
+        keyTest.request[2] = keyParams.toString();
+      }
 
       const bodyMethods = ['PUT', 'POST', 'PATCH'];
       const method = request[1];
