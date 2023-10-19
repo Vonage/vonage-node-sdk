@@ -1,0 +1,32 @@
+name: Release Action
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    name: Update Release
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Update RELEASES.MD
+        uses: manchuck/release-action@1.0.0
+
+      - name: Debug
+        run: cat RELEASES.md
+
+      - name: Commit relase Log
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: RELEASES.md
+          message: 'chore: updating release log'
