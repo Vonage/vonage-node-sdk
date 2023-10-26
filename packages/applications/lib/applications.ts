@@ -7,24 +7,65 @@ import {
   ApplicationPageList,
 } from './types';
 
-const apiToApplication = (response: ApplicationResponse) => {
-  delete response?._links;
-  return Client.transformers.camelCaseObjectKeys(response, true, true);
+/**
+ * Represents the application with both the `snake_case` and the `camelCase` keys.
+ *
+ * @remarks
+ * This is used for backward compatibility with an earlier release of the SDK
+ * which was not transforming the application correctly.
+ * Using `snake_case` is considered deprecated
+ */
+export type MergedApplication = Application | ApplicationResponse;
+
+const apiToApplication = (
+  response: MergedApplication,
+): MergedApplication => {
+  delete (response as ApplicationResponse)._links;
+  return Client.transformers.camelCaseObjectKeys(
+    response,
+    true,
+    true,
+  ) as MergedApplication;
 };
 
 export class Applications extends Client {
-  protected authType = AuthenticationType.BASIC;
+  authType = AuthenticationType.BASIC;
 
-  public async listApplications(filter: {
-    page_size?: number;
-    page?: number;
-  }): Promise<ApplicationPageResponse> {
-    return this.getApplicationPage(filter);
+  /**
+   * Retrieves a list of applications with optional pagination parameters.
+   *
+   * @remarks
+   * This is used to get a specific page of applications. This will
+   * return the `snake_case` and the `camelCase` response. Using `snake_case`
+   * is considered deprecated
+   *
+   * @see API Specification {@link https://developer.vonage.com/en/api/application.v2#listApplication}
+   *
+   * @param {ListApplicationParams} params - The filter parameters.
+   * @return {Promise<ApplicationPageResponse>} - A promise resolving to the list of applications.
+   */
+  public async listApplications(
+    params: ListApplicationParams,
+  ): Promise<ApplicationPageList> {
+    return this.getApplicationPage(params);
   }
 
+  /**
+   * Retrieves all applications, iterating over paginated results.
+   *
+   * @remarks
+   * This will keep calling the API until there are no pages left. This will
+   * return the `snake_case` and the `camelCase` response. Using `snake_case`
+   * is considered deprecated
+   *
+   * @param {ListApplicationParams} [params={}] - Optional filter parameters.
+   * @yields {MergedApplication} - Yields application items.
+   * @return {AsyncGenerator<MergedApplication, void, undefined>} - An asynchronous generator.
+   *
+   */
   public async *listAllApplications(
     params: ListApplicationParams = {},
-  ): AsyncGenerator<Application, void & Application, undefined> {
+  ): AsyncGenerator<MergedApplication, void & MergedApplication, undefined> {
     let next = null;
     params.page = params?.page || 1;
     do {
@@ -36,6 +77,18 @@ export class Applications extends Client {
     } while (next);
   }
 
+  /**
+   * Retrieves a page of applications based on filter parameters.
+   *
+   * @param {ListApplicationParams} filter - The filter parameters for pagination.
+   * @return {Promise<ApplicationPageList>} - A promise resolving to a page of applications.
+   *
+   * @remarks
+   * This will return the `snake_case` and the `camelCase` response. Using
+   * `snake_case` is considered deprecated
+   *
+   * @see API Specification {@link https://developer.vonage.com/en/api/application.v2#listApplication}
+   */
   public async getApplicationPage(
     filter: ListApplicationParams,
   ): Promise<ApplicationPageList> {
@@ -57,9 +110,17 @@ export class Applications extends Client {
     };
   }
 
+  /**
+   * Creates a new application with the provided details.
+   *
+   * @see API Specification {@link https://developer.vonage.com/en/api/application.v2#createApplication}
+   *
+   * @param {Application} application - The application details to be created.
+   * @return {Promise<MergedApplication>} - A promise resolving to the created application.
+   */
   public async createApplication(
     application: Application,
-  ): Promise<Application> {
+  ): Promise<MergedApplication> {
     const resp = await this.sendPostRequest<ApplicationResponse>(
       `${this.config.apiHost}/v2/applications`,
       Client.transformers.snakeCaseObjectKeys(application, true),
@@ -68,7 +129,17 @@ export class Applications extends Client {
     return apiToApplication(resp.data);
   }
 
-  public async getApplication(applicationId: string): Promise<Application> {
+  /**
+   * Retrieves an application by its unique identifier.
+   *
+   * @see API Specification {@link https://developer.vonage.com/en/api/application.v2#getApplication}
+   *
+   * @param {string} applicationId - The unique identifier of the application to retrieve.
+   * @return {Promise<MergedApplication>} - A promise resolving to the retrieved application.
+   */
+  public async getApplication(
+    applicationId: string,
+  ): Promise<MergedApplication> {
     const resp = await this.sendGetRequest<ApplicationResponse>(
       `${this.config.apiHost}/v2/applications/${applicationId}`,
     );
@@ -76,9 +147,17 @@ export class Applications extends Client {
     return apiToApplication(resp.data);
   }
 
+  /**
+   * Updates an existing application with the provided details.
+   *
+   * @see API Specification {@link https://developer.vonage.com/en/api/application.v2#updateApplication}
+   *
+   * @param {Application} application - The application details to be updated.
+   * @return {Promise<MergedApplication>} - A promise resolving to the updated application.
+   */
   public async updateApplication(
     application: Application,
-  ): Promise<Application> {
+  ): Promise<MergedApplication> {
     const resp = await this.sendPutRequest<ApplicationResponse>(
       `${this.config.apiHost}/v2/applications/${application.id}`,
       Client.transformers.snakeCaseObjectKeys(application, true),
@@ -86,6 +165,14 @@ export class Applications extends Client {
     return apiToApplication(resp.data);
   }
 
+  /**
+   * Deletes an application by its unique identifier.
+   *
+   * @see API Specification {@link https://developer.vonage.com/en/api/application.v2#deleteApplication}
+   *
+   * @param {string} applicationId - The unique identifier of the application to delete.
+   * @return {Promise<void>} - A promise indicating the successful deletion of the application.
+   */
   public async deleteApplication(applicationId: string): Promise<void> {
     await this.sendDeleteRequest<void>(
       `${this.config.apiHost}/v2/applications/${applicationId}`,
