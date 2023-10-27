@@ -1,5 +1,19 @@
+/**
+ * Enum representing different types of logos.
+ */
 export enum LogoType {
-    'WHITE' = 'white',
-    'COLORED' = 'colored',
-    'FAVICON' = 'favicon',
+  /**
+   * White logo.
+   */
+  WHITE = 'white',
+
+  /**
+   * Colored logo.
+   */
+  COLORED = 'colored',
+
+  /**
+   * Favicon logo.
+   */
+  FAVICON = 'favicon',
 }

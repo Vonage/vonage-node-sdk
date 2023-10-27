@@ -1,5 +1,19 @@
+/**
+ * Enum representing different states for a microphone.
+ */
 export enum MicrophoneSate {
-    'ON' = 'on',
-    'OFF' = 'off',
-    'DEFAULT' = 'default',
+  /**
+   * Microphone is turned on.
+   */
+  ON = 'on',
+
+  /**
+   * Microphone is turned off.
+   */
+  OFF = 'off',
+
+  /**
+   * Default microphone state.
+   */
+  DEFAULT = 'default',
 }

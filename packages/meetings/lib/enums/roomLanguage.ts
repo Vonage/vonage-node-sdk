@@ -1,8 +1,34 @@
+/**
+ * Enum representing different room languages.
+ */
 export enum RoomLanguage {
-    'DEFAULT' = 'default',
-    'EN' = 'en',
-    'HE' = 'he',
-    'ES' = 'es',
-    'PT' = 'pt',
-    'IT' = 'it',
+  /**
+   * Default language for the room.
+   */
+  DEFAULT = 'default',
+
+  /**
+   * English language.
+   */
+  EN = 'en',
+
+  /**
+   * Hebrew language.
+   */
+  HE = 'he',
+
+  /**
+   * Spanish language.
+   */
+  ES = 'es',
+
+  /**
+   * Portuguese language.
+   */
+  PT = 'pt',
+
+  /**
+   * Italian language.
+   */
+  IT = 'it',
 }
