@@ -1,22 +1,35 @@
 import { Client, AuthenticationType } from '@vonage/server-client';
 import { VetchOptions } from '@vonage/vetch';
-import { MessageSuccess } from './interfaces';
-import { SendMessageParams, MessageSuccessResponse } from './types';
+import {
+  MessageSuccess,
+  SendMessageParams,
+  MessageSuccessResponse, AnyChannel,
+} from './types';
 import debug from 'debug';
 
 const log = debug('vonage:messages');
 
+/**
+ * A client for sending messages via the Vonage API.
+ *
+ * This class extends the `Client` class and provides methods for adding
+ * authentication to requests and sending messages.
+ *
+ * @group Client
+ */
 export class Messages extends Client {
   /**
-     * Handle various ways the Messages API handles auth
-     * The Messages API handles both JWT (preferred) as well as Basic so we
-     * cannot just set a local authType
-     *
-     * @param {any} request - Object containing request data
-     */
+   * Adds authentication details to the given request based on the configured
+   * authentication type. Handle various ways the Messages API handles auth
+   * The Messages API handles both JWT (preferred) as well as Basic so we
+   * cannot just set a local authType
+   *
+   * @param {VetchOptions} request - The request to which authentication should be added.
+   * @return {Promise<VetchOptions>} A promise that resolves to the request with added authentication.
+   */
   public async addAuthenticationToRequest(
     request: VetchOptions,
-  ): Promise<VetchOptions & unknown> {
+  ): Promise<VetchOptions> {
     log('Auth config', this.auth);
     this.authType = AuthenticationType.KEY_SECRET;
 
@@ -33,7 +46,15 @@ export class Messages extends Client {
     return super.addAuthenticationToRequest(request);
   }
 
-  public async send(message: SendMessageParams): Promise<MessageSuccess> {
+  /**
+   * Sends a message using the Vonage API.
+   *
+   * @param {SendMessageParams} message - The message to be sent.
+   * @return {Promise<MessageSuccess>} A promise that resolves to a success response with a message UUID.
+   */
+  public async send(
+    message: SendMessageParams | AnyChannel,
+  ): Promise<MessageSuccess> {
     const resp = await this.sendPostRequest<MessageSuccessResponse>(
       `${this.config.apiHost}/v1/messages`,
       JSON.parse(
@@ -44,7 +65,7 @@ export class Messages extends Client {
     );
 
     return {
-      messageUUID: resp.data?.message_uuid,
+      messageUUID: resp.data.message_uuid,
     };
   }
 }

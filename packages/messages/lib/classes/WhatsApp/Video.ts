@@ -5,9 +5,19 @@ import debug from 'debug';
 const log = debug('vonage:messages:whatsapp');
 
 /**
- * @deprecated please use WhatsAppVideo instead
+ * @deprecated please use the WhatsAppVideo class instead
+ *
+ * @group WhatsApp
  */
 export class Video extends WhatsAppVideo {
+  /**
+   * Constructs a new `Video` instance for WhatsApp.
+   *
+   * @param {VideoObject} video - The video message content.
+   * @param {string} to - The recipient's WhatsApp number.
+   * @param {string} from - The sender's WhatsApp number.
+   * @param {string} clientRef - (Optional) A unique client reference for the message.
+   */
   constructor(
     video: VideoObject,
     to: string,

@@ -1,48 +1,18 @@
-import {
-  MessengerAudioInterface,
-  MessengerFileInterface,
-  MessengerImageInterface,
-  MessengerTextInterface,
-  MessengerVideoInterface,
-  MMSAudioInterface,
-  MMSImageInterface,
-  MMSVcardInterface,
-  MMSVideoInterface,
-  SMSTextInterface,
-  ViberFileInterface,
-  ViberImageInterface,
-  ViberTextInterface,
-  ViberVideoInterface,
-  WhatsAppAudioInterface,
-  WhatsAppCustomInterface,
-  WhatsAppFileInterface,
-  WhatsAppImageInterface,
-  WhatsAppStickerInterface,
-  WhatsAppTemplateInterface,
-  WhatsAppTextInterface,
-  WhatsAppVideoInterface,
-} from '../interfaces';
+import { AnyMessengerParams } from "./Channels/Messenger";
+import { AnyViberParams } from "./Channels/Viber";
+import { AnyWhatsAppParams } from "./Channels/WhatsApp";
+import { AnyMMSParams } from "./Channels/MMS";
+import { SMSParams } from "./Channels/SMSParams";
 
+/**
+ * Represents parameters for sending various types of messages.
+ * This union type can be used to send messages across different platforms like
+ * Messenger, MMS, SMS, Viber, WhatsApp, etc.
+ * Use the corresponding Type for the specific message type you want to send.
+ */
 export type SendMessageParams =
-    | MessengerAudioInterface
-    | MessengerFileInterface
-    | MessengerImageInterface
-    | MessengerTextInterface
-    | MessengerVideoInterface
-    | MMSAudioInterface
-    | MMSImageInterface
-    | MMSVcardInterface
-    | MMSVideoInterface
-    | SMSTextInterface
-    | ViberFileInterface
-    | ViberImageInterface
-    | ViberTextInterface
-    | ViberVideoInterface
-    | WhatsAppAudioInterface
-    | WhatsAppCustomInterface
-    | WhatsAppFileInterface
-    | WhatsAppImageInterface
-    | WhatsAppStickerInterface
-    | WhatsAppTemplateInterface
-    | WhatsAppTextInterface
-    | WhatsAppVideoInterface
+  AnyMessengerParams |
+  AnyViberParams |
+  AnyWhatsAppParams |
+  AnyMMSParams |
+  SMSParams

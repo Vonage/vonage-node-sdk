@@ -1,6 +1,12 @@
 import { MessageParams } from './MessageParams';
 import { MessageAudioType } from './MessageAudioType';
 
+/**
+ * Represents the parameters for a message with audio.
+ */
 export type MessageParamsAudio = {
-    audio: MessageAudioType
-} & MessageParams
+  /**
+   * The audio message content.
+   */
+  audio: MessageAudioType;
+} & MessageParams;

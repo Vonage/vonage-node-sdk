@@ -1,0 +1,18 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "extends": ["../../typedoc.base.json"],
+  "entryPoints": ["lib/index.ts"],
+  "name": "Vonage Messages",
+  "groupOrder": [
+    "Client",
+    "MMS",
+    "Messenger",
+    "SMS",
+    "Viber",
+    "WhatsApp",
+    "Types",
+    "Responses",
+    "*"
+  ],
+  "defaultCategory": ""
+}
