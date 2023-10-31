@@ -1,1 +1,3 @@
-export { NumberInsights } from './number-insights'
+export * from './number-insights';
+export * from './enums';
+export * from './types';

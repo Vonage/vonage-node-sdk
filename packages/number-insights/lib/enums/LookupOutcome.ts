@@ -1,5 +1,20 @@
+/**
+ * Enum representing the outcomes of a lookup operation.
+ * @enum {number}
+ */
 export enum LookupOutcome {
-    SUCCESS = 0,
-    PARTIAL_SUCCESS = 1,
-    FAILED = 2,
+  /**
+   * The lookup operation was successful.
+   */
+  SUCCESS = 0,
+
+  /**
+   * The lookup operation partially succeeded.
+   */
+  PARTIAL_SUCCESS = 1,
+
+  /**
+   * The lookup operation failed.
+   */
+  FAILED = 2,
 }
