@@ -2,7 +2,11 @@ name: Release Action
 
 on:
   release:
-    types: [published]
+    types:
+      - published
+      - created
+      - edited
+      - released
 
 jobs:
   test-action:
@@ -20,7 +24,7 @@ jobs:
           node-version: 18.x
 
       - name: Update RELEASES.MD
-        uses: manchuck/release-action@1.0.0
+        uses: vonage/generate-release-log@1.0.0
 
       - name: Debug
         run: cat RELEASES.md
