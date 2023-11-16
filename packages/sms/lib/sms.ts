@@ -2,14 +2,36 @@ import { Client } from '@vonage/server-client';
 import {
   MessageSendAllFailure,
   MessageSendPartialFailure,
-} from './classes/index';
-import { SMSMessages, SMSResponse, Message } from './interfaces/index';
-import { SMSParams } from './types/index';
-import { SMSStatus } from './enums/index';
+} from './classes';
+import {
+  SMSMessages,
+  SMSResponse,
+  Message,
+  SMSParams,
+  SMSMessageResponse,
+} from './types';
+import { SMSStatus } from './enums';
 import crypto from 'crypto';
 import { AlgorithmTypes } from '@vonage/auth';
 
+/**
+ * Class representing an SMS client for sending SMS messages using the Vonage API.
+ *
+ * Extends the Vonage Client class and provides methods for sending SMS messages and verifying signatures.
+ *
+ * @class
+ * @extends {Client}
+ */
 export class SMS extends Client {
+  /**
+   * Sends an SMS message using the Vonage API.
+   *
+   * @async
+   * @param {SMSParams} [params] - The parameters for the SMS message.
+   * @return {Promise<SMSMessages>} A Promise that resolves to the response containing details about the sent SMS messages.
+   * @throws {MessageSendAllFailure} If all SMS messages fail to send.
+   * @throws {MessageSendPartialFailure} If some SMS messages fail to send.
+   */
   public async send(params?: SMSParams): Promise<SMSMessages> {
     const resp = await this.sendPostRequest<SMSResponse>(
       `${this.config.restHost}/sms/json`,
@@ -20,7 +42,7 @@ export class SMS extends Client {
       resp.data,
       true,
       true,
-    );
+    ) as SMSMessages;
 
     const totalMessages = messageData.messageCount || 0;
     const messages = (messageData.messages as Array<Message>) || [];
@@ -41,6 +63,16 @@ export class SMS extends Client {
     throw new MessageSendPartialFailure(messageData);
   }
 
+  /**
+   * Verifies the signature of a request using the specified algorithm and signature secret.
+   *
+   * @param {string} signature - The signature to be verified.
+   * @param {string | { [key: string]: string }} params - The request parameters used to generate the signature.
+   * @param {string} signatureSecret - The secret key used for generating the signature.
+   * @param {AlgorithmTypes} algorithm - The algorithm used for generating the signature.
+   * @return {boolean} `true` if the signature is valid, `false` otherwise.
+   * @throws {Error} If the provided signature algorithm is not supported.
+   */
   public verifySignature(
     signature: string,
     params: string | { [key: string]: string },
