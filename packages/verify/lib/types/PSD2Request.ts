@@ -1,4 +1,4 @@
-import { PSD2Parameters } from '../types/index';
+import { PSD2Parameters } from './index';
 
 /**
  * @deprecated please use PSD2Parameters

@@ -1,5 +1,5 @@
 import { Client } from '@vonage/server-client';
-import { Command } from './enums/index';
+import { Command } from './enums';
 import {
   VerifyControl,
   VerifyControlError,
@@ -15,8 +15,9 @@ import {
   VerifyRequestErrorResponse,
   VerifyError,
   VerifyRequest,
-} from './interfaces/index';
-import { VerificationParameters, PSD2Parameters } from './types/index';
+  VerificationParameters,
+  PSD2Parameters,
+} from './types';
 import omit from 'lodash.omit';
 
 export class Verify extends Client {
@@ -33,7 +34,11 @@ export class Verify extends Client {
     const resp = await this.sendPostRequest<
             VerifyControlResponse | VerifyControlErrorResponse
         >(`${this.config.apiHost}/verify/control/json`, data);
-    return Client.transformers.camelCaseObjectKeys(resp.data, true, true);
+    return Client.transformers.camelCaseObjectKeys(
+      resp.data,
+      true,
+      true,
+    ) as VerifyControl | VerifyControlError;
   }
 
   public async cancel(
@@ -60,7 +65,11 @@ export class Verify extends Client {
           code: code,
         });
 
-    return Client.transformers.camelCaseObjectKeys(resp.data, true, true);
+    return Client.transformers.camelCaseObjectKeys(
+      resp.data,
+      true,
+      true,
+    ) as VerifyCheck | VerifyCheckError;
   }
 
   public async search(
@@ -71,7 +80,11 @@ export class Verify extends Client {
       { request_id: requestId },
     );
 
-    return Client.transformers.camelCaseObjectKeys(resp.data, true, true);
+    return Client.transformers.camelCaseObjectKeys(
+      resp.data,
+      true,
+      true,
+    ) as VerifySearch | VerifySearchError;
   }
 
   public async start(
@@ -87,6 +100,10 @@ export class Verify extends Client {
       Client.transformers.snakeCaseObjectKeys(omit(request, ['language'])),
     );
 
-    return Client.transformers.camelCaseObjectKeys(resp.data, true, true);
+    return Client.transformers.camelCaseObjectKeys(
+      resp.data,
+      true,
+      true,
+    ) as VerifyError | VerifyRequest;
   }
 }

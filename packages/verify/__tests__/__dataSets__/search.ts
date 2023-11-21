@@ -3,12 +3,12 @@ import {
   VerifySearch,
   VerifySearchErrorResponse,
   VerifySearchError,
-} from '../../lib/interfaces/index';
+} from '../../lib/types';
 import {
   SearchStatus,
   SearchCheckStatus,
   SearchEventTypes,
-} from '../../lib/enums/index';
+} from '../../lib/enums';
 
 const params = new URLSearchParams({
   api_key: '12345',

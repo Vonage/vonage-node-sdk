@@ -1,7 +1,8 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/verify",
   "version": "1.9.0",
-  "description": "Verify package for Vonage",
+  "description": "Verify API provides a choice of routes for sending a code to a user. You can use this to confirm a user's contact information, as a second factor when authenticating users, or for step-up authentication.",
   "keywords": [
     "vonage",
     "verify",
@@ -19,7 +20,16 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "contributors": [
+    {
+      "name": "Chris Tankersley",
+      "email": "chris@ctankersley.com"
+    },
+    {
+      "name": "Chuck MANCHUCK Reeves",
+      "email": "chuck@manchuck.com"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -32,9 +42,11 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-    "compile": "npx tsc --build --verbose"
+    "compile": "npx tsc --build --verbose",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@types/lodash.omit": "4.5.9",
     "@vonage/auth": "^1.7.0",
     "@vonage/server-client": "^1.9.0",
     "@vonage/vetch": "^1.6.0",
@@ -45,6 +57,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "gitHead": "328f18e5c8a458cb4d06d7955ec2399a6ce6f5d8"
+  }
 }
