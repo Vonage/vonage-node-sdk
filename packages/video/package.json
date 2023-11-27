@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/video",
   "version": "1.12.0",
   "description": "Package to interact with the Vonage Video API (Not OpenTok Compatible)",
@@ -15,7 +16,16 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "contributors": [
+    {
+      "name": "Chris Tankersley",
+      "email": "chris@ctankersley.com"
+    },
+    {
+      "name": "Chuck MANCHUCK Reeves",
+      "email": "chuck@manchuck.com"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -28,7 +38,8 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-    "compile": "npx tsc --build --verbose"
+    "compile": "npx tsc --build --verbose",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@vonage/auth": "^1.7.0",
@@ -42,6 +53,5 @@
   },
   "publishConfig": {
     "directory": "dist"
-  },
-  "gitHead": "328f18e5c8a458cb4d06d7955ec2399a6ce6f5d8"
+  }
 }

@@ -5,3 +5,4 @@ export * from './ExperienceComposerResolution';
 export * from './LayoutType';
 export * from './Resolution';
 export * from './StreamMode';
+export * from './MediaMode';
