@@ -1,17 +1,64 @@
 import { NCCOActions, TTSLanguages } from '../../enums';
-import { TalkAction } from '../../types/NCCO/TalkAction';
+import { TalkAction } from '../../types';
 import { Serializable } from '../../ncco';
 
+/**
+ * Represents a Talk action in a Nexmo Call Control Object (NCCO).
+ *
+ * This action allows the text-to-speech (TTS) synthesis of spoken words in the call.
+ */
 export class Talk implements TalkAction, Serializable {
+  /**
+   * The action type for this NCCO action.
+   */
   action: NCCOActions.TALK = NCCOActions.TALK;
+
+  /**
+   * The text to be spoken during the call.
+   */
   text: string;
+
+  /**
+   * Indicates whether the talk action allows barge-in (optional).
+   */
   bargeIn?: boolean;
+
+  /**
+   * The number of times to loop the speech (optional).
+   */
   loop?: number;
+
+  /**
+   * The audio level at which to play the speech (optional).
+   */
   level?: string;
+
+  /**
+   * The language for the text-to-speech synthesis (optional).
+   */
   language?: TTSLanguages;
+
+  /**
+   * The speech style (optional).
+   */
   style?: string;
+
+  /**
+   * Indicates whether to use premium text-to-speech (optional).
+   */
   premium?: boolean;
 
+  /**
+   * Creates a new Talk action.
+   *
+   * @param {string} text - The text to be spoken during the call.
+   * @param {boolean} [bargeIn] - Indicates whether the talk action allows barge-in (optional).
+   * @param {number} [loop] - The number of times to loop the speech (optional).
+   * @param {string} [level] - The audio level at which to play the speech (optional).
+   * @param {TTSLanguages} [language] - The language for the text-to-speech synthesis (optional).
+   * @param {string} [style] - The speech style (optional).
+   * @param {boolean} [premium] - Indicates whether to use premium text-to-speech (optional).
+   */
   constructor(
     text: string,
     bargeIn?: boolean,
@@ -43,6 +90,11 @@ export class Talk implements TalkAction, Serializable {
     }
   }
 
+  /**
+   * Serializes the Talk action to a Nexmo Call Control Object (NCCO).
+   *
+   * @return {TalkAction} - The serialized Talk action.
+   */
   serializeToNCCO() {
     const data: TalkAction = {
       action: NCCOActions.TALK,

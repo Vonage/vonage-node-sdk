@@ -1,12 +1,12 @@
 import debug from 'debug';
-import { CallWithAnswerURL } from '../types/index';
+import { CallWithAnswerURL } from '../types';
 
 debug('@vonage/voice')(
-  'This interface is deprecated. Please update to use the appropriate type',
+  // eslint-disable-next-line max-len
+  'This interface is deprecated. Please update to use the CallWithAnswerURL type',
 );
 
 /**
- * @deprecated This interface is deprecated. Please update to use the
- *             appropriate type
+ * @deprecated This interface is deprecated. Please update to use the CallWithAnswerURL type
  */
 export type OutboundCallWithAnswerURL = CallWithAnswerURL;

@@ -1,4 +1,5 @@
 export * from './CreateCallParameters';
+export * from './CallListFilter';
 export * from './GetCallsDetailsParameters';
 export * from './EarmuffCallParameters';
 export * from './HangupCallParameters';
