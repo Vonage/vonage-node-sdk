@@ -2,5 +2,13 @@
   "packages": [
     "packages/*"
   ],
+ "command": {
+    "version": {
+      "ignoreChanges": [
+        "package-lock.json"
+      ],
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  },
   "version": "independent"
 }
