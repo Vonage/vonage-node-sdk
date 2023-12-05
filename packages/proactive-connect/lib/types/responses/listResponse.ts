@@ -4,30 +4,76 @@ import { ListSyncStatus } from '../listSyncStatus';
 import { ListSalesForceDataSource } from '../listSalesForceDataSource';
 import { ListManualDatasource } from '../listManualDatasource';
 
-type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
+/**
+ * Represents a response object for synchronization status with modified metadata and data flags.
+ * @remarks
+ * Vonage API's will return information using `snake_case`. This represents the
+ * pure response before the client will transform the keys into `camelCase`.
+ */
+export type SyncStatusResponse = Omit<
+  ListSyncStatus,
+  'metadataModified' | 'dataModified'
+  > & {
+  /**
+   * Indicates whether the list metadata (definition) is modified since the latest sync.
+   */
+  metadata_modified: boolean;
 
-type SyncStatusResponse = Omit<
-    ListSyncStatus,
-    'metadataModified' | 'dataModified'
-> & {
-    metadata_modified: boolean
-    data_modified: boolean
-}
+  /**
+   * Indicates whether one or more list items were added, removed, and/or modified since the latest sync.
+   */
+  data_modified: boolean;
+};
 
-type SaleForceDataSourceResponse = Omit<
-    ListSalesForceDataSource,
-    'integrationId'
-> & {
-    integration_id: string
-}
+/**
+ * Represents a response object for a Salesforce data source with modified integration ID.
+ * @remarks
+ * Vonage API's will return information using `snake_case`. This represents the
+ * pure response before the client will transform the keys into `camelCase`.
+ */
+export type SaleForceDataSourceResponse = Omit<
+  ListSalesForceDataSource,
+  'integrationId'
+  > & {
+  /**
+   * The integration ID defining Salesforce credentials to use for this data source.
+   */
+  integration_id: string;
+};
 
+/**
+ * Represents a response object for a list with associated metadata and synchronization details.
+ * @remarks
+ * Vonage API's will return information using `snake_case`. This represents the
+ * pure response before the client will transform the keys into `camelCase`.
+ */
 export type ListResponse = Omit<
-    List,
-    'createdAt' | 'updatedAt' | 'itemsCount'
-> & {
-    datasource?: ListManualDatasource | SaleForceDataSourceResponse
-    created_at: string
-    updated_at: string
-    items_count: number
-    sync_status: SyncStatusResponse
-} & Optional<APILinks, '_links'>
+  List,
+  'createdAt' | 'updatedAt' | 'itemsCount'
+  > & {
+  /**
+   * The data source for the list, which can be either a manual data source or a Salesforce data source.
+   */
+  datasource?: ListManualDatasource | SaleForceDataSourceResponse;
+
+  /**
+   * The creation date and time of the list.
+   */
+  created_at: string;
+
+  /**
+   * The last update date and time of the list.
+   */
+  updated_at: string;
+
+  /**
+   * The number of items in the list.
+   */
+  items_count: number;
+
+  /**
+   * The synchronization status of the list.
+   */
+  sync_status: SyncStatusResponse;
+} & APILinks;
+
