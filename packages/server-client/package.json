@@ -1,7 +1,8 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/server-client",
   "version": "1.9.0",
-  "description": "Core services related to talking to the Vonage APIs",
+  "description": "The Vonage Server Client provides core functionalities for interacting with Vonage APIs, ensuring a standardized response regardless of the underlying HTTP adapter.",
   "homepage": "https://developer.vonage.com",
   "bugs": {
     "url": "https://github.com/Vonage/vonage-node-sdk/issues"
@@ -11,7 +12,16 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "contributors": [
+    {
+      "name": "Chris Tankersley",
+      "email": "chris@ctankersley.com"
+    },
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "email": "chuck@manchuck.com"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -37,6 +47,13 @@
     "lodash.snakecase": "^4.1.1"
   },
   "devDependencies": {
+    "@types/lodash.camelcase": "4.3.7",
+    "@types/lodash.isobject": "3.0.7",
+    "@types/lodash.kebabcase": "4.1.7",
+    "@types/lodash.merge": "4.6.7",
+    "@types/lodash.partial": "4.2.7",
+    "@types/lodash.snakecase": "4.1.7",
+    "@types/node-fetch": "2.6.6",
     "nock": "^13.3.4"
   },
   "publishConfig": {

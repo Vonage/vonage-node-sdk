@@ -80,4 +80,36 @@ describe('File tests', () => {
     expect(readFileSync(file).toString()).toEqual(content);
     expect(nock.isDone()).toBeTruthy();
   });
+
+  test('Can download multiple files', async () => {
+    const file = `${FILE_PATH}/my-file.txt`;
+    const content = "Ford, I think I'm a couch";
+
+    const file2 = `${FILE_PATH}/my-file2.txt`;
+    const content2 = "I know how you feel.";
+
+    scope
+      .get(`/v1/files/00000000-0000-0000-0000-000000000001`)
+      .delay(1000)
+      .reply(200, content)
+      .get(`/v1/files/00000000-0000-0000-0000-000000000002`)
+      .delay(800)
+      .reply(200, content2);
+
+    expect(existsSync(file)).toBeFalsy();
+    expect(existsSync(file2)).toBeFalsy();
+
+    await Promise.all([
+      client.downloadFile('00000000-0000-0000-0000-000000000001', file),
+      client.downloadFile('00000000-0000-0000-0000-000000000002', file2),
+    ]);
+
+    expect(existsSync(file)).toBeTruthy();
+    expect(readFileSync(file).toString()).toEqual(content);
+
+    expect(existsSync(file2)).toBeTruthy();
+    expect(readFileSync(file2).toString()).toEqual(content2);
+
+    expect(nock.isDone()).toBeTruthy();
+  });
 });

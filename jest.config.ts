@@ -117,11 +117,6 @@ const config: Config.InitialOptions = {
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {
-      displayName: 'VETCH',
-      testMatch: ['<rootDir>/packages/vetch/__tests__/**/*.test.ts'],
-      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
-    },
-    {
       displayName: 'VIDEO',
       testMatch: ['<rootDir>/packages/video/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
