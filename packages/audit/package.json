@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/audit",
   "version": "1.9.0",
   "description": "Vonage Audit SDK Package",
@@ -11,7 +12,12 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Chuck \"MANCHUCK\" Reeves",
+  "contributors": [
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "email": "chuck@manchuck.com"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -22,6 +28,7 @@
     "/dist"
   ],
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "npm run clean && npm run compile",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
     "compile": "npx tsc --build --verbose"
