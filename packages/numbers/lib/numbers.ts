@@ -1,30 +1,17 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
-import { Feature } from './enums/Feature';
+import { Feature, SearchPattern } from './enums';
+import omit from 'lodash.omit';
 import {
   NumbersAvailableList,
-  NumbersOwnedFilter,
   NumbersOwnedList,
-  NumbersOwnedNumber,
   NumbersEmptyResponse,
-  NumbersUpdateParams,
-  NumbersSearchFilter,
   NumbersParams,
+  NumbersOwnedFilter,
   NumbersQuerySearchFilter,
   NumbersSearchSimple,
-} from './types';
-import { SearchPattern } from './enums/SearchPattern';
-import omit from 'lodash.omit';
-
-const remapObjects = <T, O>(mapping, newObject: T, oldObject: O): T => {
-  for (const key in mapping) {
-    if (oldObject[mapping[key]]) {
-      newObject[key] = oldObject[mapping[key]];
-      delete oldObject[mapping[key]];
-    }
-  }
-  newObject = { ...newObject, ...oldObject };
-  return newObject;
-};
+  NumbersSearchFilter,
+  NumbersUpdateParams,
+} from "./types";
 
 const buildSearch = ({
   endsWith,
@@ -46,7 +33,7 @@ const buildSearch = ({
     };
   }
 
-  // order of precdent contains, endsWith, startsWith
+  // order of precedent contains, endsWith, startsWith
   if (contains) {
     return {
       search_pattern: SearchPattern.CONTAINS,
@@ -74,7 +61,7 @@ const buildSearch = ({
   return {};
 };
 
-const sortFeatures = (features: string[]): string => {
+const sortFeatures = (features: Feature[]): string => {
   // API expects these as a CSV in a specific order
   if (features.length > 4) {
     throw new Error('Invalid number of features request');
@@ -104,64 +91,90 @@ const sortFeatures = (features: string[]): string => {
   return newOrder.join(',');
 };
 
+/**
+ * Represents a client for managing phone numbers.
+ */
 export class Numbers extends Client {
-  protected authType = AuthenticationType.QUERY_KEY_SECRET;
+  public authType = AuthenticationType.QUERY_KEY_SECRET;
 
+  /**
+   * Buys a phone number.
+   *
+   * @param {NumbersParams} params - The parameters for buying a number.
+   * @return {Promise<NumbersEmptyResponse>} A promise that resolves to an empty response or an error response.
+   */
   public async buyNumber(
-    params?: NumbersParams,
+    params: NumbersParams,
   ): Promise<NumbersEmptyResponse> {
-    const mapping = { target_api_key: 'targetApiKey' };
-    const data = remapObjects(mapping, {}, params);
     const resp = await this.sendFormSubmitRequest<NumbersEmptyResponse>(
       `${this.config.restHost}/number/buy`,
-      data,
+      Client.transformers.snakeCaseObjectKeys(params) as Record<string, string>,
     );
 
     return {
-      errorCode: resp.data['error-code'],
+      errorCode: `${resp.data['error-code']}`,
       errorCodeLabel: resp.data['error-code-label'],
     };
   }
 
+  /**
+   * Cancels a phone number.
+   *
+   * @param {NumbersParams} params - The parameters for canceling a number.
+   * @return {Promise<NumbersEmptyResponse>} A promise that resolves to an empty response or an error response.
+   */
   public async cancelNumber(
-    params?: NumbersParams,
+    params: NumbersParams,
   ): Promise<NumbersEmptyResponse> {
-    const mapping = { target_api_key: 'targetApiKey' };
-    const data = remapObjects(mapping, {}, params);
     const resp = await this.sendFormSubmitRequest<NumbersEmptyResponse>(
       `${this.config.restHost}/number/cancel`,
-      data,
+      Client.transformers.snakeCaseObjectKeys(params) as Record<string, string>,
     );
 
     return {
-      errorCode: resp.data['error-code'],
+      errorCode: `${resp.data['error-code']}`,
       errorCodeLabel: resp.data['error-code-label'],
     };
   }
-
+  /**
+   * Retrieves a list of available phone numbers based on the provided filter criteria.
+   *
+   * @param {NumbersSearchFilter} filter - The filter criteria for searching available numbers.
+   * @return {Promise<NumbersAvailableList>} A promise that resolves to a list of available phone numbers or an error response.
+   */
   public async getAvailableNumbers(
     filter: NumbersSearchFilter,
   ): Promise<NumbersAvailableList> {
-    const mapping = {
-      search_pattern: 'searchPattern',
-    };
-    const data: any = omit(
-      remapObjects(mapping, {}, { ...filter, ...buildSearch(filter) }),
-      ['startsWith', 'contains', 'endsWith', 'searchPattern'],
+    omit(
+      Client.transformers.snakeCaseObjectKeys({
+        ...filter,
+        ...buildSearch(filter),
+        country: filter.country,
+      }),
+      ['starts_with', 'contains', 'ends_with', 'search_pattern'],
     );
-
-    if (data.features?.length > 0) {
-      data.features = sortFeatures(data.features);
-    }
 
     const resp = await this.sendGetRequest<NumbersAvailableList>(
       `${this.config.restHost}/number/search`,
-      data,
+      {
+        country: filter.country,
+        type: filter.type,
+        size: filter.size,
+        index: filter.index,
+        ...buildSearch(filter),
+        ...(filter.features ? { features: sortFeatures(filter.features) } : {}),
+      },
     );
 
     return resp.data;
   }
 
+  /**
+   * Retrieves a list of owned phone numbers based on the provided filter criteria.
+   *
+   * @param {NumbersOwnedFilter} [filter] - The filter criteria for searching owned numbers.
+   * @return {Promise<NumbersOwnedList>} A promise that resolves to a list of owned phone numbers or an error response.
+   */
   public async getOwnedNumbers(
     filter?: NumbersOwnedFilter,
   ): Promise<NumbersOwnedList> {
@@ -175,20 +188,26 @@ export class Numbers extends Client {
     return resp.data;
   }
 
+  /**
+   * Updates the settings of a phone number.
+   *
+   * @param {NumbersUpdateParams} [params] - The parameters for updating a phone number.
+   * @return {Promise<NumbersEmptyResponse>} A promise that resolves to an empty response or an error response.
+   */
   public async updateNumber(
-    params?: NumbersUpdateParams,
+    params: NumbersUpdateParams,
   ): Promise<NumbersEmptyResponse> {
-    const mapping = {
-      app_id: 'applicationId',
-    };
-    const data = remapObjects(mapping, {}, params);
-    const resp = await this.sendFormSubmitRequest<NumbersOwnedNumber>(
+    params.appId = params.applicationId || params.appId;
+    const resp = await this.sendFormSubmitRequest<NumbersEmptyResponse>(
       `${this.config.restHost}/number/update`,
-      data,
+      {
+        ...params,
+        ...(params.appId ? { app_id: params.appId } : {}),
+      },
     );
 
     return {
-      errorCode: resp.data['error-code'],
+      errorCode: `${resp.data['error-code']}`,
       errorCodeLabel: resp.data['error-code-label'],
     };
   }
