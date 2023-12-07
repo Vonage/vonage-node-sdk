@@ -40,7 +40,7 @@ export type InboundMessage = {
   keyword: string;
 
   /**
-   * The time when Vonage started to push this Delivery Receipt to your webhook endpoint.
+   * The time when Vonage started to push this Inbound SMS to your webhook endpoint.
    */
   'message-timestamp': string;
 
