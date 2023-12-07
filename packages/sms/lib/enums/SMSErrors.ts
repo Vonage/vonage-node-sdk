@@ -46,7 +46,7 @@ export enum SMSErrors {
   INVALID_MESSAGE = '6',
 
   /**
-   * Barred Number: The number you're trying to send messages to is blacklisted.
+   * Barred Number: The number you're trying to send messages to is blocklisted.
    */
   BARRED_NUMBER = '7',
 
