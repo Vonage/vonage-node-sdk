@@ -53,7 +53,7 @@ export enum SMSErrors {
   /**
    * Partner Account Barred: Your Vonage account has been suspended.
    */
-  PARTNER_ACCOUNT_BARRED = '7',
+  PARTNER_ACCOUNT_BARRED = '8',
 
   /**
    * Partner Quota Violation: Insufficient credit to send the message.
@@ -97,6 +97,8 @@ export enum SMSErrors {
 
   /**
    * Non-Whitelisted Destination: Vonage account is in demo mode and requires whitelisted numbers.
+   * This error is returned if you attempt to send a message to a number that isn't in your
+   * pre-approved destination list.
    */
   NON_WHITELISTED_DESTINATION = '29',
 

@@ -1,3 +1,5 @@
+import { TypeEnum } from '../enums';
+
 /**
  * Interface representing an inbound SMS message.
  *
@@ -32,7 +34,7 @@ export type InboundMessage = {
   /**
    * The format of the message body.
    */
-  type: string;
+  type: TypeEnum | string;
 
   /**
    * The first word in the message body, converted to uppercase.

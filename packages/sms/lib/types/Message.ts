@@ -1,11 +1,9 @@
 import { SMSMessageResponse } from './Responses';
 
 /**
- * Interface representing an SMS message.
+ * Type representing an SMS message.
  *
  * Extends the structure of an SMS message response and includes additional optional properties.
- *
- * @extends {SMSMessageResponse}
  */
 export type Message = SMSMessageResponse & {
   /**

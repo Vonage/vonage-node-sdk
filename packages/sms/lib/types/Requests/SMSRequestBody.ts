@@ -12,7 +12,7 @@ export type SMSRequestBody = {
   to: string;
 
   /**
-   * The sender's name or number, specified in E.164 format.
+   * The Alphanumeric senderID (if supported for the destination) or virtual number (specified in E.164 format) that the SMS is being sent from.
    */
   from: string;
 
