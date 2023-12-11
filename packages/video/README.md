@@ -16,6 +16,10 @@ For full API documentation refer to [developer.vonage.com](https://developer.von
 
 ## Installation
 
+We recommend using this SDK as part of the overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). Please see the main package for installation.
+
+You can also use this SDK standalone if you only need access to just the Video API.
+
 ### With NPM
 
 ```bash
@@ -30,9 +34,25 @@ yarn add @vonage/video
 
 ## Usage
 
-Unlike the other SDK's this package is not include in the [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
+If you are using this SDK as part of the Vonage Server SDK, you can access it as the `video` property off of the client that you instantiate.
 
-You only need to use the Video APIs. All you need to do is `require('@vonage/video')`, and use the returned object to create your own client.
+```js
+const { Auth } = require('@vonage/auth');
+const { Vonage } = require('@vonage/server-sdk');
+
+const credentials = new Auth({
+  apiKey: API_KEY,
+  apiSecret: API_SECRET
+});
+const options = {};
+const vonage = new Vonage(credentials, options);
+
+const session = await vonage.video.createSession();
+```
+
+### Standalone
+
+The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if you only need to use the Video API. All you need to do is `require('@vonage/video')`, and use the returned object to create your own client.
 
 ```js
 const { Auth } = require('@vonage/auth');
@@ -70,15 +90,13 @@ The following is a list of Vonage Video APIs and whether the SDK provides suppor
 
 | API                       |  Supported? |
 |---------------------------|:-----------:|
-| Session Creation          | ✅          |
-| Signaling                 | ✅          |
-| Force Muting              | ✅          |
-| Archiving                 | ✅          |
-| Custom S3/Azure buckets   | ❌          |
-| SIP Interconnect          | ✅          |
-| Live Streaming Broadcasts | ✅          |
-| Experience Composer       | ✅          |
-| Account Management        | ❌          |
+| Session Creation          |      ✅     |
+| Signaling                 |      ✅     |
+| Force Muting              |      ✅     |
+| Archiving                 |      ✅     |
+| SIP Interconnect          |      ✅     |
+| Live Streaming Broadcasts |      ✅     |
+| Experience Composer       |      ✅     |
 
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
