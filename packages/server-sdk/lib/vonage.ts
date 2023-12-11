@@ -12,6 +12,7 @@ import { Users } from '@vonage/users';
 import { Verify } from '@vonage/verify';
 import { Verify2 } from '@vonage/verify2';
 import { Voice } from '@vonage/voice';
+import { Video } from '@vonage/video';
 
 export class Vonage {
   protected credentials: AuthInterface;
@@ -30,6 +31,7 @@ export class Vonage {
   public verify2: Verify2;
   public verify: Verify;
   public voice: Voice;
+  public video: Video;
 
   constructor(credentials: AuthInterface, options?: ConfigParams) {
     if (typeof credentials.getQueryParams === 'undefined') {
@@ -52,5 +54,6 @@ export class Vonage {
     this.verify = new Verify(this.credentials, this.options);
     this.verify2 = new Verify2(this.credentials, this.options);
     this.voice = new Voice(this.credentials, this.options);
+    this.video = new Video(this.credentials, this.options);
   }
 }

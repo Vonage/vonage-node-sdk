@@ -122,6 +122,7 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Users                 | General Availability |     ✅     |
 | Verify API            | General Availability |     ✅     |
 | Verify v2 API         | General Availability |     ✅     |
+| Video API             | General Availability |     ✅     |
 | Voice API             | General Availability |     ✅     |
 
 ### V2 Migrations
