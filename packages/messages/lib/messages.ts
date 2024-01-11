@@ -1,22 +1,60 @@
 import { Client, AuthenticationType } from '@vonage/server-client';
 import { VetchOptions } from '@vonage/vetch';
-import { MessageSuccess } from './interfaces';
-import { SendMessageParams, MessageSuccessResponse } from './types';
+import {
+  MessageSuccess,
+  SendMessageParams,
+  MessageSuccessResponse, AnyChannel,
+} from './types';
 import debug from 'debug';
 
 const log = debug('vonage:messages');
 
+/**
+ * Client class to interact with the Messages API which enables users to manage
+ * send messages through various channels programmatically. 
+ * @see {@link https://developer.nexmo.com/en/messages/overview}
+ 
+ * @group Client
+ *
+ * @example
+ * Create a standalone Messages client
+ *
+ * ```ts
+ * import { Messages } from '@vonage/messages';
+ *
+ * const messagesClient = new Messages({
+ *  apiKey: VONAGE_API_KEY,
+ *  apiSecret: VONAGE_API_SECRET
+ * });
+ * ```
+ *
+ * @example
+ * Create an Messages client from the Vonage client
+ *
+ * ```ts
+ * import { Vonage } from '@vonage/server-client';
+ *
+ * const vonage = new Vonage({
+ *   apiKey: VONAGE_API_KEY,
+ *   apiSecret: VONAGE_API_SECRET
+ * });
+ *
+ * const messagesClient = vonage.messages;
+ * ```
+ */
 export class Messages extends Client {
   /**
-     * Handle various ways the Messages API handles auth
-     * The Messages API handles both JWT (preferred) as well as Basic so we
-     * cannot just set a local authType
-     *
-     * @param {any} request - Object containing request data
-     */
+   * Adds authentication details to the given request based on the configured
+   * authentication type. Handle various ways the Messages API handles auth
+   * The Messages API handles both JWT (preferred) as well as Basic so we
+   * cannot just set a local authType
+   *
+   * @param {VetchOptions} request - The request to which authentication should be added.
+   * @return {Promise<VetchOptions>} A promise that resolves to the request with added authentication.
+   */
   public async addAuthenticationToRequest(
     request: VetchOptions,
-  ): Promise<VetchOptions & unknown> {
+  ): Promise<VetchOptions> {
     log('Auth config', this.auth);
     this.authType = AuthenticationType.KEY_SECRET;
 
@@ -33,7 +71,15 @@ export class Messages extends Client {
     return super.addAuthenticationToRequest(request);
   }
 
-  public async send(message: SendMessageParams): Promise<MessageSuccess> {
+  /**
+   * Sends a message using the Vonage API.
+   *
+   * @param {SendMessageParams} message - The message to be sent.
+   * @return {Promise<MessageSuccess>} A promise that resolves to a success response with a message UUID.
+   */
+  public async send(
+    message: SendMessageParams | AnyChannel,
+  ): Promise<MessageSuccess> {
     const resp = await this.sendPostRequest<MessageSuccessResponse>(
       `${this.config.apiHost}/v1/messages`,
       JSON.parse(
@@ -44,7 +90,7 @@ export class Messages extends Client {
     );
 
     return {
-      messageUUID: resp.data?.message_uuid,
+      messageUUID: resp.data.message_uuid,
     };
   }
 }

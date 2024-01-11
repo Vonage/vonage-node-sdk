@@ -1,3 +1,9 @@
+/**
+ * Represents a response for a verification request.
+ */
 export type VerificationResponse = {
-    request_id: string
-}
+  /**
+   * The unique identifier for the verification request.
+   */
+  request_id: string;
+};

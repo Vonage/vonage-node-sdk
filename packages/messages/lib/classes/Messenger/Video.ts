@@ -8,9 +8,22 @@ import debug from 'debug';
 const log = debug('vonage:messages:messenger');
 
 /**
- * @deprecated please use MessengerVideo instead
+ * Represents a text message for the Messenger channel.
+ *
+ * @deprecated Please use the MessengerText class instead.
+ *
+ * @group Messenger
  */
 export class Video extends MessengerVideo {
+  /**
+   * Constructs a new `Text` instance.
+   *
+   * @param {VideoObject} video - The text content of the message.
+   * @param {string} to - The recipient of the message.
+   * @param {string} from - The sender of the message.
+   * @param {MessageType} messenger - The messenger information for the message.
+   * @param {string} clientRef - The client reference for the message.
+   */
   constructor(
     video: VideoObject,
     to: string,
@@ -24,8 +37,8 @@ export class Video extends MessengerVideo {
       to: to,
       from: from,
       messenger: {
-        category: messenger.category as unknown as MessengerCategory,
-        tag: messenger.tag,
+        category: messenger?.category as unknown as MessengerCategory,
+        tag: messenger?.tag,
       } as MessengerType,
       clientRef: clientRef,
     });

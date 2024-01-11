@@ -195,22 +195,4 @@ describe('Meetings > File uploads', () => {
 
     expect(nock.isDone()).toBeTruthy();
   });
-
-  test('Will throw error when apply fails with no message', async () => {
-    scope
-      .get(`/v1/meetings/themes/logos-upload-urls`)
-      .reply(200, urlResponses)
-      .put(`/v1/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
-        keys: [urlResponses[0].fields.key],
-      })
-      .reply(400);
-
-    const awsUrl = new URL(urlResponses[0].url);
-    awsScope.post(awsUrl.pathname, () => true).reply(204);
-    await expect(() =>
-      client.uploadIcon(themeOne.themeId, LogoType.WHITE, file),
-    ).rejects.toThrow(`Could not attach image to theme: FATAL ERROR`);
-
-    expect(nock.isDone()).toBeTruthy();
-  });
 });

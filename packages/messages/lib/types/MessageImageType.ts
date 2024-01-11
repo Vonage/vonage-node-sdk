@@ -1,3 +1,9 @@
+/**
+ * Represents an image message type.
+ */
 export type MessageImageType = {
-    url: string
-}
+  /**
+   * The URL of the image attachment.
+   */
+  url: string;
+};

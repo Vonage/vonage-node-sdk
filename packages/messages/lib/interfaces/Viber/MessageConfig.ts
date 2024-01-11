@@ -1,10 +1,26 @@
 import { MessageCategory } from '../../enums/Viber/MessageCategory';
 
 /**
- * @deprecated please use Viber Service instead
+ * Represents a message configuration. for Viber
+ *
+ * @deprecated Please use types instead of interfaces.
+ *
+ * @ignore
  */
 export interface MessageConfig {
-    category: MessageCategory
-    ttl?: number
-    type?: string
+  /**
+   * The category of the message.
+   */
+  category: MessageCategory;
+
+  /**
+   * The time-to-live (TTL) of the message in seconds.
+   */
+  ttl?: number;
+
+  /**
+   * The type of the message.
+   */
+  type?: string;
 }
+

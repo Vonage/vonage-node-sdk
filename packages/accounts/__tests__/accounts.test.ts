@@ -1,22 +1,22 @@
 import nock from 'nock';
-import { Accounts } from '../lib/index'
+import { Accounts } from '../lib/index';
 import { Auth } from '@vonage/auth';
 
 describe('accounts', () => {
   let client;
 
   beforeEach(() => {
-      client = new Accounts(new Auth({ apiKey: 'abcd', apiSecret: '1234' }));
+    client = new Accounts(new Auth({ apiKey: 'abcd', apiSecret: '1234' }));
   });
 
   afterEach(() => {
-      client = null;
+    client = null;
   });
 
   test("get balance", async () => {
     const expectedResponse = {
       "value": 10.28,
-      "autoReload": false
+      "autoReload": false,
     };
 
     nock("https://rest.nexmo.com")
@@ -33,7 +33,7 @@ describe('accounts', () => {
   test("top up balance", async () => {
     const expectedResponse = {
       "error-code": "200",
-      "error-code-label": "success"
+      "error-code-label": "success",
     };
 
     nock("https://rest.nexmo.com")
@@ -42,21 +42,28 @@ describe('accounts', () => {
       .query({ api_key: 'abcd', api_secret: '1234' })
       .reply(200, expectedResponse);
 
-    const lookup = await client.topUpBalance('8ef2447e69604f642ae59363aa5f781b');
+    const lookup = await client.topUpBalance(
+      '8ef2447e69604f642ae59363aa5f781b',
+    );
     expect(lookup['error-code']).toEqual(expectedResponse['error-code']);
-    expect(lookup['error-code-label']).toEqual(expectedResponse['error-code-label']);
+    expect(
+      lookup['error-code-label'],
+    ).toEqual(expectedResponse['error-code-label']);
   });
 
   test("update callbacks", async () => {
     const expectedResponse = {
-      "mo-callback-url": "https://example.com/webhooks/inbound-sms",
       "dr-callback-url": "https://example.com/webhooks/delivery-receipt",
+      "mo-callback-url": "https://example.com/webhooks/inbound-sms",
       "max-outbound-request": 30,
       "max-inbound-request": 30,
-      "max-calls-per-second": 30
+      "max-calls-per-second": 30,
     };
 
-    const callbacks = {moCallBackUrl: "https://example.com/webhooks/inbound-sms", drCallBackUrl: "https://example.com/webhooks/delivery-receipt"};
+    const callbacks = {
+      drCallBackUrl: "https://example.com/webhooks/delivery-receipt",
+      moCallBackUrl: "https://example.com/webhooks/inbound-sms",
+    };
     const queryString = new URLSearchParams(callbacks);
     const re = new RegExp(queryString.toString(), "g");
 
@@ -67,7 +74,11 @@ describe('accounts', () => {
       .reply(200, expectedResponse);
 
     const lookup = await client.updateAccountCallbacks(callbacks);
-    expect(lookup['mo-callback-url']).toEqual(expectedResponse['mo-callback-url']);
-    expect(lookup['dr-callback-url']).toEqual(expectedResponse['dr-callback-url']);
+    expect(
+      lookup['mo-callback-url'],
+    ).toEqual(expectedResponse['mo-callback-url']);
+    expect(
+      lookup['dr-callback-url'],
+    ).toEqual(expectedResponse['dr-callback-url']);
   });
 });

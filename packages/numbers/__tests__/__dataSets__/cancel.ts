@@ -13,9 +13,9 @@ export default [
         `/number/cancel?api_key=12345&api_secret=ABCDE`,
         'POST',
         new URLSearchParams([
-          ['target_api_key', '67890'],
           ['country', 'US'],
           ['msisdn', '12345'],
+          ['target_api_key', '67890'],
         ]).toString(),
       ],
       reply: [200, validResponse],

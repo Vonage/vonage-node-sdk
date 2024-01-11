@@ -1,24 +1,25 @@
 {
-    "extends": "../../tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
 
-    "compilerOptions": {
-        "rootDir": "lib",
-        "outDir": "dist"
-    },
+  "extends": "../../tsconfig.json",
 
-    "exclude": [
-        "__tests__",
-        "jest.config.js",
-        "dist"
-    ],
+  "compilerOptions": {
+    "rootDir": "lib",
+    "outDir": "dist"
+  },
 
-    "references": [
-        { "path": "../auth" },
-        { "path": "../server-client" },
-        { "path": "../vetch" }
-    ],
+  "exclude": [
+    "__tests__",
+    "dist"
+  ],
 
-    "ts-node": {
-        "esm": true
-    }
+  "references": [
+    { "path": "../auth" },
+    { "path": "../server-client" },
+    { "path": "../vetch" }
+  ],
+
+  "ts-node": {
+    "esm": true
+  }
 }

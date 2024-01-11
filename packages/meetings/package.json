@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/meetings",
   "version": "1.5.0",
   "description": "Vonage Meetings Management API",
@@ -11,7 +12,16 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Chuck MANCHUCK Reeves <chuck@manchuck.com>",
+  "contributors": [
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "url": "https://github.com/manchuck"
+    },
+    {
+      "name": "Chris Tankersley",
+      "url": "https://github.com/dragonmantank"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -24,18 +34,20 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-    "compile": "npx tsc --build --verbose"
+    "compile": "npx tsc --build --verbose",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@types/lodash.pick": "4.4.8",
     "@vonage/server-client": "^1.9.0",
     "@vonage/vetch": "^1.6.0",
     "fast-xml-parser": "^4.3.2",
-    "form-data": "^4.0.0",
-    "lodash.pick": "^4.4.0"
+    "form-data": "^4.0.0"
   },
   "devDependencies": {
     "@amvijay/multipart-parser": "^1.0.2",
     "@vonage/auth": "^1.7.0",
+    "lodash.pick": "4.4.0",
     "nock": "^13.3.4"
   }
 }

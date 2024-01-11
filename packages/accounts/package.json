@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/accounts",
   "version": "1.9.0",
   "description": "Vonage Account Management API",
@@ -11,7 +12,16 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
-  "author": "Chris Tankersley <chris@ctankersley.com>",
+  "contributors": [
+    {
+      "name": "Chris Tankersley",
+      "url": "https://github.com/dragonmantank"
+    },
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "url": "https://github.com/manchuck"
+    }
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -24,7 +34,8 @@
   "scripts": {
     "build": "npm run clean && npm run compile",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-    "compile": "npx tsc --build --verbose"
+    "compile": "npx tsc --build --verbose",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@vonage/server-client": "^1.9.0"
@@ -35,6 +46,5 @@
   },
   "publishConfig": {
     "directory": "dist"
-  },
-  "gitHead": "328f18e5c8a458cb4d06d7955ec2399a6ce6f5d8"
+  }
 }

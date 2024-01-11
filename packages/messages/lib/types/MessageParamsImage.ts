@@ -1,6 +1,12 @@
 import { MessageParams } from './MessageParams';
 import { MessageImageType } from './MessageImageType';
 
+/**
+ * Represents the parameters for a message with an image attachment.
+ */
 export type MessageParamsImage = {
-    image: MessageImageType
-} & MessageParams
+  /**
+   * The image attachment content.
+   */
+  image: MessageImageType;
+} & MessageParams;

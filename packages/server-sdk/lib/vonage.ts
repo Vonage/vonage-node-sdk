@@ -14,32 +14,98 @@ import { Verify2 } from '@vonage/verify2';
 import { Voice } from '@vonage/voice';
 import { Video } from '@vonage/video';
 
+/**
+ * Represents the Vonage SDK for interacting with Vonage APIs.
+ */
 export class Vonage {
+  /**
+   * The credentials used for authentication.
+   */
   protected credentials: AuthInterface;
+
+  /**
+   * Optional configuration parameters.
+   */
   protected options: ConfigParams;
 
+  /**
+   * Provides access to the Accounts API.
+   */
   public accounts: Accounts;
+
+  /**
+   * Provides access to the Applications API.
+   */
   public applications: Applications;
+
+  /**
+   * Provides access to the Messages API.
+   */
   public messages: Messages;
+
+  /**
+   * Provides access to the Number Insights API.
+   */
   public numberInsights: NumberInsights;
+
+  /**
+   * Provides access to the Numbers API.
+   */
   public numbers: Numbers;
+
+  /**
+   * Provides access to the Pricing API.
+   */
   public pricing: Pricing;
+
+  /**
+   * Provides access to the Redact API.
+   */
   public redact: Redact;
+
+  /**
+   * Provides access to the Secrets API.
+   */
   public secrets: Secrets;
+
+  /**
+   * Provides access to the SMS API.
+   */
   public sms: SMS;
+
+  /**
+   * Provides access to the Users API.
+   */
   public users: Users;
+
+  /**
+   * Provides access to the Verify V2 API.
+   */
   public verify2: Verify2;
+
+  /**
+   * Provides access to the Verify API.
+   */
   public verify: Verify;
+
+  /**
+   * Provides access to the Voice API.
+   */
   public voice: Voice;
   public video: Video;
 
+  /**
+   * The credentials used for authentication.
+   * @param {AuthInterface} credentials - The authentication credentials.
+   * @param {ConfigParams} [options] - Optional configuration parameters.
+   */
   constructor(credentials: AuthInterface, options?: ConfigParams) {
     if (typeof credentials.getQueryParams === 'undefined') {
       credentials = new Auth(credentials);
     }
 
     this.credentials = credentials;
-    this.options = options;
+    this.options = options || {};
 
     this.accounts = new Accounts(this.credentials, this.options);
     this.applications = new Applications(this.credentials, this.options);

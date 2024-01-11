@@ -1,0 +1,15 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "includeVersion": false,
+  "entryPointStrategy": "packages",
+  "entryPoints": [
+    "packages/*"
+  ],
+  "json": "docs/docs.json",
+  "out": "docs",
+  "logLevel": "Verbose",
+  "excludeInternal": true,
+  "plugin": [
+    "typedoc-plugin-markdown"
+  ]
+}

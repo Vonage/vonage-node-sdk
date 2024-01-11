@@ -1,10 +1,24 @@
-import { AuthOpts } from '@vonage/auth';
+import { AuthParams } from '@vonage/auth';
 import { AuthInterface } from '@vonage/auth';
 import { VetchOptions } from '@vonage/vetch';
 
-export type VideoClassParameters = AuthOpts &
+/**
+ * Parameters required to initialize the Video class.
+ */
+export type VideoClassParameters = AuthParams &
   VetchOptions & {
-    applicationId: string;
-    privateKey: string;
-    auth?: AuthInterface;
-  };
+  /**
+   * The unique identifier for the application.
+   */
+  applicationId: string;
+
+  /**
+   * The private key used for authentication.
+   */
+  privateKey: string;
+
+  /**
+   * Optional authentication interface to use for custom authentication.
+   */
+  auth?: AuthInterface;
+};

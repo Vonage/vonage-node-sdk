@@ -1,4 +1,4 @@
-import { VerifyCheckResponse, VerifyCheck } from '../../lib/interfaces/index';
+import { VerifyCheckResponse, VerifyCheck } from '../../lib/types';
 
 export default [
   {

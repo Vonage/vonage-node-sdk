@@ -1,3 +1,9 @@
+/**
+ * Represents a video message type.
+ */
 export type MessageVideoType = {
-    url: string
-}
+  /**
+   * The URL of the video attachment.
+   */
+  url: string;
+};

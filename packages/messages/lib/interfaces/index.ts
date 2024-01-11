@@ -5,7 +5,7 @@ export * from './MessageAudioInterface';
 export * from './MessageFileInterface';
 export * from './MessageImageInterface';
 export * from './MessageInterface';
-export * from './MessageSuccess';
+export * from './MessageSuccessInterface';
 export * from './MessageTextInterface';
 export * from './MessageVCardInterface';
 export * from './MessageVideoInterface';

@@ -1,4 +1,14 @@
+/**
+ * Enum representing the status of a verification check during Verify search.
+ */
 export enum SearchCheckStatus {
-    INVALID = 'INVALID',
-    VALID = 'VALID',
+  /**
+   * The verification check is invalid.
+   */
+  INVALID = 'INVALID',
+
+  /**
+   * The verification check is valid.
+   */
+  VALID = 'VALID',
 }

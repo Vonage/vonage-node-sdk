@@ -1,6 +1,24 @@
+/**
+ * Enum representing different captioning status.
+ */
 export enum CaptionStatus {
-    STARTED = "started",
-    STOPPED = "stopped",
-    PAUSED = "paused",
-    FAILED = "failed"
+  /**
+   * Indicates that captioning has started.
+   */
+  STARTED = "started",
+
+  /**
+   * Indicates that captioning has stopped.
+   */
+  STOPPED = "stopped",
+
+  /**
+   * Indicates that captioning has been paused.
+   */
+  PAUSED = "paused",
+
+  /**
+   * Indicates that captioning has failed.
+   */
+  FAILED = "failed"
 }

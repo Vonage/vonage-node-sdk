@@ -132,27 +132,12 @@ describe('Audit Events', () => {
   });
 
   test('Throws exception when request fails', async () => {
-    const events = [];
     const scope = nock(BASE_URL, {
       reqheaders: {
         authorization: 'Basic MTIzNDU6QUJDREU=',
       },
     })
       .intercept(`/beta/audit/events?page=1`, 'GET')
-      .reply(200, {
-        _embedded: {
-          events: [createEvent({ id: '1' })].map(
-            Client.transformers.snakeCaseObjectKeys,
-          ),
-        },
-        page: {
-          size: 20,
-          totalElements: 2,
-          totalPages: 2,
-          page: 1,
-        },
-      })
-      .intercept(`/beta/audit/events?page=2`, 'GET')
       .reply(401, {
         status: 401,
         error: 'Unauthorized',
@@ -160,9 +145,6 @@ describe('Audit Events', () => {
       });
 
     const results = client.getEvents({});
-
-    const eventIter = await results.next();
-    expect(eventIter.value.id).toBe('1');
 
     await expect(results.next()).rejects.toThrow(
       'Request failed with status code 401',

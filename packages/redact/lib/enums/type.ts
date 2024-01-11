@@ -1,4 +1,14 @@
+/**
+ * Enum representing different message types for redaction requests.
+ */
 export enum Type {
-    INBOUND = 'Inbound',
-    OUTBOUND = 'Outbound',
+  /**
+   * Represents an inbound message type.
+   */
+  INBOUND = 'Inbound',
+
+  /**
+   * Represents an outbound message type.
+   */
+  OUTBOUND = 'Outbound',
 }

@@ -1,3 +1,9 @@
+/**
+ * Represents an audio message type.
+ */
 export type MessageAudioType = {
-    url: string
-}
+  /**
+   * The URL of the audio attachment.
+   */
+  url: string;
+};
