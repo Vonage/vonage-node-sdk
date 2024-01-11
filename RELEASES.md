@@ -1,6 +1,43 @@
+---
+version: '3.12.0'
+release: '11 Jan 2024'
+id: vonage-node-sdk
+title: 'vonage-node-sdk'
+icon: 'node-color'
+pkgName: 'Node SDK'
+title: 'Vonage Node SDK'
+version: 1.0.0
+---
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+
+## v3.12.0 (2024-01-11)
+
+This release addressed some issues with improper types, cleaning up `@vonage/vetch` package and adding a huge amount of documentation and examples to the code.
+
+## Added
+- Documentation blocks to all user facing API
+
+## Fixed
+- Updated all types to no longer use `any` when passing in parameters to the `send*Request` function calls
+
+## Deprecated
+- Having `@vonage/vetch` make HTTP calls is deprecated. Going forward only `@vonage/server-client` will handle making HTTP requests
+
+**Full Changelog**: [Link](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.11.0...@vonage/server-sdk@3.12.0)
+
+## v.3.11.0 (2023-12-11)
+
+Video has now been released and is no longer in beta. This release adds video to the `@vonage/server-sdk` for ease of use.
+
+## Added
+
+- Video has been released is now part of the core SDK
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.10.2...@vonage/server-sdk@3.11.0)
 
 ## v3.10.2 (2023-10-19)
 
