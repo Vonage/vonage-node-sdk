@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/meetings",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Vonage Meetings Management API",
   "homepage": "httsp://developer.vonage.com",
   "bugs": {
@@ -39,14 +39,14 @@
   },
   "dependencies": {
     "@types/lodash.pick": "4.4.8",
-    "@vonage/server-client": "^1.9.0",
-    "@vonage/vetch": "^1.6.0",
+    "@vonage/server-client": "^1.10.0",
+    "@vonage/vetch": "^1.7.0",
     "fast-xml-parser": "^4.3.2",
     "form-data": "^4.0.0"
   },
   "devDependencies": {
     "@amvijay/multipart-parser": "^1.0.2",
-    "@vonage/auth": "^1.7.0",
+    "@vonage/auth": "^1.8.0",
     "lodash.pick": "4.4.0",
     "nock": "^13.3.4"
   }

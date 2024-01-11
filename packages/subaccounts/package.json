@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/subaccounts",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "The Subaccounts API enables you to create subaccounts under your primary account. Subaccounts facilitate differential product configuration, reporting, and billing. The Subaccounts API is released initially with restricted availability.",
   "keywords": [
     "vonage"
@@ -41,10 +41,10 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.9.0"
+    "@vonage/server-client": "^1.10.0"
   },
   "devDependencies": {
-    "@vonage/auth": "^1.7.0",
+    "@vonage/auth": "^1.8.0",
     "nock": "^13.3.4"
   }
 }

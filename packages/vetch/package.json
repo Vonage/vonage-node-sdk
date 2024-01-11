@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/vetch",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Vonage's type and enum definitions module for server-side HTTP interactions.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/vetch#readme",
   "bugs": {

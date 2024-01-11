@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/audit",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Vonage Audit SDK Package",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/audit#readme",
   "bugs": {
@@ -34,9 +34,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/auth": "^1.7.0",
-    "@vonage/server-client": "^1.9.0",
-    "@vonage/vetch": "^1.6.0"
+    "@vonage/auth": "^1.8.0",
+    "@vonage/server-client": "^1.10.0",
+    "@vonage/vetch": "^1.7.0"
   },
   "devDependencies": {
     "nock": "^13.3.4"

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/messages",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "description": "Multi-channel messaging that integrates WhatsApp, Facebook, Viber, SMS, and MMS",
   "keywords": [
     "whatsapp",
@@ -47,9 +47,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/auth": "^1.7.0",
-    "@vonage/server-client": "^1.9.0",
-    "@vonage/vetch": "^1.6.0",
+    "@vonage/auth": "^1.8.0",
+    "@vonage/server-client": "^1.10.0",
+    "@vonage/vetch": "^1.7.0",
     "debug": "^4.3.4"
   },
   "devDependencies": {

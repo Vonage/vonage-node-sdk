@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/media",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "The Media API can be used to query, download and delete media items such as audio files for use with other Vonage APIs.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/media#readme",
   "bugs": {

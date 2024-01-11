@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/video",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "description": "Package to interact with the Vonage Video API (Not OpenTok Compatible)",
   "keywords": [
     "vonage",
@@ -42,10 +42,10 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/auth": "^1.7.0",
-    "@vonage/jwt": "^1.7.0",
-    "@vonage/server-client": "^1.9.0",
-    "@vonage/vetch": "^1.6.0"
+    "@vonage/auth": "^1.8.0",
+    "@vonage/jwt": "^1.8.0",
+    "@vonage/server-client": "^1.10.0",
+    "@vonage/vetch": "^1.7.0"
   },
   "devDependencies": {
     "jsonwebtoken": "^9.0.2",

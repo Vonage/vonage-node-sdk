@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/jwt",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Vonage JWT package. Creates JWT tokens for Vonage API's",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/jwt#readme",
   "bugs": {
