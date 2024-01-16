@@ -33,6 +33,8 @@ jobs:
       - name: Build example markdown
         run: node scripts/generateExample.mjs
 
+      - name: Add TOC
+        run: (cd docs && npx markdown-index . > toc.md)
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
