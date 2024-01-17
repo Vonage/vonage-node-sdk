@@ -38,6 +38,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@types/node-fetch": "2.6.11",
     "node-fetch": "^2.7"
   },
   "publishConfig": {
