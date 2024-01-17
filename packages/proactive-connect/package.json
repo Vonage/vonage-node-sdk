@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/proactive-connect",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Send large scale outreach campaigns using any channels available through the Vonage APIs",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/proactive-connect#readme",
   "bugs": {
@@ -34,8 +34,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.10.0",
-    "@vonage/vetch": "^1.7.0",
+    "@vonage/server-client": "^1.10.1",
+    "@vonage/vetch": "^1.7.1",
     "form-data": "^4.0.0",
     "lodash.pick": "^4.4.0"
   },
