@@ -360,7 +360,6 @@ export class Client {
     response: Response,
   ): Promise<VetchResponse<T>> {
     let decoded = null;
-
     if (!response.ok) {
       log('Request failed', response);
       throw new VetchError(
@@ -369,27 +368,38 @@ export class Client {
         response,
       );
     }
+    log('Request succeeded');
 
-    switch (response.headers.get('content-type')) {
+    // eslint-disable-next-line max-len
+    const [contentType] = (response.headers.get('content-type') || '').split(
+      ';',
+    );
+    log(`Response content type: ${contentType}`);
+
+    switch (contentType) {
     case ContentType.FORM_URLENCODED:
+      log('Decoding form data');
       decoded = response.body
         ? new URLSearchParams(await response.text())
         : '';
       break;
     case ContentType.JSON:
+      log('Decoding JSON');
       decoded = await response.json();
       break;
     default:
+      log('Decoding text');
       decoded = await response.text();
     }
 
+    log('Decoded body', decoded);
     const responseHeaders = {};
 
     for (const [header, value] of response.headers.entries()) {
       Object.assign(response, header, value);
     }
 
-    return {
+    const result = {
       data: decoded as T,
       config: request,
       status: response.status,
@@ -397,5 +407,8 @@ export class Client {
       headers: responseHeaders,
       request: request,
     } as VetchResponse<T>;
+
+    log('Response', JSON.stringify(result, null, 2));
+    return result;
   }
 }
