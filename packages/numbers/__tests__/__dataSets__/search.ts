@@ -21,7 +21,11 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [`/number/search?api_key=12345&api_secret=ABCDE`, 'GET'],
-      reply: [200, validResponse],
+      reply: [
+        200,
+        validResponse,
+        { 'Content-Type': 'application/json;charset=utf-8' },
+      ],
     },
     parameters: [{}],
     expected: validResponse,
