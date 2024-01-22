@@ -68,7 +68,8 @@
     ]
   },
   "dependencies": {
-    "@droppedcode/typedoc-plugin-copy-assets": "1.0.10"
+    "@droppedcode/typedoc-plugin-copy-assets": "1.0.10",
+    "@vonage/messages": "1.11.2"
   },
   "devDependencies": {
     "@babel/core": "7.22.5",

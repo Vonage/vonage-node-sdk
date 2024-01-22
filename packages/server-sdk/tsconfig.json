@@ -17,6 +17,7 @@
     { "path": "../accounts" },
     { "path": "../applications" },
     { "path": "../auth" },
+    { "path": "../conversations" },
     { "path": "../messages" },
     { "path": "../number-insights" },
     { "path": "../numbers" },

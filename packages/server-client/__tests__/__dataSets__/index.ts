@@ -6,6 +6,7 @@ import putTests from './put';
 import patchTests from './patch';
 import deleteTests from './delete';
 
+
 export const requestTests = [
   {
     label: 'Get requests',
