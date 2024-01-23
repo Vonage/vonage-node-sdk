@@ -1,5 +1,4 @@
 import { AuthenticationType, Client, FileClient } from '@vonage/server-client';
-import { NCCOActions } from './enums';
 import {
   GetCallDetailsParameters,
   CallPageResponse,
@@ -12,6 +11,7 @@ import {
   Action,
   TalkAction,
   OutboundCall,
+  CallWithNCCO,
 } from './types';
 
 import { ResponseTypes } from '@vonage/vetch';
@@ -237,9 +237,14 @@ export class Voice extends Client {
    * ```
    */
   async createOutboundCall(call: OutboundCall): Promise<CallResult> {
+    const callRequest = Client.transformers.snakeCaseObjectKeys(call, true);
+    if ((call as CallWithNCCO).ncco) {
+      callRequest.ncco = (call as CallWithNCCO).ncco;
+    }
+
     const resp = await this.sendPostRequest<CreateCallResponse>(
       `${this.config.apiHost}/v1/calls`,
-      Client.transformers.snakeCaseObjectKeys(call, true),
+      callRequest,
     );
     const result = Client.transformers.camelCaseObjectKeys(
       resp.data,
