@@ -1,8 +1,7 @@
 ---
 version: '3.12.0'
-release: '11 Jan 2024'
+release: '23 Jan 2024'
 id: vonage-node-sdk
-title: 'vonage-node-sdk'
 icon: 'node-color'
 pkgName: 'Node SDK'
 title: 'Vonage Node SDK'
@@ -12,6 +11,18 @@ version: 1.0.0
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## v3.12.2 (2024-01-23)
+
+The SDK update introduces improvements in response header charset decoding and NCCO encoding in voice functionality, enhancing overall reliability and performance.
+
+## What's Changed
+
+### Fixed
+- Decoding issues when charset is in the content type response header (https://github.com/Vonage/vonage-node-sdk/pull/904)
+- NCCO encoding in voice functionality (https://github.com/Vonage/vonage-node-sdk/pull/906)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.12.0...@vonage/server-sdk@3.12.2)
 
 
 ## v3.12.0 (2024-01-11)
@@ -27,7 +38,7 @@ This release addressed some issues with improper types, cleaning up `@vonage/vet
 ## Deprecated
 - Having `@vonage/vetch` make HTTP calls is deprecated. Going forward only `@vonage/server-client` will handle making HTTP requests
 
-**Full Changelog**: [Link](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.11.0...@vonage/server-sdk@3.12.0)
+**Full Changelog**: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.11.0...@vonage/server-sdk@3.12.0)
 
 ## v.3.11.0 (2023-12-11)
 
