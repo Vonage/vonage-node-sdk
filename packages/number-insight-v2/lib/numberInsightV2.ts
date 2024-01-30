@@ -6,7 +6,7 @@ import { FraudCheck, FraudCheckParameters, FraudScoreResponse } from './types';
  * This class represents the client for making fraud check requests.
  */
 export class NumberInsightV2 extends Client {
-  protected authType = AuthenticationType.JWT;
+  protected authType = AuthenticationType.BASIC;
 
   /**
    * Make a fraud check request with the provided parameters.
