@@ -6,4 +6,9 @@ export type Request = {
    * The unique identifier for the request.
    */
   requestId: string;
+
+  /**
+   * The URL to check the status of the request.
+   */
+  checkUrl?: string;
 };

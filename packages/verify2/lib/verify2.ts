@@ -22,9 +22,7 @@ export class Verify2 extends Client {
    *  verification request.
    * @return {Request} A `Request` object containing the request ID.
    */
-  public async newRequest(
-    params: VerificationRequestParams,
-  ): Promise<Request> {
+  public async newRequest(params: VerificationRequestParams): Promise<Request> {
     const resp = await this.sendPostRequest<VerificationResponse>(
       `${this.config.apiHost}/v2/verify`,
       Client.transformers.snakeCaseObjectKeys(params, true),
@@ -32,6 +30,7 @@ export class Verify2 extends Client {
 
     return {
       requestId: resp.data.request_id,
+      checkUrl: resp.data.check_url,
     };
   }
 

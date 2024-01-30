@@ -28,7 +28,7 @@ export type VerificationRequestParams = {
     | VoiceWorkflow
     | WhatsAppInteractiveWorkflow
     | WhatsAppWorkflow
-    >;
+  >;
 
   /**
    * (Optional) The verification code to be sent.
@@ -38,7 +38,7 @@ export type VerificationRequestParams = {
   /**
    * (Optional) The locale for the verification request.
    */
-  locale?: VerifyLocale;
+  locale?: VerifyLocale | string;
 
   /**
    * (Optional) The timeout duration for the verification channel in seconds.

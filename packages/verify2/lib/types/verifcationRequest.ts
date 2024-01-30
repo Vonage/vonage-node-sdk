@@ -6,6 +6,17 @@ import { VoiceWorkflow } from './voiceWorkflow';
 import { WhatsAppInteractiveWorkflow } from './whatsAppInteractiveWorkflow';
 import { WhatsAppWorkflow } from './whatsAppWorkflow';
 
+export type SMSWorkflowRequest = {
+  app_hash?: string;
+
+  content_id?: string;
+
+  entity_id?: string;
+} & Omit<SMSWorkflow, 'appHash'>;
+
+export type SilentAuthWorkflowRequest = {
+  redirect_url: string;
+} & Omit<SilentAuthWorkflow, 'redirectUrl'>;
 /**
  * Represents a verification request for sending verification codes via
  * different communication channels.
@@ -23,12 +34,12 @@ export type VerificationRequest = {
    */
   workflow: Array<
     | EmailWorkflow
-    | (Omit<SMSWorkflow, 'appHash'> & { app_hash: string })
-    | SilentAuthWorkflow
+    | SMSWorkflowRequest
+    | SilentAuthWorkflowRequest
     | VoiceWorkflow
     | WhatsAppInteractiveWorkflow
     | WhatsAppWorkflow
-    >;
+  >;
 
   /**
    * (Optional) The verification code to be sent.
@@ -38,7 +49,7 @@ export type VerificationRequest = {
   /**
    * (Optional) The locale for the verification request.
    */
-  locale?: VerifyLocale;
+  locale?: VerifyLocale | string;
 
   /**
    * (Optional) The timeout duration for the verification channel in seconds.

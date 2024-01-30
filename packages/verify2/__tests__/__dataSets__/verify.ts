@@ -253,6 +253,8 @@ export default [
             channel: Channels.SMS,
             to: '14152739164',
             app_hash: 'C0FFEE',
+            entity_id: '1101407360000017170',
+            content_id: '1107158078772563946',
           },
         ],
         locale: VerifyLocale.EN_GB,
@@ -278,6 +280,8 @@ export default [
             channel: Channels.SMS,
             to: '14152739164',
             appHash: 'C0FFEE',
+            entityId: '1101407360000017170',
+            contentId: '1107158078772563946',
           } as SMSWorkflow,
         ],
         locale: VerifyLocale.EN_GB,
@@ -494,6 +498,7 @@ export default [
           {
             channel: SilentAuthChannel.SILENT_AUTH,
             to: '14152739164',
+            redirect_url: 'https://example.com/redirect',
           },
         ],
         locale: VerifyLocale.EN_GB,
@@ -507,6 +512,7 @@ export default [
       202,
       {
         request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+        check_url: 'https://example.com/check',
       } as VerificationResponse,
     ],
     method: 'post',
@@ -518,6 +524,7 @@ export default [
           {
             channel: SilentAuthChannel.SILENT_AUTH,
             to: '14152739164',
+            redirectUrl: 'https://example.com/redirect',
           } as SilentAuthWorkflow,
         ],
         locale: VerifyLocale.EN_GB,
@@ -529,6 +536,7 @@ export default [
     ],
     expected: {
       requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
+      checkUrl: 'https://example.com/check',
     },
   },
   {
