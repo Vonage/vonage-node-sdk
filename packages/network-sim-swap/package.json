@@ -1,0 +1,39 @@
+{
+  "name": "@vonage/network-sim-swap",
+  "version": "1.0.1-4",
+  "description": "A Network API client for checking if a SIM card was swapped recently for a phone number",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/network-sim-swap#readme",
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    {
+      "name": "Chuck MANCHUCK Reeves",
+      "url": "https://github.com/manchuck"
+    }
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+    "compile": "npx tsc --build --verbose",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@vonage/network-client": "1.0.1-2",
+    "@vonage/server-client": "1.10.2"
+  }
+}
