@@ -62,6 +62,10 @@ export class Client {
     } as ConfigParams;
   }
 
+  getConfig(): ConfigParams {
+    return this.config;
+  }
+
   /**
    * Adds the appropriate authentication headers or parameters to the request based on the authentication type.
    *
@@ -80,29 +84,40 @@ export class Client {
       throw new Error('No authentication type set');
     }
 
+    if (
+      [AuthenticationType.OAUTH2, AuthenticationType.CIBA].includes(
+        this.authType as AuthenticationType,
+      )
+    ) {
+      throw new Error(
+        'OAuth2 and CIBA authentication is not supportedfor this Client',
+      );
+    }
+
     switch (this.authType) {
     case AuthenticationType.BASIC:
-      request.headers = Object.assign({}, request.headers, {
-        Authorization: await this.auth.createBasicHeader(),
-      });
-      return request;
+      return this.addBasicAuthToRequest(request);
 
     case AuthenticationType.JWT:
-      request.headers = Object.assign({}, request.headers, {
-        Authorization: await this.auth.createBearerHeader(),
-      });
-      return request;
-    }
+      return this.addJWTToRequest(request);
 
-    if (this.authType === AuthenticationType.QUERY_KEY_SECRET) {
-      log(`adding parameters to query string`);
-      request.params = {
-        ...(request.params ? request.params : {}),
-        ...(await this.auth.getQueryParams({})),
-      };
-      return request;
-    }
+    case AuthenticationType.QUERY_KEY_SECRET:
+      return this.addQueryKeySecretToRequest(request);
 
+    default:
+      return this.addQueryKeySecretToRequestBody(request);
+    }
+  }
+
+  /**
+   * Adds API key and secret to the request body.
+   *
+   * @param {VetchOptions} request - The request options to which authentication needs to be added.
+   * @return {VetchOptions} - The request options with the added authentication.
+   */
+  protected async addQueryKeySecretToRequestBody(
+    request: VetchOptions,
+  ): Promise<VetchOptions> {
     if (typeof request.data === 'string') {
       throw new Error('Cannot append auth parameters to body');
     }
@@ -116,7 +131,53 @@ export class Client {
       ...request.data,
       ...authParams,
     };
+    return request;
+  }
 
+  /**
+   * Adds API key and secret to the request.
+   *
+   * @param {VetchOptions} request - The request options to which authentication needs to be added.
+   * @return {VetchOptions} - The request options with the added authentication.
+   */
+  protected async addQueryKeySecretToRequest(
+    request: VetchOptions,
+  ): Promise<VetchOptions> {
+    log(`adding parameters to query string`);
+    request.params = {
+      ...(request.params ? request.params : {}),
+      ...(await this.auth.getQueryParams({})),
+    };
+    return request;
+  }
+
+  /**
+   * Adds a JWT to the request.
+   *
+   * @param {VetchOptions} request - The request options to which authentication needs to be added.
+   * @return {VetchOptions} - The request options with the added authentication.
+   */
+  protected async addJWTToRequest(
+    request: VetchOptions,
+  ): Promise<VetchOptions> {
+    request.headers = Object.assign({}, request.headers, {
+      Authorization: await this.auth.createBearerHeader(),
+    });
+    return request;
+  }
+
+  /**
+   * Adds basic authentication headers to the request.
+   *
+   * @param {VetchOptions} request - The request options to which authentication needs to be added.
+   * @return {VetchOptions} - The request options with the added authentication.
+   */
+  protected async addBasicAuthToRequest(
+    request: VetchOptions,
+  ): Promise<VetchOptions> {
+    request.headers = Object.assign({}, request.headers, {
+      Authorization: await this.auth.createBasicHeader(),
+    });
     return request;
   }
 
