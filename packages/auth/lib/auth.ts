@@ -89,10 +89,9 @@ export class Auth implements AuthInterface {
       privateKey = readFileSync(opts?.privateKey as PathLike).toString();
     }
 
-    this.privateKey
-      = privateKey instanceof Buffer
-        ? privateKey.toString()
-        : (opts?.privateKey as string);
+    this.privateKey = privateKey instanceof Buffer
+      ? privateKey.toString()
+      : (opts?.privateKey as string);
   }
 
   /**
