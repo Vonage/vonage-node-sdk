@@ -150,6 +150,7 @@ export class Client {
       url,
       method: HTTPMethods.POST,
       type: ContentType.FORM_URLENCODED,
+      headers: { Accept: 'application/json' },
       ...(payload ? { data: payload } : {}),
     } as VetchOptions;
 

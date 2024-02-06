@@ -236,13 +236,13 @@ export class Video extends Client {
       location: sessionOptions?.location ?? null,
     } as Record<string, string>;
 
-    const resp = await this.sendFormSubmitRequest<CreateSessionResponse>(
+    const resp = await this.sendFormSubmitRequest<CreateSessionResponse[]>(
       `${this.config.videoHost}/session/create`,
       data,
     );
 
     return {
-      sessionId: resp.data.session_id,
+      sessionId: resp.data[0].session_id,
       archiveMode: data.archiveMode,
       mediaMode: data['p2p.preference'],
       location: data.location,
@@ -302,7 +302,7 @@ export class Video extends Client {
   public async disableForceMute(
     sessionId: string,
     excludedStreamIds: string[] = [],
-  ): Promise<ProjectDetailsResponse>  {
+  ): Promise<ProjectDetailsResponse> {
     return this.muteAllStreams(sessionId, false, excludedStreamIds);
   }
 
@@ -710,7 +710,7 @@ export class Video extends Client {
    * @param {string} digits - The DTMF tones to play.
    * @param {string} [connectionId] - Optional. The ID of the connection within the session to send DTMF tones to.
    * @return {Promise<void>} A promise that resolves when the DTMF tones have been played.
-   * 
+   *
    * @example
    * ```ts
    * await videoClient.playDTMF(SESSION_ID, '1234');
@@ -782,7 +782,7 @@ export class Video extends Client {
    * for (const archive of archives.items) {
    *   console.log(archive.id);
    * }
-   * ```     
+   * ```
    * @example
    * Search for archives for a session
    * ```ts
@@ -1022,7 +1022,7 @@ export class Video extends Client {
    * @param {string} broadcastId - The ID of the broadcast to stop.
    * @return {Promise<BroadcastDetailsResponse>} A promise that resolves with information about the stopped broadcast.
    *
-   * @example  
+   * @example
    * ```ts
    * const broadcast = await videoClient.stopBroadcast(BROADCAST_ID);
    * console.log(broadcast.status);
