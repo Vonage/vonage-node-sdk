@@ -13,4 +13,9 @@ export type SilentAuthWorkflow = {
    * The target identifier for Silent Authentication.
    */
   to: string;
+
+  /**
+   * The redirect URL for Silent Authentication.
+   */
+  redirectUrl: string;
 };

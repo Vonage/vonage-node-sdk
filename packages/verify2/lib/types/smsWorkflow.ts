@@ -16,6 +16,26 @@ export type SMSWorkflow = {
   to: string;
 
   /**
+   * An optional sender number, in the E.164 format.
+   * Don't use a leading + or 00 when entering a phone number, start with the
+   * country code, for example, 447700900000.
+   *
+   * @remarks
+   * If no from number is given, the request will default to the brand.
+   */
+  from?: string;
+
+  /**
+   * Optional PEID required for SMS delivery using Indian Carriers
+   */
+  entityId?: string;
+
+  /**
+   * Optional value corresponding to a TemplateID for SMS delivery using Indian Carriers
+   */
+  contentId?: string;
+
+  /**
    * (Optional) An application-specific hash value for the SMS workflow.
    */
   appHash?: string;
