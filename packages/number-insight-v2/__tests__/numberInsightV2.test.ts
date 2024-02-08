@@ -14,14 +14,14 @@ describe.each(testDataSets)('$label', ({ tests }) => {
   beforeEach(function () {
     client = new NumberInsightV2(
       new Auth({
-        privateKey: key,
-        applicationId: 'my-application',
-      }),
+        apiKey: 'abcd',
+        apiSecret: '1234',
+      })
     );
 
     scope = nock(BASE_URL, {
       reqheaders: {
-        authorization: (value) => value.startsWith('Bearer '),
+        authorization: (value) => value === 'Basic YWJjZDoxMjM0',
       },
     }).persist();
   });
@@ -43,6 +43,6 @@ describe.each(testDataSets)('$label', ({ tests }) => {
 
       expect(result).toEqual(expected);
       expect(nock.isDone()).toBeTruthy();
-    },
+    }
   );
 });
