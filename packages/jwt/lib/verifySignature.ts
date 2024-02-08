@@ -45,7 +45,7 @@ export const verifySignature = (
 
   try {
     verify(jwt, privateKey, {
-      algorithms: ['HS256'],
+      algorithms: ['RS256', 'HS256'],
     });
     return true;
   } catch (error) {
