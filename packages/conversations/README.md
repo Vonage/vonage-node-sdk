@@ -40,7 +40,7 @@ If you are using this SDK as part of the Vonage Server SDK, you can access it as
 
 ```js
 const {Vonage} = require('@vonage/server-sdk');
-const { Auth, AlgorithmTypes } = require('@vonage/auth');
+const { Auth } = require('@vonage/auth');
 const { SMS } = require('@vonage/conversations');
 
 const vonage = new Vonage(new Auth({
