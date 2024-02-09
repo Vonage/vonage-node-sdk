@@ -17,7 +17,7 @@ import {
 
 export default [
   {
-    label: 'create conversations',
+    label: 'create conversation',
     requests: [
       [
         `/v1/conversations`,
