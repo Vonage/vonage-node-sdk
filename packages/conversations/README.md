@@ -70,6 +70,8 @@ const conversationsClient = new Conversations(new Auth({
   applicationId: APP_ID,
   privateKey: PRIVATE_KEY_PATH,
 }), options);
+
+conversationsClient.getConversation(CONVERSATION_ID)
 ```
 
 ## Promises
