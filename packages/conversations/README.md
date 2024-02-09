@@ -6,7 +6,7 @@
 
 This is the Vonage Conversations SDK for Node.js for use with [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free][signup] at vonage.com.
 
-For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
+For full API documentation refer to the [Vonage Conversations API specs](https://developer.vonage.com/en/api/conversation?source=conversation).
 
 If you are updating from V2 to V3, please check the migration guide found [here](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/conversations/v2_TO_v3_MIGRATION_GUIDE.md)
 
