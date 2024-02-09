@@ -13,6 +13,14 @@ describe.each(transfomTests)('$label', ({ tests }) => {
       expect(results).toEqual(expected);
     }
   );
+
+  test('Can omit keys', async () => {
+    const original = Object.freeze({
+      foo: 'bar',
+      fizz: 'buzz',
+    });
+    expect(Client.transformers.omit(['foo'], original)).toEqual({fizz: 'buzz'});
+  });
 });
 
 describe.each(requestTests)('$label', ({ tests }) => {

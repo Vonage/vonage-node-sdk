@@ -28,6 +28,11 @@ const config: Config.InitialOptions = {
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {
+      displayName: 'CONVERSATIONS',
+      testMatch: ['<rootDir>/packages/conversations/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
       displayName: 'JWT',
       testMatch: ['<rootDir>/packages/jwt/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],

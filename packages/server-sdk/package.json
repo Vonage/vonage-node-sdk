@@ -41,6 +41,7 @@
     "@vonage/accounts": "^1.10.2",
     "@vonage/applications": "^1.10.2",
     "@vonage/auth": "^1.8.0",
+    "@vonage/conversations": "1.0.0",
     "@vonage/messages": "^1.11.2",
     "@vonage/number-insights": "^1.10.2",
     "@vonage/numbers": "^1.10.2",

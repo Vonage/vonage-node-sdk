@@ -92,3 +92,21 @@ export const snakeCaseObjectKeys = partial(transformObjectKeys, snakeCase);
  * @return {Record<string | number, unknown>} A new object with kebab-cased keys.
  */
 export const kebabCaseObjectKeys = partial(transformObjectKeys, kebabCase);
+
+
+/**
+ * Omit keys from an object.
+ *
+ * @param {Array<string>} keys - The keys to omit.
+ * @param {Record<string | number, unknown>} obj - The object from which to omit keys.
+ *
+ * @return {Record<string | number, unknown>} A new object with omitted keys.
+ */
+export const omit = (
+  keys: Array<string>,
+  obj: Record<string | number, unknown>,
+): Record<string | number, unknown> =>
+  Object.fromEntries(
+    Object.entries(obj)
+      .filter(([key]) => !keys.includes(key)),
+  );

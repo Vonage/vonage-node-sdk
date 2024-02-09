@@ -13,6 +13,7 @@ import { Verify } from '@vonage/verify';
 import { Verify2 } from '@vonage/verify2';
 import { Voice } from '@vonage/voice';
 import { Video } from '@vonage/video';
+import { Conversations } from '@vonage/conversations';
 
 /**
  * Represents the Vonage SDK for interacting with Vonage APIs.
@@ -92,7 +93,16 @@ export class Vonage {
    * Provides access to the Voice API.
    */
   public voice: Voice;
+
+  /**
+   * Provides access to the Video API.
+   */
   public video: Video;
+
+  /**
+   * Provides access to the Conversations API.
+   */
+  public conversations: Conversations;
 
   /**
    * The credentials used for authentication.
@@ -121,5 +131,6 @@ export class Vonage {
     this.verify2 = new Verify2(this.credentials, this.options);
     this.voice = new Voice(this.credentials, this.options);
     this.video = new Video(this.credentials, this.options);
+    this.conversations = new Conversations(this.credentials, this.options);
   }
 }
