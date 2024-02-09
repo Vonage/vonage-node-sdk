@@ -11,7 +11,7 @@ export default [
     requests: [
       [
         `/v1/conversations/${conversationResponse.id}`,
-        'PUt',
+        'PUT',
         {
           name: conversationToCreate.name,
           display_name: conversationToCreate.displayName,
