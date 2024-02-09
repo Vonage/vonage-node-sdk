@@ -7,7 +7,7 @@ import {
 
 export default [
   {
-    label: 'create conversations',
+    label: 'update conversation',
     requests: [
       [
         `/v1/conversations/${conversationResponse.id}`,
