@@ -109,7 +109,7 @@ export default [
           },
           _links: {
             self: {
-              href: '/v1/conversations',
+              href: `/v1/users/${member.user.id}/conversations`,
             },
             next: {
               href: `${BASE_URL}/v1/users/${member.user.id}/conversations?cursor=next`,
