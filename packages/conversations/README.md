@@ -39,9 +39,8 @@ yarn add @vonage/conversations
 If you are using this SDK as part of the Vonage Server SDK, you can access it as the `conversations` property off of the client that you instantiate.
 
 ```js
-const {Vonage} = require('@vonage/server-sdk');
+const { Vonage } = require('@vonage/server-sdk');
 const { Auth } = require('@vonage/auth');
-const { SMS } = require('@vonage/conversations');
 
 const vonage = new Vonage(new Auth({
   apiKey: API_KEY,
@@ -61,8 +60,8 @@ is `require('@vonage/conversations')`, and use the returned object to create you
 client.
 
 ```js
-const {Auth} = require('@vonage/auth');
-const {Conversations} = require('@vonage/conversations');
+const { Auth } = require('@vonage/auth');
+const { Conversations } = require('@vonage/conversations');
 
 const conversationsClient = new Conversations(new Auth({
   apiKey: API_KEY,

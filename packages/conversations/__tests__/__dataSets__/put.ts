@@ -28,7 +28,7 @@ export default [
             event_mask: conversationToCreate?.callback?.eventMask,
             params: conversationToCreate?.callback?.params,
             method: conversationToCreate?.callback?.method,
-          }
+          },
         } as CreateConversationRequest,
       ],
     ],
@@ -37,8 +37,8 @@ export default [
     parameters: [
       {
         ...conversationToCreate,
-        id: conversationResponse.id
-      }
+        id: conversationResponse.id,
+      },
     ],
     generator: false,
     error: false,

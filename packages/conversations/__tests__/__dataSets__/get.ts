@@ -27,14 +27,8 @@ export default [
   {
     label: 'retrieve all conversations',
     requests: [
-      [
-        `/v1/conversations`,
-        'GET',
-      ],
-      [
-        `/v1/conversations?cursor=next`,
-        'GET',
-      ],
+      [`/v1/conversations`, 'GET'],
+      [`/v1/conversations?cursor=next`, 'GET'],
     ],
     responses: [
       [
@@ -50,7 +44,7 @@ export default [
             },
             next: {
               href: 'https://api.nexmo.com/v1/conversations?cursor=next',
-            }
+            },
           },
           conversationResponse,
         } as ConversationPageResponse,
@@ -60,10 +54,12 @@ export default [
         {
           page_size: 10,
           _embedded: {
-            conversations: [{
-              ...conversationResponse,
-              id: 'CON-00000000-0000-0000-0000-000000000002',
-            }],
+            conversations: [
+              {
+                ...conversationResponse,
+                id: 'CON-00000000-0000-0000-0000-000000000002',
+              },
+            ],
           },
           _links: {
             self: {
@@ -75,8 +71,7 @@ export default [
       ],
     ],
     clientMethod: 'listAllConversations',
-    parameters: [
-    ],
+    parameters: [],
     generator: true,
     error: false,
     expected: [
@@ -84,20 +79,14 @@ export default [
       {
         ...conversation,
         id: 'CON-00000000-0000-0000-0000-000000000002',
-      } as Conversation
+      } as Conversation,
     ],
   },
   {
     label: 'list all conversations by user',
     requests: [
-      [
-        `/v1/users/${member.user.id}/conversations`,
-        'GET',
-      ],
-      [
-        `/v1/users/${member.user.id}/conversations?cursor=next`,
-        'GET',
-      ],
+      [`/v1/users/${member.user.id}/conversations`, 'GET'],
+      [`/v1/users/${member.user.id}/conversations?cursor=next`, 'GET'],
     ],
     responses: [
       [
@@ -113,7 +102,7 @@ export default [
             },
             next: {
               href: `${BASE_URL}/v1/users/${member.user.id}/conversations?cursor=next`,
-            }
+            },
           },
           conversationResponse,
         } as ConversationPageResponse,
@@ -123,10 +112,12 @@ export default [
         {
           page_size: 10,
           _embedded: {
-            conversations: [{
-              ...conversationResponse,
-              id: 'CON-00000000-0000-0000-0000-000000000002',
-            }],
+            conversations: [
+              {
+                ...conversationResponse,
+                id: 'CON-00000000-0000-0000-0000-000000000002',
+              },
+            ],
           },
           _links: {
             self: {
@@ -138,9 +129,7 @@ export default [
       ],
     ],
     clientMethod: 'listAllUserConversations',
-    parameters: [
-      member.user.id,
-    ],
+    parameters: [member.user.id],
     generator: true,
     error: false,
     expected: [
@@ -148,95 +137,80 @@ export default [
       {
         ...conversation,
         id: 'CON-00000000-0000-0000-0000-000000000002',
-      } as Conversation
+      } as Conversation,
     ],
   },
   {
     label: 'retrieve a page of conversations',
-    requests: [
+    requests: [[`/v1/conversations`, 'GET']],
+    responses: [
       [
-        `/v1/conversations`,
-        'GET',
+        200,
+        {
+          page_size: 10,
+          _embedded: {
+            conversations: [conversationResponse],
+          },
+          _links: {
+            self: {
+              href: '/v1/conversations',
+            },
+          },
+          conversationResponse,
+        } as ConversationPageResponse,
       ],
     ],
-    responses: [[
-      200,
-      {
-        page_size: 10,
-        _embedded: {
-          conversations: [conversationResponse],
-        },
-        _links: {
-          self: {
-            href: '/v1/conversations',
-          },
-        },
-        conversationResponse,
-      } as ConversationPageResponse,
-    ]],
     clientMethod: 'getConversationPage',
     parameters: [],
     generator: false,
     error: false,
     expected: {
       pageSize: 10,
-      conversations: [
-        conversation
-      ],
+      conversations: [conversation],
       links: {
         self: {
           href: '/v1/conversations',
-        }
-      }
+        },
+      },
     } as ConversationPage,
   },
   {
     label: 'fetch a page of sessions',
-    requests: [
+    requests: [[`/v1/users/${sessionUser.id}/sessions`, 'GET']],
+    responses: [
       [
-        `/v1/users/${sessionUser.id}/sessions`,
-        'GET',
+        200,
+        {
+          page_size: 10,
+          _embedded: {
+            sessions: [sessionResponse],
+          },
+          _links: {
+            self: {
+              href: `${BASE_URL}/v1/users/${sessionUser.id}/sessions`,
+            },
+          },
+        } as SessionPageResponse,
       ],
     ],
-    responses: [[
-      200,
-      {
-        page_size: 10,
-        _embedded: {
-          sessions: [sessionResponse],
-        },
-        _links: {
-          self: {
-            href: `${BASE_URL}/v1/users/${sessionUser.id}/sessions`,
-          }
-        }
-      } as SessionPageResponse,
-    ]],
     clientMethod: 'getUserSessionsPage',
-    parameters: [
-      sessionUser.id,
-    ],
+    parameters: [sessionUser.id],
     generator: false,
     error: false,
     expected: {
       pageSize: 10,
-      sessions: [
-        session
-      ],
+      sessions: [session],
       links: {
         self: {
           href: `${BASE_URL}/v1/users/${sessionUser.id}/sessions`,
-        }
-      }
+        },
+      },
     } as SessionPage,
   },
   {
     label: 'list all user serssions',
     requests: [
-      [
-        `/v1/users/${sessionUser.id}/sessions?page_size=10&order=asc`,
-        'GET',
-      ],
+      [`/v1/users/${sessionUser.id}/sessions?page_size=10&order=asc`, 'GET'],
       [
         `/v1/users/${sessionUser.id}/sessions?page_size=10&order=asc&cursor=next`,
         'GET',
@@ -256,8 +230,8 @@ export default [
             },
             next: {
               href: `${BASE_URL}/v1/users/${sessionUser.id}/sessions?cursor=next`,
-            }
-          }
+            },
+          },
         } as SessionPageResponse,
       ],
       [
@@ -265,16 +239,18 @@ export default [
         {
           page_size: 10,
           _embedded: {
-            sessions: [{
-              ...sessionResponse,
-              id: 'SESSION-00000000-0000-0000-0000-000000000002',
-            }],
+            sessions: [
+              {
+                ...sessionResponse,
+                id: 'SESSION-00000000-0000-0000-0000-000000000002',
+              },
+            ],
           },
           _links: {
             self: {
               href: `${BASE_URL}/v1/users/${sessionUser.id}/sessions`,
             },
-          }
+          },
         } as SessionPageResponse,
       ],
     ],
@@ -284,7 +260,7 @@ export default [
       {
         pageSize: 10,
         order: 'asc',
-      }
+      },
     ],
     generator: true,
     error: false,
@@ -293,8 +269,8 @@ export default [
       {
         ...session,
         id: 'SESSION-00000000-0000-0000-0000-000000000002',
-      }
-    ]
+      },
+    ],
   },
   {
     label: 'retrieve a page of conversations with parameters',
@@ -304,21 +280,23 @@ export default [
         'GET',
       ],
     ],
-    responses: [[
-      200,
-      {
-        page_size: 10,
-        _embedded: {
-          conversations: [conversationResponse],
-        },
-        _links: {
-          self: {
-            href: '/v1/conversations',
+    responses: [
+      [
+        200,
+        {
+          page_size: 10,
+          _embedded: {
+            conversations: [conversationResponse],
           },
-        },
-        conversationResponse,
-      } as ConversationPageResponse,
-    ]],
+          _links: {
+            self: {
+              href: '/v1/conversations',
+            },
+          },
+          conversationResponse,
+        } as ConversationPageResponse,
+      ],
+    ],
     clientMethod: 'getConversationPage',
     parameters: [
       {
@@ -326,30 +304,23 @@ export default [
         order: 'asc',
         dateEnd: '2024-01-17T13:45:56.000Z',
         dateStart: '2024-01-17T13:45:56.000Z',
-      } as ListConversationsParameters
+      } as ListConversationsParameters,
     ],
     generator: false,
     error: false,
     expected: {
       pageSize: 10,
-      conversations: [
-        conversation
-      ],
+      conversations: [conversation],
       links: {
         self: {
           href: '/v1/conversations',
-        }
-      }
+        },
+      },
     } as ConversationPage,
   },
   {
     label: 'retrieve a conversation',
-    requests: [
-      [
-        `/v1/conversations/${conversationResponse.id}`,
-        'GET',
-      ],
-    ],
+    requests: [[`/v1/conversations/${conversationResponse.id}`, 'GET']],
     responses: [[200, conversationResponse]],
     clientMethod: 'getConversation',
     parameters: [conversationResponse.id],
@@ -360,10 +331,7 @@ export default [
   {
     label: 'list members',
     requests: [
-      [
-        `/v1/conversations/${conversationResponse.id}/members`,
-        'GET',
-      ],
+      [`/v1/conversations/${conversationResponse.id}/members`, 'GET'],
       [
         `/v1/conversations/${conversationResponse.id}/members?cursor=next`,
         'GET',
@@ -383,7 +351,7 @@ export default [
             },
             next: {
               href: `${BASE_URL}/v1/conversations/${conversationResponse.id}/members?cursor=next`,
-            }
+            },
           },
         } as MemberPageResponse,
       ],
@@ -392,10 +360,12 @@ export default [
         {
           page_size: 10,
           _embedded: {
-            members: [{
-              ...memberResponse,
-              id: 'MEM-00000000-0000-0000-0000-000000000002',
-            }],
+            members: [
+              {
+                ...memberResponse,
+                id: 'MEM-00000000-0000-0000-0000-000000000002',
+              },
+            ],
           },
           _links: {
             self: {
@@ -406,9 +376,7 @@ export default [
       ],
     ],
     clientMethod: 'listAllMembers',
-    parameters: [
-      conversationResponse.id,
-    ],
+    parameters: [conversationResponse.id],
     generator: true,
     error: false,
     expected: [
@@ -437,10 +405,7 @@ export default [
   {
     label: 'retrieve me',
     requests: [
-      [
-        `/v1/conversations/${conversationResponse.id}/members/me`,
-        'GET',
-      ],
+      [`/v1/conversations/${conversationResponse.id}/members/me`, 'GET'],
     ],
     responses: [[200, memberResponse]],
     clientMethod: 'getMe',
@@ -452,10 +417,7 @@ export default [
   {
     label: 'retrieve all events',
     requests: [
-      [
-        `/v1/conversations/${conversationResponse.id}/events`,
-        'GET',
-      ],
+      [`/v1/conversations/${conversationResponse.id}/events`, 'GET'],
       [
         `/v1/conversations/${conversationResponse.id}/events?cursor=next`,
         'GET',
@@ -466,16 +428,14 @@ export default [
         200,
         {
           page_size: 10,
-          _embedded: [
-             eventResponse,
-          ],
+          _embedded: [eventResponse],
           _links: {
             self: {
               href: `${BASE_URL}/v1/conversations/${conversationResponse.id}/events`,
             },
             next: {
               href: `${BASE_URL}/v1/conversations/${conversationResponse.id}/events?cursor=next`,
-            }
+            },
           },
         } as EventPageResponse,
       ],
@@ -486,29 +446,27 @@ export default [
           _embedded: [
             {
               ...eventResponse,
-              id: 8874
-            }
+              id: 8874,
+            },
           ],
           _links: {
             self: {
-              href: '/v1/events',
+              href: `v1/conversations/${conversationResponse.id}/events`,
             },
           },
         } as EventPageResponse,
       ],
     ],
     clientMethod: 'listAllEvents',
-    parameters: [
-      conversationResponse.id,
-    ],
+    parameters: [conversationResponse.id],
     generator: true,
     error: false,
     expected: [
       event,
       {
         ...event,
-        id: 8874
-      } 
+        id: 8874,
+      },
     ],
   },
   {
@@ -521,12 +479,9 @@ export default [
     ],
     responses: [[200, eventResponse]],
     clientMethod: 'getEvent',
-    parameters: [
-      conversationResponse.id,
-      event.id,
-    ],
+    parameters: [conversationResponse.id, event.id],
     generator: false,
     error: false,
     expected: event,
   },
-]
+];
