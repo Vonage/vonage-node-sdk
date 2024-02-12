@@ -1,16 +1,41 @@
 ---
-version: '3.12.0'
-release: '23 Jan 2024'
-id: vonage-node-sdk
 icon: 'node-color'
+id: vonage-node-sdk
 pkgName: 'Node SDK'
+release: '12 Feb 2024'
 title: 'Vonage Node SDK'
-version: 1.0.0
+version: '3.13.0'
 ---
 
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## v3.13.0 (2024-02-12)
+
+This version delivers fixes and a new feature, including corrections for JWT algorithm parameters, session creation in the video API, authentication in Number Insights V2, updates to SMS and silent authentication in Verify2, and the introduction of the conversations package.
+
+### Fixed:
+
+- Outdated/wrong algorithm argument in JWT handling.
+- Video API session creation to ensure JSON return type.
+- Incorrect authentication method in Number Insights V2.
+- (Typescript only) Locale can now be any string along with a value from the enum
+
+### Added:
+
+- Conversations package for enhanced communication features.
+
+### Updated:
+
+- Added `from`, `entityId`, and `contentId` to the SMS workflow in Verify V2.
+- Verify V2 will return back the `check_url` if present.
+
+### New Contributors:
+
+[@Ymirke](https://github.com/Ymirke)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.12.2...@vonage/server-sdk@3.13.0)
 
 ## v3.12.2 (2024-01-23)
 
