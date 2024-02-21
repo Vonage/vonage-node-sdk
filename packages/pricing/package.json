@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/pricing",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "Vonage API for pricing",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -38,8 +38,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/auth": "^1.9.0",
-    "@vonage/server-client": "^1.11.0",
+    "@vonage/auth": "^1.9.1",
+    "@vonage/server-client": "^1.11.1",
     "@vonage/vetch": "^1.7.1"
   },
   "devDependencies": {
