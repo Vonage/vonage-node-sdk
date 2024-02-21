@@ -90,9 +90,7 @@ export class Auth implements AuthInterface {
     }
 
     this.privateKey
-      = privateKey instanceof Buffer
-        ? privateKey.toString()
-        : (opts?.privateKey as string);
+      = privateKey instanceof Buffer ? privateKey.toString() : privateKey;
   }
 
   /**

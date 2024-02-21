@@ -55,4 +55,21 @@ export default [
       fizz: 'buzz',
     })}`,
   },
+  {
+    label: 'create bearer header with private key path',
+    method: 'createBearerHeader',
+    authParameters: {
+      privateKey: privateKeyPath,
+      applicationId: applicationId,
+      jwtOptions: {
+        jti: 'foo',
+        fizz: 'buzz',
+      },
+    } as AuthParams,
+    parameters: [],
+    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, {
+      jti: 'foo',
+      fizz: 'buzz',
+    })}`,
+  },
 ];
