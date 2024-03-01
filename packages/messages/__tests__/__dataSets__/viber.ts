@@ -27,13 +27,13 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              text: 'too many secrets',
-              channel: 'viber_service',
-              message_type: 'text',
-            } as ViberTextRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'viber_service',
+        message_type: 'text',
+      } as ViberTextRequest,
     ],
     response: [
       200,
@@ -59,23 +59,25 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              text: 'too many secrets',
-              channel: 'viber_service',
-              message_type: 'text',
-              client_ref: 'my-ref',
-              viber_service: {
-                category: ViberCategory.PROMOTION,
-                ttl: 42,
-                type: 'type',
-                action: {
-                  url: 'https://example.com',
-                  text: 'viber text',
-                },
-              },
-            } as ViberTextRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'viber_service',
+        message_type: 'text',
+        client_ref: 'my-ref',
+        webhook_url: 'https://example.com',
+        webhook_version: 'v1',
+        viber_service: {
+          category: ViberCategory.PROMOTION,
+          ttl: 42,
+          type: 'type',
+          action: {
+            url: 'https://example.com',
+            text: 'viber text',
+          },
+        },
+      } as ViberTextRequest,
     ],
     response: [
       200,
@@ -91,6 +93,8 @@ export default [
         to: '14152739164',
         text: 'too many secrets',
         clientRef: 'my-ref',
+        webhookUrl: 'https://example.com',
+        webhookVersion: 'v1',
         viberService: {
           category: ViberCategory.PROMOTION,
           ttl: 42,
@@ -111,19 +115,19 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              text: 'too many secrets',
-              channel: 'viber_service',
-              message_type: 'text',
-              client_ref: 'my-ref',
-              viber_service: {
-                category: ViberCategory.PROMOTION,
-                ttl: 42,
-                type: 'type',
-              },
-            } as ViberTextRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'viber_service',
+        message_type: 'text',
+        client_ref: 'my-ref',
+        viber_service: {
+          category: ViberCategory.PROMOTION,
+          ttl: 42,
+          type: 'type',
+        },
+      } as ViberTextRequest,
     ],
     response: [
       200,
@@ -143,7 +147,7 @@ export default [
           ttl: 42,
           type: 'type',
         },
-        'my-ref', // client ref
+        'my-ref' // client ref
       ),
     ],
     expected: {
@@ -155,15 +159,15 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              channel: 'viber_service',
-              message_type: 'image',
-              image: {
-                url: 'https://example.com',
-              },
-            } as ViberImageRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'viber_service',
+        message_type: 'image',
+        image: {
+          url: 'https://example.com',
+        },
+      } as ViberImageRequest,
     ],
     response: [
       200,
@@ -191,25 +195,25 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              channel: 'viber_service',
-              message_type: 'image',
-              image: {
-                url: 'https://example.com',
-              },
-              client_ref: 'my-ref',
-              viber_service: {
-                category: ViberCategory.PROMOTION,
-                ttl: 42,
-                type: 'type',
-                action: {
-                  url: 'https://example.com',
-                  text: 'viber text',
-                },
-              },
-            } as ViberImageRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'viber_service',
+        message_type: 'image',
+        image: {
+          url: 'https://example.com',
+        },
+        client_ref: 'my-ref',
+        viber_service: {
+          category: ViberCategory.PROMOTION,
+          ttl: 42,
+          type: 'type',
+          action: {
+            url: 'https://example.com',
+            text: 'viber text',
+          },
+        },
+      } as ViberImageRequest,
     ],
     response: [
       200,
@@ -247,25 +251,25 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              channel: 'viber_service',
-              message_type: 'image',
-              image: {
-                url: 'https://example.com',
-              },
-              client_ref: 'my-ref',
-              viber_service: {
-                category: ViberCategory.PROMOTION,
-                ttl: 42,
-                type: 'type',
-                action: {
-                  url: 'https://example.com',
-                  text: 'viber text',
-                },
-              },
-            } as ViberImageRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'viber_service',
+        message_type: 'image',
+        image: {
+          url: 'https://example.com',
+        },
+        client_ref: 'my-ref',
+        viber_service: {
+          category: ViberCategory.PROMOTION,
+          ttl: 42,
+          type: 'type',
+          action: {
+            url: 'https://example.com',
+            text: 'viber text',
+          },
+        },
+      } as ViberImageRequest,
     ],
     response: [
       200,
@@ -291,7 +295,7 @@ export default [
             text: 'viber text',
           },
         },
-        'my-ref', // client Ref
+        'my-ref' // client Ref
       ),
     ],
     expected: {
@@ -303,15 +307,17 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              channel: 'viber_service',
-              message_type: 'video',
-              video: {
-                url: 'https://example.com',
-              },
-            } as ViberVideoRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'viber_service',
+        message_type: 'video',
+        video: {
+          url: 'https://example.com',
+          caption: 'my caption',
+          thumb_url: 'https://example.com/thumb.jpg',
+        },
+      } as ViberVideoRequest,
     ],
     response: [
       200,
@@ -327,6 +333,8 @@ export default [
         to: '14152739164',
         video: {
           url: 'https://example.com',
+          caption: 'my caption',
+          thumbUrl: 'https://example.com/thumb.jpg',
         },
       } as ViberVideoParams),
     ],
@@ -339,25 +347,25 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              channel: 'viber_service',
-              message_type: 'video',
-              video: {
-                url: 'https://example.com',
-              },
-              client_ref: 'my-ref',
-              viber_service: {
-                category: ViberCategory.PROMOTION,
-                ttl: 42,
-                type: 'type',
-                action: {
-                  url: 'https://example.com',
-                  text: 'viber text',
-                },
-              },
-            } as ViberVideoRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'viber_service',
+        message_type: 'video',
+        video: {
+          url: 'https://example.com',
+        },
+        client_ref: 'my-ref',
+        viber_service: {
+          category: ViberCategory.PROMOTION,
+          ttl: 42,
+          type: 'type',
+          action: {
+            url: 'https://example.com',
+            text: 'viber text',
+          },
+        },
+      } as ViberVideoRequest,
     ],
     response: [
       200,
@@ -395,15 +403,15 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              channel: 'viber_service',
-              message_type: 'file',
-              file: {
-                url: 'https://example.com',
-              },
-            } as ViberFileRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'viber_service',
+        message_type: 'file',
+        file: {
+          url: 'https://example.com',
+        },
+      } as ViberFileRequest,
     ],
     response: [
       200,
@@ -431,26 +439,26 @@ export default [
     request: [
       '/v1/messages',
       'POST',
-            {
-              from: '12126875309',
-              to: '14152739164',
-              channel: 'viber_service',
-              message_type: 'file',
-              file: {
-                url: 'https://example.com/my-image.jpg',
-                name: 'Keyboard Cat',
-              },
-              client_ref: 'my-ref',
-              viber_service: {
-                category: ViberCategory.PROMOTION,
-                ttl: 42,
-                type: 'type',
-                action: {
-                  url: 'https://example.com',
-                  text: 'viber text',
-                },
-              },
-            } as ViberFileRequest,
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'viber_service',
+        message_type: 'file',
+        file: {
+          url: 'https://example.com/my-image.jpg',
+          name: 'Keyboard Cat',
+        },
+        client_ref: 'my-ref',
+        viber_service: {
+          category: ViberCategory.PROMOTION,
+          ttl: 42,
+          type: 'type',
+          action: {
+            url: 'https://example.com',
+            text: 'viber text',
+          },
+        },
+      } as ViberFileRequest,
     ],
     response: [
       200,

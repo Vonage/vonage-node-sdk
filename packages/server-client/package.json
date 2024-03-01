@@ -38,7 +38,6 @@
   },
   "dependencies": {
     "@vonage/auth": "^1.9.1",
-    "@vonage/conversations": "1.1.1",
     "@vonage/vetch": "^1.7.1",
     "debug": "^4.3.4",
     "lodash.camelcase": "^4.3.0",

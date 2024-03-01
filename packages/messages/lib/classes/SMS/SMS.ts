@@ -1,5 +1,5 @@
 import { AbstractTextMessage } from '../AbstractTextMessage';
-import { MessageParamsText, SMSParams  } from '../../types';
+import { MessageParamsText, SMSExtraParams, SMSParams } from '../../types';
 import debug from 'debug';
 
 const log = debug('vonage:messages:sms');
@@ -11,6 +11,8 @@ const log = debug('vonage:messages:sms');
  */
 export class SMS extends AbstractTextMessage implements SMSParams {
   public channel: 'sms';
+
+  public sms?: SMSExtraParams;
 
   /**
    * Send an SMS message
@@ -33,9 +35,28 @@ export class SMS extends AbstractTextMessage implements SMSParams {
    *
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
+   *
+   * @example
+   * Send SMS with entity ID and content ID
+   * ```ts
+   * import { SMS } from '@vonage/messages';
+   *
+   * const { messageUUID } = await messagesClient.send(new SMS({
+   *  to: TO_NUMBER,
+   *  from: FROM_NUMBER,
+   *  text: 'Hello world',
+   *  clientRef: 'my-personal-reference',
+   *  sms: {
+   *    entityId: 'MyEntityID',
+   *    contentId: 'MyContentID'
+   *  }
+   * }));
+   *
+   * console.log(`Message sent successfully with UUID ${messageUUID}`);
+   * ```
    */
   constructor(
-    params: MessageParamsText | string,
+    params: SMSParams | string,
     to?: string,
     from?: string,
     clientRef?: string,
@@ -52,5 +73,16 @@ export class SMS extends AbstractTextMessage implements SMSParams {
 
     super(params as MessageParamsText);
     this.channel = 'sms';
+    if (typeof params === 'string') {
+      return;
+    }
+
+    this.sms = params.sms
+      ? {
+        encodingType: params.sms?.encodingType,
+        contentId: params.sms?.contentId,
+        entityId: params.sms?.entityId,
+      }
+      : undefined;
   }
 }
