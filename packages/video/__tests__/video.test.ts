@@ -624,7 +624,7 @@ describe('video', () => {
     })
       .persist()
       .patch(
-        '/v2/project/abcd-1234/archive/b40ef09b-3811-4726-b508-e41a0f96c68f/stream',
+        '/v2/project/abcd-1234/archive/b40ef09b-3811-4726-b508-e41a0f96c68f/streams',
         { addStream: 'test-1234', hasAudio: false, hasVideo: true }
       )
       .reply(204);
@@ -645,7 +645,7 @@ describe('video', () => {
     })
       .persist()
       .patch(
-        '/v2/project/abcd-1234/archive/b40ef09b-3811-4726-b508-e41a0f96c68f/stream',
+        '/v2/project/abcd-1234/archive/b40ef09b-3811-4726-b508-e41a0f96c68f/streams',
         { removeStream: 'test-1234' }
       )
       .reply(204);

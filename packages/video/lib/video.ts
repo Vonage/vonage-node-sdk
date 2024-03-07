@@ -112,7 +112,7 @@ export class Video extends Client {
     };
 
     await this.sendPatchRequest<void>(
-      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/stream`,
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/streams`,
       data,
     );
   }
@@ -746,7 +746,7 @@ export class Video extends Client {
     streamId: string,
   ): Promise<void> {
     await this.sendPatchRequest<void>(
-      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/stream`,
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}/streams`,
       { removeStream: streamId },
     );
   }
