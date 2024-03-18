@@ -1,5 +1,5 @@
 import { AbstractVideoMessage } from '../AbstractVideoMessage';
-import { WhatsAppVideoParams } from '../../types';
+import { WhatsAppVideoParams, WhatsAppContext } from '../../types';
 
 /**
  * Represents a video message for WhatsApp.
@@ -12,6 +12,7 @@ export class WhatsAppVideo
 {
   public channel: 'whatsapp';
 
+  public context?: WhatsAppContext;
   /**
    * Sends a video message to a WhatsApp user.
    *
@@ -37,5 +38,8 @@ export class WhatsAppVideo
   public constructor(params: WhatsAppVideoParams) {
     super(params);
     this.channel = 'whatsapp';
+    if (params.context) {
+      this.context = params.context;
+    }
   }
 }

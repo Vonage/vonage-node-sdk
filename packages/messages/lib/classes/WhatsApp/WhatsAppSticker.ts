@@ -1,7 +1,10 @@
 import { AbstractMessage } from '../AbstractMessage';
-import { WhatsAppStickerParams } from '../../types';
-import { WhatsAppStickerIdType } from '../../types';
-import { WhatsAppStickerUrlType } from '../../types';
+import {
+  WhatsAppStickerParams,
+  WhatsAppStickerIdType,
+  WhatsAppStickerUrlType,
+  WhatsAppContext,
+} from '../../types';
 
 /**
  * Represents a sticker message for WhatsApp.
@@ -15,6 +18,8 @@ export class WhatsAppSticker
   public channel: 'whatsapp';
   public messageType: 'sticker';
   public sticker: WhatsAppStickerIdType | WhatsAppStickerUrlType;
+
+  public context?: WhatsAppContext;
 
   /**
    * Send a sticker message to a WhatsApp user.
@@ -59,5 +64,8 @@ export class WhatsAppSticker
     this.sticker = params.sticker;
     this.channel = 'whatsapp';
     this.messageType = 'sticker';
+    if (params.context) {
+      this.context = params.context;
+    }
   }
 }

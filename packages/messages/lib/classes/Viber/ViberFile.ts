@@ -6,12 +6,8 @@ import { ViberFileParams } from '../../types';
  *
  * @group Viber
  */
-export class ViberFile
-  extends AbstractFileMessage
-  implements ViberFileParams
-{
+export class ViberFile extends AbstractFileMessage implements ViberFileParams {
   public channel: 'viber_service';
-  public viberService;
 
   /**
    * Send a file message using the Viber Service channel.
@@ -41,7 +37,6 @@ export class ViberFile
    */
   constructor(params: ViberFileParams) {
     super(params);
-    this.viberService = params.viberService;
     this.channel = 'viber_service';
   }
 }

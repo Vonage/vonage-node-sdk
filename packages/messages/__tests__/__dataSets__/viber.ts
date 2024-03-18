@@ -356,15 +356,6 @@ export default [
           url: 'https://example.com',
         },
         client_ref: 'my-ref',
-        viber_service: {
-          category: ViberCategory.PROMOTION,
-          ttl: 42,
-          type: 'type',
-          action: {
-            url: 'https://example.com',
-            text: 'viber text',
-          },
-        },
       } as ViberVideoRequest,
     ],
     response: [
@@ -383,15 +374,6 @@ export default [
           url: 'https://example.com',
         },
         clientRef: 'my-ref',
-        viberService: {
-          category: ViberCategory.PROMOTION,
-          ttl: 42,
-          type: 'type',
-          action: {
-            url: 'https://example.com',
-            text: 'viber text',
-          } as ViberAction,
-        } as ViberService,
       } as ViberVideoParams),
     ],
     expected: {
@@ -449,15 +431,6 @@ export default [
           name: 'Keyboard Cat',
         },
         client_ref: 'my-ref',
-        viber_service: {
-          category: ViberCategory.PROMOTION,
-          ttl: 42,
-          type: 'type',
-          action: {
-            url: 'https://example.com',
-            text: 'viber text',
-          },
-        },
       } as ViberFileRequest,
     ],
     response: [
@@ -477,15 +450,6 @@ export default [
           name: 'Keyboard Cat',
         },
         clientRef: 'my-ref',
-        viberService: {
-          category: ViberCategory.PROMOTION,
-          ttl: 42,
-          type: 'type',
-          action: {
-            url: 'https://example.com',
-            text: 'viber text',
-          } as ViberAction,
-        } as ViberService,
       } as ViberFileParams),
     ],
     expected: {

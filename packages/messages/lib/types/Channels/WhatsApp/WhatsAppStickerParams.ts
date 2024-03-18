@@ -1,4 +1,4 @@
-import { MessageParams } from '../../MessageParams';
+import { WhatsAppParams } from './WhatsAppParams';
 import { WhatsAppStickerIdType } from './WhatsAppStickerIdType';
 import { WhatsAppStickerUrlType } from './WhatsAppStickerUrlType';
 
@@ -13,4 +13,4 @@ export type WhatsAppStickerParams = {
    * The sticker to be sent, which can be either a sticker ID or a sticker URL.
    */
   sticker: WhatsAppStickerIdType | WhatsAppStickerUrlType;
-} & MessageParams;
+} & WhatsAppParams;

@@ -71,7 +71,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp text with client ref',
+    label: 'send WhatsApp text with client ref and context',
     request: [
       '/v1/messages',
       'POST',
@@ -81,6 +81,9 @@ export default [
         channel: 'whatsapp',
         message_type: 'text',
         client_ref: 'my-ref',
+        context: {
+          message_uuid: '00000000-0000-0000-0000-000000000000',
+        },
         text: 'Too many secrets',
         webhook_url: 'https://example.com',
         webhook_version: 'v1',
@@ -100,6 +103,9 @@ export default [
         to: '14152739164',
         clientRef: 'my-ref',
         text: 'Too many secrets',
+        context: {
+          messageUUID: '00000000-0000-0000-0000-000000000000',
+        },
         webhookUrl: 'https://example.com',
         webhookVersion: 'v1',
       } as WhatsAppTextParams),
@@ -479,6 +485,7 @@ export default [
         file: {
           url: 'https://example.com/my-file.png',
           caption: 'a snake on a plane',
+          name: 'my-file.png',
         },
       } as WhatsAppFileRequest,
     ],
@@ -497,8 +504,8 @@ export default [
         clientRef: 'my-ref',
         file: {
           url: 'https://example.com/my-file.png',
-
           caption: 'a snake on a plane',
+          name: 'my-file.png',
         },
       } as WhatsAppFileParams),
     ],

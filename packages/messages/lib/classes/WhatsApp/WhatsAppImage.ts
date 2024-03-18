@@ -1,5 +1,5 @@
 import { AbstractImageMessage } from '../AbstractImageMessage';
-import { WhatsAppImageParams } from '../../types';
+import { WhatsAppImageParams, WhatsAppContext } from '../../types';
 
 /**
  * Represents an image message for WhatsApp.
@@ -12,6 +12,7 @@ export class WhatsAppImage
 {
   public channel: 'whatsapp';
 
+  public context?: WhatsAppContext;
   /**
    * Sends an image message to a WhatsApp user.
    *
@@ -36,5 +37,8 @@ export class WhatsAppImage
   public constructor(params: WhatsAppImageParams) {
     super(params);
     this.channel = 'whatsapp';
+    if (params.context) {
+      this.context = params.context;
+    }
   }
 }

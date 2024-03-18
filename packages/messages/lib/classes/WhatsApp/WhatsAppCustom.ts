@@ -1,5 +1,9 @@
 import { AbstractMessage } from '../AbstractMessage';
-import { WhatsAppCustomType, WhatsAppCustomParams } from '../../types';
+import {
+  WhatsAppCustomType,
+  WhatsAppCustomParams,
+  WhatsAppContext,
+} from '../../types';
 
 /**
  * Represents a custom message for WhatsApp.
@@ -13,6 +17,8 @@ export class WhatsAppCustom
   public channel: 'whatsapp';
   public messageType: 'custom';
   public custom: WhatsAppCustomType;
+
+  public context?: WhatsAppContext;
 
   /**
    * Sends a custom message to a WhatsApp user.
@@ -43,5 +49,8 @@ export class WhatsAppCustom
     this.custom = params.custom;
     this.channel = 'whatsapp';
     this.messageType = 'custom';
+    if (params.context) {
+      this.context = params.context;
+    }
   }
 }

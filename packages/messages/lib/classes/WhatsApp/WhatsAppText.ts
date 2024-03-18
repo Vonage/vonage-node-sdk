@@ -1,5 +1,5 @@
 import { AbstractTextMessage } from '../AbstractTextMessage';
-import { WhatsAppTextParams } from '../../types';
+import { WhatsAppTextParams, WhatsAppContext } from '../../types';
 
 /**
  * Represents a text message for WhatsApp.
@@ -12,6 +12,7 @@ export class WhatsAppText
 {
   public channel: 'whatsapp';
 
+  public context?: WhatsAppContext;
   /**
    * Send a WhatsApp text message.
    *
@@ -33,5 +34,8 @@ export class WhatsAppText
   public constructor(params: WhatsAppTextParams) {
     super(params);
     this.channel = 'whatsapp';
+    if (params.context) {
+      this.context = params.context;
+    }
   }
 }

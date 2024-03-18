@@ -1,4 +1,5 @@
 import { MessageParamsImage } from '../../MessageParamsImage';
+import { WhatsAppParams } from './WhatsAppParams';
 
 /**
  * Represents a WhatsApp image message type.
@@ -6,4 +7,4 @@ import { MessageParamsImage } from '../../MessageParamsImage';
  * @group WhatsApp
  * @category Parameters
  */
-export type WhatsAppImageParams = MessageParamsImage
+export type WhatsAppImageParams = WhatsAppParams & MessageParamsImage;

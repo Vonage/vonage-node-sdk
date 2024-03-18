@@ -1,11 +1,12 @@
-import { MessageParamsFile } from '../../MessageParamsFile';
+import { MessageFileType } from '../../MessageFileType';
 import { MessengerParams } from './MessengerParams';
 
 /**
  * Represents parameters for sending a file message via the Messenger platform.
- * Combines parameters from both MessengerParams and MessageParamsFile.
  *
  * @group Messenger
  * @category Parameters
  */
-export type MessengerFileParams = MessengerParams & MessageParamsFile
+export type MessengerFileParams = {
+  file: MessageFileType;
+} & MessengerParams;

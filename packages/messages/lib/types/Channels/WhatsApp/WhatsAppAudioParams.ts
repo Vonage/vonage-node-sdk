@@ -1,4 +1,5 @@
 import { MessageParamsAudio } from '../../MessageParamsAudio';
+import { WhatsAppParams } from './WhatsAppParams';
 
 /**
  * Represents parameters for sending an audio message via WhatsApp.
@@ -6,4 +7,4 @@ import { MessageParamsAudio } from '../../MessageParamsAudio';
  * @group WhatsApp
  * @category Parameters
  */
-export type WhatsAppAudioParams = MessageParamsAudio
+export type WhatsAppAudioParams = WhatsAppParams & MessageParamsAudio;

@@ -1,5 +1,5 @@
 import { AbstractAudioMessage } from '../AbstractAudioMessage';
-import { WhatsAppAudioParams } from '../../types';
+import { WhatsAppAudioParams, WhatsAppContext } from '../../types';
 
 /**
  * Represents an audio message for WhatsApp.
@@ -12,6 +12,7 @@ export class WhatsAppAudio
 {
   public channel: 'whatsapp';
 
+  public context?: WhatsAppContext;
   /**
    * Sends an audio message to a WhatsApp user.
    *
@@ -36,5 +37,8 @@ export class WhatsAppAudio
   public constructor(params: WhatsAppAudioParams) {
     super(params);
     this.channel = 'whatsapp';
+    if (params.context) {
+      this.context = params.context;
+    }
   }
 }

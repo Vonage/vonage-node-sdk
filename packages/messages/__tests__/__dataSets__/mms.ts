@@ -421,6 +421,7 @@ export default [
         message_type: 'vcard',
         vcard: {
           url: 'https://example.com',
+          caption: 'My vcard',
         },
         client_ref: 'my-ref',
       } as MMSVcardRequest,
@@ -439,6 +440,7 @@ export default [
         to: '14152739164',
         vcard: {
           url: 'https://example.com',
+          caption: 'My vcard',
         },
         clientRef: 'my-ref',
       } as MessageParamsVcard),

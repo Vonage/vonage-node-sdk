@@ -24,8 +24,8 @@ export class MMSVcard
    *  to: TO_NUMBER,
    *  from: FROM_NUMBER,
    *  vcard: {
-   *    name: 'John Doe',
-   *    phoneNumber: '15555555555',
+   *    url: 'https://example.com/vcard.vcf',
+   *    caption: 'Download my contact information',
    *  },
    *  clientRef: 'my-personal-reference',
    * }));
