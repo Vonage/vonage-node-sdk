@@ -7,7 +7,7 @@ import { WhatsAppStickerParams } from './WhatsAppStickerParams';
 import { WhatsAppTemplateParams } from './WhatsAppTemplateParams';
 import { WhatsAppTextParams } from './WhatsAppTextParams';
 import { WhatsAppVideoParams } from './WhatsAppVideoParams';
-import { Channels } from "../../../enums";
+import { Channels } from '../../../enums';
 
 export * from './WhatsAppAudioParams';
 export * from './WhatsAppCustomParams';
@@ -22,6 +22,7 @@ export * from './WhatsAppTemplateParams';
 export * from './WhatsAppTemplateType';
 export * from './WhatsAppTextParams';
 export * from './WhatsAppVideoParams';
+export * from './WhatsAppParams';
 
 /**
  * Represents a union type that can be any of the WhatsApp-specific message

@@ -20,7 +20,7 @@ export type ViberVideoParams = {
      * The file size of the video in MB.
      */
     fileSize: string;
-  }  & ViberActionParams;
+  } & ViberActionParams;
 
   /**
    * The details of the video message to be sent.
@@ -30,5 +30,15 @@ export type ViberVideoParams = {
      * The URL of the video attachment.
      */
     url: string;
+
+    /**
+     * The caption to be displayed with the video.
+     */
+    caption?: string;
+
+    /**
+     * The URL of the thumbnail image to be displayed with the video.
+     */
+    thumbUrl?: string;
   };
-} & MessageParamsVideo
+} & MessageParamsVideo;

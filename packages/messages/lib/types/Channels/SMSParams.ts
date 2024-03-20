@@ -1,5 +1,5 @@
-import { MessageParamsText } from "../MessageParamsText";
-import { Channels } from "../../enums";
+import { MessageParamsText } from '../MessageParamsText';
+import { Channels } from '../../enums';
 
 /**
  * Represents the parameters for sending an SMS message.
@@ -13,7 +13,34 @@ import { Channels } from "../../enums";
  * future without impacting existing code that uses it.
  * It is based on the `MessageParamsText` type.
  */
-export type SMSParams = MessageParamsText;
+export type SMSParams = { sms?: SMSExtraParams } & MessageParamsText;
+
+export type SMSExtraParams = {
+  /**
+   * The encoding type to use for the message. If set to either text or
+   * unicode the specified type will be used. If set to auto (the default),
+   * the Messages API will automatically set the type based on the content
+   * of text; i.e. if unicode characters are detected in text, then the
+   * message will be encoded as unicode, and otherwise as text.
+   *
+   * @link https://api.support.vonage.com/hc/en-us/sections/200622473-Country-Specific-Features-and-Restrictions
+   */
+  encodingType?: 'unicode' | 'text' | 'auto';
+
+  /**
+   * A string parameter that satisfies regulatory requirements when sending
+   * an SMS to specific countries.
+   */
+  contentId?: string;
+
+  /**
+   * A string parameter that satisfies regulatory requirements when sending
+   * an SMS to specific countries.
+   *
+   * @link https://api.support.vonage.com/hc/en-us/sections/200622473-Country-Specific-Features-and-Restrictions
+   */
+  entityId?: string;
+};
 
 /**
  * Represents an SMS channel message, combining the channel type with SMS-specific parameters.
@@ -24,5 +51,15 @@ export type SMSParams = MessageParamsText;
  * @group SMS
  */
 export type SMSChannel = {
-  channel: Channels.SMS
+  channel: Channels.SMS;
+
+  /**
+   * The duration in seconds the delivery of an SMS will be attempted. By
+   * default Vonage attempts delivery for 72 hours, however the maximum
+   * effective value depends on the operator and is typically 24 - 48 hours.
+   * We recommend this value should be kept at its default or at least 30 minutes.
+   */
+  ttl?: number;
+
+  sms?: SMSExtraParams;
 } & SMSParams;

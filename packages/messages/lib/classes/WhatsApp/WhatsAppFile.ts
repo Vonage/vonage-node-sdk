@@ -1,5 +1,6 @@
+import { Channels } from '../../enums';
 import { AbstractFileMessage } from '../AbstractFileMessage';
-import { WhatsAppFileParams } from '../../types';
+import { WhatsAppFileParams, WhatsAppContext } from '../../types';
 
 /**
  * Represents a file message for WhatsApp.
@@ -10,7 +11,9 @@ export class WhatsAppFile
   extends AbstractFileMessage
   implements WhatsAppFileParams
 {
-  public channel: 'whatsapp';
+  public channel = Channels.WHATSAPP;
+
+  public context?: WhatsAppContext;
 
   /**
    * Send a WhatsApp file message.
@@ -34,6 +37,8 @@ export class WhatsAppFile
    */
   public constructor(params: WhatsAppFileParams) {
     super(params);
-    this.channel = 'whatsapp';
+    if (params.context) {
+      this.context = params.context;
+    }
   }
 }

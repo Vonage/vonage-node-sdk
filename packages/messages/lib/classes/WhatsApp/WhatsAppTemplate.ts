@@ -1,7 +1,10 @@
 import { AbstractMessage } from '../AbstractMessage';
-import { WhatsAppTemplateParams } from '../../types';
-import { WhatsAppPolicyType } from '../../types';
-import { WhatsAppTemplateType } from '../../types';
+import {
+  WhatsAppTemplateParams,
+  WhatsAppPolicyType,
+  WhatsAppTemplateType,
+  WhatsAppContext,
+} from '../../types';
 
 /**
  * Represents a template message for WhatsApp.
@@ -16,6 +19,8 @@ export class WhatsAppTemplate
   public messageType: 'template';
   public whatsapp: WhatsAppPolicyType;
   public template: WhatsAppTemplateType;
+
+  public context?: WhatsAppContext;
 
   /**
    * Send a template message to a WhatsApp user.
@@ -52,5 +57,8 @@ export class WhatsAppTemplate
     this.template = params.template;
     this.channel = 'whatsapp';
     this.messageType = 'template';
+    if (params.context) {
+      this.context = params.context;
+    }
   }
 }

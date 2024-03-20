@@ -1,3 +1,4 @@
+import { WhatsAppParams } from '.';
 import { MessageParamsText } from '../../MessageParamsText';
 
 /**
@@ -6,4 +7,4 @@ import { MessageParamsText } from '../../MessageParamsText';
  * @group WhatsApp
  * @category Parameters
  */
-export type WhatsAppTextParams = MessageParamsText;
+export type WhatsAppTextParams = WhatsAppParams & MessageParamsText;

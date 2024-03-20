@@ -1,5 +1,5 @@
 import { AbstractFileMessage } from '../AbstractFileMessage';
-import { MessageParamsFile, MessengerFileParams } from '../../types';
+import { MessageParams, MessengerFileParams } from '../../types';
 
 /**
  * Represents a file message for the Messenger channel.
@@ -8,7 +8,7 @@ import { MessageParamsFile, MessengerFileParams } from '../../types';
  */
 export class MessengerFile
   extends AbstractFileMessage
-  implements MessageParamsFile
+  implements MessengerFileParams, MessageParams
 {
   /**
    * The channel for this message (always 'messenger').
@@ -42,7 +42,7 @@ export class MessengerFile
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: MessengerFileParams) {
+  public constructor(params: MessageParams & MessengerFileParams) {
     super(params);
     this.messenger = params.messenger;
     this.channel = 'messenger';
