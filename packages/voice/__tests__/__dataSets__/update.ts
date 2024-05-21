@@ -214,7 +214,7 @@ export default [
         {
           action: NCCOActions.TALK,
           text: "I'll always dial the K for you",
-          language: TTSLanguages.EN_US,
+          language: 'en-US',
           style: '0',
           premium: true,
           loop: 1,
