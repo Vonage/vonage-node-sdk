@@ -35,7 +35,7 @@ export type TalkAction = {
   /**
    * (Optional) The language in which the TTS speech should be spoken. Use one of the supported TTS language codes.
    */
-  language?: TTSLanguages;
+  language?: TTSLanguages | string;
 
   /**
    * (Optional) The style or type of voice to use for TTS speech. This can be a string representing the voice style.

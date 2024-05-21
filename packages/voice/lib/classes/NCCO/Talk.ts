@@ -36,7 +36,7 @@ export class Talk implements TalkAction, Serializable {
   /**
    * The language for the text-to-speech synthesis (optional).
    */
-  language?: TTSLanguages;
+  language?: TTSLanguages | string;
 
   /**
    * The speech style (optional).
@@ -55,7 +55,7 @@ export class Talk implements TalkAction, Serializable {
    * @param {boolean} [bargeIn] - Indicates whether the talk action allows barge-in (optional).
    * @param {number} [loop] - The number of times to loop the speech (optional).
    * @param {string} [level] - The audio level at which to play the speech (optional).
-   * @param {TTSLanguages} [language] - The language for the text-to-speech synthesis (optional).
+   * @param {TTSLanguages | string} [language] - The language for the text-to-speech synthesis (optional).
    * @param {string} [style] - The speech style (optional).
    * @param {boolean} [premium] - Indicates whether to use premium text-to-speech (optional).
    */
@@ -64,7 +64,7 @@ export class Talk implements TalkAction, Serializable {
     bargeIn?: boolean,
     loop?: number,
     level?: string,
-    language?: TTSLanguages,
+    language?: TTSLanguages | string,
     style?: string,
     premium?: boolean,
   ) {

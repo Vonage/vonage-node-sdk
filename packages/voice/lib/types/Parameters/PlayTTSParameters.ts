@@ -12,7 +12,7 @@ export type PlayTTSParameters = {
   /**
    * The language in which the text should be spoken. Optional.
    */
-  language?: TTSLanguages;
+  language?: TTSLanguages | string;
 
   /**
    * The style or voice variant for the TTS. Optional.
