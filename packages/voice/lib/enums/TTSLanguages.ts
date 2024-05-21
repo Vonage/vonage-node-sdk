@@ -3,22 +3,37 @@
  */
 export enum TTSLanguages {
   /**
+   * Afrikaans (af-ZA) - Supported Text-to-Speech (TTS) language.
+   */
+  AF_ZA = 'af-ZA',
+
+  /**
    * Arabic (ar) - Supported Text-to-Speech (TTS) language.
    */
   AR = 'ar',
 
   /**
-   * Catalan (ca-ES) - Supported Text-to-Speech (TTS) language.
+   * Bulgarian (bg-BG) - Supported Text-to-Speech (TTS) language.
+   */
+  BG_BG = 'bg-BG',
+
+  /**
+   * Bengali (bn-IN) - Supported Text-to-Speech (TTS) language.
+   */
+  BN_IN = 'bn-IN',
+
+  /**
+   * Catalan, Valencian (ca-ES) - Supported Text-to-Speech (TTS) language.
    */
   CA_ES = 'ca-ES',
 
   /**
-   * Mandarin Chinese (cmn-CN) - Supported Text-to-Speech (TTS) language.
+   * China Chinese, Mandarin (cmn-CN) - Supported Text-to-Speech (TTS) language.
    */
   CMN_CN = 'cmn-CN',
 
   /**
-   * Mandarin Chinese (cmn-TW) - Supported Text-to-Speech (TTS) language.
+   * Taiwan Chinese, Mandarin (cmn-TW) - Supported Text-to-Speech (TTS) language.
    */
   CMN_TW = 'cmn-TW',
 
@@ -38,6 +53,11 @@ export enum TTSLanguages {
   DA_DK = 'da-DK',
 
   /**
+   * Austria German (de-AT) - Supported Text-to-Speech (TTS) language.
+   */
+  DE_AT = 'de-AT',
+
+  /**
    * German (de-DE) - Supported Text-to-Speech (TTS) language.
    */
   DE_DE = 'de-DE',
@@ -48,47 +68,67 @@ export enum TTSLanguages {
   EL_GR = 'el-GR',
 
   /**
-   * Australian English (en-AU) - Supported Text-to-Speech (TTS) language.
+   * Australia English (en-AU) - Supported Text-to-Speech (TTS) language.
    */
   EN_AU = 'en-AU',
 
   /**
-   * British English (en-GB) - Supported Text-to-Speech (TTS) language.
+   * United Kingdom English (en-GB) - Supported Text-to-Speech (TTS) language.
    */
   EN_GB = 'en-GB',
 
   /**
-   * British English (en-GB-WLS) - Supported Text-to-Speech (TTS) language.
+   * Scotland English (en-GB-SCT) - Supported Text-to-Speech (TTS) language.
+   */
+  EN_GB_SCT = 'en-GB-SCT',
+
+  /**
+   * Wales English (en-GB-WLS) - Supported Text-to-Speech (TTS) language.
    */
   EN_GB_WLS = 'en-GB-WLS',
 
   /**
-   * Indian English (en-IN) - Supported Text-to-Speech (TTS) language.
+   * Ireland English (en-IE) - Supported Text-to-Speech (TTS) language.
+   */
+  EN_IE = 'en-IE',
+
+  /**
+   * India English (en-IN) - Supported Text-to-Speech (TTS) language.
    */
   EN_IN = 'en-IN',
 
   /**
-   * US English (en-US) - Supported Text-to-Speech (TTS) language.
+   * New Zealand English (en-NZ) - Supported Text-to-Speech (TTS) language.
+   */
+  EN_NZ = 'en-NZ',
+
+  /**
+   * United States English (en-US) - Supported Text-to-Speech (TTS) language.
    */
   EN_US = 'en-US',
 
   /**
-   * South African English (en-ZA) - Supported Text-to-Speech (TTS) language.
+   * South Africa English (en-ZA) - Supported Text-to-Speech (TTS) language.
    */
   EN_ZA = 'en-ZA',
 
   /**
-   * Spanish (es-ES) - Supported Text-to-Speech (TTS) language.
+   * Colombia Spanish (es-CO) - Supported Text-to-Speech (TTS) language.
+   */
+  ES_CO = 'es-CO',
+
+  /**
+   * Spain Spanish (es-ES) - Supported Text-to-Speech (TTS) language.
    */
   ES_ES = 'es-ES',
 
   /**
-   * Mexican Spanish (es-MX) - Supported Text-to-Speech (TTS) language.
+   * Mexico Spanish (es-MX) - Supported Text-to-Speech (TTS) language.
    */
   ES_MX = 'es-MX',
 
   /**
-   * US Spanish (es-US) - Supported Text-to-Speech (TTS) language.
+   * United States Spanish (es-US) - Supported Text-to-Speech (TTS) language.
    */
   ES_US = 'es-US',
 
@@ -108,14 +148,24 @@ export enum TTSLanguages {
   FIL_PH = 'fil-PH',
 
   /**
-   * Canadian French (fr-CA) - Supported Text-to-Speech (TTS) language.
+   * Canada French (fr-CA) - Supported Text-to-Speech (TTS) language.
    */
   FR_CA = 'fr-CA',
 
   /**
-   * French (fr-FR) - Supported Text-to-Speech (TTS) language.
+   * France French (fr-FR) - Supported Text-to-Speech (TTS) language.
    */
   FR_FR = 'fr-FR',
+
+  /**
+   * Spain Galician (gl-ES) - Supported Text-to-Speech (TTS) language.
+   */
+  GL_ES = 'gl-ES',
+
+  /**
+   * Gujarati (gu-IN) - Supported Text-to-Speech (TTS) language.
+   */
+  GU_IN = 'gu-IN',
 
   /**
    * Hebrew (he-IL) - Supported Text-to-Speech (TTS) language.
@@ -153,17 +203,42 @@ export enum TTSLanguages {
   JA_JP = 'ja-JP',
 
   /**
+   * Kannada (kn-IN) - Supported Text-to-Speech (TTS) language.
+   */
+  KN_IN = 'kn-IN',
+
+  /**
    * Korean (ko-KR) - Supported Text-to-Speech (TTS) language.
    */
   KO_KR = 'ko-KR',
 
   /**
-   * Norwegian Bokmål (nb-NO) - Supported Text-to-Speech (TTS) language.
+   * Latvian (lv-LV) - Supported Text-to-Speech (TTS) language.
+   */
+  LV_LV = 'lv-LV',
+
+  /**
+   * Malayalam (ml-IN) - Supported Text-to-Speech (TTS) language.
+   */
+  ML_IN = 'ml-IN',
+
+  /**
+   * Malay (ms-MY) - Supported Text-to-Speech (TTS) language.
+   */
+  MS_MY = 'ms-MY',
+
+  /**
+   * Norwegian (nb-NO) - Supported Text-to-Speech (TTS) language.
    */
   NB_NO = 'nb-NO',
 
   /**
-   * Dutch (nl-NL) - Supported Text-to-Speech (TTS) language.
+   * Belgium Dutch (nl-BE) - Supported Text-to-Speech (TTS) language.
+   */
+  NL_BE = 'nl-BE',
+
+  /**
+   * Netherlands Dutch (nl-NL) - Supported Text-to-Speech (TTS) language.
    */
   NL_NL = 'nl-NL',
 
@@ -173,17 +248,22 @@ export enum TTSLanguages {
   NO_NO = 'no-NO',
 
   /**
+   * Punjabi (pa-IN) - Supported Text-to-Speech (TTS) language.
+   */
+  PA_IN = 'pa-IN',
+
+  /**
    * Polish (pl-PL) - Supported Text-to-Speech (TTS) language.
    */
   PL_PL = 'pl-PL',
 
   /**
-   * Brazilian Portuguese (pt-BR) - Supported Text-to-Speech (TTS) language.
+   * Brazil Portuguese (pt-BR) - Supported Text-to-Speech (TTS) language.
    */
   PT_BR = 'pt-BR',
 
   /**
-   * Portuguese (pt-PT) - Supported Text-to-Speech (TTS) language.
+   * Portugal Portuguese (pt-PT) - Supported Text-to-Speech (TTS) language.
    */
   PT_PT = 'pt-PT',
 
@@ -203,9 +283,24 @@ export enum TTSLanguages {
   SK_SK = 'sk-SK',
 
   /**
+   * Serbian (sr-RS) - Supported Text-to-Speech (TTS) language.
+   */
+  SR_RS = 'sr-RS',
+
+  /**
    * Swedish (sv-SE) - Supported Text-to-Speech (TTS) language.
    */
   SV_SE = 'sv-SE',
+
+  /**
+   * Tamil (ta-IN) - Supported Text-to-Speech (TTS) language.
+   */
+  TA_IN = 'ta-IN',
+
+  /**
+   * Telugu (te-IN) - Supported Text-to-Speech (TTS) language.
+   */
+  TE_IN = 'te-IN',
 
   /**
    * Thai (th-TH) - Supported Text-to-Speech (TTS) language.
@@ -228,7 +323,7 @@ export enum TTSLanguages {
   VI_VN = 'vi-VN',
 
   /**
-   * Cantonese Chinese (yue-CN) - Supported Text-to-Speech (TTS) language.
+   * China Chinese, Cantonese (yue-CN) - Supported Text-to-Speech (TTS) language.
    */
   YUE_CN = 'yue-CN',
 }
