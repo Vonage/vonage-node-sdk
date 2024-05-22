@@ -42,12 +42,6 @@ jobs:
       - name: Debug
         run: echo ${{ steps.releasepr.outputs.pull-request-number }}
 
-      - name: Approve PR
-        uses: juliangruber/approve-pull-request-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.releasepr.outputs.pull-request-number }}
-
       - name: Merge PR
         uses: juliangruber/merge-pull-request-action@v1
         with:
