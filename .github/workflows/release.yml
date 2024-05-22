@@ -8,6 +8,9 @@ on:
       - edited
       - released
 
+env:
+  GH_TOKEN: ${{ secrets.GH_WIKI_PERSONAL_ACCESS_TOKEN }}
+
 jobs:
   test-action:
     runs-on: ubuntu-latest
@@ -19,6 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: '3.x'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -28,29 +32,43 @@ jobs:
       - name: Update RELEASES.MD
         uses: vonage/generate-release-log@1.0.2
 
-      - name: Release PR
-        id: releasepr
-        uses: peter-evans/create-pull-request@v6
-        with:
-          add-paths: RELEASES.md
-          commit-message: 'chore: updating release log'
-          title: 'chore: updating release log'
-          delete-branch: true
-          branch: 'release-log'
-          base: '3.x'
+      - name: GH_TOKEN
+        if: env.GH_TOKEN == ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
 
-      - name: Debug
-        run: echo ${{ steps.releasepr.outputs.pull-request-number }}
+      - name: changelog
+        run: |
+          git config --local user.name github-actions
+          git config --local user.email github-actions@github.com
+          git add RELEASES.md
+          git commit -m "chore: updated release log"
+          git push --force
 
-      - name: Approve PR
-        uses: juliangruber/approve-pull-request-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.releasepr.outputs.pull-request-number }}
-
-      - name: Merge PR
-        uses: juliangruber/merge-pull-request-action@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          merge-method: squash
-          pr: ${{ steps.releasepr.outputs.pull-request-number }}
+#      - name: Release PR
+#        id: releasepr
+#        uses: peter-evans/create-pull-request@v6
+#        with:
+#          add-paths: RELEASES.md
+#          commit-message: 'chore: updating release log'
+#          title: 'chore: updating release log'
+#          delete-branch: true
+#          branch: 'release-log'
+#          base: '3.x'
+#
+#      - name: Debug
+#        run: echo ${{ steps.releasepr.outputs.pull-request-number }}
+#
+#      - name: Approve PR
+#        uses: juliangruber/approve-pull-request-action@v2
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          number: ${{ steps.releasepr.outputs.pull-request-number }}
+#
+#      - name: Merge PR
+#        uses: juliangruber/merge-pull-request-action@v1
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+#          merge-method: squash
+#          pr: ${{ steps.releasepr.outputs.pull-request-number }}
