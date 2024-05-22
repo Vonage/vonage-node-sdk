@@ -31,8 +31,23 @@ jobs:
       - name: Debug
         run: cat RELEASES.md
 
-      - name: Commit relase Log
-        uses: EndBug/add-and-commit@v9
+      - name: Release PR
+        id: releasepr
+        uses: peter-evans/create-pull-request@v6
         with:
-          add: RELEASES.md
-          message: 'chore: updating release log'
+          add-paths: RELEASES.md
+          commit-message: 'chore: updating release log'
+          title: 'chore: updating release log'
+          delete-branch: true
+          base: '3.x'
+
+      - name: Approve PR
+        uses: juliangruber/approve-pull-request-action@v2
+        with:
+          pr: ${{ steps.releasepr.outputs.pull-request-number }}
+
+      - name: Merge PR
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          merge-method: squash
+          pr: ${{ steps.releasepr.outputs.pull-request-number }}
