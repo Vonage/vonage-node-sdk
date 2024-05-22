@@ -13,30 +13,6 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## Vonage Node SDK v4.0.11 (2024-05-22)
-
-test
-
-test
-
----
-
-## Vonage Node SDK v4.0.9 (2024-05-22)
-
-test
-
-test
-
----
-
-## Vonage Node SDK v4.0.3 (2024-05-22)
-
-Ignore testing
-
-Ignore testing
-
----
-
 ## Vonage Node SDK v3.13.0 (2024-02-12)
 
 This version delivers fixes and a new feature, including corrections for JWT algorithm parameters, session creation in the video API, authentication in Number Insights V2, updates to SMS and silent authentication in Verify2, and the introduction of the conversations package.
