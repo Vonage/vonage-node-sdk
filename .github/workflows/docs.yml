@@ -6,15 +6,25 @@ on:
     branches:
       - 3.x
 
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN_COMMIT }}
+
 jobs:
   build:
+    name: Build Documentation
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          ref: '3.x'
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN_COMMIT }}
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
 
@@ -24,7 +34,7 @@ jobs:
       - name: Install typescript
         run: npm install -g typescript
 
-      - name: Build Typescripts
+      - name: Build Typescript
         run: npm run compile
 
       - name: Build Typedoc
@@ -40,4 +50,13 @@ jobs:
         with:
           path: "docs"
         env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_WIKI_PERSONAL_ACCESS_TOKEN }}
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_TOKEN_COMMIT }}
+
+      - name: Copy and commit example markdown
+        run: |
+          cp docs/EXAMPLES.md .
+          git config --local user.name github-actions
+          git config --local user.email github-actions@github.com
+          git add EXAMPLES.md
+          git commit -m "docs: updated example markdown"
+          git push --force-with-lease

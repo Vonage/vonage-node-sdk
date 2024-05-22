@@ -1,12 +1,17 @@
+---
 name: Vonage
 
 on:
   push:
-    branches: [ 3.x ]
+    branches:
+      - 3.x
   pull_request:
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    name: Test and build
+
     strategy:
       fail-fast: false
       matrix:

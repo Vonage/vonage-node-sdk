@@ -4,9 +4,9 @@ on:
   release:
     types:
       - published
-      - created
-      - edited
-      - released
+
+env:
+  GH_TOKEN: ${{ secrets.GH_TOKEN_COMMIT }}
 
 jobs:
   test-action:
@@ -16,7 +16,11 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: '3.x'
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN_COMMIT }}
 
       - name: Setup node
         uses: actions/setup-node@v3
@@ -24,13 +28,12 @@ jobs:
           node-version: 18.x
 
       - name: Update RELEASES.MD
-        uses: vonage/generate-release-log@1.0.0
+        uses: vonage/generate-release-log@1.0.2
 
-      - name: Debug
-        run: cat RELEASES.md
-
-      - name: Commit relase Log
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: RELEASES.md
-          message: 'chore: updating release log'
+      - name: Commit release
+        run: |
+          git config --local user.name github-actions
+          git config --local user.email github-actions@github.com
+          git add RELEASES.md
+          git commit -m "chore: updated release log"
+          git push --force-with-lease
