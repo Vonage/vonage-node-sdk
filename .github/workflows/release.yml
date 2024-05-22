@@ -38,7 +38,6 @@ jobs:
           delete-branch: true
           branch: 'release-log'
           base: '3.x'
-          github-token: ${{ secrets.GH_TOKEN_COMMIT }}
 
       - name: Debug
         run: echo ${{ steps.releasepr.outputs.pull-request-number }}
