@@ -28,9 +28,6 @@ jobs:
       - name: Update RELEASES.MD
         uses: vonage/generate-release-log@1.0.2
 
-      - name: Debug
-        run: cat RELEASES.md
-
       - name: Release PR
         id: releasepr
         uses: peter-evans/create-pull-request@v6
@@ -39,7 +36,11 @@ jobs:
           commit-message: 'chore: updating release log'
           title: 'chore: updating release log'
           delete-branch: true
+          branch: 'release-log'
           base: '3.x'
+
+      - name: Debug
+        run: echo ${{ steps.releasepr.outputs.pull-request-number }}
 
       - name: Approve PR
         uses: juliangruber/approve-pull-request-action@v2
