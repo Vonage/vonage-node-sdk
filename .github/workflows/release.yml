@@ -1,3 +1,4 @@
+---
 name: Release Action
 
 on:
@@ -7,6 +8,9 @@ on:
       - created
       - edited
       - released
+
+env:
+  GH_TOKEN: ${{ secrets.GH_WIKI_PERSONAL_ACCESS_TOKEN }}
 
 jobs:
   test-action:
@@ -22,35 +26,17 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.x
 
       - name: Update RELEASES.MD
         uses: vonage/generate-release-log@1.0.2
 
-      - name: Release PR
-        id: releasepr
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GH_WIKI_PERSONAL_ACCESS_TOKEN }}
-          add-paths: RELEASES.md
-          commit-message: 'chore: updating release log'
-          title: 'chore: updating release log'
-          delete-branch: true
-          branch: 'release-log'
-          base: '3.x'
-
-      - name: Debug
-        run: echo ${{ steps.releasepr.outputs.pull-request-number }}
-
-      - name: Approve PR
-        uses: juliangruber/approve-pull-request-action@v2
-        with:
-          number: ${{ steps.releasepr.outputs.pull-request-number }}
-
-      - name: Merge PR
-        uses: juliangruber/merge-pull-request-action@v1
-        with:
-          merge-method: squash
-          pr: ${{ steps.releasepr.outputs.pull-request-number }}
+      - name: changelog
+        run: |
+          git config --local user.name github-actions
+          git config --local user.email github-actions@github.com
+          git add RELEASES.md
+          git commit -m "chore: updated release log"
+          git push --force-with-lease
