@@ -38,6 +38,7 @@ jobs:
           delete-branch: true
           branch: 'release-log'
           base: '3.x'
+          github-token: ${{ secrets.GH_TOKEN_COMMIT }}
 
       - name: Debug
         run: echo ${{ steps.releasepr.outputs.pull-request-number }}
@@ -53,4 +54,4 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN_COMMIT }}
           merge-method: squash
-          pr: ${{ steps.releasepr.outputs.pull-request-number }}
+          number: ${{ steps.releasepr.outputs.pull-request-number }}
