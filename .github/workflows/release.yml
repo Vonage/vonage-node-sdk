@@ -41,8 +41,8 @@ jobs:
 
       - name: Commit and push release log
         run: |
-          git config --local user.name github-actions
-          git config --local user.email github-actions@github.com
+          git config --local user.name Chuck MANCHUCK Reeves
+          git config --local user.email chuck@manchuck.com
           git add RELEASES.md
           git commit -m "chore: updated release log"
           git push --force-with-lease
