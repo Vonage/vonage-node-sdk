@@ -24,7 +24,7 @@ jobs:
           node-version: 18.x
 
       - name: Update RELEASES.MD
-        uses: vonage/generate-release-log@1.0.0
+        uses: vonage/generate-release-log@1.0.1
 
       - name: Debug
         run: cat RELEASES.md
