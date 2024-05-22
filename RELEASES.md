@@ -4,12 +4,20 @@ id: vonage-node-sdk
 pkgName: Node SDK
 release: '2024-05-22'
 title: Vonage Node SDK
-version: 4.0.11
+version: 4.0.18
 ---
 
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+---
+
+## Vonage Node SDK v4.0.18 (2024-05-22)
+
+test
+
+test
 
 ---
 
