@@ -33,7 +33,13 @@ jobs:
       - name: Update RELEASES.MD
         uses: vonage/generate-release-log@1.0.2
 
-      - name: changelog
+      - name: Set GitHub Token
+        if: env.GH_TOKEN == ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+
+      - name: Commit and push release log
         run: |
           git config --local user.name github-actions
           git config --local user.email github-actions@github.com
