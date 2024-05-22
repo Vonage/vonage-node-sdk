@@ -4,12 +4,20 @@ id: vonage-node-sdk
 pkgName: Node SDK
 release: '2024-05-22'
 title: Vonage Node SDK
-version: 4.0.3
+version: 4.0.5
 ---
 
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+---
+
+## Vonage Node SDK v4.0.5 (2024-05-22)
+
+Test Release
+
+Test Release
 
 ---
 
@@ -125,7 +133,7 @@ The node SDK version 3.10.0 introduces support for number insight v2 and the med
 
 - Version now present in the meetings API path
 
-### New Contributor(s)
+### Changed
 
 - @ajumal-ashraf-dev made their first contribution ([#867](https://github.com/Vonage/vonage-node-sdk/pull/867)).
 - @muhammadzadeh made their first contribution ([#870](https://github.com/Vonage/vonage-node-sdk/pull/870)).
@@ -706,8 +714,6 @@ You can find migration guides for each package here:
 - [SMS](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/sms/v2_TO_v3_MIGRATION_GUIDE.md)
 - [Verify](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/verify/v2_TO_v3_MIGRATION_GUIDE.md)
 - [Voice](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/voice/v2_TO_v3_MIGRATION_GUIDE.md)
-
-### New Contributor(s)
 
 - @conshus made their first contribution ([#687](https://github.com/Vonage/vonage-node-sdk/pull/687)).
 
