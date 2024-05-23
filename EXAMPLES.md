@@ -19,6 +19,9 @@ const accountClient = new Accounts({
 });
 ```
 
+
+
+
 Create an Account client from the Vonage client
 
 
@@ -287,6 +290,9 @@ const privateKey = fs.readFileSync(__dirname + '/private.key');
 const token = tokenGenerate(applicationId, privateKey);
 ```
 
+
+
+
 Generate a JWT token with custom claims.
 
 
@@ -338,6 +344,9 @@ const numberInsightClient = new NumberInsights({
 });
 ```
 
+
+
+
 Create an Number Insight client from the Vonage client
 
 
@@ -374,6 +383,9 @@ const lookup = await numberInsightsClient.asyncAdvancedLookup(
 console.log(`The request ID is ${lookup.request_id}`);
 ```
 
+
+
+
 Lookup with the CNAME option:
 
 ```ts
@@ -396,6 +408,9 @@ const lookup = await numberInsightsClient.basicLookup(
 console.log(`The request ID is ${lookup.request_id}`);
 ```
 
+
+
+
 Lookup with the country option:
 
 ```ts
@@ -416,6 +431,9 @@ const lookup = await numberInsightsClient.standardLookup(
 );
 console.log(`The request ID is ${lookup.request_id}`);
 ```
+
+
+
 
 Lookup with the cname option:
 
@@ -568,6 +586,9 @@ Generate query parameters
 const queryParams = await auth.getQueryParams();
 ```
 
+
+
+
 Generate query parameters and merge with additional Parameters
 
 
@@ -596,6 +617,9 @@ const conversationClient = new Conversations({
   privateKey: VONAGE_APPLICATION_PRIVATE_KEY_PATH,
 });
 ```
+
+
+
 
 Create an Conversation client from the Vonage client
 
@@ -985,6 +1009,9 @@ for await (const media of mediaClient.listAllMediaItems()) {
 };
 ```
 
+
+
+
 List all public media items
 
 ```ts
@@ -1145,6 +1172,9 @@ console.log(`There are ${resp.totalItems} meeting rooms`);
 console.log(`There are ${resp.pageSize} meeting rooms per page`);
 ```
 
+
+
+
 Get a specific page of meeting rooms
 
 
@@ -1200,6 +1230,9 @@ const resp = await meetingsClient.getRoomsForThemePage('my-theme-id');
 console.log(`There are ${resp.totalItems} meeting rooms`);
 console.log(`There are ${resp.pageSize} meeting rooms per page`);
 ```
+
+
+
 
 Get a specific page of meeting rooms for a theme
 
@@ -1575,6 +1608,9 @@ const { messageUUID } = await messagesClient.send(new SMS({
 console.log(`Message sent successfully with UUID ${messageUUID}`);
 ```
 
+
+
+
 Send SMS with entity ID and content ID
 
 ```ts
@@ -1859,6 +1895,9 @@ const { messageUUID } = await messagesClient.send(new WhatsAppSticker({
 console.log(`Message sent successfully with UUID ${messageUUID}`);
 ```
 
+
+
+
 Send a sticker message with a sticker URL:
 
 ```ts
@@ -1987,6 +2026,9 @@ const score = await client.numberInsightV2.checkForFraud({
 console.log(`Fraud score: ${score.riskScore}`);
 ```
 
+
+
+
 Check for SIM swap on a phone number.
 
 ```ts
@@ -2000,6 +2042,9 @@ const score = await client.numberInsightV2.checkForFraud({
 });
 console.log(`SIM swap detected: ${score.simSwap ? 'Yes' : 'No'}`);
 ```
+
+
+
 
 Check both fraud score and SIM swap on a phone number.
 
@@ -2034,6 +2079,9 @@ const numbersClient = new Numbers({
  apiSecret: VONAGE_API_SECRET
 });
 ```
+
+
+
 
 Create an Numbers client from the Vonage client
 
@@ -2167,6 +2215,9 @@ const pricingClient = new Pricing({
 });
 ```
 
+
+
+
 Create an Pricing client from the Vonage client
 
 
@@ -2239,6 +2290,9 @@ const smsClient = new SMS({
  },
 });
 ```
+
+
+
 
 Create an SMS client from the Vonage client
 
@@ -2313,6 +2367,9 @@ const verifyClient = new Verify({
  apiSecret: VONAGE_API_SECRET
 });
 ```
+
+
+
 
 Create an Verify client from the Vonage client
 
@@ -2394,6 +2451,9 @@ if (result.status === CheckStatus.SUCCESS) {
 }
 ```
 
+
+
+
 Trigger the next event for a verification request
 
 ```ts
@@ -2425,6 +2485,9 @@ if (result.requestId) {
   console.log(`Request failed with error: ${result.errorText}`);
 }
 ```
+
+
+
 
 Start a request with PSD2 parameters
 
@@ -2491,6 +2554,9 @@ const videoClient = new Video({
 });
 ```
 
+
+
+
 Create an Video client from the Vonage client
 
 
@@ -2549,6 +2615,9 @@ const session = await videoClient.createSession({});
 console.log(session.sessionId);
 ```
 
+
+
+
 Create a session with archive mode set to manual
 
 ```ts
@@ -2560,6 +2629,9 @@ const session = await videoClient.createSession({
 console.log(session.sessionId);
 ```
 
+
+
+
 Create a session with location set to a specific region
 
 ```ts
@@ -2568,6 +2640,9 @@ const session = await videoClient.createSession({
 });
 console.log(session.sessionId);
 ```
+
+
+
 
 Create a session with media mode set to routed
 
@@ -2702,6 +2777,9 @@ const sipCall = await videoClient.intiateSIPCall(SESSION_ID);
 console.log(sipCall.id);
 ```
 
+
+
+
 Start a SIP call with custom options
 
 ```ts
@@ -2778,6 +2856,9 @@ for (const archive of archives.items) {
 }
 ```
 
+
+
+
 Search for archives for a session
 
 ```ts
@@ -2800,6 +2881,9 @@ for (const broadcast of broadcasts.items) {
    console.log(broadcast.id);
 }
 ```
+
+
+
 
 Get braodcasts for a session
 
@@ -2958,6 +3042,9 @@ const voiceClient = new Voice({
 });
 ```
 
+
+
+
 Create an Voice client from the Vonage client
 
 
@@ -2999,6 +3086,9 @@ const call = await voiceClient.createOutboundCall({
 console.log(call.uuid);
 
 ```
+
+
+
 
 Create a call with answer URL
 
@@ -3071,6 +3161,9 @@ for (const call of page._embedded.calls) {
 }
 ```
 
+
+
+
 Get the next page of call details
 
 ```ts
@@ -3082,6 +3175,9 @@ for (const call of page._embedded.calls) {
   console.log(call.startTime);
 }
 ```
+
+
+
 
 Get all started calls
 
