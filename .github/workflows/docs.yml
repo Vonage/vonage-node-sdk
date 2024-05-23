@@ -43,8 +43,16 @@ jobs:
       - name: Build example markdown
         run: node scripts/generateExample.mjs
 
-      - name: Add TOC
-        run: (cd docs && npx markdown-index . > toc.md)
+      - name: Sync Wiki to Docs
+        uses: newrelic/wiki-sync-action@main
+        with:
+          source: docs
+          destination: wiki
+          token: ${{ secrets.GH_TOKEN_COMMIT}}
+          gitAuthorName: github-actions
+          gitAuthorEmail: github-actions@github.com
+          branch: main
+
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:

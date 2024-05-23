@@ -1,14 +1,16 @@
 {
-  "$schema": "https://typedoc.org/schema.json",
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
   "includeVersion": false,
   "entryPointStrategy": "packages",
+  "outputFileStrategy": "modules",
+  "flattenOutputFiles": true,
+  "mergeReadme": true,
   "entryPoints": [
     "packages/*"
   ],
   "json": "docs/docs.json",
   "out": "docs",
   "logLevel": "Verbose",
-  "excludeInternal": true,
   "plugin": [
     "typedoc-plugin-markdown"
   ]
