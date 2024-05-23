@@ -4,7 +4,11 @@
   "entryPointStrategy": "packages",
   "outputFileStrategy": "modules",
   "flattenOutputFiles": true,
-  "mergeReadme": true,
+  "mergeReadme": false,
+  "entryFileName": "index",
+  "excludeScopesInPaths": true,
+  "enumMembersFormat": "table",
+  "useCodeBlocks": true,
   "entryPoints": [
     "packages/*"
   ],
