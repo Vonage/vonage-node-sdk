@@ -2,14 +2,38 @@
 icon: node-color
 id: vonage-node-sdk
 pkgName: Node SDK
-release: '2024-05-23'
+release: '2024-06-06'
 title: Vonage Node SDK
-version: 4.0.38
+version: 4.0.0
 ---
 
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+---
+## Vonage Node SDK v3.14.0 (2024-06-06)
+
+Version 3.14.1 of the Vonage Node SDK introduces fixes for private key path handling
+and updated endpoints for video stream management. It also adds new parameters for
+webhooks, Viber, and SMS, and enhances TTS language support. These updates
+improve functionality, security, and expand messaging capabilities.
+
+**Fixed:**
+  - Passing in private key path for authentication.
+  - Updated endpoints for adding/removing streams from Archive in the video API.
+
+**Added:**
+  - New webhook, Viber, and SMS parameters in messages.
+  - TTS languages generation from voice.json.
+
+**Refactor:**
+  - Allowing strings for voice TTS languages.
+
+**New Contributors:**
+[@ThingUroboros](https://github.com/ThingUroboros )
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.14.0...@vonage/server-sdk@3.14.1)
 
 ---
 
