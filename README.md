@@ -75,8 +75,8 @@ See the [Vonage Node Quickstarts repo](https://github.com/Vonage/vonage-node-cod
 
 You can find more information for each product below:
 
-* [Accounts][applications]
-* [Applications](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/applications/README.md)
+* [Accounts][accounts]
+* [Applications][applications]
 * [Audit](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/audit/README.md)
 * [Auth][auth]
 * [JWT][jwt]
@@ -146,6 +146,7 @@ While most of the V2 functions have been ported into their own package, some of 
 
 For more information, check out each packages migration guide.
 
+[accounts]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/accounts/README.md
 [applications]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/applications/README.md
 [auth]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/auth/README.md
 [sms]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/sms/README.md
