@@ -15,7 +15,7 @@ export type BalanceTransferParameters = {
   /**
    * The amount of balance to transfer.
    */
-  amount: string;
+  amount: number;
 
   /**
    * (Optional) A reference for the balance transfer.
