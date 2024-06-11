@@ -100,7 +100,7 @@ export default [
           to: balanceTransfer.to,
           amount: `${balanceTransfer.amount}`,
           reference: balanceTransfer.reference,
-        } as BalanceTransferParameters,
+        },
       ],
     ],
     responses: [
@@ -118,7 +118,7 @@ export default [
         to: balanceTransfer.to,
         amount: `${balanceTransfer.amount}`,
         reference: balanceTransfer.reference,
-      } as BalanceTransferParameters,
+      },
     ],
     error: false,
     expected: balanceTransfer,
