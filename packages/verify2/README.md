@@ -1,4 +1,4 @@
-# Vonage Verify SDK for Node.js
+# Vonage Verify V2 SDK for Node.js
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vonage/vonage-node-sdk/ci.yml?branch=3.x) [![Codecov](https://img.shields.io/codecov/c/github/vonage/vonage-node-sdk?label=Codecov&logo=codecov&style=flat-square)](https://codecov.io/gh/Vonage/vonage-server-sdk) ![Latest Release](https://img.shields.io/npm/v/@vonage/verify2?label=%40vonage%2Fverify2&style=flat-square) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg?style=flat-square)](../../CODE_OF_CONDUCT.md) [![License](https://img.shields.io/npm/l/@vonage/accounts?label=License&style=flat-square)][license]
 
@@ -16,6 +16,10 @@ For full API documentation refer to [developer.vonage.com](https://developer.von
 
 ## Installation
 
+We recommend using this SDK as part of the overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). Please see the main package for installation.
+
+You can also use this SDK standalone if you only need access to just the Verify API.
+
 ### With NPM
 
 ```bash
@@ -30,7 +34,27 @@ yarn add @vonage/verify2
 
 ## Usage
 
-Unlike the other SDK's this package is not include in the [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
+If you are using this SDK as part of the Vonage Server SDK, you can access it as the `verify2` property off of the client that you instantiate.
+
+```js
+const { Vonage } = require('@vonage/server-sdk')
+
+const credentials = {
+  apiKey: API_KEY,
+  apiSecret: API_SECRET,
+}
+const options = {}
+const vonage = new Vonage(credentials, options)
+
+vonage.verify2
+  .newRequest()
+  .then((resp) => console.log(resp))
+  .catch((err) => console.error(err))
+```
+
+### Standalone
+
+The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if you only need to use the Verify V2 API. All you need to do is `require('@vonage/verify2')`, and use the returned object to create your own client.
 
 ```js
 const { Auth } = require('@vonage/auth')

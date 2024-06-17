@@ -10,7 +10,7 @@ Note: This package is only compatible with verify V1.
 
 For full API documentation refer to [developer.vonage.com](https://developer.vonage.com/).
 
-If you are updating from V2 to V3, please check the migration guide found [here](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/verify/v2_TO_v3_MIGRATION_GUIDE.md)
+If you are updating from V2 to V3 of the SDK, please check the migration guide found [here](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/verify/v2_TO_v3_MIGRATION_GUIDE.md)
 
 -   [Installation](#installation)
 -   [Usage](#usage)
@@ -44,7 +44,7 @@ If you are using this SDK as part of the Vonage Server SDK, you can access it as
 ```js
 const { Vonage } = require('@vonage/server-sdk')
 
-const credentials = { 
+const credentials = {
   apiKey: API_KEY,
   apiSecret: API_SECRET,
 }
