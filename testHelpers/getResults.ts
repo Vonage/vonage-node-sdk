@@ -13,7 +13,7 @@ type GeneratorClientMethod = (...args: unknown[]) => AsyncGenerator<unknown>;
  * @param {boolean} generator - Whether the client method is a generator
  * @param {T} client - The client to call the method on
  * @param {string} clientMethod - The method to call on the clientMethod
- * @param {Array<unknown> }args - The arguments to pass to the client method
+ * @param {Array<unknown>} args - The arguments to pass to the client method
  *
  * @return {Promise<unknown | Array<unknown>>} The results of the client method
  */
@@ -21,7 +21,7 @@ export const getResults = async <T>(
   generator: boolean,
   client: T,
   clientMethod: keyof T,
-  args: [unknown?, unknown?, unknown?] = [],
+  args: Array<unknown> = [],
 ): Promise<unknown | Array<unknown>> => {
   if (!client) {
     throw new Error('Client is not defined');

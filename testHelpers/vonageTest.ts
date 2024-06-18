@@ -8,9 +8,23 @@ import { getResults } from './getResults';
  *
  * @param {TestTuple} testDataSets - An array of test data sets
  */
-export const VonageTest = <T>(testDataSets: TestTuple[]) => {
-  describe.each<TestTuple>(testDataSets)('$label', ({ tests }) => {
-    test.each<SDKTestCase<T>>(tests)(
+export const VonageTest = <T>(testDataSets: TestTuple<T>[]) => {
+  describe.each<TestTuple<T>>(testDataSets)('$name', ({ tests }) => {
+    afterEach(function () {
+      nock.cleanAll();
+    });
+
+    const successTests = tests.filter(
+      ({ error }) => !error,
+    );
+
+    const failureTests = tests.filter(
+      ({ error }) => !!error,
+    );
+
+
+    // JEST will error out if there are no tests to run
+    test.each<SDKTestCase<T>>(successTests)(
       'Can $label',
       async ({
         baseUrl,
@@ -42,8 +56,49 @@ export const VonageTest = <T>(testDataSets: TestTuple[]) => {
 
         expect(results).toEqual(expected);
         expect(nock.isDone()).toBeTruthy();
+      },
+    );
 
-        expect(results).toEqual(expected);
+    // We might always have a failure test
+    if (failureTests.length < 1) {
+      return;
+    }
+
+    test.each<SDKTestCase<T>>(failureTests)(
+      'Will throw $label',
+      async ({
+        baseUrl,
+        reqHeaders,
+        requests,
+        responses,
+        client,
+        clientMethod,
+        parameters,
+        error,
+      }) => {
+        if ((error !instanceof Error || typeof error !== 'string')) {
+          throw new Error('Error must be a string or an instance of Error');
+        }
+
+        const scope = nock(baseUrl, {
+          reqheaders: reqHeaders,
+        });
+
+        requests.forEach((request, index) => {
+          (scope as nock.Scope)
+            .intercept(...request)
+            .reply(...responses[index]);
+        });
+
+        await expect(() => getResults<T>(
+          false,
+          client,
+          clientMethod,
+          parameters,
+        )).rejects.toThrow(
+          error,
+        );
+
         expect(nock.isDone()).toBeTruthy();
       },
     );

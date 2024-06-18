@@ -3,7 +3,7 @@ import nock from 'nock';
 /**
  * A Tuple that contains the status code of the response and the nock interceptor function
  */
-type TestResponse = [
+export type TestResponse = [
   /**
    * The status code of the response
    */
@@ -14,13 +14,13 @@ type TestResponse = [
    *
    * This can either be the body of the response or a nock interceptor function
    */
-  nock.InterceptFunction?,
+  (nock.InterceptFunction | Record<string, unknown> | string)?,
 ];
 
 /**
  * A Tuple that contains the method, path, and body of a request nock will intercept.
  */
-type TestRequest = [
+export type TestRequest = [
   /**
    * The path of the request
    */
@@ -34,7 +34,7 @@ type TestRequest = [
   /**
    * The body of the request
    */
-  nock.RequestBodyMatcher?,
+  nock.RequestBodyMatcher,
 ];
 
 export type SDKTestCase<T> = {
@@ -76,7 +76,7 @@ export type SDKTestCase<T> = {
   /**
    * The parameters that will be passed to the client method
    */
-  parameters?: [unknown, unknown, unknown];
+  parameters?: Array<unknown>;
 
   /**
    * Tell the test that the client method is a generator
@@ -86,7 +86,7 @@ export type SDKTestCase<T> = {
   /**
    * Tell the test that the response is going to be an error
    */
-  error: boolean;
+  error: boolean | Error | string;
 
   /**
    * The expected response from the call to the client method
