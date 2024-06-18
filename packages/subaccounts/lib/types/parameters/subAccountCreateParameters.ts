@@ -21,6 +21,7 @@ export type SubAccountCreateParameters = {
 
   /**
    * Flag indicating whether to use the primary account balance (true) or not (false).
+   * Default value is true.
    */
-  usePrimaryAccountBalance: boolean;
+  usePrimaryAccountBalance?: boolean;
 };
