@@ -74,8 +74,8 @@ The following is a list of Vonage Video APIs and whether the SDK provides suppor
 | Signaling | ✅ |
 | Force Muting | ✅ |
 | Archiving | ✅ |
-| Custom S3/Azure buckets | ❌ |
-| SIP Interconnect | ❌ |
-| Live Streaming Broadcasts | ❌ |
-| Experience Composer | ❌ |
+| Custom S3/Azure buckets | ✅ |
+| SIP Interconnect | ✅ |
+| Live Streaming Broadcasts | ✅ |
+| Experience Composer | ✅ |
 | Account Management | ❌ |
