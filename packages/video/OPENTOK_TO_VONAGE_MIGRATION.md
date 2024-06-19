@@ -2,11 +2,11 @@
 
 ## Installation
 
-The package name has changed, and is now a companion to the core Vonage Node SDK. You will need to remove the old `opentok` package and install `@vonage/server-sdk@beta` and `@vonage/video`
+The package name has changed, and is now a companion to the core Vonage Node SDK. You will need to remove the old `opentok` package and install `@vonage/server-sdk`
 
 ```console
 $ npm uninstall opentok
-$ npm install -s @vonage/server-sdk@beta @vonage/video
+$ npm install -s @vonage/server-sdk
 ```
 
 If you are not planning on using any of the additional Vonage APIs, or need to use a custom URL (for example, accessing dev or QA environments), you can also just install `@vonage/video` and configure it as a standalon client.
