@@ -1,14 +1,13 @@
 import { Client } from '@vonage/server-client';
 import {
   Account,
-  SubAccountResponsePage,
-  SubAccountResponse,
-  SubAccountCreateParameters,
   SubAccount,
+  SubAccountCreateParameters,
   SubAccountCreateRequest,
   SubAccountModifyParameters,
+  SubAccountResponse,
+  SubAccountResponsePage,
 } from '../../lib/types';
-import { BASE_URL } from '../common';
 
 const primaryAccount = {
   apiKey: '12345',
@@ -110,7 +109,7 @@ export default [
         'POST',
         {
           name: subAccountOne.name,
-          secret: 'the new secret',
+          secret: 'The new secret1',
           use_primary_account_balance: true,
         } as SubAccountCreateRequest,
       ],
@@ -127,7 +126,7 @@ export default [
     parameters: [
       {
         name: subAccountOne.name,
-        secret: 'the new secret',
+        secret: 'The new secret1',
         usePrimaryAccountBalance: true,
       } as SubAccountCreateParameters,
     ],
