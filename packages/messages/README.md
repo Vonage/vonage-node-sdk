@@ -13,6 +13,7 @@ If you are updating from V2 to V3, please check the migration guide found [here]
 * [Installation](#installation)
 * [Usage](#usage)
 * [Promises](#promises)
+* [Channels](#channels)
 
 ## Installation
 
@@ -108,6 +109,24 @@ Run:
 ```bash
 npm run test
 ```
+
+## Channels
+
+Vonage is constantly adding new channels to the Messages API. However, these
+channels follow our normal product development cycle and may not be available to
+all users. All channels marked as 'General Availability' are available to all
+while those marked as 'Beta' are available to a limited number of users. There
+also maybe new features on a channel that are in 'Beta'. This table details
+the current status of each channel:
+
+| Channel            |  API Release Status  |
+|--------------------|:--------------------:|
+| SMS                | General Availability |
+| MMS                | General Availability |
+| RCS                | Beta                 |
+| Facebook Messenger | General Availability |
+| WhatsApp           | General Availability |
+| Viber              | General Availability |
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 

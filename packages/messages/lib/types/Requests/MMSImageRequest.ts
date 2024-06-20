@@ -48,4 +48,9 @@ export type MMSImageRequest = {
    * The channel through which the message will be sent, which is 'mms' for MMS.
    */
   channel: 'mms';
+
+  /**
+   * The amount of time in seconds the message will live for
+   */
+  ttl?: number;
 }

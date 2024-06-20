@@ -1,7 +1,6 @@
 import { SMS } from '../../lib';
 import { MessageSuccess } from '../../lib';
 import { MessageParamsText, SMSMessageRequest } from '../../lib';
-import { AuthType } from '../common';
 
 export default [
   {
@@ -47,6 +46,9 @@ export default [
         text: 'too many secrets',
         channel: 'sms',
         message_type: 'text',
+        origin: {
+          network_code: 'SG1',
+        },
         sms: {
           encoding_type: 'unicode',
           content_id: 'content id',
@@ -67,6 +69,9 @@ export default [
         from: '12126875309',
         to: '14152739164',
         text: 'too many secrets',
+        origin: {
+          networkCode: 'SG1',
+        },
         sms: {
           encodingType: 'unicode',
           contentId: 'content id',
@@ -214,6 +219,5 @@ export default [
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
     } as MessageSuccess,
     error: 'Request failed with status code 401',
-    authType: AuthType.JWT,
   },
 ];

@@ -13,6 +13,11 @@ export class MMSVcard
   public channel: 'mms';
 
   /**
+   * The amount of time in seconds the message will live for
+   */
+  public ttl?: number;
+
+  /**
    * Send an MMS vCard message.
    *
    * @param {MessageParamsVcard} params - The parameters for creating the vCard message.
@@ -36,5 +41,6 @@ export class MMSVcard
   constructor(params: MessageParamsVcard) {
     super(params);
     this.channel = 'mms';
+    this.ttl = params?.ttl;
   }
 }

@@ -13,6 +13,11 @@ export class MMSAudio
   public channel: 'mms';
 
   /**
+   * The amount of time in seconds the message will live for
+   */
+  public ttl?: number;
+
+  /**
    * Send an MMS audio message.
    *
    * @param {MessageParamsAudio} params - The parameters for creating the audio message.
@@ -36,5 +41,6 @@ export class MMSAudio
   public constructor(params: MessageParamsAudio) {
     super(params);
     this.channel = 'mms';
+    this.ttl = params?.ttl;
   }
 }

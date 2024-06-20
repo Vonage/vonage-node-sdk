@@ -15,6 +15,16 @@ export class SMS extends AbstractTextMessage implements SMSParams {
   public sms?: SMSExtraParams;
 
   /**
+   * The originator of the message.
+   */
+  public origin?: {
+    /**
+     * The network code of the originator.
+     */
+    networkCode: string;
+  };
+
+  /**
    * Send an SMS message
    *
    * @param {MessageParamsText | string} params - The message parameters or text message.
@@ -76,6 +86,8 @@ export class SMS extends AbstractTextMessage implements SMSParams {
     if (typeof params === 'string') {
       return;
     }
+
+    this.origin = params.origin;
 
     this.sms = params.sms
       ? {

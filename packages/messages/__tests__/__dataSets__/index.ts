@@ -3,6 +3,7 @@ import mmsTests from './mms';
 import messengerTests from './messenger';
 import viberTests from './viber';
 import whatsAppTests from './whatsApp';
+import RCSTests from './rcs';
 
 export default [
   {
@@ -24,5 +25,9 @@ export default [
   {
     label: 'WhatsApp',
     tests: whatsAppTests,
+  },
+  {
+    label: 'RCS',
+    tests: RCSTests,
   },
 ];
