@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/server-sdk",
-  "version": "3.14.1",
+  "version": "3.14.2",
   "description": "Node.js Client for the Vonage API Platform",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -50,9 +50,9 @@
     "@vonage/server-client": "^1.12.0",
     "@vonage/sms": "^1.13.0",
     "@vonage/users": "^1.6.0",
-    "@vonage/verify": "^1.12.0",
-    "@vonage/verify2": "^1.11.0",
-    "@vonage/video": "^1.16.0",
+    "@vonage/verify": "^1.12.1",
+    "@vonage/verify2": "^1.11.1",
+    "@vonage/video": "^1.16.1",
     "@vonage/voice": "^1.12.1"
   },
   "publishConfig": {
