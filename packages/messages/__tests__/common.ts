@@ -4,9 +4,9 @@ import { Messages } from '../lib/index';
 import { readFileSync } from 'fs';
 
 export enum AuthType {
-    JWT = 'jwt',
-    SIG = 'sig',
-    QUERY = 'query',
+  JWT = 'jwt',
+  SIG = 'sig',
+  QUERY = 'query',
 }
 
 export const BASE_URL = 'https://api.nexmo.com';
@@ -45,7 +45,7 @@ const auths = {
 
 export const getAuth = (authType: AuthType): Auth => auths[authType];
 
-export const getClient = (authType: AuthType): Messages =>
+export const getClient: Messages = (authType: AuthType): Messages =>
   new Messages(getAuth(authType));
 
 export const getScope = (authType: AuthType): nock => scopes[authType];

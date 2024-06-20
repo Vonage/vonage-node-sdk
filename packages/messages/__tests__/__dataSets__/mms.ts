@@ -22,7 +22,7 @@ import { Vcard } from '../../lib/classes/MMS/Vcard';
 
 export default [
   {
-    label: 'send MMS image',
+    label: 'send image',
     request: [
       '/v1/messages',
       'POST',
@@ -58,7 +58,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS image with caption and ref',
+    label: 'send image with caption and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -102,7 +102,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS image with old class ',
+    label: 'send image with old class ',
     request: [
       '/v1/messages',
       'POST',
@@ -142,7 +142,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS audio',
+    label: 'send audio',
     request: [
       '/v1/messages',
       'POST',
@@ -178,7 +178,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS audio with caption and ref',
+    label: 'send audio with caption and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -218,7 +218,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS audio using old class ',
+    label: 'send audio using old class ',
     request: [
       '/v1/messages',
       'POST',
@@ -258,7 +258,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS video',
+    label: 'send video',
     request: [
       '/v1/messages',
       'POST',
@@ -294,7 +294,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS video with caption and ref',
+    label: 'send video with caption and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -334,7 +334,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS video with old class ',
+    label: 'send video with old class ',
     request: [
       '/v1/messages',
       'POST',
@@ -374,7 +374,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS vcard',
+    label: 'send vcard',
     request: [
       '/v1/messages',
       'POST',
@@ -410,7 +410,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS vcard with client ref',
+    label: 'send vcard with client ref',
     request: [
       '/v1/messages',
       'POST',
@@ -450,7 +450,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send MMS vcard with old class',
+    label: 'send vcard with old class',
     request: [
       '/v1/messages',
       'POST',

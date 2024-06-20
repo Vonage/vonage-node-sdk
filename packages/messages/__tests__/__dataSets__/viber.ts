@@ -23,7 +23,7 @@ import { MessageCategory } from '../../lib/enums/Viber/MessageCategory';
 
 export default [
   {
-    label: 'send Viber text',
+    label: 'send text',
     request: [
       '/v1/messages',
       'POST',
@@ -55,7 +55,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber text with viber service',
+    label: 'send text with viber service',
     request: [
       '/v1/messages',
       'POST',
@@ -111,7 +111,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber text with old class',
+    label: 'send text with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -155,7 +155,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber image',
+    label: 'send image',
     request: [
       '/v1/messages',
       'POST',
@@ -191,7 +191,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber image with viber service',
+    label: 'send image with viber service',
     request: [
       '/v1/messages',
       'POST',
@@ -247,7 +247,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber image with old class',
+    label: 'send image with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -303,7 +303,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber video',
+    label: 'send video',
     request: [
       '/v1/messages',
       'POST',
@@ -343,7 +343,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber video with viber service',
+    label: 'send video with viber service',
     request: [
       '/v1/messages',
       'POST',
@@ -381,7 +381,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber file',
+    label: 'send file',
     request: [
       '/v1/messages',
       'POST',
@@ -417,7 +417,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Viber file with viber service',
+    label: 'send file with viber service',
     request: [
       '/v1/messages',
       'POST',

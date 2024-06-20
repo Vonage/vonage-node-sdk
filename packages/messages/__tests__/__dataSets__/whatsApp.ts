@@ -39,7 +39,7 @@ import { Video } from '../../lib/classes/WhatsApp/Video';
 
 export default [
   {
-    label: 'send WhatsApp text',
+    label: 'send text',
     request: [
       '/v1/messages',
       'POST',
@@ -71,7 +71,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp text with client ref and context',
+    label: 'send text with client ref and context',
     request: [
       '/v1/messages',
       'POST',
@@ -115,7 +115,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp text with old class',
+    label: 'send text with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -149,7 +149,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp template',
+    label: 'send template',
     request: [
       '/v1/messages',
       'POST',
@@ -195,7 +195,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp template with client ref',
+    label: 'send template with client ref',
     request: [
       '/v1/messages',
       'POST',
@@ -243,7 +243,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp template with old class',
+    label: 'send template with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -288,7 +288,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp url sticker',
+    label: 'send url sticker',
     request: [
       '/v1/messages',
       'POST',
@@ -324,7 +324,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp url sticker with clientRef',
+    label: 'send url sticker with clientRef',
     request: [
       '/v1/messages',
       'POST',
@@ -362,7 +362,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp id sticker',
+    label: 'send id sticker',
     request: [
       '/v1/messages',
       'POST',
@@ -398,7 +398,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp id sticker with client ref',
+    label: 'send id sticker with client ref',
     request: [
       '/v1/messages',
       'POST',
@@ -436,7 +436,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp file',
+    label: 'send file',
     request: [
       '/v1/messages',
       'POST',
@@ -472,7 +472,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp file with caption and ref',
+    label: 'send file with caption and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -514,7 +514,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp file with old class',
+    label: 'send file with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -554,7 +554,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp custom',
+    label: 'send custom',
     request: [
       '/v1/messages',
       'POST',
@@ -590,7 +590,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp custom with client ref',
+    label: 'send custom with client ref',
     request: [
       '/v1/messages',
       'POST',
@@ -628,7 +628,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp custom with old class',
+    label: 'send custom with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -666,7 +666,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp image',
+    label: 'send image',
     request: [
       '/v1/messages',
       'POST',
@@ -702,7 +702,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp image with caption and ref',
+    label: 'send image with caption and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -742,7 +742,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp image with old class',
+    label: 'send image with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -782,7 +782,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp audio',
+    label: 'send audio',
     request: [
       '/v1/messages',
       'POST',
@@ -818,7 +818,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp audio with caption and ref',
+    label: 'send audio with caption and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -858,7 +858,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp audio with old class',
+    label: 'send audio with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -898,7 +898,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp video',
+    label: 'send video',
     request: [
       '/v1/messages',
       'POST',
@@ -934,7 +934,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp video with caption and ref',
+    label: 'send video with caption and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -974,7 +974,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send WhatsApp video with old class',
+    label: 'send video with old class',
     request: [
       '/v1/messages',
       'POST',

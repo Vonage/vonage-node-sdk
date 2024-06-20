@@ -6,23 +6,23 @@ import whatsAppTests from './whatsApp';
 
 export default [
   {
-    label: 'SMS Messages',
+    label: 'SMS',
     tests: smsTests,
   },
   {
-    label: 'MMS Messages',
+    label: 'MMS',
     tests: mmsTests,
   },
   {
-    label: 'Messenger Messages',
+    label: 'Messenger',
     tests: messengerTests,
   },
   {
-    label: 'Viber Messages',
+    label: 'Viber',
     tests: viberTests,
   },
   {
-    label: 'WhatsApp Messages',
+    label: 'WhatsApp',
     tests: whatsAppTests,
   },
 ];
