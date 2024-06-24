@@ -14,7 +14,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         text: 'too many secrets',
         channel: 'rcs',
