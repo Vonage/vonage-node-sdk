@@ -13,11 +13,6 @@ export class MMSVideo
   public channel: 'mms';
 
   /**
-   * The amount of time in seconds the message will live for
-   */
-  public ttl?: number;
-
-  /**
    * Send an MMS video message.
    *
    * @param {MessageParamsVideo} params - The parameters for creating the video message.
@@ -40,6 +35,5 @@ export class MMSVideo
   constructor(params: MessageParamsVideo) {
     super(params);
     this.channel = 'mms';
-    this.ttl = params?.ttl;
   }
 }

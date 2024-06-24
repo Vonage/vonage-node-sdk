@@ -74,7 +74,6 @@ export default [
         },
         webhook_url: 'https://example.com',
         webhook_version: 'v1',
-        ttl: 42,
       } as MMSImageRequest,
     ],
     response: [
@@ -96,7 +95,6 @@ export default [
         },
         webhookUrl: 'https://example.com',
         webhookVersion: 'v1',
-        ttl: 42,
       } as MessageParamsImage),
     ],
     expected: {
@@ -189,7 +187,6 @@ export default [
         to: '14152739164',
         channel: 'mms',
         message_type: 'audio',
-        ttl: 42,
         client_ref: 'my-ref',
         audio: {
           url: 'https://example.com',
@@ -210,7 +207,6 @@ export default [
         from: '12126875309',
         to: '14152739164',
         clientRef: 'my-ref',
-        ttl: 42,
         audio: {
           url: 'https://example.com',
           caption: 'A cool track',
@@ -308,7 +304,6 @@ export default [
         channel: 'mms',
         message_type: 'video',
         client_ref: 'my-ref',
-        ttl: 42,
         video: {
           url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
           caption: 'Click me',
@@ -328,7 +323,6 @@ export default [
         from: '12126875309',
         to: '14152739164',
         clientRef: 'my-ref',
-        ttl: 42,
         video: {
           url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
           caption: 'Click me',
@@ -430,7 +424,6 @@ export default [
           caption: 'My vcard',
         },
         client_ref: 'my-ref',
-        ttl: 42,
       } as MMSVcardRequest,
     ],
     response: [
@@ -450,7 +443,6 @@ export default [
           caption: 'My vcard',
         },
         clientRef: 'my-ref',
-        ttl: 42,
       } as MessageParamsVcard),
     ],
     expected: {

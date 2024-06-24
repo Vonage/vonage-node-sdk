@@ -12,8 +12,6 @@ export class MMSImage
 {
   public channel: 'mms';
 
-  public ttl?: number;
-
   /**
    * Send an MMS image message.
    *
@@ -38,6 +36,5 @@ export class MMSImage
   constructor(params: MessageParamsImage) {
     super(params);
     this.channel = 'mms';
-    this.ttl = params.ttl;
   }
 }

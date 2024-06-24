@@ -127,7 +127,6 @@ export default [
           url: 'https://example.com',
         },
         webhook_url: 'https://example.com',
-        webhook_version: 'v1',
         ttl: 42,
       },
     ],
@@ -148,7 +147,6 @@ export default [
           url: 'https://example.com',
         },
         webhookUrl: 'https://example.com',
-        webhookVersion: 'v1',
         ttl: 42,
       }),
     ],
@@ -205,7 +203,7 @@ export default [
         client_ref: 'my-ref',
         ttl: 42,
         video: {
-          url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          url: 'http://example.com/video.mp4',
         },
       },
     ],
@@ -224,7 +222,7 @@ export default [
         clientRef: 'my-ref',
         ttl: 42,
         video: {
-          url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+          url: 'http://example.com/video.mp4',
         },
       }),
     ],
@@ -243,7 +241,20 @@ export default [
         channel: 'rcs',
         message_type: 'custom',
         custom: {
-          foo: 'bar',
+          contentMessage: {
+            text: 'Check out our latest offers!',
+            suggestions: [
+              {
+                action: {
+                  text: 'Open product page',
+                  postbackData: 'postback_data_1234',
+                  openUrlAction: {
+                    url: 'http://example.com/',
+                  },
+                },
+              },
+            ],
+          },
         } as Record<string, unknown>,
       },
     ],
@@ -260,7 +271,20 @@ export default [
         from: 'Vonage',
         to: '14152739164',
         custom: {
-          foo: 'bar',
+          contentMessage: {
+            text: 'Check out our latest offers!',
+            suggestions: [
+              {
+                action: {
+                  text: 'Open product page',
+                  postbackData: 'postback_data_1234',
+                  openUrlAction: {
+                    url: 'http://example.com/',
+                  },
+                },
+              },
+            ],
+          },
         },
       }),
     ],
@@ -281,7 +305,20 @@ export default [
         client_ref: 'my-ref',
         ttl: 42,
         custom: {
-          foo: 'bar',
+          contentMessage: {
+            text: 'Check out our latest offers!',
+            suggestions: [
+              {
+                action: {
+                  text: 'Open product page',
+                  postbackData: 'postback_data_1234',
+                  openUrlAction: {
+                    url: 'http://example.com/',
+                  },
+                },
+              },
+            ],
+          },
         } as Record<string, unknown>,
       },
     ],
@@ -300,7 +337,20 @@ export default [
         clientRef: 'my-ref',
         ttl: 42,
         custom: {
-          foo: 'bar',
+          contentMessage: {
+            text: 'Check out our latest offers!',
+            suggestions: [
+              {
+                action: {
+                  text: 'Open product page',
+                  postbackData: 'postback_data_1234',
+                  openUrlAction: {
+                    url: 'http://example.com/',
+                  },
+                },
+              },
+            ],
+          },
         },
       }),
     ],
