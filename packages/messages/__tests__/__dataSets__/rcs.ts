@@ -22,7 +22,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -31,7 +31,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSText({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         text: 'too many secrets',
       }),
@@ -46,7 +46,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         text: 'too many secrets',
         channel: 'rcs',
@@ -56,7 +56,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -65,7 +65,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSText({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         text: 'too many secrets',
         ttl: 42,
@@ -82,7 +82,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         channel: 'rcs',
         message_type: 'image',
@@ -101,7 +101,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSImage({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         image: {
           url: 'https://example.com',
@@ -118,7 +118,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         channel: 'rcs',
         client_ref: 'my-ref',
@@ -132,7 +132,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -141,7 +141,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSImage({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         clientRef: 'my-ref',
         image: {
@@ -162,7 +162,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         channel: 'rcs',
         message_type: 'video',
@@ -172,7 +172,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -181,7 +181,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSVideo({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         video: {
           url: 'https://example.com',
@@ -198,7 +198,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         channel: 'rcs',
         message_type: 'video',
@@ -210,7 +210,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -219,7 +219,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSVideo({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         clientRef: 'my-ref',
         ttl: 42,
@@ -238,7 +238,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         channel: 'rcs',
         message_type: 'custom',
@@ -248,7 +248,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -257,7 +257,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSCustom({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         custom: {
           foo: 'bar',
@@ -274,7 +274,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         channel: 'rcs',
         message_type: 'custom',
@@ -286,7 +286,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -295,7 +295,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSCustom({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         clientRef: 'my-ref',
         ttl: 42,
@@ -314,7 +314,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         channel: 'rcs',
         message_type: 'file',
@@ -324,7 +324,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -333,7 +333,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSFile({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         file: {
           url: 'https://example.com/my-file.png',
@@ -350,7 +350,7 @@ export default [
       '/v1/messages',
       'POST',
       {
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         channel: 'rcs',
         message_type: 'file',
@@ -362,7 +362,7 @@ export default [
       },
     ],
     response: [
-      200,
+      202,
       {
         message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
       },
@@ -371,7 +371,7 @@ export default [
     clientMethod: 'send',
     parameters: [
       new RCSFile({
-        from: '12126875309',
+        from: 'Vonage',
         to: '14152739164',
         clientRef: 'my-ref',
         ttl: 42,
