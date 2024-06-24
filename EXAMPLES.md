@@ -268,66 +268,6 @@ console.log(application.name);
 
 ## Vonage JWT Package
 
-### MissingPrivateKeyError Class
-
-`MissingPrivateKeyError`
- class for throwing an error when the private key
-is missing. The private key must either be the string of the key or a buffer
-from the key file. When you created the application, the private key would
-have been downloaded then. If you lost the key, you will need to regenrate
-the key.
-
-
-#### tokenGenerate
-
-Generates a JWT token.
-
-Generate a JWT token with default claims.
-
-
-```js
-const privateKey = fs.readFileSync(__dirname + '/private.key');
-const token = tokenGenerate(applicationId, privateKey);
-```
-
-
-
-
-Generate a JWT token with custom claims.
-
-
-```js
-const privateKey = fs.readFileSync(__dirname + '/private.key');
-const token = tokenGenerate(applicationId, privateKey, {
-  subject: 'my-subject',
-  acl: {
-   paths: {
-     '/*/users/**': {},
-     '/*/conversations/**': {},
-     '/*/sessions/**': {},
-   },
-  },
-});
-```
-
-#### verifySignature
-
-Verifies a JWT token
-
-Validate a JWT token
-
-
-```js
-const privateKey = fs.readFileSync('./private.key');
-if (verifySignature(token, privateKey)) {
-  console.log('JWT signature verified.');
-} else {
-  console.log('JWT signature verification failed.');
-}
-```
-
-## Vonage JWT Package
-
 ### NumberInsights Class
 
 Client for the Vonage Number Insights API.
