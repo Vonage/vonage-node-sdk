@@ -1,5 +1,5 @@
-import { MessageParams } from "../../MessageParams";
-import { MessageVcardType } from "../../MessageVcardType";
+import { MessageParams } from '../../MessageParams';
+import { MessageVcardType } from '../../MessageVcardType';
 
 /**
  * Represents the parameters for sending a vCard message on the MMS channel.
@@ -10,4 +10,10 @@ import { MessageVcardType } from "../../MessageVcardType";
  * @group MMS
  * @category Parameters
  */
-export type MMSVcardParams = MessageParams & MessageVcardType;
+export type MMSVcardParams = {
+  /**
+   * The amount of time in seconds the message will live for
+   */
+  ttl?: number;
+} & MessageParams &
+  MessageVcardType;

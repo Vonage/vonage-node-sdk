@@ -39,13 +39,6 @@ export type SMSMessageRequest = {
    */
   channel: 'sms';
 
-  origin?: {
-    /**
-     * The network code of the originator.
-     */
-    network_code: string;
-  }
-
   sms?: {
     /**
      * The encoding type to use for the message. If set to either text or

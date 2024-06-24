@@ -46,9 +46,6 @@ export default [
         text: 'too many secrets',
         channel: 'sms',
         message_type: 'text',
-        origin: {
-          network_code: 'SG1',
-        },
         sms: {
           encoding_type: 'unicode',
           content_id: 'content id',
@@ -69,9 +66,6 @@ export default [
         from: '12126875309',
         to: '14152739164',
         text: 'too many secrets',
-        origin: {
-          networkCode: 'SG1',
-        },
         sms: {
           encodingType: 'unicode',
           contentId: 'content id',

@@ -112,12 +112,13 @@ npm run test
 
 ## Channels
 
-Vonage is constantly adding new channels to the Messages API. However, these
-channels follow our normal product development cycle and may not be available to
-all users. All channels marked as 'General Availability' are available to all
-while those marked as 'Beta' are available to a limited number of users. There
-also maybe new features on a channel that are in 'Beta'. This table details
-the current status of each channel:
+The Vonage Messages API supports several different communication channels, and
+from time to time will add new channels. Each channel follows our normal product
+development cycle and therefore different channels within the overall API may
+have different release statuses at a certain point in time. Channels available
+for general use will be listed as having 'General Availability'. Channels which
+are currently part of a Beta program will be listed as 'Beta'. This table
+details the current release status of each channel implemented in this SDK:
 
 | Channel            |  API Release Status  |
 |--------------------|:--------------------:|

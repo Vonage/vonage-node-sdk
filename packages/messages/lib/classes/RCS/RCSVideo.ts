@@ -3,7 +3,7 @@ import { RCSVideoParams } from '../../types';
 import { Channels } from '../../enums';
 
 /**
- * Represents an audio message for the RCS channel.
+ * Represents an video message for the RCS channel.
  *
  * @group RCS
  */
@@ -24,17 +24,17 @@ export class RCSVideo extends AbstractVideoMessage implements RCSVideoParams {
   /**
    * Send an RCS video message.
    *
-   * @param {RcsAudioMessageParams} params - The parameters for creating the audio message.
+   * @param {RCSVideoParams} params - The parameters for creating the video message.
    *
    * @example
    * ```ts
-   * import { RcsAudio } from '@vonage/messages';
+   * import { RCSVideo } from '@vonage/messages';
    *
-   * const { messageUUID } = await messagesClient.send(new RcsAudio({
+   * const { messageUUID } = await messagesClient.send(new RCSVideo({
    *  to: TO_NUMBER,
    *  from: FROM_NUMBER,
    *  audio: {
-   *    url: 'https://example.com/audio.mp3',
+   *    url: 'https://example.com/video.mp4',
    *  },
    *  clientRef: 'my-personal-reference',
    * }));

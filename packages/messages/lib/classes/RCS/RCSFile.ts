@@ -25,7 +25,7 @@ export class RCSFile
   public ttl?: number;
 
   /**
-   * Sends a file message to the Facebook RCS channel.
+   * Sends a file message to the RCS channel.
    *
    * @param {RCSFileParams} params - The parameters for creating a RCS file message.
    *
@@ -37,8 +37,7 @@ export class RCSFile
    *  to: TO_NUMBER,
    *  from: FROM_NUMBER,
    *  file: {
-   *    url: 'https://example.com/image.jpg',
-   *    caption: 'This is an image',
+   *    url: 'https://example.com/image.pdf',
    *  },
    *  clientRef: 'my-personal-reference',
    * }));

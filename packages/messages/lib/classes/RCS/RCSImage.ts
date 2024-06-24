@@ -34,7 +34,6 @@ export class RCSImage extends AbstractImageMessage implements RCSImageParams {
    *  from: FROM_NUMBER,
    *  image: {
    *    url: 'https://example.com/image.jpg',
-   *    caption: 'This is an example image',
    *  },
    *  clientRef: 'my-personal-reference',
    * }));

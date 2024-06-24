@@ -7,4 +7,10 @@ import { WhatsAppParams } from './WhatsAppParams';
  * @group WhatsApp
  * @category Parameters
  */
-export type WhatsAppAudioParams = WhatsAppParams & MessageParamsAudio;
+export type WhatsAppAudioParams = {
+  /**
+   * The amount of time in seconds the message will live for
+   */
+  ttl?: number;
+} & WhatsAppParams &
+  MessageParamsAudio;

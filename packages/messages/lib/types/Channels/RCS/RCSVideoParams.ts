@@ -20,9 +20,4 @@ export type RCSVideoParams = MessageParams & {
    * We recommend this value should be kept at its default or at least 30 minutes.
    */
   ttl?: number;
-
-  /**
-   * Additional text to accompany the video file.
-   */
-  caption?: string;
 };

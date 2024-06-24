@@ -7,4 +7,10 @@ import { WhatsAppParams } from './WhatsAppParams';
  * @group WhatsApp
  * @category Parameters
  */
-export type WhatsAppVideoParams = WhatsAppParams & MessageParamsVideo;
+export type WhatsAppVideoParams = {
+  /**
+   * The amount of time in seconds the message will live for
+   */
+  ttl?: number;
+} & WhatsAppParams &
+  MessageParamsVideo;
