@@ -1,25 +1,21 @@
 import nock from 'nock';
-import { Accounts } from '../lib/index';
+import { Accounts } from '../lib';
 import { Auth } from '@vonage/auth';
 
 describe('accounts', () => {
-  let client;
+  let client: Accounts;
 
   beforeEach(() => {
     client = new Accounts(new Auth({ apiKey: 'abcd', apiSecret: '1234' }));
   });
 
-  afterEach(() => {
-    client = null;
-  });
-
-  test("get balance", async () => {
+  test('get balance', async () => {
     const expectedResponse = {
-      "value": 10.28,
-      "autoReload": false,
+      'value': 10.28,
+      'autoReload': false,
     };
 
-    nock("https://rest.nexmo.com")
+    nock('https://rest.nexmo.com')
       .persist()
       .get('/account/get-balance')
       .query({ api_key: 'abcd', api_secret: '1234' })
@@ -30,13 +26,13 @@ describe('accounts', () => {
     expect(lookup.autoReload).toEqual(expectedResponse.autoReload);
   });
 
-  test("top up balance", async () => {
+  test('top up balance', async () => {
     const expectedResponse = {
-      "error-code": "200",
-      "error-code-label": "success",
+      'error-code': '200',
+      'error-code-label': 'success',
     };
 
-    nock("https://rest.nexmo.com")
+    nock('https://rest.nexmo.com')
       .persist()
       .post('/account/top-up', /trx=8ef2447e69604f642ae59363aa5f781b/)
       .query({ api_key: 'abcd', api_secret: '1234' })
@@ -51,23 +47,23 @@ describe('accounts', () => {
     ).toEqual(expectedResponse['error-code-label']);
   });
 
-  test("update callbacks", async () => {
+  test('update callbacks', async () => {
     const expectedResponse = {
-      "dr-callback-url": "https://example.com/webhooks/delivery-receipt",
-      "mo-callback-url": "https://example.com/webhooks/inbound-sms",
-      "max-outbound-request": 30,
-      "max-inbound-request": 30,
-      "max-calls-per-second": 30,
+      'dr-callback-url': 'https://example.com/webhooks/delivery-receipt',
+      'mo-callback-url': 'https://example.com/webhooks/inbound-sms',
+      'max-outbound-request': 30,
+      'max-inbound-request': 30,
+      'max-calls-per-second': 30,
     };
 
     const callbacks = {
-      drCallBackUrl: "https://example.com/webhooks/delivery-receipt",
-      moCallBackUrl: "https://example.com/webhooks/inbound-sms",
+      drCallBackUrl: 'https://example.com/webhooks/delivery-receipt',
+      moCallBackUrl: 'https://example.com/webhooks/inbound-sms',
     };
     const queryString = new URLSearchParams(callbacks);
-    const re = new RegExp(queryString.toString(), "g");
+    const re = new RegExp(queryString.toString(), 'g');
 
-    nock("https://rest.nexmo.com")
+    nock('https://rest.nexmo.com')
       .persist()
       .post('/account/settings', re)
       .query({ api_key: 'abcd', api_secret: '1234' })

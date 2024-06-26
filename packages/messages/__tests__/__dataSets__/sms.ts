@@ -196,7 +196,7 @@ export default [
       {
         type: 'https://developer.nexmo.com/api-errors/#unathorized',
         title: 'You did not provide correct credentials.',
-        detail: `Check that you're using the correct credentials, and that your account has this feature enabled`,
+        detail: 'Check that you\'re using the correct credentials, and that your account has this feature enabled',
         instance: 'bf0ca0bf927b3b52e3cb03217e1a1ddf',
       },
     ],

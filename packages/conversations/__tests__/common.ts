@@ -10,7 +10,6 @@ import {
   MemberState,
   MemberResponse,
   SessionUser,
-  SessionPageResponse,
   Event,
   EventType,
   EventResponse,
@@ -114,7 +113,7 @@ export const sessionResponse = Object.freeze({
   },
 }) as SessionResponse;
 
-export const sessionPage = Object.freeze() as SessionPageResponse;
+//export const sessionPage = Object.freeze() as SessionPageResponse;
 
 export const memberResponse = Object.freeze({
   id: 'MEM-00000000-0000-0000-0000-000000000001',
@@ -234,6 +233,6 @@ export const eventResponse = Object.freeze({
     },
     from_member: {
       id: 'MEM-00000000-0000-0000-0000-000000000001',
-  },
-  } 
+    },
+  }
 }) as EventResponse;

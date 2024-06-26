@@ -1,4 +1,3 @@
-import { Application } from '..';
 import { ApplicationResponse } from './ApplicationResponse';
 import { APILinks } from '@vonage/server-client';
 
@@ -45,6 +44,6 @@ export type ApplicationPageResponse = {
     /**
      * A list of applications matching your existing filters.
      */
-    applications: Array<ApplicationResponse | Application>;
+    applications: Array<ApplicationResponse>;
   };
 } & APILinks;

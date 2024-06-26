@@ -1,4 +1,4 @@
-import { MessageSIPBody } from "./messageSIPBody";
+import { MessageSIPBody } from './messageSIPBody';
 
 export type MessageSIPMachineBody = {
   /**

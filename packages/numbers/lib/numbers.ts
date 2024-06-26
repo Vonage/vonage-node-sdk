@@ -11,7 +11,7 @@ import {
   NumbersSearchSimple,
   NumbersSearchFilter,
   NumbersUpdateParams,
-} from "./types";
+} from './types';
 
 const buildSearch = ({
   endsWith,

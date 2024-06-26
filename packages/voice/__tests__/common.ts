@@ -1,5 +1,4 @@
-import { CallStatus } from '../lib/enums';
-import { CallDetail } from '../lib/types/index';
+import { CallDetail, CallStatus } from '../lib';
 export const BASE_URL = 'https://api.nexmo.com/';
 
 export const callPhone = {

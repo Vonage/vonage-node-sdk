@@ -1,4 +1,4 @@
-import { ExperienceComposerResolution } from "../../enums";
+import { ExperienceComposerResolution } from '../../enums';
 
 /**
  * Represents a response from the Experience Composer.
@@ -42,7 +42,7 @@ export type ExperienceComposerResponse = {
   /**
    * The status of the response, which can be one of: "starting", "started", "stopped", "failed".
    */
-  status: "starting" | "started" | "stopped" | "failed";
+  status: 'starting' | 'started' | 'stopped' | 'failed';
 
   /**
    * The stream ID associated with the response.

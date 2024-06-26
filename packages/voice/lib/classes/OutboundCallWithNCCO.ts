@@ -1,4 +1,4 @@
-import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject';
+import { PhoneEndpointObject } from '@vonage/voice';
 import { CallEndpoint, NCCOAction } from '../types';
 import { OutboundCall } from './OutboundCall';
 import debug from 'debug';

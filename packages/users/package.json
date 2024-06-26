@@ -22,8 +22,9 @@
       "url": "https://github.com/dragonmantank"
     }
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "directories": {
     "lib": "dist",
     "test": "__tests__"
@@ -39,9 +40,5 @@
   },
   "dependencies": {
     "@vonage/server-client": "^1.12.0"
-  },
-  "devDependencies": {
-    "@vonage/auth": "^1.10.0",
-    "nock": "^13.3.4"
   }
 }

@@ -1,4 +1,5 @@
 import { ViberCategory } from '../../../enums';
+import { ViberAction } from './ViberAction';
 
 /**
  * Represents parameters for a Viber service message.
@@ -24,4 +25,6 @@ export type ViberService = {
    * The category of the Viber service message.
    */
   category: ViberCategory;
+
+  action?: ViberAction
 };

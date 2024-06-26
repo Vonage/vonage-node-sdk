@@ -1,5 +1,5 @@
-import { MessageParams } from "../../MessageParams";
-import { MessageAudioType } from "../../MessageAudioType";
+import { MessageParams } from '../../MessageParams';
+import { MessageAudioType } from '../../MessageAudioType';
 
 /**
  * Represents the parameters for sending an audio message on the MMS channel.

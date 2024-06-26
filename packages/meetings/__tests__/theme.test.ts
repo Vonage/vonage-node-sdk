@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { Client } from '@vonage/server-client';
-import { Meetings } from '../lib/index';
+import { Meetings, Theme } from '../lib';
 import {
   BASE_URL,
   getClient,
@@ -15,7 +15,7 @@ import pick from 'lodash.pick';
 
 describe('Meetings > Themes', () => {
   let client: Meetings;
-  let scope: nock;
+  let scope: nock.Scope;
 
   beforeEach(() => {
     client = getClient();
@@ -27,9 +27,9 @@ describe('Meetings > Themes', () => {
   });
 
   test('Can get empty themes', async () => {
-    scope.get(`/v1/meetings/themes`).reply(200, []);
+    scope.get('/v1/meetings/themes').reply(200, []);
 
-    const results = [];
+    const results: Array<Theme> = [];
     for await (const room of client.getThemes()) {
       results.push(room);
     }
@@ -40,13 +40,13 @@ describe('Meetings > Themes', () => {
 
   test('Can get themes', async () => {
     scope
-      .get(`/v1/meetings/themes`)
+      .get('/v1/meetings/themes')
       .reply(200, [
         Client.transformers.snakeCaseObjectKeys(themeOne),
         Client.transformers.snakeCaseObjectKeys(themeTwo),
       ]);
 
-    const results = [];
+    const results: Array<Theme> = [];
     for await (const room of client.getThemes()) {
       results.push(room);
     }
@@ -57,7 +57,7 @@ describe('Meetings > Themes', () => {
 
   test('Can get theme', async () => {
     scope
-      .get(`/v1/meetings/themes/my-theme`)
+      .get('/v1/meetings/themes/my-theme')
       .reply(200, Client.transformers.snakeCaseObjectKeys(themeOne));
 
     expect(await client.getTheme('my-theme')).toEqual(themeOne);
@@ -66,7 +66,7 @@ describe('Meetings > Themes', () => {
 
   test('Can delete theme', async () => {
     scope
-      .delete(`/v1/meetings/themes/my-theme`)
+      .delete('/v1/meetings/themes/my-theme')
       .reply(200, Client.transformers.snakeCaseObjectKeys(themeOne));
 
     await client.deleteTheme('my-theme');
@@ -75,7 +75,7 @@ describe('Meetings > Themes', () => {
 
   test('Can force delete theme', async () => {
     scope
-      .delete(`/v1/meetings/themes/my-theme?force=true`)
+      .delete('/v1/meetings/themes/my-theme?force=true')
       .reply(200, Client.transformers.snakeCaseObjectKeys(themeOne));
 
     await client.deleteTheme('my-theme', true);
@@ -83,7 +83,7 @@ describe('Meetings > Themes', () => {
   });
 
   test('Will throw when theme in use', async () => {
-    scope.delete(`/v1/meetings/themes/my-theme`).reply(400, {
+    scope.delete('/v1/meetings/themes/my-theme').reply(400, {
       message: 'could not delete theme',
       name: 'BadRequestError',
       errors: [
@@ -101,11 +101,11 @@ describe('Meetings > Themes', () => {
   test('Will create a theme', async () => {
     scope
       .post(
-        `/v1/meetings/themes`,
+        '/v1/meetings/themes',
         pick(
           Client.transformers.snakeCaseObjectKeys(themeOne, true),
           client.THEME_WRITE_KEYS,
-        ),
+        ) as nock.RequestBodyMatcher,
       )
       .reply(201, themeOne);
 
@@ -115,12 +115,14 @@ describe('Meetings > Themes', () => {
 
   test('Will update a theme', async () => {
     scope
-      .patch(`/v1/meetings/themes/my-theme`, {
-        update_details: pick(
-          Client.transformers.snakeCaseObjectKeys(themeOne, true),
-          client.THEME_WRITE_KEYS,
-        ),
-      })
+      .patch('/v1/meetings/themes/my-theme',
+        {
+          update_details: pick(
+            Client.transformers.snakeCaseObjectKeys(themeOne, true),
+            client.THEME_WRITE_KEYS,
+          ),
+        } as nock.RequestBodyMatcher,
+      )
       .reply(201, themeOne);
 
     expect(await client.updateTheme('my-theme', themeOne)).toEqual(themeOne);
@@ -128,7 +130,7 @@ describe('Meetings > Themes', () => {
   });
 
   test('Can get one page of theme rooms', async () => {
-    scope.get(`/v1/meetings/themes/my-theme/rooms?`).reply(200, {
+    scope.get('/v1/meetings/themes/my-theme/rooms?').reply(200, {
       _embedded: [
         {
           ...roomOne,
@@ -155,7 +157,7 @@ describe('Meetings > Themes', () => {
 
   test('Can get two pages of theme rooms', async () => {
     scope
-      .get(`/v1/meetings/themes/my-theme/rooms?page_size=1`)
+      .get('/v1/meetings/themes/my-theme/rooms?page_size=1')
       .reply(200, {
         _embedded: [
           {
@@ -174,7 +176,7 @@ describe('Meetings > Themes', () => {
         page_size: 20,
         total_items: 1,
       })
-      .get(`/v1/meetings/themes/my-theme/rooms?page_size=1&start_id=42`)
+      .get('/v1/meetings/themes/my-theme/rooms?page_size=1&start_id=42')
       .reply(200, {
         _embedded: [
           {
@@ -207,7 +209,7 @@ describe('Meetings > Themes', () => {
 
   test('Will throw error when call to theme rooms fails', async () => {
     scope
-      .get(`/v1/meetings/themes/my-theme/rooms?`)
+      .get('/v1/meetings/themes/my-theme/rooms?')
       .reply(200, {
         _embedded: [roomOne],
         _links: {
@@ -221,7 +223,7 @@ describe('Meetings > Themes', () => {
         page_size: 20,
         total_items: 1,
       })
-      .get(`/v1/meetings/themes/my-theme/rooms?start_id=42`)
+      .get('/v1/meetings/themes/my-theme/rooms?start_id=42')
       .reply(401, {
         status: 401,
         error: 'Unauthorized',
@@ -241,7 +243,7 @@ describe('Meetings > Themes', () => {
 
   test('Will set default theme', async () => {
     scope
-      .patch(`/v1/meetings/applications`, {
+      .patch('/v1/meetings/applications', {
         update_details: {
           default_theme_id: 'my-theme',
         },

@@ -7,5 +7,5 @@ export * from './listItem';
 export * from './listManualDatasource';
 export * from './listSalesForceDataSource';
 export * from './listSyncStatus';
-export * from './requests/index';
-export * from './responses/index';
+export * from './requests';
+export * from './responses';

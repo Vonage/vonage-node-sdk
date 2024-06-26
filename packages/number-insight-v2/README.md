@@ -38,7 +38,7 @@ yarn add @vonage/number-insight-v2
 If you are using this SDK as part of the Vonage Server SDK, you can access it as the `numberInsightV2` property off of the client that you instantiate.
 
 ```js
-const { Auth } = require('@vonage/auth);
+const { Auth } = require('@vonage/auth');
 const { Vonage } = require('@vonage/server-sdk');
 const { Insight } = require('@vonage/number-insight-v2');
 

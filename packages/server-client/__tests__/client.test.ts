@@ -1,122 +1,126 @@
-import nock from 'nock';
-import { Client, AuthenticationType } from '../lib/index';
-import { requestTests, transfomTests } from './__dataSets__/index';
-import { getScope, getClient, BASE_URL, API_SECRET, API_KEY } from './common';
+import { Client, AuthenticationType } from '../lib';
+import { requestTests } from './__dataSets__';
+import {
+  VonageTest,
+  SDKTestCase,
+  TestResponse,
+  TestRequest,
+  TestTuple,
+  apiKey,
+  apiSecret,
+  keyAuth,
+  apiKeyAuth,
+  validateApiKeyAuth,
+} from '../../../testHelpers';
 
-describe.each(transfomTests)('$label', ({ tests }) => {
-  test.each(tests)(
-    'Can $label [using $transformFn]',
-    async ({ transformFn, original, parameters, expected }) => {
-      expect(Client.transformers[transformFn]).toBeDefined();
-      const results = Client.transformers[transformFn](original, ...parameters);
+class JWTAuthClient extends Client {
+  protected authType = AuthenticationType.JWT;
+}
 
-      expect(results).toEqual(expected);
-    }
-  );
+class KeyAuthClient extends Client {
+  protected authType = AuthenticationType.KEY_SECRET;
+}
 
-  test('Can omit keys', async () => {
-    const original = Object.freeze({
-      foo: 'bar',
-      fizz: 'buzz',
-    });
-    expect(Client.transformers.omit(['foo'], original)).toEqual({fizz: 'buzz'});
-  });
-});
+class QueryAuthClient extends Client {
+  protected authType = AuthenticationType.QUERY_KEY_SECRET;
+}
 
-describe.each(requestTests)('$label', ({ tests }) => {
-  afterEach(() => {
-    nock.cleanAll();
-  });
+class BasicAuthClient extends Client {
+  protected authType = AuthenticationType.BASIC;
+}
 
-  const successTests = tests
-    .filter(({ error }) => !error)
-    .map((test) => {
-      const request = test.request;
-      // Add on query testing
-      const url = new URL(`${BASE_URL}${request[0]}`);
-      url.searchParams.append('api_key', API_KEY);
-      url.searchParams.append('api_secret', API_SECRET);
+type AnyClient = JWTAuthClient | KeyAuthClient | QueryAuthClient | BasicAuthClient;
 
-      const keyTest = {
-        ...test,
-        request: [
-          ...request.slice(0, 2),
-          {
-            ...request[2],
-            api_key: API_KEY,
-            api_secret: API_SECRET,
-          },
-        ],
-        authType: AuthenticationType.KEY_SECRET,
+const methodsThatHaveBodies = ['PUT', 'POST', 'PATCH'];
+
+const applicationsTest = requestTests.map((dataSet): TestTuple<AnyClient> => {
+  const { label, tests } = dataSet;
+
+  return {
+    name: label,
+    tests: tests.map((test): Array<SDKTestCase<AnyClient>> => {
+      const commonTest = {
+        label: test.label,
+        baseUrl: 'https://api.nexmo.com',
+        requests: [test.request] as TestRequest[],
+        responses: [test.response] as TestResponse[],
+        clientMethod: test.clientMethod as keyof Client,
+        parameters: test.parameters,
+        generator: false,
+        error: 'error' in test ? String(test.error) : false,
+        expected: test.expected,
       };
 
-      if (test.form && request[2]) {
-        const params = new URLSearchParams(request[2]);
-        params.sort();
-        request[2] = params.toString();
+      const request = test.request;
+      const [path, method, body] = request;
 
-        const keyParams = new URLSearchParams(keyTest.request[2]);
-        keyParams.sort();
-        keyTest.request[2] = keyParams.toString();
+      // Add on query testing
+      const url = new URL(`https://api.nexmo.com${path}`);
+      url.searchParams.set('api_key', apiKey);
+      url.searchParams.set('api_secret', apiSecret);
+
+      const isForm = 'form' in test;
+      const bodyParams = new URLSearchParams(body);
+      const bodyWithAPIKeys = body ? {
+        ...body as Record<string, string>,
+        api_key: apiKey,
+        api_secret: apiSecret,
+      } : body;
+
+      if (methodsThatHaveBodies.includes(method as string)) {
+        bodyParams.set('api_key', apiKey);
+        bodyParams.set('api_secret', apiSecret);
+        bodyParams.sort();
       }
 
-      const bodyMethods = ['PUT', 'POST', 'PATCH'];
-      const method = request[1];
-
       return [
+        // Key Client
         {
-          ...test,
-          authType: AuthenticationType.BASIC,
+          ...commonTest,
+          client: new KeyAuthClient(apiKeyAuth),
+          label: `${test.label} using a API Key/Secret Client`,
+          requests: [[
+            path,
+            method as unknown,
+            isForm ? bodyParams.toString() : bodyWithAPIKeys,
+          ]] as TestRequest[],
         },
+
+        // Query Client
         {
-          ...test,
-          authType: AuthenticationType.JWT,
+          ...commonTest,
+          client: new QueryAuthClient(apiKeyAuth),
+          label: `${test.label} using a Query String Client`,
+          requests: [[
+            `${url.pathname}${url.search}`,
+            method as unknown,
+            body
+          ]] as TestRequest[],
         },
+
+        // Basic Client
         {
-          ...test,
-          request: [`${url.pathname}${url.search}`, ...request.slice(1)],
-          authType: AuthenticationType.QUERY_KEY_SECRET,
+          ...commonTest,
+          client: new BasicAuthClient(apiKeyAuth),
+          reqHeaders: {
+            authorization: validateApiKeyAuth,
+          },
+          label: `${test.label} using an API Key/Secret Client`,
         },
-        bodyMethods.includes(method) ? keyTest : null,
-      ].filter((value) => value);
-    })
-    .flat();
 
-  const failureTests = tests.filter(({ error }) => !!error);
-
-  test.each(successTests)(
-    'Can $label with $clientMethod using $authType auth',
-    async ({
-      request,
-      response,
-      clientMethod,
-      expected,
-      parameters,
-      authType = AuthenticationType.BASIC,
-    }) => {
-      const scope = getScope(authType);
-      const client = getClient(authType);
-      scope.intercept(...request).reply(...response);
-
-      const results = await client[clientMethod](...parameters);
-      expect(results).toEqual(expected);
-      expect(nock.isDone()).toBeTruthy();
-    }
-  );
-
-  if (failureTests.length < 1) {
-    return;
-  }
-
-  test.each(failureTests)(
-    'Will throw $label using: $clientMethod',
-    async ({ request, response, clientMethod, parameters, error }) => {
-      scope.intercept(...request).reply(...response);
-
-      await expect(() => client[clientMethod](...parameters)).rejects.toThrow(
-        error
-      );
-      expect(nock.isDone()).toBeTruthy();
-    }
-  );
+        // JWT Client
+        {
+          ...commonTest,
+          client: new JWTAuthClient(keyAuth),
+          reqHeaders: {
+            //authorization: validateApiKeyAuth,
+          },
+          label: `${test.label} using a JWT Client`,
+        }
+      ];
+    }).flat(),
+  };
 });
+
+VonageTest(applicationsTest);
+

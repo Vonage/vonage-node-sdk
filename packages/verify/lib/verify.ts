@@ -103,7 +103,7 @@ export class Verify extends Client {
       cmd: command,
     };
 
-    // eslint-disable-next-line max-len
+     
     const resp = await this.sendPostRequest<
             VerifyControlResponse | VerifyControlErrorResponse
         >(`${this.config.apiHost}/verify/control/json`, data);
@@ -195,7 +195,7 @@ export class Verify extends Client {
     requestId: string,
     code: string,
   ): Promise<VerifyCheck | VerifyCheckError> {
-    // eslint-disable-next-line max-len
+     
     const resp = await this.sendPostRequest<
             VerifyRequestResponse | VerifyRequestErrorResponse
         >(`${this.config.apiHost}/verify/check/json`, {

@@ -1,3 +1,4 @@
+import { apiKey } from '../../../../testHelpers';
 import { Client } from '@vonage/server-client';
 import {
   Account,
@@ -10,7 +11,7 @@ import {
 } from '../../lib/types';
 
 const primaryAccount = {
-  apiKey: '12345',
+  apiKey: apiKey,
   name: 'Primary Account',
   balance: 2373,
   creditLimit: 0.0,

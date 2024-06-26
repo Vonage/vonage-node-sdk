@@ -1,5 +1,5 @@
-import { AuthInterface, AuthParams } from "@vonage/auth";
-import { VetchOptions } from "@vonage/vetch";
+import { AuthInterface, AuthParams } from '@vonage/auth';
+import { VetchOptions } from '@vonage/vetch';
 
 /**
  * Represents the parameters for configuring the NumbersClass.

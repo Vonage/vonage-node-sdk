@@ -1,4 +1,4 @@
-import { UserType } from '../index';
+import { UserType } from '..';
 import { WebSocketChannelRequest } from './websocketChannelRequest';
 
 /**
@@ -29,7 +29,7 @@ export type UserChannelsRequest = {
    * An array of WebSocket channel requests.
    */
   websocket: Array<WebSocketChannelRequest>;
-} & Omit<Pick<UserType, 'channels'>, 'websocket'>;;
+} & Omit<Pick<UserType, 'channels'>, 'websocket'>;
 
 /**
  * Represents a request to create or update a user.

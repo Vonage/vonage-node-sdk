@@ -1,4 +1,4 @@
-import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject';
+import { PhoneEndpointObject } from '@vonage/voice';
 import { CallEndpoint } from '../types';
 import debug from 'debug';
 import { HttpMethod, MachineDetectionBehavior } from '../enums';

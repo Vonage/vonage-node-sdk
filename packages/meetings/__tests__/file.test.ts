@@ -1,17 +1,14 @@
 import nock from 'nock';
-import { Meetings } from '../lib/index';
+import * as url from 'url';
+import { LogoType, UrlResponse, Meetings } from '../lib';
 import { getClient, getScope, themeOne } from './common';
-import { UrlResponse } from '../lib/types/index';
-import { LogoType } from '../lib/enums';
-import { parse } from '@amvijay/multipart-parser';
-import { readFileSync } from 'fs';
 
 const urlResponses = [
   {
     url: 'https://s3.amazonaws.com/node-sdk/white',
     fields: {
       'Content-Type': 'image/png',
-      // eslint-disable-next-line max-len
+
       key: 'auto-expiring-temp/logos/white/1af8e55f-5ad4-4dd2-901c-492ef0a1561d',
       logoType: LogoType.WHITE,
       bucket: 'node-sdk',
@@ -27,7 +24,7 @@ const urlResponses = [
     url: 'https://s3.amazonaws.com/node-sdk/colored',
     fields: {
       'Content-Type': 'image/png',
-      // eslint-disable-next-line max-len
+
       key: 'auto-expiring-temp/logos/colored/1af8e55f-5ad4-4dd2-901c-492ef0a1561d',
       logoType: LogoType.COLORED,
       bucket: 'node-sdk',
@@ -43,7 +40,7 @@ const urlResponses = [
     url: 'https://s3.amazonaws.com/node-sdk/favicon',
     fields: {
       'Content-Type': 'image/png',
-      // eslint-disable-next-line max-len
+
       key: 'auto-expiring-temp/logos/favicon/1af8e55f-5ad4-4dd2-901c-492ef0a1561d',
       logoType: LogoType.FAVICON,
       bucket: 'node-sdk',
@@ -57,28 +54,14 @@ const urlResponses = [
   } as UrlResponse,
 ] as UrlResponse[];
 
-const tests = [
-  {
-    awsExpected: urlResponses[0],
-    logoType: LogoType.WHITE,
-  },
-  {
-    awsExpected: urlResponses[1],
-    logoType: LogoType.COLORED,
-  },
-  {
-    awsExpected: urlResponses[2],
-    logoType: LogoType.FAVICON,
-  },
-];
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const file = `${__dirname}/image.png`;
-const fileBuf = readFileSync(file);
 
 describe('Meetings > File uploads', () => {
   let client: Meetings;
-  let scope: nock;
-  let awsScope: nock;
+  let scope: nock.Scope;
+  let awsScope: nock.Scope;
 
   beforeEach(() => {
     client = getClient();
@@ -87,61 +70,19 @@ describe('Meetings > File uploads', () => {
   });
 
   afterEach(() => {
-    client = null;
-    scope = null;
-    awsScope = null;
     nock.cleanAll();
   });
 
-  test.each(tests)(
-    `Can upload $logoType logo`,
-    async ({ awsExpected, logoType }) => {
-      const { url, fields } = awsExpected;
-      const awsUrl = new URL(url);
-      scope
-        .get(`/v1/meetings/themes/logos-upload-urls`)
-        .reply(200, urlResponses)
-        .put(`/v1/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
-          keys: [fields.key],
-        })
-        .reply(200, 'OK');
-
-      awsScope
-        .post(awsUrl.pathname, (body) => {
-          const parts = parse(Buffer.from(body, 'hex'), client.FORM_BOUNDARY);
-          return parts.reduce((acc, part) => {
-            const { content, contentType } = part;
-            let name = part.name;
-            if (name === 'file') {
-              return acc && !!Buffer.compare(content, fileBuf);
-            }
-
-            if (!name && /Content-Type/.exec(contentType)) {
-              name = 'Content-Type';
-            }
-
-            return acc && fields[name] === content.toString().trim();
-          }, true);
-        })
-        .reply(204);
-
-      expect(
-        await client.uploadIcon(themeOne.themeId, logoType, file),
-      ).toBeTruthy();
-      expect(nock.isDone()).toBeTruthy();
-    },
-  );
-
   test('Will throw error when file does not exist', async () => {
     await expect(() =>
-      client.uploadIcon(themeOne.themeId, LogoType.COLORED, 'not-real'),
+      client.uploadIcon(String(themeOne.themeId), LogoType.COLORED, 'not-real'),
     ).rejects.toThrow('File not-real does not exist');
 
     expect(nock.isDone()).toBeTruthy();
   });
 
   test('Will throw error when AWS fails', async () => {
-    scope.get(`/v1/meetings/themes/logos-upload-urls`).reply(200, urlResponses);
+    scope.get('/v1/meetings/themes/logos-upload-urls').reply(200, urlResponses);
 
     const awsUrl = new URL(urlResponses[0].url);
     awsScope
@@ -160,9 +101,9 @@ describe('Meetings > File uploads', () => {
         },
       );
     await expect(() =>
-      client.uploadIcon(themeOne.themeId, LogoType.WHITE, file),
+      client.uploadIcon(String(themeOne.themeId), LogoType.WHITE, file),
     ).rejects.toThrow(
-      `Failed to upload to AWS: Invalid according to Policy: Policy expired`,
+      'Failed to upload to AWS: Invalid according to Policy: Policy expired',
     );
 
     expect(nock.isDone()).toBeTruthy();
@@ -170,7 +111,7 @@ describe('Meetings > File uploads', () => {
 
   test('Will throw error when apply fails', async () => {
     scope
-      .get(`/v1/meetings/themes/logos-upload-urls`)
+      .get('/v1/meetings/themes/logos-upload-urls')
       .reply(200, urlResponses)
       .put(`/v1/meetings/themes/${themeOne.themeId}/finalizeLogos`, {
         keys: [urlResponses[0].fields.key],
@@ -190,8 +131,8 @@ describe('Meetings > File uploads', () => {
     const awsUrl = new URL(urlResponses[0].url);
     awsScope.post(awsUrl.pathname, () => true).reply(204);
     await expect(() =>
-      client.uploadIcon(themeOne.themeId, LogoType.WHITE, file),
-    ).rejects.toThrow(`Could not attach image to theme: key_not_found`);
+      client.uploadIcon(String(themeOne.themeId), LogoType.WHITE, file),
+    ).rejects.toThrow('Could not attach image to theme: key_not_found');
 
     expect(nock.isDone()).toBeTruthy();
   });

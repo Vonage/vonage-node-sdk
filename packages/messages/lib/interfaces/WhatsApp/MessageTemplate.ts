@@ -1,4 +1,5 @@
-import { WhatsAppTemplateType } from "../../types";
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+import { WhatsAppTemplateType } from '../../types';
 
 /**
  * Represents a message template.

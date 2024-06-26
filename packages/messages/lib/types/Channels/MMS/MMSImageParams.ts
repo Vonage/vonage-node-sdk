@@ -1,5 +1,5 @@
-import { MessageParams } from "../../MessageParams";
-import { MessageImageType } from "../../MessageImageType";
+import { MessageParams } from '../../MessageParams';
+import { MessageImageType } from '../../MessageImageType';
 
 /**
  * Represents the parameters for sending an image message on the MMS channel.

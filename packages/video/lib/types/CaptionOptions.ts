@@ -5,7 +5,7 @@ export type CaptionOptions = {
   /**
    * The language code for captions (e.g., "en-us").
    */
-  languageCode?: "en-us";
+  languageCode?: 'en-us';
 
   /**
    * The maximum duration for captions.
@@ -15,7 +15,7 @@ export type CaptionOptions = {
   /**
    * Whether to generate partial captions.
    */
-  partialCaptions?: "true" | "false";
+  partialCaptions?: 'true' | 'false';
 
   /**
    * The URL for the status callback of captions.

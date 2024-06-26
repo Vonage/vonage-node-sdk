@@ -113,30 +113,26 @@ const apiToMember = (response: MemberResponse | ListMemberResponse): Member => {
   } as Member;
 };
 
-const memberToApi = (member: Member): CreateMemberRequest => {
-  const apiMember  = {
-    ...Client.transformers.snakeCaseObjectKeys(
-      Client.transformers.omit(
-        [
-          'id',
-          'timestamp',
-          'conversationId',
-          'initiator',
-          'invitedBy',
-        ],
-        member,
-      ),
-      true,
+const memberToApi = (member: Member): CreateMemberRequest => ({
+  ...Client.transformers.snakeCaseObjectKeys(
+    Client.transformers.omit(
+      [
+        'id',
+        'timestamp',
+        'conversationId',
+        'initiator',
+        'invitedBy',
+      ],
+      member,
     ),
-    user: {
-      id: member.user.id,
-      name: member.user.name,
-    },
-    member_id_inviting: member.invitedBy,
-  } as CreateMemberRequest;
-
-  return apiMember;
-};
+    true,
+  ),
+  user: {
+    id: member.user.id,
+    name: member.user.name,
+  },
+  member_id_inviting: member.invitedBy,
+} as CreateMemberRequest);
 
 /**
  * A client for talking to the Vonage Conversation API.

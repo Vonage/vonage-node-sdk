@@ -1,4 +1,4 @@
-import { Feature } from '../../lib/enums/Feature';
+import { Feature } from '../../lib/enums';
 const BASE_URL = 'https://rest.nexmo.com';
 const CLIENT_METHOD = 'getAvailableNumbers';
 
@@ -20,7 +20,7 @@ export default [
     clientMethod: CLIENT_METHOD,
     request: {
       url: BASE_URL,
-      intercept: [`/number/search?api_key=12345&api_secret=ABCDE`, 'GET'],
+      intercept: ['/number/search?api_key=12345&api_secret=ABCDE', 'GET'],
       reply: [
         200,
         validResponse,
@@ -93,7 +93,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=0&country=US`,
+        '/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=0&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -112,7 +112,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=2&country=US`,
+        '/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=2&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -131,7 +131,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=1&country=US`,
+        '/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=1&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -150,7 +150,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=1&country=US`,
+        '/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=1&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -171,7 +171,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&pattern=0987&search_pattern=2&country=US`,
+        '/number/search?api_key=12345&api_secret=ABCDE&pattern=0987&search_pattern=2&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -191,7 +191,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&pattern=5309&search_pattern=0&country=US`,
+        '/number/search?api_key=12345&api_secret=ABCDE&pattern=5309&search_pattern=0&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -214,7 +214,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&pattern=5309&search_pattern=1&country=US`,
+        '/number/search?api_key=12345&api_secret=ABCDE&pattern=5309&search_pattern=1&country=US',
         'GET',
       ],
       reply: [200, validResponse],

@@ -9,7 +9,7 @@ export default [
     label: 'create simple user',
     requests: [
       [
-        `/v1/users`,
+        '/v1/users',
         'POST',
         {
           name: testUserOne.name,
@@ -38,7 +38,7 @@ export default [
   },
   {
     label: 'create user',
-    requests: [[`/v1/users`, 'POST', createUser]],
+    requests: [['/v1/users', 'POST', createUser]],
     responses: [
       [
         200,

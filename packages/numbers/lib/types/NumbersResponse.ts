@@ -1,4 +1,4 @@
-import { VetchResponse } from "@vonage/vetch";
+import { VetchResponse } from '@vonage/vetch';
 
 /**
  * Represents a response for phone numbers.

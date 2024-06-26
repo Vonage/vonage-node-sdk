@@ -1,5 +1,5 @@
 import { NCCOActions } from '../../enums';
-import { ConversationAction } from '../../interfaces/NCCO/ConversationAction';
+import { ConversationAction } from '@vonage/voice';
 import { Serializable } from '../../ncco';
 
 /**

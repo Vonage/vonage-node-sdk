@@ -30,8 +30,9 @@
       "url": "https://github.com/manchuck"
     }
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -51,9 +52,6 @@
     "@vonage/server-client": "^1.12.0",
     "@vonage/vetch": "^1.7.1",
     "lodash.omit": "^4.5.0"
-  },
-  "devDependencies": {
-    "nock": "^13.3.4"
   },
   "publishConfig": {
     "access": "public"

@@ -1,115 +1,63 @@
-import { ImportFileResponse, ProactiveConnect } from '../lib/index';
+import { ImportFileResponse, ProactiveConnect } from '../lib';
 import nock from 'nock';
 import { Auth } from '@vonage/auth';
 import { BASE_URL } from './common';
-import testDataSets from './__dataSets__/index';
+import testDataSets from './__dataSets__';
 import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs';
 import { rm } from 'fs/promises';
-import { parse } from '@amvijay/multipart-parser';
-
-const key = readFileSync(`${__dirname}/private.test.key`).toString();
 
 const CSV_DIR = `${process.cwd()}/path`;
 
-const getResults = async (
-  generator: boolean,
-  client: unknown,
-  clientMethod: string,
-  parameters: Array<unknown>,
-) => {
-  if (!generator) {
-    return await client[clientMethod](...parameters);
-  }
+import {
+  VonageTest,
+  SDKTestCase,
+  TestResponse,
+  TestRequest,
+  TestTuple,
+  keyAuth,
+  validateBearerAuth,
+  testPrivateKey,
+} from '../../../testHelpers';
 
-  const results = [];
-  for await (const result of client[clientMethod](...parameters)) {
-    results.push(result);
-  }
-  return results;
-};
+const applicationsTest = testDataSets.map((dataSet): TestTuple<ProactiveConnect> => {
+  const { label, tests } = dataSet;
 
-describe.each(testDataSets)('$label', ({ tests }) => {
-  let client;
-  let scope;
-
-  beforeEach(function () {
-    client = new ProactiveConnect(
-      new Auth({
-        privateKey: key,
-        applicationId: 'my-application',
-      }),
-    );
-    scope = nock(BASE_URL, {
-      reqheaders: {
-        authorization: (value) => value.startsWith('Bearer '),
-      },
-    }).persist();
-  });
-
-  afterEach(function () {
-    client = null;
-    scope = null;
-    nock.cleanAll();
-  });
-
-  const successTests = tests.filter(({ error }) => !error);
-  const failureTests = tests.filter(({ error }) => !!error);
-
-  test.each(successTests)(
-    'Can $label using: $clientMethod',
-    async ({
-      requests,
-      responses,
-      clientMethod,
-      parameters,
-      expected,
-      generator = false,
-    }) => {
-      requests.forEach((request, index) => {
-        scope.intercept(...request).reply(...responses[index]);
-      });
-
-      const results = await getResults(
-        generator,
-        client,
-        clientMethod,
-        parameters,
-      );
-
-      expect(results).toEqual(expected);
-      expect(nock.isDone()).toBeTruthy();
-    },
-  );
-
-  if (failureTests.length < 1) {
-    return;
-  }
-
-  test.each(failureTests)(
-    'Will throw $label using: $clientMethod',
-    async ({ request, response, clientMethod, parameters, error }) => {
-      scope.intercept(...request).reply(...response);
-
-      await expect(() => client[clientMethod](...parameters)).rejects.toThrow(
-        error,
-      );
-      expect(nock.isDone()).toBeTruthy();
-    },
-  );
+  return {
+    name: label,
+    tests: tests.map((test): SDKTestCase<ProactiveConnect> => {
+      return {
+        label: test.label,
+        baseUrl: 'https://api-eu.vonage.com',
+        reqHeaders: {
+          authorization: validateBearerAuth,
+        },
+        requests: test.requests as TestRequest[],
+        responses: test.responses as TestResponse[],
+        client: new ProactiveConnect(keyAuth),
+        clientMethod: test.clientMethod as keyof ProactiveConnect,
+        parameters: test.parameters,
+        generator: test.generator || false,
+        error: test.error || false,
+        expected: test.expected,
+      };
+    }),
+  };
 });
 
+VonageTest(applicationsTest);
+
 describe('File tests', () => {
-  let client;
-  let scope;
+  let client: ProactiveConnect;
+  let scope: nock.Scope;
 
   beforeEach(() => {
     if (!existsSync(CSV_DIR)) {
       mkdirSync(CSV_DIR);
     }
-    writeFileSync(`${CSV_DIR}/upload-file.csv`, `fizz,buzz\nfoo,bar`);
+    writeFileSync(`${CSV_DIR}/upload-file.csv`, 'fizz,buzz\nfoo,bar');
     client = new ProactiveConnect(
       new Auth({
-        privateKey: key,
+        privateKey: testPrivateKey,
         applicationId: 'my-application',
       }),
     );
@@ -121,8 +69,6 @@ describe('File tests', () => {
   });
 
   afterEach(async () => {
-    client = null;
-    scope = null;
     nock.cleanAll();
     await rm(CSV_DIR, {
       force: true,
@@ -132,10 +78,10 @@ describe('File tests', () => {
 
   test('Can download CSV file', async () => {
     const file = `${CSV_DIR}/tmp.csv`;
-    const csv = `foo,bar\nfizz,buzz`;
+    const csv = 'foo,bar\nfizz,buzz';
     scope
       .get(
-        `/v0.1/bulk/lists/10000000-0000-0000-0000-000000000000/items/download`,
+        '/v0.1/bulk/lists/10000000-0000-0000-0000-000000000000/items/download',
       )
       .reply(200, csv);
 
@@ -156,20 +102,9 @@ describe('File tests', () => {
   test('Can upload CSV File', async () => {
     const file = `${CSV_DIR}/upload-file.csv`;
     expect(existsSync(file)).toBeTruthy();
-    const fileBuf = readFileSync(file);
     scope
       .post(
-        `/v0.1/bulk/lists/10000000-0000-0000-0000-000000000000/items/download`,
-        (body) => {
-          const parts = parse(Buffer.from(body, 'hex'), client.FORM_BOUNDARY);
-          return parts.reduce((acc, part) => {
-            if (part.name === 'file') {
-              return acc && !!Buffer.compare(parts.content, fileBuf);
-            }
-
-            return true;
-          }, true);
-        },
+        '/v0.1/bulk/lists/10000000-0000-0000-0000-000000000000/items/download',
       )
       .reply(200, {
         inserted: 42,

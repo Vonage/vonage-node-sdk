@@ -60,13 +60,13 @@ export default [
           page_index: 0,
           _links: {
             self: {
-              href: `/v3/media?page_size=20&order=descending`,
+              href: '/v3/media?page_size=20&order=descending',
             },
             first: {
-              href: `/v3/media?page_size=20&order=descending`,
+              href: '/v3/media?page_size=20&order=descending',
             },
             last: {
-              href: `/v3/media?page_size=20&order=descending`,
+              href: '/v3/media?page_size=20&order=descending',
             },
           },
           count: 1,
@@ -87,7 +87,7 @@ export default [
                 public: false,
                 metadata_primary: null,
                 metadata_secondary: null,
-              } as MediaItemResponse,
+              },
             ],
           },
         } as MediaItemPageResponse,
@@ -100,13 +100,13 @@ export default [
       page_index: 0,
       _links: {
         self: {
-          href: `/v3/media?page_size=20&order=descending`,
+          href: '/v3/media?page_size=20&order=descending',
         },
         first: {
-          href: `/v3/media?page_size=20&order=descending`,
+          href: '/v3/media?page_size=20&order=descending',
         },
         last: {
-          href: `/v3/media?page_size=20&order=descending`,
+          href: '/v3/media?page_size=20&order=descending',
         },
       },
       count: 1,
@@ -136,7 +136,7 @@ export default [
     label: 'get page of data with query parameters',
     requests: [
       [
-        `/v3/media?order=descending&page_index=42&page_size=10&start_time=2020-01-01T14:00:00.000Z&end_time=2020-01-01T14:00:00.000Z`,
+        '/v3/media?order=descending&page_index=42&page_size=10&start_time=2020-01-01T14:00:00.000Z&end_time=2020-01-01T14:00:00.000Z',
         'GET',
       ],
     ],
@@ -148,13 +148,13 @@ export default [
           page_index: 0,
           _links: {
             self: {
-              href: `/v3/media?page_size=20&order=descending`,
+              href: '/v3/media?page_size=20&order=descending',
             },
             first: {
-              href: `/v3/media?page_size=20&order=descending`,
+              href: '/v3/media?page_size=20&order=descending',
             },
             last: {
-              href: `/v3/media?page_size=20&order=descending`,
+              href: '/v3/media?page_size=20&order=descending',
             },
           },
           count: 1,
@@ -196,13 +196,13 @@ export default [
       page_index: 0,
       _links: {
         self: {
-          href: `/v3/media?page_size=20&order=descending`,
+          href: '/v3/media?page_size=20&order=descending',
         },
         first: {
-          href: `/v3/media?page_size=20&order=descending`,
+          href: '/v3/media?page_size=20&order=descending',
         },
         last: {
-          href: `/v3/media?page_size=20&order=descending`,
+          href: '/v3/media?page_size=20&order=descending',
         },
       },
       count: 1,
@@ -232,7 +232,7 @@ export default [
     label: 'get multiple pages using generator',
     requests: [
       ['/v3/media?page_index=0', 'GET'],
-      [`/v3/media?page_index=1`, 'GET'],
+      ['/v3/media?page_index=1', 'GET'],
     ],
     responses: [
       [
@@ -242,16 +242,16 @@ export default [
           page_index: 0,
           _links: {
             self: {
-              href: `/v3/media?page_index=0&page_size=20&order=descending`,
+              href: '/v3/media?page_index=0&page_size=20&order=descending',
             },
             first: {
-              href: `/v3/media?page_index=0&page_size=20&order=descending`,
+              href: '/v3/media?page_index=0&page_size=20&order=descending',
             },
             next: {
-              href: `/v3/media?page_index=1&page_size=20&order=descending`,
+              href: '/v3/media?page_index=1&page_size=20&order=descending',
             },
             last: {
-              href: `/v3/media?page_index=1&page_size=20&order=descending`,
+              href: '/v3/media?page_index=1&page_size=20&order=descending',
             },
           },
           count: 2,
@@ -284,16 +284,16 @@ export default [
           page_index: 1,
           _links: {
             self: {
-              href: `/v3/media?page_index=0&page_size=20&order=descending`,
+              href: '/v3/media?page_index=0&page_size=20&order=descending',
             },
             first: {
-              href: `/v3/media?page_index=0&page_size=20&order=descending`,
+              href: '/v3/media?page_index=0&page_size=20&order=descending',
             },
             prev: {
-              href: `/v3/media?page_index=0&page_size=20&order=descending`,
+              href: '/v3/media?page_index=0&page_size=20&order=descending',
             },
             last: {
-              href: `/v3/media?page_index=1&page_size=20&order=descending`,
+              href: '/v3/media?page_index=1&page_size=20&order=descending',
             },
           },
           count: 2,

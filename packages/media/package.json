@@ -18,7 +18,9 @@
       "url": "https://github.com/manchuck"
     }
   ],
-  "main": "dist/index.js",
+  "type": "module",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -33,9 +35,5 @@
   },
   "dependencies": {
     "@vonage/server-client": "1.6.0"
-  },
-  "devDependencies": {
-    "@vonage/auth": "1.5.0",
-    "nock": "13.3.2"
   }
 }

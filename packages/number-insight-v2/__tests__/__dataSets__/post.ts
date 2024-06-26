@@ -58,7 +58,7 @@ const response = {
 export default [
   {
     label: 'check for fraud',
-    requests: [[`/v2/ni`, 'POST', params]],
+    requests: [['/v2/ni', 'POST', params]],
     responses: [[200, response]],
     clientMethod: 'checkForFraud',
     parameters: [params],

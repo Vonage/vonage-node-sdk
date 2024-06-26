@@ -1,4 +1,4 @@
 export { Verify } from './verify';
-export * from './classes/index';
-export * from './enums/index';
-export * from './types/index';
+export * from './classes';
+export * from './enums';
+export * from './types';

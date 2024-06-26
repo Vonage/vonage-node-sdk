@@ -81,5 +81,5 @@ export type ApplicationResponse = {
     vbc: unknown;
 
   };
-  _links?: Pick<APILinks, '_links'>
-} & Application;
+
+} & Application & APILinks;

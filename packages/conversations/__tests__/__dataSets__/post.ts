@@ -20,7 +20,7 @@ export default [
     label: 'create conversation',
     requests: [
       [
-        `/v1/conversations`,
+        '/v1/conversations',
         'POST',
         {
           name: conversationToCreate.name,

@@ -1,66 +1,87 @@
-import nock from 'nock';
-import fs from 'fs';
-import { Video } from '../lib/video';
+import  nock from 'nock'; 
 import { decode } from 'jsonwebtoken';
-import { LayoutType } from '../lib/enums/LayoutType';
-import { MediaMode } from '../lib/enums/MediaMode';
-import { ArchiveMode } from '../lib/types/ArchiveMode';
 import { Auth } from '@vonage/auth';
-import testDataSets from './__dataSets__/index';
+import testDataSets from './__dataSets__';
+import { Jwt } from 'jsonwebtoken';
 
+import {
+  Video,
+  LayoutType,
+  MediaMode,
+  ArchiveMode,
+  SingleStreamLayoutResponse,
+  MultiStreamLayoutResponse,
+} from '../lib';
+
+
+import {
+  VonageTest,
+  SDKTestCase,
+  TestResponse,
+  TestRequest,
+  TestTuple,
+  keyAuth,
+  validateBearerAuth,
+  testPrivateKey,
+} from '../../../testHelpers';
 const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
 
-describe.each(testDataSets)('$label', ({ tests }) => {
-  let client;
-  let scope;
+type jwtClaims = {
+    application_id: string;
+    session_id: string;
+    sub: string;
+    acl: {
+      paths: Record<string, string>;
+    };
+    exp: number;
+    initial_layout_class_list: string;
+    connection_data: string;
+    role: string;
+    scope: string;
+};
 
-  beforeEach(() => {
-    client = new Video(
-      new Auth({
-        applicationId: 'abcd-1234',
-        privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString(),
-      })
-    );
-    scope = nock(BASE_URL, {
-      reqheaders: {
-        authorization: (value) =>
-          value.startsWith('Bearer ') && value.length > 10,
-      },
-    }).persist();
-  });
+const applicationsTest = testDataSets.map((dataSet): TestTuple<Video> => {
+  const { label, tests } = dataSet;
 
-  afterEach(() => {
-    client = null;
-    scope = null;
-    nock.cleanAll();
-  });
-
-  test.each(tests)(
-    'Can $label using: $clientMethod',
-    async ({ request, response, clientMethod, expected, parameters }) => {
-      scope.intercept(...request).reply(...response);
-      const results = await client[clientMethod](...parameters);
-      expect(results).toEqual(expected);
-      expect(nock.isDone()).toBeTruthy();
-    }
-  );
+  return {
+    name: label,
+    tests: tests.map((test): SDKTestCase<Video> => {
+      return {
+        label: test.label,
+        baseUrl: 'https://video.api.vonage.com',
+        reqHeaders: {
+          authorization: validateBearerAuth,
+        },
+        requests: [test.request] as TestRequest[],
+        responses: [test.response] as TestResponse[],
+        client: new Video(keyAuth),
+        clientMethod: test.clientMethod as keyof Video,
+        parameters: test.parameters,
+        generator: false,
+        error: false,
+        expected: test.expected,
+      };
+    }),
+  };
 });
+
+VonageTest(applicationsTest);
 
 // Legacy unit tests
 describe('video', () => {
-  let client;
+  let client: Video;
 
   beforeEach(() => {
     client = new Video(
       new Auth({
         applicationId: 'abcd-1234',
-        privateKey: fs.readFileSync(`${__dirname}/private.test.key`).toString(),
+        privateKey: testPrivateKey,
       })
     );
   });
 
   afterEach(() => {
-    client = null;
+    nock.cleanAll();
   });
 
   test('can create a server session', async () => {
@@ -87,7 +108,7 @@ describe('video', () => {
       ]);
 
     const session = await client.createSession();
-    expect(session.sessionId).toEqual('the session ID');
+    expect(session.sessionId).toBe('the session ID');
     expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
     expect(session.mediaMode).toEqual(MediaMode.ROUTED);
     expect(session.location).toBeNull();
@@ -118,7 +139,7 @@ describe('video', () => {
     const session = await client.createSession({
       mediaMode: MediaMode.RELAYED,
     });
-    expect(session.sessionId).toEqual('the session ID');
+    expect(session.sessionId).toBe('the session ID');
     expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
     expect(session.mediaMode).toEqual(MediaMode.RELAYED);
     expect(session.location).toBeNull();
@@ -147,7 +168,7 @@ describe('video', () => {
       ]);
 
     const session = await client.createSession({ mediaMode: MediaMode.ROUTED });
-    expect(session.sessionId).toEqual('the session ID');
+    expect(session.sessionId).toBe('the session ID');
     expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
     expect(session.mediaMode).toEqual(MediaMode.ROUTED);
     expect(session.location).toBeNull();
@@ -176,9 +197,9 @@ describe('video', () => {
       ]);
 
     const session = await client.createSession({
-      ArchiveMode: ArchiveMode.MANUAL,
+      archiveMode: ArchiveMode.MANUAL,
     });
-    expect(session.sessionId).toEqual('the session ID');
+    expect(session.sessionId).toBe('the session ID');
     expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
     expect(session.mediaMode).toEqual(MediaMode.ROUTED);
     expect(session.location).toBeNull();
@@ -209,7 +230,7 @@ describe('video', () => {
     const session = await client.createSession({
       archiveMode: ArchiveMode.ALWAYS,
     });
-    expect(session.sessionId).toEqual('the session ID');
+    expect(session.sessionId).toBe('the session ID');
     expect(session.archiveMode).toEqual(ArchiveMode.ALWAYS);
     expect(session.mediaMode).toEqual(MediaMode.ROUTED);
     expect(session.location).toBeNull();
@@ -238,21 +259,23 @@ describe('video', () => {
       ]);
 
     const session = await client.createSession({ location: '10.0.1.2' });
-    expect(session.sessionId).toEqual('the session ID');
+    expect(session.sessionId).toBe('the session ID');
     expect(session.archiveMode).toEqual(ArchiveMode.MANUAL);
     expect(session.mediaMode).toEqual(MediaMode.ROUTED);
-    expect(session.location).toEqual('10.0.1.2');
+    expect(session.location).toBe('10.0.1.2');
   });
 
   test('can generate a client JWT token', async () => {
     const token = await client.generateClientToken('abcd');
-    const decoded: any = decode(token, { json: true, complete: true });
+    const decoded: Jwt | null = decode(token, { json: true, complete: true });
+    const { payload } = decoded as Jwt;
 
-    expect(decoded.payload.application_id).toEqual('abcd-1234');
-    expect(decoded.payload.scope).toEqual('session.connect');
-    expect(decoded.payload.session_id).toEqual('abcd');
-    expect(decoded.payload.sub).toEqual('video');
-    expect(decoded.payload.acl.paths).toEqual({ '/session/**': {} });
+
+    expect((payload as jwtClaims).application_id).toBe('abcd-1234');
+    expect((payload as jwtClaims).scope).toBe('session.connect');
+    expect((payload as jwtClaims).session_id).toBe('abcd');
+    expect((payload as jwtClaims).sub).toBe('video');
+    expect((payload as jwtClaims).acl.paths).toEqual({ '/session/**': {} });
   });
 
   test('can generate a client JWT token with renamed values', async () => {
@@ -262,26 +285,28 @@ describe('video', () => {
       expireTime: now,
       initialLayoutClassList: ['foo', 'bar'],
     });
-    const decoded: any = decode(token, { json: true, complete: true });
+    const decoded: Jwt | null = decode(token, { json: true, complete: true });
+    const { payload } = decoded as Jwt;
 
-    expect(decoded.payload.application_id).toEqual('abcd-1234');
-    expect(decoded.payload.scope).toEqual('session.connect');
-    expect(decoded.payload.session_id).toEqual('abcd');
-    expect(decoded.payload.connection_data).toEqual('test');
-    expect(decoded.payload.exp).toEqual(now);
-    expect(decoded.payload.initial_layout_class_list).toEqual('foo bar');
+    expect((payload as jwtClaims).application_id).toBe('abcd-1234');
+    expect((payload as jwtClaims).scope).toBe('session.connect');
+    expect((payload as jwtClaims).session_id).toBe('abcd');
+    expect((payload as jwtClaims).connection_data).toBe('test');
+    expect((payload as jwtClaims).exp).toEqual(now);
+    expect((payload as jwtClaims).initial_layout_class_list).toBe('foo bar');
   });
 
   test('can generate a client JWT token with custom options', async () => {
     const token = await client.generateClientToken('abcd', {
       role: 'publisher',
     });
-    const decoded: any = decode(token, { json: true, complete: true });
+    const decoded: Jwt | null = decode(token, { json: true, complete: true });
+    const { payload } = decoded as Jwt;
 
-    expect(decoded.payload.application_id).toEqual('abcd-1234');
-    expect(decoded.payload.scope).toEqual('session.connect');
-    expect(decoded.payload.session_id).toEqual('abcd');
-    expect(decoded.payload.role).toEqual('publisher');
+    expect((payload as jwtClaims).application_id).toBe('abcd-1234');
+    expect((payload as jwtClaims).scope).toBe('session.connect');
+    expect((payload as jwtClaims).session_id).toBe('abcd');
+    expect((payload as jwtClaims).role).toBe('publisher');
   });
 
   test('can send a signal to everyone', async () => {
@@ -299,6 +324,7 @@ describe('video', () => {
       .reply(200);
 
     await client.sendSignal({ type: 'foo', data: 'bar' }, '1234');
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can send a signal to one connection', async () => {
@@ -316,6 +342,7 @@ describe('video', () => {
       .reply(200);
 
     await client.sendSignal({ type: 'foo', data: 'bar' }, '1234', 'qwer');
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can start an archive with no options', async () => {
@@ -591,9 +618,10 @@ describe('video', () => {
       )
       .reply(204);
 
-    const resp = await client.deleteArchive(
+    await client.deleteArchive(
       'b40ef09b-3811-4726-b508-e41a0f96c68f'
     );
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can update an archive layout', async () => {
@@ -613,6 +641,7 @@ describe('video', () => {
     await client.updateArchiveLayout('b40ef09b-3811-4726-b508-e41a0f96c68f', {
       type: LayoutType.BEST_FIT,
     });
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can add a stream to an archive', async () => {
@@ -634,6 +663,7 @@ describe('video', () => {
       'test-1234',
       false
     );
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can remove a stream from an archive', async () => {
@@ -654,6 +684,7 @@ describe('video', () => {
       'b40ef09b-3811-4726-b508-e41a0f96c68f',
       'test-1234'
     );
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can force disconnect a client', async () => {
@@ -668,6 +699,7 @@ describe('video', () => {
       .reply(204);
 
     await client.disconnectClient('sess-1234', 'conn-1234');
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can get stream info', async () => {
@@ -693,7 +725,7 @@ describe('video', () => {
       'sess-1234',
       '8b732909-0a06-46a2-8ea8-074e64d43422'
     );
-    expect(resp.id).toEqual(expectedResponse.id);
+    expect((resp as SingleStreamLayoutResponse).id).toEqual(expectedResponse.id);
   });
 
   test('can get all stream info', async () => {
@@ -719,8 +751,8 @@ describe('video', () => {
       .reply(200, expectedResponse);
 
     const resp = await client.getStreamInfo('sess-1234');
-    expect(resp.items[0].id).toEqual(expectedResponse.items[0].id);
-    expect(resp.count).toEqual(expectedResponse.count);
+    expect((resp as MultiStreamLayoutResponse).items[0].id).toEqual(expectedResponse.items[0].id);
+    expect((resp as MultiStreamLayoutResponse).count).toEqual(expectedResponse.count);
   });
 
   test('can mute streams', async () => {
@@ -816,11 +848,12 @@ describe('video', () => {
     await client.setStreamClassLists('sess-1234', [
       { id: 'stream-1234', layoutClassList: ['full'] },
     ]);
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can initiate a SIP call', async () => {
     const options = {
-      token: client.generateClientToken(),
+      token: client.generateClientToken('session-id'),
       sip: {
         uri: 'sip:user@sip.partner.com;transport=tls',
       },
@@ -869,6 +902,7 @@ describe('video', () => {
       .reply(200);
 
     await client.playDTMF('2_MX40NTMyODc3Mn5-fg', '1234#');
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can play DTMF digits into one connection', async () => {
@@ -890,10 +924,11 @@ describe('video', () => {
       '1234#',
       '396edda0-fc30-41fd-8e63'
     );
+    expect(nock.isDone()).toBeTruthy();
   });
 
   test('can connect to a websocket', async () => {
-    const token = client.generateClientToken();
+    const token = client.generateClientToken('session-id');
 
     nock(BASE_URL, {
       reqheaders: {
@@ -914,8 +949,8 @@ describe('video', () => {
       token,
       { uri: 'wss://mydomain.com/websocket/' }
     );
-    expect(resp.id).toEqual('CALLID');
-    expect(resp.connectionId).toEqual('CONNECTIONID');
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
   });
 
   test('can disconnect a websocket', async () => {
@@ -930,5 +965,6 @@ describe('video', () => {
       .reply(200);
 
     await client.disconnectWebsocket('CALLID');
+    expect(nock.isDone()).toBeTruthy();
   });
 });

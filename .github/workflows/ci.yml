@@ -15,8 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [16.x, 18.x, 20.x]
+        os: [ubuntu-latest, windows-latest]
+        node: [18.x, 20.x, 22.x]
     steps:
       - uses: actions/checkout@v3
 
@@ -31,8 +31,17 @@ jobs:
       - name: Install packages
         run: npm install
 
-      - name: Compile, Test
-        run: npm run compile && npm run test -- --coverage --verbose --maxWorkers=1
+      # Run lint before building to prevent eslint from checking the compiled files
+      - name: Lint
+        run: npm run lint
+
+      - name: Compile
+        run: npm run compile
+
+      - name: Test
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: npm run test
 
       - name: Run codecov
         uses: codecov/codecov-action@v3

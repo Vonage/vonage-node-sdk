@@ -40,7 +40,7 @@ yarn add @vonage/number-insights
 If you are using this SDK as part of the Vonage Server SDK, you can access it as the `messages` property off of the client that you instantiate.
 
 ```js
-const { Auth } = require('@vonage/auth);
+const { Auth } = require('@vonage/auth');
 const { Vonage } = require('@vonage/server-sdk');
 
 const credentials = new Auth({

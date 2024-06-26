@@ -94,7 +94,7 @@ export class NumberInsights extends Client {
   public async asyncAdvancedLookup(
     phoneNumber: string,
     callback: string,
-    options: StandardLookupOptions,
+    options?: StandardLookupOptions,
   ): Promise<AsyncAdvancedResponse> {
     const params = { number: phoneNumber, callback, ...options };
     const resp = await this.sendGetRequest<AsyncAdvancedResponse>(

@@ -30,7 +30,7 @@ const messageTests = testDataSets.map((dataSet): TestTuple<Messages> => {
         clientMethod: 'send',
         parameters: test.parameters,
         generator: false,
-        error: test.error || false,
+        error: 'error' in test ? String(test.error) : false,
         expected: test.expected,
       };
 
@@ -43,7 +43,7 @@ const messageTests = testDataSets.map((dataSet): TestTuple<Messages> => {
             test.request[0],
             test.request[1],
             {
-              ...test.request[2],
+              ...(typeof test.request[2] === 'object' ? test.request[2] : {}),
               api_key: '12345',
               api_secret: 'ABCDE',
             },
@@ -56,7 +56,7 @@ const messageTests = testDataSets.map((dataSet): TestTuple<Messages> => {
         clientMethod: 'send',
         parameters: test.parameters,
         generator: false,
-        error: test.error || false,
+        error: 'error' in test ? String(test.error) : false,
         expected: test.expected,
       };
 

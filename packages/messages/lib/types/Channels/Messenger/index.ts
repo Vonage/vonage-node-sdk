@@ -5,7 +5,7 @@ import { MessengerParams } from './MessengerParams';
 import { MessengerTextParams } from './MessengerTextParams';
 import { MessengerType } from './MessengerType';
 import { MessengerVideoParams } from './MessengerVideoParams';
-import { Channels } from "../../../enums";
+import { Channels } from '../../../enums';
 
 export * from './MessengerAudioParams';
 export * from './MessengerFileParams';

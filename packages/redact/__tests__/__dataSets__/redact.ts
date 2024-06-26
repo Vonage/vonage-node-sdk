@@ -1,6 +1,10 @@
-import { ProductType, Type } from '../../lib/enums/index';
-import { TransactionParams } from '../../lib/types/index';
-import { TransactionRequest, ErrorResponse } from '../../lib/interfaces/index';
+import {
+  TransactionRequest,
+  ErrorResponse,
+  TransactionParams,
+  ProductType,
+  Type
+} from '../../lib';
 
 export default [
   {

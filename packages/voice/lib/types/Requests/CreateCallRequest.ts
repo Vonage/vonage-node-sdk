@@ -1,4 +1,4 @@
-import { OutboundCall } from '../OutboundCall';
+import { OutboundCall } from '@vonage/voice';
 import { AdvancedMachineDetection } from '../AdvancedMachineDetection';
 import { MachineDetection } from '../../enums';
 

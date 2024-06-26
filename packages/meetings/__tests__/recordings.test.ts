@@ -1,8 +1,7 @@
 import nock from 'nock';
 import { Client } from '@vonage/server-client';
-import { Meetings } from '../lib/index';
+import { RecordingStatus, Meetings } from '../lib';
 import { getClient, getScope } from './common';
-import { RecordingStatus } from '../lib/enums';
 
 const session = {
   id: 'my-recording',
@@ -19,7 +18,7 @@ const session = {
 
 describe('Meetings > Recordings', () => {
   let client: Meetings;
-  let scope: nock;
+  let scope: nock.Scope;
 
   beforeEach(() => {
     client = getClient();
@@ -27,14 +26,12 @@ describe('Meetings > Recordings', () => {
   });
 
   afterEach(() => {
-    client = null;
-    scope = null;
     nock.cleanAll();
   });
 
   test('Can get recording by id', async () => {
     scope
-      .get(`/v1/meetings/recordings/my-awesome-recording`)
+      .get('/v1/meetings/recordings/my-awesome-recording')
       .reply(200, session);
 
     expect(await client.getRecording('my-awesome-recording')).toEqual({
@@ -46,7 +43,7 @@ describe('Meetings > Recordings', () => {
   });
 
   test('Can get recordings for session', async () => {
-    scope.get(`/v1/meetings/sessions/my-session`).reply(200, {
+    scope.get('/v1/meetings/sessions/my-session').reply(200, {
       _embedded: {
         recordings: [session],
       },
@@ -63,7 +60,7 @@ describe('Meetings > Recordings', () => {
   });
 
   test('Can delete recording by id', async () => {
-    scope.delete(`/v1/meetings/recordings/my-awesome-recording`).reply(204);
+    scope.delete('/v1/meetings/recordings/my-awesome-recording').reply(204);
 
     await client.deleteRecording('my-awesome-recording');
 

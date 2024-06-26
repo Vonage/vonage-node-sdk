@@ -1,4 +1,4 @@
-import { NumbersOwnedNumber } from "./NumbersOwnedNumber";
+import { NumbersOwnedNumber } from './NumbersOwnedNumber';
 
 /**
  * Represents a list of owned numbers.

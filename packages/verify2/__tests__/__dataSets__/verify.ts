@@ -8,9 +8,10 @@ import {
   VoiceWorkflow,
   EmailWorkflow,
   SilentAuthWorkflow,
-} from '../../lib/types';
-
-import { VerifyLocale, Channels, SilentAuthChannel } from '../../lib/enums';
+  VerifyLocale,
+  Channels,
+  SilentAuthChannel
+} from '../../lib';
 
 export default [
   {

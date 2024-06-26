@@ -1,6 +1,6 @@
 import nock from 'nock';
 import { Client } from '@vonage/server-client';
-import { Meetings } from '../lib/index';
+import { MeetingRoom, Meetings } from '../lib';
 import pick from 'lodash.pick';
 import {
   BASE_URL,
@@ -13,7 +13,7 @@ import {
 
 describe('Meetings > Rooms', () => {
   let client: Meetings;
-  let scope: nock;
+  let scope: nock.Scope;
 
   beforeEach(() => {
     client = getClient();
@@ -25,7 +25,7 @@ describe('Meetings > Rooms', () => {
   });
 
   test('Can get one page of data', async () => {
-    scope.get(`/v1/meetings/rooms?`).reply(200, {
+    scope.get('/v1/meetings/rooms?').reply(200, {
       _embedded: [
         {
           ...roomOne,
@@ -41,7 +41,7 @@ describe('Meetings > Rooms', () => {
       total_items: 1,
     });
 
-    const rooms = await client.getRooms();
+    const rooms = client.getRooms();
     const room = await rooms.next();
 
     expect(room.value).toEqual(
@@ -52,7 +52,7 @@ describe('Meetings > Rooms', () => {
 
   test('Can get two pages of data', async () => {
     scope
-      .get(`/v1/meetings/rooms?page_size=1`)
+      .get('/v1/meetings/rooms?page_size=1')
       .reply(200, {
         _embedded: [
           {
@@ -71,7 +71,7 @@ describe('Meetings > Rooms', () => {
         page_size: 20,
         total_items: 1,
       })
-      .get(`/v1/meetings/rooms?page_size=1&start_id=42`)
+      .get('/v1/meetings/rooms?page_size=1&start_id=42')
       .reply(200, {
         _embedded: [
           {
@@ -88,7 +88,7 @@ describe('Meetings > Rooms', () => {
         total_items: 1,
       });
 
-    const results = [];
+    const results: Array<MeetingRoom> = [];
     for await (const room of client.getRooms({ pageSize: 1 })) {
       results.push(room);
     }
@@ -102,7 +102,7 @@ describe('Meetings > Rooms', () => {
 
   test('Will throw error when call fails', async () => {
     scope
-      .get(`/v1/meetings/rooms?`)
+      .get('/v1/meetings/rooms?')
       .reply(200, {
         _embedded: [
           {
@@ -121,7 +121,7 @@ describe('Meetings > Rooms', () => {
         page_size: 20,
         total_items: 1,
       })
-      .get(`/v1/meetings/rooms?start_id=42`)
+      .get('/v1/meetings/rooms?start_id=42')
       .reply(401, {
         status: 401,
         error: 'Unauthorized',
@@ -140,7 +140,7 @@ describe('Meetings > Rooms', () => {
   });
 
   test('Can get room by id', async () => {
-    scope.get(`/v1/meetings/rooms/my-awesome-room`).reply(200, {
+    scope.get('/v1/meetings/rooms/my-awesome-room').reply(200, {
       ...roomOne,
       _links: roomLinks,
     });
@@ -155,11 +155,11 @@ describe('Meetings > Rooms', () => {
   test('Can create room', async () => {
     scope
       .post(
-        `/v1/meetings/rooms`,
+        '/v1/meetings/rooms',
         pick(
           Client.transformers.snakeCaseObjectKeys(roomOne, true),
           client.ROOM_WRITE_KEYS,
-        ),
+        ) as nock.RequestBodyMatcher,
       )
       .reply(200, {
         ...roomOne,
@@ -175,12 +175,15 @@ describe('Meetings > Rooms', () => {
 
   test('Can Update an existing room', async () => {
     scope
-      .patch(`/v1/meetings/rooms/my-awesome-room`, {
-        update_options: pick(
-          Client.transformers.snakeCaseObjectKeys(roomOne, true),
-          client.ROOM_WRITE_KEYS,
-        ),
-      })
+      .patch(
+        '/v1/meetings/rooms/my-awesome-room',
+        {
+          update_options: pick(
+            Client.transformers.snakeCaseObjectKeys(roomOne, true),
+            client.ROOM_WRITE_KEYS,
+          ),
+        } as nock.RequestBodyMatcher
+      )
       .reply(200, {
         ...roomOne,
         _links: roomLinks,

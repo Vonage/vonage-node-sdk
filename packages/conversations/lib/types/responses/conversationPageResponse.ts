@@ -1,5 +1,5 @@
-import { APILinks } from "@vonage/server-client";
-import { ConversationResponse } from "./conversationResponse.js";
+import { APILinks } from '@vonage/server-client';
+import { ConversationResponse } from './conversationResponse.js';
 
 /**
  * Represents the response for listing conversations retrieved from the API.

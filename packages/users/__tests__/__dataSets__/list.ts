@@ -17,7 +17,7 @@ import {
 export default [
   {
     label: 'get one page',
-    requests: [[`/v1/users?`, 'GET']],
+    requests: [['/v1/users?', 'GET']],
     responses: [
       [
         200,
@@ -61,7 +61,7 @@ export default [
   {
     label: 'get one page with params',
     requests: [
-      [`/v1/users?page_size=1&order=ASC&cursor=foo&name=user_one`, 'GET'],
+      ['/v1/users?page_size=1&order=ASC&cursor=foo&name=user_one', 'GET'],
     ],
     responses: [
       [
@@ -105,8 +105,8 @@ export default [
   {
     label: 'get all pages',
     requests: [
-      [`/v1/users?`, 'GET'],
-      [`/v1/users?cursor=fizz`, 'GET'],
+      ['/v1/users?', 'GET'],
+      ['/v1/users?cursor=fizz', 'GET'],
     ],
     responses: [
       [

@@ -12,7 +12,7 @@ const expectedApplication = JSON.parse(JSON.stringify(testApplication));
 
 expectedApplication.keys = {
   ...testApplication.keys,
-  privateKey: `-----BEGIN PRIVATE KEY-----bar----END PRIVATE KEY-----`,
+  privateKey: '-----BEGIN PRIVATE KEY-----bar----END PRIVATE KEY-----',
 };
 
 export default [
@@ -20,7 +20,7 @@ export default [
     label: 'create simple application',
     requests: [
       [
-        `/v2/applications`,
+        '/v2/applications',
         'POST',
         Client.transformers.snakeCaseObjectKeys(applicationToCreate, true),
       ],
@@ -58,7 +58,7 @@ export default [
     label: 'create application with custom key',
     requests: [
       [
-        `/v2/applications`,
+        '/v2/applications',
         'POST',
         Client.transformers.snakeCaseObjectKeys(
           {
@@ -111,7 +111,7 @@ export default [
     label: `create application with ${name} capability`,
     requests: [
       [
-        `/v2/applications`,
+        '/v2/applications',
         'POST',
         Client.transformers.snakeCaseObjectKeys(
           {

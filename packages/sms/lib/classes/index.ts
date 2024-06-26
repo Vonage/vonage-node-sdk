@@ -1,1 +1,1 @@
-export * from './Error/index';
+export * from './Error';

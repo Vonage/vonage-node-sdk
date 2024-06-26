@@ -5,7 +5,7 @@
 
   "compilerOptions": {
     "rootDir": "lib",
-    "outDir": "dist"
+    "outDir": "dist/lib"
   },
 
   "exclude": [
@@ -22,13 +22,14 @@
     { "path": "../number-insights" },
     { "path": "../numbers" },
     { "path": "../pricing" },
+    { "path": "../redact" },
     { "path": "../server-client" },
     { "path": "../sms" },
     { "path": "../users" },
-    { "path": "../redact" },
     { "path": "../verify" },
     { "path": "../verify2" },
     { "path": "../vetch" },
+    { "path": "../video" },
     { "path": "../voice" }
   ],
 

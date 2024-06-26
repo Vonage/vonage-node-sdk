@@ -1,4 +1,4 @@
-import { VerificationParameters } from './index';
+import { VerificationParameters } from '.';
 
 /**
  * Represents a verification request.

@@ -1,61 +1,36 @@
-import { SMS } from '../lib/index';
-import nock from 'nock';
-import { Auth } from '@vonage/auth';
-import { BASE_URL } from './common';
-import testDataSets from './__dataSets__/index';
-import testSignatureDataSets from './__dataSets__/signature';
+import { SMS } from '../lib';
+import testDataSets from './__dataSets__';
 
-describe.each(testDataSets)('$label', ({ tests }) => {
-  let client;
-  let scope;
+import {
+  VonageTest,
+  SDKTestCase,
+  TestResponse,
+  TestRequest,
+  TestTuple,
+  apiKeyAuth,
+} from '../../../testHelpers';
 
-  beforeEach(function () {
-    client = new SMS(new Auth({ apiKey: '12345', apiSecret: 'ABCDE' }));
-    scope = nock(BASE_URL).persist();
-  });
+const applicationsTest = testDataSets.map((dataSet): TestTuple<SMS> => {
+  const { label, tests } = dataSet;
 
-  afterEach(function () {
-    client = null;
-    scope = null;
-    nock.cleanAll();
-  });
-
-  const successTests = tests.filter(({ error }) => !error);
-  const failureTests = tests.filter(({ error }) => !!error);
-
-  test.each(successTests)(
-    'Can $label using: $clientMethod',
-    async ({ request, response, clientMethod, expected, parameters }) => {
-      scope.intercept(...request).reply(...response);
-
-      const results = await client[clientMethod](...parameters);
-      expect(results).toEqual(expected);
-      expect(nock.isDone()).toBeTruthy();
-    },
-  );
-
-  if (failureTests.length < 1) {
-    return;
-  }
-
-  test.each(failureTests)(
-    'Will throw $label using: $clientMethod',
-    async ({ request, response, clientMethod, parameters, error }) => {
-      scope.intercept(...request).reply(...response);
-
-      await expect(() => client[clientMethod](...parameters)).rejects.toThrow(
-        error,
-      );
-      expect(nock.isDone()).toBeTruthy();
-    },
-  );
-
-  test.each(testSignatureDataSets)(
-    'Testing signature using $algorithm',
-    async ({ expected, params, algorithm, signature, signatureSecret }) => {
-      expect(
-        client.verifySignature(signature, params, signatureSecret, algorithm),
-      ).toEqual(expected);
-    },
-  );
+  return {
+    name: label,
+    tests: tests.map((test): SDKTestCase<SMS> => {
+      return {
+        label: test.label,
+        baseUrl: 'https://rest.nexmo.com',
+        requests: [test.request] as TestRequest[],
+        responses: [test.response] as TestResponse[],
+        client: new SMS(apiKeyAuth),
+        clientMethod: test.clientMethod as keyof SMS,
+        parameters: test.parameters,
+        generator: false,
+        error: 'error' in test ? test.error as Error : false,
+        expected: test.expected,
+      };
+    }),
+  };
 });
+
+VonageTest(applicationsTest);
+

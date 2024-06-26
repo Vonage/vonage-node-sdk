@@ -76,10 +76,6 @@ export const VonageTest = <T>(testDataSets: TestTuple<T>[]) => {
         parameters,
         error,
       }) => {
-        if ((error !instanceof Error || typeof error !== 'string')) {
-          throw new Error('Error must be a string or an instance of Error');
-        }
-
         const scope = nock(baseUrl, {
           reqheaders: reqHeaders,
         });
@@ -96,7 +92,7 @@ export const VonageTest = <T>(testDataSets: TestTuple<T>[]) => {
           clientMethod,
           parameters,
         )).rejects.toThrow(
-          error,
+          error as Error,
         );
 
         expect(nock.isDone()).toBeTruthy();

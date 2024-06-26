@@ -1,4 +1,4 @@
-import { CaptionStatus } from "../../enums";
+import { CaptionStatus } from '../../enums';
 
 /**
  * Represents a response containing the status of captions for a live streaming broadcast.
@@ -43,12 +43,12 @@ export type CaptionStatusResponse = {
   /**
    * The language code of the captions (e.g., "en-us" for English, US).
    */
-  languageCode: "en-us";
+  languageCode: 'en-us';
 
   /**
    * The caption provider (e.g., "aws-transcribe").
    */
-  provider: "aws-transcribe";
+  provider: 'aws-transcribe';
 
   /**
    * An optional reason for the caption status.

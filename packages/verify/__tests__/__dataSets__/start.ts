@@ -1,17 +1,16 @@
+import { apiKey, apiSecret } from '../../../../testHelpers';
 import {
   CheckStatus,
   VerifyLanguages,
   VerifyWorkflows,
-} from '../../lib/enums/index';
-import {
   VerifyRequestResponse,
   VerifyRequest,
   VerifyRequestErrorResponse,
   VerifyError,
   PSD2Parameters,
   VerificationParameters,
-} from '../../lib/types/index';
-import { PSD2, Verification } from '../../lib/classes/index';
+} from '../../lib';
+import { PSD2, Verification } from '../../lib/classes';
 
 export default [
   {
@@ -20,8 +19,8 @@ export default [
       '/verify/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         number: '12128675309',
         brand: 'My Brand',
       },
@@ -53,8 +52,8 @@ export default [
       '/verify/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         number: '12128675309',
         brand: 'My Brand',
         lg: VerifyLanguages.WELSH_UK,
@@ -73,9 +72,9 @@ export default [
       new Verification(
         '12128675309',
         'My Brand',
-        null,
-        null,
-        null,
+        undefined,
+        undefined,
+        undefined,
         VerifyLanguages.WELSH_UK,
       ),
     ],
@@ -91,8 +90,8 @@ export default [
       '/verify/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         brand: 'My Brand',
         number: '12128675309',
         country: 'us',
@@ -140,8 +139,8 @@ export default [
       '/verify/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         number: '12128675309',
         brand: 'My Brand',
       },
@@ -151,7 +150,7 @@ export default [
             {
               request_id: 'abcdef0123456789abcdef0123456789',
               status: CheckStatus.MISSING_REQUIRED_PARAM,
-              error_text: `Your request is incomplete and missing the mandatory parameter 'number'`,
+              error_text: 'Your request is incomplete and missing the mandatory parameter \'number\'',
               network: '305699',
             } as VerifyRequestErrorResponse,
     ],
@@ -167,8 +166,8 @@ export default [
       request_id: 'abcdef0123456789abcdef0123456789',
       requestId: 'abcdef0123456789abcdef0123456789',
       status: CheckStatus.MISSING_REQUIRED_PARAM,
-      error_text: `Your request is incomplete and missing the mandatory parameter 'number'`,
-      errorText: `Your request is incomplete and missing the mandatory parameter 'number'`,
+      error_text: 'Your request is incomplete and missing the mandatory parameter \'number\'',
+      errorText: 'Your request is incomplete and missing the mandatory parameter \'number\'',
       network: '305699',
     } as VerifyError,
   },
@@ -178,8 +177,8 @@ export default [
       '/verify/psd2/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         number: '12128675309',
         payee: 'My Payee',
         amount: 42.0,
@@ -200,8 +199,8 @@ export default [
         '12128675309',
         'My Payee',
         42.0,
-        null,
-        null,
+        undefined,
+        undefined,
         VerifyLanguages.SWEDISH,
       ),
     ],
@@ -217,8 +216,8 @@ export default [
       '/verify/psd2/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         number: '12128675309',
         payee: 'My Payee',
         amount: 42.0,
@@ -252,8 +251,8 @@ export default [
       '/verify/psd2/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         number: '12128675309',
         payee: 'My Payee',
         amount: 42.0,

@@ -2,7 +2,7 @@ import { SIPEndpoint as SIPEndpointType } from '../../types/Endpoint/SIPEndpoint
 import debug from 'debug';
 
 debug('@vonage/voice')(
-  // eslint-disable-next-line max-len
+   
   'This class is deprecated. Please update to use the SIPEndpointType type instead',
 );
 

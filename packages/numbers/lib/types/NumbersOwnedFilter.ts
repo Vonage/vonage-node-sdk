@@ -1,5 +1,5 @@
-import { SearchPattern } from "../enums";
-import { Country } from "./Country";
+import { SearchPattern } from '../enums';
+import { Country } from './Country';
 
 /**
  * Represents filters for searching owned numbers.

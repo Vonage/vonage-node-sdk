@@ -1,14 +1,28 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
 
-  "extends": "@tsconfig/node16/tsconfig.json",
+  "extends": "@tsconfig/node18/tsconfig.json",
 
   "compilerOptions": {
-    "skipLibCheck": true,
-    "composite": true
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+
+    "composite": true,
+    "incremental": true,
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@vonage/*": [
+        "packages/*/lib"
+      ]
+    }
   },
 
   "ts-node": {
-      "esm": true
+    "esm": true
   }
 }

@@ -1,10 +1,35 @@
 import camelCase from 'lodash.camelcase';
 import snakeCase from 'lodash.snakecase';
 import kebabCase from 'lodash.kebabcase';
-import partial from 'lodash.partial';
 import isObject from 'lodash.isobject';
 
 export type TransformFunction = (key: string) => string;
+
+export type ObjectToTransform = Record<string | number, unknown>;
+
+export type TransformedObject = Record<string | number, unknown>;
+
+export type TransformFunctionPartialParams = [ObjectToTransform, boolean, boolean];
+
+export type PartialTransformFunction = (
+  objectToTransform: ObjectToTransform,
+  deep?: boolean,
+  preserve?: boolean,
+) => TransformedObject;
+
+export type TransformObjectKeys = (
+  transformFn: TransformFunction,
+  objectToTransform: ObjectToTransform,
+  deep?: boolean,
+  preserve?: boolean,
+) => TransformedObject;
+
+export type OmitFunction = (
+  keys: Array<string>,
+  obj: ObjectToTransform,
+) => TransformedObject;
+
+export type AnyTransformFunction = PartialTransformFunction | TransformObjectKeys | OmitFunction;
 
 /**
  * Transforms the keys of an object based on a provided transformation function.
@@ -13,16 +38,15 @@ export type TransformFunction = (key: string) => string;
  * @param {Record<string | number, unknown>} objectToTransform - The object whose keys are to be transformed.
  * @param {boolean} [deep=false] - Whether to deeply transform nested object keys.
  * @param {boolean} [preserve=false] - Whether to preserve the original object's keys.
- *
  * @return {Record<string | number, unknown>} A new object with transformed keys.
  */
-export const transformObjectKeys = (
+export const transformObjectKeys = <T = TransformedObject, O = ObjectToTransform>(
   transformFn: TransformFunction,
-  objectToTransform: Record<string | number, unknown>,
+  objectToTransform: O,
   deep = false,
   preserve = false,
-): Record<string | number, unknown> => {
-  const transformedObject = {
+): T => {
+  const transformedObject: ObjectToTransform = {
     ...(preserve ? objectToTransform : {}),
   };
 
@@ -60,7 +84,7 @@ export const transformObjectKeys = (
     );
   }
 
-  return transformedObject;
+  return transformedObject as T;
 };
 
 /**
@@ -71,7 +95,10 @@ export const transformObjectKeys = (
  * @param {boolean} [preserve=false] - Whether to preserve the original object's keys.
  * @return {Record<string | number, unknown>} A new object with camelCased keys.
  */
-export const camelCaseObjectKeys = partial(transformObjectKeys, camelCase);
+export const camelCaseObjectKeys = (...rest: TransformFunctionPartialParams) => transformObjectKeys(
+  camelCase, 
+  ...rest,
+);
 
 /**
  * Transforms the keys of an object to snake_case.
@@ -81,7 +108,10 @@ export const camelCaseObjectKeys = partial(transformObjectKeys, camelCase);
  * @param {boolean} [preserve=false] - Whether to preserve the original object's keys.
  * @return {Record<string | number, unknown>} A new object with snake_cased keys.
  */
-export const snakeCaseObjectKeys = partial(transformObjectKeys, snakeCase);
+export const snakeCaseObjectKeys = (...rest: TransformFunctionPartialParams) => transformObjectKeys(
+  snakeCase, 
+  ...rest,
+);
 
 /**
  * Transforms the keys of an object to kebab-case.
@@ -91,7 +121,10 @@ export const snakeCaseObjectKeys = partial(transformObjectKeys, snakeCase);
  * @param {boolean} [preserve=false] - Whether to preserve the original object's keys.
  * @return {Record<string | number, unknown>} A new object with kebab-cased keys.
  */
-export const kebabCaseObjectKeys = partial(transformObjectKeys, kebabCase);
+export const kebabCaseObjectKeys = (...rest: TransformFunctionPartialParams) => transformObjectKeys(
+  kebabCase, 
+  ...rest,
+);
 
 
 /**
@@ -104,8 +137,8 @@ export const kebabCaseObjectKeys = partial(transformObjectKeys, kebabCase);
  */
 export const omit = (
   keys: Array<string>,
-  obj: Record<string | number, unknown>,
-): Record<string | number, unknown> =>
+  obj: ObjectToTransform,
+): TransformedObject =>
   Object.fromEntries(
     Object.entries(obj)
       .filter(([key]) => !keys.includes(key)),

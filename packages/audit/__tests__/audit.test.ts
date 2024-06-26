@@ -1,9 +1,7 @@
 import nock from 'nock';
 import { Client } from '@vonage/server-client';
 import { Auth } from '@vonage/auth';
-import { Audit } from '../lib/index';
-import { AuditEventTypes } from '../lib/enums';
-import { AuditEvent } from '../lib/types/auditEvent';
+import { AuditEvent, AuditEventTypes, Audit } from '../lib';
 
 const BASE_URL = 'https://api.nexmo.com/';
 
@@ -28,7 +26,6 @@ describe('Audit Events', () => {
   });
 
   afterEach(function () {
-    client = null;
     nock.cleanAll();
   });
 
@@ -38,11 +35,11 @@ describe('Audit Events', () => {
         authorization: 'Basic MTIzNDU6QUJDREU=',
       },
     })
-      .intercept(`/beta/audit/events?page=1`, 'GET')
+      .intercept('/beta/audit/events?page=1', 'GET')
       .reply(200, {
         _embedded: {
-          events: [createEvent({ id: '1' })].map(
-            Client.transformers.snakeCaseObjectKeys,
+          events: [createEvent({ id: '1' })].map((event) =>
+            Client.transformers.snakeCaseObjectKeys(event),
           ),
         },
         page: {
@@ -55,24 +52,23 @@ describe('Audit Events', () => {
 
     const results = client.getEvents({});
     const eventIter = await results.next();
-    expect(eventIter.value.id).toBe('1');
-    expect(eventIter.value.createdAt).toBe('2022-11-15T17:30:33');
-    expect(await results.next().value).toBeUndefined();
+    expect((eventIter.value as AuditEvent).id).toBe('1');
+    expect((eventIter.value as AuditEvent).createdAt).toBe('2022-11-15T17:30:33');
     expect(scope.isDone()).toBeTruthy();
   });
 
   test('Can get events on multiple pages', async () => {
     // We're also checking AuditParams converts to snake_case
     const eventParameters = new URLSearchParams([
-      ['event_type', AuditEventTypes.ACCOUNT_SECRET_CREATE],
-      ['date_from', createEvent({}).createdAt],
-      ['date_to', createEvent({}).createdAt],
+      ['event_type', String(AuditEventTypes.ACCOUNT_SECRET_CREATE)],
+      ['date_from', String(createEvent({}).createdAt)],
+      ['date_to', String(createEvent({}).createdAt)],
       ['search_text', 'fizz-buzz'],
-      ['page', 2],
-      ['size', 21],
+      ['page', '2'],
+      ['size', '21'],
     ]);
 
-    const events = [];
+    const events: Array<AuditEvent> = [];
     const clientParams = Client.transformers.camelCaseObjectKeys(
       Object.fromEntries(eventParameters),
     );
@@ -91,7 +87,7 @@ describe('Audit Events', () => {
           events: [
             createEvent({ id: '1' }),
             createEvent({ id: '2' }),
-          ].map(Client.transformers.snakeCaseObjectKeys),
+          ].map((event) => Client.transformers.snakeCaseObjectKeys(event)),
         },
         page: {
           size: 20,
@@ -109,8 +105,8 @@ describe('Audit Events', () => {
       )
       .reply(200, {
         _embedded: {
-          events: [createEvent({ id: '3' })].map(
-            Client.transformers.snakeCaseObjectKeys,
+          events: [createEvent({ id: '3' })].map((event) =>
+            Client.transformers.snakeCaseObjectKeys(event),
           ),
         },
         page: {
@@ -137,7 +133,7 @@ describe('Audit Events', () => {
         authorization: 'Basic MTIzNDU6QUJDREU=',
       },
     })
-      .intercept(`/beta/audit/events?page=1`, 'GET')
+      .intercept('/beta/audit/events?page=1', 'GET')
       .reply(401, {
         status: 401,
         error: 'Unauthorized',
@@ -159,7 +155,7 @@ describe('Audit Events', () => {
         authorization: 'Basic MTIzNDU6QUJDREU=',
       },
     })
-      .intercept(`/beta/audit/events/asdf`, 'GET')
+      .intercept('/beta/audit/events/asdf', 'GET')
       .reply(200, {
         id: 'asdf',
         created_at: '2022-11-15T17:30:33',

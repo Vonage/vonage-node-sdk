@@ -3,6 +3,17 @@ import { UserResponse } from '../../lib';
 
 import { BASE_URL, testUser } from '../common';
 
+
+const { websocket } = testUser.channels || {};
+let webSocketResponse = {};
+if (websocket) {
+  webSocketResponse = {
+    'content-type':  websocket[0].contentType,
+    'headers': websocket[0].headers,
+    'uri': websocket[0].uri,
+  };
+}
+
 export default [
   {
     label: 'get user',
@@ -20,11 +31,7 @@ export default [
           channels: {
             ...testUser.channels,
             websocket: [
-              {
-                'content-type': testUser.channels?.websocket[0].contentType,
-                headers: testUser.channels?.websocket[0].headers,
-                uri: testUser.channels?.websocket[0].uri,
-              },
+              webSocketResponse,
             ],
           },
           _links: {

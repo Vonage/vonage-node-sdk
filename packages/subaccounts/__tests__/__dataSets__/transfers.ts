@@ -1,3 +1,4 @@
+import { apiKey } from '../../../../testHelpers';
 import { Client } from '@vonage/server-client';
 import {
   NumberTransfer,
@@ -9,10 +10,9 @@ import {
   CreditTransfer,
   CreditTransferParameters,
   CreditTransferListParameters,
-} from '../../lib/types';
-import { BASE_URL } from '../common';
+} from '../../lib';
 
-const API_KEY = '12345';
+const API_KEY = apiKey;
 
 const numberTransfer = {
   from: 'primary',
@@ -26,7 +26,7 @@ const balanceTransfer = {
   amount: 123.45,
   from: 'primary',
   to: 'sub',
-  reference: "Let's rock and roll!",
+  reference: 'Let\'s rock and roll!',
   createdAt: '2063-04-05T18:00:00.000Z',
 } as BalanceTransfer;
 
@@ -35,7 +35,7 @@ const creditTransfer = {
   amount: 123.45,
   from: 'primary',
   to: 'sub',
-  reference: "Let's rock and roll!",
+  reference: 'Let\'s rock and roll!',
   createdAt: '2063-04-05T18:00:00.000Z',
 } as CreditTransfer;
 
@@ -77,7 +77,7 @@ export default [
               },
             ],
           },
-        } as BalanceTransferResponsePage,
+        }
       ],
     ],
     clientMethod: 'listBalanceTransfers',

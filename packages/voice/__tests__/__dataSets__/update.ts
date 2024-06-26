@@ -1,5 +1,9 @@
-import { NCCOActions, TTSLanguages } from '../../lib/enums';
-import { CallUpdateResult, TalkAction } from '../../lib/types/index';
+import {
+  NCCOActions,
+  TTSLanguages,
+  CallUpdateResult,
+  TalkAction,
+} from '../../lib';
 import { callPhone } from '../common';
 
 export default [
@@ -39,7 +43,7 @@ export default [
         `/v1/calls/${callPhone.uuid}/talk`,
         'PUT',
         {
-          text: "I'll always dial the K for you",
+          text: 'I\'ll always dial the K for you',
           language: TTSLanguages.EN_US,
           style: '0',
           premium: true,
@@ -62,7 +66,7 @@ export default [
       callPhone.uuid,
       {
         action: NCCOActions.TALK,
-        text: "I'll always dial the K for you",
+        text: 'I\'ll always dial the K for you',
         language: TTSLanguages.EN_US,
         style: '0',
         premium: true,
@@ -193,7 +197,7 @@ export default [
             ncco: [
               {
                 action: NCCOActions.TALK,
-                text: "I'll always dial the K for you",
+                text: 'I\'ll always dial the K for you',
                 language: TTSLanguages.EN_US,
                 style: '0',
                 premium: true,
@@ -213,7 +217,7 @@ export default [
       [
         {
           action: NCCOActions.TALK,
-          text: "I'll always dial the K for you",
+          text: 'I\'ll always dial the K for you',
           language: 'en-US',
           style: '0',
           premium: true,

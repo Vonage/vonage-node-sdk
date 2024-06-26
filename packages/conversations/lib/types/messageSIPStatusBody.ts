@@ -1,5 +1,5 @@
-import { CallStatus, CallDirection } from "@vonage/voice";
-import { MessageSIPBody } from "./messageSIPBody";
+import { CallStatus, CallDirection } from '@vonage/voice';
+import { MessageSIPBody } from './messageSIPBody';
 
 /**
  * SIP and RTC message body with status

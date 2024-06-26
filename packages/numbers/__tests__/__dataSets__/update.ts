@@ -1,4 +1,4 @@
-import { VoiceCallbackTypeEnum } from "../../lib";
+import { VoiceCallbackTypeEnum } from '../../lib';
 
 const BASE_URL = 'https://rest.nexmo.com';
 const CLIENT_METHOD = 'updateNumber';
@@ -12,7 +12,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/update?api_key=12345&api_secret=ABCDE`,
+        '/number/update?api_key=12345&api_secret=ABCDE',
         'POST',
         new URLSearchParams([
           ['app_id', '123abc'],

@@ -4,24 +4,21 @@ import { BASE_URL } from './common';
 import { Auth } from '@vonage/auth';
 import { mkdirSync, readFileSync, existsSync } from 'fs';
 import { rm } from 'fs/promises';
+import { keyAuth } from '../../../testHelpers/';
 
 const FILE_PATH = `${process.cwd()}/test-path`;
 
-const key = readFileSync(`${__dirname}/private.test.key`).toString();
-
 describe('File tests', () => {
-  let client;
-  let scope;
+  let client: FileClient;
+  let scope: nock.Scope;
 
   beforeEach(() => {
     if (!existsSync(FILE_PATH)) {
       mkdirSync(FILE_PATH);
     }
+
     client = new FileClient(
-      new Auth({
-        privateKey: key,
-        applicationId: 'my-application',
-      }),
+      new Auth(keyAuth),
     );
 
     scope = nock(BASE_URL, {
@@ -32,8 +29,6 @@ describe('File tests', () => {
   });
 
   afterEach(async () => {
-    client = null;
-    scope = null;
     nock.cleanAll();
 
     await rm(FILE_PATH, {
@@ -43,17 +38,17 @@ describe('File tests', () => {
   });
 
   test('Can download file with url', async () => {
-    const content = "Ford, I think I'm a couch";
+    const content = 'Ford, I think I\'m a couch';
     const file = `${FILE_PATH}/my-file.txt`;
     scope
-      .get(`/v1/files/00000000-0000-0000-0000-000000000001`)
+      .get('/v1/files/00000000-0000-0000-0000-000000000001')
       .reply(200, content);
 
     expect(existsSync(file)).toBeFalsy();
 
     expect(
       await client.downloadFile(
-        `https://api.nexmo.com/v1/files/00000000-0000-0000-0000-000000000001`,
+        'https://api.nexmo.com/v1/files/00000000-0000-0000-0000-000000000001',
         file,
       ),
     ).toBeUndefined();
@@ -64,10 +59,10 @@ describe('File tests', () => {
   });
 
   test('Can download file with id', async () => {
-    const content = "Ford, I think I'm a couch";
+    const content = 'Ford, I think I\'m a couch';
     const file = `${FILE_PATH}/my-file.txt`;
     scope
-      .get(`/v1/files/00000000-0000-0000-0000-000000000001`)
+      .get('/v1/files/00000000-0000-0000-0000-000000000001')
       .reply(200, content);
 
     expect(existsSync(file)).toBeFalsy();
@@ -83,16 +78,16 @@ describe('File tests', () => {
 
   test('Can download multiple files', async () => {
     const file = `${FILE_PATH}/my-file.txt`;
-    const content = "Ford, I think I'm a couch";
+    const content = 'Ford, I think I\'m a couch';
 
     const file2 = `${FILE_PATH}/my-file2.txt`;
-    const content2 = "I know how you feel.";
+    const content2 = 'I know how you feel.';
 
     scope
-      .get(`/v1/files/00000000-0000-0000-0000-000000000001`)
+      .get('/v1/files/00000000-0000-0000-0000-000000000001')
       .delay(1000)
       .reply(200, content)
-      .get(`/v1/files/00000000-0000-0000-0000-000000000002`)
+      .get('/v1/files/00000000-0000-0000-0000-000000000002')
       .delay(800)
       .reply(200, content2);
 

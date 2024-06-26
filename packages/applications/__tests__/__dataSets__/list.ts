@@ -13,7 +13,7 @@ import {
 } from '../common';
 
 const appToApi = (application: Application): ApplicationResponse => ({
-  ...Client.transformers.snakeCaseObjectKeys(application, true),
+  ...Client.transformers.snakeCaseObjectKeys(application, true) as ApplicationResponse,
   _links: {
     self: {
       href: `${BASE_URL}/v2/applications/${application.id}`,
@@ -24,7 +24,7 @@ const appToApi = (application: Application): ApplicationResponse => ({
 export default [
   {
     label: 'get one page',
-    requests: [[`/v2/applications?`, 'GET']],
+    requests: [['/v2/applications?', 'GET']],
     responses: [
       [
         200,
@@ -84,7 +84,7 @@ export default [
   },
   {
     label: 'get one page with params',
-    requests: [[`/v2/applications?page_size=1&page=2`, 'GET']],
+    requests: [['/v2/applications?page_size=1&page=2', 'GET']],
     responses: [
       [
         200,
@@ -97,7 +97,7 @@ export default [
               href: `${BASE_URL}/v2/applications`,
             },
           },
-        } as ApplicationResponse,
+        } as ApplicationPageResponse,
       ],
     ],
     clientMethod: 'listApplications',
@@ -125,8 +125,8 @@ export default [
   {
     label: 'get all pages',
     requests: [
-      [`/v2/applications?page=1`, 'GET'],
-      [`/v2/applications?page=2`, 'GET'],
+      ['/v2/applications?page=1', 'GET'],
+      ['/v2/applications?page=2', 'GET'],
     ],
     responses: [
       [
@@ -146,7 +146,7 @@ export default [
               href: `${BASE_URL}/v2/applications?page=2`,
             },
           },
-        } as ApplicationResponse,
+        } as ApplicationPageResponse,
       ],
       [
         200,
@@ -162,7 +162,7 @@ export default [
               href: `${BASE_URL}/v2/applications?page=1`,
             },
           },
-        } as ApplicationResponse,
+        } as ApplicationPageResponse,
       ],
     ],
     clientMethod: 'listAllApplications',

@@ -2,7 +2,7 @@ import { MMSAudioParams }  from './MMSAudioParams';
 import { MMSImageParams }  from './MMSImageParams';
 import { MMSVcardParams }  from './MMSVcardParams';
 import { MMSVideoParams }  from './MMSVideoParams';
-import { Channels } from "../../../enums";
+import { Channels } from '../../../enums';
 
 export * from './MMSAudioParams';
 export * from './MMSImageParams';

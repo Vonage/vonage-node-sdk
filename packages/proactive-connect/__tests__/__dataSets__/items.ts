@@ -18,7 +18,7 @@ const itemOne = {
   updatedAt: '2023-04-20T15:23:10.169Z',
   data: {
     phone: '19162255887',
-    message: "I'll always dial the 'K' for you.",
+    message: 'I\'ll always dial the \'K\' for you.',
   },
 } as ListItem<TestDataType>;
 
@@ -134,7 +134,7 @@ export default [
     label: 'create item',
     requests: [
       [
-        `/v0.1/bulk/lists`,
+        '/v0.1/bulk/lists',
         'POST',
         {
           data: itemOne.data,

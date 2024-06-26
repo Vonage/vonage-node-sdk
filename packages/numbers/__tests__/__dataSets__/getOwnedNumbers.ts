@@ -23,7 +23,7 @@ export default [
     clientMethod: CLIENT_METHOD,
     request: {
       url: BASE_URL,
-      intercept: [`/account/numbers?api_key=12345&api_secret=ABCDE`, 'GET'],
+      intercept: ['/account/numbers?api_key=12345&api_secret=ABCDE', 'GET'],
       reply: [200, validResponse],
     },
     parameters: [{}],
@@ -35,7 +35,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/account/numbers?application_id=foo-bar&has_application=false&search_pattern=searchPattern&country=US&pattern=pattern&size=42&index=1&api_key=12345&api_secret=ABCDE`,
+        '/account/numbers?application_id=foo-bar&has_application=false&search_pattern=searchPattern&country=US&pattern=pattern&size=42&index=1&api_key=12345&api_secret=ABCDE',
         'GET',
       ],
       reply: [200, validResponse],

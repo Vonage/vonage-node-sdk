@@ -1,7 +1,9 @@
+import { camelCaseObjectKeys } from '../../lib';
+
 export default [
   {
     label: 'Transform to camel case',
-    transformFn: 'camelCaseObjectKeys',
+    transformFn: camelCaseObjectKeys,
     original: {
       foo_bar: 'fizz_buzz',
     },
@@ -15,7 +17,7 @@ export default [
   },
   {
     label: 'Transform to camel has no effect',
-    transformFn: 'camelCaseObjectKeys',
+    transformFn: camelCaseObjectKeys,
     original: {
       fooBar: 'fizz_buzz',
     },
@@ -29,7 +31,7 @@ export default [
   },
   {
     label: 'Transform to camel will preserves key',
-    transformFn: 'camelCaseObjectKeys',
+    transformFn: camelCaseObjectKeys,
     original: {
       foo_bar: 'fizz_buzz',
     },
@@ -44,7 +46,7 @@ export default [
   },
   {
     label: 'Transform to camel uses transformed key',
-    transformFn: 'camelCaseObjectKeys',
+    transformFn: camelCaseObjectKeys,
     original: {
       foo_bar: 'fizz_buzz',
       fooBar: 'baz_bat',
@@ -59,7 +61,7 @@ export default [
   },
   {
     label: 'Transform to camel deep',
-    transformFn: 'camelCaseObjectKeys',
+    transformFn: camelCaseObjectKeys,
     original: {
       foo_bar: {
         fizz_buzz: {
@@ -81,7 +83,7 @@ export default [
   },
   {
     label: 'Transform to camel deep with array (prevents object confusion)',
-    transformFn: 'camelCaseObjectKeys',
+    transformFn: camelCaseObjectKeys,
     original: {
       foo_bar: ['fizz_buzz', 'baz_bat'],
     },
@@ -95,7 +97,7 @@ export default [
   },
   {
     label: 'Transform to camel deep with null (prevents object confusion)',
-    transformFn: 'camelCaseObjectKeys',
+    transformFn: camelCaseObjectKeys,
     original: {
       foo_bar: null,
     },
@@ -109,7 +111,7 @@ export default [
   },
   {
     label: 'Transform to camel deep array only',
-    transformFn: 'camelCaseObjectKeys',
+    transformFn: camelCaseObjectKeys,
     original: {
       foo_bar: [
         {

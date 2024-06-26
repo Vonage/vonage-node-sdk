@@ -1,4 +1,4 @@
-import { AnyChannel } from "@vonage/messages";
+import { AnyChannel } from '@vonage/messages';
 
 /**
  * Standard SIP and RTC message body

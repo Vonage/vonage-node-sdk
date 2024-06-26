@@ -7,7 +7,7 @@ const expectedApplication = JSON.parse(JSON.stringify(testApplication));
 
 expectedApplication.keys = {
   ...testApplication.keys,
-  privateKey: `-----BEGIN PRIVATE KEY-----bar----END PRIVATE KEY-----`,
+  privateKey: '-----BEGIN PRIVATE KEY-----bar----END PRIVATE KEY-----',
 };
 
 export default [

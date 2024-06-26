@@ -6,6 +6,7 @@ import {
   Application,
   CapabilityVoice,
   CapabilityMessages,
+  AnyCapability,
 } from '../lib';
 
 export const BASE_URL = 'https://api.nexmo.com/';
@@ -173,4 +174,4 @@ export const capabilitiesToTest = [
   ['rtc', rtcCapability],
   ['verify', verifyCapability],
   ['voice', voiceCapability],
-] as unknown as [[string, unknown]];
+] as Array<[string, AnyCapability]>;

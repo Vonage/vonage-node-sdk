@@ -1,5 +1,5 @@
 import { GeneratorOptions, Claims } from './types';
-import jsonwebtoken from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import {
   MissingApplicationIdError,
@@ -9,7 +9,7 @@ import {
 } from './errors';
 import debug from 'debug';
 
-const { sign } = jsonwebtoken;
+const { sign } = jwt;
 
 const log = debug('vonage:jwt:tokenGenerate');
 
@@ -107,7 +107,7 @@ export const tokenGenerate = (
     throw new InvalidPrivateKeyError();
   }
 
-  const claims = validateOptions(opts);
+  const claims = validateOptions(opts as jwt.JwtPayload);
   log('Claims', claims);
   claims.application_id = applicationId;
 

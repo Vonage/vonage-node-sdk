@@ -34,8 +34,9 @@ export class FileClient extends Client {
     try {
       const fileURL = new URL(file);
       fileId = fileURL.pathname.split('/').pop() || '';
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_) {
-      log(`Not a url`);
+      log('Not a url');
     }
 
     log(`File Id ${fileId}`);

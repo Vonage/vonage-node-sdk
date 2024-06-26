@@ -9,47 +9,47 @@ export type MediaItemResponse = {
   /**
    * The filename of the object as it was originally uploaded.
    */
-  originalFileName: string;
+  original_file_name: string;
 
   /**
    * The IETF MIME type of the file.
    */
-  mimeType: string;
+  mime_type: string;
 
   /**
    * The ID of your Nexmo account. This is the same as your API key.
    */
-  accountId: string;
+  account_id: string;
 
   /**
    * An internal identifier of how the file is stored.
    */
-  storeId: string;
+  store_id: string;
 
   /**
    * The maximum number of times the file may be downloaded.
    */
-  maxDownloadsAllowed: number;
+  max_downloads_allowed: number;
 
   /**
    * The number of times the file has been downloaded.
    */
-  timesDownloaded: number;
+  times_downloaded: number;
 
   /**
    * The size of the file in bytes.
    */
-  mediaSize: number;
+  media_size: number;
 
   /**
    * A timestamp for the time that the file was created.
    */
-  timeCreated: string;
+  time_created: string;
 
   /**
    * A timestamp for the time that the file was last modified.
    */
-  timeLastUpdated: string;
+  time_last_updated: string;
 
   /**
    * Whether the item is available for download without authentication.
@@ -59,12 +59,12 @@ export type MediaItemResponse = {
   /**
    * A user-set string containing metadata about the media file.
    */
-  metadataPrimary: string;
+  metadata_primary?: string | null;
 
   /**
    * A user-set string containing further metadata about the media file.
    */
-  metadataSecondary: string;
+  metadata_secondary?: string | null;
 
   /**
    * A UUID representing the object.

@@ -1,9 +1,9 @@
-import { snakeCaseObjectKeys } from '../../lib';
+import { kebabCaseObjectKeys } from '../../lib';
 
 export default [
   {
-    label: 'Transform to snake case',
-    transformFn: snakeCaseObjectKeys,
+    label: 'Transform to kebab case',
+    transformFn: kebabCaseObjectKeys,
     original: {
       fooBar: 'fizz_buzz',
     },
@@ -12,12 +12,12 @@ export default [
       false, // preserve
     ],
     expected: {
-      foo_bar: 'fizz_buzz',
+      'foo-bar': 'fizz_buzz',
     },
   },
   {
-    label: 'Transform to snake has no effect',
-    transformFn: snakeCaseObjectKeys,
+    label: 'Transform to kebab has no effect',
+    transformFn: kebabCaseObjectKeys,
     original: {
       foo_bar: 'fizz_buzz',
     },
@@ -26,12 +26,12 @@ export default [
       false, // preserve
     ],
     expected: {
-      foo_bar: 'fizz_buzz',
+      'foo-bar': 'fizz_buzz',
     },
   },
   {
-    label: 'Transform to snake will preserves key',
-    transformFn: snakeCaseObjectKeys,
+    label: 'Transform to kebab will preserves key',
+    transformFn: kebabCaseObjectKeys,
     original: {
       fooBar: 'fizz_buzz',
     },
@@ -40,13 +40,13 @@ export default [
       true, // preserve
     ],
     expected: {
-      foo_bar: 'fizz_buzz',
+      'foo-bar': 'fizz_buzz',
       fooBar: 'fizz_buzz',
     },
   },
   {
-    label: 'Transform to snake uses transformed key',
-    transformFn: snakeCaseObjectKeys,
+    label: 'Transform to kebab uses transformed key',
+    transformFn: kebabCaseObjectKeys,
     original: {
       foo_bar: 'fizz_buzz',
       fooBar: 'baz_bat',
@@ -56,12 +56,12 @@ export default [
       false, // preserve
     ],
     expected: {
-      foo_bar: 'baz_bat',
+      'foo-bar': 'baz_bat',
     },
   },
   {
-    label: 'Transform to snake deep',
-    transformFn: snakeCaseObjectKeys,
+    label: 'Transform to kebab deep',
+    transformFn: kebabCaseObjectKeys,
     original: {
       foo_bar: {
         fizz_buzz: {
@@ -74,16 +74,16 @@ export default [
       false, // preserve
     ],
     expected: {
-      foo_bar: {
-        fizz_buzz: {
-          baz_bat: 'qux',
+      'foo-bar': {
+        'fizz-buzz': {
+          'baz-bat': 'qux',
         },
       },
     },
   },
   {
-    label: 'Transform to snake deep with array (prevents object confusion)',
-    transformFn: snakeCaseObjectKeys,
+    label: 'Transform to kebab deep with array (prevents object confusion)',
+    transformFn: kebabCaseObjectKeys,
     original: {
       fooBar: ['fizz_buzz', 'baz_bat'],
     },
@@ -92,12 +92,12 @@ export default [
       false, // preserve
     ],
     expected: {
-      foo_bar: ['fizz_buzz', 'baz_bat'],
+      'foo-bar': ['fizz_buzz', 'baz_bat'],
     },
   },
   {
-    label: 'Transform to snake deep with null (prevents object confusion)',
-    transformFn: snakeCaseObjectKeys,
+    label: 'Transform to kebab deep with null (prevents object confusion)',
+    transformFn: kebabCaseObjectKeys,
     original: {
       fooBar: null,
     },
@@ -106,7 +106,8 @@ export default [
       false, // preserve
     ],
     expected: {
-      foo_bar: null,
+      'foo-bar': null,
     },
   },
 ];
+
