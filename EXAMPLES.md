@@ -1526,6 +1526,134 @@ console.log(`Message sent successfully with UUID ${messageUUID}`);
 
 ## Vonage Messages Package
 
+### RCSCustom Class
+
+Represents a custom message for RCS.
+
+
+#### RCSCustom
+
+Sends a custom message through RCS
+
+```ts
+import { RCSCustom } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new RCSCustom({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ custom: {
+   foo: 'bar',
+ }
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
+### RCSFile Class
+
+Represents a file message for the RCS channel.
+
+
+#### RCSFile
+
+Sends a file message to the RCS channel.
+
+```ts
+import { RCSFile } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new RCSFile({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ file: {
+   url: 'https://example.com/image.pdf',
+ },
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
+### RCSImage Class
+
+Represents an image message for the RCS channel.
+
+
+#### RCSImage
+
+Send an RCS image message.
+
+```ts
+import { RCSImage } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new RCSImage({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ image: {
+   url: 'https://example.com/image.jpg',
+ },
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
+### RCSText Class
+
+Represents a text message for the RCS channel.
+
+
+#### RCSText
+
+Sends a text message through the RCS channel.
+
+```ts
+import { RCSText } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new RCSText({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ text: 'Hello world',
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
+### RCSVideo Class
+
+Represents an video message for the RCS channel.
+
+
+#### RCSVideo
+
+Send an RCS video message.
+
+```ts
+import { RCSVideo } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new RCSVideo({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ audio: {
+   url: 'https://example.com/video.mp4',
+ },
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
 ### SMS Class
 
 Send a text message using the SMS channel.
