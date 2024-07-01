@@ -11,10 +11,9 @@ body:
     label: Node Version
     description: What version of NodeJS are you using?
     options:
-     - 16.x
      - 18.x
      - 20.x
-     - 21.x
+     - 22.x
    validations:
     required: true
  - type: dropdown
@@ -36,7 +35,7 @@ body:
    attributes:
     label: SDK Version
     description: What version of the SDK are you using?
-    placeholder: 3.10.0
+    placeholder: 3.x.x
    validations:
     required: true
  - type: textarea
