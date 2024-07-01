@@ -47,13 +47,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/auth": "^1.10.0",
     "@vonage/server-client": "^1.12.0",
     "@vonage/vetch": "^1.7.1",
     "debug": "^4.3.4"
-  },
-  "devDependencies": {
-    "nock": "^13.3.4"
   },
   "publishConfig": {
     "directory": "dist"

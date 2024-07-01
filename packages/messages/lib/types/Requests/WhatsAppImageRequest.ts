@@ -48,4 +48,9 @@ export type WhatsAppImageRequest = {
    * The channel through which the message will be sent, which is 'whatsapp' for WhatsApp.
    */
   channel: 'whatsapp';
-}
+
+  /**
+   * The amount of time in seconds the message will live for
+   */
+  ttl?: number;
+};

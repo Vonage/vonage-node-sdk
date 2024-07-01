@@ -29,7 +29,7 @@ import { MessageCategory } from '../../lib/enums/Messenger/MessageCategory';
 
 export default [
   {
-    label: 'send Messenger text',
+    label: 'send text',
     request: [
       '/v1/messages',
       'POST',
@@ -61,7 +61,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger text with ref and messenger properties',
+    label: 'send text with ref and messenger properties',
     request: [
       '/v1/messages',
       'POST',
@@ -107,7 +107,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger text with old class',
+    label: 'send text with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -149,7 +149,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger image',
+    label: 'send image',
     request: [
       '/v1/messages',
       'POST',
@@ -185,7 +185,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger image with messenger properties and ref',
+    label: 'send image with messenger properties and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -231,7 +231,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger image with old class',
+    label: 'send image with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -277,7 +277,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger audio',
+    label: 'send audio',
     request: [
       '/v1/messages',
       'POST',
@@ -313,7 +313,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger audio with caption and ref',
+    label: 'send audio with caption and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -359,7 +359,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger audio with old class',
+    label: 'send audio with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -405,7 +405,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger video',
+    label: 'send video',
     request: [
       '/v1/messages',
       'POST',
@@ -441,7 +441,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger video with messenger and ref',
+    label: 'send video with messenger and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -487,7 +487,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger video with old class',
+    label: 'send video with old class',
     request: [
       '/v1/messages',
       'POST',
@@ -533,7 +533,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger file',
+    label: 'send file',
     request: [
       '/v1/messages',
       'POST',
@@ -569,7 +569,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger file with messenger and ref',
+    label: 'send file with messenger and ref',
     request: [
       '/v1/messages',
       'POST',
@@ -615,7 +615,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send Messenger file with old class',
+    label: 'send file with old class',
     request: [
       '/v1/messages',
       'POST',

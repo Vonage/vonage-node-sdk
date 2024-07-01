@@ -3,7 +3,8 @@ import { VetchOptions } from '@vonage/vetch';
 import {
   MessageSuccess,
   SendMessageParams,
-  MessageSuccessResponse, AnyChannel,
+  MessageSuccessResponse,
+  AnyChannel,
 } from './types';
 import debug from 'debug';
 
@@ -11,9 +12,9 @@ const log = debug('vonage:messages');
 
 /**
  * Client class to interact with the Messages API which enables users to manage
- * send messages through various channels programmatically. 
+ * send messages through various channels programmatically.
  * @see {@link https://developer.nexmo.com/en/messages/overview}
- 
+
  * @group Client
  *
  * @example
@@ -80,13 +81,15 @@ export class Messages extends Client {
   public async send(
     message: SendMessageParams | AnyChannel,
   ): Promise<MessageSuccess> {
+    const data = Client.transformers.snakeCaseObjectKeys(message, true);
+
+    if ('custom' in message) {
+      data.custom = message.custom;
+    }
+
     const resp = await this.sendPostRequest<MessageSuccessResponse>(
       `${this.config.apiHost}/v1/messages`,
-      JSON.parse(
-        JSON.stringify(
-          Client.transformers.snakeCaseObjectKeys(message, true),
-        ),
-      ),
+      data,
     );
 
     return {

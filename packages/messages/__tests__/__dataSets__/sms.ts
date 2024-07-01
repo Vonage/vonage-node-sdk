@@ -1,11 +1,10 @@
 import { SMS } from '../../lib';
 import { MessageSuccess } from '../../lib';
 import { MessageParamsText, SMSMessageRequest } from '../../lib';
-import { AuthType } from '../common';
 
 export default [
   {
-    label: 'send SMS message',
+    label: 'send message',
     request: [
       '/v1/messages',
       'POST',
@@ -15,7 +14,7 @@ export default [
         text: 'too many secrets',
         channel: 'sms',
         message_type: 'text',
-      } as SMSMessageRequest,
+      },
     ],
     response: [
       200,
@@ -37,7 +36,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send SMS message with SMS extra params',
+    label: 'send message with extra params',
     request: [
       '/v1/messages',
       'POST',
@@ -79,7 +78,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send SMS message with client ref',
+    label: 'send message with client ref',
     request: [
       '/v1/messages',
       'POST',
@@ -117,7 +116,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send SMS message with client ref',
+    label: 'send message with client ref',
     request: [
       '/v1/messages',
       'POST',
@@ -151,7 +150,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send SMS message with old params',
+    label: 'send message with old params',
     request: [
       '/v1/messages',
       'POST',
@@ -180,7 +179,7 @@ export default [
     } as MessageSuccess,
   },
   {
-    label: 'send SMS message with error response',
+    label: 'send message with error response',
     request: [
       '/v1/messages',
       'POST',
@@ -214,6 +213,5 @@ export default [
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
     } as MessageSuccess,
     error: 'Request failed with status code 401',
-    authType: AuthType.JWT,
   },
 ];

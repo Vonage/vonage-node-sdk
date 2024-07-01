@@ -13,6 +13,7 @@ If you are updating from V2 to V3, please check the migration guide found [here]
 * [Installation](#installation)
 * [Usage](#usage)
 * [Promises](#promises)
+* [Channels](#channels)
 
 ## Installation
 
@@ -108,6 +109,25 @@ Run:
 ```bash
 npm run test
 ```
+
+## Channels
+
+The Vonage Messages API supports several different communication channels, and
+from time to time will add new channels. Each channel follows our normal product
+development cycle and therefore different channels within the overall API may
+have different release statuses at a certain point in time. Channels available
+for general use will be listed as having 'General Availability'. Channels which
+are currently part of a Beta program will be listed as 'Beta'. This table
+details the current release status of each channel implemented in this SDK:
+
+| Channel            |  API Release Status  |
+|--------------------|:--------------------:|
+| SMS                | General Availability |
+| MMS                | General Availability |
+| RCS                | Beta                 |
+| Facebook Messenger | General Availability |
+| WhatsApp           | General Availability |
+| Viber              | General Availability |
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 

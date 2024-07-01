@@ -3,26 +3,31 @@ import mmsTests from './mms';
 import messengerTests from './messenger';
 import viberTests from './viber';
 import whatsAppTests from './whatsApp';
+import RCSTests from './rcs';
 
 export default [
   {
-    label: 'SMS Messages',
+    label: 'SMS',
     tests: smsTests,
   },
   {
-    label: 'MMS Messages',
+    label: 'MMS',
     tests: mmsTests,
   },
   {
-    label: 'Messenger Messages',
+    label: 'Messenger',
     tests: messengerTests,
   },
   {
-    label: 'Viber Messages',
+    label: 'Viber',
     tests: viberTests,
   },
   {
-    label: 'WhatsApp Messages',
+    label: 'WhatsApp',
     tests: whatsAppTests,
+  },
+  {
+    label: 'RCS',
+    tests: RCSTests,
   },
 ];
