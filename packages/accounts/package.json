@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/accounts",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "description": "Vonage Account Management API",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -22,9 +22,9 @@
       "url": "https://github.com/manchuck"
     }
   ],
+  "type": "module",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
-  "type": "module",
   "directories": {
     "lib": "dist",
     "test": "__tests__"
@@ -39,10 +39,10 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.12.0"
+    "@vonage/server-client": "^1.12.1"
   },
   "devDependencies": {
-    "@vonage/auth": "^1.10.0",
+    "@vonage/auth": "^1.10.1",
     "nock": "^13.3.4"
   },
   "publishConfig": {
