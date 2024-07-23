@@ -3,12 +3,17 @@
  */
 export enum AdvancedMachineDetectionMode {
   /**
-   * Detect mode, used for advanced machine detection without beep detection.
+   * Default mode, used for advanced async machine detection, including beep detection.
+   */
+  DEFAULT = 'default',
+
+  /**
+   * Detect mode, used for advanced sync machine detection without beep detection.
    */
   DETECT = 'detect',
 
   /**
-   * Detect beep mode, used for advanced machine detection with beep detection.
+   * Detect beep mode, used for advanced sync machine detection with beep detection.
    */
   DETECTBEEP = 'detect_beep',
 }
