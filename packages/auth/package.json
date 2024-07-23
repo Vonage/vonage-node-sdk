@@ -26,8 +26,9 @@
       "url": "https://github.com/manchuck"
     }
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "files": [
     "/dist"
   ],
@@ -42,6 +43,7 @@
     "debug": "^4.3.4"
   },
   "devDependencies": {
+    "@jest/globals": "29.7.0",
     "@types/node": "^20.8.4"
   },
   "publishConfig": {

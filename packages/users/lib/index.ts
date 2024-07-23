@@ -1,3 +1,3 @@
-export * from './types/index';
-export * from './enums/index';
+export * from './types';
+export * from './enums';
 export * from './user';

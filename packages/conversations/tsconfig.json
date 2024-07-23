@@ -5,7 +5,7 @@
 
   "compilerOptions": {
     "rootDir": "lib",
-    "outDir": "dist"
+    "outDir": "dist/lib"
   },
 
   "exclude": [
@@ -15,6 +15,9 @@
 
   "references": [
     { "path": "../server-client" },
+    { "path": "../messages" },
+    { "path": "../voice" },
+    { "path": "../users" },
     { "path": "../auth" }
   ],
 

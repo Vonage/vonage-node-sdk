@@ -1,4 +1,4 @@
-import { GetCallDetailsParameters } from "./GetCallsDetailsParameters";
+import { GetCallDetailsParameters } from './GetCallsDetailsParameters';
 
 /**
  * @deprecated Pelease use GetCallDetailsParameters instead

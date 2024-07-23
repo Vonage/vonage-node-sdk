@@ -22,8 +22,9 @@
       "url": "https://github.com/manchuck"
     }
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "directories": {
     "lib": "dist",
     "test": "__tests__"
@@ -43,7 +44,6 @@
     "lodash.camelcase": "^4.3.0",
     "lodash.isobject": "3.0.2",
     "lodash.kebabcase": "^4.1.1",
-    "lodash.partial": "^4.2.1",
     "lodash.snakecase": "^4.1.1",
     "node-fetch": "^2"
   },
@@ -51,7 +51,6 @@
     "@types/lodash.camelcase": "4.3.7",
     "@types/lodash.isobject": "3.0.7",
     "@types/lodash.kebabcase": "4.1.7",
-    "@types/lodash.partial": "4.2.7",
     "@types/lodash.snakecase": "4.1.7",
     "@types/node-fetch": "2.6.6",
     "nock": "^13.3.4"

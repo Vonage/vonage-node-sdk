@@ -1,55 +1,48 @@
-import nock from 'nock';
-import { Auth } from '@vonage/auth';
-import { Numbers } from '../lib/index';
-import dataSet from './__dataSets__/index';
+import { Numbers } from '../lib';
+import dataSet from './__dataSets__';
+import { URL } from 'url';
+import {
+  VonageTest,
+  SDKTestCase,
+  TestResponse,
+  TestRequest,
+  TestTuple,
+  apiKeyAuth,
+  apiKey,
+  apiSecret,
+} from '../../../testHelpers';
 
-describe.each(dataSet)('$label', ({ tests }) => {
-  let client: Numbers;
+const applicationsTest = dataSet.map((dataSet): TestTuple<Numbers> => {
+  const { label, tests } = dataSet;
 
-  beforeEach(function () {
-    client = new Numbers(new Auth({ apiKey: '12345', apiSecret: 'ABCDE' }));
-  });
-
-  afterEach(function () {
-    client = null;
-    nock.cleanAll();
-  });
-
-  const succesfulTests = tests.filter((test) => !test?.exception);
-  const exceptionTests = tests.filter((test) => test?.exception);
-
-  test.each(succesfulTests)(
-    'Can $label',
-    async ({ request, parameters, clientMethod, expected }) => {
-      const { url, intercept, reply } = request;
-
-      const scope = nock(url)
-        .intercept(...intercept)
-        .reply(...reply);
-
-      const results = await client[clientMethod](...parameters);
-      expect(results).toEqual(expected);
-      expect(scope.isDone()).toBeTruthy();
-    },
-  );
-
-  if (exceptionTests.length < 1) {
-    return;
-  }
-
-  test.each(exceptionTests)(
-    'Throws exception $label',
-    async ({ request, parameters, clientMethod, exception }) => {
-      const { url, intercept, reply } = request;
-
-      const scope = nock(url)
-        .intercept(...intercept)
-        .reply(...reply);
-
-      await expect(() =>
-        client[clientMethod](...parameters),
-      ).rejects.toThrow(exception);
-      expect(scope.isDone()).toBeTruthy();
-    },
-  );
+  return {
+    name: label,
+    tests: tests.map((test): SDKTestCase<Numbers> => {
+      const requestUrl = new URL(`${test.request.url}${test.request.intercept[0]}`);
+      requestUrl.searchParams.set('api_key', apiKey);
+      requestUrl.searchParams.set('api_secret', apiSecret);
+      return {
+        label: test.label,
+        baseUrl: 'https://rest.nexmo.com',
+        requests: [
+          [
+            `${requestUrl.pathname}${requestUrl.search.toString()}`,
+            test.request.intercept[1],
+            test.request.intercept[2],
+          ] as TestRequest
+        ],
+        responses: [
+          test.request.reply as TestResponse
+        ],
+        client: new Numbers(apiKeyAuth),
+        clientMethod: test.clientMethod as keyof Numbers,
+        parameters: test.parameters,
+        generator: 'generator' in test ? Boolean(test.generator) : false,
+        error: 'exception' in test ? String(test.exception) : false,
+        expected: test.expected,
+      };
+    }),
+  };
 });
+
+VonageTest(applicationsTest);

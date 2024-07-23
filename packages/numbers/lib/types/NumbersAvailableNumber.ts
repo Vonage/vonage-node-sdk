@@ -1,5 +1,5 @@
-import { LineType, Feature } from "../enums";
-import { Country } from "./Country";
+import { LineType, Feature } from '../enums';
+import { Country } from './Country';
 
 /**
  * Represents an available phone number with its details.

@@ -1,78 +1,40 @@
-import { Users } from '../lib/index';
-import nock from 'nock';
-import { Auth } from '@vonage/auth';
-import { BASE_URL } from './common';
-import testDataSets from './__dataSets__/index';
-import { readFileSync } from 'fs';
+import { Users } from '../lib';
+import testDataSets from './__dataSets__';
 
-const key = readFileSync(`${__dirname}/private.test.key`).toString();
+import {
+  VonageTest,
+  SDKTestCase,
+  TestResponse,
+  TestRequest,
+  TestTuple,
+  keyAuth,
+  validateBearerAuth
+} from '../../../testHelpers';
 
-const getResults = async (
-  generator: boolean,
-  client: Users,
-  clientMethod: string,
-  parameters: Array<unknown>,
-): Promise<unknown | Array<unknown>> => {
-  if (!generator) {
-    return await client[clientMethod](...parameters);
-  }
+const applicationsTest = testDataSets.map((dataSet): TestTuple<Users> => {
+  const { label, tests } = dataSet;
 
-  const results = [];
-  for await (const result of client[clientMethod](...parameters)) {
-    results.push(result as never);
-  }
-
-  return results;
-};
-
-describe.each(testDataSets)('$label', ({ tests }) => {
-  let client: Users | null;
-  let scope;
-
-  beforeEach(function () {
-    client = new Users(
-      new Auth({
-        privateKey: key,
-        applicationId: 'my-application',
-      }),
-    );
-
-    scope = nock(BASE_URL, {
-      reqheaders: {
-        authorization: (value) => value.startsWith('Bearer '),
-      },
-    }).persist();
-  });
-
-  afterEach(function () {
-    client = null;
-    scope = null;
-    nock.cleanAll();
-  });
-
-  test.each(tests)(
-    'Can $label using: $clientMethod',
-    async ({
-      requests,
-      responses,
-      clientMethod,
-      parameters,
-      expected,
-      generator = false,
-    }) => {
-      requests.forEach((request, index) => {
-        scope.intercept(...request).reply(...responses[index]);
-      });
-
-      const results = await getResults(
-        generator,
-        client as User,
-        clientMethod,
-        parameters,
-      );
-
-      expect(results).toEqual(expected);
-      expect(nock.isDone()).toBeTruthy();
-    },
-  );
+  return {
+    name: label,
+    tests: tests.map((test): SDKTestCase<Users> => {
+      return {
+        label: test.label,
+        baseUrl: 'https://api.nexmo.com',
+        reqHeaders: {
+          authorization: validateBearerAuth,
+        },
+        requests: test.requests as TestRequest[],
+        responses: test.responses as TestResponse[],
+        client: new Users(keyAuth),
+        clientMethod: test.clientMethod as keyof Users,
+        parameters: test.parameters,
+        generator: test.generator || false,
+        error: test.error || false,
+        expected: test.expected,
+      };
+    }),
+  };
 });
+
+VonageTest(applicationsTest);
+

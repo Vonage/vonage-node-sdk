@@ -8,8 +8,8 @@ import {
   ListResponse,
   ListSalesForceDataSource,
   WriteListRequest,
-} from '../../lib/types';
-import { ProactiveConnect } from '../../lib/proactiveConnect';
+  ProactiveConnect,
+} from '../../lib';
 import pick from 'lodash.pick';
 
 const listOne = {
@@ -80,8 +80,8 @@ export default [
   {
     label: 'find all lists',
     requests: [
-      [`/v0.1/bulk/lists?page=1`, 'GET'],
-      [`/v0.1/bulk/lists?page=2`, 'GET'],
+      ['/v0.1/bulk/lists?page=1', 'GET'],
+      ['/v0.1/bulk/lists?page=2', 'GET'],
     ],
     responses: [
       [
@@ -166,7 +166,7 @@ export default [
     label: 'create list',
     requests: [
       [
-        `/v0.1/bulk/lists`,
+        '/v0.1/bulk/lists',
         'POST',
                 {
                   name: listOne.name,

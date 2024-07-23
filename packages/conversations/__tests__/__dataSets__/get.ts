@@ -27,8 +27,8 @@ export default [
   {
     label: 'retrieve all conversations',
     requests: [
-      [`/v1/conversations`, 'GET'],
-      [`/v1/conversations?cursor=next`, 'GET'],
+      ['/v1/conversations', 'GET'],
+      ['/v1/conversations?cursor=next', 'GET'],
     ],
     responses: [
       [
@@ -142,7 +142,7 @@ export default [
   },
   {
     label: 'retrieve a page of conversations',
-    requests: [[`/v1/conversations`, 'GET']],
+    requests: [['/v1/conversations', 'GET']],
     responses: [
       [
         200,
@@ -276,7 +276,7 @@ export default [
     label: 'retrieve a page of conversations with parameters',
     requests: [
       [
-        `/v1/conversations?page_size=1&order=asc&date_end=2024-01-17T13:45:56.000Z&date_start=2024-01-17T13:45:56.000Z`,
+        '/v1/conversations?page_size=1&order=asc&date_end=2024-01-17T13:45:56.000Z&date_start=2024-01-17T13:45:56.000Z',
         'GET',
       ],
     ],

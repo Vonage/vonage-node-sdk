@@ -6,5 +6,5 @@ export * from './MachineDetctionBehavior';
 export * from './NCCOActions';
 export * from './TTSLanguages';
 export * from './TTSVoices';
-export * from './Endpoint/index';
-export * from './NCCO/index';
+export * from './Endpoint';
+export * from './NCCO';

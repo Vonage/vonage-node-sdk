@@ -1,4 +1,4 @@
-import { OutboundCall } from '../OutboundCall';
+import { OutboundCall } from '../../types';
 import { AdvancedMachineDetection } from '../AdvancedMachineDetection';
 import { MachineDetection } from '../../enums';
 

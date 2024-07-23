@@ -1,4 +1,4 @@
-import { APILinks, APILink } from '@vonage/server-client';
+import { APILinks } from '@vonage/server-client';
 import { MediaItemResponse } from './mediaItemResponse';
 
 /**
@@ -30,34 +30,4 @@ export type MediaItemPageResponse = {
   _embedded: {
     media: Array<MediaItemResponse>;
   };
-
-  /**
-   * Links to navigate through pages.
-   */
-  _links: {
-    /**
-     * Link to the first page.
-     */
-    first?: APILink;
-
-    /**
-     * Link to the last page.
-     */
-    last?: APILink;
-
-    /**
-     * Link to the next page.
-     */
-    next?: APILink;
-
-    /**
-     * Link to the previous page.
-     */
-    prev?: APILink;
-
-    /**
-     * Link to the start page.
-     */
-    start?: APILink;
-  } & APILinks;
-};
+} & APILinks;

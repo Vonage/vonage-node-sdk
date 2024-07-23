@@ -1,7 +1,9 @@
-import { ExperienceComposerResolution } from '../../lib/enums/ExperienceComposerResolution';
-import { ExperienceComposerOptions } from '../../lib/types/ExperienceComposerOptions';
-import { CaptionOptions } from '../../lib/types/CaptionOptions';
-import { SIPCallOptions } from '../../lib/types/SIPCallOptions';
+import {
+  ExperienceComposerResolution,
+  ExperienceComposerOptions,
+  CaptionOptions,
+  SIPCallOptions,
+} from '../../lib';
 
 const renderInformation = {
   id: '1248e7070b81464c9789f46ad10e7764',
@@ -162,7 +164,7 @@ export default [
   {
     label: 'Disable captions for a session',
     request: [
-      `/v2/project/abcd-1234/captions/7c0680fc-6274-4de5-a66f-d0648e8d3ac2/stop`,
+      '/v2/project/abcd-1234/captions/7c0680fc-6274-4de5-a66f-d0648e8d3ac2/stop',
       'POST',
     ],
     response: [200],

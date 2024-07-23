@@ -131,7 +131,7 @@ export class Record implements RecordAction {
 
     if (this.wrappedSplit !== 'conversation') {
       throw new Error(
-        `Channels must have split set to 'conversation' before changing channel numbers`,
+        'Channels must have split set to \'conversation\' before changing channel numbers',
       );
     }
 
@@ -204,7 +204,7 @@ export class Record implements RecordAction {
    */
   public set split(splitType: string) {
     if (splitType !== 'conversation') {
-      throw new Error("Recording can only be split to 'conversation'");
+      throw new Error('Recording can only be split to \'conversation\'');
     }
 
     this.wrappedSplit = splitType;

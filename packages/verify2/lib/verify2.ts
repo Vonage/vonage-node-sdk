@@ -62,7 +62,9 @@ export class Verify2 extends Client {
         `${this.config.apiHost}/v2/verify/${requestId}`,
       );
       return true;
-    } catch (error) {
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
       return false;
     }
   }

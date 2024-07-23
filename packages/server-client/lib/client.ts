@@ -10,9 +10,15 @@ import {
   VetchError,
 } from '@vonage/vetch';
 import { AuthenticationType } from './enums';
-import * as transfomers from './transformers';
+import {
+  camelCaseObjectKeys,
+  kebabCaseObjectKeys,
+  snakeCaseObjectKeys,
+  omit,
+  PartialTransformFunction,
+} from './transformers';
 import debug from 'debug';
-import { ConfigParams } from './types';
+import { ConfigParams } from './types/index';
 
 const log = debug('vonage:server-client');
 
@@ -20,7 +26,12 @@ export class Client {
   /**
    * Static property containing utility transformers.
    */
-  public static transformers = transfomers;
+  public static transformers  = {
+    'camelCaseObjectKeys': camelCaseObjectKeys as PartialTransformFunction,
+    'snakeCaseObjectKeys': snakeCaseObjectKeys as PartialTransformFunction,
+    'kebabCaseObjectKeys': kebabCaseObjectKeys as PartialTransformFunction,
+    'omit': omit,
+  };
 
   /**
    * The type of authentication used for the client's requests.
@@ -95,7 +106,7 @@ export class Client {
     }
 
     if (this.authType === AuthenticationType.QUERY_KEY_SECRET) {
-      log(`adding parameters to query string`);
+      log('adding parameters to query string');
       request.params = {
         ...(request.params ? request.params : {}),
         ...(await this.auth.getQueryParams({})),
@@ -111,7 +122,7 @@ export class Client {
     request.data = request.data ?? {};
 
     // JSON as default
-    log(`Adding parameters to body`);
+    log('Adding parameters to body');
     request.data = {
       ...request.data,
       ...authParams,
@@ -291,7 +302,7 @@ export class Client {
     request.headers = {
       ...request.headers,
       'user-agent': [
-        `@vonage/server-sdk/3.0.0`,
+        '@vonage/server-sdk/3.0.0',
         ` node/${process.version.replace('v', '')}`,
         this.config.appendUserAgent ? ` ${this.config.appendUserAgent}` : '',
       ].join(),
@@ -371,7 +382,7 @@ export class Client {
     }
     log('Request succeeded');
 
-    // eslint-disable-next-line max-len
+
     const [contentType] = (response.headers.get('content-type') || '').split(
       ';',
     );

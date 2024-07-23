@@ -1,18 +1,16 @@
+import { apiKey, apiSecret } from '../../../../testHelpers';
 import {
   VerifySearchResponse,
-  VerifySearch,
   VerifySearchErrorResponse,
   VerifySearchError,
-} from '../../lib/types';
-import {
   SearchStatus,
   SearchCheckStatus,
   SearchEventTypes,
-} from '../../lib/enums';
+} from '../../lib';
 
 const params = new URLSearchParams({
-  api_key: '12345',
-  api_secret: 'ABCDE',
+  api_key: apiKey,
+  api_secret: apiSecret,
   request_id: 'abcdef0123456789abcdef0123456789',
 });
 
@@ -90,7 +88,7 @@ export default [
       ],
       estimated_price_messages_sent: '0.03330000',
       estimatedPriceMessagesSent: '0.03330000',
-    } as VerifySearch,
+    }
   },
   {
     label: 'search for a request with error',
@@ -100,7 +98,7 @@ export default [
             {
               request_id: 'abcdef0123456789abcdef0123456789',
               status: SearchStatus.FAILED,
-              error_text: `Your user entered an incorrect code more than three times.`,
+              error_text: 'Your user entered an incorrect code more than three times.',
             } as VerifySearchErrorResponse,
     ],
     method: 'get',

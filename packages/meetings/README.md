@@ -110,9 +110,7 @@ const options = {};
 
 const meetingsClient = new Meetings(credentials, options);
 
-(async () => {
-	await meetingsClient.uploadIcon('my-theme', LogoType.WHITE, '/path/to/image.png'),
-})()
+await meetingsClient.uploadIcon('my-theme', LogoType.WHITE, '/path/to/image.png'),
 ```
 
 For more information see [Uploading Icons and Logos](https://developer.vonage.com/en/meetings/code-snippets/theme-management#uploading-icons-and-logos)

@@ -1,17 +1,17 @@
+import { apiKey, apiSecret} from '../../../../testHelpers';
 import {
+  MessageClassEnum,
+  SMSStatus,
+  TypeEnum,
   MessageSendAllFailure,
   MessageSendPartialFailure,
-} from '../../lib/classes';
-import { MessageClassEnum, SMSStatus, TypeEnum } from '../../lib/enums/index';
-import {
   SMSResponse,
   SMSMessageResponse,
   Message,
   ErrorMessage,
   SMSMessages,
-  SMSRequestBody,
-} from '../../lib/interfaces/index';
-import { SMSParams } from '../../lib/types/index';
+  SMSParams,
+} from '../../lib';
 
 export default [
   {
@@ -20,14 +20,13 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         from: '12126875309',
         to: '14152739164',
         text: 'too many secrets',
-      } as SMSRequestBody,
+      },
     ],
-    error: null,
     response: [
       200,
       {
@@ -77,8 +76,8 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         from: '12126875309',
         to: '19162255887',
         text: 'I\'ll always dial the "K" for you',
@@ -90,9 +89,8 @@ export default [
         'client-ref': 'my client ref',
         'entity-id': '1101456324675322134',
         'content-id': '1107457532145798767',
-      } as SMSRequestBody,
+      },
     ],
-    error: null,
     response: [
       200,
       {
@@ -150,15 +148,14 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         from: '12126875309',
         to: '18187779311',
         text: 'Whats your number? ⏳',
         type: TypeEnum.UNICODE,
-      } as SMSRequestBody,
+      },
     ],
-    error: null,
     response: [
       200,
       {
@@ -209,17 +206,16 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         from: '12126875309',
         to: '18186345789',
         type: TypeEnum.BINARY,
         body: '0011223344556677',
         udh: '06050415811581',
         'protocol-id': 127,
-      } as SMSRequestBody,
+      },
     ],
-    error: null,
     response: [
       200,
       {
@@ -272,12 +268,12 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         from: '12126875309',
         to: '14152739164',
         text: 'too many secrets',
-      } as SMSRequestBody,
+      }
     ],
     error: new MessageSendAllFailure({
       'message-count': 1,
@@ -318,12 +314,12 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         from: '12126875309',
         to: '14152739164',
         text: 'too many secrets',
-      } as SMSRequestBody,
+      }
     ],
     error: new MessageSendPartialFailure({
       'message-count': 1,

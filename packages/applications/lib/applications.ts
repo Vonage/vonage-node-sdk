@@ -41,7 +41,7 @@ import {
  * const applicationClient = vonage.application
  * ```
  */
-export type MergedApplication = Application | ApplicationResponse;
+export type MergedApplication = Application & ApplicationResponse;
 
 const apiToApplication = (
   response: MergedApplication,

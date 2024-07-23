@@ -1,15 +1,15 @@
 import { tokenGenerate, verifySignature } from '../lib';
-import { verify, sign } from 'jsonwebtoken';
-import { readFileSync } from 'fs';
+import jwt from 'jsonwebtoken';
 import {
   MissingApplicationIdError,
   MissingPrivateKeyError,
   InvalidPrivateKeyError,
   InvalidApplicationIdError,
-} from '../lib/errors/index';
+  ACL,
+} from '../lib';
+import { testPrivateKey } from '../../../testHelpers';
 
 const applicationId = '12345';
-const privateKey = readFileSync(`${__dirname}/private.test.key`);
 const ttl = 1800;
 const subject = 'test';
 const acl = {
@@ -27,7 +27,7 @@ const acl = {
       },
     },
   },
-};
+} as ACL;
 
 describe('Token Generator', () => {
   test('Will throw when missing applicationId', () => {
@@ -45,7 +45,7 @@ describe('Token Generator', () => {
   test('Will throw when applicationId not a string', () => {
     // eslint-disable-next-line
     // @ts-ignore
-    expect(() => tokenGenerate(12345, privateKey)).toThrow(
+    expect(() => tokenGenerate(12345, testPrivateKey)).toThrow(
       new InvalidApplicationIdError(),
     );
   });
@@ -59,9 +59,9 @@ describe('Token Generator', () => {
   });
 
   test('Can return a valid JWT string', () => {
-    const token = tokenGenerate(applicationId, privateKey);
-    const decoded = verify(token, privateKey, { algorithms: ['RS256'] });
-    expect(typeof token).toEqual('string');
+    const token = tokenGenerate(applicationId, testPrivateKey);
+    const decoded = jwt.verify(token, testPrivateKey, { algorithms: ['RS256'] });
+    expect(typeof token).toBe('string');
     expect(decoded).toHaveProperty('iat');
     expect(decoded).toHaveProperty('jti');
     expect(decoded).toHaveProperty('exp');
@@ -69,9 +69,9 @@ describe('Token Generator', () => {
   });
 
   test('Can return a valid JWT string with private key as string', () => {
-    const token = tokenGenerate(applicationId, privateKey.toString());
-    const decoded = verify(token, privateKey, { algorithms: ['RS256'] });
-    expect(typeof token).toEqual('string');
+    const token = tokenGenerate(applicationId, testPrivateKey.toString());
+    const decoded = jwt.verify(token, testPrivateKey, { algorithms: ['RS256'] });
+    expect(typeof token).toBe('string');
     expect(decoded).toHaveProperty('iat');
     expect(decoded).toHaveProperty('jti');
     expect(decoded).toHaveProperty('exp');
@@ -79,31 +79,32 @@ describe('Token Generator', () => {
   });
 
   test('Can accept and use options', () => {
-    const token = tokenGenerate(applicationId, privateKey, {
+    const token = tokenGenerate(applicationId, testPrivateKey, {
       ttl,
       subject,
       acl,
     });
-    const decoded = verify(token, privateKey, { algorithms: ['RS256'] });
-    expect(decoded.exp).toEqual(decoded.iat + ttl);
-    expect(decoded.sub).toEqual(subject);
-    expect(decoded).not.toHaveProperty('ttl');
-    expect(decoded.acl).toMatchObject(acl);
+
+    const decoded = jwt.verify(token, testPrivateKey, { algorithms: ['RS256'] });
+    expect((decoded as jwt.JwtPayload).exp).toEqual(Number((decoded as jwt.JwtPayload).iat) + ttl);
+    expect((decoded as jwt.JwtPayload).sub).toEqual(subject);
+    expect((decoded as jwt.JwtPayload)).not.toHaveProperty('ttl');
+    expect((decoded as jwt.JwtPayload).acl).toMatchObject(acl);
   });
 
   test('Can Verify signature', () => {
-    const token = tokenGenerate(applicationId, privateKey, {
+    const token = tokenGenerate(applicationId, testPrivateKey, {
       ttl,
       subject,
       acl,
     });
 
     // eslint-disable-next-line
-    expect(verifySignature(token, privateKey)).toEqual(true);
+    expect(verifySignature(token, testPrivateKey)).toEqual(true);
   });
 
   test('Will not validate with invalid key', () => {
-    const token = tokenGenerate(applicationId, privateKey, {
+    const token = tokenGenerate(applicationId, testPrivateKey, {
       ttl,
       subject,
       acl,
@@ -114,14 +115,14 @@ describe('Token Generator', () => {
   });
 
   test('Will not validate with invalid JWT token', () => {
-    const token = sign({}, 'fizzBuzz');
+    const token = jwt.sign({}, 'fizzBuzz');
 
     // eslint-disable-next-line
-    expect(verifySignature(token, privateKey)).toEqual(false);
+    expect(verifySignature(token, testPrivateKey)).toEqual(false);
   });
 
   test('Will not validate with non JWT token', () => {
     // eslint-disable-next-line
-    expect(verifySignature('fizz-buzz', privateKey)).toEqual(false);
+    expect(verifySignature('fizz-buzz', testPrivateKey)).toEqual(false);
   });
 });

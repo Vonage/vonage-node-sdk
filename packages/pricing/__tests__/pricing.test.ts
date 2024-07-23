@@ -1,20 +1,16 @@
 import { Auth } from '@vonage/auth';
 import nock from 'nock';
-import { ServiceType } from '../lib/enums/ServiceType';
-import { Pricing } from '../lib/index';
+import { ServiceType, Pricing } from '../lib';
 
 const BASE_URL = 'https://rest.nexmo.com/'.replace(/\/+$/, '');
 
 describe('pricing', () => {
-  let client;
+  let client: Pricing;
 
   beforeEach(() => {
     client = new Pricing(new Auth({ apiKey: 'abcd', apiSecret: '1234' }));
   });
 
-  afterEach(() => {
-    client = null;
-  });
 
   test('do a country lookup', async () => {
     const expectedResponse = {

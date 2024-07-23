@@ -1,8 +1,8 @@
-import { readFileSync, createWriteStream } from "fs";
+import { readFileSync, createWriteStream } from 'fs';
 import RecursiveIterator from 'recursive-iterator';
-import { ReflectionKind } from "typedoc";
+import { ReflectionKind } from 'typedoc';
 
-const data = readFileSync("./docs/docs.json", "utf8");
+const data = readFileSync('./docs/docs.json', 'utf8');
 
 const docs = JSON.parse(data);
 const log = createWriteStream('./docs/EXAMPLES.md', { flags: 'w' });
@@ -37,9 +37,11 @@ const formatBlocks = (examples) => examples.map(
   ],
 ).flat();
 
+let complete = false;
 do {
   value = iterator.next();
-  if (value.done) {
+  complete = value.done;
+  if (complete) {
     break;
   }
 
@@ -63,7 +65,7 @@ do {
       classExamples: [
         `### ${currentClass} Class`,
         '',
-        // eslint-disable-next-line max-len
+
         ...[ (parent?.comment?.summary || []).map(({ text }) => text), '' ].flat(),
         ...formatBlocks(
           parent.comment?.blockTags?.filter(remarksFilter) || [],
@@ -110,7 +112,7 @@ do {
     '',
     ...formatBlocks(examples),
   ];
-} while (true);
+} while (!complete);
 
 Object.values(sections).forEach(({ name, classes }) => {
   Object.values(classes).forEach( ({ examples, classExamples }) => {

@@ -2,7 +2,7 @@ import { WhatsAppLanguageCode } from '../../enums';
 import { MessageTemplate } from '../../interfaces/WhatsApp/MessageTemplate';
 import { WhatsAppTemplate } from './WhatsAppTemplate';
 import debug from 'debug';
-import { WhatsAppTemplateParams } from "../../types";
+import { WhatsAppTemplateParams } from '../../types';
 
 const log = debug('vonage:messages:whatsapp');
 

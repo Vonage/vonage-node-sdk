@@ -1,5 +1,10 @@
-import { NCCOBuilder } from '../lib';
-import { Conversation, Input, Talk } from '../lib/ncco';
+import {
+  Conversation,
+  Input,
+  Talk,
+  NCCOBuilder,
+  NCCOActions,
+} from '../lib';
 
 describe('voice', () => {
   test('can add a single action', async () => {
@@ -52,7 +57,7 @@ describe('voice', () => {
 
     const ncco = new NCCOBuilder();
     ncco.addAction({
-      action: 'talk',
+      action: NCCOActions.TALK,
       text: 'This call was transferred',
     });
 

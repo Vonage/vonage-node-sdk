@@ -1,10 +1,12 @@
-import { Command, CheckStatus } from '../../lib/enums';
-import {
+import { apiKey, apiSecret } from '../../../../testHelpers';
+import { 
+  Command, 
+  CheckStatus,
   VerifyCancelResponse,
   VerifyControlErrorResponse,
   VerifyControl,
   VerifyControlError,
-} from '../../lib/types';
+} from '../../lib';
 
 export default [
   {
@@ -13,8 +15,8 @@ export default [
       '/verify/control/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         request_id: 'abcdef0123456789abcdef0123456789',
         cmd: 'cancel',
       },
@@ -40,8 +42,8 @@ export default [
       '/verify/control/json',
       'POST',
       {
-        api_key: '12345',
-        api_secret: 'ABCDE',
+        api_key: apiKey,
+        api_secret: apiSecret,
         request_id: 'abcdef0123456789abcdef0123456789',
         cmd: 'cancel',
       },

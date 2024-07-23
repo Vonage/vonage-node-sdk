@@ -22,8 +22,9 @@
       "url": "https://github.com/dragonmantank"
     }
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -38,16 +39,15 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@types/lodash.pick": "4.4.8",
     "@vonage/server-client": "^1.12.0",
     "@vonage/vetch": "^1.7.1",
     "fast-xml-parser": "^4.3.2",
     "form-data": "^4.0.0"
   },
   "devDependencies": {
-    "@amvijay/multipart-parser": "^1.0.2",
+    "@types/lodash.pick": "4.4.8",
     "@vonage/auth": "^1.10.0",
-    "lodash.pick": "4.4.0",
+    "lodash.pick": "3.1.0",
     "nock": "^13.3.4"
   }
 }

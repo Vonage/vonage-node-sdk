@@ -34,4 +34,4 @@ export default [
     error: false,
     expected: undefined,
   }
-]
+];

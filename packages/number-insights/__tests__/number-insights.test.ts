@@ -1,11 +1,11 @@
 import { Auth } from '@vonage/auth';
 import nock from 'nock';
-import { NumberInsights } from '../lib/index';
+import { NumberInsights } from '../lib';
 
 const BASE_URL = 'https://api.nexmo.com';
 
 describe('number-insights', () => {
-  let client;
+  let client: NumberInsights;
 
   beforeEach(() => {
     client = new NumberInsights(
@@ -13,9 +13,6 @@ describe('number-insights', () => {
     );
   });
 
-  afterEach(() => {
-    client = null;
-  });
 
   test('do a basic lookup', async () => {
     const expectedResponse = {

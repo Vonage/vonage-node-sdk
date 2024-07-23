@@ -3,7 +3,7 @@ import { WebsocketEndpoint as WebsocketEndpointType } from '../../types/Endpoint
 import debug from 'debug';
 
 debug('@vonage/voice')(
-  // eslint-disable-next-line max-len
+   
   'This class is deprecated. Please update to use the WebsocketEndpointType type instead',
 );
 

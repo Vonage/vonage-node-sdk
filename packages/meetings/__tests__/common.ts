@@ -1,7 +1,6 @@
 import nock from 'nock';
 import { Auth } from '@vonage/auth';
-import { Meetings } from '../lib/index';
-import { readFileSync } from 'fs';
+import { Meetings } from '../lib';
 import {
   ThemeDomain,
   MeetingType,
@@ -10,10 +9,7 @@ import {
   RoomLanguage,
 } from '../lib/enums';
 import { Theme, MeetingRoom } from '../lib/types';
-
-const testKey = readFileSync(`${__dirname}/private.test.key`).toString();
-
-const checkAuth = (value) => value.startsWith('Bearer ') && value.length > 10;
+import { keyAuth, validateBearerAuth } from '../../../testHelpers';
 
 export const BASE_URL = 'https://api-eu.vonage.com';
 
@@ -28,16 +24,13 @@ export const roomLinks = {
 
 export const getClient = (): Meetings =>
   new Meetings(
-    new Auth({
-      applicationId: 'abcd-1234',
-      privateKey: testKey,
-    }),
+    new Auth(keyAuth),
   );
 
-export const getScope = (): nock =>
+export const getScope = (): nock.Scope =>
   nock(BASE_URL, {
     reqheaders: {
-      authorization: checkAuth,
+      authorization: validateBearerAuth,
     },
   }).persist();
 
@@ -57,7 +50,7 @@ export const roomOne: MeetingRoom = {
   initialJoinOptions: {
     microphoneState: MicrophoneSate.OFF,
   },
-  joinApprovalLevel: JoinType.EXPLICT_APPROVAL,
+  joinApprovalLevel: JoinType.EXPLICIT_APPROVAL,
   uiSettings: {
     language: RoomLanguage.DEFAULT,
   },

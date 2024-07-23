@@ -35,7 +35,7 @@ const { Video } = require('@vonage/video');
 const vonage = new Video({
     applicationId: APP_ID,
     privateKey: PRIVATE_KEY_STRING,
-    baseUrl: https://video.dev.api.vonage.com,
+    baseUrl: 'https://video.dev.api.vonage.com',
  });
 const session = await vonage.createSession();
 ```
@@ -44,7 +44,7 @@ Functionality-wise, the standalone version works just as the wrapped SDK version
 
 ## Callbacks vs Promises
 
-The new Video Node SDK uses Promises instead of callbacks, as the next version of the Vonage Node Server SDK will be promise-based. Customers will need to convert their callbacks to work with the responses returned from the calls. 
+The new Video Node SDK uses Promises instead of callbacks, as the next version of the Vonage Node Server SDK will be promise-based. Customers will need to convert their callbacks to work with the responses returned from the calls.
 
 ## TypeScript
 

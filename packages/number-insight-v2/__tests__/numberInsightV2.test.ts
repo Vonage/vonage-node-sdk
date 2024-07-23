@@ -1,48 +1,39 @@
-import { NumberInsightV2 } from '../lib/index';
-import nock from 'nock';
-import { Auth } from '@vonage/auth';
-import { BASE_URL } from './common';
-import testDataSets from './__dataSets__/index';
-import { readFileSync } from 'fs';
+import { NumberInsightV2 } from '../lib';
+import testDataSets from './__dataSets__';
 
-const key = readFileSync(`${__dirname}/private.test.key`).toString();
+import {
+  VonageTest,
+  SDKTestCase,
+  TestResponse,
+  TestRequest,
+  TestTuple,
+  validateApiKeyAuth,
+  apiKeyAuth,
+} from '../../../testHelpers';
 
-describe.each(testDataSets)('$label', ({ tests }) => {
-  let client;
-  let scope;
+const applicationsTest = testDataSets.map((dataSet): TestTuple<NumberInsightV2> => {
+  const { label, tests } = dataSet;
 
-  beforeEach(function () {
-    client = new NumberInsightV2(
-      new Auth({
-        apiKey: 'abcd',
-        apiSecret: '1234',
-      })
-    );
-
-    scope = nock(BASE_URL, {
-      reqheaders: {
-        authorization: (value) => value === 'Basic YWJjZDoxMjM0',
-      },
-    }).persist();
-  });
-
-  afterEach(function () {
-    client = null;
-    scope = null;
-    nock.cleanAll();
-  });
-
-  test.each(tests)(
-    'Can $label using: $clientMethod',
-    async ({ requests, responses, clientMethod, parameters, expected }) => {
-      requests.forEach((request, index) => {
-        scope.intercept(...request).reply(...responses[index]);
-      });
-
-      const result = await client[clientMethod](...parameters);
-
-      expect(result).toEqual(expected);
-      expect(nock.isDone()).toBeTruthy();
-    }
-  );
+  return {
+    name: label,
+    tests: tests.map((test): SDKTestCase<NumberInsightV2> => {
+      return {
+        label: test.label,
+        baseUrl: 'https://api.nexmo.com',
+        reqHeaders: {
+          authorization: validateApiKeyAuth,
+        },
+        requests: test.requests as TestRequest[],
+        responses: test.responses as TestResponse[],
+        client: new NumberInsightV2(apiKeyAuth),
+        clientMethod: test.clientMethod as keyof NumberInsightV2,
+        parameters: test.parameters,
+        generator: test.generator || false,
+        error: test.error || false,
+        expected: test.expected,
+      };
+    }),
+  };
 });
+
+VonageTest(applicationsTest);

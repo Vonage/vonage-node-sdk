@@ -1,12 +1,13 @@
 import { Client } from '@vonage/server-client';
-import { ApplicationResponse } from '../../lib';
 
 import { BASE_URL, testApplication, capabilitiesToTest } from '../common';
 
 export default [
   {
     label: 'get simple application',
-    requests: [[`/v2/applications/${testApplication.id}`, 'GET']],
+    requests: [
+      [`/v2/applications/${testApplication.id}`, 'GET']
+    ],
     responses: [
       [
         200,
@@ -17,7 +18,7 @@ export default [
               href: `${BASE_URL}/v2/applications/${testApplication.id}`,
             },
           },
-        } as ApplicationResponse,
+        },
       ],
     ],
     clientMethod: 'getApplication',
@@ -46,7 +47,7 @@ export default [
               href: `${BASE_URL}/v2/applications/${testApplication.id}`,
             },
           },
-        } as ApplicationResponse,
+        },
       ],
     ],
     clientMethod: 'getApplication',

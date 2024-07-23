@@ -7,7 +7,7 @@ import {
 } from './types';
 
 const apiToSdk = (media: MediaItemResponse): MediaItem =>
-  Client.transformers.camelCaseObjectKeys(media);
+  Client.transformers.camelCaseObjectKeys(media) as MediaItem;
 
 /**
  * Client class to interact with the Media API which enables users to manage

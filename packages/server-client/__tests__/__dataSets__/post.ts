@@ -35,7 +35,7 @@ export default [
     },
   },
   {
-    label: 'make web post request',
+    label: 'make post form request',
     request: [
       '/my/path',
       'POST',

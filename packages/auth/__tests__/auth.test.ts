@@ -1,36 +1,36 @@
 import { Auth } from '../lib';
-import testDataSets from './__dataSets__/index';
+import testDataSets from './__dataSets__';
 
-describe.each(testDataSets)('$label', ({ tests }) => {
-  beforeEach(() => {
-    jest.useFakeTimers({
-      now: 10907902800000,
-    });
-  });
+import {
+  VonageTest,
+  SDKTestCase,
+  TestTuple,
+} from '../../../testHelpers';
 
-  const successTests = tests.filter(({ error }) => !error);
-  const failureTests = tests.filter(({ error }) => !!error);
 
-  test.each(successTests)(
-    'Can $label by calling: [$method]',
-    async ({ method, authParameters, parameters, expected }) => {
-      const auth = new Auth(authParameters);
-      const results = await auth[method](...parameters);
-      expect(results).toEqual(expected);
-    },
-  );
+const authTests = testDataSets.map(( dataSet): TestTuple<Auth> => {
+  const { label, tests } = dataSet;
 
-  if (failureTests.length < 1) {
-    return;
-  }
-
-  test.each(failureTests)(
-    'Will throw $label for method: $clientMethod',
-    async ({ method, authParameters, parameters, error }) => {
-      const auth = new Auth(authParameters);
-      await expect(() => auth[method](...parameters)).rejects.toThrow(
-        error,
-      );
-    },
-  );
+  return {
+    name: label,
+    tests: tests.map((test): SDKTestCase<Auth> => {
+      const willError = 'error' in test ? test.error : false;
+      return {
+        label: test.label,
+        baseUrl: 'https://api.nexmo.com',
+        reqHeaders: {},
+        requests: [],
+        responses: [],
+        client: new Auth(test.authParameters),
+        clientMethod: test.method as keyof Auth,
+        parameters: test.parameters,
+        error: willError || false,
+        expected: test.expected,
+        generator: false,
+      };
+    })
+  };
 });
+
+VonageTest(authTests);
+

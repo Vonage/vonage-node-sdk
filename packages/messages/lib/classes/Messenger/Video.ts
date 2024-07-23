@@ -1,6 +1,6 @@
 import { MessengerCategory } from '../../enums';
 import { MessageType } from '../../interfaces/Messenger/MessageType';
-import { VideoObject } from '../../interfaces/VideoObject';
+import { VideoObject } from '../../interfaces';
 import { MessengerType } from '../../types';
 import { MessengerVideo } from './MessengerVideo';
 import debug from 'debug';

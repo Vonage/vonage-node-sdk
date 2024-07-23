@@ -3,7 +3,7 @@
 
     "compilerOptions": {
         "rootDir": "lib",
-        "outDir": "dist"
+        "outDir": "dist/lib"
     },
 
     "exclude": [

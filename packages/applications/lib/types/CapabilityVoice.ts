@@ -1,5 +1,5 @@
 import { CapabilityWebhook } from './CapabilityWebhook';
-import { VoiceRegions } from "../enums";
+import { VoiceRegions } from '../enums';
 
 /**
  * Vonage numbers that are linked to Vonage applications will use the answer_url

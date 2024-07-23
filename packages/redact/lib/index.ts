@@ -1,4 +1,4 @@
-export * from './enums/index';
-export * from './interfaces/index';
-export * from './types/index';
+export * from './enums';
+export * from './interfaces';
+export * from './types';
 export * from './redact';

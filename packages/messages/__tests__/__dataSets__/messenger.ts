@@ -5,9 +5,8 @@ import {
   MessengerVideo,
   MessengerText,
   MessengerFile,
-} from '../../lib';
-import { MessageSuccess } from '../../lib';
-import {
+  MessageParams,
+  MessageSuccess,
   MessengerAudioRequest,
   MessengerTextRequest,
   MessengerImageRequest,
@@ -25,7 +24,6 @@ import { File } from '../../lib/classes/Messenger/File';
 import { Image } from '../../lib/classes/Messenger/Image';
 import { Text } from '../../lib/classes/Messenger/Text';
 import { Video } from '../../lib/classes/Messenger/Video';
-import { MessageCategory } from '../../lib/enums/Messenger/MessageCategory';
 
 export default [
   {
@@ -119,7 +117,7 @@ export default [
         message_type: 'text',
         client_ref: 'my-ref',
         messenger: {
-          category: MessengerCategory.RESPONSE,
+          category: MessengerCategory.UPDATE,
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
       } as MessengerTextRequest,
@@ -138,7 +136,7 @@ export default [
         '14152739164', // to
         '12126875309', // from
         {
-          category: MessageCategory.RESPONSE,
+          category: MessengerCategory.UPDATE,
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
         'my-ref' // client ref
@@ -266,7 +264,7 @@ export default [
         '14152739164', // to
         '12126875309', // from
         {
-          category: MessageCategory.RESPONSE,
+          category: MessengerCategory.RESPONSE,
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
         'my-ref' // client ref
@@ -373,7 +371,7 @@ export default [
           url: 'https://example.com',
         },
         messenger: {
-          category: MessengerCategory.RESPONSE,
+          category: MessengerCategory.MESSAGE_TAG,
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
       } as MessengerAudioRequest,
@@ -394,7 +392,7 @@ export default [
         '14152739164', // to
         '12126875309', // from
         {
-          category: MessageCategory.RESPONSE,
+          category: MessengerCategory.MESSAGE_TAG,
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
         'my-ref'
@@ -562,7 +560,7 @@ export default [
         file: {
           url: 'https://example.com',
         },
-      } as MessengerFileParams),
+      } as MessageParams & MessengerFileParams),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
@@ -608,7 +606,7 @@ export default [
           category: MessengerCategory.RESPONSE,
           tag: MessengerTags.ACCOUNT_UPDATE,
         },
-      } as MessengerFileParams),
+      } as MessageParams & MessengerFileParams),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',

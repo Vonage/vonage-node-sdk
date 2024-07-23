@@ -1,5 +1,5 @@
 import { NCCOActions } from '../../enums';
-import { StreamAction } from '../../interfaces/NCCO/StreamAction';
+import { StreamAction } from '../../types';
 import { Serializable } from '../../ncco';
 
 /**

@@ -1,4 +1,4 @@
-import { LayoutType } from "../enums";
+import { LayoutType } from '../enums';
 
 /**
  * Represents the layout configuration for an archive.

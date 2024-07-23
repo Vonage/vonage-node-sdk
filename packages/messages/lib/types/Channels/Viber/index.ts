@@ -5,7 +5,7 @@ import { ViberImageParams } from './ViberImageParams';
 import { ViberService } from './ViberService';
 import { ViberTextParams } from './ViberTextParams';
 import { ViberVideoParams } from './ViberVideoParams';
-import { Channels } from "../../../enums";
+import { Channels } from '../../../enums';
 
 export * from './ViberAction';
 export * from './ViberActionParams';

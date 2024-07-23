@@ -76,10 +76,10 @@ export type MediaItem = {
   /**
    * A user-set string containing metadata about the media file.
    */
-  metadataPrimary: string;
+  metadataPrimary?: string | null;
 
   /**
    * A user-set string containing further metadata about the media file.
    */
-  metadataSecondary: string;
+  metadataSecondary?: string | null;
 };

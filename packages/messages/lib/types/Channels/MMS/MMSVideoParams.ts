@@ -1,5 +1,5 @@
-import { MessageParams } from "../../MessageParams";
-import { MessageVideoType } from "../../MessageVideoType";
+import { MessageParams } from '../../MessageParams';
+import { MessageVideoType } from '../../MessageVideoType';
 
 /**
  * Represents the parameters for sending a video message on the MMS channel.

@@ -5,6 +5,6 @@ export * from './meetingRoomParams';
 export * from './recording';
 export * from './events';
 export * from './recordingOptions';
-export * from './response/index';
+export * from './response';
 export * from './roomCallbackURLS';
 export * from './theme';

@@ -1,7 +1,8 @@
+import { jest } from '@jest/globals';
 import { tokenGenerate } from '@vonage/jwt';
-import { AuthParams } from '../../lib/types/index';
-import { applicationId, privateKeyString, privateKeyPath } from '../common';
-import { readFileSync } from 'fs';
+import { AuthParams } from '../../lib/types';
+import { applicationId, } from '../common';
+import { testPrivateKey, testPrivateKeyPath } from '../../../../testHelpers';
 
 jest.useFakeTimers({
   now: 10907902800000,
@@ -12,14 +13,14 @@ export default [
     label: 'create bearer header with private string',
     method: 'createBearerHeader',
     authParameters: {
-      privateKey: privateKeyString,
+      privateKey: testPrivateKey,
       applicationId: applicationId,
       jwtOptions: {
         jti: 'foo',
       },
     } as AuthParams,
     parameters: [],
-    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, {
+    expected: `Bearer ${tokenGenerate(applicationId, testPrivateKey, {
       jti: 'foo',
     })}`,
   },
@@ -27,14 +28,14 @@ export default [
     label: 'create bearer header with private key file',
     method: 'createBearerHeader',
     authParameters: {
-      privateKey: readFileSync(privateKeyPath),
+      privateKey: testPrivateKeyPath,
       applicationId: applicationId,
       jwtOptions: {
         jti: 'foo',
       },
     } as AuthParams,
     parameters: [],
-    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, {
+    expected: `Bearer ${tokenGenerate(applicationId, testPrivateKey, {
       jti: 'foo',
     })}`,
   },
@@ -42,7 +43,7 @@ export default [
     label: 'create bearer header with custom claims',
     method: 'createBearerHeader',
     authParameters: {
-      privateKey: readFileSync(privateKeyPath),
+      privateKey: testPrivateKeyPath,
       applicationId: applicationId,
       jwtOptions: {
         jti: 'foo',
@@ -50,7 +51,7 @@ export default [
       },
     } as AuthParams,
     parameters: [],
-    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, {
+    expected: `Bearer ${tokenGenerate(applicationId, testPrivateKey, {
       jti: 'foo',
       fizz: 'buzz',
     })}`,
@@ -59,7 +60,7 @@ export default [
     label: 'create bearer header with private key path',
     method: 'createBearerHeader',
     authParameters: {
-      privateKey: privateKeyPath,
+      privateKey: testPrivateKeyPath,
       applicationId: applicationId,
       jwtOptions: {
         jti: 'foo',
@@ -67,7 +68,7 @@ export default [
       },
     } as AuthParams,
     parameters: [],
-    expected: `Bearer ${tokenGenerate(applicationId, privateKeyString, {
+    expected: `Bearer ${tokenGenerate(applicationId, testPrivateKey, {
       jti: 'foo',
       fizz: 'buzz',
     })}`,

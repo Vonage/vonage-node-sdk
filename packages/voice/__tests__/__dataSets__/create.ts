@@ -11,7 +11,7 @@ import {
   CallWithAnswerURL,
   CallWithNCCO,
   CreateCallResponse,
-} from '../../lib/types/index';
+} from '../../lib/types';
 import { callPhone } from '../common';
 
 export default [
@@ -19,7 +19,7 @@ export default [
     label: 'create a call with NCCO',
     requests: [
       [
-        `/v1/calls?`,
+        '/v1/calls?',
         'POST',
         {
           to: [
@@ -35,7 +35,7 @@ export default [
           ncco: [
             {
               action: NCCOActions.TALK,
-              text: "I'll always dial the K for you",
+              text: 'I\'ll always dial the K for you',
               bargeIn: false,
             },
             {
@@ -89,7 +89,7 @@ export default [
         ncco: [
           {
             action: NCCOActions.TALK,
-            text: "I'll always dial the K for you",
+            text: 'I\'ll always dial the K for you',
             bargeIn: false,
           },
           {
@@ -129,7 +129,7 @@ export default [
     label: 'create a call with answer url',
     requests: [
       [
-        `/v1/calls?`,
+        '/v1/calls?',
         'POST',
         {
           to: [

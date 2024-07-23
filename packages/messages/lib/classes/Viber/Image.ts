@@ -1,5 +1,4 @@
 import { ImageObject } from '../../interfaces';
-import { MessageConfig } from '../../interfaces/Viber/MessageConfig';
 import { ViberImageParams, ViberService } from '../../types';
 import { ViberImage } from './ViberImage';
 import debug from 'debug';
@@ -27,7 +26,7 @@ export class Image extends ViberImage {
     image: ImageObject,
     to: string,
     from: string,
-    viberService?: MessageConfig,
+    viberService?: ViberService,
     clientRef?: string,
   ) {
     log('Please update to use the ViberImage class instead');

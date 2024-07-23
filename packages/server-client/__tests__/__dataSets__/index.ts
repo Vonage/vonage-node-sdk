@@ -1,5 +1,7 @@
 import camelCase from './camelCase';
 import snakeCase from './snakeCase';
+import kebabCase from './kebabCase';
+
 import getTests from './get';
 import postTests from './post';
 import putTests from './put';
@@ -38,5 +40,9 @@ export const transfomTests = [
   {
     label: 'Transform Snake Case',
     tests: snakeCase,
+  },
+  {
+    label: 'Transform Kebab Case',
+    tests: kebabCase,
   },
 ];

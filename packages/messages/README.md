@@ -95,8 +95,8 @@ const resp = await messagesClient.send(new SMS({
 
 messagesClient.send(new SMS({
   to: TO_NUMBER,
-  from: FROM_NUMBER:
-  text: MESSAGE
+  from: FROM_NUMBER,
+  text: MESSAGE,
 }))
   .then(resp => console.log(resp))
   .catch(err => console.error(err));

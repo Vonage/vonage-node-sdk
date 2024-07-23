@@ -1,4 +1,4 @@
-import { SortOrder } from "../enums";
+import { SortOrder } from '../enums';
 
 /**
  * Represents parameters for finding list items.

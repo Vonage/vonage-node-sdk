@@ -1,46 +1,40 @@
-import { SubAccounts } from '../lib/index';
-import nock from 'nock';
-import { Auth } from '@vonage/auth';
-import { BASE_URL } from './common';
-import testDataSets from './__dataSets__/index';
+import { SubAccounts } from '../lib';
+import testDataSets from './__dataSets__';
 
-describe.each(testDataSets)('$label', ({ tests }) => {
-  let client;
-  let scope;
+import {
+  VonageTest,
+  SDKTestCase,
+  TestResponse,
+  TestRequest,
+  TestTuple,
+  apiKeyAuth,
+  validateApiKeyAuth,
+} from '../../../testHelpers';
 
-  beforeEach(function () {
-    client = new SubAccounts(
-      new Auth({
-        apiKey: '12345',
-        apiSecret: 'ABCDE',
-      })
-    );
-    scope = nock(BASE_URL, {
-      reqheaders: {
-        authorization: 'Basic MTIzNDU6QUJDREU=',
-      },
-    }).persist();
-  });
+const applicationsTest = testDataSets.map((dataSet): TestTuple<SubAccounts> => {
+  const { label, tests } = dataSet;
 
-  afterEach(function () {
-    client = null;
-    scope = null;
-    nock.cleanAll();
-  });
-
-  const successTests = tests.filter(({ error }) => !error);
-
-  test.each(successTests)(
-    'Can $label using: $clientMethod',
-    async ({ requests, responses, clientMethod, parameters, expected }) => {
-      requests.forEach((request, index) => {
-        scope.intercept(...request).reply(...responses[index]);
-      });
-
-      const results = await client[clientMethod](...parameters);
-
-      expect(results).toEqual(expected);
-      expect(nock.isDone()).toBeTruthy();
-    }
-  );
+  return {
+    name: label,
+    tests: tests.map((test): SDKTestCase<SubAccounts> => {
+      return {
+        label: test.label,
+        baseUrl: 'https://api.nexmo.com',
+        reqHeaders: {
+          authorization: validateApiKeyAuth,
+        },
+        requests: test.requests as TestRequest[],
+        responses: test.responses as TestResponse[],
+        client: new SubAccounts(apiKeyAuth),
+        clientMethod: test.clientMethod as keyof SubAccounts,
+        parameters: test.parameters,
+        generator: false,
+        error: test.error || false,
+        expected: test.expected,
+      };
+    }),
+  };
 });
+
+VonageTest(applicationsTest);
+

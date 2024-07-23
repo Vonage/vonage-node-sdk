@@ -88,7 +88,7 @@ export type MessagePlayDTMFBody = {
     /**
      * Message type
      */
-    type: 'app' | 'phone' | 'sip' | 'websocket' | 'vcp' | 'websocket';
+    type: 'app' | 'phone' | 'sip' | 'websocket' | 'vcp';
 
     /**
      * Message headers

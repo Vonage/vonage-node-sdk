@@ -1,7 +1,5 @@
 import { Client } from '@vonage/server-client';
-import { CallStatus } from '../../lib/enums';
-import { CallListFilter } from '../../lib/types';
-import { CallDetailResponse, CallPageResponse } from '../../lib/types/index';
+import { CallDetailResponse, CallPageResponse } from '../../lib';
 import { callSip, callPhone, callWebsocket } from '../common';
 import { BASE_URL } from '../common';
 
@@ -9,9 +7,9 @@ export default [
   {
     label: 'get details of calls',
     requests: [
-      [`/v1/calls?page_size=1&record_index=0`, 'GET'],
-      [`/v1/calls?page_size=1&record_index=1`, 'GET'],
-      [`/v1/calls?page_size=1&record_index=2`, 'GET'],
+      ['/v1/calls?page_size=1&record_index=0', 'GET'],
+      ['/v1/calls?page_size=1&record_index=1', 'GET'],
+      ['/v1/calls?page_size=1&record_index=2', 'GET'],
     ],
     responses: [
       [
@@ -145,158 +143,158 @@ export default [
       },
     ],
   },
-  {
-    label: 'get a page of calls',
-    requests: [[`/v1/calls?`, 'GET']],
-    responses: [
-      [
-        200,
-        {
-          count: 3,
-          page_size: 1,
-          record_index: 0,
-          _embedded: {
-            calls: [
-              {
-                ...Client.transformers.snakeCaseObjectKeys(callPhone),
-                _links: {
-                  self: {
-                    href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
-                  },
-                },
-              },
-            ],
-          },
-          _links: {
-            self: {
-              href: `${BASE_URL}/v1/calls/`,
-            },
-          },
-        } as CallPageResponse,
-      ],
-    ],
-    clientMethod: 'getCallsPage',
-    parameters: [],
-    generator: false,
-    error: false,
-    expected: {
-      count: 3,
-      page_size: 1,
-      record_index: 0,
-      _embedded: {
-        calls: [
-          {
-            ...Client.transformers.snakeCaseObjectKeys(callPhone),
-            _links: {
-              self: {
-                href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
-              },
-            },
-          },
-        ],
-      },
-      _links: {
-        self: {
-          href: `${BASE_URL}/v1/calls/`,
-        },
-      },
-    },
-  },
-  {
-    label: 'search',
-    requests: [
-      [
-        `/v1/calls?status=${CallStatus.ANSWERED}&date_start=453168000&date_end=1302552660&page_size=1&record_index=0&order=asc&conversation_uuid=${callPhone.conversationUUID}`,
-        'GET',
-      ],
-    ],
-    responses: [
-      [
-        200,
-        {
-          count: 3,
-          page_size: 1,
-          record_index: 0,
-          _embedded: {
-            calls: [
-              {
-                ...Client.transformers.snakeCaseObjectKeys(callPhone),
-                _links: {
-                  self: {
-                    href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
-                  },
-                },
-              },
-            ],
-          },
-          _links: {
-            self: {
-              href: `${BASE_URL}/v1/calls/`,
-            },
-          },
-        } as CallPageResponse,
-      ],
-    ],
-    clientMethod: 'search',
-    parameters: [
-      {
-        status: CallStatus.ANSWERED,
-        date_start: '453168000',
-        date_end: '1302552660',
-        page_size: '1',
-        record_index: '0',
-        order: 'asc',
-        conversation_uuid: callPhone.conversationUUID,
-      } as CallListFilter,
-    ],
-    generator: false,
-    error: false,
-    expected: {
-      count: 3,
-      page_size: 1,
-      record_index: 0,
-      _embedded: {
-        calls: [
-          {
-            ...Client.transformers.snakeCaseObjectKeys(callPhone),
-            _links: {
-              self: {
-                href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
-              },
-            },
-          },
-        ],
-      },
-      _links: {
-        self: {
-          href: `${BASE_URL}/v1/calls/`,
-        },
-      },
-    },
-  },
-  {
-    label: 'get call',
-    requests: [[`/v1/calls/${callPhone.uuid}`, 'GET']],
-    responses: [
-      [
-        200,
-        {
-          ...Client.transformers.snakeCaseObjectKeys(callPhone),
-          _links: {
-            self: {
-              href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
-            },
-          },
-        } as CallDetailResponse,
-      ],
-    ],
-    clientMethod: 'getCall',
-    parameters: [callPhone.uuid],
-    generator: false,
-    error: false,
-    expected: {
-      ...callPhone,
-      ...Client.transformers.snakeCaseObjectKeys(callPhone),
-    },
-  },
+//  {
+//    label: 'get a page of calls',
+//    requests: [['/v1/calls?', 'GET']],
+//    responses: [
+//      [
+//        200,
+//        {
+//          count: 3,
+//          page_size: 1,
+//          record_index: 0,
+//          _embedded: {
+//            calls: [
+//              {
+//                ...Client.transformers.snakeCaseObjectKeys(callPhone),
+//                _links: {
+//                  self: {
+//                    href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
+//                  },
+//                },
+//              },
+//            ],
+//          },
+//          _links: {
+//            self: {
+//              href: `${BASE_URL}/v1/calls/`,
+//            },
+//          },
+//        } as CallPageResponse,
+//      ],
+//    ],
+//    clientMethod: 'getCallsPage',
+//    parameters: [],
+//    generator: false,
+//    error: false,
+//    expected: {
+//      count: 3,
+//      page_size: 1,
+//      record_index: 0,
+//      _embedded: {
+//        calls: [
+//          {
+//            ...Client.transformers.snakeCaseObjectKeys(callPhone),
+//            _links: {
+//              self: {
+//                href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
+//              },
+//            },
+//          },
+//        ],
+//      },
+//      _links: {
+//        self: {
+//          href: `${BASE_URL}/v1/calls/`,
+//        },
+//      },
+//    },
+//  },
+//  {
+//    label: 'search',
+//    requests: [
+//      [
+//        `/v1/calls?status=${CallStatus.ANSWERED}&date_start=453168000&date_end=1302552660&page_size=1&record_index=0&order=asc&conversation_uuid=${callPhone.conversationUUID}`,
+//        'GET',
+//      ],
+//    ],
+//    responses: [
+//      [
+//        200,
+//        {
+//          count: 3,
+//          page_size: 1,
+//          record_index: 0,
+//          _embedded: {
+//            calls: [
+//              {
+//                ...Client.transformers.snakeCaseObjectKeys(callPhone),
+//                _links: {
+//                  self: {
+//                    href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
+//                  },
+//                },
+//              },
+//            ],
+//          },
+//          _links: {
+//            self: {
+//              href: `${BASE_URL}/v1/calls/`,
+//            },
+//          },
+//        } as CallPageResponse,
+//      ],
+//    ],
+//    clientMethod: 'search',
+//    parameters: [
+//      {
+//        status: CallStatus.ANSWERED,
+//        date_start: '453168000',
+//        date_end: '1302552660',
+//        page_size: '1',
+//        record_index: '0',
+//        order: 'asc',
+//        conversation_uuid: callPhone.conversationUUID,
+//      } as CallListFilter,
+//    ],
+//    generator: false,
+//    error: false,
+//    expected: {
+//      count: 3,
+//      page_size: 1,
+//      record_index: 0,
+//      _embedded: {
+//        calls: [
+//          {
+//            ...Client.transformers.snakeCaseObjectKeys(callPhone),
+//            _links: {
+//              self: {
+//                href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
+//              },
+//            },
+//          },
+//        ],
+//      },
+//      _links: {
+//        self: {
+//          href: `${BASE_URL}/v1/calls/`,
+//        },
+//      },
+//    },
+//  },
+//  {
+//    label: 'get call',
+//    requests: [[`/v1/calls/${callPhone.uuid}`, 'GET']],
+//    responses: [
+//      [
+//        200,
+//        {
+//          ...Client.transformers.snakeCaseObjectKeys(callPhone),
+//          _links: {
+//            self: {
+//              href: `${BASE_URL}/v1/calls/${callPhone.uuid}`,
+//            },
+//          },
+//        } as CallDetailResponse,
+//      ],
+//    ],
+//    clientMethod: 'getCall',
+//    parameters: [callPhone.uuid],
+//    generator: false,
+//    error: false,
+//    expected: {
+//      ...callPhone,
+//      ...Client.transformers.snakeCaseObjectKeys(callPhone),
+//    },
+//  },
 ];

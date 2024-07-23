@@ -4,14 +4,17 @@ import { UserResponse, UserType, WebSocketChannelResponse } from '../lib';
 export const BASE_URL = 'https://api.nexmo.com/';
 
 export const userToApi = (user: UserType): UserResponse => {
-  const apiUser = Client.transformers.snakeCaseObjectKeys(user, true);
+  const apiUser = Client.transformers.snakeCaseObjectKeys(
+    user,
+    true
+  ) as UserResponse;
   if (user.properties) {
     apiUser.properties = {
       custom_data: user.properties.customData,
     };
   }
 
-  if (user.channels?.websocket) {
+  if (user?.channels?.websocket) {
     apiUser.channels.websocket = [
       {
         uri: user.channels.websocket[0].uri,

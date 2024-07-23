@@ -3,8 +3,8 @@ import {
   MissingApiSecretError,
   InvalidApiKeyError,
   InvalidApiSecretError,
-} from '../../lib/errors/index';
-import { AuthParams } from '../../lib/types/index';
+  AuthParams,
+} from '../../lib';
 import { apiKey, apiSecret } from '../common';
 
 export default [
@@ -12,17 +12,17 @@ export default [
     label: 'create basic auth',
     method: 'createBasicHeader',
     authParameters: {
-      apiKey,
-      apiSecret,
+      apiKey: apiKey,
+      apiSecret: apiSecret,
     } as AuthParams,
     parameters: [],
-    expected: `Basic MTIzNDU6QUJDREU=`,
+    expected: 'Basic MTIzNDU6QUJDREU=',
   },
   {
     label: 'when missing apiKey',
     method: 'createBasicHeader',
     authParameters: {
-      apiSecret,
+      apiSecret: apiSecret,
     },
     parameters: [],
     error: new MissingApiKeyError(),
@@ -32,8 +32,8 @@ export default [
     method: 'createBasicHeader',
     authParameters: {
       apiKey: 1234,
-      apiSecret,
-    },
+      apiSecret: apiSecret,
+    } as unknown as AuthParams,
     parameters: [],
     error: new InvalidApiKeyError(),
   },
@@ -41,7 +41,7 @@ export default [
     label: 'when missing apiSecret',
     method: 'createBasicHeader',
     authParameters: {
-      apiKey,
+      apiKey: apiKey,
     },
     parameters: [],
     error: new MissingApiSecretError(),
@@ -50,9 +50,9 @@ export default [
     label: 'when apiSecret is invalid',
     method: 'createBasicHeader',
     authParameters: {
-      apiKey,
+      apiKey: apiKey,
       apiSecret: 1234,
-    },
+    } as unknown as AuthParams,
     parameters: [],
     error: new InvalidApiSecretError(),
   },

@@ -34,7 +34,7 @@ export type TestRequest = [
   /**
    * The body of the request
    */
-  nock.RequestBodyMatcher,
+  nock.RequestBodyMatcher?,
 ];
 
 export type SDKTestCase<T> = {

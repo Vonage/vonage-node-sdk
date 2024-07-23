@@ -10,8 +10,8 @@ export * from './CommonOutboundCall';
 export * from './OutboundCall';
 export * from './Parameters';
 
-export * from './NCCO/index';
-export * from './Endpoint/index';
-export * from './Parameters/index';
-export * from './Requests/index';
-export * from './Responses/index';
+export * from './NCCO';
+export * from './Endpoint';
+export * from './Parameters';
+export * from './Requests';
+export * from './Responses';
