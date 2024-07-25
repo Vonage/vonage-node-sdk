@@ -32,7 +32,6 @@
       "url": "https://github.com/dragonmantank"
     }
   ],
-  "type": "module",
   "workspaces": [
     "packages/*"
   ],

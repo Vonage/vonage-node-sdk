@@ -31,7 +31,6 @@
       "url": "https://github.com/manchuck"
     }
   ],
-  "type": "module",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
   "directories": {

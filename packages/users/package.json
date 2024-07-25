@@ -22,7 +22,6 @@
       "url": "https://github.com/dragonmantank"
     }
   ],
-  "type": "module",
   "main": "dist/lib/index.js",
   "types": "dist/lib/index.d.ts",
   "directories": {
