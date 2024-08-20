@@ -18,6 +18,9 @@ import {
 } from './types';
 import { LogoType } from './enums';
 import { existsSync, readFileSync } from 'fs';
+import debug from 'debug';
+
+const log = debug('vonage:meetings');
 
 type MeetingError = {
   status: number;
@@ -59,6 +62,8 @@ const apiRecordingToSdk = (recording: RecordingResponse): Recording =>
 
 /**
  * Client class to interact with the Meetings API to create and manage meeting rooms.
+ *
+ * @deprecated the meetings API is officially sunsetted by Vonage.
  *
  * @remarks
  * This client is only available as a standalone client. It cannot be
@@ -190,6 +195,7 @@ export class Meetings extends Client {
   async getRoomPage(
     params: MeetingRoomParams = {},
   ): Promise<MeetingRoomPageResponse> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<MeetingRoomPageResponse>(
       `${this.config.meetingsHost}/v1/meetings/rooms`,
       Client.transformers.snakeCaseObjectKeys(params),
@@ -216,6 +222,7 @@ export class Meetings extends Client {
    * ```
    */
   async getRoom(roomId: string): Promise<MeetingRoom> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<MeetingRoomResponse>(
       `${this.config.meetingsHost}/v1/meetings/rooms/${roomId}`,
     );
@@ -243,6 +250,7 @@ export class Meetings extends Client {
    * ```
    */
   async createRoom(room: MeetingRoom): Promise<MeetingRoom> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendPostRequest<MeetingRoomResponse>(
       `${this.config.meetingsHost}/v1/meetings/rooms`,
       pick(
@@ -275,6 +283,7 @@ export class Meetings extends Client {
    * ```
    */
   async updateRoom(roomId: string, room: MeetingRoom): Promise<MeetingRoom> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendPatchRequest<MeetingRoomResponse>(
       `${this.config.meetingsHost}/v1/meetings/rooms/${roomId}`,
       {
@@ -304,6 +313,7 @@ export class Meetings extends Client {
    * ```
    */
   async getRecording(recordingId: string): Promise<Recording> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<RecordingResponse>(
       `${this.config.meetingsHost}/v1/meetings/recordings/${recordingId}`,
     );
@@ -335,6 +345,7 @@ export class Meetings extends Client {
   async *getSessionRecordings(
     sessionId: string,
   ): AsyncGenerator<Recording, void & Recording, undefined> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<RecordingResponsePage>(
       `${this.config.meetingsHost}/v1/meetings/sessions/${sessionId}`,
     );
@@ -361,6 +372,7 @@ export class Meetings extends Client {
    * ```
    */
   async deleteRecording(recordingId: string): Promise<void> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     await this.sendDeleteRequest(
       `${this.config.meetingsHost}/v1/meetings/recordings/${recordingId}`,
     );
@@ -388,6 +400,7 @@ export class Meetings extends Client {
     void & DialInNumber,
     undefined
     > {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<DialInNumber[]>(
       `${this.config.meetingsHost}/v1/meetings/dial-in-numbers`,
     );
@@ -410,13 +423,14 @@ export class Meetings extends Client {
    *
    * @example
    * Get a list of getThemes
-   * ```ts  
+   * ```ts
    * for await (const theme of meetingsClient.getThemes()) {
    *   console.log(`Theme ${theme.themeName} has ID ${theme.id}`);
    * }
    * ```
    */
   async *getThemes(): AsyncGenerator<Theme, void & Theme, undefined> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<ThemeResponse[]>(
       `${this.config.meetingsHost}/v1/meetings/themes`,
     );
@@ -444,6 +458,7 @@ export class Meetings extends Client {
    * ```
    */
   async getTheme(themeId: string): Promise<Theme> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<ThemeResponse>(
       `${this.config.meetingsHost}/v1/meetings/themes/${themeId}`,
     );
@@ -467,6 +482,7 @@ export class Meetings extends Client {
    * ```
    */
   async deleteTheme(themeId: string, force: boolean = false): Promise<void> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     await this.sendRequest({
       url: `${this.config.meetingsHost}/v1/meetings/themes/${themeId}`,
       method: HTTPMethods.DELETE,
@@ -494,6 +510,7 @@ export class Meetings extends Client {
    * ```
    */
   async createTheme(theme: Theme): Promise<Theme> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendPostRequest<ThemeResponse>(
       `${this.config.meetingsHost}/v1/meetings/themes`,
       pick(
@@ -526,6 +543,7 @@ export class Meetings extends Client {
    * ```
    */
   async updateTheme(themeId: string, theme: Theme): Promise<Theme> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendPatchRequest<ThemeResponse>(
       `${this.config.meetingsHost}/v1/meetings/themes/${themeId}`,
       {
@@ -565,6 +583,7 @@ export class Meetings extends Client {
     themeId: string,
     params: MeetingRoomParams = {},
   ): AsyncGenerator<MeetingRoom, void & MeetingRoom, undefined> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     let startId = params?.startId || null;
     do {
       if (startId) {
@@ -595,7 +614,7 @@ export class Meetings extends Client {
    * @example
    * Get a page of meeting rooms for a theme
    *
-   * ```ts  
+   * ```ts
    * const resp = await meetingsClient.getRoomsForThemePage('my-theme-id');
    * console.log(`There are ${resp.totalItems} meeting rooms`);
    * console.log(`There are ${resp.pageSize} meeting rooms per page`);
@@ -604,7 +623,7 @@ export class Meetings extends Client {
    * @example
    * Get a specific page of meeting rooms for a theme
    *
-   * ```ts  
+   * ```ts
    * const resp = await meetingsClient.getRoomsForThemePage('my-theme-id', {pageSize: 10, pageNumber: 2});
    * console.log(`There are ${resp.totalItems} meeting rooms`);
    * console.log(`There are ${resp.pageSize} meeting rooms per page`);
@@ -614,6 +633,7 @@ export class Meetings extends Client {
     themeId: string,
     params: MeetingRoomParams = {},
   ): Promise<MeetingRoomPageResponse> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<MeetingRoomPageResponse>(
       `${this.config.meetingsHost}/v1/meetings/themes/${themeId}/rooms`,
       Client.transformers.snakeCaseObjectKeys(params),
@@ -630,13 +650,14 @@ export class Meetings extends Client {
    *
    * @example
    * Set the default theme
-   *  
+   *
    * ```ts
    * await meetingsClient.setDefaultTheme('my-theme-id');
    * console.log(`Default theme has been set`);
    * ```
    */
   async setDefaultTheme(themeId: string): Promise<true> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     await this.sendPatchRequest<ThemeResponse>(
       `${this.config.meetingsHost}/v1/meetings/applications`,
       {
@@ -668,7 +689,7 @@ export class Meetings extends Client {
    * @example
    * Upload an icon to a theme
    *
-   * ```ts 
+   * ```ts
    * await meetingsClient.uploadIcon('my-theme-id', LogoType.WHITE, '/path/to/white-logo.png');
    * console.log(`Icon has been uploaded`);
    * ```
@@ -678,6 +699,7 @@ export class Meetings extends Client {
     logo: LogoType,
     logoFile: string,
   ): Promise<true> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     if (!existsSync(logoFile)) {
       throw new Error(`File ${logoFile} does not exist`);
     }
@@ -723,6 +745,7 @@ export class Meetings extends Client {
     { url, fields }: UrlResponse,
     logoFile: string,
   ): Promise<true> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const awsForm = new FormData();
     awsForm.setBoundary(this.FORM_BOUNDARY);
     for (const [key, value] of Object.entries(fields)) {
@@ -763,6 +786,7 @@ export class Meetings extends Client {
    * @throws {Error} If the upload URL retrieval fails or encounters an error.
    */
   protected async _getIconUploadUrl(logo: LogoType): Promise<UrlResponse> {
+    log('WARNING The meetings API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<UrlResponse[]>(
       `${this.config.meetingsHost}/v1/meetings/themes/logos-upload-urls`,
     );

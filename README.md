@@ -101,48 +101,49 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 
 | API                   |  API Release Status  | Supported? |
 |-----------------------|:--------------------:|:----------:|
-| Account API           | General Availability |     ✅     |
-| Alerts API            | General Availability |     ✅     |
-| Application API       | General Availability |     ✅     |
-| Audit API             |         Beta         |     ✅     |
-| Conversation API      | General Availability |     ✅     |
-| Dispatch API          |         Beta         |     ❌     |
-| External Accounts API |         Beta         |     ❌     |
-| Media API             |         Beta         |     ✅     |
-| Messages API          | General Availability |     ✅     |
-| Number Insight V2 API |         Beta         |     ✅     |
-| Number Insights API   | General Availability |     ✅     |
-| Number Management API | General Availability |     ✅     |
-| Pricing API           | General Availability |     ✅     |
-| Proactive Connect API |          Beta        |     ✅     |
-| Redact API            |  Developer Preview   |     ✅     |
-| Reports API           |         Beta         |     ✅     |
-| SMS API               | General Availability |     ✅     |
-| Sub Accounts          |         Beta         |     ✅     |
-| Users                 | General Availability |     ✅     |
-| Verify API            | General Availability |     ✅     |
-| Verify v2 API         | General Availability |     ✅     |
-| Video API             | General Availability |     ✅     |
-| Voice API             | General Availability |     ✅     |
+| Account API           | General Availability |     ✅      |
+| Alerts API            | General Availability |     ✅      |
+| Application API       | General Availability |     ✅      |
+| Audit API             |         Beta         |     ✅      |
+| Conversation API      | General Availability |     ✅      |
+| Dispatch API          |         Beta         |     ❌      |
+| External Accounts API |         Beta         |     ❌      |
+| Media API             |         Beta         |     ✅      |
+| Messages API          | General Availability |     ✅      |
+| Meetings API          |      Deprecated      |     ✅      |
+| Number Insight V2 API |         Beta         |     ✅      |
+| Number Insights API   | General Availability |     ✅      |
+| Number Management API | General Availability |     ✅      |
+| Pricing API           | General Availability |     ✅      |
+| Proactive Connect API |      Deprecated      |     ✅      |
+| Redact API            |  Developer Preview   |     ✅      |
+| Reports API           |         Beta         |     ✅      |
+| SMS API               | General Availability |     ✅      |
+| Sub Accounts          |         Beta         |     ✅      |
+| Users                 | General Availability |     ✅      |
+| Verify API            | General Availability |     ✅      |
+| Verify v2 API         | General Availability |     ✅      |
+| Video API             | General Availability |     ✅      |
+| Voice API             | General Availability |     ✅      |
 
 ### V2 Migrations
 
 While most of the V2 functions have been ported into their own package, some of the functions have not been ported or were removed. Below is a list of those changes:
 
-| V2 Function                 | Status          | Note                                                   |
-|-----------------------------|:---------------:|:------------------------------------------------------:|
-| `vonage.conversion`         | _REMOVED_       |                                                        |
-| `vonage.conversation`       | Not Implemented | This was only released as a beta package               |
-| `vonage.app`                | Moved           | Moved to [Applications][applications]                  |
-| `vonage.files`              | Moved           | Move to [ServerClient][server-client]                  |
-| `vonage.message`            | Moved           | Moved to [SMS][sms]                                    |
-| `vonage.generateJwt`        | Moved           | Was moved to [JWT][jwt]                                |
-| `vonage.generateSignature`  | Moved           | Was moved to [SMS][sms] and [Voice][voice]             |
-| `vonage.calls`              | Moved           | Was moved to [Voice][voice]                            |
-| `vonage.credentials`        | Updated         | Options can be found in [Server Client][server-client] |
-| `vonage.options`            | Updated         | Options can be found in [Server Client][server-client] |
-| `vonage.options.httpClient` | _Removed_       |                                                        |
-| `vonage.options.userAgent`  | Moved           | Options can be found in [Server Client][server-client] |
+| V2 Function                 |  Status   |                          Note                          |
+|-----------------------------|:---------:|:------------------------------------------------------:|
+| `vonage.conversion`         | _REMOVED_ |                                                        |
+| `vonage.conversation`       |   Moved   |        Moved To [Conversations][conversations]         |
+| `vonage.app`                |   Moved   |         Moved to [Applications][applications]          |
+| `vonage.files`              |   Moved   |         Move to [ServerClient][server-client]          |
+| `vonage.message`            |   Moved   |                  Moved to [SMS][sms]                   |
+| `vonage.generateJwt`        |   Moved   |                Was moved to [JWT][jwt]                 |
+| `vonage.generateSignature`  |   Moved   |       Was moved to [SMS][sms] and [Voice][voice]       |
+| `vonage.calls`              |   Moved   |              Was moved to [Voice][voice]               |
+| `vonage.credentials`        |  Updated  | Options can be found in [Server Client][server-client] |
+| `vonage.options`            |  Updated  | Options can be found in [Server Client][server-client] |
+| `vonage.options.httpClient` | _Removed_ |                                                        |
+| `vonage.options.userAgent`  |   Moved   | Options can be found in [Server Client][server-client] |
 
 For more information, check out each packages migration guide.
 
@@ -152,6 +153,7 @@ For more information, check out each packages migration guide.
 [sms]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/sms/README.md
 [server-client]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/server-client/README.md
 [jwt]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/jwt/README.md
+[conversations]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/conversations/README.md
 [voice]: https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/voice/README.md
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 [license]: LICENSE.txt

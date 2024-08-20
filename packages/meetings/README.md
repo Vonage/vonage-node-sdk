@@ -8,6 +8,14 @@
 
 <img src="https://developer.nexmo.com/images/logos/vbc-logo.svg" height="48px" alt="Vonage" />
 
+> [!WARNING]
+> Starting on August 31st 2024, users will no longer be able to create Meetings API
+> applications. Existing applications will continue to work uninterrupted until
+> June 30th, 2025. If you are looking to build with video,
+> please [consider](https://api.support.vonage.com/hc/en-us/articles/14280908404636-Meetings-API-Migration-Options)
+> Vonage Video API or Vonage Video Express services, or contact your account managers or
+> [support](https://api.support.vonage.com/) for help.
+
 This is the Vonage Meetings SDK for Node.js for use with
 [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage
 account. Sign up [for free at vonage.com][signup].
