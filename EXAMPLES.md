@@ -1225,7 +1225,7 @@ Retrieves a page of meeting rooms associated with a specific theme.
 Get a page of meeting rooms for a theme
 
 
-```ts  
+```ts
 const resp = await meetingsClient.getRoomsForThemePage('my-theme-id');
 console.log(`There are ${resp.totalItems} meeting rooms`);
 console.log(`There are ${resp.pageSize} meeting rooms per page`);
@@ -1237,7 +1237,7 @@ console.log(`There are ${resp.pageSize} meeting rooms per page`);
 Get a specific page of meeting rooms for a theme
 
 
-```ts  
+```ts
 const resp = await meetingsClient.getRoomsForThemePage('my-theme-id', {pageSize: 10, pageNumber: 2});
 console.log(`There are ${resp.totalItems} meeting rooms`);
 console.log(`There are ${resp.pageSize} meeting rooms per page`);
@@ -1276,7 +1276,7 @@ Retrieves a list of themes.
 
 Get a list of getThemes
 
-```ts  
+```ts
 for await (const theme of meetingsClient.getThemes()) {
   console.log(`Theme ${theme.themeName} has ID ${theme.id}`);
 }
@@ -1287,7 +1287,7 @@ for await (const theme of meetingsClient.getThemes()) {
 Sets the default theme for the application.
 
 Set the default theme
- 
+
 
 ```ts
 await meetingsClient.setDefaultTheme('my-theme-id');
@@ -1335,7 +1335,7 @@ Uploads an icon (logo) to a theme.
 Upload an icon to a theme
 
 
-```ts 
+```ts
 await meetingsClient.uploadIcon('my-theme-id', LogoType.WHITE, '/path/to/white-logo.png');
 console.log(`Icon has been uploaded`);
 ```
