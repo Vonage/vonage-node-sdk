@@ -32,6 +32,7 @@
       "url": "https://github.com/dragonmantank"
     }
   ],
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],
@@ -79,6 +80,7 @@
     "lerna": "^8.1.5",
     "lint-staged": "15.2.7",
     "nock": "^13.5.4",
+    "recursive-iterator": "3.3.0",
     "ts-jest": "^29.1.4",
     "ts-node": "10.9.2",
     "typedoc": "^0.26.2",

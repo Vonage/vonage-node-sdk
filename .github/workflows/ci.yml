@@ -8,6 +8,28 @@ on:
   pull_request:
 
 jobs:
+  static:
+    name: Static Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Run Dependency Check
+        run: npm run depcheck
+
+      - name: Install packages
+        run: npm install
+
+      # Run lint before building to prevent eslint from checking the compiled files
+      - name: Lint
+        run: npm run lint
+
+
   test:
     runs-on: ${{ matrix.os }}
     name: Test and build
@@ -30,16 +52,6 @@ jobs:
 
       - name: Install packages
         run: npm install
-
-      - name: Run Dependency Check
-        run: npm run depcheck
-
-      # Run lint before building to prevent eslint from checking the compiled files
-      - name: Lint
-        run: npm run lint
-
-      - name: Compile
-        run: npm run compile
 
       - name: Test
         env:
