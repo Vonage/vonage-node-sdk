@@ -14,6 +14,9 @@ import {
 import pick from 'lodash.pick';
 import { readFileSync, writeFileSync } from 'fs';
 import FormData from 'form-data';
+import debug from 'debug';
+
+const log = debug('vonage:proactive-connect');
 
 const apiListToList = (list: ListResponse): List => {
   delete list?._links;
@@ -30,6 +33,9 @@ const apiItemToItem = <T>(item: ListItemResponse<T>): ListItem<T> => {
  * Represents an API client for interacting with the Vonage Proactive Connect
  * API. This client provides methods for managing lists, list items, and
  * performing import/export operations.
+ *
+ *
+ * @deprecated the Proactive connect API is officially sunsetted by Vonage. 
  */
 export class ProactiveConnect extends Client {
   public FORM_BOUNDARY = '-------------------------Vonage-Node_SDK';
@@ -55,6 +61,7 @@ export class ProactiveConnect extends Client {
   async *findAllLists(
     params: FindListParams = {},
   ): AsyncGenerator<List, void & List, undefined> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     let next = null;
     params.page = params?.page || 1;
     do {
@@ -78,6 +85,7 @@ export class ProactiveConnect extends Client {
    * @throws {Error} If there's an issue with the API request or the list creation fails.
    */
   async createList(list: List): Promise<List> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     const resp = await this.sendPostRequest<ListResponse>(
       `${this.config.proactiveHost}/v0.1/bulk/lists`,
       pick(
@@ -98,6 +106,7 @@ export class ProactiveConnect extends Client {
    * @throws {Error} If there's an issue with the API request or the list retrieval fails.
    */
   async getListById(listId: string): Promise<List> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<ListResponse>(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}`,
     );
@@ -125,6 +134,7 @@ export class ProactiveConnect extends Client {
    * @throws {Error} If there's an issue with the API request or the list update fails.
    */
   async deleteList(listId: string): Promise<true> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     await this.sendDeleteRequest(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}`,
     );
@@ -140,6 +150,7 @@ export class ProactiveConnect extends Client {
    * @throws {Error} If there's an issue with the API request or the list clearing fails.
    */
   async clearList(listId: string): Promise<true> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     await this.sendPostRequest(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/clear`,
     );
@@ -159,6 +170,7 @@ export class ProactiveConnect extends Client {
     listId: string,
     params: FindListItemParams = {},
   ): AsyncGenerator<ListItem<T>, void & ListItem<T>, undefined> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     let next = null;
     params.page = params?.page || 1;
     do {
@@ -186,6 +198,7 @@ export class ProactiveConnect extends Client {
     listId: string,
     item: ListItem<T>,
   ): Promise<ListItem<T>> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     const resp = await this.sendPostRequest<ListItemResponse<T>>(
       `${this.config.proactiveHost}/v0.1/bulk/lists`,
       {
@@ -209,6 +222,7 @@ export class ProactiveConnect extends Client {
     listId: string,
     itemId: string,
   ): Promise<ListItem<T>> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<ListItemResponse<T>>(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/items/${itemId}`,
     );
@@ -231,6 +245,7 @@ export class ProactiveConnect extends Client {
     itemId: string,
     item: ListItem<T>,
   ): Promise<ListItem<T>> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     const resp = await this.sendPutRequest<ListItemResponse<T>>(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/items/${itemId}`,
       {
@@ -251,6 +266,7 @@ export class ProactiveConnect extends Client {
    * @throws {Error} If there's an issue with the API request or the list item deletion fails.
    */
   async deleteListItem(listId: string, itemId: string): Promise<true> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     await this.sendDeleteRequest(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/items/${itemId}`,
     );
@@ -267,6 +283,7 @@ export class ProactiveConnect extends Client {
    * @throws {Error} If there's an issue with the API request or the file download fails.
    */
   async downloadListItems(listId: string, file: string): Promise<true> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     const resp = await this.sendGetRequest<string>(
       `${this.config.proactiveHost}/v0.1/bulk/lists/${listId}/items/download`,
     );
@@ -288,6 +305,7 @@ export class ProactiveConnect extends Client {
     listId: string,
     file: string,
   ): Promise<ImportFileResponse> {
+    log('WARNING The Proactive Connect API is deprecated and will be sunsetted soon');
     const itemsForm = new FormData();
     itemsForm.setBoundary(this.FORM_BOUNDARY);
     itemsForm.append('file', readFileSync(file));
