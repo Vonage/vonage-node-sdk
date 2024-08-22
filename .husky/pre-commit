@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 # Lint all the staged files
 echo "Linting Staged files"
 npx lint-staged

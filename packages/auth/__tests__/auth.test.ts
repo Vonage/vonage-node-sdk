@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Auth } from '../lib';
 import testDataSets from './__dataSets__';
 
@@ -7,6 +8,9 @@ import {
   TestTuple,
 } from '../../../testHelpers';
 
+
+jest.useFakeTimers();
+jest.setSystemTime(10907902800000);
 
 const authTests = testDataSets.map(( dataSet): TestTuple<Auth> => {
   const { label, tests } = dataSet;

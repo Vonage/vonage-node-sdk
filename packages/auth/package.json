@@ -42,7 +42,7 @@
     "debug": "^4.3.4"
   },
   "devDependencies": {
-    "@jest/globals": "29.7.0",
+    "@jest/globals": "27.5.1",
     "@types/node": "^20.8.4"
   },
   "publishConfig": {

@@ -4,9 +4,8 @@ import { AuthParams } from '../../lib/types';
 import { applicationId, } from '../common';
 import { testPrivateKey, testPrivateKeyPath } from '../../../../testHelpers';
 
-jest.useFakeTimers({
-  now: 10907902800000,
-});
+jest.useFakeTimers();
+jest.setSystemTime(10907902800000);
 
 export default [
   {
