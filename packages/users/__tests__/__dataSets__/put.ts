@@ -8,7 +8,7 @@ delete updateUser.id;
 export default [
   {
     label: 'update user',
-    requests: [[`/v1/users/${testUser.id}`, 'PUT', updateUser]],
+    requests: [[`/v1/users/${testUser.id}`, 'PATCH', updateUser]],
     responses: [
       [
         200,

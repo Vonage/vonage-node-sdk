@@ -181,7 +181,7 @@ export class Users extends Client {
    * @throws {Error} If there is an issue with the request or response, or if the user with the specified ID is not found.
    */
   async updateUser(user: UserType): Promise<UserType> {
-    const resp = await this.sendPutRequest<UserResponse>(
+    const resp = await this.sendPatchRequest<UserResponse>(
       `${this.config.apiHost}/v1/users/${user.id}`,
       userToAPI(user),
     );
