@@ -62,14 +62,32 @@ const config: Config.InitialOptions = {
     },
     {
       ...projectDefault,
+      displayName: 'MEETINGS',
+      testMatch: ['<rootDir>/packages/meetings/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
+      ...projectDefault,
       displayName: 'MESSAGES',
       testMatch: ['<rootDir>/packages/messages/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {
       ...projectDefault,
-      displayName: 'MEETINGS',
-      testMatch: ['<rootDir>/packages/meetings/__tests__/**/*.test.ts'],
+      displayName: 'NETWORK CLIENT',
+      testMatch: ['<rootDir>/packages/network-client/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
+      ...projectDefault,
+      displayName: 'NETWORK SIM SWAP',
+      testMatch: ['<rootDir>/packages/network-sim-swap/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
+      ...projectDefault,
+      displayName: 'NETWORK NUMBER VERIFICATION',
+      testMatch: ['<rootDir>/packages/network-number-verification/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {

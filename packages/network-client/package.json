@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@vonage/network-client",
+  "version": "1.0.1",
+  "description": "Network API Client package",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/network-client#readme",
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    {
+      "name": "Chuck MANCHUCK Reeves",
+      "url": "https://github.com/manchuck"
+    }
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
+    "compile": "npx tsc --build --verbose",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@vonage/auth": "1.11.0",
+    "@vonage/jwt": "1.11.0",
+    "@vonage/server-client": "1.13.0",
+    "@vonage/vetch": "1.8.0",
+    "debug": "4.3.6"
+  }
+}
