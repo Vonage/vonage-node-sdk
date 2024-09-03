@@ -12,6 +12,47 @@ version: 4.0.0
 All notable changes to this project will be documented in this file.
 
 ---
+
+## Vonage Node SDK v3.17.0 (2024-09-03)
+
+Deprecated proactive-connect and meetings, fixed incorrect HTTP method for updating
+users, and added SIM swap, number verification and network client features.
+Network API features are not included in the complete @Vonage/server-sdk package.
+To use, you will need to install them manually.
+
+**Deprecated:**
+
+- Proactive-connect
+- Meetings
+
+**Fixed:**
+
+- Incorrect HTTP method for updating users
+
+**Added:**
+
+- Network API: SIM swap
+- Network API: Custom client
+- Network API: Number verification
+
+**Full Changelog**: https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.16.0...@vonage/server-sdk@3.17.0
+
+---
+
+## Vonage Node SDK v3.16.0 (2024-07-25)
+
+Fixed missing advanced machine detection mode.
+
+**Fixed:**
+
+- Added missing advanced machine detection mode
+
+### New Contributors
+
+- [@d-vanhees-micoworks](https://github.com/d-vanhees-micoworks) made their first contribution in https://github.com/Vonage/vonage-node-sdk/pull/947
+
+**Full Changelog**: https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.15.0...@vonage/server-sdk@3.16.0
+
 ## Vonage Node SDK v3.14.0 (2024-06-06)
 
 Version 3.14.1 of the Vonage Node SDK introduces fixes for private key path handling
@@ -20,15 +61,18 @@ webhooks, Viber, and SMS, and enhances TTS language support. These updates
 improve functionality, security, and expand messaging capabilities.
 
 **Fixed:**
-  - Passing in private key path for authentication.
-  - Updated endpoints for adding/removing streams from Archive in the video API.
+
+- Passing in private key path for authentication.
+- Updated endpoints for adding/removing streams from Archive in the video API.
 
 **Added:**
-  - New webhook, Viber, and SMS parameters in messages.
-  - TTS languages generation from voice.json.
+
+- New webhook, Viber, and SMS parameters in messages.
+- TTS languages generation from voice.json.
 
 **Refactor:**
-  - Allowing strings for voice TTS languages.
+
+- Allowing strings for voice TTS languages.
 
 **New Contributors:**
 [@ThingUroboros](https://github.com/ThingUroboros )
