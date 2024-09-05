@@ -35,7 +35,6 @@ export type EventCallbackUrl = {
   connectTimeout?: number;
 } & CapabilityWebhook;
 
-
 /**
  * The fallback answer url can optionally be configured. This is used when
  * answer url is offline or returning an HTTP error code.
@@ -67,17 +66,17 @@ export type CapabilityVoice = {
     /**
      * Webhook for events related to voice calls.
      */
-    eventUrl: EventCallbackUrl
+    eventUrl?: EventCallbackUrl;
 
     /**
      *  Webhook for voice call answer events.
      */
-    answerUrl: AnswerCallbackUrl
+    answerUrl?: AnswerCallbackUrl;
 
     /**
      * Webhook for fallback voice call answer events.
      */
-    fallbackAnswerUrl: FallbackAnswerUrl
+    fallbackAnswerUrl?: FallbackAnswerUrl;
   };
 
   /**
