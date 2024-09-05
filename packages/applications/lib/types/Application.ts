@@ -36,7 +36,7 @@ export type Application = {
      */
     publicKey?: string;
     /**
-     * The public key for the application.
+     * The private key for the application.
      *
      * @remarks
      * Store this value securely.
