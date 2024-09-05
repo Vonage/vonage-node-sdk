@@ -83,5 +83,4 @@ export type ApplicationResponse = {
      */
     vbc: unknown;
   };
-} & Application &
-  APILinks;
+} & Application & APILinks;

@@ -62,7 +62,7 @@ export type CapabilityVoice = {
   /**
    *  Webhook configuration for voice events.
    */
-  webhooks: {
+  webhooks?: {
     /**
      * Webhook for events related to voice calls.
      */
@@ -82,14 +82,14 @@ export type CapabilityVoice = {
   /**
    * Indicates whether payment is enabled.
    */
-  paymentEnabled: boolean;
+  paymentEnabled?: boolean;
 
   /**
    * Whether to use signed webhooks for voice events.
    *
    * @remarks Refer to {@link https://developer.vonage.com/en/getting-started/concepts/webhooks#decoding-signed-webhooks} for more information.
    */
-  signedCallbacks: boolean;
+  signedCallbacks?: boolean;
 
   /**
    * Conversation TTL
@@ -97,7 +97,7 @@ export type CapabilityVoice = {
    * @remarks The length of time named conversations will remain active for after
    * creation, in hours. 0 means infinite. Maximum value is 744 (i.e., 31 days).
    */
-  conversationsTTL: number;
+  conversationsTTL?: number;
 
   /**
    * Region to round calls
@@ -108,15 +108,15 @@ export type CapabilityVoice = {
    * regional endpoint. If the call is using a regional endpoint, this will
    * override the application setting.
    */
-  region: VoiceRegions | string;
+  region?: VoiceRegions | string;
 
   /**
    * Payment gateway configuration.
    */
-  payments: {
+  payments?: {
     /**
      * List of payment gateways.
      */
-    gateways: Array<unknown>;
+    gateways?: Array<unknown>;
   };
 };
