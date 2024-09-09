@@ -1342,112 +1342,6 @@ console.log(`Icon has been uploaded`);
 
 ## Vonage Messages Package
 
-### MMSAudio Class
-
-Represents an audio message for the MMS channel.
-
-
-#### MMSAudio
-
-Send an MMS audio message.
-
-```ts
-import { MMSAudio } from '@vonage/messages';
-
-const { messageUUID } = await messagesClient.send(new MMSAudio({
- to: TO_NUMBER,
- from: FROM_NUMBER,
- audio: {
-   url: 'https://example.com/audio.mp3',
- },
- clientRef: 'my-personal-reference',
-}));
-
-console.log(`Message sent successfully with UUID ${messageUUID}`);
-```
-
-## Vonage Messages Package
-
-### MMSImage Class
-
-Represents an image message for the MMS channel.
-
-
-#### MMSImage
-
-Send an MMS image message.
-
-```ts
-import { MMSImage } from '@vonage/messages';
-
-const { messageUUID } = await messagesClient.send(new MMSImage({
- to: TO_NUMBER,
- from: FROM_NUMBER,
- image: {
-   url: 'https://example.com/image.jpg',
-   caption: 'This is an example image',
- },
- clientRef: 'my-personal-reference',
-}));
-
-console.log(`Message sent successfully with UUID ${messageUUID}`);
-```
-
-## Vonage Messages Package
-
-### MMSVcard Class
-
-Represents a vCard message for the MMS channel.
-
-
-#### MMSVcard
-
-Send an MMS vCard message.
-
-```ts
-import { MMSVcard } from '@vonage/messages';
-
-const { messageUUID } = await messagesClient.send(new MMSVcard({
- to: TO_NUMBER,
- from: FROM_NUMBER,
- vcard: {
-   url: 'https://example.com/vcard.vcf',
-   caption: 'Download my contact information',
- },
- clientRef: 'my-personal-reference',
-}));
-
-console.log(`Message sent successfully with UUID ${messageUUID}`);
-```
-
-## Vonage Messages Package
-
-### MMSVideo Class
-
-Represents a video message for the MMS channel.
-
-
-#### MMSVideo
-
-Send an MMS video message.
-
-```ts
-import { MMSVideo } from '@vonage/messages';
-
-const { messageUUID } = await messagesClient.send(new MMSVideo({
- to: TO_NUMBER,
- from: FROM_NUMBER,
- video: {
-   url: 'https://example.com/video.mp4',
- },
- clientRef: 'my-personal-reference',
-}));
-
-console.log(`Message sent successfully with UUID ${messageUUID}`);
-```
-
-## Vonage Messages Package
-
 ### MessengerAudio Class
 
 Represents an audio message for the Messenger channel.
@@ -1577,6 +1471,112 @@ const { messageUUID } = await messagesClient.send(new MessagengerVideo({
  video: {
    url: 'https://example.com/video.mp4',
    caption: 'This is a video',
+ },
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
+### MMSAudio Class
+
+Represents an audio message for the MMS channel.
+
+
+#### MMSAudio
+
+Send an MMS audio message.
+
+```ts
+import { MMSAudio } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new MMSAudio({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ audio: {
+   url: 'https://example.com/audio.mp3',
+ },
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
+### MMSImage Class
+
+Represents an image message for the MMS channel.
+
+
+#### MMSImage
+
+Send an MMS image message.
+
+```ts
+import { MMSImage } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new MMSImage({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ image: {
+   url: 'https://example.com/image.jpg',
+   caption: 'This is an example image',
+ },
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
+### MMSVcard Class
+
+Represents a vCard message for the MMS channel.
+
+
+#### MMSVcard
+
+Send an MMS vCard message.
+
+```ts
+import { MMSVcard } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new MMSVcard({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ vcard: {
+   url: 'https://example.com/vcard.vcf',
+   caption: 'Download my contact information',
+ },
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
+### MMSVideo Class
+
+Represents a video message for the MMS channel.
+
+
+#### MMSVideo
+
+Send an MMS video message.
+
+```ts
+import { MMSVideo } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new MMSVideo({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ video: {
+   url: 'https://example.com/video.mp4',
  },
  clientRef: 'my-personal-reference',
 }));
