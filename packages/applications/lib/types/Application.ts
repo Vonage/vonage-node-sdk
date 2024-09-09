@@ -35,6 +35,14 @@ export type Application = {
      *
      */
     publicKey?: string;
+    /**
+     * The private key for the application.
+     *
+     * @remarks
+     * This will only be present when the application is created, or when you cycle the public key when doing an update.
+     *
+     */
+    privateKey?: string;
   };
 
   /**

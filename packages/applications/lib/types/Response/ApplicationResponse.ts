@@ -26,7 +26,11 @@ export type ApplicationResponse = {
     /**
      * The public key for the application.
      */
-    public_key?: string | undefined
+    public_key?: string | undefined;
+    /**
+     * The private key for the application.
+     */
+    private_key?: string | undefined;
   };
   /**
    * Privacy configuration for the application.
@@ -43,7 +47,6 @@ export type ApplicationResponse = {
    * Capabilities configuration for the application.
    */
   capabilities: {
-
     /**
      * RTC/Conversation Service related configuration.
      */
@@ -79,7 +82,5 @@ export type ApplicationResponse = {
      * programmability service applications. This is always an empty object.
      */
     vbc: unknown;
-
   };
-
 } & Application & APILinks;
