@@ -5,6 +5,8 @@ import {
   RCSVideo,
   RCSFile,
   RCSCustom,
+  UpdateMessageRequest,
+  UpdateMessageStatus
 } from '../../lib';
 
 export default [
@@ -434,4 +436,24 @@ export default [
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
     } as MessageSuccess,
   },
+  {
+    baseUrl: 'https://api.vonage.com',
+    label: 'update a message as read',
+    request: [
+      '/v1/messages/1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      'PATCH',
+      {
+        status: 'revoked',
+      } as UpdateMessageRequest,
+    ],
+    response: [
+      202,
+    ],
+    clientMethod: 'updateMessage',
+    parameters: [
+      '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      UpdateMessageStatus.REVOKED
+    ],
+    expected: true
+  }
 ];
