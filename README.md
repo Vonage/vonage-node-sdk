@@ -126,6 +126,20 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 | Video API             | General Availability |     ✅      |
 | Voice API             | General Availability |     ✅      |
 
+### Network APIS
+
+The following Network APIs are supported however they are opt-in.
+
+| API                   | Supported? |
+|-----------------------|:----------:|
+| Number Verification   |     ✅     |
+| SIM Swap              |     ✅     |
+
+#### Network API references
+
+* [Number Verification](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/network-number-verification/README.md)
+* [SIM Swap](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/network-sim-swap/README.md)
+
 ### V2 Migrations
 
 While most of the V2 functions have been ported into their own package, some of the functions have not been ported or were removed. Below is a list of those changes:
