@@ -34,11 +34,6 @@ export type ConfigParams = {
   timeout?: number;
 
   /**
-   * The host for proactive API requests.
-   */
-  proactiveHost?: string;
-
-  /**
    * The host for meetings-related API requests.
    */
   meetingsHost?: string;

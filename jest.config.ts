@@ -118,14 +118,6 @@ const config: Config.InitialOptions = {
     },
     {
       ...projectDefault,
-      displayName: 'PROACTIVE CONNECT',
-      testMatch: [
-        '<rootDir>/packages/proactive-connect/__tests__/**/*.test.ts',
-      ],
-      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
-    },
-    {
-      ...projectDefault,
       displayName: 'REDACT',
       testMatch: ['<rootDir>/packages/redact/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
