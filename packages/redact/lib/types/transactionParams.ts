@@ -18,5 +18,5 @@ export type TransactionParams = {
   /**
    * Required if redacting SMS data. Must be one of: inbound, outbound.
    */
-  type: Type;
+  type?: Type;
 };
