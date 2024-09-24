@@ -443,26 +443,39 @@ export class Client {
     }
     log('Request succeeded');
 
-
+    const contentLength = parseInt(response.headers.get('content-length') || '0');
     const [contentType] = (response.headers.get('content-type') || '').split(
       ';',
     );
-    log(`Response content type: ${contentType}`);
 
-    switch (contentType) {
-    case ContentType.FORM_URLENCODED:
-      log('Decoding form data');
-      decoded = response.body
-        ? new URLSearchParams(await response.text())
-        : '';
-      break;
-    case ContentType.JSON:
-      log('Decoding JSON');
-      decoded = await response.json();
-      break;
-    default:
-      log('Decoding text');
-      decoded = await response.text();
+    log(`Response content type: ${contentType}`);
+    try {
+      const body = await response.text();
+
+      switch (contentType) {
+      case ContentType.FORM_URLENCODED:
+        log('Decoding form data');
+        decoded = response.body
+          ? new URLSearchParams(body)
+          : '';
+        break;
+      case ContentType.JSON:
+        log('Decoding JSON');
+        decoded = JSON.parse(body);
+        break;
+      default:
+        log('Decoding text');
+        decoded = body;
+      }
+    } catch (error) {
+      log('Failed to decode body', error);
+      if (contentLength > 0) {
+        throw new VetchError(
+          'Failed to decode response body',
+          request,
+          response,
+        );
+      }
     }
 
     log('Decoded body', decoded);

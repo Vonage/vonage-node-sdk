@@ -23,4 +23,28 @@ export default [
       statusText: 'OK',
     },
   },
+  {
+    label: 'make delete request with content-type header but no body',
+    request: ['/my/path', 'DELETE'],
+    response: [
+      204,
+      null,
+      undefined,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    ],
+    clientMethod: 'sendDeleteRequest',
+    parameters: [`${BASE_URL}/my/path`],
+    expected: {
+      config: expect.anything(),
+      data: null,
+      headers: expect.anything(),
+      request: expect.anything(),
+      status: 204,
+      statusText: 'No Content',
+    },
+  },
 ];

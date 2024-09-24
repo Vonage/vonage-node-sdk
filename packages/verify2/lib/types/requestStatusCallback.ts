@@ -1,5 +1,5 @@
 import { RequestStatus } from '../enums';
-import { RequestStatusCallbackWorkflow } from './requestStatusCallbackWorkflow';
+import { RequestStatusCallbackWorkflow } from './workflows/requestStatusCallbackWorkflow';
 
 /**
  * Represents a callback received for the status update of a
