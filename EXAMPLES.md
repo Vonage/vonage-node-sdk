@@ -1342,6 +1342,68 @@ console.log(`Icon has been uploaded`);
 
 ## Vonage Messages Package
 
+### Messages Class
+
+Client class to interact with the Messages API which enables users to manage
+send messages through various channels programmatically.
+
+Create a standalone Messages client
+
+
+```ts
+import { Messages } from '@vonage/messages';
+
+const messagesClient = new Messages({
+ apiKey: VONAGE_API_KEY,
+ apiSecret: VONAGE_API_SECRET
+});
+```
+
+
+
+
+Create an Messages client from the Vonage client
+
+
+```ts
+import { Vonage } from '@vonage/server-client';
+
+const vonage = new Vonage({
+  apiKey: VONAGE_API_KEY,
+  apiSecret: VONAGE_API_SECRET
+});
+
+const messagesClient = vonage.messages;
+```
+
+
+#### updateMessage
+
+Update the status of outbound and/or inbound messages for certain
+channels. For example, you can revoke outbound messages or mark inbound
+messages as read.
+
+Please not that this endpoint is region specifc. You will need to set the
+region when you create the client.
+
+Update the status of a WhatsApp message to "read"
+
+```ts
+const vonage = new Vonage(
+  {
+    applicationId: myAppId,
+    privateKey: myPrivateKey
+  },
+  {
+    apiHost: 'https://api-eu.vonage.com'
+  }
+)
+
+await vonage.messages.updateMessage(messageId, UpdateMessageStatus.READ);
+```
+
+## Vonage Messages Package
+
 ### MessengerAudio Class
 
 Represents an audio message for the Messenger channel.
