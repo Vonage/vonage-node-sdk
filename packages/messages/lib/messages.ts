@@ -7,6 +7,7 @@ import {
   AnyChannel,
 } from './types';
 import debug from 'debug';
+import { UpdateMessageStatus } from './enums/UpdateMessageStatus';
 
 const log = debug('vonage:messages');
 
@@ -95,5 +96,47 @@ export class Messages extends Client {
     return {
       messageUUID: resp.data.message_uuid,
     };
+  }
+
+  /**
+   * Update the status of outbound and/or inbound messages for certain
+   * channels. For example, you can revoke outbound messages or mark inbound
+   * messages as read.
+   *
+   * Please not that this endpoint is region specifc. You will need to set the
+   * region when you create the client.
+   *
+   * @example
+   * Update the status of a WhatsApp message to "read"
+   * ```ts
+   * const vonage = new Vonage(
+   *   {
+   *     applicationId: myAppId,
+   *     privateKey: myPrivateKey
+   *   },
+   *   {
+   *     apiHost: 'https://api-eu.vonage.com'
+   *   }
+   * )
+   *
+   * await vonage.messages.updateMessage(messageId, UpdateMessageStatus.READ);
+   * ```
+   *
+   * @param {string} messageId - The ID of the message to update.
+   * @param {UpdateMessageStatus | string} status - The status to update the message to.
+   *
+   * @return {Promise<true>} A promise that resolves to true if the message was
+   * updated successfully.
+   */
+  public async updateMessage(
+    messageId: string,
+    status: UpdateMessageStatus | string,
+  ): Promise<true> {
+    // This endpoint returns a 202 so we don't need to parse the response
+    await this.sendPatchRequest<MessageSuccessResponse>(
+      `${this.config.apiHost}/v1/messages/${messageId}`,
+      {status: status},
+    );
+    return true;
   }
 }
