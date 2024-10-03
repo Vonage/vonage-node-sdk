@@ -1,10 +1,12 @@
-import { VerifyLocale } from '../enums';
-import { EmailWorkflow } from './emailWorkflow';
-import { SMSWorkflow } from './smsWorkflow';
-import { SilentAuthWorkflow } from './silentAuthWorkflow';
-import { VoiceWorkflow } from './voiceWorkflow';
-import { WhatsAppInteractiveWorkflow } from './whatsAppInteractiveWorkflow';
-import { WhatsAppWorkflow } from './whatsAppWorkflow';
+import { VerifyLocale } from '../../enums';
+import {
+  EmailWorkflow,
+  SMSWorkflow,
+  SilentAuthWorkflow,
+  VoiceWorkflow,
+  WhatsAppInteractiveWorkflow,
+  WhatsAppWorkflow
+} from '../workflows';
 
 export type SMSWorkflowRequest = {
   app_hash?: string;

@@ -1,18 +1,28 @@
 import requestTests from './verify';
 import checkTests from './check';
 import cancelTests from './cancel';
+import templateTests from './templates';
+import fragmentTests from './templateFragments';
 
 export default [
   {
-    label: 'Request tests',
+    name: 'Request tests',
     tests: requestTests,
   },
   {
-    label: 'Check tests',
+    name: 'Check tests',
     tests: checkTests,
   },
   {
-    label: 'Cancel tests',
+    name: 'Cancel tests',
     tests: cancelTests,
   },
+  {
+    name: 'Templates tests',
+    tests: templateTests,
+  },
+  {
+    name: 'Template Fragment tests',
+    tests: fragmentTests,
+  }
 ];

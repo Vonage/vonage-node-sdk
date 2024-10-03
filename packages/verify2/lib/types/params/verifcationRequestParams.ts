@@ -1,10 +1,12 @@
-import { VerifyLocale } from '../enums';
-import { EmailWorkflow } from './emailWorkflow';
-import { SMSWorkflow } from './smsWorkflow';
-import { SilentAuthWorkflow } from './silentAuthWorkflow';
-import { VoiceWorkflow } from './voiceWorkflow';
-import { WhatsAppInteractiveWorkflow } from './whatsAppInteractiveWorkflow';
-import { WhatsAppWorkflow } from './whatsAppWorkflow';
+import { VerifyLocale } from '../../enums';
+import {
+  EmailWorkflow,
+  SMSWorkflow,
+  SilentAuthWorkflow ,
+  VoiceWorkflow,
+  WhatsAppInteractiveWorkflow ,
+  WhatsAppWorkflow,
+} from '../workflows';
 
 /**
  * Represents parameters for creating a verification request for sending
@@ -61,4 +63,12 @@ export type VerificationRequestParams = {
    * verification request.
    */
   fraudCheck?: boolean;
+
+  /**
+   * A custom template ID to use for the verification request.
+   *
+   * @remarks
+   * Only voice and sms workflows support custom templates.
+   */
+  templateId?: string;
 };

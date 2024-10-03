@@ -1,4 +1,4 @@
-import { Channels, RequestWorkflowStatus } from '../enums';
+import { Channels, RequestWorkflowStatus } from '../../enums';
 
 /**
  * Represents a workflow step within a verification request's status callback.
