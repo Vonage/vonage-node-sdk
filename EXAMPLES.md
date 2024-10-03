@@ -2712,6 +2712,205 @@ if (result.status === CheckStatus.SUCCESS) {
 }
 ```
 
+## Vonage Verify v2 Package
+
+### Verify2 Class
+
+A class for interacting with the Vonage Verify API (Version 2).
+
+
+#### createTemplate
+
+Creates a new template with the provided details.
+
+Create a new template:
+
+```ts
+const newTemplate = await templateClient.createTemplate({
+  name: 'My New Template',
+});
+console.log(newTemplate.name);
+```
+
+#### createTemplateFragment
+
+Creates a new template fragment with the provided details.
+
+Create a new template fragment:
+
+```ts
+const newFragment = await templateClient.createTemplateFragment(
+  '22f571c1-f41a-4db2-bba7-f23a069200c1',
+  {
+    channel: 'sms',
+    locale: 'en-us',
+    text: 'Your verification code is ${code}',
+  },
+);
+console.log(newFragment.text);
+```
+
+#### deleteTemplate
+
+Deletes a template by its unique identifier.
+
+Delete a template by ID:
+
+```ts
+await templateClient.deleteTemplate('22f571c1-f41a-4db2-bba7-f23a069200c1');
+console.log('Template deleted successfully');
+```
+
+#### deleteTemplateFragment
+
+Deletes a template fragment by its unique identifier.
+
+Delete a template by ID:
+
+```ts
+await templateClient.deleteTemplateFragment(
+  '22f571c1-f41a-4db2-bba7-f23a069200c1'
+  'c70f446e-997a-4313-a081-60a02a31dc19',
+);
+console.log('Template Fragment deleted successfully');
+```
+
+#### getTemplate
+
+Retrieves a single template by its unique identifier.
+
+Get a template by ID:
+
+```ts
+const template = await templateClient.getTemplate('22f571c1-f41a-4db2-bba7-f23a069200c1');
+console.log(template.name);
+```
+
+#### getTemplateFragment
+
+Retrieves a single template fragment by its unique identifier.
+
+Get a template fragment by ID:
+
+```ts
+const fragment = await templateClient.getTemplateFragment('22f571c1-f41a-4db2-bba7-f23a069200c1', 'c70f446e-997a-4313-a081-60a02a31dc19');
+console.log(fragment.text);
+```
+
+#### getTemplateFragmentPage
+
+Retrieves a page of template fragments based on the provided pagination and filter parameters.
+
+Get a page of template fragments:
+
+```ts
+const fragmentPage = await templateClient.getTemplateFragmentPage({
+  templateId: '22f571c1-f41a-4db2-bba7-f23a069200c1',
+  page: 1,
+  pageSize: 10,
+});
+fragmentPage._embedded.template_fragments.forEach(fragment => {
+  console.log(fragment.text);
+});
+```
+
+#### getTemplatePage
+
+Retrieves a single page of templates based on the provided pagination parameters.
+
+Get a single page of templates:
+
+
+```ts
+const templatePage = await templateClient.getTemplatePage({
+  page: 1,
+  pageSize: 10
+});
+
+templatePage.templates.forEach(template => {
+  console.log(template.name);
+});
+```
+
+#### listAllTemplateFragments
+
+Generator function to list all templates across multiple pages.
+
+List all templates using pagination:
+
+```ts
+for await (const template of templateClient.listAllTemplateFragments({ pageSize: 5 })) {
+  console.log(template.name);
+}
+```
+
+
+
+
+List all templates without pagination:
+
+```ts
+for await (const template of templateClient.listAllTemplateFragments()) {
+  console.log(template.name);
+}
+```
+
+#### listAllTemplates
+
+Generator function to list all templates across multiple pages.
+
+List all templates using pagination:
+
+```ts
+for await (const template of templateClient.listAllTemplates({ pageSize: 5 })) {
+  console.log(template.name);
+}
+```
+
+
+
+
+List all templates without pagination:
+
+```ts
+for await (const template of templateClient.listAllTemplates()) {
+  console.log(template.name);
+}
+```
+
+#### updateTemplate
+
+Updates an existing template with the provided details.
+
+Update a template:
+
+```ts
+const updatedTemplate = await templateClient.updateTemplate({
+  templateId: '22f571c1-f41a-4db2-bba7-f23a069200c1',
+  name: 'Updated Template Name',
+  isDefault: false,
+});
+console.log(updatedTemplate.name);
+```
+
+#### updateTemplateFragment
+
+Updates an existing template with the provided details.
+
+Update a template:
+
+```ts
+const updatedTemplateFragment = await templateClient.updateTemplateFragment(
+ '22f571c1-f41a-4db2-bba7-f23a069200c1',
+  {
+    templateId: '22f571c1-f41a-4db2-bba7-f23a069200c1',
+    name: 'Updated Template Name',
+    isDefault: false,
+  }
+);
+console.log(updatedTemplateFragment.name);
+```
+
 ## Vonage Video Package
 
 ### Video Class
