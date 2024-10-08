@@ -120,14 +120,15 @@ for general use will be listed as having 'General Availability'. Channels which
 are currently part of a Beta program will be listed as 'Beta'. This table
 details the current release status of each channel implemented in this SDK:
 
-| Channel            |  API Release Status  |
-|--------------------|:--------------------:|
-| SMS                | General Availability |
-| MMS                | General Availability |
-| RCS                | Beta                 |
-| Facebook Messenger | General Availability |
-| WhatsApp           | General Availability |
-| Viber              | General Availability |
+| Channel             |  API Release Status  |
+|---------------------|:--------------------:|
+| SMS                 | General Availability |
+| MMS                 | General Availability |
+| RCS                 | Beta                 |
+| Facebook Messenger  | General Availability |
+| WhatsApp            | General Availability |
+| WhatsApp (reaction) | Beta                 |
+| Viber               | General Availability |
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 

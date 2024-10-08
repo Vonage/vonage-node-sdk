@@ -22,3 +22,4 @@ export * from './WhatsAppStickerIdRequest';
 export * from './WhatsAppTemplateRequest';
 export * from './WhatsAppTextRequest';
 export * from './UpdateMessageRequest';
+export * from './WhatsAppReactionRequest';
