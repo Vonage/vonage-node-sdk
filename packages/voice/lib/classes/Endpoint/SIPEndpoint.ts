@@ -2,7 +2,7 @@ import { SIPEndpoint as SIPEndpointType } from '../../types/Endpoint/SIPEndpoint
 import debug from 'debug';
 
 debug('@vonage/voice')(
-   
+
   'This class is deprecated. Please update to use the SIPEndpointType type instead',
 );
 
@@ -28,7 +28,7 @@ export class SIPEndpoint implements SIPEndpointType {
    *
    * @param {Array<Record<string, unknown>>} headers - Optional custom headers as an array of key-value pairs.
    */
-  headers?: Array<Record<string, unknown>>;
+  headers?: Record<string, unknown>;
 
   /**
    * Create a new SIPEndpoint instance.
@@ -41,7 +41,7 @@ export class SIPEndpoint implements SIPEndpointType {
     this.uri = uri;
 
     if (headers) {
-      this.headers = headers;
+      this.headers = headers[0];
     }
   }
 }
