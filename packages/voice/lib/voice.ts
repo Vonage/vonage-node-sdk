@@ -238,19 +238,39 @@ export class Voice extends Client {
    */
   async createOutboundCall(call: OutboundCall): Promise<CallResult> {
     const callRequest = Client.transformers.snakeCaseObjectKeys(call, true);
+
     if ((call as CallWithNCCO).ncco) {
       callRequest.ncco = (call as CallWithNCCO).ncco;
     }
 
+    const to = call.to.map((endpoint) => {
+      switch (endpoint.type) {
+      case 'sip':
+        return {
+          type: 'sip',
+          uri: endpoint.uri,
+          headers: endpoint.headers,
+          standard_headers: {
+            'User-to-User': endpoint.standardHeaders?.userToUser,
+          }
+        };
+      }
+
+      return endpoint;
+    });
+
+    callRequest.to = to;
     const resp = await this.sendPostRequest<CreateCallResponse>(
       `${this.config.apiHost}/v1/calls`,
       callRequest,
     );
+
     const result = Client.transformers.camelCaseObjectKeys(
       resp.data,
       true,
       true,
     );
+
     delete result.conversationUuid;
     result.conversationUUID = resp.data.conversation_uuid;
     return result as CallResult;

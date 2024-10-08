@@ -63,6 +63,11 @@ export enum TTSLanguages {
   DE_DE = 'de-DE',
 
   /**
+   * Ethiopia German (de-ET) - Supported Text-to-Speech (TTS) language.
+   */
+  DE_ET = 'de-ET',
+
+  /**
    * Greek (el-GR) - Supported Text-to-Speech (TTS) language.
    */
   EL_GR = 'el-GR',

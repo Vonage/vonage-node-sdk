@@ -15,5 +15,20 @@ export type SIPEndpoint = {
   /**
    * An optional array of headers as key-value pairs. These headers can be included in the SIP request.
    */
-  headers?: Array<Record<string, unknown>>;
+  headers?: Record<string, unknown>;
+
+  /**
+   * Standard SIP INVITE headers. Unlike the headers property, these are not
+   * prepended with X-.
+   */
+  standardHeaders?: {
+    /**
+     * Transmit user-to-user information if supported by the CC / PBX vendor,
+     * as per RFC 7433.
+     *
+     * @link https://tools.ietf.org/html/rfc7433
+     */
+    userToUser: string;
+  }
 };
+
