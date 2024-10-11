@@ -2059,6 +2059,55 @@ console.log(`Message sent successfully with UUID ${messageUUID}`);
 
 ## Vonage Messages Package
 
+### WhatsAppReaction Class
+
+Represents a reaction message for WhatsApp.
+
+
+#### WhatsAppReaction
+
+Sends a reaction message to a WhatsApp user.
+
+Send a reaction
+
+```ts
+import { WhatsAppReaction } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new WhatsAppReaction({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ reaction: {
+   action: 'react',
+   emoji: '😍',
+ }
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+
+
+
+Remove reaction
+
+```ts
+import { WhatsAppReaction } from '@vonage/messages';
+
+const { messageUUID } = await messagesClient.send(new WhatsAppReaction({
+ to: TO_NUMBER,
+ from: FROM_NUMBER,
+ reaction: {
+   action: 'unreact',
+ }
+ clientRef: 'my-personal-reference',
+}));
+
+console.log(`Message sent successfully with UUID ${messageUUID}`);
+```
+
+## Vonage Messages Package
+
 ### WhatsAppSticker Class
 
 Represents a sticker message for WhatsApp.
