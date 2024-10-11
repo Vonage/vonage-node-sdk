@@ -29,6 +29,9 @@ import {
   WhatsAppVideoRequest,
   UpdateMessageStatus,
   UpdateMessageRequest,
+  WhatsAppReactionRequest,
+  WhatsAppReactionParams,
+  WhatsAppReaction,
 } from '../../lib';
 
 import { Audio } from '../../lib/classes/WhatsApp/Audio';
@@ -1035,4 +1038,102 @@ export default [
     ],
     expected: true
   },
+  {
+    label: 'send reaction',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'whatsapp',
+        message_type: 'reaction',
+        client_ref: 'my-ref',
+        context: {
+          message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+        },
+        webhook_version: 'v1',
+        webhook_url: 'https://example.com',
+        reaction: {
+          action: 'react',
+          emoji: '😄',
+        }
+      } as WhatsAppReactionRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new WhatsAppReaction({
+        from: '12126875309',
+        to: '14152739164',
+        clientRef: 'my-ref',
+        context: {
+          messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+        },
+        webhookVersion: 'v1',
+        webhookUrl: 'https://example.com',
+        reaction: {
+          action: 'react',
+          emoji: '😄',
+        }
+      } as WhatsAppReactionParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'remove reaction',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'whatsapp',
+        message_type: 'reaction',
+        client_ref: 'my-ref',
+        context: {
+          message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+        },
+        webhook_version: 'v1',
+        webhook_url: 'https://example.com',
+        reaction: {
+          action: 'unreact',
+        }
+      } as WhatsAppReactionRequest,
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new WhatsAppReaction({
+        from: '12126875309',
+        to: '14152739164',
+        clientRef: 'my-ref',
+        context: {
+          messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+        },
+        webhookVersion: 'v1',
+        webhookUrl: 'https://example.com',
+        reaction: {
+          action: 'unreact',
+        }
+      } as WhatsAppReactionParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  }
 ];
