@@ -380,6 +380,10 @@ export class Client {
     request = await this.addAuthenticationToRequest(request);
 
     log('Request prepared', request);
+    if (request.params) {
+      request.params = JSON.parse(JSON.stringify(request.params));
+    }
+
     const url = new URL(request.url as string);
     const params = new URLSearchParams(request.params);
 
