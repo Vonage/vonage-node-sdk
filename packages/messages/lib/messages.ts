@@ -58,7 +58,7 @@ export class Messages extends Client {
     request: VetchOptions,
   ): Promise<VetchOptions> {
     log('Auth config', this.auth);
-    this.authType = AuthenticationType.KEY_SECRET;
+    this.authType = AuthenticationType.BASIC;
 
     if (this.auth.applicationId && this.auth.privateKey) {
       log('Adding JWT token to request');

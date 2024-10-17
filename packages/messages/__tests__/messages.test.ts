@@ -38,14 +38,15 @@ const messageTests = testDataSets.map((dataSet): TestTuple<Messages> => {
         label: `${test.label} [API Key and Secret]`,
         baseUrl: 'https://api.nexmo.com',
         responses: [test.response as TestResponse],
+        reqHeaders: {
+          authorization: (value: string) => value === 'Basic MTIzNDU6QUJDREU=',
+        },
         requests: [
           [
             test.request[0],
             test.request[1],
             {
               ...(typeof test.request[2] === 'object' ? test.request[2] : {}),
-              api_key: '12345',
-              api_secret: 'ABCDE',
             },
           ] as TestRequest,
         ],
