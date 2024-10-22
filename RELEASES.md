@@ -4,7 +4,7 @@ id: vonage-node-sdk
 pkgName: Node SDK
 release: '2024-06-06'
 title: Vonage Node SDK
-version: 4.0.0
+version: 3.19.0
 ---
 
 # Changelog
@@ -12,6 +12,46 @@ version: 4.0.0
 All notable changes to this project will be documented in this file.
 
 ---
+
+## Vonage Node SDK v3.19.0 (2024-10-17)
+
+Added WhatsApp reaction, User-to-User SIP headers and Verify template. It also fixed issues with the `server-client` not removing undefined query string parameters and messages not using basic auth when only apiKey or apiSecret are provided.
+
+**Added:**
+- WhatsApp reaction
+- Verify Templates,
+- User-to-User Header added to voice
+
+**Updated**
+- New TTS Languages
+
+**Fixed**
+- Server-client not removing undefined query string parameters
+- Messages not using basic auth when only apiKey or apiSecret are passed to the client
+
+**Full Changelog**: https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.18.0...@vonage/server-sdk@3.19.0
+
+## Vonage Node SDK v3.18.0 (2024-10-03)
+
+This update fixes application response types, removes proactive-connect, makes `type` optional in Redact API, adds message updates, and adds verification templates.
+
+**Fixed:**
+- Application response types
+
+**Removed:**
+- Proactive-connect
+
+**Changed:**
+- `type` parameter made optional in Redact API
+
+**Added:**
+- Message updates
+- Templates to verify
+
+### New Contributors
+- @s-lukashenka-micoworks made their first contribution in https://github.com/Vonage/vonage-node-sdk/pull/956
+
+**Full Changelog**: https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.17.0...@vonage/server-sdk@3.18.0
 
 ## Vonage Node SDK v3.17.0 (2024-09-03)
 
