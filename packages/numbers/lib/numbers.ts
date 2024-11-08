@@ -200,7 +200,7 @@ export class Numbers extends Client {
    * @param {NumbersSearchFilter} filter - The filter criteria for searching available numbers.
    * @return {Promise<NumbersAvailableList>} A promise that resolves to a list of available phone numbers or an error response.
    *
-   * @example   
+   * @example
    * Search for available numbers that can send SMS and make voice calls
    * ```ts
    * import { Country, Feature } from '@vonage/numbers';
@@ -306,8 +306,14 @@ export class Numbers extends Client {
     const resp = await this.sendFormSubmitRequest<NumbersEmptyResponse>(
       `${this.config.restHost}/number/update`,
       {
+        country: params.country,
+        msisdn: params.msisdn,
         ...(appId ? { app_id: appId } : {}),
-        ...params,
+        moHttpUrl: params.moHttpUrl,
+        moSmppSysType: params.moSmppSysType,
+        voiceCallbackType: params.voiceCallbackType,
+        voiceCallbackValue: params.voiceCallbackValue,
+        voiceStatusCallback: params.voiceStatusCallback,
       },
     );
 
