@@ -215,14 +215,14 @@ export class Client {
    */
   async sendFormSubmitRequest<T>(
     url: string,
-    payload?: Record<string, string>,
+    payload?: Record<string, string | undefined>,
   ): Promise<VetchResponse<T>> {
     const request = {
       url,
       method: HTTPMethods.POST,
       type: ContentType.FORM_URLENCODED,
       headers: { Accept: 'application/json' },
-      ...(payload ? { data: payload } : {}),
+      ...JSON.parse(JSON.stringify((payload ? { data: payload } : {}))),
     } as VetchOptions;
 
     return await this.sendRequest<T>(request);
