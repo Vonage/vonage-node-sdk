@@ -33,34 +33,7 @@ yarn add @vonage/number-insight-v2
 
 ## Usage
 
-### As part of the Vonage Server SDK
-
-If you are using this SDK as part of the Vonage Server SDK, you can access it as the `numberInsightV2` property off of the client that you instantiate.
-
-```js
-const { Auth } = require('@vonage/auth');
-const { Vonage } = require('@vonage/server-sdk');
-const { Insight } = require('@vonage/number-insight-v2');
-
-const credentials = new Auth({
-  apiKey: API_KEY,
-  apiSecret: API_SECRET
-});
-const options = {};
-const vonage = new Vonage(credentials, options);
-
-vonage.numberInsightV2.checkForFraud({
-  type: 'phone',
-  phone: PHONE_NUMBER,
-  insights: [Insight.SIM_SWAP, Insight.FRAUD_SCORE],
-})
-  .then(resp => console.log(resp))
-  .catch(err => console.error(err));
-```
-
-### Standalone
-
-The SDK can be used standalone from the main [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk) if you only need to use the Number Insight v2 API. All you need to do is `require('@vonage/number-insight-v2')`, and use the returned object to create your own client.
+Unlike the other SDK's this package is not include in the [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
 
 ```js
 const { Auth } = require('@vonage/auth');
