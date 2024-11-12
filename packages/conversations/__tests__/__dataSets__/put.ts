@@ -26,7 +26,10 @@ export default [
           callback: {
             url: conversationToCreate?.callback?.url,
             event_mask: conversationToCreate?.callback?.eventMask,
-            params: conversationToCreate?.callback?.params,
+            params: {
+              applicationId: conversationToCreate?.callback?.params?.applicationId,
+              ncco_url: conversationToCreate?.callback?.params?.nccoUrl,
+            },
             method: conversationToCreate?.callback?.method,
           },
         } as CreateConversationRequest,
