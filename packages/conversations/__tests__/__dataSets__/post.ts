@@ -36,7 +36,10 @@ export default [
           callback: {
             url: conversationToCreate?.callback?.url,
             event_mask: conversationToCreate?.callback?.eventMask,
-            params: conversationToCreate?.callback?.params,
+            params:{
+              applicationId: conversationToCreate?.callback?.params?.applicationId,
+              ncco_url: conversationToCreate?.callback?.params?.nccoUrl,
+            }, 
             method: conversationToCreate?.callback?.method,
           },
         } as CreateConversationRequest,
@@ -108,5 +111,41 @@ export default [
     generator: false,
     error: false,
     expected: event,
+  },
+  {
+    label: 'create conversation with callback',
+    requests: [
+      [
+        '/v1/conversations',
+        'POST',
+        {
+          name: conversationToCreate.name,
+          display_name: conversationToCreate.displayName,
+          image_url: conversationToCreate.imageUrl,
+          properties: {
+            ttl: conversationToCreate?.properties?.ttl,
+            type: conversationToCreate?.properties?.type,
+            custom_sort_key: conversationToCreate?.properties?.customSortKey,
+            custom_data: conversationToCreate?.properties?.customData,
+          },
+          numbers: conversationToCreate?.numbers,
+          callback: {
+            url: conversationToCreate?.callback?.url,
+            event_mask: conversationToCreate?.callback?.eventMask,
+            params: {
+              applicationId: conversationToCreate?.callback?.params?.applicationId,
+              ncco_url: conversationToCreate?.callback?.params?.nccoUrl,
+            },
+            method: conversationToCreate?.callback?.method,
+          },
+        } as CreateConversationRequest,
+      ],
+    ],
+    responses: [[200, conversationResponse]],
+    clientMethod: 'createConversation',
+    parameters: [conversationToCreate],
+    generator: false,
+    error: false,
+    expected: conversation,
   },
 ];

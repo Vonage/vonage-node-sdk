@@ -19,12 +19,12 @@ export type ConversationCallbackRequest = {
     /**
      * The application ID for the callback.
      */
-    application_id: string;
+    applicationId?: string;
 
     /**
      * The NCCO URL for the callback.
      */
-    ncco_url: string;
+    ncco_url?: string;
   };
 
   /**

@@ -57,6 +57,13 @@ const conversationToApi = (
     apiConversation.properties.custom_data = customData;
   }
 
+  if (conversation?.callback?.params?.applicationId && apiConversation?.callback?.params) {
+    apiConversation.callback.params = {
+      applicationId: conversation.callback.params.applicationId,
+      ncco_url: conversation.callback.params.nccoUrl,
+    };
+  }
+
   return apiConversation;
 };
 

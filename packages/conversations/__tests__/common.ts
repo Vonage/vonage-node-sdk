@@ -40,7 +40,10 @@ export const conversationToCreate = Object.freeze({
   callback: {
     url: 'https://example.com/callback',
     eventMask: EventType.AUDIO_PLAY,
-    params: {},
+    params: {
+      applicationId: 'APP-00000000-0000-0000-0000-000000000001',
+      nccoUrl: 'https://example.com/ncco',
+    },
     method: 'POST',
   }
 }) as Conversation;
