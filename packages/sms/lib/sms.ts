@@ -45,7 +45,10 @@ import { AlgorithmTypes } from '@vonage/auth';
  * ```
  */
 export class SMS extends Client {
-  protected authType?: AuthenticationType = AuthenticationType.KEY_SECRET;
+  /**
+   * @see {@link Client.authType}
+   */
+  protected authType?: AuthenticationType = AuthenticationType.BASIC;
 
   /**
    * Sends an SMS message using the legacy Vonage SMS API.
@@ -62,7 +65,7 @@ export class SMS extends Client {
    *   from: FROM_NUMBER,
    *   text: 'Hello from Vonage SMS API',
    * });
-   * console.log(`Number of messages sent: ${response.messageCount}`);); 
+   * console.log(`Number of messages sent: ${response.messageCount}`););
    * ```
    */
   public async send(params?: SMSParams): Promise<SMSMessages> {
@@ -117,7 +120,7 @@ export class SMS extends Client {
    * sms.verifySignature(
    *   sig,
    *   {}, // request parameters
-   *   VONAGE_API_SIGNATURE_SECRET, 
+   *   VONAGE_API_SIGNATURE_SECRET,
    *   AlgorithmTypes.md5hash,
    * ) === params.sig) {
    *   console.log("Valid signature");

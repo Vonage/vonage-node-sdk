@@ -37,7 +37,10 @@ import {
  * ```
  */
 export class Pricing extends Client {
-  protected authType = AuthenticationType.QUERY_KEY_SECRET;
+  /**
+   * @see {@link Client.authType}
+   */
+  protected authType = AuthenticationType.BASIC;
 
   /**
    * Retrieves pricing information for a specific country and service type.

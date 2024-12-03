@@ -41,7 +41,7 @@ export class Accounts extends Client {
   /**
    * @see {@link Client.authType}
    */
-  protected authType = AuthenticationType.QUERY_KEY_SECRET;
+  protected authType = AuthenticationType.BASIC;
 
   /**
    * Retrieves the current balance of the Vonage API account.

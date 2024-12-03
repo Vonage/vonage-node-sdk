@@ -121,7 +121,11 @@ const sortFeatures = (features: Feature[]): string => {
  * ```
  */
 export class Numbers extends Client {
-  protected authType = AuthenticationType.QUERY_KEY_SECRET;
+  /**
+   * @see {@link Client.authType}
+   */
+  protected authType = AuthenticationType.BASIC;
+
 
   /**
    * Buy a phone number.

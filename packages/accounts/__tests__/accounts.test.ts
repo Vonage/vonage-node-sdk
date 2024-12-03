@@ -15,10 +15,13 @@ describe('accounts', () => {
       'autoReload': false,
     };
 
-    nock('https://rest.nexmo.com')
+    nock('https://rest.nexmo.com', {
+      reqheaders: {
+        'authorization': 'Basic YWJjZDoxMjM0',
+      }
+    })
       .persist()
       .get('/account/get-balance')
-      .query({ api_key: 'abcd', api_secret: '1234' })
       .reply(200, expectedResponse);
 
     const lookup = await client.getBalance();
@@ -32,10 +35,13 @@ describe('accounts', () => {
       'error-code-label': 'success',
     };
 
-    nock('https://rest.nexmo.com')
+    nock('https://rest.nexmo.com', {
+      reqheaders: {
+        'authorization': 'Basic YWJjZDoxMjM0',
+      }
+    })
       .persist()
       .post('/account/top-up', /trx=8ef2447e69604f642ae59363aa5f781b/)
-      .query({ api_key: 'abcd', api_secret: '1234' })
       .reply(200, expectedResponse);
 
     const lookup = await client.topUpBalance(
@@ -63,10 +69,13 @@ describe('accounts', () => {
     const queryString = new URLSearchParams(callbacks);
     const re = new RegExp(queryString.toString(), 'g');
 
-    nock('https://rest.nexmo.com')
+    nock('https://rest.nexmo.com', {
+      reqheaders: {
+        'authorization': 'Basic YWJjZDoxMjM0',
+      }
+    } )
       .persist()
       .post('/account/settings', re)
-      .query({ api_key: 'abcd', api_secret: '1234' })
       .reply(200, expectedResponse);
 
     const lookup = await client.updateAccountCallbacks(callbacks);

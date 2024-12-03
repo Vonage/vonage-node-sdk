@@ -20,7 +20,7 @@ export default [
     clientMethod: CLIENT_METHOD,
     request: {
       url: BASE_URL,
-      intercept: ['/number/search?api_key=12345&api_secret=ABCDE', 'GET'],
+      intercept: ['/number/search?', 'GET'],
       reply: [
         200,
         validResponse,
@@ -36,7 +36,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&country=US&features=${Feature.MMS}`,
+        `/number/search?country=US&features=${Feature.MMS}`,
         'GET',
       ],
       reply: [200, validResponse],
@@ -55,7 +55,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&country=US&features=${Feature.VOICE},${Feature.MMS}`,
+        `/number/search?country=US&features=${Feature.VOICE},${Feature.MMS}`,
         'GET',
       ],
       reply: [200, validResponse],
@@ -74,7 +74,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        `/number/search?api_key=12345&api_secret=ABCDE&country=US&features=${Feature.SMS},${Feature.MMS},${Feature.VOICE}`,
+        `/number/search?country=US&features=${Feature.SMS},${Feature.MMS},${Feature.VOICE}`,
         'GET',
       ],
       reply: [200, validResponse],
@@ -93,7 +93,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=0&country=US',
+        '/number/search?pattern=1234&search_pattern=0&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -112,7 +112,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=2&country=US',
+        '/number/search?pattern=1234&search_pattern=2&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -131,7 +131,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=1&country=US',
+        '/number/search?pattern=1234&search_pattern=1&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -150,7 +150,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/search?api_key=12345&api_secret=ABCDE&pattern=1234&search_pattern=1&country=US',
+        '/number/search?pattern=1234&search_pattern=1&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -171,7 +171,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/search?api_key=12345&api_secret=ABCDE&pattern=0987&search_pattern=2&country=US',
+        '/number/search?pattern=0987&search_pattern=2&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -191,7 +191,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/search?api_key=12345&api_secret=ABCDE&pattern=5309&search_pattern=0&country=US',
+        '/number/search?pattern=5309&search_pattern=0&country=US',
         'GET',
       ],
       reply: [200, validResponse],
@@ -214,7 +214,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/search?api_key=12345&api_secret=ABCDE&pattern=5309&search_pattern=1&country=US',
+        '/number/search?pattern=5309&search_pattern=1&country=US',
         'GET',
       ],
       reply: [200, validResponse],

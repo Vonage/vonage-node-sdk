@@ -8,7 +8,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/buy?api_key=12345&api_secret=ABCDE',
+        '/number/buy',
         'POST',
         new URLSearchParams([
           ['country', 'US'],
@@ -43,7 +43,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/buy?api_key=12345&api_secret=ABCDE',
+        '/number/buy',
         'POST',
         new URLSearchParams([
           ['country', 'US'],

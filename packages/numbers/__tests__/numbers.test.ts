@@ -8,8 +8,6 @@ import {
   TestRequest,
   TestTuple,
   apiKeyAuth,
-  apiKey,
-  apiSecret,
 } from '../../../testHelpers';
 
 const applicationsTest = dataSet.map((dataSet): TestTuple<Numbers> => {
@@ -19,11 +17,12 @@ const applicationsTest = dataSet.map((dataSet): TestTuple<Numbers> => {
     name: label,
     tests: tests.map((test): SDKTestCase<Numbers> => {
       const requestUrl = new URL(`${test.request.url}${test.request.intercept[0]}`);
-      requestUrl.searchParams.set('api_key', apiKey);
-      requestUrl.searchParams.set('api_secret', apiSecret);
       return {
         label: test.label,
         baseUrl: 'https://rest.nexmo.com',
+        reqHeaders: {
+          'authorization': 'Basic dGVzdEtleTp0ZXN0U2VjcmV0',
+        },
         requests: [
           [
             `${requestUrl.pathname}${requestUrl.search.toString()}`,
