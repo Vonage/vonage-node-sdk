@@ -147,304 +147,6 @@ for (const secret of response._embedded.secrets) {
 }
 ```
 
-## Vonage JWT Package
-
-### Applications Class
-
-
-
-#### createApplication
-
-Creates a new application with the provided details.
-
-Create a new application
-
-
-```ts
-const application = await applicationClient.createApplication({
-  name: 'My Application',
-  capabilities: {
-    voice: {
-      webhooks: {
-        answerUrl: {
-          address: 'https://example.com/answer',
-          httpMethod: 'GET'
-        },
-        eventUrl: {
-          address: 'https://example.com/event',
-          httpMethod: 'POST'
-        }
-      }
-    }
-  }
-});
-
-console.log(application.id);
-```
-
-#### deleteApplication
-
-Deletes an application by its unique identifier.
-
-Delete an application
-
-
-```ts
-await applicationClient.deleteApplication(APPLICATION_ID);
-```
-
-#### getApplication
-
-Retrieves an application by its unique identifier.
-
-Retrieve an application  
-
-
-```ts
-const application = await applicationClient.getApplication(APPLICATION_ID);
-console.log(application.name);
-```
-
-#### getApplicationPage
-
-Retrieves a page of applications based on filter parameters.
-
-Get a single page of applications
-
-
-```ts
-const applications = await applicationClient.getApplicationPage({
-  page: 1,
-  size: 10
-});
-
-applications.applications.forEach(application => {
-  console.log(application.name);
-});
-```
-
-#### listAllApplications
-
-Retrieves all applications, iterating over paginated results.
-
-List applications with pagination using an iterator
-
-
-```ts
-for await (const application of applicationClient.listAllApplications()) {
-  console.log(application.name);
-}
-```
-
-#### listApplications
-
-Retrieves a list of applications with optional pagination parameters.
-
-List a single page of applications 
-
-
-```ts
-const applications = await applicationClient.listApplications({});
-
-applications.applications.forEach(application => {
-  console.log(application.name);
-});
-```
-
-#### updateApplication
-
-Updates an existing application with the provided details.
-
-Update an application  
-
-
-```ts
-const application = await applicationClient.updateApplication({
-  id: APPLICATION_ID,
-  name: 'My Application',
-});
-console.log(application.name);
-```
-
-## Vonage JWT Package
-
-### MissingPrivateKeyError Class
-
-`MissingPrivateKeyError`
- class for throwing an error when the private key
-is missing. The private key must either be the string of the key or a buffer
-from the key file. When you created the application, the private key would
-have been downloaded then. If you lost the key, you will need to regenrate
-the key.
-
-
-#### tokenGenerate
-
-Generates a JWT token.
-
-Generate a JWT token with default claims.
-
-
-```js
-const privateKey = fs.readFileSync(__dirname + '/private.key');
-const token = tokenGenerate(applicationId, privateKey);
-```
-
-
-
-
-Generate a JWT token with custom claims.
-
-
-```js
-const privateKey = fs.readFileSync(__dirname + '/private.key');
-const token = tokenGenerate(applicationId, privateKey, {
-  subject: 'my-subject',
-  acl: {
-   paths: {
-     '/*/users/**': {},
-     '/*/conversations/**': {},
-     '/*/sessions/**': {},
-   },
-  },
-});
-```
-
-#### verifySignature
-
-Verifies a JWT token
-
-Validate a JWT token
-
-
-```js
-const privateKey = fs.readFileSync('./private.key');
-if (verifySignature(token, privateKey)) {
-  console.log('JWT signature verified.');
-} else {
-  console.log('JWT signature verification failed.');
-}
-```
-
-## Vonage JWT Package
-
-### NumberInsights Class
-
-Client for the Vonage Number Insights API.
-
-Create a standalone Number Insight client
-
-
-```ts
-import { NumberInsights } from '@vonage/numberInsight';
-
-const numberInsightClient = new NumberInsights({
- apiKey: VONAGE_API_KEY,
- apiSecret: VONAGE_API_SECRET
-});
-```
-
-
-
-
-Create an Number Insight client from the Vonage client
-
-
-```ts
-import { Vonage } from '@vonage/server-client';
-
-const vonage = new Vonage({
-  apiKey: VONAGE_API_KEY,
-  apiSecret: VONAGE_API_SECRET
-});
-
-const numberInsightClient = vonage.numberInsight;
-```
-
-
-#### advancedLookup
-
-Perform an advanced number lookup operation.
-
-```ts
-const lookup = await numberInsightsClient.advancedLookup('15555551212');
-console.log(`Ths number is ${lookup.valid_number}`);
-```
-
-#### asyncAdvancedLookup
-
-Perform an asynchronous advanced number lookup operation.
-
-```ts
-const lookup = await numberInsightsClient.asyncAdvancedLookup(
-  '15555551212',
-  'https://example.com/number-insights',
-);
-console.log(`The request ID is ${lookup.request_id}`);
-```
-
-
-
-
-Lookup with the CNAME option:
-
-```ts
-const lookup = await numberInsightsClient.asyncAdvancedLookup(
-  '15555551212',
-  'https://example.com/number-insights',
-  { cname: true },
-);
-console.log(`The request ID is ${lookup.request_id}`);
-```
-
-#### basicLookup
-
-Perform a basic number lookup operation.
-
-```ts
-const lookup = await numberInsightsClient.basicLookup(
-  '15555551212',
-);
-console.log(`The request ID is ${lookup.request_id}`);
-```
-
-
-
-
-Lookup with the country option:
-
-```ts
-const lookup = await numberInsightsClient.basicLookup(
-  '15555551212',
-  { country: 'US' },
-);
-console.log(`The request ID is ${lookup.request_id}`);
-```
-
-#### standardLookup
-
-Perform a standard number lookup operation.
-
-```ts
-const lookup = await numberInsightsClient.standardLookup(
-  '15555551212',
-);
-console.log(`The request ID is ${lookup.request_id}`);
-```
-
-
-
-
-Lookup with the cname option:
-
-```ts
-const lookup = await numberInsightsClient.standardLookup(
-  '15555551212',
-  { cname: true },
-);
-console.log(`The request ID is ${lookup.request_id}`);
-```
-
 ## Vonage Audit Package
 
 ### Audit Class
@@ -931,6 +633,304 @@ const member = await memberClient.updateMember(
 );
 
 console.log(member.name);
+```
+
+## Vonage JWT Package
+
+### Applications Class
+
+
+
+#### createApplication
+
+Creates a new application with the provided details.
+
+Create a new application
+
+
+```ts
+const application = await applicationClient.createApplication({
+  name: 'My Application',
+  capabilities: {
+    voice: {
+      webhooks: {
+        answerUrl: {
+          address: 'https://example.com/answer',
+          httpMethod: 'GET'
+        },
+        eventUrl: {
+          address: 'https://example.com/event',
+          httpMethod: 'POST'
+        }
+      }
+    }
+  }
+});
+
+console.log(application.id);
+```
+
+#### deleteApplication
+
+Deletes an application by its unique identifier.
+
+Delete an application
+
+
+```ts
+await applicationClient.deleteApplication(APPLICATION_ID);
+```
+
+#### getApplication
+
+Retrieves an application by its unique identifier.
+
+Retrieve an application  
+
+
+```ts
+const application = await applicationClient.getApplication(APPLICATION_ID);
+console.log(application.name);
+```
+
+#### getApplicationPage
+
+Retrieves a page of applications based on filter parameters.
+
+Get a single page of applications
+
+
+```ts
+const applications = await applicationClient.getApplicationPage({
+  page: 1,
+  size: 10
+});
+
+applications.applications.forEach(application => {
+  console.log(application.name);
+});
+```
+
+#### listAllApplications
+
+Retrieves all applications, iterating over paginated results.
+
+List applications with pagination using an iterator
+
+
+```ts
+for await (const application of applicationClient.listAllApplications()) {
+  console.log(application.name);
+}
+```
+
+#### listApplications
+
+Retrieves a list of applications with optional pagination parameters.
+
+List a single page of applications 
+
+
+```ts
+const applications = await applicationClient.listApplications({});
+
+applications.applications.forEach(application => {
+  console.log(application.name);
+});
+```
+
+#### updateApplication
+
+Updates an existing application with the provided details.
+
+Update an application  
+
+
+```ts
+const application = await applicationClient.updateApplication({
+  id: APPLICATION_ID,
+  name: 'My Application',
+});
+console.log(application.name);
+```
+
+## Vonage JWT Package
+
+### MissingPrivateKeyError Class
+
+`MissingPrivateKeyError`
+ class for throwing an error when the private key
+is missing. The private key must either be the string of the key or a buffer
+from the key file. When you created the application, the private key would
+have been downloaded then. If you lost the key, you will need to regenrate
+the key.
+
+
+#### tokenGenerate
+
+Generates a JWT token.
+
+Generate a JWT token with default claims.
+
+
+```js
+const privateKey = fs.readFileSync(__dirname + '/private.key');
+const token = tokenGenerate(applicationId, privateKey);
+```
+
+
+
+
+Generate a JWT token with custom claims.
+
+
+```js
+const privateKey = fs.readFileSync(__dirname + '/private.key');
+const token = tokenGenerate(applicationId, privateKey, {
+  subject: 'my-subject',
+  acl: {
+   paths: {
+     '/*/users/**': {},
+     '/*/conversations/**': {},
+     '/*/sessions/**': {},
+   },
+  },
+});
+```
+
+#### verifySignature
+
+Verifies a JWT token
+
+Validate a JWT token
+
+
+```js
+const privateKey = fs.readFileSync('./private.key');
+if (verifySignature(token, privateKey)) {
+  console.log('JWT signature verified.');
+} else {
+  console.log('JWT signature verification failed.');
+}
+```
+
+## Vonage JWT Package
+
+### NumberInsights Class
+
+Client for the Vonage Number Insights API.
+
+Create a standalone Number Insight client
+
+
+```ts
+import { NumberInsights } from '@vonage/numberInsight';
+
+const numberInsightClient = new NumberInsights({
+ apiKey: VONAGE_API_KEY,
+ apiSecret: VONAGE_API_SECRET
+});
+```
+
+
+
+
+Create an Number Insight client from the Vonage client
+
+
+```ts
+import { Vonage } from '@vonage/server-client';
+
+const vonage = new Vonage({
+  apiKey: VONAGE_API_KEY,
+  apiSecret: VONAGE_API_SECRET
+});
+
+const numberInsightClient = vonage.numberInsight;
+```
+
+
+#### advancedLookup
+
+Perform an advanced number lookup operation.
+
+```ts
+const lookup = await numberInsightsClient.advancedLookup('15555551212');
+console.log(`Ths number is ${lookup.valid_number}`);
+```
+
+#### asyncAdvancedLookup
+
+Perform an asynchronous advanced number lookup operation.
+
+```ts
+const lookup = await numberInsightsClient.asyncAdvancedLookup(
+  '15555551212',
+  'https://example.com/number-insights',
+);
+console.log(`The request ID is ${lookup.request_id}`);
+```
+
+
+
+
+Lookup with the CNAME option:
+
+```ts
+const lookup = await numberInsightsClient.asyncAdvancedLookup(
+  '15555551212',
+  'https://example.com/number-insights',
+  { cname: true },
+);
+console.log(`The request ID is ${lookup.request_id}`);
+```
+
+#### basicLookup
+
+Perform a basic number lookup operation.
+
+```ts
+const lookup = await numberInsightsClient.basicLookup(
+  '15555551212',
+);
+console.log(`The request ID is ${lookup.request_id}`);
+```
+
+
+
+
+Lookup with the country option:
+
+```ts
+const lookup = await numberInsightsClient.basicLookup(
+  '15555551212',
+  { country: 'US' },
+);
+console.log(`The request ID is ${lookup.request_id}`);
+```
+
+#### standardLookup
+
+Perform a standard number lookup operation.
+
+```ts
+const lookup = await numberInsightsClient.standardLookup(
+  '15555551212',
+);
+console.log(`The request ID is ${lookup.request_id}`);
+```
+
+
+
+
+Lookup with the cname option:
+
+```ts
+const lookup = await numberInsightsClient.standardLookup(
+  '15555551212',
+  { cname: true },
+);
+console.log(`The request ID is ${lookup.request_id}`);
 ```
 
 ## Vonage Media Package
