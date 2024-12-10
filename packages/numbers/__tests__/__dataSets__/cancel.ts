@@ -10,7 +10,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/cancel?api_key=12345&api_secret=ABCDE',
+        '/number/cancel',
         'POST',
         new URLSearchParams([
           ['country', 'US'],

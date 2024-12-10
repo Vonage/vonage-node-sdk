@@ -1,4 +1,3 @@
-import { apiKey, apiSecret} from '../../../../testHelpers';
 import {
   MessageClassEnum,
   SMSStatus,
@@ -20,8 +19,6 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         from: '12126875309',
         to: '14152739164',
         text: 'too many secrets',
@@ -76,8 +73,6 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         from: '12126875309',
         to: '19162255887',
         text: 'I\'ll always dial the "K" for you',
@@ -148,8 +143,6 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         from: '12126875309',
         to: '18187779311',
         text: 'Whats your number? ⏳',
@@ -206,8 +199,6 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         from: '12126875309',
         to: '18186345789',
         type: TypeEnum.BINARY,
@@ -268,8 +259,6 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         from: '12126875309',
         to: '14152739164',
         text: 'too many secrets',
@@ -314,8 +303,6 @@ export default [
       '/sms/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         from: '12126875309',
         to: '14152739164',
         text: 'too many secrets',

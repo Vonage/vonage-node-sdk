@@ -11,7 +11,6 @@ describe('pricing', () => {
     client = new Pricing(new Auth({ apiKey: 'abcd', apiSecret: '1234' }));
   });
 
-
   test('do a country lookup', async () => {
     const expectedResponse = {
       countryCode: 'CA',
@@ -33,10 +32,14 @@ describe('pricing', () => {
       ],
     };
 
-    nock(BASE_URL)
+    nock(BASE_URL, {
+      reqheaders: {
+        'authorization': 'Basic YWJjZDoxMjM0',
+      }
+    })
       .persist()
       .get('/account/get-pricing/outbound/sms')
-      .query({ api_key: 'abcd', api_secret: '1234', country: 'CA' })
+      .query({ country: 'CA' })
       .reply(200, expectedResponse);
 
     const lookup = await client.listCountryPricing(ServiceType.SMS, 'CA');
@@ -76,10 +79,13 @@ describe('pricing', () => {
       ],
     };
 
-    nock(BASE_URL)
+    nock(BASE_URL, {
+      reqheaders: {
+        'authorization': 'Basic YWJjZDoxMjM0',
+      }
+    })
       .persist()
       .get('/account/get-full-pricing/outbound/sms')
-      .query({ api_key: 'abcd', api_secret: '1234' })
       .reply(200, expectedResponse);
 
     const lookup = await client.listAllCountriesPricing(ServiceType.SMS);
@@ -112,10 +118,14 @@ describe('pricing', () => {
       ],
     };
 
-    nock(BASE_URL)
+    nock(BASE_URL, {
+      reqheaders: {
+        'authorization': 'Basic YWJjZDoxMjM0',
+      }
+    })
       .persist()
       .get('/account/get-prefix-pricing/outbound/sms')
-      .query({ api_key: 'abcd', api_secret: '1234', prefix: '1' })
+      .query({ prefix: '1' })
       .reply(200, expectedResponse);
 
     const lookup = await client.listPrefixPricing(ServiceType.SMS, '1');

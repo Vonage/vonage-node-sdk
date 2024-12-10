@@ -12,7 +12,7 @@ export default [
     request: {
       url: BASE_URL,
       intercept: [
-        '/number/update?api_key=12345&api_secret=ABCDE',
+        '/number/update',
         'POST',
         new URLSearchParams([
           ['app_id', '123abc'],

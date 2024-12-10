@@ -19,6 +19,9 @@ const applicationsTest = testDataSets.map((dataSet): TestTuple<SMS> => {
       return {
         label: test.label,
         baseUrl: 'https://rest.nexmo.com',
+        reqHeaders: {
+          'authorization': 'Basic dGVzdEtleTp0ZXN0U2VjcmV0',
+        },
         requests: [test.request] as TestRequest[],
         responses: [test.response] as TestResponse[],
         client: new SMS(apiKeyAuth),
