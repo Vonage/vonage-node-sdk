@@ -1,4 +1,4 @@
-import  nock from 'nock'; 
+import  nock from 'nock';
 import { decode } from 'jsonwebtoken';
 import { Auth } from '@vonage/auth';
 import testDataSets from './__dataSets__';
@@ -395,6 +395,7 @@ describe('video', () => {
       size: 0,
       status: 'started',
       streamMode: 'auto',
+      maxBitrate: 0,
       url: null,
     };
 

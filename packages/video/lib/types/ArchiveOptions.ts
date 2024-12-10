@@ -39,4 +39,9 @@ export type ArchiveOptions = {
    * Stream mode for the archive.
    */
   streamMode?: StreamMode;
+
+  /**
+   * The maximum video bitrate for the archive, in bits per second
+   */
+  maxBitrate?: number;
 }
