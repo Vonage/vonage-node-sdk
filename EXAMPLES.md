@@ -2563,7 +2563,7 @@ const response = await smsClient.send({
   from: FROM_NUMBER,
   text: 'Hello from Vonage SMS API',
 });
-console.log(`Number of messages sent: ${response.messageCount}`);); 
+console.log(`Number of messages sent: ${response.messageCount}`););
 ```
 
 #### verifySignature
@@ -2577,7 +2577,7 @@ const { sig } = params;
 sms.verifySignature(
   sig,
   {}, // request parameters
-  VONAGE_API_SIGNATURE_SECRET, 
+  VONAGE_API_SIGNATURE_SECRET,
   AlgorithmTypes.md5hash,
 ) === params.sig) {
   console.log("Valid signature");
