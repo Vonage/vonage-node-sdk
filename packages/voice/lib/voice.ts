@@ -13,6 +13,7 @@ import {
   OutboundCall,
   CallWithNCCO,
   SIPEndpoint,
+  CallEndpoint,
 } from './types';
 
 import { ResponseTypes } from '@vonage/vetch';
@@ -37,7 +38,7 @@ const NCCOToApiCalls = (ncco: Action[]): Array<Action> => ncco.map((action) => {
   case NCCOActions.CONNECT:
     return {
       ...action,
-      endpoint: action.endpoint.map((endpoint) => {
+      endpoint: (action.endpoint as Array<CallEndpoint>)?.map((endpoint) => {
         switch (endpoint.type) {
         case 'sip':
           return {
@@ -332,6 +333,48 @@ export class Voice extends Client {
   }
 
   /**
+   * Register a listener to receive asynchronous DTMF inputs from a call
+   *
+   * This is only applicable to Input NCCO events with the mode set to
+   * asynchronous. The payload delivered to this URL will be an Input webhook
+   * event with a single DTMF digit every time the callee enters DTMF into the
+   * call.
+   *
+   * @param {string} uuid - The UUID of the call leg
+   * @param {string} eventUrl - The The URL to send DTMF events to, as a POST request.
+   * @return {Promise<void>} A promise that resolves to the result
+   *
+   * @example
+   * ```ts
+   * const result = await voiceClient.subscribeDTMF('CALL_UUID', 'https://example.com/dtmf');
+   * console.log(result.status);
+   * ```
+   */
+  async subscribeDTMF(uuid: string, eventUrl: string): Promise<void> {
+    await this.sendPutRequest<UpdateCallResponse>(
+      `${this.config.apiHost}/v1/calls/${uuid}/input/dtmf`,
+      { event_url: [eventUrl]},
+    );
+  }
+
+  /**
+   * Removes the registered DTMF listener
+   * @param {string} uuid - The UUID of the call leg
+   * @return {Promise<void>} A promise that resolves to the result
+   *
+   * @example
+   * ```ts
+   * const result = await voiceClient.subscribeDTMF('CALL_UUID', 'https://example.com/dtmf');
+   * console.log(result.status);
+   * ```
+   */
+  async unsubscribeDTMF(uuid: string): Promise<void> {
+    await this.sendDeleteRequest<UpdateCallResponse>(
+      `${this.config.apiHost}/v1/calls/${uuid}/input/dtmf`,
+    );
+  }
+
+  /**
    * Plays text-to-speech (TTS) audio on an active call.
    *
    * @param {string} uuid - The UUID of the call on which to play TTS audio.
@@ -582,7 +625,7 @@ export class Voice extends Client {
   /**
    * Download the recording of a call to the specified file path.
    *
-   * @param {string} file - The name of the recording file to download.
+   * @param {string} file - The name or recording id of the recording file to download.
    * @param {string} path - The local file path where the recording will be saved.
    * @return {Promise<void>} A promise that resolves when the recording has been successfully downloaded.
    *
@@ -602,7 +645,7 @@ export class Voice extends Client {
   /**
    * Download the transcription of a call to the specified file path.
    *
-   * @param {string} file - The name of the transcription file to download.
+   * @param {string} file - The name or transcription id of the recording file to download.
    * @param {string} path - The local file path where the transcription will be saved.
    * @return {Promise<void>} A promise that resolves when the transcription has been successfully downloaded.
    *

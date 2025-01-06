@@ -334,6 +334,47 @@ export default [
     expected: undefined,
   },
   {
+    label: 'transfer call with NCCO Input DTMF Action',
+    requests: [
+      [
+        `/v1/calls/${callPhone.uuid}`,
+        'PUT',
+        {
+          action: 'transfer',
+          destination: {
+            type: 'ncco',
+            ncco: [
+              {
+                action: NCCOActions.INPUT,
+                dtmf: {
+                  digits: '1234',
+                },
+                mode: 'asynchronous',
+              },
+            ],
+          },
+        },
+      ],
+    ],
+    responses: [[204]],
+    clientMethod: 'transferCallWithNCCO',
+    parameters: [
+      callPhone.uuid,
+      [
+        {
+          action: NCCOActions.INPUT,
+          dtmf: {
+            digits: '1234',
+          },
+          mode: 'asynchronous',
+        },
+      ],
+    ],
+    generator: false,
+    error: false,
+    expected: undefined,
+  },
+  {
     label: 'hangup call',
     requests: [
       [
@@ -401,6 +442,24 @@ export default [
     responses: [[204]],
     clientMethod: 'unearmuffCall',
     parameters: [callPhone.uuid],
+    generator: false,
+    error: false,
+    expected: undefined,
+  },
+  {
+    label: 'subscribe to DTMF events',
+    requests: [
+      [
+        `/v1/calls/${callPhone.uuid}/input/dtmf`,
+        'PUT',
+        {
+          event_url: ['https://example.com/dtmf'],
+        },
+      ],
+    ],
+    responses: [[200]],
+    clientMethod: 'subscribeDTMF',
+    parameters: [callPhone.uuid, 'https://example.com/dtmf'],
     generator: false,
     error: false,
     expected: undefined,

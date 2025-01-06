@@ -16,7 +16,7 @@ export class NCCOBuilder {
   public addAction(action: NCCOAction): NCCOBuilder {
     this.actions.push(
       ('serializeToNCCO' in action
-        ? (action as Serializable).serializeToNCCO()
+        ? (action as unknown as Serializable).serializeToNCCO()
         : action
       ) as NCCOAction,
     );
