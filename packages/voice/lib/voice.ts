@@ -12,9 +12,11 @@ import {
   TalkAction,
   OutboundCall,
   CallWithNCCO,
+  SIPEndpoint,
 } from './types';
 
 import { ResponseTypes } from '@vonage/vetch';
+import { NCCOActions } from './enums';
 
 const apiCallsToCalls = (call: CallDetailResponse): CallDetail => {
   delete call._links;
@@ -29,6 +31,34 @@ const apiCallsToCalls = (call: CallDetailResponse): CallDetail => {
     conversationUUID: call.conversation_uuid,
   } as CallDetail;
 };
+
+const NCCOToApiCalls = (ncco: Action[]): Array<Action> => ncco.map((action) => {
+  switch (action.action) {
+  case NCCOActions.CONNECT:
+    return {
+      ...action,
+      endpoint: action.endpoint.map((endpoint) => {
+        switch (endpoint.type) {
+        case 'sip':
+          return {
+            type: 'sip',
+            uri: endpoint.uri,
+            headers: endpoint.headers,
+            standardHeaders: {
+              'User-to-User': Object.hasOwn(endpoint.standardHeaders || {} ,'User-to-User')
+                ? {...endpoint.standardHeaders}['User-to-User']
+                : endpoint.standardHeaders?.userToUser,
+            }
+          } as SIPEndpoint;
+        default:
+          return endpoint;
+        }
+      })
+    };
+  default:
+    return action;
+  }
+});
 
 type NCCODestination = {
   type: 'ncco';
@@ -443,10 +473,14 @@ export class Voice extends Client {
    * ```
    */
   async transferCallWithNCCO(uuid: string, ncco: Action[]): Promise<void> {
-    return this.callAction(uuid, 'transfer', {
-      type: 'ncco',
-      ncco: ncco,
-    });
+    return this.callAction(
+      uuid,
+      'transfer',
+      {
+        type: 'ncco',
+        ncco: NCCOToApiCalls(ncco),
+      },
+    );
   }
 
   /**
