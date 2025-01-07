@@ -28,7 +28,12 @@ export type SIPEndpoint = {
      *
      * @link https://tools.ietf.org/html/rfc7433
      */
-    userToUser: string;
+    userToUser?: string;
+
+    /**
+     * Allows using the pure header that is expected in the API call.
+     */
+    'User-to-User'?: string;
   }
 };
 

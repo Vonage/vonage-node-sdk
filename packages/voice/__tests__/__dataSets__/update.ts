@@ -185,6 +185,108 @@ export default [
     expected: undefined,
   },
   {
+    label: 'transfer call with NCCO with userToUser',
+    requests: [
+      [
+        `/v1/calls/${callPhone.uuid}`,
+        'PUT',
+        {
+          action: 'transfer',
+          destination: {
+            type: 'ncco',
+            ncco: [
+              {
+                action: NCCOActions.CONNECT,
+                endpoint: [
+                  {
+                    type: 'sip',
+                    uri: 'xxx',
+                    standardHeaders: {
+                      'User-to-User': 'yyy'
+                    }
+                  },
+                ]
+              },
+            ],
+          },
+        },
+      ],
+    ],
+    responses: [[204]],
+    clientMethod: 'transferCallWithNCCO',
+    parameters: [
+      callPhone.uuid,
+      [
+        {
+          action: NCCOActions.CONNECT,
+          endpoint: [
+            {
+              type: 'sip',
+              uri: 'xxx',
+              standardHeaders: {
+                'userToUser': 'yyy'
+              }
+            },
+          ],
+        },
+      ],
+    ],
+    generator: false,
+    error: false,
+    expected: undefined,
+  },
+  {
+    label: 'transfer call with NCCO with User-To-User',
+    requests: [
+      [
+        `/v1/calls/${callPhone.uuid}`,
+        'PUT',
+        {
+          action: 'transfer',
+          destination: {
+            type: 'ncco',
+            ncco: [
+              {
+                action: NCCOActions.CONNECT,
+                endpoint: [
+                  {
+                    type: 'sip',
+                    uri: 'xxx',
+                    standardHeaders: {
+                      'User-to-User': 'yyy'
+                    }
+                  },
+                ]
+              },
+            ],
+          },
+        },
+      ],
+    ],
+    responses: [[204]],
+    clientMethod: 'transferCallWithNCCO',
+    parameters: [
+      callPhone.uuid,
+      [
+        {
+          action: NCCOActions.CONNECT,
+          endpoint: [
+            {
+              type: 'sip',
+              uri: 'xxx',
+              standardHeaders: {
+                'User-to-User': 'yyy'
+              }
+            },
+          ],
+        },
+      ],
+    ],
+    generator: false,
+    error: false,
+    expected: undefined,
+  },
+  {
     label: 'transfer call with NCCO',
     requests: [
       [
