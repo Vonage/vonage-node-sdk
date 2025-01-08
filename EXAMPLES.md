@@ -3716,6 +3716,20 @@ const result = await voiceClient.streamAudio(CALL_UUID, 'https://example.com/aud
 console.log(result.message);
 ```
 
+#### subscribeDTMF
+
+Register a listener to receive asynchronous DTMF inputs from a call
+
+This is only applicable to Input NCCO events with the mode set to
+asynchronous. The payload delivered to this URL will be an Input webhook
+event with a single DTMF digit every time the callee enters DTMF into the
+call.
+
+```ts
+const result = await voiceClient.subscribeDTMF('CALL_UUID', 'https://example.com/dtmf');
+console.log(result.status);
+```
+
 #### transferCallWithNCCO
 
 Transfer an active call to a new destination using a Nexmo Call Control Object (NCCO).
@@ -3755,5 +3769,14 @@ Unmute a muted call, allowing audio to be transmitted again.
 
 ```ts
 await voiceClient.unmuteCall(CALL_UUID);
+```
+
+#### unsubscribeDTMF
+
+Removes the registered DTMF listener
+
+```ts
+const result = await voiceClient.subscribeDTMF('CALL_UUID', 'https://example.com/dtmf');
+console.log(result.status);
 ```
 
