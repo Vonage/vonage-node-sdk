@@ -1,6 +1,7 @@
 import callTests from './calls';
 import createTests from './create';
 import updateTests from './update';
+import deleteTests from './delete';
 
 export default [
   {
@@ -14,5 +15,9 @@ export default [
   {
     label: 'Update call',
     tests: updateTests,
+  },
+  {
+    label: 'Delete call',
+    tests: deleteTests,
   },
 ];

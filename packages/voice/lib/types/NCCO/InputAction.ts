@@ -42,4 +42,14 @@ export type InputAction = {
    * Valid values are 'GET' and 'POST'.
    */
   eventMethod?: string;
-};
+
+  /**
+   * Input processing mode, currently only applicable to DTMF. Valid values are
+   * synchronous (the default) and asynchronous. If set to asynchronous, all
+   * DTMF settings must be left blank. In asynchronous mode, digits are sent one
+   * at a time to the event webhook in real time. In the default synchronous
+   * mode, this is controlled by the DTMF settings instead and the inputs are
+   * sent in batch.
+   */
+  mode?: 'asynchronous' | 'synchronous';
+} | Record<string, unknown>;
