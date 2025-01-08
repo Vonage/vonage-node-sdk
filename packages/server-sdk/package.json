@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/server-sdk",
-  "version": "3.19.2",
+  "version": "3.19.3",
   "description": "Node.js Client for the Vonage API Platform",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -38,22 +38,22 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/accounts": "^1.16.1",
+    "@vonage/accounts": "^1.16.2",
     "@vonage/applications": "^1.16.1",
     "@vonage/auth": "^1.12.0",
-    "@vonage/conversations": "^1.7.2",
+    "@vonage/conversations": "^1.7.3",
     "@vonage/messages": "^1.18.1",
     "@vonage/number-insights": "^1.16.1",
-    "@vonage/numbers": "^1.16.1",
-    "@vonage/pricing": "^1.16.1",
+    "@vonage/numbers": "^1.16.2",
+    "@vonage/pricing": "^1.16.2",
     "@vonage/redact": "^1.15.1",
     "@vonage/server-client": "^1.16.1",
-    "@vonage/sms": "^1.17.1",
+    "@vonage/sms": "^1.17.2",
     "@vonage/users": "^1.10.1",
     "@vonage/verify": "^1.16.1",
     "@vonage/verify2": "^1.15.1",
-    "@vonage/video": "^1.20.1",
-    "@vonage/voice": "^1.16.1"
+    "@vonage/video": "^1.21.0",
+    "@vonage/voice": "^1.17.0"
   },
   "publishConfig": {
     "directory": "dist"

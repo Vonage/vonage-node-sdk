@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/voice",
-  "version": "1.16.1",
+  "version": "1.17.0",
   "description": "The Voice API lets you create outbound calls, control in-progress calls and get information about historical calls.",
   "keywords": [
     "vonage",

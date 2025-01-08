@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/sms",
-  "version": "1.17.1",
+  "version": "1.17.2",
   "description": "Vonage SMS API SDK package",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
   "bugs": {

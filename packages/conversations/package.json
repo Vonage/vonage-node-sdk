@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/conversations",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "The Vonage Conversation API enables you to build conversation features where communication can take place across multiple mediums including IP Messaging, PSTN Voice, SMS and WebRTC Audio and Video. The context of the conversations is maintained though each communication event taking place within a conversation, no matter the medium.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/conversations#readme",
   "bugs": {
@@ -37,6 +37,6 @@
     "@vonage/messages": "^1.18.1",
     "@vonage/server-client": "^1.16.1",
     "@vonage/users": "^1.10.1",
-    "@vonage/voice": "^1.16.1"
+    "@vonage/voice": "^1.17.0"
   }
 }
