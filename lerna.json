@@ -2,5 +2,13 @@
   "packages": [
     "packages/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "version": {
+      "message": "chore(release): publish",
+      "conventionalCommits": true,
+      "noCommitHooks": true,
+      "exact": true
+    }
+  }
 }

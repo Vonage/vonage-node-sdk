@@ -46,7 +46,7 @@
     "format": "prettier -- -w",
     "jest": "jest",
     "lerna": "lerna",
-    "version": "lerna version --conventional-commits --no-commit-hooks --message='chore(release): publish %s'",
+    "version": "lerna version --conventional-commits --no-commit-hooks",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prepare": "is-ci || husky install",

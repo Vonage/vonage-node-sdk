@@ -1,4 +1,4 @@
-name: Release Action
+name: Publish to NPM
 
 on:
   release:
@@ -27,13 +27,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: Update RELEASES.MD
-        uses: vonage/generate-release-log@1.0.2
-
-      - name: Commit release notes
-        run: |
-          git config --local user.name github-actions
-          git config --local user.email github-actions@github.com
-          git add RELEASES.md
-          git commit -m "chore: updated release log"
-          git push --force-with-leaseCallUpdateResultc
+      - name: Publish to NPM
+        run: ./scripts/publish.sh
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
