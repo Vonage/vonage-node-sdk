@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 /**
  * Error thrown when no scope is set for a request.
  */

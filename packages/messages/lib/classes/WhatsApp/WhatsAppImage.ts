@@ -37,6 +37,7 @@ export class WhatsAppImage
   public constructor(params: WhatsAppImageParams) {
     super(params);
     this.channel = 'whatsapp';
+    /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;
     }

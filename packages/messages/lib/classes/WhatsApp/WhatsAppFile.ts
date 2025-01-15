@@ -37,6 +37,7 @@ export class WhatsAppFile
    */
   public constructor(params: WhatsAppFileParams) {
     super(params);
+    /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;
     }

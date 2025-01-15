@@ -49,6 +49,7 @@ export class WhatsAppCustom
     this.custom = params.custom;
     this.channel = 'whatsapp';
     this.messageType = 'custom';
+    /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;
     }

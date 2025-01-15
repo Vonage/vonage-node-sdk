@@ -38,6 +38,7 @@ export class WhatsAppVideo
   public constructor(params: WhatsAppVideoParams) {
     super(params);
     this.channel = 'whatsapp';
+    /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;
     }

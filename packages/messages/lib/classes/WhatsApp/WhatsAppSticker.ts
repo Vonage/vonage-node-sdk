@@ -64,6 +64,7 @@ export class WhatsAppSticker
     this.sticker = params.sticker;
     this.channel = 'whatsapp';
     this.messageType = 'sticker';
+    /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;
     }

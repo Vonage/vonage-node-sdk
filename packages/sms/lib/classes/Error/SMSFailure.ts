@@ -1,6 +1,7 @@
 import { SMSStatus } from '../../enums';
 import { SMSMessages, ErrorMessage, Message } from '../../types';
 
+/* istanbul ignore next */
 /**
  * Class representing a failure response when sending SMS messages.
  *

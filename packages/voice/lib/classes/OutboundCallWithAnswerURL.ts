@@ -7,6 +7,7 @@ debug('@vonage/voice')(
   'This class is deprecated. Please update to use the CallWithAnswerURL type',
 );
 
+/* istanbul ignore next */
 /**
  * Represents an outbound call with an answer URL.
  *

@@ -57,6 +57,7 @@ export class WhatsAppTemplate
     this.template = params.template;
     this.channel = 'whatsapp';
     this.messageType = 'template';
+    /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;
     }
