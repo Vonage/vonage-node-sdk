@@ -90,5 +90,8 @@
     "typedoc-plugin-markdown": "^4.3.2",
     "typedoc-plugin-remark": "^1.2.0",
     "typescript": "5.5.4"
+  },
+  "devDependencies": {
+    "jest-junit": "16.0.0"
   }
 }
