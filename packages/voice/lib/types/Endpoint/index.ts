@@ -4,3 +4,4 @@ export * from './PhoneEndpoint';
 export * from './SIPEndpoint';
 export * from './VBCEndpoint';
 export * from './WebsocketEndpoint';
+export * from './AppEndpoint';

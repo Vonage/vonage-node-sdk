@@ -3,6 +3,7 @@ import {
   TTSLanguages,
   CallUpdateResult,
   TalkAction,
+  PhoneEndpoint,
 } from '../../lib';
 import { callPhone } from '../common';
 
@@ -368,6 +369,64 @@ export default [
           },
           mode: 'asynchronous',
         },
+      ],
+    ],
+    generator: false,
+    error: false,
+    expected: undefined,
+  },
+  {
+    label: 'transfer call with NCCO and onAnswer',
+    requests: [
+      [
+        `/v1/calls/${callPhone.uuid}`,
+        'PUT',
+        {
+          action: 'transfer',
+          destination: {
+            type: 'ncco',
+            ncco: [
+              {
+                action: NCCOActions.CONNECT,
+                from: '19172255887',
+                endpoint: [
+                  {
+                    type: 'phone',
+                    number: '19172255887',
+                    dtmfAnswer: '1234',
+                    onAnswer: {
+                      url: 'https://example.com/answer',
+                      ringbackTone: 'http://example.com/ringbackTone.wav',
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    ],
+    responses: [[204]],
+    clientMethod: 'transferCallWithNCCO',
+    parameters: [
+      callPhone.uuid,
+      [
+        {
+          action: NCCOActions.CONNECT,
+          from: '19172255887',
+          endpoint: [
+            {
+              type: 'phone',
+              number: '19172255887',
+              dtmfAnswer: '1234',
+              onAnswer: {
+                url: 'https://example.com/answer',
+                ringbackTone: 'http://example.com/ringbackTone.wav',
+              },
+            } as PhoneEndpoint, 
+          ],
+        }
+        ,
       ],
     ],
     generator: false,
