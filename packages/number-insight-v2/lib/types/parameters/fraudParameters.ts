@@ -2,6 +2,8 @@ import { Insight } from '../../enums/';
 
 /**
  * Represents the parameters for making a fraud check request.
+ *
+ * @deprecated This service is deprecated and will be turned off.
  */
 export type FraudCheckParameters = {
   /**
