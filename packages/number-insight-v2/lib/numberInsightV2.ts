@@ -11,6 +11,7 @@ export class NumberInsightV2 extends Client {
   /**
    * Make a fraud check request with the provided parameters.
    *
+   * @deprecated This service is deprecated and will be turned off.
    * @param {FraudCheckParameters} params - The parameters for the fraud check request.
    * @return {Promise<FraudScore>} - A Promise that resolves with the fraud score response.
    * @example

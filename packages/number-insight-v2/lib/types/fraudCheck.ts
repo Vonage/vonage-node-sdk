@@ -4,6 +4,8 @@ import { SimSwap } from './simSwap';
 
 /**
  * Represents the result of a fraud check request.
+ *
+ * @deprecated This service is deprecated and will be turned off.
  */
 export type FraudCheck = {
   /**

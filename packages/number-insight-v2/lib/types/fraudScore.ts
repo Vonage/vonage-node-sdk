@@ -2,6 +2,8 @@ import { RiskRecommendation, Label, Status } from '../enums';
 
 /**
  * Represents the result of the fraud_score insight operation.
+ *
+ * @deprecated This service is deprecated and will be turned off.
  */
 export type FraudScore = {
   /**
