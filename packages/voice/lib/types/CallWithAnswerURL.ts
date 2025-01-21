@@ -14,4 +14,9 @@ export type CallWithAnswerURL = CommonOutboundCall & {
    * The HTTP method used to send events to the answer URL(s), typically "GET" or "POST."
    */
   answerMethod?: HttpMethod;
+
+  /**
+   * Provide DTMF digits to send when the call is answerMethod
+   */
+  dtmfAnswer?: string;
 };

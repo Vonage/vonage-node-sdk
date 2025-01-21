@@ -301,4 +301,64 @@ export default [
       conversationUUID: callPhone.conversationUUID,
     } as CallResult,
   },
+  {
+    label: 'create a call with DTFM and answer endpoint',
+    requests: [
+      [
+        '/v1/calls?',
+        'POST',
+        {
+          to: [
+            {
+              type: 'phone',
+              number: '19162255887',
+              dtmfAnswer: '1234',
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'phone',
+            number: '19162255887',
+            dtmfAnswer: '1234',
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
 ];
