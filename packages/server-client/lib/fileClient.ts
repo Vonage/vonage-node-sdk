@@ -30,20 +30,30 @@ export class FileClient extends Client {
    */
   async downloadFile(file: string, path: string): Promise<void> {
     log(`Downloading file: ${file}`);
-    let fileId = file;
+    let fileURL: URL;
     try {
-      const fileURL = new URL(file);
-      fileId = fileURL.pathname.split('/').pop() || '';
+      fileURL = new URL(file);
+      log('Downloading file by URL');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_) {
-      log('Not a url');
+      log('Downloading file by ID');
+      fileURL = new URL(`${this.config.apiHost}/v3/files/${file}`);
     }
 
-    log(`File Id ${fileId}`);
+    log(`File URL ${fileURL}`);
+    const hostname = fileURL.hostname.split('.').slice(-2).join('.');
+
+    if (!['vonage.com', 'nexmo.com'].includes(hostname)) {
+      throw new Error(
+        `The domain ${fileURL} is invalid for file download. Only vonage.com and nexmo.com are allowed.`,
+      );
+    }
+
     const request = await this.addAuthenticationToRequest({
-      url: `${this.config.apiHost}/v1/files/${fileId}`,
+      url: fileURL.toString(),
       method: HTTPMethods.GET,
     } as VetchOptions);
+
     log('File download request', request);
 
     const response = await fetch(
