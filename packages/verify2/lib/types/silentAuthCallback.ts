@@ -13,7 +13,7 @@ export type SilentAuthCallback = {
    * The date and time when the Silent Authentication event was triggered
    * in ISO 8601 format.
    */
-  triggerd_at: string; // Typo: Should be 'triggered_at'
+  triggered_at: string;
 
   /**
    * The type of response for the Silent Authentication event.
