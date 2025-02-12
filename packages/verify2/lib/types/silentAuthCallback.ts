@@ -1,4 +1,4 @@
-import { SilentAuthChannel, SilenAuthStatus } from '../enums';
+import { SilentAuthChannel, SilentAuthStatus } from '../enums';
 
 /**
  * Represents a callback received for Silent Authentication.
@@ -28,7 +28,7 @@ export type SilentAuthCallback = {
   /**
    * The status of the Silent Authentication event.
    */
-  status: SilenAuthStatus;
+  status: SilentAuthStatus;
 
   /**
    * Information about the action in the Silent Authentication event.

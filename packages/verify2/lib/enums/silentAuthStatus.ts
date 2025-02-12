@@ -1,7 +1,7 @@
 /**
  * Enum representing the status of Silent Authentication.
  */
-export enum SilenAuthStatus {
+export enum SilentAuthStatus {
   /**
    * Silent Authentication has been completed successfully.
    */
