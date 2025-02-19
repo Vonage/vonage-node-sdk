@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/server-client",
-  "version": "1.16.1",
+  "version": "1.17.0",
   "description": "The Vonage Server Client provides core functionalities for interacting with Vonage APIs, ensuring a standardized response regardless of the underlying HTTP adapter.",
   "homepage": "https://developer.vonage.com",
   "bugs": {
