@@ -27,6 +27,12 @@ jobs:
         with:
           node-version: 18.x
 
+      - name: Install packages
+        run: npm install
+
+      - name: Install typescript
+        run: npm install -g typescript
+
       - name: Publish to NPM
         run: ./scripts/publish.sh
         env:
