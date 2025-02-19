@@ -37,8 +37,3 @@ export enum SilentAuthChannel {
    */
   SILENT_AUTH = 'silent_auth',
 }
-
-/**
- * Type alias for the Silent Authentication channel.
- */
-export type SilenAuthChannel = SilentAuthChannel;

@@ -12,7 +12,7 @@ export type EventCallback = {
   /**
    * The date and time when the event was triggered in ISO 8601 format.
    */
-  triggerd_at: string; // Typo: Should be 'triggered_at'
+  triggered_at: string;
 
   /**
    * The type of response for the event.
