@@ -1,4 +1,4 @@
-import { Client } from '@vonage/server-client';
+import { AuthenticationType, Client } from '@vonage/server-client';
 import {
   AdvancedLookupOptions,
   BasicLookupOptions,
@@ -39,6 +39,12 @@ import {
  * ```
  */
 export class NumberInsights extends Client {
+  /**
+   * @see {@link Client.authType}
+   */
+  protected authType = AuthenticationType.BASIC;
+
+
   /**
    * Perform an advanced number lookup operation.
    *

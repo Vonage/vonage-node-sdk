@@ -30,9 +30,8 @@ describe('number-insights', () => {
     nock(BASE_URL)
       .persist()
       .get('/ni/basic/json')
+      .basicAuth({user: 'abcd', pass: '1234'})
       .query({
-        api_key: 'abcd',
-        api_secret: '1234',
         number: expectedResponse.international_format_number,
       })
       .reply(200, expectedResponse);
@@ -97,9 +96,8 @@ describe('number-insights', () => {
     nock(BASE_URL)
       .persist()
       .get('/ni/standard/json')
+      .basicAuth({user: 'abcd', pass: '1234'})
       .query({
-        api_key: 'abcd',
-        api_secret: '1234',
         number: expectedResponse.international_format_number,
       })
       .reply(200, expectedResponse);
@@ -187,9 +185,8 @@ describe('number-insights', () => {
     nock(BASE_URL)
       .persist()
       .get('/ni/advanced/json')
+      .basicAuth({user: 'abcd', pass: '1234'})
       .query({
-        api_key: 'abcd',
-        api_secret: '1234',
         number: expectedResponse.international_format_number,
       })
       .reply(200, expectedResponse);
@@ -242,9 +239,8 @@ describe('number-insights', () => {
     nock(BASE_URL)
       .persist()
       .get('/ni/advanced/async/json')
+      .basicAuth({user: 'abcd', pass: '1234'})
       .query({
-        api_key: 'abcd',
-        api_secret: '1234',
         number: expectedResponse.number,
         callback: 'https://test.com/lookup/handler',
       })
