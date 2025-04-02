@@ -29,7 +29,6 @@ jobs:
       - name: Lint
         run: npm run lint
 
-
   test:
     runs-on: ${{ matrix.os }}
     name: Test and build
