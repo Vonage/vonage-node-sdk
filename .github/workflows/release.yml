@@ -20,6 +20,7 @@ jobs:
         with:
           ref: '3.x'
           fetch-depth: 0
+          fetch-tags: true
           token: ${{ secrets.GH_TOKEN_COMMIT }}
 
       - name: Setup node
@@ -37,35 +38,6 @@ jobs:
         run: ./scripts/publish.sh
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  update-release-notes:
-    runs-on: ubuntu-latest
-    name: Update Release Notes
-
-    steps:
-      - name: Checkout
-        id: checkout
-        uses: actions/checkout@v4
-        with:
-          ref: '3.x'
-          fetch-depth: 0
-          token: ${{ secrets.GH_TOKEN_COMMIT }}
-
-      - name: Setup node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
-      - name: Update RELEASES.MD
-        uses: vonage/generate-release-log@1.0.2
-
-      - name: Commit release notes
-        run: |
-          git config --local user.name github-actions
-          git config --local user.email github-actions@github.com
-          git add RELEASES.md
-          git commit -m "chore: updated release log"
-          git push --force-with-leaseCallUpdateResultc
 
   build-wiki-documentation:
     name: Build Wiki Documentation
@@ -124,11 +96,14 @@ jobs:
   notify-release:
     runs-on: ubuntu-latest
     name: Notify Release
+    strategy:
+      matrix:
+        url: [SLACK_WEBHOOK_ASK_DEVREL_URL, SLACK_WEBHOOK_DEVREL_TOOLING_URL, SLACK_WEBHOOK_DEVREL_PRIVATE_URL]
     steps:
-      - name: Post to DevRel Private
+      - name: Send to slack channles
         uses: slackapi/slack-github-action@v2.0.0
         with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_DEVREL_PRIVATE_URL }}
+          webhook: ${{ secrets[matrix.url]}}
           webhook-type: incoming-webhook
           errors: true
           payload: |
@@ -137,55 +112,9 @@ jobs:
                 text:
                   type: "plain_text"
                   text: ":initial_external_notification_sent: Version ${{ github.event.release.name }} of the NodeJS SDK has been released"
-              - type: "section"
-                text:
-                  type: "plain_text"
-                  text: "${{ github.event.release.body }}"
-                  emoji: true
-              - type: "divider"
               - type: "section"
                 text:
                   type: "mrkdwn"
-                  text: "You can view the full change log <${{github.event.release.html_url }}|here>"
-
-      - name: Post to DevRel Tooling
-        uses: slackapi/slack-github-action@v2.0.0
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_DEVREL_TOOLING_URL }}
-          webhook-type: incoming-webhook
-          errors: true
-          payload: |
-            blocks:
-              - type: "header"
-                text:
-                  type: "plain_text"
-                  text: ":initial_external_notification_sent: Version ${{ github.event.release.name }} of the NodeJS SDK has been released"
-              - type: "section"
-                text:
-                  type: "plain_text"
-                  text: "${{ github.event.release.body }}"
-                  emoji: true
-              - type: "divider"
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "You can view the full change log <${{github.event.release.html_url }}|here>"
-
-      - name: Post to Ask DevRel
-        uses: slackapi/slack-github-action@v2.0.0
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_ASK_DEVREL_URL }}
-          webhook-type: incoming-webhook
-          errors: true
-          payload: |
-            blocks:
-              - type: "header"
-                text:
-                  type: "plain_text"
-                  text: ":initial_external_notification_sent: Version ${{ github.event.release.name }} of the NodeJS SDK has been released"
-              - type: "section"
-                text:
-                  type: "plain_text"
                   text: "${{ github.event.release.body }}"
                   emoji: true
               - type: "divider"
