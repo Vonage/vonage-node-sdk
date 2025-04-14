@@ -45,6 +45,10 @@
     "@jest/globals": "27.5.1",
     "@types/node": "^20.8.4"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
   "publishConfig": {
     "directory": "dist"
   }

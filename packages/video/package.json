@@ -51,6 +51,10 @@
     "jsonwebtoken": "^9.0.2",
     "nock": "^13.3.4"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
   "publishConfig": {
     "directory": "dist"
   }

@@ -38,5 +38,9 @@
     "@vonage/server-client": "^1.17.0",
     "@vonage/users": "^1.11.0",
     "@vonage/voice": "^1.18.0"
-  }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true
 }

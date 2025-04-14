@@ -51,6 +51,10 @@
     "@vonage/vetch": "^1.8.0",
     "debug": "^4.3.4"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
   "publishConfig": {
     "directory": "dist"
   }

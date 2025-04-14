@@ -55,6 +55,10 @@
     "@vonage/video": "^1.22.0",
     "@vonage/voice": "^1.18.0"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
   "publishConfig": {
     "directory": "dist"
   }

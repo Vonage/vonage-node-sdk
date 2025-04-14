@@ -52,6 +52,10 @@
     "@vonage/vetch": "^1.8.0",
     "lodash.omit": "^4.5.0"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
   "publishConfig": {
     "access": "public"
   }

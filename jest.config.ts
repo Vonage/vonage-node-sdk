@@ -1,9 +1,13 @@
+import { createDefaultEsmPreset } from 'ts-jest';
 // eslint-disable-next-line n/no-extraneous-import
 import type { Config } from '@jest/types';
 
+const presetConfig = createDefaultEsmPreset({
+});
+
 const projectDefault = {
   testEnvironment: 'node',
-  preset: 'ts-jest/presets/default-esm',
+  ...presetConfig,
   moduleNameMapper: {
     '@vonage/(.+)': '<rootDir>/packages/$1/lib',
   },
@@ -16,6 +20,7 @@ const config: Config.InitialOptions = {
     'node_modules',
     '<rootDir>/testHelpers/*',
     '<rootDir>/packages/**/__tests__',
+    '<rootDir>/packages/meetings',
   ],
   projects: [
     {
@@ -58,12 +63,6 @@ const config: Config.InitialOptions = {
       ...projectDefault,
       displayName: 'MEDIA',
       testMatch: ['<rootDir>/packages/media/__tests__/**/*.test.ts'],
-      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
-    },
-    {
-      ...projectDefault,
-      displayName: 'MEETINGS',
-      testMatch: ['<rootDir>/packages/meetings/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {

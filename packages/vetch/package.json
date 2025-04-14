@@ -41,6 +41,10 @@
     "@types/node-fetch": "2.6.11",
     "node-fetch": "^2.7"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
   "publishConfig": {
     "directory": "dist"
   }

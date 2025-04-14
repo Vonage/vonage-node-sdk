@@ -46,6 +46,10 @@
     "@types/jsonwebtoken": "9.0.3",
     "@types/uuid": "^9.0.5"
   },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
   "publishConfig": {
     "directory": "dist"
   }

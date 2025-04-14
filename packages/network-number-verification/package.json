@@ -35,5 +35,9 @@
   },
   "dependencies": {
     "@vonage/network-client": "^1.4.0"
-  }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true
 }

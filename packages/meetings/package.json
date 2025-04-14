@@ -46,8 +46,6 @@
   },
   "devDependencies": {
     "@types/lodash.pick": "4.4.8",
-    "@vonage/auth": "^1.12.0",
-    "lodash.pick": "3.1.0",
-    "nock": "^13.3.4"
+    "lodash.pick": "3.1.0"
   }
 }
