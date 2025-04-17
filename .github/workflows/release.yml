@@ -98,7 +98,7 @@ jobs:
     name: Notify Release
     strategy:
       matrix:
-        url: [SLACK_WEBHOOK_ASK_DEVREL_URL, SLACK_WEBHOOK_DEVREL_TOOLING_URL, SLACK_WEBHOOK_DEVREL_PRIVATE_URL]
+        url: [SLACK_WEBHOOK_ASK_DEVREL_URL, SLACK_WEBHOOK_DEVREL_TOOLING_URL, SLACK_WEBHOOK_DEVREL_PRIVATE_URL, SLACK_WEBHOOK_COMMUNITY]
     steps:
       - name: Send to slack channles
         uses: slackapi/slack-github-action@v2.0.0
@@ -111,12 +111,11 @@ jobs:
               - type: "header"
                 text:
                   type: "plain_text"
-                  text: ":initial_external_notification_sent: Version ${{ github.event.release.name }} of the NodeJS SDK has been released"
+                  text: ":initial_external_notification_sent: :NodeJS: Version ${{ github.event.release.name }} of the NodeJS SDK has been released"
               - type: "section"
                 text:
                   type: "mrkdwn"
                   text: "${{ github.event.release.body }}"
-                  emoji: true
               - type: "divider"
               - type: "section"
                 text:
