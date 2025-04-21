@@ -1,7 +1,7 @@
 /**
  * Represents the details of a single archive.
  */
-export type SingleArchiveResponse = {
+type SingleArchiveResponseBase = {
   /**
    * The timestamp when the archive was created, expressed in milliseconds since the Unix epoch.
    */
@@ -81,4 +81,33 @@ export type SingleArchiveResponse = {
    * An array of stream identifiers associated with the archive.
    */
   streams?: string[];
-}
+};
+
+/**
+ * Represents an archive with a maximum bitrate.
+ */
+type SingleArchiveResponseWithMaxBitrate = SingleArchiveResponseBase & {
+  /**
+   * The maximum video bitrate for the archive, in bits per second.
+   */
+  maxBitrate: number;
+  quantizationParameter?: never;
+};
+
+/**
+ * Represents an archive with a quantization parameter.
+ */
+type SingleArchiveResponseWithQuantizationParameter = SingleArchiveResponseBase & {
+  /**
+   * The quantization level for the archive quality.
+   */
+  quantizationParameter: number;
+  maxBitrate?: never;
+};
+
+/**
+ * Represents the details of a single archive, supporting mutually exclusive parameters.
+ */
+export type SingleArchiveResponse =
+  | SingleArchiveResponseWithMaxBitrate
+  | SingleArchiveResponseWithQuantizationParameter;

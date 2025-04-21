@@ -4,7 +4,7 @@ import { ArchiveLayout } from './ArchiveLayout';
 /**
  * Interface representing options for creating an archive.
  */
-export type ArchiveOptions = {
+type BaseArchiveOptions = {
   /**
    * Flag indicating whether audio should be included in the archive.
    */
@@ -41,7 +41,38 @@ export type ArchiveOptions = {
   streamMode?: StreamMode;
 
   /**
-   * The maximum video bitrate for the archive, in bits per second
+   * Flag indicating whether or not the archive should have transcription
    */
-  maxBitrate?: number;
+  hasTranscription?: boolean;
+
+  /**
+   * Additional properties that control the trascription output
+   */
+  transcriptionProperties?: {
+    /**
+     * The primary language spoken in the archive to be transcribed, in BCP-47 format, e.g. en-US, es-ES or pt-BR.
+     */
+    primaryLanguageCode?: string;
+
+    /**
+     * Whether or not the transcription should also provide a summary
+     */
+    hasSummary?: boolean;
+  }
 }
+
+type ArchiveOptionsWithMaxBitrate = BaseArchiveOptions & {
+    /**
+   * The maximum video bitrate for the archive, in bits per second. This is mutually exclusive with quantizationParameter.
+   */
+    maxBitrate?: number;
+}
+
+type ArchiveOptionsWithQuantizationParameter = BaseArchiveOptions & {
+    /**
+     * The quantization level for the archive quality. This is mutually exclusive with maxBitrate.
+     */
+    quantizationParameter?: number;
+}
+
+export type ArchiveOptions = ArchiveOptionsWithMaxBitrate | ArchiveOptionsWithQuantizationParameter;
