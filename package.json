@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/server-sdk-monorepo",
+  "version": "3.20.0",
   "private": true,
   "description": "Vonage Server SDK for Node.js. API support for SMS, Voice Calls, Text-to-Speech, Numbers, Verify (2FA) and more.",
   "keywords": [
