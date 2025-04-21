@@ -84,6 +84,47 @@ type SingleArchiveResponseBase = {
 };
 
 /**
+ * Represents an archive with transcription properties.
+ */
+type SingleArchiveResponseWithTranscription = SingleArchiveResponseBase & {
+  /**
+   * Post-processing will include transcription
+   */
+  hasTranscription: true;
+
+  /**
+   * Additional options when transcription is enabled
+   */
+  transcriptionProperties: {
+    /**
+     * The primary language spoken in the archive to be transcribed, in BCP-47 format.
+     * Example: en-US, es-ES, or pt-BR.
+     */
+    primaryLanguageCode?: string;
+
+    /**
+     * True if the transcription should have a summary.
+     */
+    hasSummary?: boolean;
+  };
+};
+
+/**
+ * Represents an archive without transcription properties.
+ */
+type SingleArchiveResponseWithoutTranscription = SingleArchiveResponseBase & {
+  /**
+   * Transcription is disabled on the archive
+   */
+  hasTranscription?: false;
+
+  /**
+   * Additional transcription options cannot be passed when transcription is disabled
+   */
+  transcriptionProperties?: never;
+};
+
+/**
  * Represents an archive with a maximum bitrate.
  */
 type SingleArchiveResponseWithMaxBitrate = SingleArchiveResponseBase & {
@@ -91,6 +132,10 @@ type SingleArchiveResponseWithMaxBitrate = SingleArchiveResponseBase & {
    * The maximum video bitrate for the archive, in bits per second.
    */
   maxBitrate: number;
+
+  /**
+   * Quantization cannot be enabled when using maxBitrate
+   */
   quantizationParameter?: never;
 };
 
@@ -102,6 +147,10 @@ type SingleArchiveResponseWithQuantizationParameter = SingleArchiveResponseBase 
    * The quantization level for the archive quality.
    */
   quantizationParameter: number;
+
+  /**
+   * MaxBitrate cannot be used when using quantizationParameter
+   */
   maxBitrate?: never;
 };
 
@@ -109,5 +158,8 @@ type SingleArchiveResponseWithQuantizationParameter = SingleArchiveResponseBase 
  * Represents the details of a single archive, supporting mutually exclusive parameters.
  */
 export type SingleArchiveResponse =
-  | SingleArchiveResponseWithMaxBitrate
-  | SingleArchiveResponseWithQuantizationParameter;
+  | (SingleArchiveResponseWithMaxBitrate & SingleArchiveResponseWithoutTranscription)
+  | (SingleArchiveResponseWithMaxBitrate & SingleArchiveResponseWithTranscription)
+  | (SingleArchiveResponseWithQuantizationParameter & SingleArchiveResponseWithoutTranscription)
+  | (SingleArchiveResponseWithQuantizationParameter & SingleArchiveResponseWithTranscription)
+  | SingleArchiveResponseWithTranscription;

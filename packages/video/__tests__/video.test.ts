@@ -517,6 +517,107 @@ describe('video', () => {
     );
   });
 
+  test('can create an archive with hasTranscription set to true', async () => {
+    const expectedResponse = {
+      createdAt: 1384221730555,
+      duration: 0,
+      hasAudio: true,
+      hasVideo: true,
+      id: 'b40ef09b-3811-4726-b508-e41a0f96c68f',
+      name: 'Archive with transcription',
+      outputMode: 'composed',
+      projectId: 234567,
+      reason: '',
+      resolution: '640x480',
+      sessionId: 'flR1ZSBPY3QgMjkgMTI6MTM6MjMgUERUIDIwMTN',
+      size: 0,
+      status: 'started',
+      streamMode: 'auto',
+      hasTranscription: true,
+      url: null,
+    };
+  
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/archive', {
+        sessionId: '1234',
+        name: 'Archive with transcription',
+        hasTranscription: true,
+      })
+      .reply(200, expectedResponse);
+  
+    const resp = await client.startArchive('1234', {
+      name: 'Archive with transcription',
+      hasTranscription: true,
+    });
+    expect(resp.name).toEqual(expectedResponse.name);
+    expect(resp.hasTranscription).toEqual(expectedResponse.hasTranscription);
+  });
+  
+  test('can create an archive with transcriptionProperties', async () => {
+    const expectedResponse = {
+      createdAt: 1384221730555,
+      duration: 0,
+      hasAudio: true,
+      hasVideo: true,
+      id: 'b40ef09b-3811-4726-b508-e41a0f96c68f',
+      name: 'Archive with transcription properties',
+      outputMode: 'composed',
+      projectId: 234567,
+      reason: '',
+      resolution: '640x480',
+      sessionId: 'flR1ZSBPY3QgMjkgMTI6MTM6MjMgUERUIDIwMTN',
+      size: 0,
+      status: 'started',
+      streamMode: 'auto',
+      hasTranscription: true,
+      transcriptionProperties: {
+        primaryLanguageCode: 'es-ES',
+        hasSummary: true,
+      },
+      url: null,
+    };
+  
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/archive', {
+        sessionId: '1234',
+        name: 'Archive with transcription properties',
+        hasTranscription: true,
+        transcriptionProperties: {
+          primaryLanguageCode: 'es-ES',
+          hasSummary: true,
+        },
+      })
+      .reply(200, expectedResponse);
+  
+    const resp = await client.startArchive('1234', {
+      name: 'Archive with transcription properties',
+      hasTranscription: true,
+      transcriptionProperties: {
+        primaryLanguageCode: 'es-ES',
+        hasSummary: true,
+      },
+    });
+    expect(resp.name).toEqual(expectedResponse.name);
+    expect(resp.transcriptionProperties?.primaryLanguageCode).toEqual(
+      expectedResponse.transcriptionProperties.primaryLanguageCode
+    );
+    expect(resp.transcriptionProperties?.hasSummary).toEqual(
+      expectedResponse.transcriptionProperties.hasSummary
+    );
+  });
+
   test('can stop an archive', async () => {
     const expectedResponse = {
       createdAt: 1384221730555,

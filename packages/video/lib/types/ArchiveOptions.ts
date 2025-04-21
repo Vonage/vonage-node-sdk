@@ -58,6 +58,28 @@ type BaseArchiveOptions = {
      * Whether or not the transcription should also provide a summary
      */
     hasSummary?: boolean;
+
+    /**
+     * True if the archive should be transcribed.
+     */
+    hasTranscription?: boolean;
+
+    /**
+     * An object containing all transcription properties.
+     * Only valid if `hasTranscription` is true.
+     */
+    transcriptionProperties?: {
+      /**
+       * The primary language spoken in the archive to be transcribed, in BCP-47 format.
+       * Example: en-US, es-ES, or pt-BR.
+       */
+      primaryLanguageCode?: string;
+
+      /**
+       * True if the transcription should have a summary.
+       */
+      hasSummary?: boolean;
+    };
   }
 }
 
@@ -75,4 +97,25 @@ type ArchiveOptionsWithQuantizationParameter = BaseArchiveOptions & {
     quantizationParameter?: number;
 }
 
-export type ArchiveOptions = ArchiveOptionsWithMaxBitrate | ArchiveOptionsWithQuantizationParameter;
+type ArchiveWithTranscription = BaseArchiveOptions & {
+  hasTranscription: true;
+  transcriptionProperties: {
+    primaryLanguageCode?: string;
+    hasSummary?: boolean;
+  };
+}
+
+type ArchiveWithoutTranscription = BaseArchiveOptions & {
+  hasTranscription?: false;
+  transcriptionProperties: never;
+}
+
+export type ArchiveOptions =
+  | ArchiveOptionsWithMaxBitrate
+  | (ArchiveOptionsWithMaxBitrate & ArchiveWithTranscription)
+  | (ArchiveOptionsWithMaxBitrate & ArchiveWithoutTranscription)
+  | ArchiveOptionsWithQuantizationParameter
+  | (ArchiveOptionsWithQuantizationParameter & ArchiveWithTranscription)
+  | (ArchiveOptionsWithQuantizationParameter & ArchiveWithoutTranscription)
+  | ArchiveWithTranscription
+  | ArchiveWithoutTranscription;
