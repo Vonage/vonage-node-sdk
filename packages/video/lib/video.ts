@@ -30,6 +30,7 @@ import {
   Session,
   Signal,
   SingleArchiveResponse,
+  SingleArchiveResponseBase,
   SingleStreamLayoutResponse,
   StreamClassList,
   VideoResponse,
@@ -461,8 +462,10 @@ export class Video extends Client {
    * console.log(archive.createdAt);
    * ```
    */
-  public async getArchive(archiveId: string): Promise<SingleArchiveResponse> {
-    const resp = await this.sendGetRequest<SingleArchiveResponse>(
+  public async getArchive<T extends SingleArchiveResponseBase = SingleArchiveResponse>(
+    archiveId: string
+  ): Promise<T> {
+    const resp = await this.sendGetRequest<T>(
       `${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive/${archiveId}`,
     );
     return resp.data;
@@ -915,13 +918,13 @@ export class Video extends Client {
    * console.log(archive.id);
    * ```
    */
-  public async startArchive(
+  public async startArchive<T extends SingleArchiveResponseBase = SingleArchiveResponse>(
     sessionId: string,
     options?: ArchiveOptions,
-  ): Promise<SingleArchiveResponse> {
+  ): Promise<T> {
     const data = Object.assign({}, { sessionId }, options);
 
-    const resp = await this.sendPostRequest<SingleArchiveResponse>(
+    const resp = await this.sendPostRequest<T>(
       `${this.config.videoHost}/v2/project/${this.auth.applicationId}/archive`,
       data,
     );

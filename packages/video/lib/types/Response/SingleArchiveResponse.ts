@@ -1,7 +1,7 @@
 /**
  * Represents the details of a single archive.
  */
-type SingleArchiveResponseBase = {
+export type SingleArchiveResponseBase = {
   /**
    * The timestamp when the archive was created, expressed in milliseconds since the Unix epoch.
    */
@@ -86,7 +86,7 @@ type SingleArchiveResponseBase = {
 /**
  * Represents an archive with transcription properties.
  */
-type SingleArchiveResponseWithTranscription = SingleArchiveResponseBase & {
+export type SingleArchiveResponseWithTranscription = SingleArchiveResponseBase & {
   /**
    * Post-processing will include transcription
    */
@@ -112,47 +112,32 @@ type SingleArchiveResponseWithTranscription = SingleArchiveResponseBase & {
 /**
  * Represents an archive without transcription properties.
  */
-type SingleArchiveResponseWithoutTranscription = SingleArchiveResponseBase & {
+export type SingleArchiveResponseWithoutTranscription = SingleArchiveResponseBase & {
   /**
    * Transcription is disabled on the archive
    */
   hasTranscription?: false;
-
-  /**
-   * Additional transcription options cannot be passed when transcription is disabled
-   */
-  transcriptionProperties?: never;
-};
+} & Omit<SingleArchiveResponseBase, 'transcriptionProperties'>;
 
 /**
  * Represents an archive with a maximum bitrate.
  */
-type SingleArchiveResponseWithMaxBitrate = SingleArchiveResponseBase & {
+export type SingleArchiveResponseWithMaxBitrate = SingleArchiveResponseBase & {
   /**
    * The maximum video bitrate for the archive, in bits per second.
    */
   maxBitrate: number;
-
-  /**
-   * Quantization cannot be enabled when using maxBitrate
-   */
-  quantizationParameter?: never;
-};
+} & Omit<SingleArchiveResponseBase, 'quantizationParameter'>;
 
 /**
  * Represents an archive with a quantization parameter.
  */
-type SingleArchiveResponseWithQuantizationParameter = SingleArchiveResponseBase & {
+export type SingleArchiveResponseWithQuantizationParameter = SingleArchiveResponseBase & {
   /**
    * The quantization level for the archive quality.
    */
   quantizationParameter: number;
-
-  /**
-   * MaxBitrate cannot be used when using quantizationParameter
-   */
-  maxBitrate?: never;
-};
+} & Omit<SingleArchiveResponseBase, 'maxBitrate'>;
 
 /**
  * Represents the details of a single archive, supporting mutually exclusive parameters.
