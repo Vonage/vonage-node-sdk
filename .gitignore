@@ -20,3 +20,4 @@ tsconfig.tsbuildinfo
 lerna-debug.log
 package-lock.json
 docs
+yarn.lock
