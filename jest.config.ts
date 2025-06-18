@@ -3,6 +3,7 @@ import { createDefaultEsmPreset } from 'ts-jest';
 import type { Config } from '@jest/types';
 
 const presetConfig = createDefaultEsmPreset({
+  diagnostics: false,
 });
 
 const projectDefault = {
