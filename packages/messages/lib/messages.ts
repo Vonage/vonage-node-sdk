@@ -5,6 +5,7 @@ import {
   SendMessageParams,
   MessageSuccessResponse,
   AnyChannel,
+  MessageWithFailover,
 } from './types';
 import debug from 'debug';
 import { UpdateMessageStatus } from './enums/UpdateMessageStatus';
@@ -80,7 +81,7 @@ export class Messages extends Client {
    * @return {Promise<MessageSuccess>} A promise that resolves to a success response with a message UUID.
    */
   public async send(
-    message: SendMessageParams | AnyChannel,
+    message: SendMessageParams | AnyChannel | MessageWithFailover,
   ): Promise<MessageSuccess> {
     const data = Client.transformers.snakeCaseObjectKeys(message, true);
 

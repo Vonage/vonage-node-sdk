@@ -23,3 +23,7 @@ export type AnyChannel =
   | AnyWhatsAppChannel
   | SMSChannel
   | AnyRCSChannel;
+
+export type MessageWithFailover = {
+    failover?: Array<AnyChannel>
+  } | AnyChannel;

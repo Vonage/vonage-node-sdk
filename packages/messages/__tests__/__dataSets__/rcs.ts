@@ -6,7 +6,8 @@ import {
   RCSFile,
   RCSCustom,
   UpdateMessageRequest,
-  UpdateMessageStatus
+  UpdateMessageStatus,
+  Channels
 } from '../../lib';
 
 export default [
@@ -455,5 +456,58 @@ export default [
       UpdateMessageStatus.REVOKED
     ],
     expected: true
+  },
+  {
+    label: 'send text',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: 'Vonage',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'rcs',
+        message_type: 'text',
+        failover: [
+          {
+            from: 'Vonage',
+            to: '14152739164',
+            text: 'too many secrets',
+            channel: 'rcs',
+            message_type: 'text',
+          }
+        ]
+
+      },
+    ],
+    response: [
+      202,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      {
+        from: 'Vonage',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: Channels.RCS,
+        messageType: 'text',
+        failover: [
+          {
+            from: 'Vonage',
+            to: '14152739164',
+            text: 'too many secrets',
+            channel: 'rcs',
+            message_type: 'text',
+          }
+        ]
+      },
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
   }
 ];
