@@ -103,7 +103,7 @@ jobs:
     steps:
       - name: Send to slack channels
         uses: slackapi/slack-github-action@v2.0.0
-        if: always();
+        if: always()
         continue-on-error: true
         with:
           webhook: ${{ secrets[matrix.url]}}
