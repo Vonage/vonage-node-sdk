@@ -4,13 +4,13 @@ on:
   release:
     types:
       - published
+      - edited
 
 env:
   GH_TOKEN: ${{ secrets.GH_TOKEN_COMMIT }}
 
 jobs:
   publish-package:
-    if: false
     runs-on: ubuntu-latest
     name: Publish to NPM
 
