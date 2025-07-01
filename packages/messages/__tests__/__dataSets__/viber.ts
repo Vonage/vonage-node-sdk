@@ -15,6 +15,7 @@ import {
   ViberFileParams,
   ViberService,
   ViberAction,
+  Channels,
 } from '../../lib';
 
 import { Image } from '../../lib/classes/Viber/Image';
@@ -451,6 +452,59 @@ export default [
         },
         clientRef: 'my-ref',
       } as ViberFileParams),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send text with failover',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'viber_service',
+        message_type: 'text',
+        failover: [
+          {
+
+            from: '12126875309',
+            to: '14152739164',
+            text: 'too many secrets',
+            channel: 'viber_service',
+            message_type: 'text',
+          }
+        ]
+      },
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: Channels.VIBER,
+        messageType: 'text',
+        failover: [
+          {
+            from: '12126875309',
+            to: '14152739164',
+            text: 'too many secrets',
+            channel: Channels.VIBER,
+            messageType: 'text',
+          }
+        ]
+      },
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',

@@ -485,4 +485,64 @@ export default [
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
     } as MessageSuccess,
   },
+  {
+    label: 'send image with failover',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'mms',
+        message_type: 'image',
+        image: {
+          url: 'https://example.com',
+        },
+        failover: [
+          {
+            from: '12126875309',
+            to: '14152739164',
+            channel: 'mms',
+            message_type: 'image',
+            image: {
+              url: 'https://example.com',
+            },
+          }
+        ]
+      },
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      {
+        from: '12126875309',
+        to: '14152739164',
+        image: {
+          url: 'https://example.com',
+        },
+        channel: 'mms',
+        messageType: 'image',
+        failover: [
+          {
+            from: '12126875309',
+            to: '14152739164',
+            channel: 'mms',
+            messageType: 'image',
+            image: {
+              url: 'https://example.com',
+            },
+          }
+        ]
+      },
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  }
 ];

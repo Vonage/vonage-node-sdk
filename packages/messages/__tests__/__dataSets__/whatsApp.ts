@@ -32,6 +32,7 @@ import {
   WhatsAppReactionRequest,
   WhatsAppReactionParams,
   WhatsAppReaction,
+  Channels,
 } from '../../lib';
 
 import { Audio } from '../../lib/classes/WhatsApp/Audio';
@@ -1135,5 +1136,58 @@ export default [
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
     } as MessageSuccess,
+  },
+  {
+    label: 'send text with failover',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        channel: 'whatsapp',
+        message_type: 'text',
+        text: 'Too many secrets',
+        failover: [
+          {
+            from: '12126875309',
+            to: '14152739164',
+            text: 'Too many secrets',
+            message_type: 'text',
+            channel: Channels.WHATSAPP,
+          }
+        ]
+      },
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'Too many secrets',
+        messageType: 'text',
+        channel: Channels.WHATSAPP,
+        failover: [
+          {
+            from: '12126875309',
+            to: '14152739164',
+            text: 'Too many secrets',
+            messageType: 'text',
+            channel: Channels.WHATSAPP,
+          }
+        ]
+      },
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
   }
+
 ];
