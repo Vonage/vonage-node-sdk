@@ -1,6 +1,7 @@
 import { AbstractTextMessage } from '../AbstractTextMessage';
 import { ViberActionParams } from '../../types';
 import { ViberTextParams } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents a text message for the Viber Service channel.
@@ -11,7 +12,11 @@ export class ViberText
   extends AbstractTextMessage
   implements ViberTextParams
 {
-  public channel: 'viber_service';
+  /**
+   * The channel for this message (always 'viber_service').
+   */
+  public channel: Channels.VIBER = Channels.VIBER;
+
   public viberService: ViberActionParams;
 
   /**
@@ -31,7 +36,7 @@ export class ViberText
    *    action: {
    *      url: 'https://my-host.com/my-path',
    *      text: 'My button text',
-   *    },  
+   *    },
    *  },
    *  clientRef: 'my-personal-reference',
    * }));
@@ -39,9 +44,8 @@ export class ViberText
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  constructor(params: ViberTextParams) {
+  constructor(params: Omit<ViberTextParams, 'channel' | 'messageType'>) {
     super(params);
     this.viberService = params.viberService;
-    this.channel = 'viber_service';
   }
 }

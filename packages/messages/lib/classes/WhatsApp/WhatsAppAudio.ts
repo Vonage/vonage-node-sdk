@@ -1,5 +1,6 @@
 import { AbstractAudioMessage } from '../AbstractAudioMessage';
 import { WhatsAppAudioParams, WhatsAppContext } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents an audio message for WhatsApp.
@@ -10,7 +11,10 @@ export class WhatsAppAudio
   extends AbstractAudioMessage
   implements WhatsAppAudioParams
 {
-  public channel: 'whatsapp';
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
   /**
@@ -34,9 +38,8 @@ export class WhatsAppAudio
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppAudioParams) {
+  public constructor(params: Omit<WhatsAppAudioParams, 'channel' | 'messageType'>) {
     super(params);
-    this.channel = 'whatsapp';
     /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;

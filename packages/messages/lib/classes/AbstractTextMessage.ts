@@ -1,5 +1,6 @@
 import { AbstractMessage } from './AbstractMessage';
 import { MessageParamsText } from '../types';
+import { MessageTypes } from '../enums/MessageTypes';
 
 /**
  * An abstract base class for text message objects.
@@ -9,9 +10,9 @@ export abstract class AbstractTextMessage
   implements MessageParamsText
 {
   /**
-   * The type of message, which is 'text' for text messages.
+   * The type of message (always 'text').
    */
-  public messageType: 'text';
+  public messageType: MessageTypes.TEXT = MessageTypes.TEXT;
 
   /**
    * The text content of the message.
@@ -23,9 +24,8 @@ export abstract class AbstractTextMessage
    *
    * @param {MessageParamsText} params - The parameters for creating a text message.
    */
-  constructor(params: MessageParamsText) {
+  constructor(params: Omit<MessageParamsText, 'channel' | 'messageType'>) {
     super(params);
     this.text = params.text;
-    this.messageType = 'text';
   }
 }

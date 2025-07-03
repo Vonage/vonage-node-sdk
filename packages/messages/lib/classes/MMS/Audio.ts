@@ -1,5 +1,5 @@
 import { AudioObject } from '../../interfaces';
-import { MessageAudioType, MessageParamsAudio } from '../../types';
+import { MessageAudioType } from '../../types';
 import { MMSAudio } from './MMSAudio';
 import debug from 'debug';
 
@@ -28,14 +28,11 @@ export class Audio extends MMSAudio {
     clientRef?: string,
   ) {
     log('Please update to use the MMSAudio class instead');
-    const params = {
+    super({
       audio: audio as MessageAudioType,
-      to: to,
-      from: from,
+      to: `${to}`,
+      from: `${from}`,
       clientRef: clientRef,
-    };
-
-    super(params as MessageParamsAudio);
-    this.channel = 'mms';
+    });
   }
 }

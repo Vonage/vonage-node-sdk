@@ -1,4 +1,5 @@
 import { MessageFileType } from '../../MessageFileType';
+import { MessageParamsFile } from '../../MessageParamsFile';
 import { MessengerParams } from './MessengerParams';
 
 /**
@@ -9,4 +10,4 @@ import { MessengerParams } from './MessengerParams';
  */
 export type MessengerFileParams = {
   file: MessageFileType;
-} & MessengerParams;
+} & MessengerParams & MessageParamsFile;

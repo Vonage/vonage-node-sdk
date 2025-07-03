@@ -1,5 +1,5 @@
 import { VideoObject } from '../../interfaces';
-import { MessageParamsVideo, MessageVideoType } from '../../types';
+import { MessageVideoType } from '../../types';
 import { MMSVideo } from './MMSVideo';
 import debug from 'debug';
 
@@ -20,9 +20,9 @@ export class Video extends MMSVideo {
     log('Please update to use the MMSVideo class instead');
     super({
       video: video as MessageVideoType,
-      to: to,
-      from: from,
+      to: `${to}`,
+      from: `${from}`,
       clientRef: clientRef,
-    } as MessageParamsVideo);
+    });
   }
 }

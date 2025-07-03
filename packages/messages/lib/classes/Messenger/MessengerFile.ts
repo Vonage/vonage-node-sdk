@@ -1,5 +1,7 @@
 import { AbstractFileMessage } from '../AbstractFileMessage';
 import { MessageParams, MessengerFileParams } from '../../types';
+import { Channels } from '../../enums';
+import { MessageTypes } from '../../enums/MessageTypes';
 
 /**
  * Represents a file message for the Messenger channel.
@@ -13,7 +15,12 @@ export class MessengerFile
   /**
    * The channel for this message (always 'messenger').
    */
-  public channel: 'messenger';
+  public channel: Channels.MESSENGER = Channels.MESSENGER;
+
+  /**
+   * The type of message (always 'file').
+   */
+  public messageType: MessageTypes.FILE = MessageTypes.FILE;
 
   /**
    * The messenger information for this message.
@@ -42,9 +49,9 @@ export class MessengerFile
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: MessageParams & MessengerFileParams) {
+  public constructor(params: Omit<MessageParams, 'channel' | 'messageType'>
+    & Omit<MessengerFileParams, 'channel' | 'messageType'>) {
     super(params);
     this.messenger = params.messenger;
-    this.channel = 'messenger';
   }
 }

@@ -8,12 +8,20 @@ import { Channels } from '../../enums';
  *
  * @group SMS
  * @category Parameters
- * @remarks The purpose of this type is to ensure a consistent interface for SMS
- * message parameters, making it easier to extend or modify the type in the
- * future without impacting existing code that uses it.
- * It is based on the `MessageParamsText` type.
  */
-export type SMSParams = { sms?: SMSExtraParams } & MessageParamsText;
+export type SMSParams = {
+  channel: Channels.SMS;
+
+  /**
+   * The duration in seconds the delivery of an SMS will be attempted. By
+   * default Vonage attempts delivery for 72 hours, however the maximum
+   * effective value depends on the operator and is typically 24 - 48 hours.
+   * We recommend this value should be kept at its default or at least 30 minutes.
+   */
+  ttl?: number;
+
+  sms?: SMSExtraParams;
+} & MessageParamsText;
 
 export type SMSExtraParams = {
   /**
@@ -49,17 +57,6 @@ export type SMSExtraParams = {
  * it with the SMS message parameters defined in `SMSParams`.
  *
  * @group SMS
+ * @deprecated Use SMSParams instead
  */
-export type SMSChannel = {
-  channel: Channels.SMS;
-
-  /**
-   * The duration in seconds the delivery of an SMS will be attempted. By
-   * default Vonage attempts delivery for 72 hours, however the maximum
-   * effective value depends on the operator and is typically 24 - 48 hours.
-   * We recommend this value should be kept at its default or at least 30 minutes.
-   */
-  ttl?: number;
-
-  sms?: SMSExtraParams;
-} & SMSParams;
+export type SMSChannel = SMSParams;

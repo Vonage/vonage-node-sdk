@@ -1,5 +1,6 @@
 import { AbstractImageMessage } from '../AbstractImageMessage';
 import { MessengerImageParams } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents an image message for the Messenger channel.
@@ -14,9 +15,9 @@ export class MessengerImage
   implements MessengerImageParams
 {
   /**
-   * The channel for sending the message, which is set to 'messenger'.
+   * The channel for this message (always 'messenger').
    */
-  public channel: 'messenger';
+  public channel: Channels.MESSENGER = Channels.MESSENGER;
 
   /**
    * Additional Messenger-specific parameters for the image message.
@@ -44,9 +45,8 @@ export class MessengerImage
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: MessengerImageParams) {
+  public constructor(params: Omit<MessengerImageParams, 'channel' | 'messageType'>) {
     super(params);
     this.messenger = params.messenger;
-    this.channel = 'messenger';
   }
 }

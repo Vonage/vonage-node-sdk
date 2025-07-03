@@ -1,9 +1,12 @@
+import { MessageTypes } from '../enums/MessageTypes';
 import { MessageParams } from './MessageParams';
 
 /**
  * Represents the parameters for a text message.
  */
 export type MessageParamsText = {
+  messageType: MessageTypes.TEXT;
+
   /**
    * The text content of the message.
    */

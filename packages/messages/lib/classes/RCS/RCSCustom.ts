@@ -1,6 +1,7 @@
 import { AbstractMessage } from '../AbstractMessage';
 import { RCSCustomParams } from '../../types';
 import { Channels } from '../../enums';
+import { MessageTypes } from '../../enums/MessageTypes';
 
 /**
  * Represents a custom message for RCS.
@@ -9,14 +10,14 @@ import { Channels } from '../../enums';
  */
 export class RCSCustom extends AbstractMessage implements RCSCustomParams {
   /**
-   * The channel through which the message will be sent. Always `rcs`
+   * The channel for this message (always 'rcs').
    */
   public channel: Channels.RCS = Channels.RCS;
 
   /**
-   * The type of message. For a custom message, this will always be `custom`.
+   * The type of message (always 'custom').
    */
-  public messageType = 'custom';
+  public messageType: MessageTypes.CUSTOM = MessageTypes.CUSTOM;
 
   /**
    * A custom payload. The schema of a custom object can vary widely.
@@ -51,7 +52,7 @@ export class RCSCustom extends AbstractMessage implements RCSCustomParams {
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: RCSCustomParams) {
+  public constructor(params: Omit<RCSCustomParams, 'channel' | 'messageType'>) {
     super(params);
     this.custom = params.custom;
     this.ttl = params.ttl;

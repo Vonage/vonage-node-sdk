@@ -1,5 +1,6 @@
 import { AbstractVideoMessage } from '../AbstractVideoMessage';
 import { WhatsAppVideoParams, WhatsAppContext } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents a video message for WhatsApp.
@@ -10,7 +11,10 @@ export class WhatsAppVideo
   extends AbstractVideoMessage
   implements WhatsAppVideoParams
 {
-  public channel: 'whatsapp';
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
   /**
@@ -35,9 +39,8 @@ export class WhatsAppVideo
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppVideoParams) {
+  public constructor(params: Omit<WhatsAppVideoParams, 'channel' | 'messageType'>) {
     super(params);
-    this.channel = 'whatsapp';
     /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;

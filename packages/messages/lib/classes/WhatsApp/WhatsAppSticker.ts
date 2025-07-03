@@ -5,6 +5,8 @@ import {
   WhatsAppStickerUrlType,
   WhatsAppContext,
 } from '../../types';
+import { MessageTypes } from '../../enums/MessageTypes';
+import { Channels } from '../../enums';
 
 /**
  * Represents a sticker message for WhatsApp.
@@ -15,8 +17,16 @@ export class WhatsAppSticker
   extends AbstractMessage
   implements WhatsAppStickerParams
 {
-  public channel: 'whatsapp';
-  public messageType: 'sticker';
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
+
+  /**
+   * The type of message (always 'sticker').
+   */
+  public messageType: MessageTypes.STICKER = MessageTypes.STICKER;
+
   public sticker: WhatsAppStickerIdType | WhatsAppStickerUrlType;
 
   public context?: WhatsAppContext;
@@ -59,11 +69,9 @@ export class WhatsAppSticker
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppStickerParams) {
+  public constructor(params: Omit<WhatsAppStickerParams, 'channel' | 'messageType'>) {
     super(params);
     this.sticker = params.sticker;
-    this.channel = 'whatsapp';
-    this.messageType = 'sticker';
     /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;

@@ -1,10 +1,11 @@
-import { MessageParams } from '../../MessageParams';
 import { Channels } from '../../../enums';
+import { MessageParamsText } from '../../MessageParamsText';
+import { RCSParams } from './RCSParams';
 
 /**
  * Represents the parameters for sending a text message using RCS.
  */
-export type RCSTextParams = MessageParams & {
+export type RCSTextParams =  {
   /**
    * The channel to send to. You must provide `rcs` in this field.
    */
@@ -22,4 +23,4 @@ export type RCSTextParams = MessageParams & {
    * We recommend this value should be kept at its default or at least 30 minutes.
    */
   ttl?: number;
-};
+} & RCSParams & MessageParamsText;

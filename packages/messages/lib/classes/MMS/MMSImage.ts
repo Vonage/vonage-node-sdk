@@ -1,5 +1,6 @@
 import { AbstractImageMessage } from '../AbstractImageMessage';
 import { MessageParamsImage } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents an image message for the MMS channel.
@@ -10,7 +11,18 @@ export class MMSImage
   extends AbstractImageMessage
   implements MessageParamsImage
 {
-  public channel: 'mms';
+  /**
+   * The channel for this message (always 'mms').
+   */
+  public channel: Channels.MMS = Channels.MMS;
+
+  /**
+   * Time-To-Live (how long a message should exist before it is delivered
+   * successfully) in seconds. If a message is not delivered successfully within
+   * the TTL time, the message is considered expired and will be rejected if TTL
+   * is supported.
+   */
+  public ttl?: number;
 
   /**
    * Send an MMS image message.
@@ -33,8 +45,7 @@ export class MMSImage
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  constructor(params: MessageParamsImage) {
+  constructor(params: Omit<MessageParamsImage, 'channel' | 'messageType'>) {
     super(params);
-    this.channel = 'mms';
   }
 }

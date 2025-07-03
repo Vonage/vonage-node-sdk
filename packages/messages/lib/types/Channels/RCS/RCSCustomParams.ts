@@ -1,5 +1,6 @@
 import { MessageParams } from '../../MessageParams';
 import { Channels } from '../../../enums';
+import { RCSParams } from './RCSParams';
 
 /**
  * Represents the parameters for sending a custom message using RCS.
@@ -22,4 +23,4 @@ export type RCSCustomParams = MessageParams & {
    * We recommend this value should be kept at its default or at least 30 minutes.
    */
   ttl?: number;
-};
+} & RCSParams;

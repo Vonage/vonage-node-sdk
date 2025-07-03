@@ -1,5 +1,6 @@
 import { AbstractVideoMessage } from '../AbstractVideoMessage';
 import { ViberVideoParams } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents a video message for the Viber Service channel.
@@ -10,7 +11,10 @@ export class ViberVideo
   extends AbstractVideoMessage
   implements ViberVideoParams
 {
-  public channel: 'viber_service';
+  /**
+   * The channel for this message (always 'viber_service').
+   */
+  public channel: Channels.VIBER = Channels.VIBER;
   public viberService;
 
   /**
@@ -40,9 +44,8 @@ export class ViberVideo
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  constructor(params: ViberVideoParams) {
+  constructor(params: Omit<ViberVideoParams, 'channel' | 'messageType'>) {
     super(params);
     this.viberService = params.viberService;
-    this.channel = 'viber_service';
   }
 }

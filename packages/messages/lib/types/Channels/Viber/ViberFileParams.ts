@@ -1,5 +1,6 @@
-import { MessageParams } from '../../MessageParams';
 import { MessageFileType } from '../../MessageFileType';
+import { MessageParamsFile } from '../../MessageParamsFile';
+import { ViberParams } from './ViberParams';
 
 /**
  * Represents parameters for sending a file via Viber.
@@ -10,8 +11,8 @@ import { MessageFileType } from '../../MessageFileType';
 export type ViberFileParams = {
   file: {
     /**
-     * The name and extension of the file.
+     * Additional text to accompany the file.
      */
-    name?: string;
+    caption?: string
   } & MessageFileType;
-} & MessageParams;
+} & ViberParams & MessageParamsFile;

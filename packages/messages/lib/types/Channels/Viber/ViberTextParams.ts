@@ -1,5 +1,6 @@
-import { ViberActionParams } from './ViberActionParams';
 import { MessageParamsText } from '../../MessageParamsText';
+import { ViberActionParams } from './ViberActionParams';
+import { ViberParams } from './ViberParams';
 
 /**
  * Represents parameters for sending a text message via Viber with action buttons.
@@ -17,4 +18,4 @@ export type ViberTextParams = {
    * The text content of the message.
    */
   text: string;
-} & MessageParamsText
+} & ViberParams & MessageParamsText

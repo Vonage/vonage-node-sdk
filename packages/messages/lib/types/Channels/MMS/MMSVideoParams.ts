@@ -1,5 +1,6 @@
 import { MessageParams } from '../../MessageParams';
 import { MessageVideoType } from '../../MessageVideoType';
+import { MMSParams } from './MMSParams';
 
 /**
  * Represents the parameters for sending a video message on the MMS channel.
@@ -10,4 +11,4 @@ import { MessageVideoType } from '../../MessageVideoType';
  * @group MMS
  * @category Parameters
  */
-export type MMSVideoParams = MessageParams & MessageVideoType;
+export type MMSVideoParams = MMSParams & MessageParams & MessageVideoType;

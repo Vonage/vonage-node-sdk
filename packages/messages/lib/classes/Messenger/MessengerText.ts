@@ -1,5 +1,6 @@
 import { AbstractTextMessage } from '../AbstractTextMessage';
 import { MessengerTextParams, MessengerType } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents a text message for the Messenger channel.
@@ -13,7 +14,7 @@ export class MessengerText
   /**
    * The channel for this message (always 'messenger').
    */
-  public channel: 'messenger';
+  public channel: Channels.MESSENGER = Channels.MESSENGER;
 
   /**
    * The messenger information for this message.
@@ -39,9 +40,8 @@ export class MessengerText
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: MessengerTextParams) {
+  public constructor(params: Omit<MessengerTextParams, 'channel' | 'messageType'>) {
     super(params);
     this.messenger = params.messenger;
-    this.channel = 'messenger';
   }
 }

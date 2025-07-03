@@ -1,6 +1,7 @@
 import { AbstractMessage } from './AbstractMessage';
 import { MessageVcardType } from '../types';
 import { MessageParamsVcard } from '../types';
+import { MessageTypes } from '../enums/MessageTypes';
 
 /**
  * An abstract base class for vCard (contact card) message objects.
@@ -10,9 +11,9 @@ export abstract class AbstractVcardMessage
   implements MessageParamsVcard
 {
   /**
-   * The type of message, which is 'vcard' for vCard messages.
+   * The type of message (always 'vcard').
    */
-  public messageType: 'vcard';
+  public messageType: MessageTypes.VCARD = MessageTypes.VCARD;
 
   /**
    * The vCard (contact card) content of the message.
@@ -24,9 +25,8 @@ export abstract class AbstractVcardMessage
    *
    * @param {MessageParamsVcard} params - The parameters for creating a vCard message.
    */
-  constructor(params: MessageParamsVcard) {
+  constructor(params: Omit<MessageParamsVcard, 'channel' | 'messageType'>) {
     super(params);
     this.vcard = params.vcard;
-    this.messageType = 'vcard';
   }
 }

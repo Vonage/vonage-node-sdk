@@ -12,5 +12,4 @@ export type WhatsAppVideoParams = {
    * The amount of time in seconds the message will live for
    */
   ttl?: number;
-} & WhatsAppParams &
-  MessageParamsVideo;
+} & WhatsAppParams & MessageParamsVideo;

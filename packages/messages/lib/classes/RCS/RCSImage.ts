@@ -9,7 +9,7 @@ import { Channels } from '../../enums';
  */
 export class RCSImage extends AbstractImageMessage implements RCSImageParams {
   /**
-   * The channel through which the message will be sent. Always `rcs`
+   * The channel for this message (always 'rcs').
    */
   public channel: Channels.RCS = Channels.RCS;
 
@@ -41,7 +41,7 @@ export class RCSImage extends AbstractImageMessage implements RCSImageParams {
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  constructor(params: RCSImageParams) {
+  constructor(params: Omit<RCSImageParams, 'channel' | 'messageType'>) {
     super(params);
     this.ttl = params.ttl;
   }

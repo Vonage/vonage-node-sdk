@@ -1,5 +1,6 @@
 import { AbstractTextMessage } from '../AbstractTextMessage';
 import { WhatsAppTextParams, WhatsAppContext } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents a text message for WhatsApp.
@@ -10,7 +11,10 @@ export class WhatsAppText
   extends AbstractTextMessage
   implements WhatsAppTextParams
 {
-  public channel: 'whatsapp';
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
   /**
@@ -31,9 +35,8 @@ export class WhatsAppText
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppTextParams) {
+  public constructor(params: Omit<WhatsAppTextParams, 'channel' | 'messageType'>) {
     super(params);
-    this.channel = 'whatsapp';
     if (params.context) {
       this.context = params.context;
     }

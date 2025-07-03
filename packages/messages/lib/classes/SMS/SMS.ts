@@ -1,6 +1,7 @@
 import { AbstractTextMessage } from '../AbstractTextMessage';
 import { MessageParamsText, SMSExtraParams, SMSParams } from '../../types';
 import debug from 'debug';
+import { Channels } from '../../enums';
 
 const log = debug('vonage:messages:sms');
 
@@ -10,9 +11,20 @@ const log = debug('vonage:messages:sms');
  * @group SMS
  */
 export class SMS extends AbstractTextMessage implements SMSParams {
-  public channel: 'sms';
+  /**
+   * The channel for this message (always 'sms').
+   */
+  public channel: Channels.SMS = Channels.SMS;
 
   public sms?: SMSExtraParams;
+
+  /**
+   * The duration in seconds the delivery of an SMS will be attempted. By
+   * default Vonage attempts delivery for 72 hours, however the maximum
+   * effective value depends on the operator and is typically 24 - 48 hours. We
+   * recommend this value should be kept at its default or at least 30 minutes.
+   */
+  public ttl?: number;
 
   /**
    * Send an SMS message
@@ -62,21 +74,21 @@ export class SMS extends AbstractTextMessage implements SMSParams {
     clientRef?: string,
   ) {
     if (to) {
-      log('Please update the call to use MessageParamsText instead');
+      log('Please update the call to pass in an object instead of parameters');
       params = {
         text: params as string,
         to: to as string,
         from: from as string,
         clientRef: clientRef,
-      };
+      } as SMSParams;
     }
 
     super(params as MessageParamsText);
-    this.channel = 'sms';
     if (typeof params === 'string') {
       return;
     }
 
+    this.ttl = params.ttl;
     this.sms = params.sms
       ? {
         encodingType: params.sms?.encodingType,
