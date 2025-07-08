@@ -5,6 +5,8 @@ import {
   WhatsAppTemplateType,
   WhatsAppContext,
 } from '../../types';
+import { MessageTypes } from '../../enums/MessageTypes';
+import { Channels } from '../../enums';
 
 /**
  * Represents a template message for WhatsApp.
@@ -15,9 +17,18 @@ export class WhatsAppTemplate
   extends AbstractMessage
   implements WhatsAppTemplateParams
 {
-  public channel: 'whatsapp';
-  public messageType: 'template';
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
+
+  /**
+   * The type of message (always 'template').
+   */
+  public messageType: MessageTypes.TEMPLATE = MessageTypes.TEMPLATE;
+
   public whatsapp: WhatsAppPolicyType;
+
   public template: WhatsAppTemplateType;
 
   public context?: WhatsAppContext;
@@ -51,12 +62,11 @@ export class WhatsAppTemplate
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppTemplateParams) {
+  public constructor(params: Omit<WhatsAppTemplateParams, 'channel' | 'messageType'>) {
     super(params);
     this.whatsapp = params.whatsapp;
     this.template = params.template;
-    this.channel = 'whatsapp';
-    this.messageType = 'template';
+
     /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;

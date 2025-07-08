@@ -4,6 +4,8 @@ import {
   WhatsAppReactionType,
   WhatsAppContext,
 } from '../../types';
+import { MessageTypes } from '../../enums/MessageTypes';
+import { Channels } from '../../enums';
 
 /**
  * Represents a reaction message for WhatsApp.
@@ -14,10 +16,24 @@ export class WhatsAppReaction
   extends AbstractMessage
   implements WhatsAppReactionParams
 {
-  public channel: 'whatsapp';
-  public messageType: 'reaction';
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
+
+  /**
+   * The type of message (always 'reaction').
+   */
+  public messageType: MessageTypes.REACTION = MessageTypes.REACTION;
+
+  /**
+   * The reaction to send
+   */
   public reaction: WhatsAppReactionType;
 
+  /**
+   * The WhatsApp Context
+   */
   public context?: WhatsAppContext;
 
   /**
@@ -59,10 +75,8 @@ export class WhatsAppReaction
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppReactionParams) {
+  public constructor(params: Omit<WhatsAppReactionParams, 'channel' | 'messageType'>) {
     super(params);
-    this.channel = 'whatsapp';
-    this.messageType = 'reaction';
     this.reaction = params.reaction;
     if (params.context) {
       this.context = params.context;

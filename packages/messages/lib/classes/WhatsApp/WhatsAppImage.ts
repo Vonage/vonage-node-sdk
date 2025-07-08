@@ -1,5 +1,6 @@
 import { AbstractImageMessage } from '../AbstractImageMessage';
 import { WhatsAppImageParams, WhatsAppContext } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents an image message for WhatsApp.
@@ -10,7 +11,10 @@ export class WhatsAppImage
   extends AbstractImageMessage
   implements WhatsAppImageParams
 {
-  public channel: 'whatsapp';
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
   /**
@@ -34,9 +38,8 @@ export class WhatsAppImage
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppImageParams) {
+  public constructor(params: Omit<WhatsAppImageParams, 'channel' | 'messageType'>) {
     super(params);
-    this.channel = 'whatsapp';
     /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;

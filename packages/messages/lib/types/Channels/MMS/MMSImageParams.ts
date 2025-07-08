@@ -1,5 +1,5 @@
-import { MessageParams } from '../../MessageParams';
 import { MessageImageType } from '../../MessageImageType';
+import { MMSParams } from './MMSParams';
 
 /**
  * Represents the parameters for sending an image message on the MMS channel.
@@ -10,4 +10,4 @@ import { MessageImageType } from '../../MessageImageType';
  * @group MMS
  * @category Parameters
  */
-export type MMSImageParams = MessageParams & MessageImageType;
+export type MMSImageParams = MMSParams & MessageImageType;

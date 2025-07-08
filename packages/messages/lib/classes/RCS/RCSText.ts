@@ -40,7 +40,7 @@ export class RCSText extends AbstractTextMessage implements RCSTextParams {
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: RCSTextParams) {
+  public constructor(params: Omit<RCSTextParams, 'channel' | 'messageType'>) {
     super(params);
     this.ttl = params.ttl;
   }

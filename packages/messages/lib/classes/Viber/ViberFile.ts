@@ -1,5 +1,6 @@
 import { AbstractFileMessage } from '../AbstractFileMessage';
 import { ViberFileParams } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents a file message for the Viber Service channel.
@@ -7,7 +8,10 @@ import { ViberFileParams } from '../../types';
  * @group Viber
  */
 export class ViberFile extends AbstractFileMessage implements ViberFileParams {
-  public channel: 'viber_service';
+  /**
+   * The channel for this message (always 'viber_service').
+   */
+  public channel: Channels.VIBER = Channels.VIBER;
 
   /**
    * Send a file message using the Viber Service channel.
@@ -35,8 +39,7 @@ export class ViberFile extends AbstractFileMessage implements ViberFileParams {
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  constructor(params: ViberFileParams) {
+  constructor(params: Omit<ViberFileParams, 'channel' | 'messageType'>) {
     super(params);
-    this.channel = 'viber_service';
   }
 }

@@ -1,5 +1,6 @@
 import { AbstractVideoMessage } from '../AbstractVideoMessage';
 import { MessengerType, MessengerVideoParams } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents a video message for the Messenger channel.
@@ -13,7 +14,7 @@ export class MessengerVideo
   /**
    * The channel for this message (always 'messenger').
    */
-  public channel: 'messenger';
+  public channel: Channels.MESSENGER = Channels.MESSENGER;
 
   /**
    * The messenger information for this message.
@@ -41,9 +42,8 @@ export class MessengerVideo
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: MessengerVideoParams) {
+  public constructor(params: Omit<MessengerVideoParams, 'channel' | 'messageType'>) {
     super(params);
     this.messenger = params.messenger;
-    this.channel = 'messenger';
   }
 }

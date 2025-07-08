@@ -45,7 +45,7 @@ export class RCSFile
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: MessageParams & RCSFileParams) {
+  public constructor(params: Omit<MessageParams, 'channel' | 'messageType'> & RCSFileParams) {
     super(params);
     this.ttl = params.ttl;
   }

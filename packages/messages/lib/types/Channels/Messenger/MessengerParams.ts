@@ -1,3 +1,4 @@
+import { Channels } from '../../../enums';
 import { MessengerType } from './MessengerType';
 
 /**
@@ -7,5 +8,7 @@ import { MessengerType } from './MessengerType';
  * @category Parameters
  */
 export type MessengerParams = {
+  channel: Channels.MESSENGER;
+
   messenger: MessengerType;
 };

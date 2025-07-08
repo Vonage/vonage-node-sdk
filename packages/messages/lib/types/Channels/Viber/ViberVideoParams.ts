@@ -1,5 +1,6 @@
 import { MessageParamsVideo } from '../../MessageParamsVideo';
 import { ViberActionParams } from './ViberActionParams';
+import { ViberParams } from './ViberParams';
 
 /**
  * Represents parameters for sending a video message via Viber with action buttons.
@@ -41,4 +42,4 @@ export type ViberVideoParams = {
      */
     thumbUrl?: string;
   };
-} & MessageParamsVideo;
+} & ViberParams & MessageParamsVideo;

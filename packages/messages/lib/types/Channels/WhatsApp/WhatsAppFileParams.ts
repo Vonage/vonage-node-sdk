@@ -1,4 +1,5 @@
 import { MessageFileType } from '../../MessageFileType';
+import { MessageParamsFile } from '../../MessageParamsFile';
 import { WhatsAppParams } from './WhatsAppParams';
 
 /**
@@ -23,4 +24,4 @@ export type WhatsAppFileParams = {
      */
     name?: string;
   } & MessageFileType;
-} & WhatsAppParams;
+} & WhatsAppParams & MessageParamsFile;

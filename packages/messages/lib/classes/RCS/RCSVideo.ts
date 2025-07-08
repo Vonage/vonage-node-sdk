@@ -9,9 +9,9 @@ import { Channels } from '../../enums';
  */
 export class RCSVideo extends AbstractVideoMessage implements RCSVideoParams {
   /**
-   * The channel through which the message will be sent. Always `rcs`
+   * The channel for this message (always 'rcs').
    */
-  public channel: Channels.RCS;
+  public channel: Channels.RCS = Channels.RCS;
 
   /**
    * The duration in seconds the delivery of a message will be attempted. By
@@ -44,7 +44,6 @@ export class RCSVideo extends AbstractVideoMessage implements RCSVideoParams {
    */
   public constructor(params: RCSVideoParams) {
     super(params);
-    this.channel = Channels.RCS;
     this.ttl = params?.ttl;
   }
 }

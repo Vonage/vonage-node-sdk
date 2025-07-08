@@ -1,6 +1,7 @@
 import { AbstractMessage } from './AbstractMessage';
 import { MessageImageType } from '../types';
 import { MessageParamsImage } from '../types';
+import { MessageTypes } from '../enums/MessageTypes';
 
 /**
  * An abstract base class for image messages.
@@ -9,7 +10,11 @@ export abstract class AbstractImageMessage
   extends AbstractMessage
   implements MessageParamsImage
 {
-  public messageType: 'image';
+  /**
+   * The type of message (always 'image').
+   */
+  public messageType: MessageTypes.IMAGE = MessageTypes.IMAGE;
+
   public image: MessageImageType;
 
   /**
@@ -17,9 +22,8 @@ export abstract class AbstractImageMessage
    *
    * @param {MessageParamsImage} params - The parameters for creating an image message.
    */
-  constructor(params: MessageParamsImage) {
+  constructor(params: Omit<MessageParamsImage, 'channel' | 'messageType'>) {
     super(params);
     this.image = params.image;
-    this.messageType = 'image';
   }
 }

@@ -1,6 +1,7 @@
 import { AbstractImageMessage } from '../AbstractImageMessage';
 import { ViberImageParams } from '../../types';
 import { ViberActionParams } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents an image message for the Viber Service channel.
@@ -11,7 +12,11 @@ export class ViberImage
   extends AbstractImageMessage
   implements ViberImageParams
 {
-  public channel: 'viber_service';
+  /**
+   * The channel for this message (always 'viber_service').
+   */
+  public channel: Channels.VIBER = Channels.VIBER;
+
   public viberService: ViberActionParams;
 
   /**
@@ -40,9 +45,8 @@ export class ViberImage
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  constructor(params: ViberImageParams) {
+  constructor(params: Omit<ViberImageParams, 'channel' | 'messageType'>) {
     super(params);
     this.viberService = params.viberService;
-    this.channel = 'viber_service';
   }
 }

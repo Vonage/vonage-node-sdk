@@ -1,5 +1,6 @@
 import { MessageParams } from '../../MessageParams';
 import { MessageVcardType } from '../../MessageVcardType';
+import { MMSParams } from './MMSParams';
 
 /**
  * Represents the parameters for sending a vCard message on the MMS channel.
@@ -15,5 +16,4 @@ export type MMSVcardParams = {
    * The amount of time in seconds the message will live for
    */
   ttl?: number;
-} & MessageParams &
-  MessageVcardType;
+} & MMSParams & MessageParams & MessageVcardType;

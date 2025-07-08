@@ -1,5 +1,4 @@
 import {
-  AudioObject,
   MMSAudio,
   MMSImage,
   MMSVcard,
@@ -95,7 +94,7 @@ export default [
         },
         webhookUrl: 'https://example.com',
         webhookVersion: 'v1',
-      } as MessageParamsImage),
+      }),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
@@ -211,7 +210,7 @@ export default [
           url: 'https://example.com',
           caption: 'A cool track',
         },
-      } as MessageParamsAudio),
+      }),
     ],
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
@@ -247,7 +246,7 @@ export default [
         {
           url: 'https://example.com',
           caption: 'A cool track',
-        } as AudioObject, // Audio
+        }, // Audio
         '14152739164', // To
         '12126875309', // From
         'my-ref' // Client Ref

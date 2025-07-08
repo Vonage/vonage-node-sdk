@@ -8,7 +8,10 @@ export type MessageParamsImage = {
   /**
    * The image attachment content.
    */
-  image: MessageImageType;
+  image: {
+    caption?: string;
+  } & MessageImageType;
+
 
   /**
    * The amount of time in seconds the message will live for

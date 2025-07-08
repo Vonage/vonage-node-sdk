@@ -1,7 +1,20 @@
+import { Channels } from '../enums';
+import { MessageTypes } from '../enums/MessageTypes';
+
 /**
  * Represents the parameters for a message.
  */
 export type MessageParams = {
+  /**
+   * The type of message to send.
+   */
+  messageType: MessageTypes;
+
+  /**
+   * The channel to sent the message through
+   */
+  channel: Channels;
+
   /**
    * The ID of the message recipient.
    */

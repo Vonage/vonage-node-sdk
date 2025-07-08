@@ -1,9 +1,16 @@
+import { Channels } from '../enums';
+import { MessageTypes } from '../enums/MessageTypes';
 import { MessageParams } from '../types';
 
 /**
  * An abstract base class for message objects.
  */
 export abstract class AbstractMessage implements MessageParams {
+
+  public abstract messageType: MessageTypes;
+
+  public abstract channel: Channels;
+
   /**
    * The recipient of the message.
    */
@@ -40,7 +47,7 @@ export abstract class AbstractMessage implements MessageParams {
    *
    * @param {MessageParams} params - The parameters for creating a message.
    */
-  public constructor(params: MessageParams) {
+  public constructor(params: Omit<MessageParams, 'channel' | 'messageType'>) {
     this.to = params.to;
     this.from = params.from;
     this.clientRef = params.clientRef;

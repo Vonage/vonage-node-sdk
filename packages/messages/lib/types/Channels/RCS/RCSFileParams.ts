@@ -1,10 +1,11 @@
 import { MessageParamsFile } from '../../MessageParamsFile';
 import { Channels } from '../../../enums';
+import { RCSParams } from './RCSParams';
 
 /**
  * Represents the parameters for sending a file message using RCS.
  */
-export type RCSFileParams = MessageParamsFile & {
+export type RCSFileParams = {
   /**
    * The channel to send to. You must provide `rcs` in this field.
    */
@@ -17,4 +18,4 @@ export type RCSFileParams = MessageParamsFile & {
    * We recommend this value should be kept at its default or at least 30 minutes.
    */
   ttl?: number;
-};
+} & RCSParams & MessageParamsFile ;

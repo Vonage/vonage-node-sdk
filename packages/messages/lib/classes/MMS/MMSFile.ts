@@ -1,15 +1,15 @@
-import { AbstractVideoMessage } from '../AbstractVideoMessage';
-import { MessageParamsVideo } from '../../types';
+import { AbstractFileMessage } from '../AbstractFileMessage';
+import { MessageParamsFile } from '../../types';
 import { Channels } from '../../enums';
 
 /**
- * Represents a video message for the MMS channel.
+ * Represents a file message for the MMS channel.
  *
  * @group MMS
  */
-export class MMSVideo
-  extends AbstractVideoMessage
-  implements MessageParamsVideo
+export class MMSFile
+  extends AbstractFileMessage
+  implements MessageParamsFile
 {
   /**
    * The channel for this message (always 'mms').
@@ -25,18 +25,18 @@ export class MMSVideo
   public ttl?: number;
 
   /**
-   * Send an MMS video message.
+   * Send an MMS file message.
    *
-   * @param {MessageParamsVideo} params - The parameters for creating the video message.
+   * @param {MessageParamsFile} params - The parameters for creating the file message.
    * @example
    * ```ts
-   * import { MMSVideo } from '@vonage/messages';
+   * import { MMSFile } from '@vonage/messages';
    *
-   * const { messageUUID } = await messagesClient.send(new MMSVideo({
+   * const { messageUUID } = await messagesClient.send(new MMSFile({
    *  to: TO_NUMBER,
    *  from: FROM_NUMBER,
-   *  video: {
-   *    url: 'https://example.com/video.mp4',
+   *  file: {
+   *    url: 'https://example.com/file.mp4',
    *  },
    *  clientRef: 'my-personal-reference',
    * }));
@@ -44,7 +44,7 @@ export class MMSVideo
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  constructor(params: Omit<MessageParamsVideo, 'channel' | 'messageType'>) {
+  constructor(params: Omit<MessageParamsFile, 'channel' | 'messageType'>) {
     super(params);
   }
 }

@@ -4,6 +4,8 @@ import {
   WhatsAppCustomParams,
   WhatsAppContext,
 } from '../../types';
+import { MessageTypes } from '../../enums/MessageTypes';
+import { Channels } from '../../enums';
 
 /**
  * Represents a custom message for WhatsApp.
@@ -14,8 +16,16 @@ export class WhatsAppCustom
   extends AbstractMessage
   implements WhatsAppCustomParams
 {
-  public channel: 'whatsapp';
-  public messageType: 'custom';
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
+
+  /**
+   * The type of message (always 'custom').
+   */
+  public messageType: MessageTypes = MessageTypes.CUSTOM;
+
   public custom: WhatsAppCustomType;
 
   public context?: WhatsAppContext;
@@ -44,11 +54,9 @@ export class WhatsAppCustom
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppCustomParams) {
+  public constructor(params: Omit<WhatsAppCustomParams, 'channel' | 'messageType'>) {
     super(params);
     this.custom = params.custom;
-    this.channel = 'whatsapp';
-    this.messageType = 'custom';
     /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;

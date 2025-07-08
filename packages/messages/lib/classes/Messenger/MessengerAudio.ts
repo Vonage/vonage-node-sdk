@@ -1,5 +1,6 @@
 import { AbstractAudioMessage } from '../AbstractAudioMessage';
 import { MessengerAudioParams, MessengerType } from '../../types';
+import { Channels } from '../../enums';
 
 /**
  * Represents an audio message for the Messenger channel.
@@ -13,7 +14,7 @@ export class MessengerAudio
   /**
    * The channel for this message (always 'messenger').
    */
-  public channel: 'messenger';
+  public channel: Channels.MESSENGER = Channels.MESSENGER;
 
   /**
    * The messenger information for this message.
@@ -40,9 +41,8 @@ export class MessengerAudio
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: MessengerAudioParams) {
+  public constructor(params: Omit<MessengerAudioParams, 'channel' | 'messageType'>) {
     super(params);
     this.messenger = params.messenger;
-    this.channel = 'messenger';
   }
 }

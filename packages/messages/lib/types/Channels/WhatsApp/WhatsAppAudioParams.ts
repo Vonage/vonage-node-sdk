@@ -12,5 +12,4 @@ export type WhatsAppAudioParams = {
    * The amount of time in seconds the message will live for
    */
   ttl?: number;
-} & WhatsAppParams &
-  MessageParamsAudio;
+} & WhatsAppParams & MessageParamsAudio;

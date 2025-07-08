@@ -1,3 +1,4 @@
+import { Channels } from '../../..//enums';
 import { MessageParams } from '../../MessageParams';
 
 export type WhatsAppContext = {
@@ -8,6 +9,8 @@ export type WhatsAppContext = {
 };
 
 export type WhatsAppParams = {
+  channel: Channels.WHATSAPP;
+
   /**
    * An optional context used for quoting/replying to a specific meesage in a
    * conversation. When used, the WhatsApp UI will display the new message

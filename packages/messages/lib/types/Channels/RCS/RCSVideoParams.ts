@@ -1,11 +1,15 @@
+import { MessageTypes } from '../../../enums/MessageTypes';
 import { Channels } from '../../../enums';
 import { MessageParams } from '../../MessageParams';
 import { MessageVideoType } from '../../MessageVideoType';
+import { RCSParams } from './RCSParams';
 
 /**
  * Represents the parameters for sending a video message using RCS.
  */
-export type RCSVideoParams = MessageParams & {
+export type RCSVideoParams = {
+  messageType: MessageTypes.VIDEO;
+
   video: MessageVideoType;
 
   /**
@@ -20,4 +24,4 @@ export type RCSVideoParams = MessageParams & {
    * We recommend this value should be kept at its default or at least 30 minutes.
    */
   ttl?: number;
-};
+} & RCSParams & MessageParams;

@@ -2,7 +2,6 @@ import { AudioObject  } from '../../interfaces';
 import { MessageType } from '../../interfaces/Messenger/MessageType';
 import {
   MessageAudioType,
-  MessengerAudioParams,
   MessengerType,
 } from '../../types';
 import { MessengerAudio } from './MessengerAudio';
@@ -43,6 +42,6 @@ export class Audio extends MessengerAudio {
         tag: messenger?.tag,
       } as MessengerType,
       clientRef: clientRef,
-    } as MessengerAudioParams);
+    });
   }
 }

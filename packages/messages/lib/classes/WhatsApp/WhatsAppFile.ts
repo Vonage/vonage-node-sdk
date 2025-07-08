@@ -11,7 +11,10 @@ export class WhatsAppFile
   extends AbstractFileMessage
   implements WhatsAppFileParams
 {
-  public channel = Channels.WHATSAPP;
+  /**
+   * The channel for this message (always 'whatsapp').
+   */
+  public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
 
@@ -35,7 +38,7 @@ export class WhatsAppFile
    * console.log(`Message sent successfully with UUID ${messageUUID}`);
    * ```
    */
-  public constructor(params: WhatsAppFileParams) {
+  public constructor(params: Omit<WhatsAppFileParams, 'channel' | 'messageType'>) {
     super(params);
     /* istanbul ignore next */
     if (params.context) {
