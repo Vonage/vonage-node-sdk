@@ -3,7 +3,7 @@ name: Bug Report
 description: File a bug report
 title: "[Bug]: "
 labels: ["bug", "Triage"]
-assignees: ["manchuck", "pardel", "dragonmantank"]
+assignees: ["manchuck", "dragonmantank"]
 body:
  - type: dropdown
    id: node_version

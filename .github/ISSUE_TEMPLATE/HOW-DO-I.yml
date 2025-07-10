@@ -3,7 +3,7 @@ name: How do I?
 description: Ask a question around how to do a task using the SDK
 title: "How Do I: "
 labels: ["question"]
-assignees: ["manchuck", "pardel", "dragonmantank"]
+assignees: ["manchuck", "dragonmantank"]
 body:
  - type: input
    id: question
