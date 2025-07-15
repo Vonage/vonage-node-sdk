@@ -19,7 +19,7 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
         with:
-          ref: '3.x'
+          ref: 'main'
           fetch-depth: 0
           fetch-tags: true
           token: ${{ secrets.GH_TOKEN_COMMIT }}
