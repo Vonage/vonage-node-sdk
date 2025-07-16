@@ -9,7 +9,7 @@ export type WhatsAppContext = {
 };
 
 export type WhatsAppParams = {
-  channel: Channels.WHATSAPP;
+  channel: Channels.WHATSAPP | string;
 
   /**
    * An optional context used for quoting/replying to a specific meesage in a

@@ -25,7 +25,7 @@ export type MessengerFileRequest = {
   /** The sender of the message. */
   from: string;
   /** The channel for sending the message, which is set to 'messenger'. */
-  channel: 'messenger';
+  channel: 'messenger' | string;
   /** Additional details about the Messenger message type. */
   messenger: MessengerType;
 };

@@ -40,5 +40,5 @@ export type AnyViberChannel = {
   /**
    * The channel through which the message will be sent, which is 'viber' for Viber.
    */
-  channel: Channels.VIBER;
+  channel: Channels.VIBER | string;
 } & AnyViberParams;

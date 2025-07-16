@@ -1,6 +1,6 @@
 import { Channels } from '../../../enums/Channels';
 
 export type ViberParams = {
-  channel: Channels.VIBER;
+  channel: Channels.VIBER | string;
 }
 

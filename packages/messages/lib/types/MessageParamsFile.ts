@@ -6,7 +6,7 @@ import { MessageTypes } from '../enums/MessageTypes';
  * Represents the parameters for a message with a file attachment.
  */
 export type MessageParamsFile = {
-  messageType: MessageTypes.FILE;
+  messageType: MessageTypes.FILE | string;
 
   /**
    * The file attachment content.

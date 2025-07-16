@@ -8,12 +8,12 @@ export type MessageParams = {
   /**
    * The type of message to send.
    */
-  messageType: MessageTypes;
+  messageType: MessageTypes | string;
 
   /**
    * The channel to sent the message through
    */
-  channel: Channels;
+  channel: Channels | string;
 
   /**
    * The ID of the message recipient.

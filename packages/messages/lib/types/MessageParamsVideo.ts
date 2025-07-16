@@ -6,7 +6,7 @@ import { MessageVideoType } from './MessageVideoType';
  * Represents the parameters for a message containing a video.
  */
 export type MessageParamsVideo = {
-  messageType: MessageTypes.VIDEO;
+  messageType: MessageTypes.VIDEO | string;
   /**
    * The video information to be included in the message.
    */

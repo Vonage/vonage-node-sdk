@@ -8,7 +8,7 @@ import { MessengerType } from './MessengerType';
  * @category Parameters
  */
 export type MessengerParams = {
-  channel: Channels.MESSENGER;
+  channel: Channels.MESSENGER | string;
 
   messenger: MessengerType;
 };
