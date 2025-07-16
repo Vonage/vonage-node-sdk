@@ -21,7 +21,6 @@ const config: Config.InitialOptions = {
     'node_modules',
     '<rootDir>/testHelpers/*',
     '<rootDir>/packages/**/__tests__',
-    '<rootDir>/packages/meetings',
   ],
   projects: [
     {
