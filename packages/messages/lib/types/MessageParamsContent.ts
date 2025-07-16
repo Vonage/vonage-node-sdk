@@ -21,7 +21,7 @@ export type MessageContentObject = {
  * Represents the parameters for a message with an content attachment.
  */
 export type MessageParamsContent = {
-  messageType: MessageTypes.CONTENT;
+  messageType: MessageTypes.CONTENT | string;
 
   content: Array<MessageContentObject>
 } & MessageParams;

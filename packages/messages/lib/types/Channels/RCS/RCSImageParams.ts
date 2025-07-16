@@ -8,5 +8,5 @@ export type RCSImageParams = MessageParamsImage & {
   /**
    * The channel to send to. You must provide `rcs` in this field.
    */
-  channel?: Channels.RCS;
+  channel?: Channels.RCS | string;
 };

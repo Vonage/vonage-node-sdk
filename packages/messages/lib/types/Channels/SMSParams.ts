@@ -10,7 +10,7 @@ import { Channels } from '../../enums';
  * @category Parameters
  */
 export type SMSParams = {
-  channel: Channels.SMS;
+  channel: Channels.SMS | string;
 
   /**
    * The duration in seconds the delivery of an SMS will be attempted. By

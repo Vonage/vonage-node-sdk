@@ -6,7 +6,7 @@ import { MessageTypes } from '../enums/MessageTypes';
  * Represents the parameters for a message with audio.
  */
 export type MessageParamsAudio = {
-  messageType: MessageTypes.AUDIO;
+  messageType: MessageTypes.AUDIO | string;
 
   /**
    * The audio message content.

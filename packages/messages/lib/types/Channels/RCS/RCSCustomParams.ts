@@ -9,7 +9,7 @@ export type RCSCustomParams = MessageParams & {
   /**
    * The channel to send to. You must provide `rcs` in this field.
    */
-  channel?: Channels.RCS;
+  channel?: Channels.RCS | string;
 
   /**
    * A custom payload. The schema of a custom object can vary widely.
