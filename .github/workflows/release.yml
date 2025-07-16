@@ -18,6 +18,7 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+        continue-on-error: true
         with:
           ref: 'main'
           fetch-depth: 0

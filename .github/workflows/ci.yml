@@ -1,12 +1,14 @@
 ---
-name: Vonage
+name: Vonage Check
 
 on:
   push:
     branches:
       - 3.x
   pull_request:
+
 permissions: read-all
+
 jobs:
   static:
     name: Static Code Analysis
