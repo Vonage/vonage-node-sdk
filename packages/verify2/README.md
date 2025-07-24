@@ -62,7 +62,7 @@ const { Verify2 } = require('@vonage/verify2')
 
 const credentials = new Auth({
   applicationId: APP_ID,
-  privateKey: PRIAVTE_KEY,
+  privateKey: PRIVATE_KEY,
 })
 const options = {}
 const verifyClient = new Verify2(credentials, options)
