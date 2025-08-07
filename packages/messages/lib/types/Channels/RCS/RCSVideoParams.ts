@@ -8,14 +8,14 @@ import { RCSParams } from './RCSParams';
  * Represents the parameters for sending a video message using RCS.
  */
 export type RCSVideoParams = {
-  messageType: MessageTypes.VIDEO;
+  messageType: MessageTypes.VIDEO | string;
 
   video: MessageVideoType;
 
   /**
    * The channel to send to. You must provide `rcs` in this field.
    */
-  channel?: Channels.RCS;
+  channel?: Channels.RCS | string;
 
   /**
    * The duration in seconds the delivery of a message will be attempted. By

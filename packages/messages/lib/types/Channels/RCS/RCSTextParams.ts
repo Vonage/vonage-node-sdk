@@ -9,7 +9,7 @@ export type RCSTextParams =  {
   /**
    * The channel to send to. You must provide `rcs` in this field.
    */
-  channel?: Channels.RCS;
+  channel?: Channels.RCS | string;
 
   /**
    * The text of the message to send. Limited to 3072 characters, including unicode.

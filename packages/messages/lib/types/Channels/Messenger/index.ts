@@ -39,5 +39,5 @@ export type AnyMessengerChannel = {
   /**
    * The channel through which the message will be sent, which is 'messenger' for Messenger.
    */
-  channel: Channels.MESSENGER
+  channel: Channels.MESSENGER | string;
 } & AnyMessengerParams

@@ -31,5 +31,5 @@ export type AnyMMSChannel = {
   /**
    * The channel through which the message will be sent, which is 'mms' for MMS.
    */
-  channel: Channels.MMS;
+  channel: Channels.MMS | string;
 } & AnyMMSParams;

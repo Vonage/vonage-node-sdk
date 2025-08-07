@@ -8,7 +8,7 @@ import { Channels } from '../../../enums/Channels';
  * @category Parameters
  */
 export type MMSParams = {
-  channel: Channels.MMS;
+  channel: Channels.MMS | string;
 
   ttl?: number;
 } & MessageParams

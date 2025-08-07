@@ -42,5 +42,5 @@ export type WhatsAppAudioRequest = {
   /**
    * The channel through which the message will be sent, which is 'whatsapp' for WhatsApp.
    */
-  channel: 'whatsapp';
+  channel: 'whatsapp' | string;
 }

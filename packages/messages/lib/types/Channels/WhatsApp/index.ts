@@ -57,5 +57,5 @@ export type AnyWhatsAppChannel = {
   /**
    * The channel through which the message will be sent, which is 'whatsapp' for WhatsApp.
    */
-  channel: Channels.WHATSAPP;
+  channel: Channels.WHATSAPP | string;
 } & AnyWhatsAppParams;
