@@ -1,6 +1,6 @@
 import { Accounts, Secrets } from '@vonage/accounts';
 import { Applications } from '@vonage/applications';
-import { Auth, AuthInterface } from '@vonage/auth';
+import { Auth, AuthInterface, AuthParams } from '@vonage/auth';
 import { ConfigParams } from '@vonage/server-client';
 import { Messages } from '@vonage/messages';
 import { NumberInsights } from '@vonage/number-insights';
@@ -22,7 +22,7 @@ export class Vonage {
   /**
    * The credentials used for authentication.
    */
-  protected credentials: AuthInterface;
+  protected credentials: AuthInterface | AuthParams;
 
   /**
    * Optional configuration parameters.
@@ -109,8 +109,8 @@ export class Vonage {
    * @param {AuthInterface} credentials - The authentication credentials.
    * @param {ConfigParams} [options] - Optional configuration parameters.
    */
-  constructor(credentials: AuthInterface, options?: ConfigParams) {
-    if (typeof credentials.getQueryParams === 'undefined') {
+  constructor(credentials: AuthInterface | AuthParams, options?: ConfigParams) {
+    if (!Object.prototype.hasOwnProperty.call(credentials, 'getQueryParams')) {
       credentials = new Auth(credentials);
     }
 
