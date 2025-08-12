@@ -69,6 +69,7 @@ export class Client {
       meetingsHost: options?.meetingsHost || 'https://api-eu.vonage.com',
       responseType: options?.responseType || ResponseTypes.json,
       timeout: options?.timeout || null,
+      appendUserAgent: options?.appendUserAgent || null,
     } as ConfigParams;
   }
 
