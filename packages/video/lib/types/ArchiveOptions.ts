@@ -47,6 +47,8 @@ type BaseArchiveOptions = {
 
   /**
    * Additional properties that control the trascription output
+   * An object containing all transcription properties.
+   * Only valid if `hasTranscription` is true.
    */
   transcriptionProperties?: {
     /**
@@ -63,23 +65,6 @@ type BaseArchiveOptions = {
      * True if the archive should be transcribed.
      */
     hasTranscription?: boolean;
-
-    /**
-     * An object containing all transcription properties.
-     * Only valid if `hasTranscription` is true.
-     */
-    transcriptionProperties?: {
-      /**
-       * The primary language spoken in the archive to be transcribed, in BCP-47 format.
-       * Example: en-US, es-ES, or pt-BR.
-       */
-      primaryLanguageCode?: string;
-
-      /**
-       * True if the transcription should have a summary.
-       */
-      hasSummary?: boolean;
-    };
   }
 }
 
