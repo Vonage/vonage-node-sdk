@@ -1236,6 +1236,144 @@ describe('video', () => {
     expect(resp.connectionId).toBe('CONNECTIONID');
   });
 
+  test('can connect to a websocket with bidirectional flag', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: { 
+          uri: 'wss://mydomain.com/websocket/',
+          bidirectional: true 
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      { 
+        uri: 'wss://mydomain.com/websocket/',
+        bidirectional: true 
+      }
+    );
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
+  });
+
+  test('can connect to a websocket with bidirectional flag set to false', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: { 
+          uri: 'wss://mydomain.com/websocket/',
+          bidirectional: false 
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      { 
+        uri: 'wss://mydomain.com/websocket/',
+        bidirectional: false 
+      }
+    );
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
+  });
+
+  test('can connect to a websocket with bidirectional flag and other properties', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: { 
+          uri: 'wss://mydomain.com/websocket/',
+          streams: ['stream1', 'stream2'],
+          headers: { 'Authorization': 'Bearer token123' },
+          bidirectional: true 
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      { 
+        uri: 'wss://mydomain.com/websocket/',
+        streams: ['stream1', 'stream2'],
+        headers: { 'Authorization': 'Bearer token123' },
+        bidirectional: true 
+      }
+    );
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
+  });
+
+  test('can connect to a websocket with all WebSocketConfig properties including bidirectional', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: { 
+          uri: 'wss://mydomain.com/websocket/',
+          streams: ['stream1', 'stream2'],
+          headers: { 'Authorization': 'Bearer token123', 'Custom-Header': 'value' },
+          audioRate: 16000,
+          bidirectional: true 
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      { 
+        uri: 'wss://mydomain.com/websocket/',
+        streams: ['stream1', 'stream2'],
+        headers: { 'Authorization': 'Bearer token123', 'Custom-Header': 'value' },
+        audioRate: 16000,
+        bidirectional: true 
+      }
+    );
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
+  });
+
   test('can disconnect a websocket', async () => {
     nock(BASE_URL, {
       reqheaders: {
