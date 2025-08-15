@@ -25,4 +25,9 @@ export type WebSocketConfig = {
    * The audio rate to be used for the WebSocket connection.
    */
   audioRate?: AudioRate;
+
+  /**
+   * Whether the WebSocket connection should be bidirectional. By default, this is false.
+   */
+  bidirectional?: boolean;
 }
