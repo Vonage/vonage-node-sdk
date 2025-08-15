@@ -237,10 +237,10 @@ export class Numbers extends Client {
     const resp = await this.sendGetRequest<NumbersAvailableList>(
       `${this.config.restHost}/number/search`,
       {
-        ...( filter.country ? { country: filter.country } : {}),
-        ...( filter.type ? { type: filter.type } : {}),
-        ...( filter.size ? { size: filter.size } : {}),
-        ...( filter.index ? { index: filter.index } : {}),
+        ...(filter.country ? { country: filter.country } : {}),
+        ...(filter.type ? { type: filter.type } : {}),
+        ...(filter.size ? { size: filter.size } : {}),
+        ...(filter.index ? { index: filter.index } : {}),
         ...buildSearch(filter),
         ...(filter.features ? { features: sortFeatures(filter.features) } : {}),
       },
@@ -321,6 +321,7 @@ export class Numbers extends Client {
       },
     );
 
+    // TODO: Next Major Parse errorCode and throw error
     return {
       errorCode: `${resp.data['error-code']}`,
       errorCodeLabel: resp.data['error-code-label'],
