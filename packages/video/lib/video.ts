@@ -332,6 +332,7 @@ export class Video extends Client {
   /**
    * Disconnects a WebSocket connection associated with a call or session.
    *
+   * @deprecated Use disconnectClient() instead, as this endpoint no longer works
    * @param {string} callId - The ID of the call or session to which the WebSocket connection is associated.
    * @return {Promise<void>} A promise that resolves when the WebSocket connection is successfully disconnected.
    * @throws {Error} If an error occurs while disconnecting the WebSocket connection or if the call or session with the given ID does not exist.
