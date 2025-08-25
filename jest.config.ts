@@ -15,11 +15,27 @@ const projectDefault = {
 };
 
 const config: Config.InitialOptions = {
+  globals: {
+    'ts-jest': {
+      tsconfig: './tsconfig.jest.json',
+      useESM: true,
+      diagnostics: false,
+    },
+  },
+  coverageProvider: 'v8',
+  transformIgnorePatterns: ['/node_modules/'],
+  cacheDirectory: process.env.JEST_CACHE_DIR || '<rootDir>/.jest-cache',
+  maxWorkers: '50%',
   extensionsToTreatAsEsm: ['.ts'],
   coverageDirectory: '<rootDir>/coverage/',
+  roots: ['<rootDir>/packages'],
+  testPathIgnorePatterns: ['<rootDir>/packages/.*/dist', '<rootDir>/packages/.*/lib', 'node_modules'],
+  modulePathIgnorePatterns: ['<rootDir>/packages/.*/dist', '<rootDir>/packages/.*/lib'],
   coveragePathIgnorePatterns: [
     'node_modules',
     '<rootDir>/testHelpers/*',
+    '!**/__tests__/**',
+    '!**/*.d.ts',
     '<rootDir>/packages/**/__tests__',
   ],
   projects: [

@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "isolatedModules": true,
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": false,
+    "noEmit": false,
+    "composite": false
+  }
+}
