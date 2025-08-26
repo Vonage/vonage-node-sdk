@@ -1,1 +1,1 @@
-export * from './WhatsAppLanguageCodes';
+export * from './WhatsAppLanguageCodes.js';

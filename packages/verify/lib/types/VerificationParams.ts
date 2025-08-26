@@ -1,4 +1,4 @@
-import { VerifyWorkflows, VerifyLanguages } from '../enums';
+import { VerifyWorkflows, VerifyLanguages } from '../enums/index.js';
 
 /**
  * Represents parameters for a verification request.

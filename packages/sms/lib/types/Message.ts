@@ -1,4 +1,4 @@
-import { SMSMessageResponse } from './Responses';
+import { SMSMessageResponse } from './Responses/index.js';
 
 /**
  * Type representing an SMS message.

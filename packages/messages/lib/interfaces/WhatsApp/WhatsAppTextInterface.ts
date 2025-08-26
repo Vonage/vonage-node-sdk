@@ -1,5 +1,5 @@
-import { MessageTextInterface } from '../MessageTextInterface';
-import { WhatsAppChannelInterface } from './WhatsAppChannelInterface';
+import { MessageTextInterface } from '../MessageTextInterface.js';
+import { WhatsAppChannelInterface } from './WhatsAppChannelInterface.js';
 
 /**
  * Represents an interface for WhatsApp text messages.
@@ -10,4 +10,4 @@ import { WhatsAppChannelInterface } from './WhatsAppChannelInterface';
  */
 export interface WhatsAppTextInterface
   extends MessageTextInterface,
-    WhatsAppChannelInterface {}
+  WhatsAppChannelInterface { }

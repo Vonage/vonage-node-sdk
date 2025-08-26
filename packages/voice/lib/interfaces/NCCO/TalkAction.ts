@@ -1,4 +1,4 @@
-import { TalkAction as TalkActionType } from '../../types';
+import { TalkAction as TalkActionType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

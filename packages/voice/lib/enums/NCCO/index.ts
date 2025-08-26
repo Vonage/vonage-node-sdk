@@ -1,3 +1,3 @@
-export * from './ConnectEventType';
-export * from './MachineDetection';
-export * from './RecordingFormat';
+export * from './ConnectEventType.js';
+export * from './MachineDetection.js';
+export * from './RecordingFormat.js';

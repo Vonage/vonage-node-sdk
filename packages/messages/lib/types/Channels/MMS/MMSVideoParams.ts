@@ -1,6 +1,6 @@
-import { MessageParams } from '../../MessageParams';
-import { MessageVideoType } from '../../MessageVideoType';
-import { MMSParams } from './MMSParams';
+import { MessageParams } from '../../MessageParams.js';
+import { MessageVideoType } from '../../MessageVideoType.js';
+import { MMSParams } from './MMSParams.js';
 
 /**
  * Represents the parameters for sending a video message on the MMS channel.

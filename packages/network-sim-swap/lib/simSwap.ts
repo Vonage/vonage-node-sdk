@@ -1,6 +1,6 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
 import { NetworkClient, Purpose, Scope } from '@vonage/network-client';
-import { SIMSwapResponse, SIMSwapParameters } from './types';
+import { SIMSwapResponse, SIMSwapParameters } from './types/index.js';
 
 export class SIMSwap extends NetworkClient {
   protected authType?: AuthenticationType.CIBA = AuthenticationType.CIBA;

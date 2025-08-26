@@ -1,1 +1,1 @@
-export * from './ServiceType';
+export * from './ServiceType.js';

@@ -1,6 +1,6 @@
-import { AbstractVideoMessage } from '../';
-import { RCSVideoParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractVideoMessage } from '../AbstractVideoMessage.js';
+import { RCSVideoParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents an video message for the RCS channel.

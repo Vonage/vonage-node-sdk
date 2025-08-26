@@ -1,4 +1,4 @@
-import { BroadcastDetailsResponse } from './BroadcastDetailsResponse';
+import { BroadcastDetailsResponse } from './BroadcastDetailsResponse.js';
 
 /**
  * Represents a response containing multiple broadcast details items.

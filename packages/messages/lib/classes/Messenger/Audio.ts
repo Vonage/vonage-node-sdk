@@ -1,10 +1,10 @@
-import { AudioObject  } from '../../interfaces';
-import { MessageType } from '../../interfaces/Messenger/MessageType';
+import { AudioObject } from '../../interfaces/index.js';
+import { MessageType } from '../../interfaces/Messenger/MessageType.js';
 import {
   MessageAudioType,
   MessengerType,
-} from '../../types';
-import { MessengerAudio } from './MessengerAudio';
+} from '../../types/index.js';
+import { MessengerAudio } from './MessengerAudio.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:messenger');

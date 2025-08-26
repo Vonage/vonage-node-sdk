@@ -1,24 +1,11 @@
 {
-    "extends": "../../tsconfig.json",
-
-    "compilerOptions": {
-        "rootDir": "lib",
-        "outDir": "dist/lib"
-    },
-
-    "exclude": [
-        "__tests__",
-        "jest.config.js",
-        "dist"
-    ],
-
-    "references": [
-        { "path": "../auth" },
-        { "path": "../server-client" },
-        { "path": "../vetch" }
-    ],
-
-    "ts-node": {
-        "esm": true
-    }
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "lib",
+    "noEmit": true
+  },
+  "exclude": [
+    "__tests__",
+    "dist"
+  ]
 }

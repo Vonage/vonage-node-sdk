@@ -1,12 +1,12 @@
-import { ViberChannel } from './viberChannel';
-import { WhatsappChannel } from './whatsappChannel';
-import { MmsChannel } from './mmsChannel';
-import { SmsChannel } from './smsChannel';
-import { WebsocketChannel } from './websocketChannel';
-import { VbcChannel } from './vbcChannel';
-import { MessengerChannel } from './messengerChannel';
-import { PstnChannel } from './pstnChannel';
-import { SipChannel } from './sipChannel';
+import { ViberChannel } from './viberChannel.js';
+import { WhatsappChannel } from './whatsappChannel.js';
+import { MmsChannel } from './mmsChannel.js';
+import { SmsChannel } from './smsChannel.js';
+import { WebsocketChannel } from './websocketChannel.js';
+import { VbcChannel } from './vbcChannel.js';
+import { MessengerChannel } from './messengerChannel.js';
+import { PstnChannel } from './pstnChannel.js';
+import { SipChannel } from './sipChannel.js';
 
 /**
  * Represents a user with various properties and communication channels.

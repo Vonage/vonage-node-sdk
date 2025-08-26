@@ -1,4 +1,4 @@
-import { VerifyRequestResponse } from './Response';
+import { VerifyRequestResponse } from './Response/index.js';
 
 /**
  * Represents a Verify request with an additional requestId property.

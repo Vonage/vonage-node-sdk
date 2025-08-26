@@ -1,5 +1,4 @@
-import { Channels } from '../enums';
-import { MessageTypes } from '../enums/MessageTypes';
+import { Channels, MessageTypes } from '../enums/index.js';
 
 /**
  * Represents the parameters for a message.

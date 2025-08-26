@@ -1,5 +1,5 @@
-import { NCCOAction } from './NCCO';
-import { CommonOutboundCall } from './CommonOutboundCall';
+import { NCCOAction } from './NCCO/index.js';
+import { CommonOutboundCall } from './CommonOutboundCall.js';
 
 /**
  * Represents an outbound call with associated Nexmo Call Control Objects (NCCO) actions.

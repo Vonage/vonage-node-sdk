@@ -1,8 +1,8 @@
-import { VBCEndpoint as VBCEndpointType } from '../../types/Endpoint/VBCEndpoint';
+import { VBCEndpoint as VBCEndpointType } from '../../types/Endpoint/VBCEndpoint.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(
-   
+
   'This class is deprecated. Please update to use the VBCEndpointType type instead',
 );
 

@@ -1,5 +1,5 @@
 import { APILinks } from '@vonage/server-client';
-import { BalanceTransferResponse } from './balanceTransferResponse';
+import { BalanceTransferResponse } from './balanceTransferResponse.js';
 
 /**
  * Type definition for the response representing a page of balance transfers,

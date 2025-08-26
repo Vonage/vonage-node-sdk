@@ -1,4 +1,4 @@
-import { SortOrder } from '../../enums';
+import { SortOrder } from '../../enums/index.js';
 
 /**
  * Parameters for listing users.

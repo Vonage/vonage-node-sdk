@@ -1,6 +1,6 @@
-import { CustomPayload } from '../../interfaces/WhatsApp/CustomPayload';
-import { WhatsAppCustomType } from '../../types';
-import { WhatsAppCustom } from './WhatsAppCustom';
+import { CustomPayload } from '../../interfaces/WhatsApp/CustomPayload.js';
+import { WhatsAppCustomType } from '../../types/index.js';
+import { WhatsAppCustom } from './WhatsAppCustom.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:whatsapp');

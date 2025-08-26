@@ -1,4 +1,4 @@
-import { Session, SessionUser } from '../session';
+import { Session, SessionUser } from '../session.js';
 
 /**
  * A session as its returned from the API

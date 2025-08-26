@@ -1,6 +1,6 @@
-import { AbstractImageMessage } from '../AbstractImageMessage';
-import { MessageParamsImage } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractImageMessage } from '../AbstractImageMessage.js';
+import { MessageParamsImage } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents an image message for the MMS channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class MMSImage
   extends AbstractImageMessage
-  implements MessageParamsImage
-{
+  implements MessageParamsImage {
   /**
    * The channel for this message (always 'mms').
    */

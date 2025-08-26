@@ -1,10 +1,10 @@
-import { CapabilityBulk } from './CapabilityBulk';
-import { CapabilityMeetings } from './CapabilityMeetings';
-import { CapabilityMessages } from './CapabilityMessages';
-import { CapabilityRTC } from './CapabilityRTC';
-import { CapabilityVerify } from './CapabilityVerify';
-import { CapabilityVoice } from './CapabilityVoice';
-import { CapabilityWebhook } from './CapabilityWebhook';
+import { CapabilityBulk } from './CapabilityBulk.js';
+import { CapabilityMeetings } from './CapabilityMeetings.js';
+import { CapabilityMessages } from './CapabilityMessages.js';
+import { CapabilityRTC } from './CapabilityRTC.js';
+import { CapabilityVerify } from './CapabilityVerify.js';
+import { CapabilityVoice } from './CapabilityVoice.js';
+import { CapabilityWebhook } from './CapabilityWebhook.js';
 
 export type AnyCapability = CapabilityBulk |
   CapabilityMeetings |

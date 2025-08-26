@@ -1,15 +1,13 @@
-import { AbstractMessage } from './AbstractMessage';
-import { MessageImageType } from '../types';
-import { MessageParamsImage } from '../types';
-import { MessageTypes } from '../enums/MessageTypes';
+import { AbstractMessage } from './AbstractMessage.js';
+import { MessageImageType, MessageParamsImage } from '../types/index.js';
+import { MessageTypes } from '../enums/MessageTypes.js';
 
 /**
  * An abstract base class for image messages.
  */
 export abstract class AbstractImageMessage
   extends AbstractMessage
-  implements MessageParamsImage
-{
+  implements MessageParamsImage {
   /**
    * The type of message (always 'image').
    */

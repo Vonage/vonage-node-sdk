@@ -1,7 +1,6 @@
-import { WhatsAppChannelInterface } from './WhatsAppChannelInterface';
-import { MessageInterface } from '../MessageInterface';
-import { WhatsAppPolicyType } from '../../types';
-import { WhatsAppTemplateType } from '../../types';
+import { WhatsAppChannelInterface } from './WhatsAppChannelInterface.js';
+import { MessageInterface } from '../MessageInterface.js';
+import { WhatsAppTemplateType, WhatsAppPolicyType } from '../../types/index.js';
 
 /**
  * Represents an interface for WhatsApp template messages.
@@ -12,7 +11,7 @@ import { WhatsAppTemplateType } from '../../types';
  */
 export interface WhatsAppTemplateInterface
   extends WhatsAppChannelInterface,
-    MessageInterface {
+  MessageInterface {
   /**
    * Specifies the type of message, which is "template" for template messages.
    */

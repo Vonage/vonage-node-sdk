@@ -1,9 +1,10 @@
-import { NCCOActions } from '../../enums';
-import { ConnectEventType } from '../../enums';
-import { MachineDetection } from '../../enums';
-import { ConnectAction } from '../../types';
-import { Serializable } from '../../ncco';
-import { CallEndpoint } from '../../types';
+import {
+  MachineDetection,
+  ConnectEventType,
+  NCCOActions
+} from '../../enums/index.js';
+import { CallEndpoint, ConnectAction } from '../../types/index.js';
+import { Serializable } from '../../ncco.js';
 
 /**
  * Represents a Connect action in the Nexmo Call Control Object (NCCO) for making voice calls.

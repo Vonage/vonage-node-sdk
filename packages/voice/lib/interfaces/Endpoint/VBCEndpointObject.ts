@@ -1,4 +1,4 @@
-import { VBCEndpoint } from '../../types';
+import { VBCEndpoint } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

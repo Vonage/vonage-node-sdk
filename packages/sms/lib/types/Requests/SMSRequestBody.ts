@@ -1,4 +1,4 @@
-import { MessageClassEnum, TypeEnum } from '../../enums';
+import { MessageClassEnum, TypeEnum } from '../../enums/index.js';
 
 /**
  * Interface representing the request body for sending an SMS.

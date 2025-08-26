@@ -1,1 +1,1 @@
-export * from './fraudParameters';
+export * from './fraudParameters.js';

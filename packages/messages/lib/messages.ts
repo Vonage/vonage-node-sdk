@@ -6,9 +6,9 @@ import {
   MessageSuccessResponse,
   AnyChannel,
   MessageWithFailover,
-} from './types';
+} from './types/index.js';
 import debug from 'debug';
-import { UpdateMessageStatus } from './enums/UpdateMessageStatus';
+import { UpdateMessageStatus } from './enums/UpdateMessageStatus.js';
 
 const log = debug('vonage:messages');
 
@@ -136,7 +136,7 @@ export class Messages extends Client {
     // This endpoint returns a 202 so we don't need to parse the response
     await this.sendPatchRequest<MessageSuccessResponse>(
       `${this.config.apiHost}/v1/messages/${messageId}`,
-      {status: status},
+      { status: status },
     );
     return true;
   }

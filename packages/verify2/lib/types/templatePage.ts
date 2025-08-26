@@ -1,5 +1,5 @@
 import { APILink } from '@vonage/server-client';
-import { Template } from './template';
+import { Template } from './template.js';
 
 /**
  * Value object for a page of templates with camelCase properties.

@@ -1,5 +1,5 @@
-import { WhatsAppChannelInterface } from './WhatsAppChannelInterface';
-import { MessageImageInterface } from '../MessageImageInterface';
+import { WhatsAppChannelInterface } from './WhatsAppChannelInterface.js';
+import { MessageImageInterface } from '../MessageImageInterface.js';
 
 /**
  * Represents an interface for WhatsApp image messages.
@@ -10,4 +10,4 @@ import { MessageImageInterface } from '../MessageImageInterface';
  */
 export interface WhatsAppImageInterface
   extends WhatsAppChannelInterface,
-    MessageImageInterface {}
+  MessageImageInterface { }

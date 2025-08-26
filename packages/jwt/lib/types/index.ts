@@ -1,3 +1,3 @@
-export * from './claims';
-export * from './generatorOptions';
-export * from './acl';
+export * from './claims.js';
+export * from './generatorOptions.js';
+export * from './acl.js';

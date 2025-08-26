@@ -1,6 +1,6 @@
-import { MessageFileType } from '../../MessageFileType';
-import { MessageParamsFile } from '../../MessageParamsFile';
-import { MessengerParams } from './MessengerParams';
+import { MessageFileType } from '../../MessageFileType.js';
+import { MessageParamsFile } from '../../MessageParamsFile.js';
+import { MessengerParams } from './MessengerParams.js';
 
 /**
  * Represents parameters for sending a file message via the Messenger platform.

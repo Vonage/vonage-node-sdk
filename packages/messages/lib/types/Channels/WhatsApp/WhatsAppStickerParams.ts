@@ -1,6 +1,6 @@
-import { WhatsAppParams } from './WhatsAppParams';
-import { WhatsAppStickerIdType } from './WhatsAppStickerIdType';
-import { WhatsAppStickerUrlType } from './WhatsAppStickerUrlType';
+import { WhatsAppParams } from './WhatsAppParams.js';
+import { WhatsAppStickerIdType } from './WhatsAppStickerIdType.js';
+import { WhatsAppStickerUrlType } from './WhatsAppStickerUrlType.js';
 
 /**
  * Represents WhatsApp sticker parameters for sending stickers in a message.

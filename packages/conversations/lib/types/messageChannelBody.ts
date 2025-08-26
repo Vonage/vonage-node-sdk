@@ -1,5 +1,5 @@
-import { ChannelType } from '../enums';
-import { AnyChannel } from './anyChannel';
+import { ChannelType } from '../enums/index.js';
+import { AnyChannel } from './anyChannel.js';
 
 export type MessageChannelBody = {
   /**

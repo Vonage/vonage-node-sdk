@@ -1,6 +1,6 @@
-import { MessageParams } from '../../MessageParams';
-import { Channels } from '../../../enums';
-import { RCSParams } from './RCSParams';
+import { MessageParams } from '../../MessageParams.js';
+import { Channels } from '../../../enums/index.js';
+import { RCSParams } from './RCSParams.js';
 
 /**
  * Represents the parameters for sending a custom message using RCS.

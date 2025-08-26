@@ -1,5 +1,5 @@
-import { MMSChannelInterface } from './MMSChannelInterface';
-import { MessageVCardInterface } from '../MessageVCardInterface';
+import { MMSChannelInterface } from './MMSChannelInterface.js';
+import { MessageVCardInterface } from '../MessageVCardInterface.js';
 
 /**
  * Represents an interface for defining MMS channel messages with vCards.
@@ -10,4 +10,4 @@ import { MessageVCardInterface } from '../MessageVCardInterface';
  */
 export interface MMSVcardInterface
   extends MessageVCardInterface,
-    MMSChannelInterface {}
+  MMSChannelInterface { }

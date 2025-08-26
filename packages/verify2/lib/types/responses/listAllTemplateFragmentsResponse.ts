@@ -1,5 +1,5 @@
 import { APILinks } from '@vonage/server-client';
-import { TemplateFragmentResponse } from './templateFragmentResponse';
+import { TemplateFragmentResponse } from './templateFragmentResponse.js';
 
 /**
  * The response when listing all template fragments, including pagination.

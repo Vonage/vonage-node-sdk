@@ -1,4 +1,4 @@
-import { NCCOActions } from '../../enums';
+import { NCCOActions } from '../../enums/index.js';
 
 /**
  * Represents a Nexmo Call Control Object (NCCO) action for starting a conversation within a call.

@@ -1,5 +1,5 @@
-import { VideoObject } from '../../interfaces';
-import { WhatsAppVideo } from './WhatsAppVideo';
+import { VideoObject } from '../../interfaces/index.js';
+import { WhatsAppVideo } from './WhatsAppVideo.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:whatsapp');

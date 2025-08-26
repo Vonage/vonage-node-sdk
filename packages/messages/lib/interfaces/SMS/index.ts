@@ -1,1 +1,1 @@
-export * from './SMSTextInterface';
+export * from './SMSTextInterface.js';

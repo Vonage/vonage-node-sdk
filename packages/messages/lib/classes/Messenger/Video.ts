@@ -1,8 +1,8 @@
-import { MessengerCategory } from '../../enums';
-import { MessageType } from '../../interfaces/Messenger/MessageType';
-import { VideoObject } from '../../interfaces';
-import { MessengerType } from '../../types';
-import { MessengerVideo } from './MessengerVideo';
+import { MessengerCategory } from '../../enums/index.js';
+import { MessageType } from '../../interfaces/Messenger/MessageType.js';
+import { VideoObject } from '../../interfaces/index.js';
+import { MessengerType } from '../../types/index.js';
+import { MessengerVideo } from './MessengerVideo.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:messenger');

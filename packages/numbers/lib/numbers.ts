@@ -1,5 +1,5 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
-import { Feature, SearchPattern } from './enums';
+import { Feature, SearchPattern } from './enums/index.js';
 import omit from 'lodash.omit';
 import {
   NumbersAvailableList,
@@ -11,7 +11,7 @@ import {
   NumbersSearchSimple,
   NumbersSearchFilter,
   NumbersUpdateParams,
-} from './types';
+} from './types/index.js';
 
 const buildSearch = ({
   endsWith,

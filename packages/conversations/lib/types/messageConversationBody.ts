@@ -1,4 +1,4 @@
-import { ConversationState } from '../enums';
+import { ConversationState } from '../enums/index.js';
 
 export type MessageConversationBody = {
   /**

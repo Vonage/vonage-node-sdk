@@ -1,6 +1,6 @@
-import { EventType } from '../enums';
-import { AnyMessageBody } from './anyMessageBody';
-import { EventUser } from './eventUser';
+import { EventType } from '../enums/index.js';
+import { AnyMessageBody } from './anyMessageBody.js';
+import { EventUser } from './eventUser.js';
 
 export type Event = {
   /**

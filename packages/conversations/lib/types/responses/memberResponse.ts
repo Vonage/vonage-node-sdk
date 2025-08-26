@@ -1,7 +1,7 @@
 import { APILinks } from '@vonage/server-client';
-import { MemberState } from '../../enums';
-import { AnyChannel } from '../anyChannel';
-import { MemberUserResponse } from './memberUserResponse';
+import { MemberState } from '../../enums/index.js';
+import { AnyChannel } from '../anyChannel.js';
+import { MemberUserResponse } from './memberUserResponse.js';
 
 export type AudioSettingsResponse = {
   /**

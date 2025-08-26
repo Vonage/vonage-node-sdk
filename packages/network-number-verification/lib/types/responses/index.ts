@@ -1,1 +1,1 @@
-export * from './numberVerificationResponse';
+export * from './numberVerificationResponse.js';

@@ -1,5 +1,5 @@
-import { MessageParamsText } from '../../MessageParamsText';
-import { MessengerParams } from './MessengerParams';
+import { MessageParamsText } from '../../MessageParamsText.js';
+import { MessengerParams } from './MessengerParams.js';
 
 /**
  * Represents parameters for sending a text message via the Messenger platform.

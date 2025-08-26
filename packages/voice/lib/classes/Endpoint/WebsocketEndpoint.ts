@@ -1,9 +1,9 @@
-import { WebsocketBitrate } from '../../enums';
-import { WebsocketEndpoint as WebsocketEndpointType } from '../../types/Endpoint/WebsocketEndpoint';
+import { WebsocketBitrate } from '../../enums/index.js';
+import { WebsocketEndpoint as WebsocketEndpointType } from '../../types/Endpoint/WebsocketEndpoint.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(
-   
+
   'This class is deprecated. Please update to use the WebsocketEndpointType type instead',
 );
 

@@ -1,4 +1,4 @@
-import { WhatsAppText } from './WhatsAppText';
+import { WhatsAppText } from './WhatsAppText.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:whatsapp');

@@ -1,6 +1,6 @@
-import { NCCOActions } from '../../enums';
-import { DTMFSettings } from './DTMFSettings';
-import { SpeechSettings } from './SpeechSettings';
+import { NCCOActions } from '../../enums/index.js';
+import { DTMFSettings } from './DTMFSettings.js';
+import { SpeechSettings } from './SpeechSettings.js';
 
 /**
  * Represents an Input action in a Nexmo Call Control Object (NCCO).

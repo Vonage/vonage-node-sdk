@@ -1,5 +1,5 @@
-import { CapabilityWebhookResponse } from './CapabilityWebhookResponse';
-import { CapabilityMessages } from '../CapabilityMessages';
+import { CapabilityWebhookResponse } from './CapabilityWebhookResponse.js';
+import { CapabilityMessages } from '../CapabilityMessages.js';
 
 /**
  * Represents the response for messages-related capabilities configuration.

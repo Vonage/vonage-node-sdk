@@ -1,4 +1,4 @@
-import { UpdateMessageStatus } from '../../enums';
+import { UpdateMessageStatus } from '../../enums/index.js';
 
 /**
  * The request object for the {@link Messages.update} method.

@@ -1,5 +1,5 @@
-import { ImageObject } from '../../interfaces';
-import { WhatsAppImage } from './WhatsAppImage';
+import { ImageObject } from '../../interfaces/index.js';
+import { WhatsAppImage } from './WhatsAppImage.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:whatsapp');

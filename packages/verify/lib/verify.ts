@@ -1,5 +1,5 @@
 import { Client, AuthenticationType } from '@vonage/server-client';
-import { Command } from './enums';
+import { Command } from './enums/index.js';
 import {
   VerifyControl,
   VerifyControlError,
@@ -17,7 +17,7 @@ import {
   VerifyRequest,
   VerificationParameters,
   PSD2Parameters,
-} from './types';
+} from './types/index.js';
 import omit from 'lodash.omit';
 
 /**
@@ -78,7 +78,7 @@ export class Verify extends Client {
    *   console.log(result.errorText);
    * }
    * ```
-   * 
+   *
    * @example
    * Trigger the next event for a verification request
    * ```ts
@@ -103,10 +103,10 @@ export class Verify extends Client {
       cmd: command,
     };
 
-     
+
     const resp = await this.sendPostRequest<
-            VerifyControlResponse | VerifyControlErrorResponse
-        >(`${this.config.apiHost}/verify/control/json`, data);
+      VerifyControlResponse | VerifyControlErrorResponse
+    >(`${this.config.apiHost}/verify/control/json`, data);
     return Client.transformers.camelCaseObjectKeys(
       resp.data,
       true,
@@ -195,13 +195,13 @@ export class Verify extends Client {
     requestId: string,
     code: string,
   ): Promise<VerifyCheck | VerifyCheckError> {
-     
+
     const resp = await this.sendPostRequest<
-            VerifyRequestResponse | VerifyRequestErrorResponse
-        >(`${this.config.apiHost}/verify/check/json`, {
-          request_id: requestId,
-          code: code,
-        });
+      VerifyRequestResponse | VerifyRequestErrorResponse
+    >(`${this.config.apiHost}/verify/check/json`, {
+      request_id: requestId,
+      code: code,
+    });
 
     return Client.transformers.camelCaseObjectKeys(
       resp.data,
@@ -282,9 +282,9 @@ export class Verify extends Client {
     request: VerificationParameters | PSD2Parameters,
   ): Promise<VerifyError | VerifyRequest> {
     const url
-            = 'brand' in request
-              ? `${this.config.apiHost}/verify/json`
-              : `${this.config.apiHost}/verify/psd2/json`;
+      = 'brand' in request
+        ? `${this.config.apiHost}/verify/json`
+        : `${this.config.apiHost}/verify/psd2/json`;
 
     const resp = await this.sendPostRequest<VerifyCheckResponse>(
       url,

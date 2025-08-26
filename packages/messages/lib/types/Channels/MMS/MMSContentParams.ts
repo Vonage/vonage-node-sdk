@@ -1,5 +1,5 @@
-import { MessageParamsContent } from '../../MessageParamsContent';
-import { MMSParams } from './MMSParams';
+import { MessageParamsContent } from '../../MessageParamsContent.js';
+import { MMSParams } from './MMSParams.js';
 
 /**
  * Represents parameters for sending a content message via MMS with action buttons.

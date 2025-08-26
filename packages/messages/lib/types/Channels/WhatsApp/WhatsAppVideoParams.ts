@@ -1,5 +1,5 @@
-import { MessageParamsVideo } from '../../MessageParamsVideo';
-import { WhatsAppParams } from './WhatsAppParams';
+import { MessageParamsVideo } from '../../MessageParamsVideo.js';
+import { WhatsAppParams } from './WhatsAppParams.js';
 
 /**
  * Represents a video message type for WhatsApp.

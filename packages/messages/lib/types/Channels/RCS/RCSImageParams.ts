@@ -1,5 +1,5 @@
-import { MessageParamsImage } from '../../MessageParamsImage';
-import { Channels } from '../../../enums';
+import { MessageParamsImage } from '../../MessageParamsImage.js';
+import { Channels } from '../../../enums/index.js';
 
 /**
  * Represents the parameters for sending an image message using RCS.

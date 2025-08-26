@@ -1,4 +1,4 @@
-import { GetCallDetailsParameters } from '../Parameters';
+import { GetCallDetailsParameters } from '../Parameters/index.js';
 
 /**
  * Represents the request payload for retrieving call details with various filtering options.
@@ -35,4 +35,4 @@ export type GetCallDetailsRequest = {
 } & Omit<
   GetCallDetailsParameters,
   'dateEnd' | 'dateStart' | 'pageSize' | 'recordIndex' | 'conversationUuid'
-  >;
+>;

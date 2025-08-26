@@ -1,4 +1,4 @@
-import { MessageSIPBody } from './messageSIPBody';
+import { MessageSIPBody } from './messageSIPBody.js';
 
 export type MessageSIPMachineBody = {
   /**

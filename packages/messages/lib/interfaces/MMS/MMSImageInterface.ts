@@ -1,5 +1,5 @@
-import { MessageImageInterface } from '../MessageImageInterface';
-import { MMSChannelInterface } from './MMSChannelInterface';
+import { MessageImageInterface } from '../MessageImageInterface.js';
+import { MMSChannelInterface } from './MMSChannelInterface.js';
 
 /**
  * Represents an interface for defining MMS channel messages with images.
@@ -8,4 +8,4 @@ import { MMSChannelInterface } from './MMSChannelInterface';
  * @ignore
  */
 export interface MMSImageInterface extends
-  MessageImageInterface, MMSChannelInterface {}
+  MessageImageInterface, MMSChannelInterface { }

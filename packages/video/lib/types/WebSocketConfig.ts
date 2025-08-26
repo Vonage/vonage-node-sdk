@@ -1,4 +1,4 @@
-import { AudioRate } from '../enums';
+import { AudioRate } from '../enums/index.js';
 
 /**
  * Configuration options for establishing a WebSocket connection.

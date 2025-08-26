@@ -1,5 +1,5 @@
-import { UserType } from '..';
-import { WebSocketChannelRequest } from './websocketChannelRequest';
+import { UserType } from '../index.js';
+import { WebSocketChannelRequest } from './websocketChannelRequest.js';
 
 /**
  * Represents a request to create or update a user's properties.

@@ -1,1 +1,1 @@
-export * from './numberVerificationRequest';
+export * from './numberVerificationRequest.js';

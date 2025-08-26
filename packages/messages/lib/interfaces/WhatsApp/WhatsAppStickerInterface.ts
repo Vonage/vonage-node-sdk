@@ -1,7 +1,9 @@
-import { WhatsAppChannelInterface } from './WhatsAppChannelInterface';
-import { MessageInterface } from '../MessageInterface';
-import { WhatsAppStickerUrlType } from '../../types';
-import { WhatsAppStickerIdType } from '../../types';
+import { WhatsAppChannelInterface } from './WhatsAppChannelInterface.js';
+import { MessageInterface } from '../MessageInterface.js';
+import {
+  WhatsAppStickerIdType,
+  WhatsAppStickerUrlType
+} from '../../types/index.js';
 
 /**
  * Represents an interface for WhatsApp sticker messages.
@@ -12,7 +14,7 @@ import { WhatsAppStickerIdType } from '../../types';
  */
 export interface WhatsAppStickerInterface
   extends WhatsAppChannelInterface,
-    MessageInterface {
+  MessageInterface {
   /**
    * Specifies the type of message, which is "sticker" for sticker messages.
    */

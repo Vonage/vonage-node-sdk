@@ -1,4 +1,4 @@
-import { MessageChannelBody } from './messageChannelBody';
+import { MessageChannelBody } from './messageChannelBody.js';
 
 export type ASRResult = {
   /**

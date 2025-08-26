@@ -1,4 +1,4 @@
-import { MessengerType } from '../../types';
+import { MessengerType } from '../../types/index.js';
 
 /**
  * Represents an interface for defining the Messenger channel and MessengerType.

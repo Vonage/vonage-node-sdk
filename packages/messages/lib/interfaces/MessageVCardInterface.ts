@@ -1,5 +1,5 @@
-import { MessageInterface } from './MessageInterface';
-import { MessageVcardType } from '../types';
+import { MessageInterface } from './MessageInterface.js';
+import { MessageVcardType } from '../types/index.js';
 /**
  * Represents a VCard message type.
  *

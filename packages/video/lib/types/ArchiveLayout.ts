@@ -1,4 +1,4 @@
-import { LayoutType } from '../enums';
+import { LayoutType } from '../enums/index.js';
 
 /**
  * Represents the layout configuration for an archive.

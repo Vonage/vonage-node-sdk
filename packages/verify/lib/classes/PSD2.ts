@@ -1,5 +1,5 @@
-import { PSD2Parameters } from '../types';
-import { VerifyWorkflows, VerifyLanguages } from '../enums';
+import { PSD2Parameters } from '../types/index.js';
+import { VerifyWorkflows, VerifyLanguages } from '../enums/index.js';
 
 /**
  * Represents parameters for a PSD2 (Payment Services Directive 2) verification

@@ -1,5 +1,5 @@
-import { Channels } from '../../../enums';
-import { MessengerType } from './MessengerType';
+import { Channels } from '../../../enums/index.js';
+import { MessengerType } from './MessengerType.js';
 
 /**
  * Represents parameters specific to the Messenger platform.

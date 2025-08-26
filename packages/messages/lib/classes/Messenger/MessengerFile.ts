@@ -1,7 +1,6 @@
-import { AbstractFileMessage } from '../AbstractFileMessage';
-import { MessageParams, MessengerFileParams } from '../../types';
-import { Channels } from '../../enums';
-import { MessageTypes } from '../../enums/MessageTypes';
+import { AbstractFileMessage } from '../AbstractFileMessage.js';
+import { MessageParams, MessengerFileParams } from '../../types/index.js';
+import { Channels, MessageTypes } from '../../enums/index.js';
 
 /**
  * Represents a file message for the Messenger channel.
@@ -10,8 +9,7 @@ import { MessageTypes } from '../../enums/MessageTypes';
  */
 export class MessengerFile
   extends AbstractFileMessage
-  implements MessengerFileParams, MessageParams
-{
+  implements MessengerFileParams, MessageParams {
   /**
    * The channel for this message (always 'messenger').
    */

@@ -1,4 +1,4 @@
-import { WhatsAppPolicyType, WhatsAppTemplateType } from '../Channels';
+import { WhatsAppPolicyType, WhatsAppTemplateType } from '../Channels/index.js';
 
 /**
  * Represents a request for sending a template message via the WhatsApp channel.

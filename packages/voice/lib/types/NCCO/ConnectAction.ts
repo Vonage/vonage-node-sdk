@@ -1,5 +1,9 @@
-import { CallEndpoint } from '../Endpoint';
-import { NCCOActions, MachineDetection, ConnectEventType } from '../../enums';
+import { CallEndpoint } from '../Endpoint/index.js';
+import {
+  NCCOActions,
+  MachineDetection,
+  ConnectEventType
+} from '../../enums/index.js';
 
 /**
  * Represents a Nexmo Call Control Object (NCCO) action for connecting a call to one or more endpoints.

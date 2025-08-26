@@ -1,4 +1,4 @@
-import { DTMFSettings as DTMFSettingsType } from '../../types';
+import { DTMFSettings as DTMFSettingsType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

@@ -1,6 +1,6 @@
-import { MessageType } from '../../interfaces/Messenger/MessageType';
-import { MessengerType } from '../../types';
-import { MessengerText } from './MessengerText';
+import { MessageType } from '../../interfaces/Messenger/MessageType.js';
+import { MessengerType } from '../../types/index.js';
+import { MessengerText } from './MessengerText.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:messenger');

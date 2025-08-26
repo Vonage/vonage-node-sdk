@@ -26,19 +26,37 @@
       "url": "https://github.com/manchuck"
     }
   ],
-  "main": "dist/lib/index.js",
-  "types": "dist/lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "node": {
+        "import": "./dist/esm/index.js",
+        "require": "./dist/cjs/index.cjs"
+      },
+      "browser": "./dist/unsupportedBrowser.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
   },
   "files": [
-    "dist"
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-    "compile": "npx tsc --build --verbose",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
+    "postbuild": "node ../../scripts/copyUnsupported.js",
+    "build:cjs": "tsc -p tsconfig.build.cjs.json && node -e \"const fs=require('node:fs');const p='dist/cjs';(function w(d){for(const e of fs.readdirSync(d,{withFileTypes:true})) e.isDirectory()?w(d+'/'+e.name):e.name.endsWith('.js')&&fs.renameSync(d+'/'+e.name,d+'/'+e.name.replace(/\\.js$/,'.cjs'));})(p)\"",
+    "build:esm": "tsc -p tsconfig.build.esm.json",
+    "build:types": "tsc -p tsconfig.build.types.json",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

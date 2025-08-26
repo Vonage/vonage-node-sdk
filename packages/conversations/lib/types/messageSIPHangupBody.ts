@@ -1,4 +1,4 @@
-import { MessageSIPDirectionBody } from './messageSIPDirectionBody';
+import { MessageSIPDirectionBody } from './messageSIPDirectionBody.js';
 
 /**
  * Standard SIP and RTC

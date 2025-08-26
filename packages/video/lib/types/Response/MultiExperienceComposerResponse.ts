@@ -1,4 +1,4 @@
-import { ExperienceComposerResponse } from './ExperienceComposerResponse';
+import { ExperienceComposerResponse } from './ExperienceComposerResponse.js';
 
 /**
  * Represents a response containing multiple ExperienceComposerResponse items.

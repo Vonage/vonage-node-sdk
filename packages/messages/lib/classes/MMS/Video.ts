@@ -1,6 +1,6 @@
-import { VideoObject } from '../../interfaces';
-import { MessageVideoType } from '../../types';
-import { MMSVideo } from './MMSVideo';
+import { VideoObject } from '../../interfaces/index.js';
+import { MessageVideoType } from '../../types/index.js';
+import { MMSVideo } from './MMSVideo.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:mms');

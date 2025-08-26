@@ -1,4 +1,4 @@
-import { EventMessageType } from '../enums';
+import { EventMessageType } from '../enums/index.js';
 
 export type MessageTemplateBody = {
   /**
@@ -24,15 +24,15 @@ export type MessageTemplateBody = {
      * Whatsapp settings
      */
     whatsapp: {
-    /**
-     * Template policy
-     */
-     policy: string;
+      /**
+       * Template policy
+       */
+      policy: string;
 
-     /**
-      * Template locale
-      */
-     locale: string;
+      /**
+       * Template locale
+       */
+      locale: string;
     }
   }
 };

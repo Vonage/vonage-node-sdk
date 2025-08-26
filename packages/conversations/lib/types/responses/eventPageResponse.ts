@@ -1,5 +1,5 @@
 import { APILinks } from '@vonage/server-client';
-import { EventResponse } from './eventResponse';
+import { EventResponse } from './eventResponse.js';
 
 export type EventPageResponse = {
   /**

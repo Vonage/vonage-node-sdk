@@ -1,6 +1,6 @@
-import { AbstractVcardMessage } from '../AbstractVcardMessage';
-import { MessageParamsVcard } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractVcardMessage } from '../AbstractVcardMessage.js';
+import { MessageParamsVcard } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a vCard message for the MMS channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class MMSVcard
   extends AbstractVcardMessage
-  implements MessageParamsVcard
-{
+  implements MessageParamsVcard {
   /**
    * The channel for this message (always 'mms').
    */

@@ -1,4 +1,4 @@
-import { ConnectAction as ConnectActionType } from '../../types';
+import { ConnectAction as ConnectActionType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

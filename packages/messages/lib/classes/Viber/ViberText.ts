@@ -1,7 +1,7 @@
-import { AbstractTextMessage } from '../AbstractTextMessage';
-import { ViberActionParams } from '../../types';
-import { ViberTextParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractTextMessage } from '../AbstractTextMessage.js';
+import { ViberActionParams } from '../../types/index.js';
+import { ViberTextParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a text message for the Viber Service channel.
@@ -10,8 +10,7 @@ import { Channels } from '../../enums';
  */
 export class ViberText
   extends AbstractTextMessage
-  implements ViberTextParams
-{
+  implements ViberTextParams {
   /**
    * The channel for this message (always 'viber_service').
    */

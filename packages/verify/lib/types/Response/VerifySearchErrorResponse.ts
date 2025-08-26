@@ -1,4 +1,4 @@
-import { SearchStatus } from '../../enums';
+import { SearchStatus } from '../../enums/index.js';
 
 /**
  * Represents an error response for a Verify search operation.

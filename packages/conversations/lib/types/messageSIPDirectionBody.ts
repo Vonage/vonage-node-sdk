@@ -1,5 +1,5 @@
 import { CallDirection } from '@vonage/voice';
-import { MessageSIPBody } from './messageSIPBody';
+import { MessageSIPBody } from './messageSIPBody.js';
 
 /**
  * Standard SIP and RTC message body with direction

@@ -1,5 +1,5 @@
-import { ViberCategory } from '../../../enums';
-import { ViberAction } from './ViberAction';
+import { ViberCategory } from '../../../enums/index.js';
+import { ViberAction } from './ViberAction.js';
 
 /**
  * Represents parameters for a Viber service message.

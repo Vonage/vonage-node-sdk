@@ -1,4 +1,4 @@
-import { OutboundCountryPricingResponse } from './OutboundCountryPricingResponse';
+import { OutboundCountryPricingResponse } from './OutboundCountryPricingResponse.js';
 
 /**
  * Type representing the response for pricing information of all countries.

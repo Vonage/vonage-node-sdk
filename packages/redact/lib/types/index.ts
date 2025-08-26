@@ -1,1 +1,1 @@
-export * from './transactionParams';
+export * from './transactionParams.js';

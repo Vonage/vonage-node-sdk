@@ -1,14 +1,13 @@
-import { AbstractMessage } from './AbstractMessage';
-import { MessageFileType, MessageParamsFile } from '../types';
-import { MessageTypes } from '../enums/MessageTypes';
+import { AbstractMessage } from './AbstractMessage.js';
+import { MessageFileType, MessageParamsFile } from '../types/index.js';
+import { MessageTypes } from '../enums/MessageTypes.js';
 
 /**
  * An abstract base class for file messages.
  */
 export abstract class AbstractFileMessage
   extends AbstractMessage
-  implements MessageParamsFile
-{
+  implements MessageParamsFile {
   /**
    * The type of message (always 'file').
    */

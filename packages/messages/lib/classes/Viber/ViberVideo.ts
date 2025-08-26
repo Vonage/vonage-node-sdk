@@ -1,6 +1,6 @@
-import { AbstractVideoMessage } from '../AbstractVideoMessage';
-import { ViberVideoParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractVideoMessage } from '../AbstractVideoMessage.js';
+import { ViberVideoParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a video message for the Viber Service channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class ViberVideo
   extends AbstractVideoMessage
-  implements ViberVideoParams
-{
+  implements ViberVideoParams {
   /**
    * The channel for this message (always 'viber_service').
    */

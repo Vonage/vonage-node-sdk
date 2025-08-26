@@ -1,2 +1,2 @@
-export * from './simSwap';
-export * from './types';
+export * from './simSwap.js';
+export * from './types/index.js';

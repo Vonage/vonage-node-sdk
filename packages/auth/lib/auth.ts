@@ -1,14 +1,14 @@
 import { tokenGenerate, GeneratorOptions } from '@vonage/jwt';
-import { createHash, createHmac } from 'crypto';
-import { PathLike, existsSync, readFileSync } from 'fs';
+import { createHash, createHmac } from 'node:crypto';
+import { PathLike, existsSync, readFileSync } from 'node:fs';
 import {
   AuthParams,
   AuthQueryParams,
   SignedHashParams,
   AuthSignedParams,
-} from './types';
-import { AuthInterface } from './interfaces';
-import { AlgorithmTypes } from './enums';
+} from './types/index.js';
+import { AuthInterface } from './interfaces/index.js';
+import { AlgorithmTypes } from './enums/index.js';
 import {
   MissingApiKeyError,
   MissingApiSecretError,
@@ -16,7 +16,7 @@ import {
   InvalidApiSecretError,
   MissingSignatureError,
   InvalidSignatureAlgorithmError,
-} from './errors';
+} from './errors/index.js';
 import debug from 'debug';
 
 const log = debug('vonage:auth');

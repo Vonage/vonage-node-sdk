@@ -1,4 +1,4 @@
-import { BalanceTransfer } from '../balanceTransfer';
+import { BalanceTransfer } from '../balanceTransfer.js';
 
 /**
  * Type definition for the response representing a balance transfer, which includes properties such as

@@ -1,19 +1,20 @@
-import { ViberAction } from './ViberAction';
-import { ViberActionParams } from './ViberActionParams';
-import { ViberFileParams } from './ViberFileParams';
-import { ViberImageParams } from './ViberImageParams';
-import { ViberService } from './ViberService';
-import { ViberTextParams } from './ViberTextParams';
-import { ViberVideoParams } from './ViberVideoParams';
-import { Channels } from '../../../enums';
+import { ViberAction } from './ViberAction.js';
+import { ViberActionParams } from './ViberActionParams.js';
+import { ViberFileParams } from './ViberFileParams.js';
+import { ViberImageParams } from './ViberImageParams.js';
+import { ViberService } from './ViberService.js';
+import { ViberTextParams } from './ViberTextParams.js';
+import { ViberVideoParams } from './ViberVideoParams.js';
+import { Channels } from '../../../enums/index.js';
 
-export * from './ViberAction';
-export * from './ViberActionParams';
-export * from './ViberFileParams';
-export * from './ViberImageParams';
-export * from './ViberService';
-export * from './ViberTextParams';
-export * from './ViberVideoParams';
+export * from './ViberAction.js';
+export * from './ViberActionParams.js';
+export * from './ViberFileParams.js';
+export * from './ViberImageParams.js';
+export * from './ViberService.js';
+export * from './ViberTextParams.js';
+export * from './ViberVideoParams.js';
+
 /**
  * Represents a union type that can be any of the Viber-specific message
  * parameters or configurations.

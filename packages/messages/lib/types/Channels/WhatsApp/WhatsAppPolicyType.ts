@@ -1,4 +1,4 @@
-import { WhatsAppLanguageCode } from '../../../enums';
+import { WhatsAppLanguageCode } from '../../../enums/index.js';
 
 /**
  * Represents a WhatsApp policy type for deterministic messaging.

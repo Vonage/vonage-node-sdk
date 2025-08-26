@@ -1,5 +1,5 @@
-import { CapabilityWebhookResponse } from './CapabilityWebhookResponse';
-import { CapabilityVerify } from '../CapabilityVerify';
+import { CapabilityWebhookResponse } from './CapabilityWebhookResponse.js';
+import { CapabilityVerify } from '../CapabilityVerify.js';
 
 /**
  * Represents the response for verification-related capabilities configuration.

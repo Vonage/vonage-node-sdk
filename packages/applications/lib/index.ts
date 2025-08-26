@@ -11,6 +11,6 @@
  *
  * @packageDocumentation
  */
-export * from './types';
-export * from './enums';
-export * from './applications';
+export * from './types/index.js';
+export * from './enums/index.js';
+export * from './applications.js';

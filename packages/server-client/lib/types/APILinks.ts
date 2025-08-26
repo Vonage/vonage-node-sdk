@@ -1,4 +1,4 @@
-import { APILink } from './APILink';
+import { APILink } from './APILink.js';
 
 /**
  * Represents a set of links in the HAL format.

@@ -1,31 +1,31 @@
-import { WhatsAppAudioParams } from './WhatsAppAudioParams';
-import { WhatsAppCustomParams } from './WhatsAppCustomParams';
-import { WhatsAppFileParams } from './WhatsAppFileParams';
-import { WhatsAppImageParams } from './WhatsAppImageParams';
-import { WhatsAppStickerIdType } from './WhatsAppStickerIdType';
-import { WhatsAppStickerParams } from './WhatsAppStickerParams';
-import { WhatsAppTemplateParams } from './WhatsAppTemplateParams';
-import { WhatsAppTextParams } from './WhatsAppTextParams';
-import { WhatsAppVideoParams } from './WhatsAppVideoParams';
-import { WhatsAppReactionParams } from './WhatsAppReactionParams';
-import { Channels } from '../../../enums';
+import { WhatsAppAudioParams } from './WhatsAppAudioParams.js';
+import { WhatsAppCustomParams } from './WhatsAppCustomParams.js';
+import { WhatsAppFileParams } from './WhatsAppFileParams.js';
+import { WhatsAppImageParams } from './WhatsAppImageParams.js';
+import { WhatsAppStickerIdType } from './WhatsAppStickerIdType.js';
+import { WhatsAppStickerParams } from './WhatsAppStickerParams.js';
+import { WhatsAppTemplateParams } from './WhatsAppTemplateParams.js';
+import { WhatsAppTextParams } from './WhatsAppTextParams.js';
+import { WhatsAppVideoParams } from './WhatsAppVideoParams.js';
+import { WhatsAppReactionParams } from './WhatsAppReactionParams.js';
+import { Channels } from '../../../enums/index.js';
 
-export * from './WhatsAppAudioParams';
-export * from './WhatsAppCustomParams';
-export * from './WhatsAppCustomType';
-export * from './WhatsAppFileParams';
-export * from './WhatsAppImageParams';
-export * from './WhatsAppPolicyType';
-export * from './WhatsAppStickerIdType';
-export * from './WhatsAppStickerParams';
-export * from './WhatsAppStickerUrlType';
-export * from './WhatsAppTemplateParams';
-export * from './WhatsAppTemplateType';
-export * from './WhatsAppTextParams';
-export * from './WhatsAppVideoParams';
-export * from './WhatsAppParams';
-export * from './WhatsAppReactionParams';
-export * from './WhatAppReactionType';
+export * from './WhatsAppAudioParams.js';
+export * from './WhatsAppCustomParams.js';
+export * from './WhatsAppCustomType.js';
+export * from './WhatsAppFileParams.js';
+export * from './WhatsAppImageParams.js';
+export * from './WhatsAppPolicyType.js';
+export * from './WhatsAppStickerIdType.js';
+export * from './WhatsAppStickerParams.js';
+export * from './WhatsAppStickerUrlType.js';
+export * from './WhatsAppTemplateParams.js';
+export * from './WhatsAppTemplateType.js';
+export * from './WhatsAppTextParams.js';
+export * from './WhatsAppVideoParams.js';
+export * from './WhatsAppParams.js';
+export * from './WhatsAppReactionParams.js';
+export * from './WhatAppReactionType.js';
 
 /**
  * Represents a union type that can be any of the WhatsApp-specific message

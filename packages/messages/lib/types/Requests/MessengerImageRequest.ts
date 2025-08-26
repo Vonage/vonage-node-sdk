@@ -1,4 +1,4 @@
-import { MessengerType } from '../Channels';
+import { MessengerType } from '../Channels/index.js';
 
 /**
  * Represents a request to send an image message via the Messenger channel.

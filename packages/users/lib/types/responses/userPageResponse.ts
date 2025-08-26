@@ -1,5 +1,5 @@
 import { APILinks } from '@vonage/server-client';
-import { UserResponse } from './userResponse';
+import { UserResponse } from './userResponse.js';
 
 /**
  * Represents a page response containing a list of users.

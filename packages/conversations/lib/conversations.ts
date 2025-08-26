@@ -24,7 +24,7 @@ import {
   EventPageResponse,
   EventPage,
   ListEventParameters,
-} from './types';
+} from './types/index.js';
 
 const apiToConversation = (response: ConversationResponse): Conversation => {
   const customData = response.properties?.custom_data;
@@ -45,13 +45,13 @@ const conversationToApi = (
   conversation: Conversation,
 ): CreateConversationRequest => {
   const customData = conversation.properties?.customData;
-  const apiConversation  = Client.transformers.snakeCaseObjectKeys(
+  const apiConversation = Client.transformers.snakeCaseObjectKeys(
     Client.transformers.omit(
       ['id', 'sequenceNumber', 'timestamp', 'state'],
       conversation,
     ),
     true,
-  )as CreateConversationRequest;
+  ) as CreateConversationRequest;
 
   if (apiConversation?.properties?.custom_data && customData) {
     apiConversation.properties.custom_data = customData;
@@ -464,7 +464,7 @@ export class Conversations extends Client {
     );
 
     return {
-      sessions: (resp.data._embedded?.sessions|| []).map(
+      sessions: (resp.data._embedded?.sessions || []).map(
         apiToSession,
       ),
       pageSize: resp.data.page_size,
@@ -752,7 +752,7 @@ export class Conversations extends Client {
         apiToEvent,
       ),
       links: resp.data._links,
-    } ;
+    };
   }
 
   /**

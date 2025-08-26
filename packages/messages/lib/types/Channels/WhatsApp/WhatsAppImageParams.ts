@@ -1,5 +1,5 @@
-import { MessageParamsImage } from '../../MessageParamsImage';
-import { WhatsAppParams } from './WhatsAppParams';
+import { MessageParamsImage } from '../../MessageParamsImage.js';
+import { WhatsAppParams } from './WhatsAppParams.js';
 
 /**
  * Represents a WhatsApp image message type.

@@ -1,8 +1,8 @@
-import { WhatsAppLanguageCode } from '../../enums';
-import { MessageTemplate } from '../../interfaces/WhatsApp/MessageTemplate';
-import { WhatsAppTemplate } from './WhatsAppTemplate';
+import { WhatsAppLanguageCode } from '../../enums/index.js';
+import { MessageTemplate } from '../../interfaces/WhatsApp/MessageTemplate.js';
+import { WhatsAppTemplate } from './WhatsAppTemplate.js';
 import debug from 'debug';
-import { WhatsAppTemplateParams } from '../../types';
+import { WhatsAppTemplateParams } from '../../types/index.js';
 
 const log = debug('vonage:messages:whatsapp');
 

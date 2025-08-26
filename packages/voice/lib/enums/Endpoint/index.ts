@@ -1,1 +1,1 @@
-export * from './WebsocketBitrate';
+export * from './WebsocketBitrate.js';

@@ -1,4 +1,4 @@
-import { MessageCategory } from '../../enums/Viber/MessageCategory';
+import { MessageCategory } from '../../enums/Viber/MessageCategory.js';
 
 /**
  * Represents a message configuration. for Viber

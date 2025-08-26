@@ -1,4 +1,4 @@
-import { CallerType } from '../../enums';
+import { CallerType } from '../../enums/index.js';
 
 /**
  * Type representing the identity of a caller.

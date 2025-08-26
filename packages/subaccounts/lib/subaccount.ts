@@ -17,7 +17,7 @@ import {
   BalanceTransferResponse,
   BalanceTransferParameters,
   NumberTransfer,
-} from './types';
+} from './types/index.js';
 
 const apiToSubAccount = (subAccount: SubAccountResponse): SubAccount =>
   Client.transformers.camelCaseObjectKeys(subAccount, true) as SubAccount;

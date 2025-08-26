@@ -1,1 +1,1 @@
-export * from './simSwapParameters';
+export * from './simSwapParameters.js';

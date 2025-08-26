@@ -1,4 +1,4 @@
-import { APISecretResponse } from './APISecretResponse';
+import { APISecretResponse } from './APISecretResponse.js';
 import { APILinks } from '@vonage/server-client';
 
 /**

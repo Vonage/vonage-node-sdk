@@ -1,4 +1,4 @@
-import { PSD2Parameters } from '.';
+import { PSD2Parameters } from './PSD2Parameters.js';
 
 /**
  * @deprecated please use PSD2Parameters

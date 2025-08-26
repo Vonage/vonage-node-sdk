@@ -1,1 +1,1 @@
-export { Vonage } from './vonage';
+export { Vonage } from './vonage.js';

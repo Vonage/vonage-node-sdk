@@ -1,5 +1,5 @@
-import { MessageParams } from '../../MessageParams';
-import { Channels } from '../../../enums/Channels';
+import { MessageParams } from '../../MessageParams.js';
+import { Channels } from '../../../enums/Channels.js';
 
 /**
  * Represents the base parameters for MMS Message

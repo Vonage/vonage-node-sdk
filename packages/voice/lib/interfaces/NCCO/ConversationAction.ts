@@ -1,4 +1,4 @@
-import { ConversationAction as ConnectionActionType } from '../../types';
+import { ConversationAction as ConnectionActionType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

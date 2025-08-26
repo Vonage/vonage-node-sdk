@@ -1,2 +1,2 @@
-export * from './AuthenticationType';
-export * from './GenericErrorCodes';
+export * from './AuthenticationType.js';
+export * from './GenericErrorCodes.js';

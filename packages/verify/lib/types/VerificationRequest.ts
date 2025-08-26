@@ -1,4 +1,4 @@
-import { VerificationParameters } from '.';
+import { VerificationParameters } from './VerificationParams.js';
 
 /**
  * Represents a verification request.

@@ -1,2 +1,2 @@
-export * from './fraudCheckResponse';
-export * from './fraudScoreResponse';
+export * from './fraudCheckResponse.js';
+export * from './fraudScoreResponse.js';

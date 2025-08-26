@@ -1,5 +1,5 @@
-import { MessengerChannelInterface } from './MessengerChannelInterface';
-import { MessageAudioInterface } from '../MessageAudioInterface';
+import { MessengerChannelInterface } from './MessengerChannelInterface.js';
+import { MessageAudioInterface } from '../MessageAudioInterface.js';
 
 /**
  * Represents an interface for sending audio messages via Messenger.
@@ -9,5 +9,5 @@ import { MessageAudioInterface } from '../MessageAudioInterface';
  * @ignore
  */
 export interface MessengerAudioInterface
-    extends MessengerChannelInterface,
-        MessageAudioInterface {}
+  extends MessengerChannelInterface,
+  MessageAudioInterface { }

@@ -1,5 +1,5 @@
-import { MessageParamsImage } from '../../MessageParamsImage';
-import { MessengerParams } from './MessengerParams';
+import { MessageParamsImage } from '../../MessageParamsImage.js';
+import { MessengerParams } from './MessengerParams.js';
 
 /**
  * Represents parameters for sending an image message via the Messenger platform.

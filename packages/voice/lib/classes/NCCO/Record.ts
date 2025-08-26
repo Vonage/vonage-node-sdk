@@ -1,6 +1,5 @@
-import { NCCOActions } from '../../enums';
-import { RecordingFormat } from '../../enums';
-import { RecordAction } from '../../types';
+import { NCCOActions, RecordingFormat } from '../../enums/index.js';
+import { RecordAction } from '../../types/index.js';
 
 /**
  * Represents a Record action in an NCCO.

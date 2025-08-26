@@ -1,5 +1,5 @@
-import { SMSErrorMessageResponse } from './SMSErrorMessageResponse';
-import { SMSMessageResponse } from './SMSMessageResponse';
+import { SMSErrorMessageResponse } from './SMSErrorMessageResponse.js';
+import { SMSMessageResponse } from './SMSMessageResponse.js';
 
 /**
  * Interface representing an SMS response.

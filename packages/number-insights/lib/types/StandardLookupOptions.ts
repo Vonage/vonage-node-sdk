@@ -1,4 +1,4 @@
-import { BasicLookupOptions } from './BasicLookupOptions';
+import { BasicLookupOptions } from './BasicLookupOptions.js';
 
 /**
  * Interface representing standard lookup options for a phone number lookup operation.

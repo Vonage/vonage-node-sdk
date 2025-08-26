@@ -1,5 +1,5 @@
 import { Client, AuthenticationType } from '@vonage/server-client';
-import { FraudCheck, FraudCheckParameters, FraudScoreResponse } from './types';
+import { FraudCheck, FraudCheckParameters, FraudScoreResponse } from './types/index.js';
 
 /**
  * Number Insight v2 is designed to give fraud scores for Application Integrations.

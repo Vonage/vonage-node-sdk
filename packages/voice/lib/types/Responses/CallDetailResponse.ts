@@ -1,6 +1,6 @@
 import { APILinks } from '@vonage/server-client';
-import { CallDetail } from '../CallDetail';
-import { CallEndpointResponse } from './CallEndpointResponse';
+import { CallDetail } from '../CallDetail.js';
+import { CallEndpointResponse } from './CallEndpointResponse.js';
 
 /**
  * Represents the response for retrieving call details.
@@ -32,5 +32,5 @@ export type CallDetailResponse = {
 } & Omit<
   CallDetail,
   'conversationUUID' | 'startTime' | 'endTime' | 'to' | 'from'
-  > &
+> &
   APILinks;

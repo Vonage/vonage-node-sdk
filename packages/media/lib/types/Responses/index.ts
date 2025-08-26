@@ -1,2 +1,2 @@
-export * from './mediaItemResponse';
-export * from './mediaItemResponsePage';
+export * from './mediaItemResponse.js';
+export * from './mediaItemResponsePage.js';

@@ -1,5 +1,5 @@
-import { MessageAudioInterface } from '../MessageAudioInterface';
-import { MMSChannelInterface } from './MMSChannelInterface';
+import { MessageAudioInterface } from '../MessageAudioInterface.js';
+import { MMSChannelInterface } from './MMSChannelInterface.js';
 
 /**
  * Represents an interface for defining MMS audio messages.
@@ -10,4 +10,4 @@ import { MMSChannelInterface } from './MMSChannelInterface';
  */
 export interface MMSAudioInterface
   extends MessageAudioInterface,
-    MMSChannelInterface {}
+  MMSChannelInterface { }

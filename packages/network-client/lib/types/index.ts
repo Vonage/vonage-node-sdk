@@ -1,2 +1,2 @@
-export * from './parameters';
-export * from './responses';
+export * from './parameters/index.js';
+export * from './responses/index.js';

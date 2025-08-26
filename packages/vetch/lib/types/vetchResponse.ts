@@ -1,5 +1,5 @@
-import { VetchOptions } from './vetchOptions';
-import { Headers } from '../types';
+import { VetchOptions } from './vetchOptions.js';
+import { Headers } from '../types/index.js';
 
 /**
  * Represents the response returned by a Vetch request.

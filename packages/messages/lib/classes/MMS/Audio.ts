@@ -1,6 +1,6 @@
-import { AudioObject } from '../../interfaces';
-import { MessageAudioType } from '../../types';
-import { MMSAudio } from './MMSAudio';
+import { AudioObject } from '../../interfaces/index.js';
+import { MessageAudioType } from '../../types/index.js';
+import { MMSAudio } from './MMSAudio.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:mms');

@@ -1,12 +1,12 @@
-import { VerifyLocale } from '../../enums';
+import { VerifyLocale } from '../../enums/index.js';
 import {
   EmailWorkflow,
   SMSWorkflow,
-  SilentAuthWorkflow ,
+  SilentAuthWorkflow,
   VoiceWorkflow,
-  WhatsAppInteractiveWorkflow ,
+  WhatsAppInteractiveWorkflow,
   WhatsAppWorkflow,
-} from '../workflows';
+} from '../workflows/index.js';
 
 /**
  * Represents parameters for creating a verification request for sending

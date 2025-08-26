@@ -1,1 +1,1 @@
-export * from './subAccountCreateRequest';
+export * from './subAccountCreateRequest.js';

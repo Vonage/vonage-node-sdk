@@ -1,5 +1,5 @@
-import { CommonOutboundCall } from './CommonOutboundCall';
-import { HttpMethod } from '../enums';
+import { CommonOutboundCall } from './CommonOutboundCall.js';
+import { HttpMethod } from '../enums/index.js';
 
 /**
  * Represents an outbound call with an answer URL, including common call properties and the answer URL information.

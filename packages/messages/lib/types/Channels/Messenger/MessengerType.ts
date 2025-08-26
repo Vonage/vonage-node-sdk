@@ -1,4 +1,4 @@
-import { MessengerCategory } from '../../../enums';
+import { MessengerCategory } from '../../../enums/index.js';
 
 /**
  * Represents the type of message to be sent via the Messenger platform.

@@ -1,5 +1,5 @@
-import { FileObject } from '../../interfaces/FileObject';
-import { WhatsAppFile } from './WhatsAppFile';
+import { FileObject } from '../../interfaces/FileObject.js';
+import { WhatsAppFile } from './WhatsAppFile.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:whatsapp');

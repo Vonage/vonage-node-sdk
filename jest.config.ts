@@ -10,6 +10,7 @@ const projectDefault = {
   testEnvironment: 'node',
   ...presetConfig,
   moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
     '@vonage/(.+)': '<rootDir>/packages/$1/lib',
   },
 };
@@ -29,8 +30,19 @@ const config: Config.InitialOptions = {
   extensionsToTreatAsEsm: ['.ts'],
   coverageDirectory: '<rootDir>/coverage/',
   roots: ['<rootDir>/packages'],
-  testPathIgnorePatterns: ['<rootDir>/packages/.*/dist', '<rootDir>/packages/.*/lib', 'node_modules'],
-  modulePathIgnorePatterns: ['<rootDir>/packages/.*/dist', '<rootDir>/packages/.*/lib'],
+
+  testPathIgnorePatterns: [
+    '<rootDir>/packages/.*/dist',
+    '<rootDir>/packages/.*/lib',
+    'node_modules'
+  ],
+
+  modulePathIgnorePatterns: [
+    '<rootDir>/packages/.*/dist',
+    '<rootDir>/packages/.*/lib',
+    'node_modules'
+  ],
+
   coveragePathIgnorePatterns: [
     'node_modules',
     '<rootDir>/testHelpers/*',
@@ -38,6 +50,7 @@ const config: Config.InitialOptions = {
     '!**/*.d.ts',
     '<rootDir>/packages/**/__tests__',
   ],
+
   projects: [
     {
       ...projectDefault,

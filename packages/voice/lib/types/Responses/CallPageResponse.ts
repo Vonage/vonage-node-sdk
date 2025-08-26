@@ -1,5 +1,5 @@
 import { APILinks } from '@vonage/server-client';
-import { CallDetailResponse } from '../../types';
+import { CallDetailResponse } from '../../types/index.js';
 
 /**
  * Represents the response for a page of call details, including information

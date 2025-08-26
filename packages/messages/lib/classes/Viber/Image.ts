@@ -1,6 +1,6 @@
-import { ImageObject } from '../../interfaces';
-import { ViberImageParams, ViberService } from '../../types';
-import { ViberImage } from './ViberImage';
+import { ImageObject } from '../../interfaces/index.js';
+import { ViberImageParams, ViberService } from '../../types/index.js';
+import { ViberImage } from './ViberImage.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:viber');

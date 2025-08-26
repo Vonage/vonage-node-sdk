@@ -1,6 +1,6 @@
-import { MessageConfig } from '../../interfaces/Viber/MessageConfig';
-import { ViberActionParams } from '../../types';
-import { ViberText } from './ViberText';
+import { MessageConfig } from '../../interfaces/Viber/MessageConfig.js';
+import { ViberActionParams } from '../../types/index.js';
+import { ViberText } from './ViberText.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:viber');

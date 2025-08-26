@@ -1,4 +1,4 @@
-import { TTSLanguages, TTSVoices } from '../../enums';
+import { TTSLanguages, TTSVoices } from '../../enums/index.js';
 
 /**
  * Represents parameters for playing Text-to-Speech (TTS) in a call.

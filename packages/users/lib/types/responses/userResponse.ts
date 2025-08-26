@@ -1,5 +1,5 @@
 import { APILinks } from '@vonage/server-client';
-import { UserRequest } from '../requests';
+import { UserRequest } from '../requests/index.js';
 
 /**
  * Represents a response containing user information.

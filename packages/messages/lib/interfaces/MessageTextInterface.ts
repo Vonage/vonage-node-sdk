@@ -1,4 +1,4 @@
-import { MessageInterface } from './MessageInterface';
+import { MessageInterface } from './MessageInterface.js';
 
 /**
  * Represents a text message type.

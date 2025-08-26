@@ -1,2 +1,2 @@
-export * from './types';
-export * from './numberVerification';
+export * from './types/index.js';
+export * from './numberVerification.js';

@@ -1,5 +1,5 @@
-import { StreamMode, Resolution } from '../../enums';
-import { RTMPStream } from '../RTMPStream';
+import { StreamMode, Resolution } from '../../enums/index.js';
+import { RTMPStream } from '../RTMPStream.js';
 
 /**
  * Represents HLS settings for a live streaming broadcast.

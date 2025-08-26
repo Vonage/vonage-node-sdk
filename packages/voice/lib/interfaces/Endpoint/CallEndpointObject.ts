@@ -1,4 +1,4 @@
-import { CallEndpoint } from '../../types';
+import { CallEndpoint } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

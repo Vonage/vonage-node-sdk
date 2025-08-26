@@ -1,4 +1,4 @@
-import { CapabilityWebhookResponse } from './CapabilityWebhookResponse';
+import { CapabilityWebhookResponse } from './CapabilityWebhookResponse.js';
 
 /**
  * Represents the response for bulk-related capabilities configuration.

@@ -1,6 +1,6 @@
-import { AbstractImageMessage } from '../AbstractImageMessage';
-import { MessengerImageParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractImageMessage } from '../AbstractImageMessage.js';
+import { MessengerImageParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents an image message for the Messenger channel.
@@ -12,8 +12,7 @@ import { Channels } from '../../enums';
  */
 export class MessengerImage
   extends AbstractImageMessage
-  implements MessengerImageParams
-{
+  implements MessengerImageParams {
   /**
    * The channel for this message (always 'messenger').
    */

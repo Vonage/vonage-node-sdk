@@ -1,4 +1,4 @@
-import { SubAccount } from '../subAccount';
+import { SubAccount } from '../subAccount.js';
 
 /**
  * Type definition for the response representing an account, which includes
@@ -37,4 +37,4 @@ export type AccountResponse = {
   | 'usePrimaryAccountBalance'
   | 'createdAt'
   | 'creditLimit'
-  >;
+>;

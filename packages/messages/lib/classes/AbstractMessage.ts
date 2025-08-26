@@ -1,6 +1,5 @@
-import { Channels } from '../enums';
-import { MessageTypes } from '../enums/MessageTypes';
-import { MessageParams } from '../types';
+import { MessageTypes, Channels } from '../enums/index.js';
+import { MessageParams } from '../types/index.js';
 
 /**
  * An abstract base class for message objects.

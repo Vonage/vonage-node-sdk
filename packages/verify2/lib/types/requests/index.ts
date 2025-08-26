@@ -1,3 +1,3 @@
-export * from './checkCodeRequest';
-export * from './createTemplateFragmentRequest';
-export * from './verificationRequest';
+export * from './checkCodeRequest.js';
+export * from './createTemplateFragmentRequest.js';
+export * from './verificationRequest.js';

@@ -1,4 +1,4 @@
-import { RecordAction as RecordActionType } from '../../types';
+import { RecordAction as RecordActionType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

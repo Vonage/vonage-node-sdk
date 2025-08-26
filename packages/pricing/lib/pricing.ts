@@ -1,9 +1,9 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
-import { ServiceType } from './enums';
+import { ServiceType } from './enums/index.js';
 import {
   OutboundAllCountriesPricingResponse,
   OutboundCountryPricingResponse,
-} from './types';
+} from './types/index.js';
 
 /**
  * The Pricing API allows you to retrieve pricing information for all countries

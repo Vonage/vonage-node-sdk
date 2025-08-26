@@ -1,5 +1,5 @@
-import { MessageImageType } from '../../MessageImageType';
-import { MMSParams } from './MMSParams';
+import { MessageImageType } from '../../MessageImageType.js';
+import { MMSParams } from './MMSParams.js';
 
 /**
  * Represents the parameters for sending an image message on the MMS channel.

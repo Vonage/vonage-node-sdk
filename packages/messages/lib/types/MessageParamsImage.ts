@@ -1,5 +1,5 @@
-import { MessageParams } from './MessageParams';
-import { MessageImageType } from './MessageImageType';
+import { MessageParams } from './MessageParams.js';
+import { MessageImageType } from './MessageImageType.js';
 
 /**
  * Represents the parameters for a message with an image attachment.

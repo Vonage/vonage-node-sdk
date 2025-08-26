@@ -5,7 +5,7 @@ import {
   Application,
   ListApplicationParams,
   ApplicationPageList,
-} from './types';
+} from './types/index.js';
 
 /**
  * Represents the application with both the `snake_case` and the `camelCase` keys.
@@ -71,7 +71,7 @@ export class Applications extends Client {
    * @return {Promise<ApplicationPageResponse>} - A promise resolving to the list of applications.
    *
    * @example
-   * List a single page of applications 
+   * List a single page of applications
    *
    * ```ts
    * const applications = await applicationClient.listApplications({});
@@ -222,7 +222,7 @@ export class Applications extends Client {
    * @return {Promise<MergedApplication>} - A promise resolving to the retrieved application.
    *
    * @example
-   * Retrieve an application  
+   * Retrieve an application
    *
    * ```ts
    * const application = await applicationClient.getApplication(APPLICATION_ID);
@@ -248,7 +248,7 @@ export class Applications extends Client {
    * @return {Promise<MergedApplication>} - A promise resolving to the updated application.
    *
    * @example
-   * Update an application  
+   * Update an application
    *
    * ```ts
    * const application = await applicationClient.updateApplication({

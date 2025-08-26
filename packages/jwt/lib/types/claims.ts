@@ -1,4 +1,4 @@
-import { ACL } from './acl';
+import { ACL } from './acl.js';
 
 /**
  * JWT claims.

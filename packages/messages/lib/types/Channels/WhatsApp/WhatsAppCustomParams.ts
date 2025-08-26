@@ -1,5 +1,5 @@
-import { WhatsAppCustomType } from './WhatsAppCustomType';
-import { WhatsAppParams } from './WhatsAppParams';
+import { WhatsAppCustomType } from './WhatsAppCustomType.js';
+import { WhatsAppParams } from './WhatsAppParams.js';
 
 /**
  * Represents parameters for sending a custom WhatsApp message with a file attachment.

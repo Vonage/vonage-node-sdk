@@ -1,4 +1,4 @@
-import { NotifyAction as NotifyActionType } from '../../types';
+import { NotifyAction as NotifyActionType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

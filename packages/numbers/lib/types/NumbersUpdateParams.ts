@@ -1,5 +1,5 @@
-import { VoiceCallbackTypeEnum, MessagesCallbackTypeEnum } from '../enums';
-import { Country } from './Country';
+import { VoiceCallbackTypeEnum, MessagesCallbackTypeEnum } from '../enums/index.js';
+import { Country } from './Country.js';
 
 /**
  * Represents parameters for updating phone numbers.

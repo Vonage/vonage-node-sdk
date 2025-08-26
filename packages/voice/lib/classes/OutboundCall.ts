@@ -1,7 +1,7 @@
 import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject';
-import { CallEndpoint } from '../types';
+import { CallEndpoint } from '../types/index.js';
+import { HttpMethod, MachineDetectionBehavior } from '../enums/index.js';
 import debug from 'debug';
-import { HttpMethod, MachineDetectionBehavior } from '../enums';
 
 debug('@vonage/voice')(
   'This class is deprecated. Please update to use the CommonOutboundCall type',

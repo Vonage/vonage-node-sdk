@@ -1,6 +1,6 @@
-import { AbstractVideoMessage } from '../AbstractVideoMessage';
-import { MessageParamsVideo } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractVideoMessage } from '../AbstractVideoMessage.js';
+import { MessageParamsVideo } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a video message for the MMS channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class MMSVideo
   extends AbstractVideoMessage
-  implements MessageParamsVideo
-{
+  implements MessageParamsVideo {
   /**
    * The channel for this message (always 'mms').
    */

@@ -1,4 +1,4 @@
-import { NCCOActions, TTSLanguages } from '../../enums';
+import { NCCOActions, TTSLanguages } from '../../enums/index.js';
 
 /**
  * Represents a Talk action within a Nexmo Call Control Object (NCCO). This action

@@ -1,4 +1,4 @@
-import { SubAccountCreateParameters } from '../parameters';
+import { SubAccountCreateParameters } from '../parameters/index.js';
 
 /**
  * Type definition for the request used to create a subaccount for a primary account.

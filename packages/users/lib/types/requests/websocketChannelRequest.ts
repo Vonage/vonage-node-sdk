@@ -1,4 +1,4 @@
-import { WebsocketChannel } from '../websocketChannel';
+import { WebsocketChannel } from '../websocketChannel.js';
 
 /**
  * Represents a request to create or update a WebSocket channel.

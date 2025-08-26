@@ -1,5 +1,5 @@
-import { MemberState } from '../../enums';
-import { AnyChannel } from '../anyChannel';
+import { MemberState } from '../../enums/index.js';
+import { AnyChannel } from '../anyChannel.js';
 
 export type AudioSettingsRequest = {
   /**

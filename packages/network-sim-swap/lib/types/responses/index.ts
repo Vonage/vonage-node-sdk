@@ -1,1 +1,1 @@
-export * from './simSwapResponse';
+export * from './simSwapResponse.js';

@@ -1,4 +1,4 @@
-import { SilentAuthChannel } from '../../enums';
+import { SilentAuthChannel } from '../../enums/index.js';
 
 /**
  * Represents a workflow for Silent Authentication.

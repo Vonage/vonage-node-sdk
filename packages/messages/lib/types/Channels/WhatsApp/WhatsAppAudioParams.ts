@@ -1,5 +1,5 @@
-import { MessageParamsAudio } from '../../MessageParamsAudio';
-import { WhatsAppParams } from './WhatsAppParams';
+import { MessageParamsAudio } from '../../MessageParamsAudio.js';
+import { WhatsAppParams } from './WhatsAppParams.js';
 
 /**
  * Represents parameters for sending an audio message via WhatsApp.

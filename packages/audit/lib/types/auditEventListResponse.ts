@@ -1,6 +1,6 @@
 import { APILinks } from '@vonage/server-client';
-import { AuditEvent } from './auditEvent';
-import { AuditEventPage } from './auditEventPage';
+import { AuditEvent } from './auditEvent.js';
+import { AuditEventPage } from './auditEventPage.js';
 
 /**
  * Represents the response containing a list of audit events.

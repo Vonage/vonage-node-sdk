@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
-import { WhatsAppTemplateType } from '../../types';
+import { WhatsAppTemplateType } from '../../types/index.js';
 
 /**
  * Represents a message template.
@@ -8,4 +8,4 @@ import { WhatsAppTemplateType } from '../../types';
  *
  * @ignore
  */
-export interface MessageTemplate extends WhatsAppTemplateType {}
+export interface MessageTemplate extends WhatsAppTemplateType { }

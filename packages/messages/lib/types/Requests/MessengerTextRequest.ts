@@ -1,4 +1,4 @@
-import { MessengerType } from '../Channels';
+import { MessengerType } from '../Channels/index.js';
 /**
  * Represents a request for sending a text message via the Messenger channel.
  *

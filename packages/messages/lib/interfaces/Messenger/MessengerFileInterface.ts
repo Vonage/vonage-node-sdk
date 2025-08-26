@@ -1,5 +1,5 @@
-import { MessengerChannelInterface } from './MessengerChannelInterface';
-import { MessageFileInterface } from '../MessageFileInterface';
+import { MessengerChannelInterface } from './MessengerChannelInterface.js';
+import { MessageFileInterface } from '../MessageFileInterface.js';
 
 /**
  * Represents an interface for defining Messenger file messages.
@@ -10,4 +10,4 @@ import { MessageFileInterface } from '../MessageFileInterface';
  */
 export interface MessengerFileInterface
   extends MessengerChannelInterface,
-    MessageFileInterface {}
+  MessageFileInterface { }

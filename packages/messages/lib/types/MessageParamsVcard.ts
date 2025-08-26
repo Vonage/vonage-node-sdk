@@ -1,6 +1,6 @@
-import { MessageTypes } from '../enums/MessageTypes';
-import { MessageParams } from './MessageParams';
-import { MessageVcardParams } from './MessageVcardType';
+import { MessageTypes } from '../enums/MessageTypes.js';
+import { MessageParams } from './MessageParams.js';
+import { MessageVcardParams } from './MessageVcardType.js';
 
 /**
  * Represents the parameters for a message containing a vCard.

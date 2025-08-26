@@ -1,6 +1,6 @@
-import { MessageParamsImage } from '../../MessageParamsImage';
-import { ViberActionParams } from './ViberActionParams';
-import { ViberParams } from './ViberParams';
+import { MessageParamsImage } from '../../MessageParamsImage.js';
+import { ViberActionParams } from './ViberActionParams.js';
+import { ViberParams } from './ViberParams.js';
 
 /**
  * Represents parameters for sending an image via Viber.

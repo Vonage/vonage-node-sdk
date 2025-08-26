@@ -1,7 +1,7 @@
 import { APILinks } from '@vonage/server-client';
-import { AnyMessageBody } from '../anyMessageBody';
-import { Event } from '../event';
-import { EventUser } from '../eventUser';
+import { AnyMessageBody } from '../anyMessageBody.js';
+import { Event } from '../event.js';
+import { EventUser } from '../eventUser.js';
 
 type SnakeToCamelCase<Key extends string> = Key extends `${infer FirstPart}_${infer FirstLetter}${infer LastPart}`
   ? `${FirstPart}${Uppercase<FirstLetter>}${SnakeToCamelCase<LastPart>}`

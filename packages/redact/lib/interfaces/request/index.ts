@@ -1,1 +1,1 @@
-export * from './transactionRequest';
+export * from './transactionRequest.js';

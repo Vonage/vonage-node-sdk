@@ -1,3 +1,3 @@
-export * from './userPageResponse';
-export * from './userResponse';
-export * from './websocketChannelResponse';
+export * from './userPageResponse.js';
+export * from './userResponse.js';
+export * from './websocketChannelResponse.js';

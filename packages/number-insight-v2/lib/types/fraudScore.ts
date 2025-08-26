@@ -1,4 +1,4 @@
-import { RiskRecommendation, Label, Status } from '../enums';
+import { RiskRecommendation, Label, Status } from '../enums/index.js';
 
 /**
  * Represents the result of the fraud_score insight operation.

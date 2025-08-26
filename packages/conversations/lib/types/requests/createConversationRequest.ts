@@ -1,9 +1,9 @@
-import { PhoneNumberChannel } from '../phoneNumberChannel';
-import { SipChannel } from '../sipChannel';
-import { AppChannel } from '../appChannel';
-import { WebSocketChannel } from '../websocketChannel';
-import { VbcChannel } from '../vbcChannel';
-import { ConversationCallbackRequest } from './conversationCallbackRequest';
+import { PhoneNumberChannel } from '../phoneNumberChannel.js';
+import { SipChannel } from '../sipChannel.js';
+import { AppChannel } from '../appChannel.js';
+import { WebSocketChannel } from '../websocketChannel.js';
+import { VbcChannel } from '../vbcChannel.js';
+import { ConversationCallbackRequest } from './conversationCallbackRequest.js';
 
 /**
  * Type representing a request to create a conversation.

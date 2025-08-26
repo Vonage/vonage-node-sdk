@@ -7,7 +7,7 @@ import {
   WebSocketChannelRequest,
   WebSocketChannelResponse,
   WebsocketChannel,
-} from './types';
+} from './types/index.js';
 
 const apiUserToUser = (apiUser: UserResponse): UserType => {
   delete apiUser._links;

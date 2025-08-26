@@ -1,7 +1,7 @@
-import { CallerType } from '../../enums';
-import { BasicResponse } from './BasicResponse';
-import { CarrierInfoResponse } from './CarrierInforResponse';
-import { CallerIdentityResponse } from './CallerIdentityResponse';
+import { CallerType } from '../../enums/index.js';
+import { BasicResponse } from './BasicResponse.js';
+import { CarrierInfoResponse } from './CarrierInforResponse.js';
+import { CallerIdentityResponse } from './CallerIdentityResponse.js';
 
 /**
  * Type representing a standard response from a phone number lookup operation.

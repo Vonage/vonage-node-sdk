@@ -1,5 +1,5 @@
-import { MessageInterface } from './MessageInterface';
-import { MessageAudioType } from '../types';
+import { MessageInterface } from './MessageInterface.js';
+import { MessageAudioType } from '../types/index.js';
 
 /**
  * Represents a message interface for audio messages.

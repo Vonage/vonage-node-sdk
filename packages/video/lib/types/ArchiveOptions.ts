@@ -1,5 +1,5 @@
-import { ArchiveOutputMode, Resolution, StreamMode } from '../enums';
-import { ArchiveLayout } from './ArchiveLayout';
+import { ArchiveOutputMode, Resolution, StreamMode } from '../enums/index.js';
+import { ArchiveLayout } from './ArchiveLayout.js';
 
 /**
  * Interface representing options for creating an archive.
@@ -69,17 +69,17 @@ type BaseArchiveOptions = {
 }
 
 type ArchiveOptionsWithMaxBitrate = BaseArchiveOptions & {
-    /**
-   * The maximum video bitrate for the archive, in bits per second. This is mutually exclusive with quantizationParameter.
-   */
-    maxBitrate?: number;
+  /**
+ * The maximum video bitrate for the archive, in bits per second. This is mutually exclusive with quantizationParameter.
+ */
+  maxBitrate?: number;
 }
 
 type ArchiveOptionsWithQuantizationParameter = BaseArchiveOptions & {
-    /**
-     * The quantization level for the archive quality. This is mutually exclusive with maxBitrate.
-     */
-    quantizationParameter?: number;
+  /**
+   * The quantization level for the archive quality. This is mutually exclusive with maxBitrate.
+   */
+  quantizationParameter?: number;
 }
 
 type ArchiveWithTranscription = BaseArchiveOptions & {

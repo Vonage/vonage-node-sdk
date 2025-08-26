@@ -5,7 +5,10 @@ import {
   Purpose,
   Scope,
 } from '@vonage/network-client';
-import { NumberVerificationResponse, NumberVerificationRequest } from './types';
+import {
+  NumberVerificationResponse,
+  NumberVerificationRequest
+} from './types/index.js';
 
 export class NumberVerificationClient extends NetworkClient {
   constructor(auth: NetworkAuthParameters, config?: NetworkConfigParameters) {
@@ -25,9 +28,9 @@ export class NumberVerificationClient extends NetworkClient {
       this.accessToken = accessToken || this.accessToken;
       const resp = await this.sendPostRequest<NumberVerificationResponse>(
         `${this.config.networkApiHost}/camara/number-verification/v031/verify`,
-      {
-        phoneNumber: phoneNumber,
-      } as NumberVerificationRequest,
+        {
+          phoneNumber: phoneNumber,
+        } as NumberVerificationRequest,
       );
 
       return resp.data.devicePhoneNumberVerified;

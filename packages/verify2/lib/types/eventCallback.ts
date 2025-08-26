@@ -1,4 +1,4 @@
-import { Channels, EventStatus } from '../enums';
+import { Channels, EventStatus } from '../enums/index.js';
 
 /**
  * Represents an event callback received for a verification request.

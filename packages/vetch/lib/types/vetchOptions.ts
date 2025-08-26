@@ -1,5 +1,5 @@
-import { ContentType, HTTPMethods, ResponseTypes } from '../enums';
-import { Headers } from './headers';
+import { ContentType, HTTPMethods, ResponseTypes } from '../enums/index.js';
+import { Headers } from './headers.js';
 
 /**
  * Options to configure the Vetch request.

@@ -1,3 +1,3 @@
-export * from './listAllTemplateFragmentsParams';
-export * from './listAllTemplateParams';
-export * from './verifcationRequestParams';
+export * from './listAllTemplateFragmentsParams.js';
+export * from './listAllTemplateParams.js';
+export * from './verifcationRequestParams.js';

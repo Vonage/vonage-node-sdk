@@ -1,4 +1,4 @@
-import { AccountResponse } from './accountResponse';
+import { AccountResponse } from './accountResponse.js';
 
 /**
  * Type definition for the response representing a subaccount, which includes

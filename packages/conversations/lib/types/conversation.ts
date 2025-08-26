@@ -1,6 +1,6 @@
-import { AnyChannel } from './anyChannel';
-import { ConversationCallback } from './conversationCallback';
-import { ConversationState } from '../enums';
+import { AnyChannel } from './anyChannel.js';
+import { ConversationCallback } from './conversationCallback.js';
+import { ConversationState } from '../enums/index.js';
 
 /**
  * Represents a conversation

@@ -1,6 +1,6 @@
-import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject';
-import { CallEndpoint, NCCOAction } from '../types';
-import { OutboundCall } from './OutboundCall';
+import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject.js';
+import { CallEndpoint, NCCOAction } from '../types/index.js';
+import { OutboundCall } from './OutboundCall.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(
@@ -14,8 +14,7 @@ debug('@vonage/voice')(
  * @deprecated This class is deprecated. Please update to use the CallWithNCCO type
  */
 export class OutboundCallWithNCCO
-  extends OutboundCall
-{
+  extends OutboundCall {
   /**
    * The list of NCCO actions.
    */

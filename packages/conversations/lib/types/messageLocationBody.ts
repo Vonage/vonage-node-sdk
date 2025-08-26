@@ -1,4 +1,4 @@
-import { EventMessageType } from '../enums';
+import { EventMessageType } from '../enums/index.js';
 
 export type MessageLocationBody = {
   /**
