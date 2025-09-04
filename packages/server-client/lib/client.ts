@@ -1,5 +1,4 @@
 import fetch, { Response } from 'node-fetch';
-import AbortError from 'node-fetch';
 import { Auth, AuthInterface, AuthParams } from '@vonage/auth';
 import {
   ResponseTypes,

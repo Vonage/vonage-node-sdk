@@ -23,7 +23,6 @@ const config: Config.InitialOptions = {
       diagnostics: false,
     },
   },
-  coverageProvider: 'v8',
   transformIgnorePatterns: ['/node_modules/'],
   cacheDirectory: process.env.JEST_CACHE_DIR || '<rootDir>/.jest-cache',
   maxWorkers: '50%',
