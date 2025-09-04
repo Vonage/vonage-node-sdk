@@ -52,7 +52,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/server-client": "1.6.0"
+    "@vonage/server-client": "1.17.1"
   },
   "engines": {
     "node": ">=20"

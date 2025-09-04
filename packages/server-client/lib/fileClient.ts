@@ -4,7 +4,8 @@ import debug from 'debug';
 import { VetchError, HTTPMethods, VetchOptions } from '@vonage/vetch';
 import fetch from 'node-fetch';
 import { createWriteStream } from 'node:fs';
-import { pipeline } from 'stream/promises';
+import { pipeline } from 'node:stream/promises';
+import { PipelineSource } from 'node:stream';
 
 const log = debug('vonage:file-client');
 
@@ -73,7 +74,7 @@ export class FileClient extends Client {
     }
 
     log(`Saving to ${path}`);
-    await pipeline(response.body, createWriteStream(path));
+    await pipeline(response.body as PipelineSource<string>, createWriteStream(path));
 
     log('File saved');
   }

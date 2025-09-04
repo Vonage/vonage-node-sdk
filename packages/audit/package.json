@@ -57,7 +57,7 @@
     "@vonage/vetch": "^1.8.0"
   },
   "devDependencies": {
-    "nock": "^13.3.4"
+    "nock": "^14.0.10"
   },
   "engines": {
     "node": ">=20"

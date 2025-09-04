@@ -57,7 +57,7 @@ export class Auth implements AuthInterface {
    * @property {string | null} [privateKey] - The private key used for JWT
    *     authentication, either as a string or read from a file.
    */
-  privateKey?: string | null;
+  privateKey?: string | Buffer | null;
 
   /**
    * @property {string | null} [applicationId] - The application ID used for
@@ -89,8 +89,7 @@ export class Auth implements AuthInterface {
       privateKey = readFileSync(opts?.privateKey as PathLike).toString();
     }
 
-    this.privateKey
-      = privateKey instanceof Buffer ? privateKey.toString() : privateKey;
+    this.privateKey = privateKey instanceof Buffer ? privateKey.toString() : privateKey;
   }
 
   /**

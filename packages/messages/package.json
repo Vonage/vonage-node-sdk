@@ -67,7 +67,7 @@
   "dependencies": {
     "@vonage/server-client": "^1.17.1",
     "@vonage/vetch": "^1.8.0",
-    "debug": "^4.3.4"
+    "debug": "^4.4.1"
   },
   "engines": {
     "node": ">=20"

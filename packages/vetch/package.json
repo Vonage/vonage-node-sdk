@@ -56,8 +56,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@types/node-fetch": "2.6.11",
-    "node-fetch": "^2.7"
+    "@types/node-fetch": "2.6.13",
+    "node-fetch": "^3.3"
   },
   "engines": {
     "node": ">=20"

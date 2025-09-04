@@ -344,7 +344,7 @@ export class Client {
         await fetch(request.url, fetcRequest),
       );
     } catch (error) {
-      if (error instanceof AbortError) {
+      if (error && (error as Error)?.name === 'AbortError') {
         log(`Request timed out after ${timeout}`);
       }
       throw error;

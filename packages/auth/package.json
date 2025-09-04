@@ -57,11 +57,11 @@
   },
   "dependencies": {
     "@vonage/jwt": "^1.11.0",
-    "debug": "^4.3.4"
+    "debug": "^4.4.1"
   },
   "devDependencies": {
-    "@jest/globals": "27.5.1",
-    "@types/node": "^20.8.4"
+    "@jest/globals": "30.1.2",
+    "@types/node": "^24.3.1"
   },
   "engines": {
     "node": ">=20"

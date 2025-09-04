@@ -58,20 +58,20 @@
   "dependencies": {
     "@vonage/auth": "^1.12.0",
     "@vonage/vetch": "^1.8.0",
-    "debug": "^4.3.4",
+    "debug": "^4.4.1",
     "lodash.camelcase": "^4.3.0",
     "lodash.isobject": "3.0.2",
     "lodash.kebabcase": "^4.1.1",
     "lodash.snakecase": "^4.1.1",
-    "node-fetch": "^2"
+    "node-fetch": "^3"
   },
   "devDependencies": {
-    "@types/lodash.camelcase": "4.3.7",
-    "@types/lodash.isobject": "3.0.7",
-    "@types/lodash.kebabcase": "4.1.7",
-    "@types/lodash.snakecase": "4.1.7",
-    "@types/node-fetch": "2.6.6",
-    "nock": "^13.3.4"
+    "@types/lodash.camelcase": "4.3.9",
+    "@types/lodash.isobject": "3.0.9",
+    "@types/lodash.kebabcase": "4.1.9",
+    "@types/lodash.snakecase": "4.1.9",
+    "@types/node-fetch": "2.6.13",
+    "nock": "^14.0.10"
   },
   "engines": {
     "node": ">=20"
