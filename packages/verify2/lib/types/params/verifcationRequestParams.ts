@@ -1,6 +1,7 @@
 import { VerifyLocale } from '../../enums/index.js';
 import {
   EmailWorkflow,
+  RCSWorkflow,
   SMSWorkflow,
   SilentAuthWorkflow,
   VoiceWorkflow,
@@ -25,6 +26,7 @@ export type VerificationRequestParams = {
    */
   workflow: Array<
     | EmailWorkflow
+    | RCSWorkflow,
     | SMSWorkflow
     | SilentAuthWorkflow
     | VoiceWorkflow
