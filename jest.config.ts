@@ -1,9 +1,9 @@
 import { createDefaultEsmPreset } from 'ts-jest';
-// eslint-disable-next-line n/no-extraneous-import
-import type { Config } from '@jest/types';
 
 const presetConfig = createDefaultEsmPreset({
-  diagnostics: false,
+  diagnostics: true,
+  isolatedModules: false,
+  tsconfig: './tsconfig.jest.json',
 });
 
 const projectDefault = {
@@ -15,12 +15,10 @@ const projectDefault = {
   },
 };
 
-const config: Config.InitialOptions = {
+const config = {
   globals: {
     'ts-jest': {
       tsconfig: './tsconfig.jest.json',
-      useESM: true,
-      diagnostics: false,
     },
   },
   transformIgnorePatterns: ['/node_modules/'],
