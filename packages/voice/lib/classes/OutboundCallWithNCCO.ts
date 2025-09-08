@@ -1,5 +1,4 @@
-import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject.js';
-import { CallEndpoint, NCCOAction } from '../types/index.js';
+import { CallEndpoint, NCCOAction, PhoneEndpoint } from '../types/index.js';
 import { OutboundCall } from './OutboundCall.js';
 import debug from 'debug';
 
@@ -30,7 +29,7 @@ export class OutboundCallWithNCCO
   constructor(
     ncco: Array<NCCOAction>,
     to: CallEndpoint,
-    from?: PhoneEndpointObject,
+    from?: PhoneEndpoint,
   ) {
     super(to, from);
     this.ncco = ncco;

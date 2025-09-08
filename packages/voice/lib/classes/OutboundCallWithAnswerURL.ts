@@ -1,5 +1,4 @@
-import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject';
-import { CallEndpoint } from '../types';
+import { CallEndpoint, PhoneEndpoint } from '../types';
 import { OutboundCall } from './OutboundCall';
 import debug from 'debug';
 
@@ -14,8 +13,7 @@ debug('@vonage/voice')(
  * @deprecated This class is deprecated. Please update to use the CallWithAnswerURL type
  */
 export class OutboundCallWithAnswerURL
-  extends OutboundCall
-{
+  extends OutboundCall {
   /**
    * The list of answer URLs.
    */
@@ -36,7 +34,7 @@ export class OutboundCallWithAnswerURL
    * @param {CallEndpoint} to - The call endpoint to which the outbound call will be made.
    * @param {PhoneEndpointObject} [from] - The phone endpoint object representing the caller's information.
    */
-  constructor(answerUrl: string, to: CallEndpoint, from?: PhoneEndpointObject) {
+  constructor(answerUrl: string, to: CallEndpoint, from?: PhoneEndpoint) {
     super(to, from);
     this.answer_url = [answerUrl];
     this.answerUrl = [answerUrl];

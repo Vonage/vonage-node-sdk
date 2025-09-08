@@ -34,16 +34,12 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     name: Test and build
-    continue-on-error: ${{ matrix.deprecated }}
 
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node: [18.x, 20.x, 22.x, 24.x]
-        include:
-          - version: 18.x
-            deprecated: true
+        node: [20.x, 22.x, 24.x]
     steps:
       - uses: actions/checkout@v3
 
@@ -57,9 +53,6 @@ jobs:
 
       - name: Install packages
         run: npm install
-
-      - name: Build Packages
-        run: npm run build
 
       - name: Test
         env:
