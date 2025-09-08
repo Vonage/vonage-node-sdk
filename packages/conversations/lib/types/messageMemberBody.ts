@@ -1,5 +1,5 @@
-import { Member } from './member';
-import { UpdateMemberParameters } from './parameters';
+import { Member } from './member.js';
+import { UpdateMemberParameters } from './parameters/index.js';
 
 export type MessageMemberBody = {
   /**

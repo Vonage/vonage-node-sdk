@@ -1,5 +1,5 @@
 import { APILink } from '@vonage/server-client';
-import { Session } from './session';
+import { Session } from './session.js';
 
 export type SessionPage = {
   /**

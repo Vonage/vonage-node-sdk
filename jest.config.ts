@@ -1,36 +1,45 @@
 import { createDefaultEsmPreset } from 'ts-jest';
-// eslint-disable-next-line n/no-extraneous-import
-import type { Config } from '@jest/types';
 
 const presetConfig = createDefaultEsmPreset({
-  diagnostics: false,
+  diagnostics: true,
+  isolatedModules: false,
+  tsconfig: './tsconfig.jest.json',
 });
 
 const projectDefault = {
   testEnvironment: 'node',
   ...presetConfig,
   moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
     '@vonage/(.+)': '<rootDir>/packages/$1/lib',
   },
 };
 
-const config: Config.InitialOptions = {
+const config = {
   globals: {
     'ts-jest': {
       tsconfig: './tsconfig.jest.json',
-      useESM: true,
-      diagnostics: false,
     },
   },
-  coverageProvider: 'v8',
   transformIgnorePatterns: ['/node_modules/'],
   cacheDirectory: process.env.JEST_CACHE_DIR || '<rootDir>/.jest-cache',
   maxWorkers: '50%',
   extensionsToTreatAsEsm: ['.ts'],
   coverageDirectory: '<rootDir>/coverage/',
   roots: ['<rootDir>/packages'],
-  testPathIgnorePatterns: ['<rootDir>/packages/.*/dist', '<rootDir>/packages/.*/lib', 'node_modules'],
-  modulePathIgnorePatterns: ['<rootDir>/packages/.*/dist', '<rootDir>/packages/.*/lib'],
+
+  testPathIgnorePatterns: [
+    '<rootDir>/packages/.*/dist',
+    '<rootDir>/packages/.*/lib',
+    'node_modules'
+  ],
+
+  modulePathIgnorePatterns: [
+    '<rootDir>/packages/.*/dist',
+    '<rootDir>/packages/.*/lib',
+    'node_modules'
+  ],
+
   coveragePathIgnorePatterns: [
     'node_modules',
     '<rootDir>/testHelpers/*',
@@ -38,6 +47,7 @@ const config: Config.InitialOptions = {
     '!**/*.d.ts',
     '<rootDir>/packages/**/__tests__',
   ],
+
   projects: [
     {
       ...projectDefault,

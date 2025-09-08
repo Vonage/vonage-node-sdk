@@ -1,4 +1,4 @@
-import { Channels } from '../../enums';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a workflow for sending a verification code via voice call.

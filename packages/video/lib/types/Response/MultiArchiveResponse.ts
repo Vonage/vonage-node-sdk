@@ -1,4 +1,4 @@
-import { SingleArchiveResponse } from './SingleArchiveResponse';
+import { SingleArchiveResponse } from './SingleArchiveResponse.js';
 
 /**
  * Represents a response containing multiple archive items.

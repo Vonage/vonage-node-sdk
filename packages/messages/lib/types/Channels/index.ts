@@ -1,16 +1,16 @@
-import { AnyMessengerChannel } from './Messenger';
-import { AnyMMSChannel } from './MMS';
-import { AnyViberChannel } from './Viber';
-import { AnyWhatsAppChannel } from './WhatsApp';
-import { SMSChannel } from './SMSParams';
-import { AnyRCSChannel } from './RCS';
+import { AnyMessengerChannel } from './Messenger/index.js';
+import { AnyMMSChannel } from './MMS/index.js';
+import { AnyViberChannel } from './Viber/index.js';
+import { AnyWhatsAppChannel } from './WhatsApp/index.js';
+import { SMSChannel } from './SMSParams.js';
+import { AnyRCSChannel } from './RCS/index.js';
 
-export * from './Messenger';
-export * from './MMS';
-export * from './Viber';
-export * from './WhatsApp';
-export * from './SMSParams';
-export * from './RCS';
+export * from './Messenger/index.js';
+export * from './MMS/index.js';
+export * from './Viber/index.js';
+export * from './WhatsApp/index.js';
+export * from './SMSParams.js';
+export * from './RCS/index.js';
 
 /**
  * Represents a union type that can be any of the specific channel message
@@ -25,5 +25,5 @@ export type AnyChannel =
   | AnyRCSChannel;
 
 export type MessageWithFailover = {
-    failover?: Array<AnyChannel>
-  } | AnyChannel;
+  failover?: Array<AnyChannel>
+} | AnyChannel;

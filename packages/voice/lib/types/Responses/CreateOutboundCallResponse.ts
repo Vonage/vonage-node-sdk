@@ -1,4 +1,4 @@
-import { BasicCallDetail } from '../BasicCallDetail';
+import { BasicCallDetail } from '../BasicCallDetail.js';
 
 /**
  * Represents the response for creating an outbound call, including the conversation UUID and basic call details.

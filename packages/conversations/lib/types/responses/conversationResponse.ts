@@ -1,4 +1,4 @@
-import { Conversation } from '../conversation';
+import { Conversation } from '../conversation.js';
 import { APILinks } from '@vonage/server-client';
 
 /**

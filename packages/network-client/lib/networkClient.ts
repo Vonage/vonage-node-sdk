@@ -1,12 +1,12 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
 import { MissingApplicationIdError } from '@vonage/jwt';
-import { Purpose, Scope } from './enums';
+import { Purpose, Scope } from './enums/index.js';
 import {
   NetworkAuthParameters,
   NetworkConfigParameters,
   CIBAResponse,
   NetworkTokenResponse,
-} from './types';
+} from './types/index.js';
 import {
   VetchOptions,
   VetchError,
@@ -18,7 +18,7 @@ import {
   InvalidScopeError,
   MissingPurposeError,
   MissingScopeError,
-} from './errors';
+} from './errors/index.js';
 
 import debug from 'debug';
 const log = debug('vonage:network-client');

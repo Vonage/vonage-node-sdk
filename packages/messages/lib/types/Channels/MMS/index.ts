@@ -1,13 +1,13 @@
-import { MMSAudioParams }  from './MMSAudioParams';
-import { MMSImageParams }  from './MMSImageParams';
-import { MMSVcardParams }  from './MMSVcardParams';
-import { MMSVideoParams }  from './MMSVideoParams';
-import { Channels } from '../../../enums';
+import { MMSAudioParams } from './MMSAudioParams.js';
+import { MMSImageParams } from './MMSImageParams.js';
+import { MMSVcardParams } from './MMSVcardParams.js';
+import { MMSVideoParams } from './MMSVideoParams.js';
+import { Channels } from '../../../enums/index.js';
 
-export * from './MMSAudioParams';
-export * from './MMSImageParams';
-export * from './MMSVcardParams';
-export * from './MMSVideoParams';
+export * from './MMSAudioParams.js';
+export * from './MMSImageParams.js';
+export * from './MMSVcardParams.js';
+export * from './MMSVideoParams.js';
 
 /**
  * Represents a union type that can be any of the MMS-specific message parameters.

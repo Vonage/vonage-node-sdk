@@ -1,7 +1,7 @@
-import { HttpMethod, MachineDetectionBehavior } from '../enums';
-import { CallEndpoint } from './Endpoint';
-import { AdvancedMachineDetection } from './AdvancedMachineDetection';
-import { CommonCallFields } from './CommonCallFields';
+import { HttpMethod, MachineDetectionBehavior } from '../enums/index.js';
+import { CallEndpoint } from './Endpoint/index.js';
+import { AdvancedMachineDetection } from './AdvancedMachineDetection.js';
+import { CommonCallFields } from './CommonCallFields.js';
 
 /**
  * Represents common fields for defining an outbound call, including the caller (from) and recipient (to) endpoints,

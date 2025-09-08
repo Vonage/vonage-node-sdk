@@ -1,4 +1,4 @@
-import { MMSVcard } from './MMSVcard';
+import { MMSVcard } from './MMSVcard.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:mms');

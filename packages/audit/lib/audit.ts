@@ -4,7 +4,7 @@ import {
   AuditEvent,
   AuditParams,
   AuditEventResponse,
-} from './types';
+} from './types/index.js';
 
 /**
  * Represents an SDK client for interacting with audit-related functionality.

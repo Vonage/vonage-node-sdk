@@ -1,6 +1,6 @@
-import { AbstractVideoMessage } from '../AbstractVideoMessage';
-import { WhatsAppVideoParams, WhatsAppContext } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractVideoMessage } from '../AbstractVideoMessage.js';
+import { WhatsAppVideoParams, WhatsAppContext } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a video message for WhatsApp.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class WhatsAppVideo
   extends AbstractVideoMessage
-  implements WhatsAppVideoParams
-{
+  implements WhatsAppVideoParams {
   /**
    * The channel for this message (always 'whatsapp').
    */

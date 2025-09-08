@@ -14,7 +14,7 @@ import {
   TemplateResponse,
   VerificationRequestParams,
   VerificationResponse,
-} from './types';
+} from './types/index.js';
 
 /**
  * A class for interacting with the Vonage Verify API (Version 2).
@@ -145,8 +145,8 @@ export class Verify2 extends Client {
     const resp = await this.sendGetRequest<ListAllTemplatesResponse>(
       `${this.config.apiHost}/v2/verify/templates`,
       {
-        ...(params.page ? {page: params.page} : {}),
-        ...(params.pageSize? {page_size: params.pageSize} : {}),
+        ...(params.page ? { page: params.page } : {}),
+        ...(params.pageSize ? { page_size: params.pageSize } : {}),
       }
     );
 
@@ -289,8 +289,8 @@ export class Verify2 extends Client {
     const resp = await this.sendGetRequest<ListAllTemplateFragmentsResponse>(
       `${this.config.apiHost}/v2/verify/templates/${params.templateId}/template_fragments`,
       {
-        ...(params.page ? {page: params.page} : {}),
-        ...(params.pageSize? {page_size: params.pageSize} : {}),
+        ...(params.page ? { page: params.page } : {}),
+        ...(params.pageSize ? { page_size: params.pageSize } : {}),
       }
     );
 
@@ -303,7 +303,7 @@ export class Verify2 extends Client {
       page: resp.data.page,
       totalPages: resp.data.total_pages,
       totalItems: resp.data.total_items,
-      fragments: fragments ,
+      fragments: fragments,
       links: resp.data._links,
     };
   }
@@ -365,7 +365,7 @@ export class Verify2 extends Client {
     templateId: string,
     fragmentId: string,
   ): Promise<TemplateFragment> {
-  // Send a GET request to retrieve the specified template fragment by its ID
+    // Send a GET request to retrieve the specified template fragment by its ID
     const resp = await this.sendGetRequest<TemplateFragmentResponse>(
       `${this.config.apiHost}/v2/verify/templates/${templateId}/template_fragments/${fragmentId}`,
     );

@@ -1,4 +1,4 @@
-import { ApplicationPageResponse } from './Response';
+import { ApplicationPageResponse } from './Response/index.js';
 
 /**
  * Represents a paginated list of applications.

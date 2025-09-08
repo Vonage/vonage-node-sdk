@@ -1,5 +1,5 @@
-import { WhatsAppParams } from '.';
-import { MessageParamsText } from '../../MessageParamsText';
+import { WhatsAppParams } from './index.js';
+import { MessageParamsText } from '../../MessageParamsText.js';
 
 /**
  * Represents a text message type for WhatsApp.

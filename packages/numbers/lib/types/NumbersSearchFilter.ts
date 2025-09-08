@@ -1,5 +1,5 @@
-import { LineType, Feature, SearchPattern } from '../enums';
-import { Country } from './Country';
+import { LineType, Feature, SearchPattern } from '../enums/index.js';
+import { Country } from './Country.js';
 
 /**
  * Represents filters for searching phone numbers.

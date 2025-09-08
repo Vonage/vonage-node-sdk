@@ -1,4 +1,4 @@
-import { SMSResponse } from './SMSResponse';
+import { SMSResponse } from './SMSResponse.js';
 
 /**
  * Deprecated type alias for `SMSResponse`.

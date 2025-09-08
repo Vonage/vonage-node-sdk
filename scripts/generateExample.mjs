@@ -1,8 +1,8 @@
-import { readFileSync, createWriteStream } from 'fs';
+import { readFileSync, createWriteStream } from 'node:fs';
 import RecursiveIterator from 'recursive-iterator';
 import { ReflectionKind } from 'typedoc';
 
-const data = readFileSync('./docs/docs.json', 'utf8');
+const data = readFileSync('./docs/docs.json', { encoding: 'utf8' });
 
 const docs = JSON.parse(data);
 const log = createWriteStream('./docs/EXAMPLES.md', { flags: 'w' });

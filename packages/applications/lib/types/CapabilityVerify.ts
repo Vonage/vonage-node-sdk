@@ -1,4 +1,4 @@
-import { CapabilityWebhook } from './CapabilityWebhook';
+import { CapabilityWebhook } from './CapabilityWebhook.js';
 
 /**
  * Represents a configuration for verification capabilities.

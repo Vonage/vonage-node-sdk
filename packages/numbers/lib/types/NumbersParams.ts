@@ -1,4 +1,4 @@
-import { Country } from './Country';
+import { Country } from './Country.js';
 
 /**
  * Represents parameters for configuring a phone number.

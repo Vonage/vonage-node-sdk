@@ -1,4 +1,4 @@
-import { Status } from '../enums/';
+import { Status } from '../enums/index.js';
 
 /**
  * Represents the result of the sim_swap insight operation.

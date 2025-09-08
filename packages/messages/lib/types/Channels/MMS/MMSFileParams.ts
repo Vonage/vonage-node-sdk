@@ -1,6 +1,6 @@
-import { MessageParamsFile } from '../../MessageParamsFile';
-import { MessageFileType } from '../../MessageFileType';
-import { MMSParams } from './MMSParams';
+import { MessageParamsFile } from '../../MessageParamsFile.js';
+import { MessageFileType } from '../../MessageFileType.js';
+import { MMSParams } from './MMSParams.js';
 
 /**
  * Represents parameters for sending a file via MMS.

@@ -1,4 +1,4 @@
-import { SMSStatus } from '../../enums';
+import { SMSStatus } from '../../enums/index.js';
 /**
  * Interface representing an SMS message response.
  *

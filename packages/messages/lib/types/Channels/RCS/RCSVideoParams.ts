@@ -1,8 +1,7 @@
-import { MessageTypes } from '../../../enums/MessageTypes';
-import { Channels } from '../../../enums';
-import { MessageParams } from '../../MessageParams';
-import { MessageVideoType } from '../../MessageVideoType';
-import { RCSParams } from './RCSParams';
+import { Channels, MessageTypes } from '../../../enums/index.js';
+import { MessageParams } from '../../MessageParams.js';
+import { MessageVideoType } from '../../MessageVideoType.js';
+import { RCSParams } from './RCSParams.js';
 
 /**
  * Represents the parameters for sending a video message using RCS.

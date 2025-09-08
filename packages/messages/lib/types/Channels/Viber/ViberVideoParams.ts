@@ -1,6 +1,6 @@
-import { MessageParamsVideo } from '../../MessageParamsVideo';
-import { ViberActionParams } from './ViberActionParams';
-import { ViberParams } from './ViberParams';
+import { MessageParamsVideo } from '../../MessageParamsVideo.js';
+import { ViberActionParams } from './ViberActionParams.js';
+import { ViberParams } from './ViberParams.js';
 
 /**
  * Represents parameters for sending a video message via Viber with action buttons.

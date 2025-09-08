@@ -2,11 +2,10 @@ import {
   LookupOutcome,
   Reachable,
   ValidNumber,
-} from '../../enums';
-
-import { StandardResponse } from './StandardResponse';
-import { RoamingDataResponse } from './RoamingDataResponse';
-import { RealTimeDataResponse } from './RealTimeDataResponse';
+} from '../../enums/index.js';
+import { StandardResponse } from './StandardResponse.js';
+import { RoamingDataResponse } from './RoamingDataResponse.js';
+import { RealTimeDataResponse } from './RealTimeDataResponse.js';
 
 /**
  * Type representing an advanced response from a phone number lookup operation.

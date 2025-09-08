@@ -1,5 +1,5 @@
-import { VerifySearchResponse } from './Response';
-import { VerifySearchCheck } from './VerifySearchCheck';
+import { VerifySearchResponse } from './Response/index.js';
+import { VerifySearchCheck } from './VerifySearchCheck.js';
 
 /**
  * Represents the response for a Verify search operation.

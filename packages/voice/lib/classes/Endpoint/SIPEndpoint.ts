@@ -1,4 +1,4 @@
-import { SIPEndpoint as SIPEndpointType } from '../../types/Endpoint/SIPEndpoint';
+import { SIPEndpoint as SIPEndpointType } from '../../types/Endpoint/SIPEndpoint.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

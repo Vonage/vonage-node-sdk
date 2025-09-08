@@ -1,4 +1,4 @@
-import { CreditTransferResponse } from './creditTransferResponse';
+import { CreditTransferResponse } from './creditTransferResponse.js';
 
 /**
  * Type definition for the response representing a page of credit transfers,

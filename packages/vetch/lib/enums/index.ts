@@ -1,3 +1,3 @@
-export * from './HTTPMethods';
-export * from './contentType';
-export * from './responseTypes';
+export * from './HTTPMethods.js';
+export * from './contentType.js';
+export * from './responseTypes.js';

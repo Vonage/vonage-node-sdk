@@ -1,11 +1,11 @@
 import { APILinks } from '@vonage/server-client';
-import { Application } from '../Application';
-import { CapabilityVerifyResponse } from './CapabilityVerifyResponse';
-import { CapabilityRTCResponse } from './CapabilityRTCResponse';
-import { CapabilityVoiceResponse } from './CapabilityVoiceResponse';
-import { CapabilityMeetingsResponse } from './CapabilityMeetingsResponse';
-import { CapabilityBulkResponse } from './CapabilityBulkResponse';
-import { CapabilityMessagesResponse } from './CapabilityMessagesResponse';
+import { Application } from '../Application.js';
+import { CapabilityVerifyResponse } from './CapabilityVerifyResponse.js';
+import { CapabilityRTCResponse } from './CapabilityRTCResponse.js';
+import { CapabilityVoiceResponse } from './CapabilityVoiceResponse.js';
+import { CapabilityMeetingsResponse } from './CapabilityMeetingsResponse.js';
+import { CapabilityBulkResponse } from './CapabilityBulkResponse.js';
+import { CapabilityMessagesResponse } from './CapabilityMessagesResponse.js';
 
 /**
  * Represents a response containing application information.

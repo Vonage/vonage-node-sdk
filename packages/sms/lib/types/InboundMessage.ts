@@ -1,4 +1,4 @@
-import { TypeEnum } from '../enums';
+import { TypeEnum } from '../enums/index.js';
 
 /**
  * Interface representing an inbound SMS message.

@@ -1,15 +1,13 @@
-import { AbstractMessage } from './AbstractMessage';
-import { MessageVideoType } from '../types';
-import { MessageParamsVideo } from '../types';
-import { MessageTypes } from '../enums/MessageTypes';
+import { AbstractMessage } from './AbstractMessage.js';
+import { MessageParamsVideo, MessageVideoType } from '../types/index.js';
+import { MessageTypes } from '../enums/MessageTypes.js';
 
 /**
  * An abstract base class for video message objects.
  */
 export abstract class AbstractVideoMessage
   extends AbstractMessage
-  implements MessageParamsVideo
-{
+  implements MessageParamsVideo {
   /**
    * The type of message, which is 'video' for video messages.
    */

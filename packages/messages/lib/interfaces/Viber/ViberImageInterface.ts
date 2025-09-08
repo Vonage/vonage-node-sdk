@@ -1,6 +1,6 @@
-import { ViberChannelInterface } from './ViberChannelInterface';
-import { MessageImageInterface } from '../MessageImageInterface';
-import { ViberActionParams } from '../../types';
+import { ViberChannelInterface } from './ViberChannelInterface.js';
+import { MessageImageInterface } from '../MessageImageInterface.js';
+import { ViberActionParams } from '../../types/index.js';
 
 /**
  * Represents the Viber image interface.
@@ -12,7 +12,7 @@ import { ViberActionParams } from '../../types';
  */
 export interface ViberImageInterface
   extends ViberChannelInterface,
-    MessageImageInterface {
+  MessageImageInterface {
   /**
    * Represents Viber-specific action parameters.
    */

@@ -1,6 +1,6 @@
-import { AbstractTextMessage } from '../AbstractTextMessage';
-import { RCSTextParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractTextMessage } from '../AbstractTextMessage.js';
+import { RCSTextParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a text message for the RCS channel.

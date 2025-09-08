@@ -1,10 +1,11 @@
-import { Client } from './client';
-import { AuthenticationType } from './enums';
+import { Client } from './client.js';
+import { AuthenticationType } from './enums/index.js';
 import debug from 'debug';
 import { VetchError, HTTPMethods, VetchOptions } from '@vonage/vetch';
 import fetch from 'node-fetch';
-import { createWriteStream } from 'fs';
-import { pipeline } from 'stream/promises';
+import { createWriteStream } from 'node:fs';
+import { pipeline } from 'node:stream/promises';
+import { PipelineSource } from 'node:stream';
 
 const log = debug('vonage:file-client');
 
@@ -34,7 +35,7 @@ export class FileClient extends Client {
     try {
       fileURL = new URL(file);
       log('Downloading file by URL');
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_) {
       log('Downloading file by ID');
       fileURL = new URL(`${this.config.apiHost}/v3/files/${file}`);
@@ -73,7 +74,7 @@ export class FileClient extends Client {
     }
 
     log(`Saving to ${path}`);
-    await pipeline(response.body, createWriteStream(path));
+    await pipeline(response.body as PipelineSource<string>, createWriteStream(path));
 
     log('File saved');
   }

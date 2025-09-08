@@ -1,2 +1,2 @@
-export * from './MessengerCategory';
-export * from './MessengerTags';
+export * from './MessengerCategory.js';
+export * from './MessengerTags.js';

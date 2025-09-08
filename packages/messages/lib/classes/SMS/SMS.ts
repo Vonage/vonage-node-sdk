@@ -1,7 +1,11 @@
-import { AbstractTextMessage } from '../AbstractTextMessage';
-import { MessageParamsText, SMSExtraParams, SMSParams } from '../../types';
+import { AbstractTextMessage } from '../AbstractTextMessage.js';
+import {
+  MessageParamsText,
+  SMSExtraParams,
+  SMSParams
+} from '../../types/index.js';
 import debug from 'debug';
-import { Channels } from '../../enums';
+import { Channels } from '../../enums/index.js';
 
 const log = debug('vonage:messages:sms');
 

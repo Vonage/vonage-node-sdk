@@ -1,6 +1,6 @@
-import { NCCOActions } from '../../enums';
-import { StreamAction } from '../../types';
-import { Serializable } from '../../ncco';
+import { NCCOActions } from '../../enums/index.js';
+import { StreamAction } from '../../types/index.js';
+import { Serializable } from '../../ncco.js';
 
 /**
  * Represents a Stream action in a Nexmo Call Control Object (NCCO).

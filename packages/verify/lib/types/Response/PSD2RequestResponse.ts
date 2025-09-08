@@ -1,4 +1,4 @@
-import { VerifyRequestResponse } from './VerifyRequestResponse';
+import { VerifyRequestResponse } from './VerifyRequestResponse.js';
 
 /**
  * Represents the response for a PSD2 verification request.

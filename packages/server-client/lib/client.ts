@@ -1,5 +1,4 @@
 import fetch, { Response } from 'node-fetch';
-import AbortError from 'node-fetch';
 import { Auth, AuthInterface, AuthParams } from '@vonage/auth';
 import {
   ResponseTypes,
@@ -9,14 +8,14 @@ import {
   ContentType,
   VetchError,
 } from '@vonage/vetch';
-import { AuthenticationType } from './enums';
+import { AuthenticationType } from './enums/index.js';
 import {
   camelCaseObjectKeys,
   kebabCaseObjectKeys,
   snakeCaseObjectKeys,
   omit,
   PartialTransformFunction,
-} from './transformers';
+} from './transformers.js';
 import debug from 'debug';
 import { ConfigParams } from './types/index';
 
@@ -26,7 +25,7 @@ export class Client {
   /**
    * Static property containing utility transformers.
    */
-  public static transformers  = {
+  public static transformers = {
     'camelCaseObjectKeys': camelCaseObjectKeys as PartialTransformFunction,
     'snakeCaseObjectKeys': snakeCaseObjectKeys as PartialTransformFunction,
     'kebabCaseObjectKeys': kebabCaseObjectKeys as PartialTransformFunction,
@@ -344,7 +343,7 @@ export class Client {
         await fetch(request.url, fetcRequest),
       );
     } catch (error) {
-      if (error instanceof AbortError) {
+      if (error && (error as Error)?.name === 'AbortError') {
         log(`Request timed out after ${timeout}`);
       }
       throw error;

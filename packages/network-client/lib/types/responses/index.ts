@@ -1,2 +1,2 @@
-export * from './odicResponse';
-export * from './networkTokenResponse';
+export * from './odicResponse.js';
+export * from './networkTokenResponse.js';

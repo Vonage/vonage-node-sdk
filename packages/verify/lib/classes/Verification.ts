@@ -1,5 +1,5 @@
-import { VerificationParameters } from '../types';
-import { VerifyWorkflows, VerifyLanguages } from '../enums';
+import { VerificationParameters } from '../types/index.js';
+import { VerifyWorkflows, VerifyLanguages } from '../enums/index.js';
 
 /**
  * Represents parameters for a verification request.

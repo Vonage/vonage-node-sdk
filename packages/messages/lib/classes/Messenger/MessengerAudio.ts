@@ -1,6 +1,6 @@
-import { AbstractAudioMessage } from '../AbstractAudioMessage';
-import { MessengerAudioParams, MessengerType } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractAudioMessage } from '../AbstractAudioMessage.js';
+import { MessengerAudioParams, MessengerType } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents an audio message for the Messenger channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class MessengerAudio
   extends AbstractAudioMessage
-  implements MessengerAudioParams
-{
+  implements MessengerAudioParams {
   /**
    * The channel for this message (always 'messenger').
    */

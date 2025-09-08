@@ -1,10 +1,10 @@
 import {
-  Conversation,
-  Input,
-  Talk,
-  NCCOBuilder,
   NCCOActions,
 } from '../lib';
+import { Conversation } from '../lib/classes/NCCO/Conversation';
+import { Input } from '../lib/classes/NCCO/Input';
+import { Talk } from '../lib/classes/NCCO/Talk';
+import { NCCOBuilder } from '../lib/classes/NCCO/NCCOBuilder';
 
 describe('voice', () => {
   test('can add a single action', async () => {

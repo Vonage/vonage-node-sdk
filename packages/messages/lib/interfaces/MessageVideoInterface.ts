@@ -1,5 +1,5 @@
-import { MessageInterface } from './MessageInterface';
-import { MessageVideoType } from '../types';
+import { MessageInterface } from './MessageInterface.js';
+import { MessageVideoType } from '../types/index.js';
 
 /**
  * Represents a video message type.

@@ -1,15 +1,13 @@
-import { AbstractMessage } from './AbstractMessage';
-import { MessageVcardType } from '../types';
-import { MessageParamsVcard } from '../types';
-import { MessageTypes } from '../enums/MessageTypes';
+import { AbstractMessage } from './AbstractMessage.js';
+import { MessageParamsVcard, MessageVcardType } from '../types/index.js';
+import { MessageTypes } from '../enums/index.js';
 
 /**
  * An abstract base class for vCard (contact card) message objects.
  */
 export abstract class AbstractVcardMessage
   extends AbstractMessage
-  implements MessageParamsVcard
-{
+  implements MessageParamsVcard {
   /**
    * The type of message (always 'vcard').
    */

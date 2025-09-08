@@ -1,4 +1,4 @@
-import { StreamAction as StreamActionType } from '../../types';
+import { StreamAction as StreamActionType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

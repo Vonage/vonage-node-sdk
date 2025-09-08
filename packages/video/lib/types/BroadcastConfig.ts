@@ -1,5 +1,5 @@
-import { LayoutType, Resolution, StreamMode } from '../enums';
-import { RTMPStream } from './RTMPStream';
+import { LayoutType, Resolution, StreamMode } from '../enums/index.js';
+import { RTMPStream } from './RTMPStream.js';
 
 /**
  * Interface representing configuration options for HLS streaming.

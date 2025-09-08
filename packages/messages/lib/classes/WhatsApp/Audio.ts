@@ -1,5 +1,5 @@
-import { AudioObject } from '../../interfaces';
-import { WhatsAppAudio } from './WhatsAppAudio';
+import { AudioObject } from '../../interfaces/index.js';
+import { WhatsAppAudio } from './WhatsAppAudio.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:whatsapp');

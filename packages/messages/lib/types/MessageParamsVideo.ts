@@ -1,6 +1,6 @@
-import { MessageTypes } from '../enums/MessageTypes';
-import { MessageParams } from './MessageParams';
-import { MessageVideoType } from './MessageVideoType';
+import { MessageTypes } from '../enums/MessageTypes.js';
+import { MessageParams } from './MessageParams.js';
+import { MessageVideoType } from './MessageVideoType.js';
 
 /**
  * Represents the parameters for a message containing a video.

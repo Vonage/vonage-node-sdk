@@ -1,4 +1,4 @@
-import { Insight } from '../../enums';
+import { Insight } from '../../enums/index.js';
 
 /**
  * Represents a fraud check request.

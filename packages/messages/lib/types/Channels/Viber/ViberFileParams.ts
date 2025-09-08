@@ -1,6 +1,6 @@
-import { MessageFileType } from '../../MessageFileType';
-import { MessageParamsFile } from '../../MessageParamsFile';
-import { ViberParams } from './ViberParams';
+import { MessageFileType } from '../../MessageFileType.js';
+import { MessageParamsFile } from '../../MessageParamsFile.js';
+import { ViberParams } from './ViberParams.js';
 
 /**
  * Represents parameters for sending a file via Viber.

@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.build.cjs.base.json",
+  "compilerOptions": {
+    "rootDir": "lib",
+    "outDir": "dist/cjs"
+  },
+  "include": [
+    "lib/**/*"
+  ],
+  "exclude": [
+    "__tests__",
+    "dist"
+  ]
+}

@@ -1,4 +1,4 @@
-import { VerifyControlResponse } from './Response';
+import { VerifyControlResponse } from './Response/index.js';
 
 /**
  * Represents the VerifyControl type.

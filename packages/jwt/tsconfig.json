@@ -1,17 +1,11 @@
 {
   "extends": "../../tsconfig.json",
-
   "compilerOptions": {
     "rootDir": "lib",
-    "outDir": "dist/lib"
+    "noEmit": true
   },
-
   "exclude": [
     "__tests__",
     "dist"
-  ],
-
-  "ts-node": {
-    "esm": true
-  }
+  ]
 }

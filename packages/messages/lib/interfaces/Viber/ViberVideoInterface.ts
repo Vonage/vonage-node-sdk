@@ -1,6 +1,6 @@
-import { ViberChannelInterface } from './ViberChannelInterface';
-import { MessageVideoInterface } from '../MessageVideoInterface';
-import { ViberService } from '../../types';
+import { ViberChannelInterface } from './ViberChannelInterface.js';
+import { MessageVideoInterface } from '../MessageVideoInterface.js';
+import { ViberService } from '../../types/index.js';
 
 /**
  * Represents the Viber video interface.
@@ -11,7 +11,7 @@ import { ViberService } from '../../types';
  */
 export interface ViberVideoInterface
   extends ViberChannelInterface,
-    MessageVideoInterface {
+  MessageVideoInterface {
   /**
    * Represents Viber-specific video service parameters.
    */

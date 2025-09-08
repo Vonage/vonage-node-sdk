@@ -1,6 +1,6 @@
-import { PhoneInfo } from './phoneInfo';
-import { FraudScore } from './fraudScore';
-import { SimSwap } from './simSwap';
+import { PhoneInfo } from './phoneInfo.js';
+import { FraudScore } from './fraudScore.js';
+import { SimSwap } from './simSwap.js';
 
 /**
  * Represents the result of a fraud check request.

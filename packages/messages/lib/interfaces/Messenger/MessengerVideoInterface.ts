@@ -1,5 +1,5 @@
-import { MessengerChannelInterface } from './MessengerChannelInterface';
-import { MessageVideoInterface } from '../MessageVideoInterface';
+import { MessengerChannelInterface } from './MessengerChannelInterface.js';
+import { MessageVideoInterface } from '../MessageVideoInterface.js';
 
 /**
  * Represents an interface for defining Messenger video messages.
@@ -10,4 +10,4 @@ import { MessageVideoInterface } from '../MessageVideoInterface';
  */
 export interface MessengerVideoInterface
   extends MessengerChannelInterface,
-    MessageVideoInterface {}
+  MessageVideoInterface { }

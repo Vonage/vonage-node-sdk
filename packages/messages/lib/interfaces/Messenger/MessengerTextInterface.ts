@@ -1,5 +1,5 @@
-import { MessengerChannelInterface } from './MessengerChannelInterface';
-import { MessageTextInterface } from '../MessageTextInterface';
+import { MessengerChannelInterface } from './MessengerChannelInterface.js';
+import { MessageTextInterface } from '../MessageTextInterface.js';
 
 /**
  * Represents an interface for defining Messenger text messages.
@@ -10,4 +10,4 @@ import { MessageTextInterface } from '../MessageTextInterface';
  */
 export interface MessengerTextInterface
   extends MessengerChannelInterface,
-    MessageTextInterface {}
+  MessageTextInterface { }

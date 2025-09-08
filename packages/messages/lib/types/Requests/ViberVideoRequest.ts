@@ -1,4 +1,4 @@
-import { ViberService } from '../Channels';
+import { ViberService } from '../Channels/index.js';
 
 /**
  * Represents a request for sending a video message via the Viber Service channel.

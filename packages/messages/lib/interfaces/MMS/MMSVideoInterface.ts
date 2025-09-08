@@ -1,5 +1,5 @@
-import { MessageVideoInterface } from '../MessageVideoInterface';
-import { MMSChannelInterface } from './MMSChannelInterface';
+import { MessageVideoInterface } from '../MessageVideoInterface.js';
+import { MMSChannelInterface } from './MMSChannelInterface.js';
 
 /**
  * Represents an interface for defining MMS channel messages with video.
@@ -9,4 +9,4 @@ import { MMSChannelInterface } from './MMSChannelInterface';
  */
 export interface MMSVideoInterface
   extends MessageVideoInterface,
-    MMSChannelInterface {}
+  MMSChannelInterface { }

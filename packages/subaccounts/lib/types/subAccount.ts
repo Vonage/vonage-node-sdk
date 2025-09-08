@@ -1,4 +1,4 @@
-import { Account } from './account';
+import { Account } from './account.js';
 
 /**
  * Type definition representing a subaccount, which includes properties such

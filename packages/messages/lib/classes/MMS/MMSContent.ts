@@ -1,7 +1,6 @@
-import { AbstractMessage } from '../AbstractMessage';
-import { MessageParamsContent, MessageContentObject } from '../../types';
-import { Channels } from '../../enums';
-import { MessageTypes } from '../../enums/MessageTypes';
+import { AbstractMessage } from '../AbstractMessage.js';
+import { MessageParamsContent, MessageContentObject } from '../../types/index.js';
+import { MessageTypes, Channels } from '../../enums/index.js';
 
 /**
  * Represents a custom message for the MMS channel.
@@ -9,8 +8,7 @@ import { MessageTypes } from '../../enums/MessageTypes';
  * @group MMS
  */
 export class MMSContent
-  extends AbstractMessage
-{
+  extends AbstractMessage {
   /**
    * The channel for this message (always 'mms').
    */

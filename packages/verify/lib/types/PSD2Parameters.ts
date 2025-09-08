@@ -1,4 +1,4 @@
-import { VerificationParameters } from './VerificationParams';
+import { VerificationParameters } from './VerificationParams.js';
 
 /**
  * Represents parameters for a PSD2 (Payment Services Directive 2)
@@ -7,7 +7,7 @@ import { VerificationParameters } from './VerificationParams';
 export type PSD2Parameters = Omit<
   VerificationParameters,
   'brand' | 'senderId' | 'pinCode'
-  > & {
+> & {
   /**
    * The payee's name or identifier for the payment confirmation.
    */

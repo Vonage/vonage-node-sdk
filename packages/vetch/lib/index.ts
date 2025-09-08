@@ -1,3 +1,3 @@
-export * from './types';
-export * from './enums';
-export * from './errors/vetchError';
+export * from './types/index.js';
+export * from './enums/index.js';
+export * from './errors/vetchError.js';

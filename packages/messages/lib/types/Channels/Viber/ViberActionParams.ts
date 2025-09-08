@@ -1,5 +1,5 @@
-import { ViberService } from './ViberService';
-import { ViberAction } from './ViberAction';
+import { ViberService } from './ViberService.js';
+import { ViberAction } from './ViberAction.js';
 /**
  * Represents parameters for a Viber action message.
  *

@@ -1,3 +1,3 @@
-export * from './APILink';
-export * from './APILinks';
-export * from './ConfigParams';
+export * from './APILink.js';
+export * from './APILinks.js';
+export * from './ConfigParams.js';

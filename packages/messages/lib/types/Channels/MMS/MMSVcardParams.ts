@@ -1,6 +1,6 @@
-import { MessageParams } from '../../MessageParams';
-import { MessageVcardType } from '../../MessageVcardType';
-import { MMSParams } from './MMSParams';
+import { MessageParams } from '../../MessageParams.js';
+import { MessageVcardType } from '../../MessageVcardType.js';
+import { MMSParams } from './MMSParams.js';
 
 /**
  * Represents the parameters for sending a vCard message on the MMS channel.

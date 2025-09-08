@@ -1,4 +1,4 @@
-import { CaptionStatus } from '../../enums';
+import { CaptionStatus } from '../../enums/index.js';
 
 /**
  * Represents a response containing the status of captions for a live streaming broadcast.

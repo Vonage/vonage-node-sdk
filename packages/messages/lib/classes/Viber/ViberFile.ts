@@ -1,6 +1,6 @@
-import { AbstractFileMessage } from '../AbstractFileMessage';
-import { ViberFileParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractFileMessage } from '../AbstractFileMessage.js';
+import { ViberFileParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a file message for the Viber Service channel.

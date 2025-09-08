@@ -1,5 +1,5 @@
 import { APILinks } from '@vonage/server-client';
-import { ListMemberResponse } from './listMemberResponse';
+import { ListMemberResponse } from './listMemberResponse.js';
 
 
 export type MemberPageResponse = {

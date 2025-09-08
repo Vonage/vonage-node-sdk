@@ -4,25 +4,25 @@ debug('@vonage/voice')(
   'This file is deprecated please update to use the core package',
 );
 
-export { Connect } from './classes/NCCO/Connect';
-export { Conversation } from './classes/NCCO/Conversation';
-export { Input } from './classes/NCCO/Input';
-export { NCCOBuilder } from './classes/NCCO/NCCOBuilder';
-export { Notify } from './classes/NCCO/Notify';
-export { Record } from './classes/NCCO/Record';
-export { Stream } from './classes/NCCO/Stream';
-export { Talk } from './classes/NCCO/Talk';
+export { Connect } from './classes/NCCO/Connect.js';
+export { Conversation } from './classes/NCCO/Conversation.js';
+export { Input } from './classes/NCCO/Input.js';
+export { NCCOBuilder } from './classes/NCCO/NCCOBuilder.js';
+export { Notify } from './classes/NCCO/Notify.js';
+export { Record } from './classes/NCCO/Record.js';
+export { Stream } from './classes/NCCO/Stream.js';
+export { Talk } from './classes/NCCO/Talk.js';
 
-export { ConnectAction } from './interfaces/NCCO/ConnectAction';
-export { ConversationAction } from './interfaces/NCCO/ConversationAction';
-export { DTMFSettings } from './interfaces/NCCO/DTMFSettings';
-export { InputAction } from './interfaces/NCCO/InputAction';
-export { NotifyAction } from './interfaces/NCCO/NotifyAction';
-export { RecordAction } from './interfaces/NCCO/RecordAction';
-export { Serializable } from './interfaces/NCCO/Serializable';
-export { SpeechSettings } from './interfaces/NCCO/SpeechSettings';
-export { StreamAction } from './interfaces/NCCO/StreamAction';
-export { TalkAction } from './interfaces/NCCO/TalkAction';
-export { URLTransfer, NCCOTransfer } from './interfaces/NCCO/Transfer';
+export { ConnectAction } from './interfaces/NCCO/ConnectAction.js';
+export { ConversationAction } from './interfaces/NCCO/ConversationAction.js';
+export { DTMFSettings } from './interfaces/NCCO/DTMFSettings.js';
+export { InputAction } from './interfaces/NCCO/InputAction.js';
+export { NotifyAction } from './interfaces/NCCO/NotifyAction.js';
+export { RecordAction } from './interfaces/NCCO/RecordAction.js';
+export { Serializable } from './interfaces/NCCO/Serializable.js';
+export { SpeechSettings } from './interfaces/NCCO/SpeechSettings.js';
+export { StreamAction } from './interfaces/NCCO/StreamAction.js';
+export { TalkAction } from './interfaces/NCCO/TalkAction.js';
+export { URLTransfer, NCCOTransfer } from './interfaces/NCCO/Transfer.js';
 
-export { Action } from './types/NCCO/Action';
+export { Action } from './types/NCCO/Action.js';

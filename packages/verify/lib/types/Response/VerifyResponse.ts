@@ -1,4 +1,4 @@
-import { CheckStatus } from '../../enums';
+import { CheckStatus } from '../../enums/index.js';
 
 /**
  * Represents the response for a Verify operation.

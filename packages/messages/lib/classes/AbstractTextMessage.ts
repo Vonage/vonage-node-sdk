@@ -1,14 +1,13 @@
-import { AbstractMessage } from './AbstractMessage';
-import { MessageParamsText } from '../types';
-import { MessageTypes } from '../enums/MessageTypes';
+import { AbstractMessage } from './AbstractMessage.js';
+import { MessageParamsText } from '../types/index.js';
+import { MessageTypes } from '../enums/index.js';
 
 /**
  * An abstract base class for text message objects.
  */
 export abstract class AbstractTextMessage
   extends AbstractMessage
-  implements MessageParamsText
-{
+  implements MessageParamsText {
   /**
    * The type of message (always 'text').
    */

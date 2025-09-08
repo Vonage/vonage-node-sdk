@@ -1,4 +1,4 @@
-import { CallStatus } from '../enums';
+import { CallStatus } from '../enums/index.js';
 
 /**
  * Represents the result of a call, including the UUID, status, direction (inbound or outbound), and conversation UUID.

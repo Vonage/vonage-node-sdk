@@ -1,5 +1,5 @@
-import { WhatsAppChannelInterface } from './WhatsAppChannelInterface';
-import { MessageFileInterface } from '../MessageFileInterface';
+import { WhatsAppChannelInterface } from './WhatsAppChannelInterface.js';
+import { MessageFileInterface } from '../MessageFileInterface.js';
 
 /**
  * Represents an interface for WhatsApp file messages.
@@ -10,4 +10,4 @@ import { MessageFileInterface } from '../MessageFileInterface';
  */
 export interface WhatsAppFileInterface
   extends WhatsAppChannelInterface,
-    MessageFileInterface {}
+  MessageFileInterface { }

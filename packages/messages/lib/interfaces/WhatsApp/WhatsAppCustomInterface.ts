@@ -1,6 +1,6 @@
-import { MessageInterface } from '../MessageInterface';
-import { WhatsAppChannelInterface } from './WhatsAppChannelInterface';
-import { WhatsAppCustomType } from '../../types';
+import { MessageInterface } from '../MessageInterface.js';
+import { WhatsAppChannelInterface } from './WhatsAppChannelInterface.js';
+import { WhatsAppCustomType } from '../../types/index.js';
 
 /**
  * Represents a WhatsApp custom message interface.
@@ -11,7 +11,7 @@ import { WhatsAppCustomType } from '../../types';
  */
 export interface WhatsAppCustomInterface
   extends MessageInterface,
-    WhatsAppChannelInterface {
+  WhatsAppChannelInterface {
   /**
    * Custom data for the WhatsApp message.
    */

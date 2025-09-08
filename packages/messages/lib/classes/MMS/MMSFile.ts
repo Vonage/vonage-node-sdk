@@ -1,6 +1,6 @@
-import { AbstractFileMessage } from '../AbstractFileMessage';
-import { MessageParamsFile } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractFileMessage } from '../AbstractFileMessage.js';
+import { MessageParamsFile } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a file message for the MMS channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class MMSFile
   extends AbstractFileMessage
-  implements MessageParamsFile
-{
+  implements MessageParamsFile {
   /**
    * The channel for this message (always 'mms').
    */

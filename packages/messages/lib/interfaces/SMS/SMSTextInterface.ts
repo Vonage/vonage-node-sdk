@@ -1,4 +1,4 @@
-import { MessageTextInterface } from '../MessageTextInterface';
+import { MessageTextInterface } from '../MessageTextInterface.js';
 
 /**
  * Represents an interface for defining SMS channel text messages.

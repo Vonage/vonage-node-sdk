@@ -1,5 +1,5 @@
-import { SMSStatus } from '../../enums';
-import { SMSMessages, ErrorMessage, Message } from '../../types';
+import { SMSStatus } from '../../enums/index.js';
+import { SMSMessages, ErrorMessage, Message } from '../../types/index.js';
 
 /* istanbul ignore next */
 /**

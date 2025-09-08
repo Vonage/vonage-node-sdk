@@ -1,5 +1,5 @@
-import { CallWithAnswerURL } from './CallWithAnswerURL';
-import { CallWithNCCO } from './CallWithNCCO';
+import { CallWithAnswerURL } from './CallWithAnswerURL.js';
+import { CallWithNCCO } from './CallWithNCCO.js';
 
 /**
  * Represents an outbound call, which can either include an answer URL (for simple call scenarios)

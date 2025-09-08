@@ -1,4 +1,4 @@
-import { InputAction as InputActionType } from '../../types';
+import { InputAction as InputActionType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

@@ -1,4 +1,4 @@
-import { SIPCallOptions } from '../SIPCallOptions';
+import { SIPCallOptions } from '../SIPCallOptions.js';
 
 /**
  * Represents the request to initiate a SIP call with additional session information.

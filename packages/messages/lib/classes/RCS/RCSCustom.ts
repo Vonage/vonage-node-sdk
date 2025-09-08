@@ -1,7 +1,6 @@
-import { AbstractMessage } from '../AbstractMessage';
-import { RCSCustomParams } from '../../types';
-import { Channels } from '../../enums';
-import { MessageTypes } from '../../enums/MessageTypes';
+import { AbstractMessage } from '../AbstractMessage.js';
+import { RCSCustomParams } from '../../types/index.js';
+import { Channels, MessageTypes } from '../../enums';
 
 /**
  * Represents a custom message for RCS.

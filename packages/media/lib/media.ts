@@ -4,7 +4,7 @@ import {
   MediaParameters,
   MediaItemPageResponse,
   MediaItemResponse,
-} from './types';
+} from './types/index.js';
 
 const apiToSdk = (media: MediaItemResponse): MediaItem =>
   Client.transformers.camelCaseObjectKeys(media) as MediaItem;

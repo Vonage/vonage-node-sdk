@@ -1,5 +1,5 @@
 import { Client, AuthenticationType } from '@vonage/server-client';
-import { TransactionParams } from './types';
+import { TransactionParams } from './types/index.js';
 
 /**
  * Represents a client for the Redact API that extends the Vonage Client.

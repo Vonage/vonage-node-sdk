@@ -1,4 +1,4 @@
-import { Type, ProductType } from '../../enums';
+import { Type, ProductType } from '../../enums/index.js';
 
 /**
  * Represents a request to redact a specific message.

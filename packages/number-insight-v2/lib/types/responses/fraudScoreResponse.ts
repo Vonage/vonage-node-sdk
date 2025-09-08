@@ -1,5 +1,5 @@
-import { RiskRecommendation } from '../../enums';
-import { FraudScore } from '../fraudScore';
+import { RiskRecommendation } from '../../enums/index.js';
+import { FraudScore } from '../fraudScore.js';
 
 /**
  * Represents the response data for the 'fraud_score' insight operation.

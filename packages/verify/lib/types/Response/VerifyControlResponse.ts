@@ -1,4 +1,4 @@
-import { Command } from '../../enums';
+import { Command } from '../../enums/index.js';
 
 /**
  * Represents the response for a Verify control operation.

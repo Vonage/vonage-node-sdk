@@ -1,5 +1,5 @@
-import { MessageParamsVideo } from '../../MessageParamsVideo';
-import { MessengerParams } from './MessengerParams';
+import { MessageParamsVideo } from '../../MessageParamsVideo.js';
+import { MessengerParams } from './MessengerParams.js';
 
 /**
  * Represents parameters for sending a video message via the Messenger platform.

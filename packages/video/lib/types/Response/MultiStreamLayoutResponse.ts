@@ -1,4 +1,4 @@
-import { SingleStreamLayoutResponse } from './SingleStreamLayoutResponse';
+import { SingleStreamLayoutResponse } from './SingleStreamLayoutResponse.js';
 
 /**
  * Represents a response containing multiple SingleStreamLayoutResponse items.

@@ -1,5 +1,5 @@
-import { TemplateResponse } from './templateResponse';
-import { Template } from '../template';
+import { TemplateResponse } from './templateResponse.js';
+import { Template } from '../template.js';
 import { APILinks } from '@vonage/server-client';
 
 /**

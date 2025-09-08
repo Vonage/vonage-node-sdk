@@ -1,5 +1,5 @@
 import { XOR } from 'ts-xor';
-import { NCCOAction } from '../NCCO';
+import { NCCOAction } from '../NCCO/index.js';
 
 /**
  * Destination using URL.

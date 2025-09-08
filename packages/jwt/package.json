@@ -12,6 +12,7 @@
     "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
   },
   "license": "Apache-2.0",
+  "type": "module",
   "contributors": [
     {
       "name": "Kelly J Andrews",
@@ -26,31 +27,47 @@
       "url": "https://github.com/manchuck"
     }
   ],
-  "main": "dist/lib/index.js",
-  "types": "dist/lib/index.d.ts",
   "files": [
-    "dist/**"
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
   ],
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "node": {
+        "import": "./dist/esm/index.js",
+        "require": "./dist/cjs/index.cjs"
+      },
+      "browser": "./dist/unsupportedBrowser.cjs"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
-    "build": "npm run clean && npm run compile",
+    "build:esm": "tsc -p tsconfig.build.esm.json",
+    "build:cjs": "tsc -p tsconfig.build.cjs.json && node -e \"const fs=require('node:fs');const p='dist/cjs';(function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})) e.isDirectory()?walk(d+'/'+e.name):e.name.endsWith('.js')&&fs.renameSync(d+'/'+e.name,d+'/'+e.name.replace(/\\.js$/,'.cjs'));})(p)\"",
+    "build:types": "tsc -p tsconfig.build.types.json",
+    "postbuild": "node ../../scripts/copyUnsupported.js",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
     "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
     "compile": "npx tsc --build --verbose",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "debug": "^4.3.4",
+    "debug": "^4.4.1",
     "jsonwebtoken": "^9.0.2",
-    "uuid": "^9.0.1"
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "9.0.3",
-    "@types/uuid": "^9.0.5"
+    "@types/jsonwebtoken": "9.0.10",
+    "@types/uuid": "^10.0.0"
   },
   "engines": {
     "node": ">=20"
   },
-  "engineStrict": true,
-  "publishConfig": {
-    "directory": "dist"
-  }
+  "engineStrict": true
 }

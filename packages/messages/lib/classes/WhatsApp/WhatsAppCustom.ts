@@ -1,11 +1,10 @@
-import { AbstractMessage } from '../AbstractMessage';
+import { AbstractMessage } from '../AbstractMessage.js';
 import {
   WhatsAppCustomType,
   WhatsAppCustomParams,
   WhatsAppContext,
-} from '../../types';
-import { MessageTypes } from '../../enums/MessageTypes';
-import { Channels } from '../../enums';
+} from '../../types/index.js';
+import { Channels, MessageTypes } from '../../enums/index.js';
 
 /**
  * Represents a custom message for WhatsApp.
@@ -14,8 +13,7 @@ import { Channels } from '../../enums';
  */
 export class WhatsAppCustom
   extends AbstractMessage
-  implements WhatsAppCustomParams
-{
+  implements WhatsAppCustomParams {
   /**
    * The channel for this message (always 'whatsapp').
    */

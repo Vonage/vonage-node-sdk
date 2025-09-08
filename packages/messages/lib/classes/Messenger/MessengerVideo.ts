@@ -1,6 +1,6 @@
-import { AbstractVideoMessage } from '../AbstractVideoMessage';
-import { MessengerType, MessengerVideoParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractVideoMessage } from '../AbstractVideoMessage.js';
+import { MessengerType, MessengerVideoParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a video message for the Messenger channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class MessengerVideo
   extends AbstractVideoMessage
-  implements MessengerVideoParams
-{
+  implements MessengerVideoParams {
   /**
    * The channel for this message (always 'messenger').
    */

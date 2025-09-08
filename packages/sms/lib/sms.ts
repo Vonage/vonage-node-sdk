@@ -1,7 +1,10 @@
 import { Client, AuthenticationType } from '@vonage/server-client';
-import { MessageSendAllFailure, MessageSendPartialFailure } from './classes';
-import { SMSMessages, SMSResponse, Message, SMSParams } from './types';
-import { SMSStatus } from './enums';
+import {
+  MessageSendAllFailure,
+  MessageSendPartialFailure
+} from './classes/index.js';
+import { SMSMessages, SMSResponse, Message, SMSParams } from './types/index.js';
+import { SMSStatus } from './enums/index.js';
 import crypto from 'crypto';
 import { AlgorithmTypes } from '@vonage/auth';
 

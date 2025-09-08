@@ -1,4 +1,4 @@
-import { VerifySearchErrorResponse } from './Response';
+import { VerifySearchErrorResponse } from './Response/index.js';
 
 /**
  * Represents an error response for a Verify search operation.

@@ -1,4 +1,4 @@
-import { Resolution } from './Resolution';
+import { Resolution } from './Resolution.js';
 
 /**
  * Enum representing different resolutions for an experience composer.

@@ -1,5 +1,5 @@
-import { WhatsAppChannelInterface } from './WhatsAppChannelInterface';
-import { MessageAudioInterface } from '../MessageAudioInterface';
+import { WhatsAppChannelInterface } from './WhatsAppChannelInterface.js';
+import { MessageAudioInterface } from '../MessageAudioInterface.js';
 
 /**
  * Represents an audio message type for WhatsApp.
@@ -10,4 +10,4 @@ import { MessageAudioInterface } from '../MessageAudioInterface';
  */
 export interface WhatsAppAudioInterface
   extends WhatsAppChannelInterface,
-    MessageAudioInterface {}
+  MessageAudioInterface { }

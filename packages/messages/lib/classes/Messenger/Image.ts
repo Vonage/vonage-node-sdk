@@ -1,7 +1,7 @@
-import { ImageObject } from '../../interfaces';
-import { MessageType } from '../../interfaces/Messenger/MessageType';
-import { MessengerType } from '../../types';
-import { MessengerImage } from './MessengerImage';
+import { ImageObject } from '../../interfaces/index.js';
+import { MessageType } from '../../interfaces/Messenger/MessageType.js';
+import { MessengerType } from '../../types/index.js';
+import { MessengerImage } from './MessengerImage.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:messenger');

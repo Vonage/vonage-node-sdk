@@ -1,5 +1,5 @@
-import { MessengerChannelInterface } from './MessengerChannelInterface';
-import { MessageImageInterface } from '../MessageImageInterface';
+import { MessengerChannelInterface } from './MessengerChannelInterface.js';
+import { MessageImageInterface } from '../MessageImageInterface.js';
 
 /**
  * Represents an interface for defining Messenger image messages.
@@ -10,4 +10,4 @@ import { MessageImageInterface } from '../MessageImageInterface';
  */
 export interface MessengerImageInterface
   extends MessengerChannelInterface,
-    MessageImageInterface {}
+  MessageImageInterface { }

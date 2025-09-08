@@ -1,2 +1,2 @@
-export * from './userRequest';
-export * from './websocketChannelRequest';
+export * from './userRequest.js';
+export * from './websocketChannelRequest.js';

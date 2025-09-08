@@ -1,5 +1,5 @@
 import { APILink } from '@vonage/server-client';
-import { TemplateFragment } from './templateFragment';
+import { TemplateFragment } from './templateFragment.js';
 
 /**
  * Value object for a page of template fragments, with camelCase properties.

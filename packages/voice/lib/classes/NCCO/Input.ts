@@ -1,8 +1,6 @@
-import { NCCOActions } from '../../enums';
-import { DTMFSettings } from '../../types';
-import { InputAction } from '../../types';
-import { SpeechSettings } from '../../types';
-import { Serializable } from '../../ncco';
+import { NCCOActions } from '../../enums/index.js';
+import { InputAction, DTMFSettings, SpeechSettings } from '../../types/index.js';
+import { Serializable } from '../../ncco.js';
 
 /**
  * Represents an Input action in the Nexmo Call Control Object (NCCO) for gathering user input.
@@ -74,7 +72,7 @@ export class Input implements Pick<InputAction, 'action' | 'type' | 'dtmf' | 'sp
     }
 
     if (eventUrl) {
-      this.eventUrl = [ eventUrl ];
+      this.eventUrl = [eventUrl];
     }
 
     if (eventMethod) {

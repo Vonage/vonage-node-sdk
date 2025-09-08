@@ -1,5 +1,5 @@
-import { AnyMessageBodyResponse } from '../responses';
-import { Event } from '../event';
+import { AnyMessageBodyResponse } from '../responses/index.js';
+import { Event } from '../event.js';
 
 export type CreateEventRequest = {
   body: AnyMessageBodyResponse

@@ -1,3 +1,3 @@
-export * from './number-insights';
-export * from './enums';
-export * from './types';
+export * from './number-insights.js';
+export * from './enums/index.js';
+export * from './types/index.js';

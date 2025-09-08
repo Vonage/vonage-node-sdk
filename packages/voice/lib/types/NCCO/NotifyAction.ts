@@ -1,4 +1,4 @@
-import { NCCOActions } from '../../enums';
+import { NCCOActions } from '../../enums/index.js';
 
 /**
  * Represents a Notify action in a Nexmo Call Control Object (NCCO). A Notify action is used to send a notification

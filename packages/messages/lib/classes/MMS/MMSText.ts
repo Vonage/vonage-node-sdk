@@ -1,6 +1,6 @@
-import { AbstractTextMessage } from '../AbstractTextMessage';
-import { MessageParamsText } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractTextMessage } from '../AbstractTextMessage.js';
+import { MessageParamsText } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a text message for the MMS channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class MMSText
   extends AbstractTextMessage
-  implements MessageParamsText
-{
+  implements MessageParamsText {
   /**
    * The channel for this message (always 'mms').
    */

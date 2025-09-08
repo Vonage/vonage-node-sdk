@@ -1,15 +1,13 @@
-import { AbstractMessage } from './AbstractMessage';
-import { MessageParamsAudio } from '../types';
-import { MessageAudioType } from '../types';
-import { MessageTypes } from '../enums/MessageTypes';
+import { AbstractMessage } from './AbstractMessage.js';
+import { MessageAudioType, MessageParamsAudio } from '../types/index.js';
+import { MessageTypes } from '../enums/MessageTypes.js';
 
 /**
  * An abstract base class for audio messages.
  */
 export abstract class AbstractAudioMessage
   extends AbstractMessage
-  implements MessageParamsAudio
-{
+  implements MessageParamsAudio {
   /**
    * The type of message (always 'audio').
    */

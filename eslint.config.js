@@ -17,7 +17,7 @@ export default [
     files: ['packages/*/lib/**/*.{ts,tsx}'],
   },
   {
-    ignores: ['packages/*/dist/**/*.js', 'coverage/**'],
+    ignores: ['packages/*/dist/**/*.js', 'coverage/**', 'scripts/**'],
   },
   ...vonage.configs.typescript,
   ...vonage.configs.jest,

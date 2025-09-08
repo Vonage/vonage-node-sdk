@@ -1,5 +1,5 @@
-import { SMSMessages } from '../../types';
-import { SMSFailure } from './SMSFailure';
+import { SMSMessages } from '../../types/index.js';
+import { SMSFailure } from './SMSFailure.js';
 
 /**
  * Class representing a failure when sending all SMS messages.

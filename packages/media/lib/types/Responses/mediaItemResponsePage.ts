@@ -1,5 +1,5 @@
 import { APILinks } from '@vonage/server-client';
-import { MediaItemResponse } from './mediaItemResponse';
+import { MediaItemResponse } from './mediaItemResponse.js';
 
 /**
  * Represents the response data for a page of media items.

@@ -12,7 +12,7 @@ import {
 jest.useFakeTimers();
 jest.setSystemTime(10907902800000);
 
-const authTests = testDataSets.map(( dataSet): TestTuple<Auth> => {
+const authTests = testDataSets.map((dataSet): TestTuple<Auth> => {
   const { label, tests } = dataSet;
 
   return {

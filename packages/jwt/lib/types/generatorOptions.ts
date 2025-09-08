@@ -1,4 +1,4 @@
-import { ACL } from './acl';
+import { ACL } from './acl.js';
 
 /**
  * Claims to pass in for the token generator.

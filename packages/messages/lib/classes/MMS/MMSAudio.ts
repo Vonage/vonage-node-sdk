@@ -1,6 +1,6 @@
-import { AbstractAudioMessage } from '../AbstractAudioMessage';
-import { MessageParamsAudio } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractAudioMessage } from '../AbstractAudioMessage.js';
+import { MessageParamsAudio } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents an audio message for the MMS channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class MMSAudio
   extends AbstractAudioMessage
-  implements MessageParamsAudio
-{
+  implements MessageParamsAudio {
   /**
    * The channel for this message (always 'mms').
    */

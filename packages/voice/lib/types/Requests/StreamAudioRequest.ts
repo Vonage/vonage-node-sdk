@@ -1,4 +1,4 @@
-import { StreamAudioParameters } from '../Parameters/StreamAudioParameters';
+import { StreamAudioParameters } from '../Parameters/StreamAudioParameters.js';
 
 /**
  * Represents the parameters for streaming audio during a call.

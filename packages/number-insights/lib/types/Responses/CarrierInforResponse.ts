@@ -1,4 +1,4 @@
-import { NetworkType } from '../../enums';
+import { NetworkType } from '../../enums/index.js';
 
 /**
  * Type representing carrier information.

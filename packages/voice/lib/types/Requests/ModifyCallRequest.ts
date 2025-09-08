@@ -5,7 +5,7 @@ import {
   TransferCallParameters,
   UnearmuffCallParameters,
   UnmuteCallParameters,
-} from '../Parameters';
+} from '../Parameters/index.js';
 
 /**
  * Represents the parameters for modifying a call, including actions like

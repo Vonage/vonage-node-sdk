@@ -1,1 +1,1 @@
-export * from './VoiceRegions';
+export * from './VoiceRegions.js';

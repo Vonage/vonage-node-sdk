@@ -1,6 +1,6 @@
-import { OutboundCall } from '../../types';
-import { AdvancedMachineDetection } from '../AdvancedMachineDetection';
-import { MachineDetection } from '../../enums';
+import { OutboundCall } from '../../types/index.js';
+import { AdvancedMachineDetection } from '../AdvancedMachineDetection.js';
+import { MachineDetection } from '../../enums/index.js';
 
 /**
  * Represents the request payload for creating a call, including various call settings.

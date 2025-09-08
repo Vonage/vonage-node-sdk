@@ -1,2 +1,2 @@
-export * from './purpose';
-export * from './scope';
+export * from './purpose.js';
+export * from './scope.js';

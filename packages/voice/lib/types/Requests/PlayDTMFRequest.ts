@@ -1,4 +1,4 @@
-import { PlayDTMFParameters } from '../Parameters/PlayDTMFParameters';
+import { PlayDTMFParameters } from '../Parameters/PlayDTMFParameters.js';
 
 /**
  * Represents the parameters for playing DTMF (Dual-Tone Multi-Frequency) tones during a call.

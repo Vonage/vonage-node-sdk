@@ -1,3 +1,3 @@
-import { OutboundCall } from '../../types';
+import { OutboundCall } from '../../types/index.js';
 
 export type CreateCallParameters = OutboundCall;

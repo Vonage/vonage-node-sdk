@@ -1,6 +1,6 @@
-import { ErrorMessage } from './ErrorMessage';
-import { Message } from './Message';
-import { SMSResponse } from './Responses';
+import { ErrorMessage } from './ErrorMessage.js';
+import { Message } from './Message.js';
+import { SMSResponse } from './Responses/index.js';
 
 /**
  * Interface representing an SMS response containing multiple messages, including errors.
@@ -10,7 +10,7 @@ import { SMSResponse } from './Responses';
  *
  * @extends {SMSResponse}
  */
-export type SMSMessages = SMSResponse  &{
+export type SMSMessages = SMSResponse & {
   /**
    * The count of messages included in the response.
    */

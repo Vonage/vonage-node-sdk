@@ -1,4 +1,4 @@
-import { NCCOActions, RecordingFormat } from '../../enums';
+import { NCCOActions, RecordingFormat } from '../../enums/index.js';
 
 /**
  * Represents a Record action in a Nexmo Call Control Object (NCCO). A Record

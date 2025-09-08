@@ -1,6 +1,6 @@
-import { BasicCallDetail } from './BasicCallDetail';
-import { CommonCallFields } from './CommonCallFields';
-import { CallDirection } from '../enums';
+import { BasicCallDetail } from './BasicCallDetail.js';
+import { CommonCallFields } from './CommonCallFields.js';
+import { CallDirection } from '../enums/index.js';
 
 /**
  * Represents detailed information about a call, including common call fields, call direction, rate, price, start time,

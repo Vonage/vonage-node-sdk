@@ -1,4 +1,4 @@
-import { NumbersAvailableNumber } from './NumbersAvailableNumber';
+import { NumbersAvailableNumber } from './NumbersAvailableNumber.js';
 
 /**
  * Represents a list of available numbers.

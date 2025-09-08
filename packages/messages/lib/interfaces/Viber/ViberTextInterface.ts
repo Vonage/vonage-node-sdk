@@ -1,6 +1,6 @@
-import { MessageTextInterface } from '../MessageTextInterface';
-import { ViberChannelInterface } from './ViberChannelInterface';
-import { ViberActionParams } from '../../types';
+import { MessageTextInterface } from '../MessageTextInterface.js';
+import { ViberChannelInterface } from './ViberChannelInterface.js';
+import { ViberActionParams } from '../../types/index.js';
 
 /**
  * Represents the Viber text interface.
@@ -11,7 +11,7 @@ import { ViberActionParams } from '../../types';
  */
 export interface ViberTextInterface
   extends MessageTextInterface,
-    ViberChannelInterface {
+  ViberChannelInterface {
   /**
    * Represents Viber-specific action parameters.
    */

@@ -1,2 +1,2 @@
-export * from './OutboundAllCountriesPricingResponse';
-export * from './OutboundCountryPricingResponse';
+export * from './OutboundAllCountriesPricingResponse.js';
+export * from './OutboundCountryPricingResponse.js';

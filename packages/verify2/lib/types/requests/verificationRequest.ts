@@ -1,4 +1,4 @@
-import { VerifyLocale } from '../../enums';
+import { VerifyLocale } from '../../enums/index.js';
 import {
   EmailWorkflow,
   SMSWorkflow,
@@ -6,7 +6,7 @@ import {
   VoiceWorkflow,
   WhatsAppInteractiveWorkflow,
   WhatsAppWorkflow
-} from '../workflows';
+} from '../workflows/index.js';
 
 export type SMSWorkflowRequest = {
   app_hash?: string;

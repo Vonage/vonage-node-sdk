@@ -1,4 +1,4 @@
-import { SearchEventInformationResponse } from './SearchEventInformationResponse';
+import { SearchEventInformationResponse } from './SearchEventInformationResponse.js';
 
 /**
  * Represents the event information for a response.

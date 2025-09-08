@@ -1,7 +1,6 @@
-import { PhoneEndpointObject } from '../interfaces/Endpoint/PhoneEndpointObject';
-import { CallEndpoint } from '../types';
+import { CallEndpoint, PhoneEndpoint } from '../types/index.js';
+import { HttpMethod, MachineDetectionBehavior } from '../enums/index.js';
 import debug from 'debug';
-import { HttpMethod, MachineDetectionBehavior } from '../enums';
 
 debug('@vonage/voice')(
   'This class is deprecated. Please update to use the CommonOutboundCall type',
@@ -22,7 +21,7 @@ export abstract class OutboundCall {
   /**
    * The phone endpoint object representing the caller's information.
    */
-  from?: PhoneEndpointObject;
+  from?: PhoneEndpoint;
 
   /**
    * Indicates whether to use a random from number (optional).
@@ -60,7 +59,7 @@ export abstract class OutboundCall {
    * @param {CallEndpoint} to - The call endpoint to which the outbound call will be made.
    * @param {PhoneEndpointObject} [from] - The phone endpoint object representing the caller's information.
    */
-  constructor(to: CallEndpoint, from?: PhoneEndpointObject) {
+  constructor(to: CallEndpoint, from?: PhoneEndpoint) {
     this.to = [to];
 
     this.from = from;

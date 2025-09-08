@@ -7,7 +7,7 @@ import {
   BasicResponse,
   StandardResponse,
   StandardLookupOptions,
-} from './types';
+} from './types/index.js';
 
 /**
  * Client for the Vonage Number Insights API.

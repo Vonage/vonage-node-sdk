@@ -1,4 +1,4 @@
-import { NCCOAction } from './NCCOActions';
+import { NCCOAction } from './NCCOActions.js';
 
 /**
  * Represents a Nexmo Call Control Object (NCCO) action that defines the behavior of a call.

@@ -1,6 +1,6 @@
-import { FraudCheck } from '../fraudCheck';
-import { FraudScoreResponse } from './fraudScoreResponse';
-import { SimSwap } from '../simSwap';
+import { FraudCheck } from '../fraudCheck.js';
+import { FraudScoreResponse } from './fraudScoreResponse.js';
+import { SimSwap } from '../simSwap.js';
 
 /**
  * Represents the response from a fraud check request.

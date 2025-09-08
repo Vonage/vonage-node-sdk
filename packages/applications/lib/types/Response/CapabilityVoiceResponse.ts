@@ -1,5 +1,5 @@
-import { CapabilityWebhookResponse } from './CapabilityWebhookResponse';
-import { CapabilityVoice } from '../CapabilityVoice';
+import { CapabilityWebhookResponse } from './CapabilityWebhookResponse.js';
+import { CapabilityVoice } from '../CapabilityVoice.js';
 
 /**
  * Event URL configuration response

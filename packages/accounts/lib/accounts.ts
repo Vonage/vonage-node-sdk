@@ -4,7 +4,7 @@ import {
   AccountUpdateResponse,
   GetBalanceResponse,
   TopUpBalanceResponse,
-} from './types';
+} from './types/index.js';
 
 /**
  * Client class to interact with the Account API which enables users to manage

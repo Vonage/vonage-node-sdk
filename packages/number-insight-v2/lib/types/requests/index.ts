@@ -1,1 +1,1 @@
-export * from './fraudCheckRequest';
+export * from './fraudCheckRequest.js';

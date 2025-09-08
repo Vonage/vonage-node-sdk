@@ -1,6 +1,6 @@
-import { AbstractFileMessage } from '../AbstractFileMessage';
-import { MessageParams, RCSFileParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractFileMessage } from '../AbstractFileMessage.js';
+import { MessageParams, RCSFileParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents a file message for the RCS channel.
@@ -9,8 +9,7 @@ import { Channels } from '../../enums';
  */
 export class RCSFile
   extends AbstractFileMessage
-  implements RCSFileParams, MessageParams
-{
+  implements RCSFileParams, MessageParams {
   /**
    * The channel for this message (always 'rcs').
    */

@@ -1,2 +1,2 @@
-export * from './MessageSuccessResponse';
-export * from './MessageErrorResponse';
+export * from './MessageSuccessResponse.js';
+export * from './MessageErrorResponse.js';

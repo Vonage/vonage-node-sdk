@@ -1,10 +1,10 @@
-import { RecordAction } from './RecordAction';
-import { ConversationAction } from './ConversationAction';
-import { ConnectAction } from './ConnectAction';
-import { TalkAction } from './TalkAction';
-import { StreamAction } from './StreamAction';
-import { InputAction } from './InputAction';
-import { NotifyAction } from './NotifyAction';
+import { RecordAction } from './RecordAction.js';
+import { ConversationAction } from './ConversationAction.js';
+import { ConnectAction } from './ConnectAction.js';
+import { TalkAction } from './TalkAction.js';
+import { StreamAction } from './StreamAction.js';
+import { InputAction } from './InputAction.js';
+import { NotifyAction } from './NotifyAction.js';
 
 /**
  * Represents a Nexmo Call Control Object (NCCO) action, which can be one of the following types:

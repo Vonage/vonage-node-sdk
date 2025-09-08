@@ -1,6 +1,6 @@
-import { SearchCheckInformationResponse } from './SearchCheckInformationResponse';
-import { SearchEventInformationResponse } from './SearchEventInformationResponse';
-import { SearchStatus } from '../../enums';
+import { SearchCheckInformationResponse } from './SearchCheckInformationResponse.js';
+import { SearchEventInformationResponse } from './SearchEventInformationResponse.js';
+import { SearchStatus } from '../../enums/index.js';
 
 /**
  * Represents the response for a Verify search operation.

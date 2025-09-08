@@ -1,4 +1,4 @@
-import { VetchOptions } from '../types';
+import { VetchOptions } from '../types/index.js';
 import { Response } from 'node-fetch';
 
 /**

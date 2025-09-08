@@ -1,5 +1,5 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
-import { APISecretResponse, ListAPISecretsResponse } from './types';
+import { APISecretResponse, ListAPISecretsResponse } from './types/index.js';
 
 /**
  * Client class to interact with the Account API to create secrets in

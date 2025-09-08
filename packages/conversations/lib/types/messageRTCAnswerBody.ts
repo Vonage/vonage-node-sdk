@@ -1,4 +1,4 @@
-import { MessageRTCIdBody } from './messageRTCIdBody';
+import { MessageRTCIdBody } from './messageRTCIdBody.js';
 
 export type MessageRTCAnswerBody = {
   answer: string;

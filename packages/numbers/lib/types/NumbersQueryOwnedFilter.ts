@@ -1,4 +1,4 @@
-import { Country } from './Country';
+import { Country } from './Country.js';
 
 /**
  * Represents filters for querying owned numbers.

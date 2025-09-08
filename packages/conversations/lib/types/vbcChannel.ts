@@ -1,4 +1,4 @@
-import { ChannelType } from '../enums';
+import { ChannelType } from '../enums/index.js';
 
 /**
  * Type representing a VBC (Voice Business Cloud) channel.

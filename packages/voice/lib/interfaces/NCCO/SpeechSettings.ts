@@ -1,4 +1,4 @@
-import { SpeechSettings as SpeechSettingsType } from '../../types';
+import { SpeechSettings as SpeechSettingsType } from '../../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

@@ -1,6 +1,6 @@
-import { MessageFileType } from '../../MessageFileType';
-import { MessageParamsFile } from '../../MessageParamsFile';
-import { WhatsAppParams } from './WhatsAppParams';
+import { MessageFileType } from '../../MessageFileType.js';
+import { MessageParamsFile } from '../../MessageParamsFile.js';
+import { WhatsAppParams } from './WhatsAppParams.js';
 
 /**
  * Represents a WhatsApp file message type.

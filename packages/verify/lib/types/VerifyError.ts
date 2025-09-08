@@ -1,4 +1,4 @@
-import { VerifyRequest } from './VerifyRequest';
+import { VerifyRequest } from './VerifyRequest.js';
 
 /**
  * Represents an error response for a Verify operation with additional

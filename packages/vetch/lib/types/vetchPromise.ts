@@ -1,4 +1,4 @@
-import { VetchResponse } from './vetchResponse';
+import { VetchResponse } from './vetchResponse.js';
 
 /**
  * Type representing a promise that resolves with a standardized Vetch API

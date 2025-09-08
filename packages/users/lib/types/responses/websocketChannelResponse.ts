@@ -1,4 +1,5 @@
-import { WebsocketChannel } from '../websocketChannel';
+import { WebsocketChannel } from '../websocketChannel.js';
+
 /**
  * Represents a response containing WebSocket channel information.
  *

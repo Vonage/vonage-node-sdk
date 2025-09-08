@@ -1,5 +1,5 @@
-import { LineType, Feature } from '../enums';
-import { Country } from './Country';
+import { LineType, Feature } from '../enums/index.js';
+import { Country } from './Country.js';
 
 /**
  * Represents an available phone number with its details.

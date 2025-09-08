@@ -1,4 +1,4 @@
-export { Verify } from './verify';
-export * from './classes';
-export * from './enums';
-export * from './types';
+export { Verify } from './verify.js';
+export * from './classes/index.js';
+export * from './enums/index.js';
+export * from './types/index.js';

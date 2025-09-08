@@ -1,4 +1,4 @@
-import { AuditEventTypes } from '../enums';
+import { AuditEventTypes } from '../enums.js';
 /**
  * Represents an Audit Event.
  */

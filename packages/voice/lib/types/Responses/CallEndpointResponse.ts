@@ -3,7 +3,7 @@ import {
   PhoneEndpoint,
   SIPEndpoint,
   VBCEndpoint,
-} from '../Endpoint';
+} from '../Endpoint/index.js';
 
 /**
  * Represents the response for a call endpoint, which can be one of the following:

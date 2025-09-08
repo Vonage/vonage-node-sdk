@@ -1,4 +1,4 @@
-import { SilentAuthChannel, SilentAuthStatus } from '../enums';
+import { SilentAuthChannel, SilentAuthStatus } from '../enums/index.js';
 
 /**
  * Represents a callback received for Silent Authentication.

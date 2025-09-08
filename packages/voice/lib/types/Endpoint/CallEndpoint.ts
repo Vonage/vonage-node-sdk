@@ -1,8 +1,8 @@
-import { PhoneEndpoint } from './PhoneEndpoint';
-import { SIPEndpoint } from './SIPEndpoint';
-import { VBCEndpoint } from './VBCEndpoint';
-import { WebsocketEndpoint } from './WebsocketEndpoint';
-import { AppEndpoint } from './AppEndpoint';
+import { PhoneEndpoint } from './PhoneEndpoint.js';
+import { SIPEndpoint } from './SIPEndpoint.js';
+import { VBCEndpoint } from './VBCEndpoint.js';
+import { WebsocketEndpoint } from './WebsocketEndpoint.js';
+import { AppEndpoint } from './AppEndpoint.js';
 
 /**
  * Represents a call endpoint, which can be of different types such as Phone, SIP, VBC, or Websocket.

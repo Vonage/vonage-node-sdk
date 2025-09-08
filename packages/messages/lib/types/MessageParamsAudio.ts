@@ -1,6 +1,6 @@
-import { MessageParams } from './MessageParams';
-import { MessageAudioType } from './MessageAudioType';
-import { MessageTypes } from '../enums/MessageTypes';
+import { MessageParams } from './MessageParams.js';
+import { MessageAudioType } from './MessageAudioType.js';
+import { MessageTypes } from '../enums/MessageTypes.js';
 
 /**
  * Represents the parameters for a message with audio.

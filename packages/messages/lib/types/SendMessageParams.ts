@@ -4,7 +4,7 @@ import {
   AnyWhatsAppParams,
   AnyMMSParams,
   SMSParams,
-} from './Channels';
+} from './Channels/index.js';
 
 /**
  * Represents parameters for sending various types of messages.

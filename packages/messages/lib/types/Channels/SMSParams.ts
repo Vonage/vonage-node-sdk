@@ -1,5 +1,5 @@
-import { MessageParamsText } from '../MessageParamsText';
-import { Channels } from '../../enums';
+import { MessageParamsText } from '../MessageParamsText.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents the parameters for sending an SMS message.

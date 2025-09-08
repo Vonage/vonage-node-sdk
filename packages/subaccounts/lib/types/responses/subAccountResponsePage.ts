@@ -1,5 +1,5 @@
-import { SubAccountResponse } from './subAccountResponse';
-import { AccountResponse } from './accountResponse';
+import { SubAccountResponse } from './subAccountResponse.js';
+import { AccountResponse } from './accountResponse.js';
 import { APILinks } from '@vonage/server-client';
 
 /**

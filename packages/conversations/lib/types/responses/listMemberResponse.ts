@@ -1,6 +1,6 @@
 import { APILinks } from '@vonage/server-client';
-import { MemberState } from '../../enums';
-import { MemberUserResponse } from './memberUserResponse';
+import { MemberState } from '../../enums/index.js';
+import { MemberUserResponse } from './memberUserResponse.js';
 
 
 /**

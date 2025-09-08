@@ -1,1 +1,1 @@
-export * from './ViberCategory';
+export * from './ViberCategory.js';

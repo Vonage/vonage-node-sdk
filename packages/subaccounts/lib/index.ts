@@ -1,2 +1,2 @@
-export * from './types';
-export * from './subaccount';
+export * from './types/index.js';
+export * from './subaccount.js';

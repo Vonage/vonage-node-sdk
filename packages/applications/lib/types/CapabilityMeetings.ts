@@ -1,4 +1,4 @@
-import { CapabilityWebhook } from './CapabilityWebhook';
+import { CapabilityWebhook } from './CapabilityWebhook.js';
 
 /**
  * Represents the meetings-related capabilities configuration for an application.

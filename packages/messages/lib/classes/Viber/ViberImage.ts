@@ -1,7 +1,7 @@
-import { AbstractImageMessage } from '../AbstractImageMessage';
-import { ViberImageParams } from '../../types';
-import { ViberActionParams } from '../../types';
-import { Channels } from '../../enums';
+import { AbstractImageMessage } from '../AbstractImageMessage.js';
+import { ViberImageParams } from '../../types/index.js';
+import { ViberActionParams } from '../../types/index.js';
+import { Channels } from '../../enums/index.js';
 
 /**
  * Represents an image message for the Viber Service channel.
@@ -10,8 +10,7 @@ import { Channels } from '../../enums';
  */
 export class ViberImage
   extends AbstractImageMessage
-  implements ViberImageParams
-{
+  implements ViberImageParams {
   /**
    * The channel for this message (always 'viber_service').
    */

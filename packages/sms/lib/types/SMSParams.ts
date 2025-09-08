@@ -1,4 +1,4 @@
-import { MessageClassEnum, TypeEnum } from '../enums';
+import { MessageClassEnum, TypeEnum } from '../enums/index.js';
 
 /**
  * Type representing parameters for sending an SMS.

@@ -1,4 +1,4 @@
-import { VerifyCheckResponse } from './Response';
+import { VerifyCheckResponse } from './Response/index.js';
 
 /**
  * Represents a verification check result as part of a Verify search operation.

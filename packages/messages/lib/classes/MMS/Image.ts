@@ -1,6 +1,6 @@
-import { ImageObject } from '../../interfaces';
-import { MessageImageType, MessageParamsImage } from '../../types';
-import { MMSImage } from './MMSImage';
+import { ImageObject } from '../../interfaces/index.js';
+import { MessageImageType, MessageParamsImage } from '../../types/index.js';
+import { MMSImage } from './MMSImage.js';
 import debug from 'debug';
 
 const log = debug('vonage:messages:mms');

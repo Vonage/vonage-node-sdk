@@ -1,6 +1,6 @@
-import { WhatsAppTemplateType } from './WhatsAppTemplateType';
-import { WhatsAppPolicyType } from './WhatsAppPolicyType';
-import { WhatsAppParams } from './WhatsAppParams';
+import { WhatsAppTemplateType } from './WhatsAppTemplateType.js';
+import { WhatsAppPolicyType } from './WhatsAppPolicyType.js';
+import { WhatsAppParams } from './WhatsAppParams.js';
 
 /**
  * Represents WhatsApp template message parameters.

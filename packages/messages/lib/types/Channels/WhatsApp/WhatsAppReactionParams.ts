@@ -1,5 +1,6 @@
-import { WhatsAppParams } from './WhatsAppParams';
-import { WhatsAppReactionType } from './WhatAppReactionType';
+import { WhatsAppParams } from './WhatsAppParams.js';
+import { WhatsAppReactionType } from './WhatAppReactionType.js';
+
 /**
  * Represents WhatsApp reaction message parameters.
  *

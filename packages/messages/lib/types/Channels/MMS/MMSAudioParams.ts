@@ -1,6 +1,6 @@
-import { MessageParams } from '../../MessageParams';
-import { MessageAudioType } from '../../MessageAudioType';
-import { MMSParams } from './MMSParams';
+import { MessageParams } from '../../MessageParams.js';
+import { MessageAudioType } from '../../MessageAudioType.js';
+import { MMSParams } from './MMSParams.js';
 
 /**
  * Represents the parameters for sending an audio message on the MMS channel.

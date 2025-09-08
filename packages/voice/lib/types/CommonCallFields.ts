@@ -1,4 +1,4 @@
-import { CallEndpoint, PSTNEndpoint } from './Endpoint';
+import { CallEndpoint, PSTNEndpoint } from './Endpoint/index.js';
 
 /**
  * Represents common fields for defining an outbound call, including the caller (from) and recipient (to) endpoints.

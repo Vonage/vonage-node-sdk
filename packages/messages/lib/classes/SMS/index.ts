@@ -1,1 +1,1 @@
-export * from './SMS';
+export * from './SMS.js';

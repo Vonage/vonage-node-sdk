@@ -1,4 +1,4 @@
-import { MemberState } from '../../enums';
+import { MemberState } from '../../enums/index.js';
 
 /**
  * Parameters for updating a member.

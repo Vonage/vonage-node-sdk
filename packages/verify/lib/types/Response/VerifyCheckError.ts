@@ -1,4 +1,4 @@
-import { VerifyCheckResponse } from './VerifyCheckResponse';
+import { VerifyCheckResponse } from './VerifyCheckResponse.js';
 
 /**
  * @deprecated Please use VerifyCheckResponse instead

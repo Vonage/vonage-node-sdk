@@ -1,4 +1,4 @@
-import { NCCOActions } from '../../enums';
+import { NCCOActions } from '../../enums/index.js';
 
 /**
  * Represents a Stream action within a Nexmo Call Control Object (NCCO). This action

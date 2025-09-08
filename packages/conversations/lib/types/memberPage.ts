@@ -1,5 +1,5 @@
 import { APILink } from '@vonage/server-client';
-import { Member } from './member';
+import { Member } from './member.js';
 
 export type MemberPage = {
   /**

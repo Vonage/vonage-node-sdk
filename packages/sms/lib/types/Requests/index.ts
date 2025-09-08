@@ -1,1 +1,1 @@
-export * from './SMSRequestBody';
+export * from './SMSRequestBody.js';

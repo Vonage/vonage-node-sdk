@@ -1,5 +1,5 @@
 import { APILink } from '@vonage/server-client';
-import { Conversation } from './conversation';
+import { Conversation } from './conversation.js';
 
 /**
  * A page of conversations.

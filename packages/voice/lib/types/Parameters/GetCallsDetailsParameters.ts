@@ -1,4 +1,4 @@
-import { CallStatus } from '../../enums';
+import { CallStatus } from '../../enums/index.js';
 
 /**
  * Represents parameters for retrieving call details.

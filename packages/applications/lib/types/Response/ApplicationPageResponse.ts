@@ -1,4 +1,4 @@
-import { ApplicationResponse } from './ApplicationResponse';
+import { ApplicationResponse } from './ApplicationResponse.js';
 import { APILinks } from '@vonage/server-client';
 
 /**

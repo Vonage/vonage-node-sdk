@@ -1,6 +1,6 @@
-import { MessageParamsText } from '../../MessageParamsText';
-import { ViberActionParams } from './ViberActionParams';
-import { ViberParams } from './ViberParams';
+import { MessageParamsText } from '../../MessageParamsText.js';
+import { ViberActionParams } from './ViberActionParams.js';
+import { ViberParams } from './ViberParams.js';
 
 /**
  * Represents parameters for sending a text message via Viber with action buttons.

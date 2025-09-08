@@ -1,19 +1,19 @@
-import { MessengerAudioParams } from './MessengerAudioParams';
-import { MessengerFileParams } from './MessengerFileParams';
-import { MessengerImageParams } from './MessengerImageParams';
-import { MessengerParams } from './MessengerParams';
-import { MessengerTextParams } from './MessengerTextParams';
-import { MessengerType } from './MessengerType';
-import { MessengerVideoParams } from './MessengerVideoParams';
-import { Channels } from '../../../enums';
+import { MessengerAudioParams } from './MessengerAudioParams.js';
+import { MessengerFileParams } from './MessengerFileParams.js';
+import { MessengerImageParams } from './MessengerImageParams.js';
+import { MessengerParams } from './MessengerParams.js';
+import { MessengerTextParams } from './MessengerTextParams.js';
+import { MessengerType } from './MessengerType.js';
+import { MessengerVideoParams } from './MessengerVideoParams.js';
+import { Channels } from '../../../enums/index.js';
 
-export * from './MessengerAudioParams';
-export * from './MessengerFileParams';
-export * from './MessengerImageParams';
-export * from './MessengerParams';
-export * from './MessengerTextParams';
-export * from './MessengerType';
-export * from './MessengerVideoParams';
+export * from './MessengerAudioParams.js';
+export * from './MessengerFileParams.js';
+export * from './MessengerImageParams.js';
+export * from './MessengerParams.js';
+export * from './MessengerTextParams.js';
+export * from './MessengerType.js';
+export * from './MessengerVideoParams.js';
 
 /**
  * Represents a union type that can be any of the Messenger-specific message

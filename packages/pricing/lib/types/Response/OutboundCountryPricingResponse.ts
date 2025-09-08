@@ -1,4 +1,5 @@
-import { Network } from '../Network';
+import { Network } from '../Network.js';
+
 /**
  * Type representing the response for pricing information of a specific country.
  */

@@ -1,4 +1,4 @@
-import { ExperienceComposerResolution } from '../enums';
+import { ExperienceComposerResolution } from '../enums/index.js';
 
 /**
  * Interface representing options for creating an Experience Composer.

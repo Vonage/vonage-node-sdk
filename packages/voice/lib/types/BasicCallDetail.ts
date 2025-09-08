@@ -1,4 +1,4 @@
-import { CallStatus } from '../enums';
+import { CallStatus } from '../enums/index.js';
 
 /**
  * Represents basic details of a call, including its UUID, conversation UUID, duration, and status.

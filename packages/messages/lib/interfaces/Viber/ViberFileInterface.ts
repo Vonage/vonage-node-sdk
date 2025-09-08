@@ -1,6 +1,6 @@
-import { ViberChannelInterface } from './ViberChannelInterface';
-import { MessageFileInterface } from '../MessageFileInterface';
-import { ViberService } from '../../types';
+import { ViberChannelInterface } from './ViberChannelInterface.js';
+import { MessageFileInterface } from '../MessageFileInterface.js';
+import { ViberService } from '../../types/index.js';
 
 /**
  * Represents the Viber file interface.
@@ -12,7 +12,7 @@ import { ViberService } from '../../types';
  */
 export interface ViberFileInterface
   extends ViberChannelInterface,
-    MessageFileInterface {
+  MessageFileInterface {
   /**
    * Represents Viber-specific service information.
    */

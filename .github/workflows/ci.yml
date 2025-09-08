@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18.x
+          node-version: 20.x
 
       - name: Run Dependency Check
         run: npm run depcheck
@@ -34,16 +34,12 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     name: Test and build
-    continue-on-error: ${{ matrix.deprecated }}
 
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node: [18.x, 20.x, 22.x]
-        include:
-          - version: 18.x
-            deprecated: true
+        node: [20.x, 22.x, 24.x]
     steps:
       - uses: actions/checkout@v3
 
