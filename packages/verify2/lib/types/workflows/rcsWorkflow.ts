@@ -16,14 +16,9 @@ export type RCSWorkflow = {
   to: string;
 
   /**
-   * An optional sender number, in the E.164 format.
-   * Don't use a leading + or 00 when entering a phone number, start with the
-   * country code, for example, 447700900000.
-   *
-   * @remarks
-   * If no from number is given, the request will default to the brand.
+   * An sender identifier in alphanumeric format.
    */
-  from?: string;
+  from: string;
 
   /**
    * Use the same PIN code across multiple channels within a workflow
