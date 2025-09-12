@@ -213,6 +213,54 @@ export default [
     },
   },
   {
+    label: 'start request using RCS',
+    baseUrl: 'https://api.nexmo.com',
+    reqHeaders: {
+      authorization: validateBearerAuth,
+    },
+    client: new Verify2(keyAuth),
+    generator: false,
+    error: false,
+    requests: [
+      [
+        '/v2/verify',
+        'POST',
+        {
+          brand: 'Vonage',
+          workflow: [
+            {
+              channel: Channels.RCS,
+              to: '14152739164',
+            },
+          ],
+        },
+      ],
+    ],
+    responses: [
+      [
+        202,
+        {
+          request_id: 'cef1c266-d144-485e-8915-bd2d51b06776',
+        } as VerificationResponse,
+      ],
+    ],
+    clientMethod: 'newRequest',
+    parameters: [
+      {
+        brand: 'Vonage',
+        workflow: [
+          {
+            channel: Channels.RCS,
+            to: '14152739164',
+          },
+        ],
+      } as VerificationRequestParams,
+    ],
+    expected: {
+      requestId: 'cef1c266-d144-485e-8915-bd2d51b06776',
+    },
+  },
+  {
     label: 'start request using Email',
     baseUrl: 'https://api.nexmo.com',
     reqHeaders: {

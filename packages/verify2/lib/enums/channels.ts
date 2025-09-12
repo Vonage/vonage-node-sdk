@@ -22,6 +22,11 @@ export enum Channels {
    */
   VOICE = 'voice',
 
+ /**
+  * RCS Channel for verification
+  */
+  RCS = 'rcs',
+
   /**
    * Email channel for verification.
    */
