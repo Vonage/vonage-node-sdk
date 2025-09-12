@@ -596,14 +596,14 @@ export class Video extends Client {
    * @example
    * Start a SIP call with default options
    * ```ts
-   * const sipCall = await videoClient.intiateSIPCall(SESSION_ID);
+   * const sipCall = await videoClient.initiateSIPCal(SESSION_ID);
    * console.log(sipCall.id);
    * ```
    *
    * @example
    * Start a SIP call with custom options
    * ```ts
-   * const sipCall = await videoClient.intiateSIPCall(
+   * const sipCall = await videoClient.initiateSIPCall(
    *   SESSION_ID,
    *   {
    *     uri: 'sip://example.com',
@@ -612,7 +612,7 @@ export class Video extends Client {
    * console.log(sipCall.id);
    * ```
    */
-  public async intiateSIPCall(
+  public async initiateSIPCall(
     sessionId: string,
     options: SIPCallOptions,
   ): Promise<SIPCallResponse> {
@@ -629,6 +629,17 @@ export class Video extends Client {
 
     const resp = await this.sendPostRequest<SIPCallResponse>(url, data);
     return resp.data;
+  }
+
+  /**
+   * This addresses a mis-spelling in the function name.
+   * @deprecated Please update to use initiateSIPCall instead
+   */
+  public async intiateSIPCall(
+    sessionId: string,
+    options: SIPCallOptions,
+  ): Promise<SIPCallResponse> {
+    return this.initiateSIPCall(sessionId, options);
   }
 
   /**

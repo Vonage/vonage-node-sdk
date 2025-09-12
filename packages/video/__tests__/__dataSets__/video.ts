@@ -41,7 +41,7 @@ const captionInfoResponse = {
   captionId: '7c0680fc-6274-4de5-a66f-d0648e8d3ac2',
   projectId: '100',
   sessionId:
-        '2_MX4xMDB-flR1ZSBOb3YgMTkgMTE6MDk6NTggUFNUIDIwMTN-MC4zNzQxNzIxNX4',
+    '2_MX4xMDB-flR1ZSBOb3YgMTkgMTE6MDk6NTggUFNUIDIwMTN-MC4zNzQxNzIxNX4',
   status: 'failed',
   createdAt: 1628115911,
   updatedAt: 1628115911,
@@ -88,14 +88,14 @@ export default [
     parameters: [
       '1234',
       'q34h9uit',
-            {
-              url: 'https://example.com',
-              maxDuration: 1800,
-              resolution: ExperienceComposerResolution.HD_LANDSCAPE,
-              properties: {
-                name: 'Sample Render',
-              },
-            } as ExperienceComposerOptions,
+      {
+        url: 'https://example.com',
+        maxDuration: 1800,
+        resolution: ExperienceComposerResolution.HD_LANDSCAPE,
+        properties: {
+          name: 'Sample Render',
+        },
+      } as ExperienceComposerOptions,
     ],
     expected: renderInformation,
   },
@@ -152,12 +152,12 @@ export default [
     parameters: [
       '1234',
       'q34h9uit',
-            {
-              statusCallbackUrl: 'https://example.com',
-              maxDuration: 1800,
-              partialCaptions: 'true',
-              languageCode: 'en-US',
-            } as CaptionOptions,
+      {
+        statusCallbackUrl: 'https://example.com',
+        maxDuration: 1800,
+        partialCaptions: 'true',
+        languageCode: 'en-US',
+      } as CaptionOptions,
     ],
     expected: enableCaptionsResponse,
   },
@@ -200,7 +200,7 @@ export default [
     ],
     response: [200, initiateSIPCallResponse],
     method: 'post',
-    clientMethod: 'intiateSIPCall',
+    clientMethod: 'initiateSIPCall',
     parameters: [
       '7c0680fc-6274-4de5-a66f-d0648e8d3ac2',
       initiateSIPCallOptions,
