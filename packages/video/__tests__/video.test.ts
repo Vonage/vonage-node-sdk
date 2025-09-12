@@ -1,4 +1,4 @@
-import  nock from 'nock';
+import nock from 'nock';
 import { decode } from 'jsonwebtoken';
 import { Auth } from '@vonage/auth';
 import testDataSets from './__dataSets__';
@@ -30,17 +30,17 @@ import {
 const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
 
 type jwtClaims = {
-    application_id: string;
-    session_id: string;
-    sub: string;
-    acl: {
-      paths: Record<string, string>;
-    };
-    exp: number;
-    initial_layout_class_list: string;
-    connection_data: string;
-    role: string;
-    scope: string;
+  application_id: string;
+  session_id: string;
+  sub: string;
+  acl: {
+    paths: Record<string, string>;
+  };
+  exp: number;
+  initial_layout_class_list: string;
+  connection_data: string;
+  role: string;
+  scope: string;
 };
 
 const applicationsTest = testDataSets.map((dataSet): TestTuple<Video> => {
@@ -1164,7 +1164,7 @@ describe('video', () => {
       .post('/v2/project/abcd-1234/dial', expectedBody)
       .reply(200, expectedResponse);
 
-    const resp = await client.intiateSIPCall('2_MX40NTMyODc3Mn5-fg', options);
+    const resp = await client.initiateSIPCall('2_MX40NTMyODc3Mn5-fg', options);
 
     expect(resp.id).toEqual(expectedResponse.id);
     expect(resp.connectionId).toEqual(expectedResponse.connectionId);
@@ -1249,9 +1249,9 @@ describe('video', () => {
       .post('/v2/project/abcd-1234/connect', {
         sessionId: '2_MX40NTMyODc3Mn5-fg',
         token,
-        websocket: { 
+        websocket: {
           uri: 'wss://mydomain.com/websocket/',
-          bidirectional: true 
+          bidirectional: true
         },
       })
       .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
@@ -1259,9 +1259,9 @@ describe('video', () => {
     const resp = await client.connectToWebsocket(
       '2_MX40NTMyODc3Mn5-fg',
       token,
-      { 
+      {
         uri: 'wss://mydomain.com/websocket/',
-        bidirectional: true 
+        bidirectional: true
       }
     );
     expect(resp.id).toBe('CALLID');
@@ -1281,9 +1281,9 @@ describe('video', () => {
       .post('/v2/project/abcd-1234/connect', {
         sessionId: '2_MX40NTMyODc3Mn5-fg',
         token,
-        websocket: { 
+        websocket: {
           uri: 'wss://mydomain.com/websocket/',
-          bidirectional: false 
+          bidirectional: false
         },
       })
       .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
@@ -1291,9 +1291,9 @@ describe('video', () => {
     const resp = await client.connectToWebsocket(
       '2_MX40NTMyODc3Mn5-fg',
       token,
-      { 
+      {
         uri: 'wss://mydomain.com/websocket/',
-        bidirectional: false 
+        bidirectional: false
       }
     );
     expect(resp.id).toBe('CALLID');
@@ -1313,11 +1313,11 @@ describe('video', () => {
       .post('/v2/project/abcd-1234/connect', {
         sessionId: '2_MX40NTMyODc3Mn5-fg',
         token,
-        websocket: { 
+        websocket: {
           uri: 'wss://mydomain.com/websocket/',
           streams: ['stream1', 'stream2'],
           headers: { 'Authorization': 'Bearer token123' },
-          bidirectional: true 
+          bidirectional: true
         },
       })
       .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
@@ -1325,11 +1325,11 @@ describe('video', () => {
     const resp = await client.connectToWebsocket(
       '2_MX40NTMyODc3Mn5-fg',
       token,
-      { 
+      {
         uri: 'wss://mydomain.com/websocket/',
         streams: ['stream1', 'stream2'],
         headers: { 'Authorization': 'Bearer token123' },
-        bidirectional: true 
+        bidirectional: true
       }
     );
     expect(resp.id).toBe('CALLID');
@@ -1349,12 +1349,12 @@ describe('video', () => {
       .post('/v2/project/abcd-1234/connect', {
         sessionId: '2_MX40NTMyODc3Mn5-fg',
         token,
-        websocket: { 
+        websocket: {
           uri: 'wss://mydomain.com/websocket/',
           streams: ['stream1', 'stream2'],
           headers: { 'Authorization': 'Bearer token123', 'Custom-Header': 'value' },
           audioRate: 16000,
-          bidirectional: true 
+          bidirectional: true
         },
       })
       .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
@@ -1362,12 +1362,12 @@ describe('video', () => {
     const resp = await client.connectToWebsocket(
       '2_MX40NTMyODc3Mn5-fg',
       token,
-      { 
+      {
         uri: 'wss://mydomain.com/websocket/',
         streams: ['stream1', 'stream2'],
         headers: { 'Authorization': 'Bearer token123', 'Custom-Header': 'value' },
         audioRate: 16000,
-        bidirectional: true 
+        bidirectional: true
       }
     );
     expect(resp.id).toBe('CALLID');
