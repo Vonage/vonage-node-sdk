@@ -1,13 +1,5 @@
 import { VerifyLocale } from '../../enums/index.js';
-import {
-  EmailWorkflow,
-  RCSWorkflow,
-  SMSWorkflow,
-  SilentAuthWorkflow,
-  VoiceWorkflow,
-  WhatsAppInteractiveWorkflow,
-  WhatsAppWorkflow,
-} from '../workflows/index.js';
+import { AnyWorkflow } from '../workflows/index.js';
 
 /**
  * Represents parameters for creating a verification request for sending
@@ -24,15 +16,7 @@ export type VerificationRequestParams = {
    * different channels. Each element in the array corresponds to a specific
    * channel workflow.
    */
-  workflow: Array<
-    | EmailWorkflow
-    | RCSWorkflow,
-    | SMSWorkflow
-    | SilentAuthWorkflow
-    | VoiceWorkflow
-    | WhatsAppInteractiveWorkflow
-    | WhatsAppWorkflow
-  >;
+  workflow: Array<AnyWorkflow>;
 
   /**
    * (Optional) The verification code to be sent.
