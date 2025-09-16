@@ -51,10 +51,10 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.18.0-alpha.0"
+    "@vonage/server-client": "1.18.0-alpha.0"
   },
   "devDependencies": {
-    "@vonage/auth": "^1.13.0-alpha.0",
+    "@vonage/auth": "1.13.0-alpha.0",
     "nock": "14.0.10"
   },
   "engines": {

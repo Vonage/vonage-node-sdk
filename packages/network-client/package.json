@@ -47,10 +47,10 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/auth": "^1.13.0-alpha.0",
+    "@vonage/auth": "1.13.0-alpha.0",
     "@vonage/jwt": "1.11.1",
-    "@vonage/server-client": "^1.18.0-alpha.0",
-    "@vonage/vetch": "^1.9.0-alpha.0",
+    "@vonage/server-client": "1.18.0-alpha.0",
+    "@vonage/vetch": "1.9.0-alpha.0",
     "debug": "4.4.1"
   },
   "engines": {

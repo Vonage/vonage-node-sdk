@@ -51,8 +51,8 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/auth": "^1.13.0-alpha.0",
-    "@vonage/vetch": "^1.9.0-alpha.0",
+    "@vonage/auth": "1.13.0-alpha.0",
+    "@vonage/vetch": "1.9.0-alpha.0",
     "debug": "4.4.1",
     "lodash.camelcase": "4.3.0",
     "lodash.isobject": "3.0.2",
