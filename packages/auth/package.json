@@ -55,7 +55,7 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/jwt": "1.11.1",
+    "@vonage/jwt": "1.12.0-alpha.1",
     "debug": "4.4.1"
   },
   "devDependencies": {
