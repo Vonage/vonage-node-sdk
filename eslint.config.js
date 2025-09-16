@@ -1,6 +1,7 @@
 // eslint-disable-next-line n/no-extraneous-import
 import globals from 'globals';
 import vonage from '@vonage/eslint-config';
+import packageJson from 'eslint-plugin-package-json';
 
 export default [
   {
@@ -17,7 +18,7 @@ export default [
     files: ['packages/*/lib/**/*.{ts,tsx}'],
   },
   {
-    ignores: ['packages/*/dist/**/*.js', 'coverage/**', 'scripts/**'],
+    ignores: ['scripts/**', 'packages/**/dist/**', 'coverage/**'],
   },
   ...vonage.configs.typescript,
   ...vonage.configs.jest,
@@ -37,5 +38,23 @@ export default [
         }]
     },
   },
-
+  {
+    ...packageJson.configs.recommended,
+    files: ['packages/**/package.json'],
+    rules: {
+      ...packageJson.configs.recommended.rules,
+      'package-json/require-type': 'error',
+      'package-json/require-engines': 'error',
+      'package-json/require-files': 'error',
+      'package-json/require-types': 'error',
+      'package-json/restrict-dependency-ranges': [
+        'error',
+        [
+          {
+            rangeType: 'pin',
+          },
+        ],
+      ],
+    }
+  },
 ];
