@@ -1,4 +1,4 @@
-import { Channels } from '../../enums/index.js';
+import { Channels } from '../../enums';
 
 /**
  * Represents a workflow for sending a verification code via SMS.
