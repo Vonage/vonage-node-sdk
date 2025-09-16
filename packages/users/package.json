@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/users",
-  "version": "1.11.2",
+  "version": "1.12.0",
   "description": "The concept of a user exists in Vonage APIs, you can associate one with a user in your own application if you choose. A user can have multiple memberships to conversations and can communicate with other users through various different mediums.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/user#readme",
   "bugs": {
@@ -22,41 +22,36 @@
       "url": "https://github.com/dragonmantank"
     }
   ],
+  "type": "commonjs",
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "node": {
-        "import": "./dist/esm/index.js",
-        "require": "./dist/cjs/index.cjs"
+      "browser": "./dist/unsupportedBrowser.cjs",
+      "import": {
+        "types": "./dist/esm/index.d.mts",
+        "default": "./dist/esm/index.mjs"
       },
-      "browser": "./dist/unsupportedBrowser.cjs"
-    },
-    "./package.json": "./package.json"
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
   },
-  "main": "./dist/cjs/index.cjs",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/cjs/index.d.ts",
   "files": [
-    "dist",
-    "package.json",
-    "README.md",
-    "LICENSE"
+    "dist"
   ],
   "scripts": {
-    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
-    "postbuild": "node ../../scripts/copyUnsupported.js",
-    "build:cjs": "tsc -p tsconfig.build.cjs.json && node -e \"const fs=require('node:fs');const p='dist/cjs';(function w(d){for(const e of fs.readdirSync(d,{withFileTypes:true})) e.isDirectory()?w(d+'/'+e.name):e.name.endsWith('.js')&&fs.renameSync(d+'/'+e.name,d+'/'+e.name.replace(/\\.js$/,'.cjs'));})(p)\"",
-    "build:esm": "tsc -p tsconfig.build.esm.json",
-    "build:types": "tsc -p tsconfig.build.types.json",
-    "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "prepublishOnly": "npm run build"
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "postbuild": "node ../../scripts/copyUnsupported.cjs && node -e \"const fs=require('node:fs'),p='dist/cjs/package.json';fs.mkdirSync('dist/cjs',{recursive:true});fs.writeFileSync(p,JSON.stringify({type:'commonjs'},null,2));\"",
+    "build:cjs": "tsup lib/** -d dist/cjs --dts --tsconfig tsconfig.tsup.json",
+    "build:esm": "tsup lib/** -d dist/esm --format=esm --dts --tsconfig tsconfig.tsup.json",
+    "check:pkg": "npx attw --pack .",
+    "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.17.2"
+    "@vonage/server-client": "1.18.0"
   },
   "engines": {
     "node": ">=20"
