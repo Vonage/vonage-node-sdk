@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/verify",
-  "version": "1.17.3",
+  "version": "1.17.4",
   "description": "Verify API provides a choice of routes for sending a code to a user. You can use this to confirm a user's contact information, as a second factor when authenticating users, or for step-up authentication.",
   "keywords": [
     "vonage",
@@ -60,9 +60,9 @@
   },
   "dependencies": {
     "@types/lodash.omit": "4.5.9",
-    "@vonage/auth": "1.13.0-alpha.0",
-    "@vonage/server-client": "1.18.0-alpha.1",
-    "@vonage/vetch": "1.9.0-alpha.0",
+    "@vonage/auth": "1.13.0",
+    "@vonage/server-client": "1.18.0",
+    "@vonage/vetch": "1.9.0",
     "lodash.omit": "4.5.0"
   },
   "engines": {
