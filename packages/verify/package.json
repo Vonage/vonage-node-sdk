@@ -33,11 +33,13 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "node": {
-        "import": "./dist/esm/index.js",
-        "require": "./dist/cjs/index.cjs"
-      },
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
       "browser": "./dist/unsupportedBrowser.cjs"
+    },
+    "./*": {
+      "import": "./esm/*",
+      "require": "./cjs/*"
     },
     "./package.json": "./package.json"
   },

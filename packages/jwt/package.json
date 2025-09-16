@@ -39,22 +39,23 @@
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "node": {
-        "import": "./dist/esm/index.js",
-        "require": "./dist/cjs/index.cjs"
-      },
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs",
       "browser": "./dist/unsupportedBrowser.cjs"
+    },
+    "./*": {
+      "import": "./esm/*",
+      "require": "./cjs/*"
     },
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build:esm": "tsc -p tsconfig.build.esm.json",
-    "build:cjs": "tsc -p tsconfig.build.cjs.json && node -e \"const fs=require('node:fs');const p='dist/cjs';(function walk(d){for(const e of fs.readdirSync(d,{withFileTypes:true})) e.isDirectory()?walk(d+'/'+e.name):e.name.endsWith('.js')&&fs.renameSync(d+'/'+e.name,d+'/'+e.name.replace(/\\.js$/,'.cjs'));})(p)\"",
-    "build:types": "tsc -p tsconfig.build.types.json",
-    "postbuild": "node ../../scripts/copyUnsupported.js",
     "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
-    "clean": "npx shx rm -rf dist tsconfig.tsbuildinfo",
-    "compile": "npx tsc --build --verbose",
+    "build:esm": "tsc -p tsconfig.build.esm.json",
+    "postbuild": "node ../../scripts/copyUnsupported.js",
+    "build:cjs": "tsc -p tsconfig.build.cjs.json && node -e \"const fs=require('node:fs');const p='dist/cjs';(function w(d){for(const e of fs.readdirSync(d,{withFileTypes:true})) e.isDirectory()?w(d+'/'+e.name):e.name.endsWith('.js')&&fs.renameSync(d+'/'+e.name,d+'/'+e.name.replace(/\\.js$/,'.cjs'));})(p)\"",
+    "build:types": "tsc -p tsconfig.build.types.json",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
