@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/sms",
-  "version": "1.18.2",
+  "version": "1.18.3-alpha.0",
   "description": "Vonage SMS API SDK package",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/sms#readme",
   "bugs": {
@@ -62,8 +62,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@vonage/auth": "^1.12.1",
-    "@vonage/server-client": "^1.17.2"
+    "@vonage/auth": "^1.12.2-alpha.0",
+    "@vonage/server-client": "^1.17.3-alpha.0"
   },
   "engines": {
     "node": ">=20"
