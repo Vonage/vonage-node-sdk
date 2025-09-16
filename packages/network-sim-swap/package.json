@@ -47,8 +47,8 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/network-client": "^1.5.0-alpha.1",
-    "@vonage/server-client": "^1.18.0-alpha.1"
+    "@vonage/network-client": "1.5.0-alpha.1",
+    "@vonage/server-client": "1.18.0-alpha.1"
   },
   "engines": {
     "node": ">=20"

@@ -47,10 +47,10 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/messages": "^1.22.0-alpha.1",
-    "@vonage/server-client": "^1.18.0-alpha.1",
-    "@vonage/users": "^1.12.0-alpha.1",
-    "@vonage/voice": "^1.19.0-alpha.1"
+    "@vonage/messages": "1.22.0-alpha.1",
+    "@vonage/server-client": "1.18.0-alpha.1",
+    "@vonage/users": "1.12.0-alpha.1",
+    "@vonage/voice": "1.19.0-alpha.1"
   },
   "engines": {
     "node": ">=20"

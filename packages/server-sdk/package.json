@@ -51,22 +51,22 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/accounts": "^1.18.0-alpha.1",
-    "@vonage/applications": "^1.18.0-alpha.1",
+    "@vonage/accounts": "1.18.0-alpha.1",
+    "@vonage/applications": "1.18.0-alpha.1",
     "@vonage/auth": "1.13.0-alpha.0",
-    "@vonage/conversations": "^1.11.0-alpha.1",
-    "@vonage/messages": "^1.22.0-alpha.1",
-    "@vonage/number-insights": "^1.18.0-alpha.1",
-    "@vonage/numbers": "^1.20.0-alpha.1",
-    "@vonage/pricing": "^1.18.0-alpha.1",
-    "@vonage/redact": "^1.17.0-alpha.1",
-    "@vonage/server-client": "^1.18.0-alpha.1",
-    "@vonage/sms": "^1.19.0-alpha.1",
-    "@vonage/users": "^1.12.0-alpha.1",
-    "@vonage/verify": "^1.18.0-alpha.1",
-    "@vonage/verify2": "^1.17.0-alpha.1",
-    "@vonage/video": "^1.26.0-alpha.1",
-    "@vonage/voice": "^1.19.0-alpha.1"
+    "@vonage/conversations": "1.11.0-alpha.1",
+    "@vonage/messages": "1.22.0-alpha.1",
+    "@vonage/number-insights": "1.18.0-alpha.1",
+    "@vonage/numbers": "1.20.0-alpha.1",
+    "@vonage/pricing": "1.18.0-alpha.1",
+    "@vonage/redact": "1.17.0-alpha.1",
+    "@vonage/server-client": "1.18.0-alpha.1",
+    "@vonage/sms": "1.19.0-alpha.1",
+    "@vonage/users": "1.12.0-alpha.1",
+    "@vonage/verify": "1.18.0-alpha.1",
+    "@vonage/verify2": "1.17.0-alpha.1",
+    "@vonage/video": "1.26.0-alpha.1",
+    "@vonage/voice": "1.19.0-alpha.1"
   },
   "engines": {
     "node": ">=20"

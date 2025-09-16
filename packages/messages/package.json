@@ -60,7 +60,7 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/server-client": "^1.18.0-alpha.1",
+    "@vonage/server-client": "1.18.0-alpha.1",
     "@vonage/vetch": "1.9.0-alpha.0",
     "debug": "4.4.1"
   },

@@ -56,7 +56,7 @@
   },
   "dependencies": {
     "@vonage/auth": "1.13.0-alpha.0",
-    "@vonage/server-client": "^1.18.0-alpha.1"
+    "@vonage/server-client": "1.18.0-alpha.1"
   },
   "engines": {
     "node": ">=20"
