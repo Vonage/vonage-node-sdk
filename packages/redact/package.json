@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/redact",
-  "version": "1.17.0-alpha.0",
+  "version": "1.17.0-alpha.1",
   "description": "Delete data from the Vonage platform.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/redact#readme",
   "bugs": {
@@ -51,7 +51,7 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/server-client": "1.18.0-alpha.0"
+    "@vonage/server-client": "^1.18.0-alpha.1"
   },
   "engines": {
     "node": ">=20"
