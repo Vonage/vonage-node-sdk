@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/network-number-verification",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Number Verfication for GNP",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/network-number-verification#readme",
   "bugs": {

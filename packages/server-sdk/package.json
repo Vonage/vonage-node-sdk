@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/server-sdk",
-  "version": "3.24.4",
+  "version": "3.24.5",
   "description": "Node.js Client for the Vonage API Platform",
   "homepage": "https://developer.vonage.com",
   "bugs": {
