@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/numbers",
-  "version": "1.20.0-alpha.2",
+  "version": "1.20.0-alpha.3",
   "description": "Vonage Numbers SDK Package",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/numbers#readme",
   "bugs": {
@@ -56,8 +56,8 @@
   },
   "dependencies": {
     "@types/lodash.omit": "4.5.9",
-    "@vonage/auth": "1.13.0-alpha.0",
-    "@vonage/server-client": "1.18.0-alpha.1",
+    "@vonage/auth": "1.13.0-alpha.1",
+    "@vonage/server-client": "1.18.0-alpha.2",
     "@vonage/vetch": "1.9.0-alpha.0",
     "lodash.omit": "4.5.0"
   },
