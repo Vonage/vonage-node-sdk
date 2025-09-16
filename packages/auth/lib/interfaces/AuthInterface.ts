@@ -1,4 +1,4 @@
-import { AuthQueryParams, AuthSignedParams, AuthParams } from '../types/index.js';
+import { AuthQueryParams, AuthSignedParams, AuthParams } from '../types';
 
 /**
  * Interface defining the methods for handling various authentication

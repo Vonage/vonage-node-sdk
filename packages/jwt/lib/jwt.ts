@@ -1,6 +1,6 @@
-import { tokenGenerate, validateOptions } from './tokenGenerate.js';
-import { verifySignature } from './verifySignature.js';
-import { GeneratorOptions, Claims } from './types/index.js';
+import { tokenGenerate, validateOptions } from './tokenGenerate';
+import { verifySignature } from './verifySignature';
+import { GeneratorOptions, Claims } from './types';
 
 /**
  * Interface defining the methods for JWT generation.

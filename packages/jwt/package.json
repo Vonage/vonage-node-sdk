@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/jwt",
-  "version": "1.11.1",
+  "version": "1.11.2-alpha.7",
   "description": "Vonage JWT package. Creates JWT tokens for Vonage API's",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/master/packages/jwt#readme",
   "bugs": {
@@ -51,12 +51,11 @@
   },
   "scripts": {
     "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
-    "build:esm": "tsc -p tsconfig.build.esm.json",
-    "postbuild": "node ../../scripts/copyUnsupported.js",
-    "build:cjs": "tsc -p tsconfig.build.cjs.json && node -e \"const fs=require('node:fs');const p='dist/cjs';(function w(d){for(const e of fs.readdirSync(d,{withFileTypes:true})) e.isDirectory()?w(d+'/'+e.name):e.name.endsWith('.js')&&fs.renameSync(d+'/'+e.name,d+'/'+e.name.replace(/\\.js$/,'.cjs'));})(p)\"",
+    "build:esm": "tsup lib/** -d dist/cjs",
+    "build:cjs": "tsup lib/** -d dist/esm --format=esm",
     "build:types": "tsc -p tsconfig.build.types.json",
-    "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "prepublishOnly": "npm run build"
+    "postbuild": "node ../../scripts/copyUnsupported.js",
+    "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "debug": "^4.4.1",

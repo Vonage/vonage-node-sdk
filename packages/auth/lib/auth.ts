@@ -6,9 +6,9 @@ import {
   AuthQueryParams,
   SignedHashParams,
   AuthSignedParams,
-} from './types/index.js';
-import { AuthInterface } from './interfaces/index.js';
-import { AlgorithmTypes } from './enums/index.js';
+} from './types';
+import { AuthInterface } from './interfaces';
+import { AlgorithmTypes } from './enums';
 import {
   MissingApiKeyError,
   MissingApiSecretError,
@@ -16,7 +16,7 @@ import {
   InvalidApiSecretError,
   MissingSignatureError,
   InvalidSignatureAlgorithmError,
-} from './errors/index.js';
+} from './errors';
 import debug from 'debug';
 
 const log = debug('vonage:auth');

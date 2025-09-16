@@ -1,4 +1,4 @@
-import { ACL } from './acl.js';
+import { ACL } from './acl';
 
 /**
  * Claims to pass in for the token generator.
@@ -20,7 +20,7 @@ export type GeneratorOptions = {
   subject?: string;
 
   /**
-   * JSON Web Token ID.
+   *ON Web Token ID.
    */
   jti?: string;
 

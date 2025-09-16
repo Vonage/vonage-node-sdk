@@ -1,6 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
 import debug from 'debug';
-import { MissingPrivateKeyError, InvalidPrivateKeyError } from './errors/index.js';
+import { MissingPrivateKeyError, InvalidPrivateKeyError } from './errors';
 
 const { verify } = jsonwebtoken;
 const log = debug('vonage:jwt:verifySignature');

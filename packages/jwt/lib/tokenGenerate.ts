@@ -1,4 +1,4 @@
-import { GeneratorOptions, Claims } from './types/index.js';
+import { GeneratorOptions, Claims } from './types';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -6,7 +6,7 @@ import {
   MissingPrivateKeyError,
   InvalidPrivateKeyError,
   InvalidApplicationIdError,
-} from './errors/index.js';
+} from './errors';
 import debug from 'debug';
 
 const { sign } = jwt;

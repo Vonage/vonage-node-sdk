@@ -1,5 +1,5 @@
 import { GeneratorOptions } from '@vonage/jwt';
-import { SignedHashParams } from './SignedHashParams.js';
+import { SignedHashParams } from './SignedHashParams';
 
 /**
  * Represents the authentication parameters required for API requests.

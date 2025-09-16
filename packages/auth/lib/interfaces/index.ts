@@ -1,1 +1,1 @@
-export * from './AuthInterface.js';
+export * from './AuthInterface';

@@ -1,1 +1,1 @@
-export * from './AlgroithmTypes.js';
+export * from './AlgroithmTypes';

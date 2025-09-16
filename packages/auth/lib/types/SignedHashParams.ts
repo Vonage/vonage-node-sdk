@@ -1,4 +1,4 @@
-import { AlgorithmTypes } from '../enums/index.js';
+import { AlgorithmTypes } from '../enums';
 
 /**
  * Represents the parameters required for generating a signed hash.
