@@ -1,6 +1,7 @@
-import { Channels } from '../../../enums/index.js';
-import { MessageParamsText } from '../../MessageParamsText.js';
-import { RCSParams } from './RCSParams.js';
+import { Channels } from '../../../enums/';
+import { MessageParamsText } from '../../MessageParamsText';
+import { RCSParams } from './RCSParams';
+import { AnyRCSSuggestion } from './Suggestions';
 
 /**
  * Represents the parameters for sending a text message using RCS.
@@ -23,4 +24,10 @@ export type RCSTextParams = {
    * We recommend this value should be kept at its default or at least 30 minutes.
    */
   ttl?: number;
+
+  /**
+   * An array of suggestion objects to include with the message. You can
+   * include up to 11 suggestions per message.
+   */
+  suggestions?: Array<AnyRCSSuggestion>;
 } & RCSParams & MessageParamsText;

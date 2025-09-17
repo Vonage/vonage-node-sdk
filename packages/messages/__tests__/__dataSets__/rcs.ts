@@ -7,7 +7,15 @@ import {
   RCSCustom,
   UpdateMessageRequest,
   UpdateMessageStatus,
-  Channels
+  RCSCreateCalendarEventSuggestion,
+  RCSDialActionSuggestion,
+  RCSOpenURLSuggestion,
+  RCSOpenURLWebviewSuggestion,
+  RCSReplySuggestion,
+  RCSShareLocationSuggestion,
+  RCSViewLocationSuggestion,
+  Channels,
+  RCSSuggestionType
 } from '../../lib';
 
 export default [
@@ -37,6 +45,125 @@ export default [
         from: 'Vonage',
         to: '14152739164',
         text: 'too many secrets',
+      }),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'send text with suggestions',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: 'Vonage',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'rcs',
+        message_type: 'text',
+        suggestions: [
+          {
+            type: RCSSuggestionType.CREATE_CALENDAR_EVENT,
+            start_date: '2015-10-15T10:00:00Z',
+            end_date: '2015-10-15T11:00:00Z',
+            title: 'Sports Alamac',
+            text: 'We gotta save your kids',
+            postback_data: 'QmlmZidzIGhpbGwgdmFsbGV5IGNhc2lubw'
+          },
+          {
+            type: RCSSuggestionType.DIAL,
+            phone_number: '+14152739164',
+            text: 'Janick Black Box',
+            postback_data: 'QmlmZidzIGhpbGwgdmFsbGV5IGNhc2lubw',
+          },
+          {
+            type: RCSSuggestionType.OPEN_URL,
+            url: 'https://youtu.be/dQw4w9WgXcQ',
+            text: 'Never going to give you up',
+            postback_data: 'TmV2ZXIgZ29pbmcgdG8gbGV0IHlvdSBkb3du',
+          },
+          {
+            type: RCSSuggestionType.OPEN_URL_IN_WEBVIEW,
+            url: 'https://youtu.be/dQw4w9WgXcQ',
+            view_mode: 'FULL',
+            text: 'Never going to give you up',
+            postback_data: 'TmV2ZXIgZ29pbmcgdG8gbGV0IHlvdSBkb3du',
+          },
+          {
+            type: RCSSuggestionType.REPLY,
+            text: 'Never going to give you up',
+            postback_data: 'Zm9yZCwgSSB0aGluayBJJ20gYSBjb3VjaAo',
+          },
+          {
+            type: RCSSuggestionType.SHARE_LOCATION,
+            text: 'The only place you are allowed to cry',
+            postback_data: 'Z3JhbmQgY2FueW9u',
+          },
+          {
+            type: RCSSuggestionType.VIEW_LOCATION,
+            text: 'The only place you are allowed to cry',
+            latitude: '36.05443',
+            longitude: '-112.13934',
+            pin_label: 'Go Here',
+            postback_data: 'Z3JhbmQgY2FueW9u',
+          },
+        ],
+      },
+    ],
+    response: [
+      202,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new RCSText({
+        from: 'Vonage',
+        to: '14152739164',
+        text: 'too many secrets',
+        suggestions: [
+          new RCSCreateCalendarEventSuggestion({
+            startDate: '2015-10-15T10:00:00Z',
+            endDate: '2015-10-15T11:00:00Z',
+            title: 'Sports Alamac',
+            text: 'We gotta save your kids',
+            postbackData: 'QmlmZidzIGhpbGwgdmFsbGV5IGNhc2lubw'
+          }),
+          new RCSDialActionSuggestion({
+            phoneNumber: '+14152739164',
+            text: 'Janick Black Box',
+            postbackData: 'QmlmZidzIGhpbGwgdmFsbGV5IGNhc2lubw',
+          }),
+          new RCSOpenURLSuggestion({
+            url: 'https://youtu.be/dQw4w9WgXcQ',
+            text: 'Never going to give you up',
+            postbackData: 'TmV2ZXIgZ29pbmcgdG8gbGV0IHlvdSBkb3du',
+          }),
+          new RCSOpenURLWebviewSuggestion({
+            url: 'https://youtu.be/dQw4w9WgXcQ',
+            viewMode: 'FULL',
+            text: 'Never going to give you up',
+            postbackData: 'TmV2ZXIgZ29pbmcgdG8gbGV0IHlvdSBkb3du',
+          }),
+          new RCSReplySuggestion({
+            text: 'Never going to give you up',
+            postbackData: 'Zm9yZCwgSSB0aGluayBJJ20gYSBjb3VjaAo',
+          }),
+          new RCSShareLocationSuggestion({
+            text: 'The only place you are allowed to cry',
+            postbackData: 'Z3JhbmQgY2FueW9u',
+          }),
+          new RCSViewLocationSuggestion({
+            text: 'The only place you are allowed to cry',
+            latitude: '36.05443',
+            longitude: '-112.13934',
+            pinLabel: 'Go Here',
+            postbackData: 'Z3JhbmQgY2FueW9u',
+          }),
+        ]
       }),
     ],
     expected: {

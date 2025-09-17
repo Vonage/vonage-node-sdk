@@ -1,6 +1,6 @@
-import { AbstractTextMessage } from '../AbstractTextMessage.js';
-import { RCSTextParams } from '../../types/index.js';
-import { Channels } from '../../enums/index.js';
+import { AbstractTextMessage } from '../AbstractTextMessage';
+import { AnyRCSSuggestion, RCSTextParams } from '../../types/';
+import { Channels } from '../../enums/';
 
 /**
  * Represents a text message for the RCS channel.
@@ -20,6 +20,12 @@ export class RCSText extends AbstractTextMessage implements RCSTextParams {
    * this value should be kept at its default or at least 30 minutes.
    */
   public ttl?: number;
+
+  /**
+   * An array of suggestion objects to include with the message. You can
+   * include up to 11 suggestions per message.
+   */
+  public suggestions?: Array<AnyRCSSuggestion>;
 
   /**
    * Sends a text message through the RCS channel.
@@ -43,5 +49,6 @@ export class RCSText extends AbstractTextMessage implements RCSTextParams {
   public constructor(params: Omit<RCSTextParams, 'channel' | 'messageType'>) {
     super(params);
     this.ttl = params.ttl;
+    this.suggestions = params.suggestions;
   }
 }
