@@ -1,6 +1,6 @@
-import { AbstractImageMessage } from '../AbstractImageMessage.js';
-import { WhatsAppImageParams, WhatsAppContext } from '../../types/index.js';
-import { Channels } from '../../enums/index.js';
+import { AbstractImageMessage } from '../AbstractImageMessage';
+import { WhatsAppImageParams, WhatsAppContext } from '../../types/';
+import { Channels } from '../../enums/';
 
 /**
  * Represents an image message for WhatsApp.

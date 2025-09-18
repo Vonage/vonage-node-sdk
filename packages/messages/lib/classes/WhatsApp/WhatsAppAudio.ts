@@ -1,6 +1,6 @@
-import { AbstractAudioMessage } from '../AbstractAudioMessage.js';
-import { WhatsAppAudioParams, WhatsAppContext } from '../../types/index.js';
-import { Channels } from '../../enums/index.js';
+import { AbstractAudioMessage } from '../AbstractAudioMessage';
+import { WhatsAppAudioParams, WhatsAppContext } from '../../types/';
+import { Channels } from '../../enums/';
 
 /**
  * Represents an audio message for WhatsApp.

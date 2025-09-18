@@ -1,5 +1,5 @@
 import { AbstractMessage } from '../AbstractMessage';
-import { RCSCustomParams, RCSParams, RCSSettings } from '../../types/';
+import { RCSCustomParams, RCSSettings } from '../../types/';
 import { Channels, MessageTypes } from '../../enums';
 
 /**
