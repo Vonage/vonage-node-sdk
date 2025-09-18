@@ -1,6 +1,6 @@
-import { AbstractFileMessage } from '../AbstractFileMessage.js';
-import { MessageParams, RCSFileParams } from '../../types/index.js';
-import { Channels } from '../../enums/index.js';
+import { AbstractFileMessage } from '../AbstractFileMessage';
+import { MessageParams, RCSFileParams, RCSSettings } from '../../types/';
+import { Channels } from '../../enums/';
 
 /**
  * Represents a file message for the RCS channel.
@@ -22,6 +22,11 @@ export class RCSFile
    * this value should be kept at its default or at least 30 minutes.
    */
   public ttl?: number;
+
+  /**
+   * An object of optional settings for the RCS message.
+   */
+  public rcs?: RCSSettings;
 
   /**
    * Sends a file message to the RCS channel.
@@ -47,5 +52,8 @@ export class RCSFile
   public constructor(params: Omit<MessageParams, 'channel' | 'messageType'> & RCSFileParams) {
     super(params);
     this.ttl = params.ttl;
+    if (params.rcs) {
+      this.rcs = params.rcs;
+    }
   }
 }

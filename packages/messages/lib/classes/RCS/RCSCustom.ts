@@ -1,5 +1,5 @@
-import { AbstractMessage } from '../AbstractMessage.js';
-import { RCSCustomParams } from '../../types/index.js';
+import { AbstractMessage } from '../AbstractMessage';
+import { RCSCustomParams, RCSParams, RCSSettings } from '../../types/';
 import { Channels, MessageTypes } from '../../enums';
 
 /**
@@ -32,28 +32,36 @@ export class RCSCustom extends AbstractMessage implements RCSCustomParams {
   public ttl?: number;
 
   /**
-   * Sends a custom message through RCS
-   *
-   * @param {RCSCustomParams} params - The parameters for creating a RCS custom message.
-   * @example
-   * ```ts
-   * import { RCSCustom } from '@vonage/messages';
-   *
-   * const { messageUUID } = await messagesClient.send(new RCSCustom({
-   *  to: TO_NUMBER,
-   *  from: FROM_NUMBER,
-   *  custom: {
-   *    foo: 'bar',
-   *  }
-   *  clientRef: 'my-personal-reference',
-   * }));
-   *
-   * console.log(`Message sent successfully with UUID ${messageUUID}`);
-   * ```
+   * An object of optional settings for the RCS message.
    */
+  public rcs?: RCSSettings;
+
+  /**
+     * Sends a custom message through RCS
+     *
+     * @param {RCSCustomParams} params - The parameters for creating a RCS custom message.
+     * @example
+     * ```ts
+     * import { RCSCustom } from '@vonage/messages';
+     *
+     * const { messageUUID } = await messagesClient.send(new RCSCustom({
+     *  to: TO_NUMBER,
+     *  from: FROM_NUMBER,
+     *  custom: {
+     *    foo: 'bar',
+     *  }
+     *  clientRef: 'my-personal-reference',
+     * }));
+     *
+     * console.log(`Message sent successfully with UUID ${messageUUID}`);
+     * ```
+     */
   public constructor(params: Omit<RCSCustomParams, 'channel' | 'messageType'>) {
     super(params);
     this.custom = params.custom;
     this.ttl = params.ttl;
+    if (params.rcs) {
+      this.rcs = params.rcs;
+    }
   }
 }

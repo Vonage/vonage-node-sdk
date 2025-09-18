@@ -4,6 +4,7 @@ import { RCSImageParams } from './RCSImageParams';
 import { RCSTextParams } from './RCSTextParams';
 import { RCSVideoParams } from './RCSVideoParams';
 
+export * from './RCSParams';
 export * from './RCSCustomParams';
 export * from './RCSFileParams';
 export * from './RCSImageParams';

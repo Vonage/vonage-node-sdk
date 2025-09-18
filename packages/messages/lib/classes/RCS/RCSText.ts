@@ -1,5 +1,5 @@
 import { AbstractTextMessage } from '../AbstractTextMessage';
-import { AnyRCSSuggestion, RCSTextParams } from '../../types/';
+import { AnyRCSSuggestion, RCSTextParams, RCSSettings } from '../../types/';
 import { Channels } from '../../enums/';
 
 /**
@@ -28,6 +28,11 @@ export class RCSText extends AbstractTextMessage implements RCSTextParams {
   public suggestions?: Array<AnyRCSSuggestion>;
 
   /**
+   * An object of optional settings for the RCS message.
+   */
+  public rcs?: RCSSettings;
+
+  /**
    * Sends a text message through the RCS channel.
    *
    * @param {RCSTextParams} params - The parameters for creating a RCS text message.
@@ -50,5 +55,8 @@ export class RCSText extends AbstractTextMessage implements RCSTextParams {
     super(params);
     this.ttl = params.ttl;
     this.suggestions = params.suggestions;
+    if (params.rcs) {
+      this.rcs = params.rcs;
+    }
   }
 }
