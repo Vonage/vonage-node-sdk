@@ -16,6 +16,13 @@ export class WhatsAppVideo
   public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
+
+  /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
+
   /**
    * Sends a video message to a WhatsApp user.
    *
@@ -44,5 +51,6 @@ export class WhatsAppVideo
     if (params.context) {
       this.context = params.context;
     }
+    this.category = params.category;
   }
 }

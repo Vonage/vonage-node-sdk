@@ -18,6 +18,12 @@ export class WhatsAppFile
   public context?: WhatsAppContext;
 
   /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
+
+  /**
    * Send a WhatsApp file message.
    *
    * @param {WhatsAppFileParams} params - The parameters for creating a WhatsApp file message.
@@ -39,6 +45,7 @@ export class WhatsAppFile
    */
   public constructor(params: Omit<WhatsAppFileParams, 'channel' | 'messageType'>) {
     super(params);
+    this.category = params.category;
     /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;

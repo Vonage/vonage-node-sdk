@@ -30,6 +30,12 @@ export class WhatsAppSticker
   public context?: WhatsAppContext;
 
   /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
+
+  /**
    * Send a sticker message to a WhatsApp user.
    *
    * @param {WhatsAppStickerParams} params - The parameters for creating a WhatsApp sticker message.
@@ -74,5 +80,7 @@ export class WhatsAppSticker
     if (params.context) {
       this.context = params.context;
     }
+
+    this.category = params.category;
   }
 }
