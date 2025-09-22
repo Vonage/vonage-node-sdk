@@ -1,10 +1,10 @@
-import { AbstractMessage } from '../AbstractMessage.js';
+import { AbstractMessage } from '../AbstractMessage';
 import {
   WhatsAppReactionParams,
   WhatsAppReactionType,
   WhatsAppContext,
-} from '../../types/index.js';
-import { Channels, MessageTypes } from '../../enums/index.js';
+} from '../../types/';
+import { Channels, MessageTypes } from '../../enums/';
 
 /**
  * Represents a reaction message for WhatsApp.
@@ -33,6 +33,12 @@ export class WhatsAppReaction
    * The WhatsApp Context
    */
   public context?: WhatsAppContext;
+
+  /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
 
   /**
    * Sends a reaction message to a WhatsApp user.
@@ -76,6 +82,8 @@ export class WhatsAppReaction
   public constructor(params: Omit<WhatsAppReactionParams, 'channel' | 'messageType'>) {
     super(params);
     this.reaction = params.reaction;
+    this.category = params.category;
+
     if (params.context) {
       this.context = params.context;
     }

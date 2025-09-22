@@ -1,6 +1,6 @@
-import { Channels } from '../../enums/index.js';
-import { AbstractFileMessage } from '../AbstractFileMessage.js';
-import { WhatsAppFileParams, WhatsAppContext } from '../../types/index.js';
+import { Channels } from '../../enums/';
+import { AbstractFileMessage } from '../AbstractFileMessage';
+import { WhatsAppFileParams, WhatsAppContext } from '../../types/';
 
 /**
  * Represents a file message for WhatsApp.
@@ -16,6 +16,12 @@ export class WhatsAppFile
   public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
+
+  /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
 
   /**
    * Send a WhatsApp file message.
@@ -39,6 +45,7 @@ export class WhatsAppFile
    */
   public constructor(params: Omit<WhatsAppFileParams, 'channel' | 'messageType'>) {
     super(params);
+    this.category = params.category;
     /* istanbul ignore next */
     if (params.context) {
       this.context = params.context;

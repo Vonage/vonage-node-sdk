@@ -1,10 +1,10 @@
-import { AbstractMessage } from '../AbstractMessage.js';
+import { AbstractMessage } from '../AbstractMessage';
 import {
   WhatsAppCustomType,
   WhatsAppCustomParams,
   WhatsAppContext,
-} from '../../types/index.js';
-import { Channels, MessageTypes } from '../../enums/index.js';
+} from '../../types/';
+import { Channels, MessageTypes } from '../../enums/';
 
 /**
  * Represents a custom message for WhatsApp.
@@ -27,6 +27,12 @@ export class WhatsAppCustom
   public custom: WhatsAppCustomType;
 
   public context?: WhatsAppContext;
+
+  /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
 
   /**
    * Sends a custom message to a WhatsApp user.
@@ -59,5 +65,7 @@ export class WhatsAppCustom
     if (params.context) {
       this.context = params.context;
     }
+
+    this.category = params.category;
   }
 }

@@ -84,6 +84,7 @@ export default [
         'client-ref': 'my client ref',
         'entity-id': '1101456324675322134',
         'content-id': '1107457532145798767',
+        'trusted-number': true,
       },
     ],
     response: [
@@ -117,6 +118,7 @@ export default [
         clientRef: 'my client ref',
         entityId: '1101456324675322134',
         contentId: '1107457532145798767',
+        trustedNumber: true,
       } as SMSParams,
     ],
     expected: {
