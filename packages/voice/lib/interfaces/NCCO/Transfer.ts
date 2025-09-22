@@ -1,4 +1,4 @@
-import { Action } from '../../ncco.js';
+import { Action } from '../../types/NCCO/Action';
 
 /**
  * Represents a Nexmo Call Control Object (NCCO) transfer action.

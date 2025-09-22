@@ -1,6 +1,6 @@
-import { NotifyAction } from '../../types/index.js';
-import { Serializable } from '../../ncco.js';
-import { NCCOActions } from '../../enums/index.js';
+import { NotifyAction } from '../../types/';
+import { Serializable } from '../../interfaces';
+import { NCCOActions } from '../../enums/';
 
 /**
  * Represents a Notify action in an NCCO.
