@@ -65,8 +65,8 @@ export default [
         suggestions: [
           {
             type: RCSSuggestionType.CREATE_CALENDAR_EVENT,
-            start_date: '2015-10-15T10:00:00Z',
-            end_date: '2015-10-15T11:00:00Z',
+            start_time: '2015-10-21T10:00:00Z',
+            end_time: '2015-10-21T11:00:00Z',
             title: 'Sports Alamac',
             text: 'We gotta save your kids',
             postback_data: 'QmlmZidzIGhpbGwgdmFsbGV5IGNhc2lubw'

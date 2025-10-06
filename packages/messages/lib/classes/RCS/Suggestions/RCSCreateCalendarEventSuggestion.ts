@@ -11,12 +11,12 @@ export class RCSCreateCalendarEventSuggestion
   /**
    * The start time of the calendar event in ISO 8601 format.
    */
-  public startDate: string;
+  public startTime: string;
 
   /**
    * The end time of the calendar event in ISO 8601 format.
    */
-  public endDate: string;
+  public endTime: string;
 
   /**
    * The title of the calendar event
