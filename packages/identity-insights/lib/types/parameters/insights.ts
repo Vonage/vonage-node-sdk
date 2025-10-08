@@ -16,7 +16,7 @@ export type IdentityInsightsParameters = {
    * Specifies the reason for the request. This property is required only for Insights that use the
    * Network Registry. The value must be "FraudPreventionAndDetection".
    */
-  purpose: "FraudPreventionAndDetection";
+  purpose: 'FraudPreventionAndDetection';
 
   /**
    * The insight(s) you need. At least one insight must be requested.
