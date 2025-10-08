@@ -1,6 +1,6 @@
-import { AbstractVideoMessage } from '../AbstractVideoMessage.js';
-import { RCSVideoParams } from '../../types/index.js';
-import { Channels } from '../../enums/index.js';
+import { AbstractVideoMessage } from '../AbstractVideoMessage';
+import { RCSVideoParams, RCSSettings } from '../../types/';
+import { Channels } from '../../enums/';
 
 /**
  * Represents an video message for the RCS channel.
@@ -20,6 +20,11 @@ export class RCSVideo extends AbstractVideoMessage implements RCSVideoParams {
    * this value should be kept at its default or at least 30 minutes.
    */
   public ttl?: number;
+
+  /**
+   * An object of optional settings for the RCS message.
+   */
+  public rcs?: RCSSettings;
 
   /**
    * Send an RCS video message.
@@ -45,5 +50,8 @@ export class RCSVideo extends AbstractVideoMessage implements RCSVideoParams {
   public constructor(params: RCSVideoParams) {
     super(params);
     this.ttl = params?.ttl;
+    if (params.rcs) {
+      this.rcs = params.rcs;
+    }
   }
 }

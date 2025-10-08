@@ -1,14 +1,16 @@
-import { RCSCustomParams } from './RCSCustomParams.js';
-import { RCSFileParams } from './RCSFileParams.js';
-import { RCSImageParams } from './RCSImageParams.js';
-import { RCSTextParams } from './RCSTextParams.js';
-import { RCSVideoParams } from './RCSVideoParams.js';
+import { RCSCustomParams } from './RCSCustomParams';
+import { RCSFileParams } from './RCSFileParams';
+import { RCSImageParams } from './RCSImageParams';
+import { RCSTextParams } from './RCSTextParams';
+import { RCSVideoParams } from './RCSVideoParams';
 
-export * from './RCSCustomParams.js';
-export * from './RCSFileParams.js';
-export * from './RCSImageParams.js';
-export * from './RCSTextParams.js';
-export * from './RCSVideoParams.js';
+export * from './RCSParams';
+export * from './RCSCustomParams';
+export * from './RCSFileParams';
+export * from './RCSImageParams';
+export * from './RCSTextParams';
+export * from './RCSVideoParams';
+export * from './Suggestions';
 
 export type AnyRCSChannel =
   | RCSCustomParams
