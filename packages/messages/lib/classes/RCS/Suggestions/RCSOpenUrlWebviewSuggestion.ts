@@ -28,6 +28,6 @@ export class RCSOpenURLWebviewSuggestion
 
     this.url = params.url;
     this.description = params.description;
-    this.viewMode = params.viewMode || 'FULL';
+    this.viewMode = params.viewMode;
   }
 }
