@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@vonage/identity-insights",
+  "version": "1.0.0",
+  "description": "The Identity Insights API provides real-time access to a broad range of attributes related to the carrier, subscriber, or device associated with a phone number.",
+  "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/identity-insights#readme",
+  "bugs": {
+    "url": "https://github.com/Vonage/vonage-node-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vonage/vonage-node-sdk.git"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "url": "https://github.com/manchuck"
+    },
+    {
+      "name": "Alvaro Navarro",
+      "url": "https://github.com/alnacle"
+    }
+  ],
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "browser": "./dist/unsupportedBrowser.cjs",
+      "import": {
+        "types": "./dist/esm/index.d.mts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    }
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/cjs/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "postbuild": "node ../../scripts/copyUnsupported.cjs && node -e \"const fs=require('node:fs'),p='dist/cjs/package.json';fs.mkdirSync('dist/cjs',{recursive:true});fs.writeFileSync(p,JSON.stringify({type:'commonjs'},null,2));\"",
+    "build:cjs": "tsup lib/** -d dist/cjs --dts --tsconfig tsconfig.tsup.json",
+    "build:esm": "tsup lib/** -d dist/esm --format=esm --dts --tsconfig tsconfig.tsup.json",
+    "check:pkg": "npx attw --pack .",
+    "clean": "rimraf dist tsconfig.tsbuildinfo"
+  },
+  "dependencies": {
+    "@vonage/server-client": "1.18.1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true
+}

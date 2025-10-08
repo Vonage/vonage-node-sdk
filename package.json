@@ -10,7 +10,8 @@
     "vonage",
     "verify",
     "2fa",
-    "phone numbers"
+    "phone numbers",
+    "identity insights"
   ],
   "homepage": "https://github.com/vonage/vonage-node-sdk",
   "repository": {
