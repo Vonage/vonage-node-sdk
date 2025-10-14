@@ -66,6 +66,7 @@ export class Client {
       apiHost: options?.apiHost || 'https://api.nexmo.com',
       videoHost: options?.videoHost || 'https://video.api.vonage.com',
       meetingsHost: options?.meetingsHost || 'https://api-eu.vonage.com',
+      identityInsightsHost: options?.identityInsightsHost|| 'https://api-eu.vonage.com',
       responseType: options?.responseType || ResponseTypes.json,
       timeout: options?.timeout || null,
       appendUserAgent: options?.appendUserAgent || null,

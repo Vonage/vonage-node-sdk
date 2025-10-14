@@ -39,6 +39,11 @@ export type ConfigParams = {
   meetingsHost?: string;
 
   /**
+   * European host
+   */
+  identityInsightsHost?: string;
+
+  /**
    * A string to append to the User-Agent header in API requests.
    */
   appendUserAgent?: string;

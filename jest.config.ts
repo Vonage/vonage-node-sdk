@@ -201,6 +201,12 @@ const config = {
       testMatch: ['<rootDir>/packages/voice/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
+    {
+      ...projectDefault,
+      displayName: 'IDENTITY INSIGHTS',
+      testMatch: ['<rootDir>/packages/identity-insights/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
   ],
 };
 
