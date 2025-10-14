@@ -41,7 +41,7 @@ export type ConfigParams = {
   /**
    * European host
    */
-  europeHost?: string;
+  identityInsightsHost?: string;
 
   /**
    * A string to append to the User-Agent header in API requests.

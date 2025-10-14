@@ -1,4 +1,6 @@
 import { MatchType } from './match.js';
+import { SimSwapType } from './simSwap.js';
+
 
 /**
  * Represents the parameters for makeing an identity insights call
@@ -41,13 +43,7 @@ export type IdentityInsightsParameters = {
     /**
      * Request the sim_swap insight
      */
-    simSwap?: {
-
-      /**
-       * Period in hours to be checked for SIM swap.
-       */
-      period: number;
-    },
+    simSwap?: SimSwapType;
 
     /**
      * Request the subscriber_match insight

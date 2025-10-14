@@ -24,7 +24,7 @@ export class IdentityInsights extends Client {
    */
   async getIdentityInsights (params: IdentityInsightsParameters): Promise<IdentityInsightsType> {
     const resp = await this.sendPostRequest<IdentityInsightsResponse>(
-      `${this.config.europeHost}/v0.1/identity-insights`,
+      `${this.config.identityInsightsHost}/v0.1/identity-insights`,
       params,
     );
 
