@@ -37,8 +37,8 @@ export class RCSCreateCalendarEventSuggestion
     super(params);
 
     this.title = params.title;
-    this.startDate = params.startDate;
-    this.endDate = params.endDate;
+    this.startTime = params.startTime;
+    this.endTime = params.endTime;
     this.description = params.description;
     this.fallbackUrl = params.fallbackUrl;
   }
