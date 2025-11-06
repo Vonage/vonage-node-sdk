@@ -1,6 +1,6 @@
-import { AbstractImageMessage } from '../AbstractImageMessage.js';
-import { RCSImageParams } from '../../types/index.js';
-import { Channels } from '../../enums/index.js';
+import { AbstractImageMessage } from '../AbstractImageMessage';
+import { RCSImageParams, RCSSettings } from '../../types/';
+import { Channels } from '../../enums/';
 
 /**
  * Represents an image message for the RCS channel.
@@ -20,6 +20,11 @@ export class RCSImage extends AbstractImageMessage implements RCSImageParams {
    * this value should be kept at its default or at least 30 minutes.
    */
   public ttl?: number;
+
+  /**
+   * An object of optional settings for the RCS message.
+   */
+  public rcs?: RCSSettings;
 
   /**
    * Send an RCS image message.
@@ -44,5 +49,8 @@ export class RCSImage extends AbstractImageMessage implements RCSImageParams {
   constructor(params: Omit<RCSImageParams, 'channel' | 'messageType'>) {
     super(params);
     this.ttl = params.ttl;
+    if (params.rcs) {
+      this.rcs = params.rcs;
+    }
   }
 }

@@ -1,11 +1,11 @@
-import { AbstractMessage } from '../AbstractMessage.js';
+import { AbstractMessage } from '../AbstractMessage';
 import {
   WhatsAppTemplateParams,
   WhatsAppPolicyType,
   WhatsAppTemplateType,
   WhatsAppContext,
-} from '../../types/index.js';
-import { Channels, MessageTypes } from '../../enums/index.js';
+} from '../../types/';
+import { Channels, MessageTypes } from '../../enums/';
 
 /**
  * Represents a template message for WhatsApp.
@@ -30,6 +30,12 @@ export class WhatsAppTemplate
   public template: WhatsAppTemplateType;
 
   public context?: WhatsAppContext;
+
+  /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
 
   /**
    * Send a template message to a WhatsApp user.
@@ -69,5 +75,7 @@ export class WhatsAppTemplate
     if (params.context) {
       this.context = params.context;
     }
+
+    this.category = params.category;
   }
 }

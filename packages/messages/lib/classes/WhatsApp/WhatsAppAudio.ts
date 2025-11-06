@@ -1,6 +1,6 @@
-import { AbstractAudioMessage } from '../AbstractAudioMessage.js';
-import { WhatsAppAudioParams, WhatsAppContext } from '../../types/index.js';
-import { Channels } from '../../enums/index.js';
+import { AbstractAudioMessage } from '../AbstractAudioMessage';
+import { WhatsAppAudioParams, WhatsAppContext } from '../../types/';
+import { Channels } from '../../enums/';
 
 /**
  * Represents an audio message for WhatsApp.
@@ -16,6 +16,13 @@ export class WhatsAppAudio
   public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
+
+  /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
+
   /**
    * Sends an audio message to a WhatsApp user.
    *
@@ -43,5 +50,6 @@ export class WhatsAppAudio
     if (params.context) {
       this.context = params.context;
     }
+    this.category = params.category;
   }
 }

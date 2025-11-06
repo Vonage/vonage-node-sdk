@@ -1,6 +1,6 @@
-import { AbstractImageMessage } from '../AbstractImageMessage.js';
-import { WhatsAppImageParams, WhatsAppContext } from '../../types/index.js';
-import { Channels } from '../../enums/index.js';
+import { AbstractImageMessage } from '../AbstractImageMessage';
+import { WhatsAppImageParams, WhatsAppContext } from '../../types/';
+import { Channels } from '../../enums/';
 
 /**
  * Represents an image message for WhatsApp.
@@ -16,6 +16,13 @@ export class WhatsAppImage
   public channel: Channels.WHATSAPP = Channels.WHATSAPP;
 
   public context?: WhatsAppContext;
+
+  /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
+
   /**
    * Sends an image message to a WhatsApp user.
    *
@@ -43,5 +50,7 @@ export class WhatsAppImage
     if (params.context) {
       this.context = params.context;
     }
+
+    this.category = params.category;
   }
 }

@@ -1,11 +1,11 @@
-import { AbstractMessage } from '../AbstractMessage.js';
+import { AbstractMessage } from '../AbstractMessage';
 import {
   WhatsAppStickerParams,
   WhatsAppStickerIdType,
   WhatsAppStickerUrlType,
   WhatsAppContext,
-} from '../../types/index.js';
-import { Channels, MessageTypes } from '../../enums/index.js';
+} from '../../types/';
+import { Channels, MessageTypes } from '../../enums/';
 
 /**
  * Represents a sticker message for WhatsApp.
@@ -28,6 +28,12 @@ export class WhatsAppSticker
   public sticker: WhatsAppStickerIdType | WhatsAppStickerUrlType;
 
   public context?: WhatsAppContext;
+
+  /**
+   * Send via MM Lite API only this is valid for marketing template messages
+   * only, and for Alpha release only
+   */
+  public category?: string;
 
   /**
    * Send a sticker message to a WhatsApp user.
@@ -74,5 +80,7 @@ export class WhatsAppSticker
     if (params.context) {
       this.context = params.context;
     }
+
+    this.category = params.category;
   }
 }
