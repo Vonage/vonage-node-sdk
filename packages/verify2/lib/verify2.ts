@@ -62,6 +62,24 @@ export class Verify2 extends Client {
   }
 
   /**
+   * Move the request to the next workflow step, if available.
+   * @param {string} requestId - The ID of the verification request.
+   * @return {boolean} `true` if the request was successful.
+   */
+  async nextWorkflow(requestId: string): Promise<boolean> {
+    try {
+      await this.sendPostRequest(
+        `${this.config.apiHost}/v2/verify/${requestId}/next_workflow`,
+      );
+      return true;
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /**
    * Cancels a verification request.
    * @param {string} requestId - The ID of the verification request to cancel.
    * @return {boolean} `true` if the cancellation was successful.
