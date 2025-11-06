@@ -497,6 +497,7 @@ export class Video extends Client {
    *
    * @param {string} captionId - The ID of the caption to retrieve the status for.
    * @return {Promise<CaptionStatusResponse>} A promise that resolves to the status of the requested caption.
+   * @deprecated This method no longer works and was added incorrectly
    *
    * @example
    * ```ts
