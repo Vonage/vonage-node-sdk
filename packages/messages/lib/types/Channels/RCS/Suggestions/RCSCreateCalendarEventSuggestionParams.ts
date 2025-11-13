@@ -7,12 +7,12 @@ export type RCSCreateCalendarEventSuggestionParams = RCSSuggestionParams & {
   /**
    * The start time of the calendar event in ISO 8601 format.
    */
-  startDate: string
+  startTime: string
 
   /**
    * The end time of the calendar event in ISO 8601 format.
    */
-  endDate: string
+  endTime: string
 
   /**
    * The title of the calendar event
