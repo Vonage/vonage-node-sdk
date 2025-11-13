@@ -5,7 +5,6 @@ import { LocationVerified } from '../enums/locationVerified.js';
  * Represents the result of the location verification insights.
  */
 export type LocationVerification = {
-
   /**
    * The status of the insight call.
    */
@@ -27,5 +26,4 @@ export type LocationVerification = {
    * area where the network locates the device
    */
   matchRate?: number;
-
 };

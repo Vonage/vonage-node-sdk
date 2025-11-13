@@ -1,6 +1,4 @@
-
 export type MatchType = {
-
   /**
    * Id number associated to the official identity document in the country
    */
@@ -55,6 +53,4 @@ export type MatchType = {
    * Birthdate of the customer
    */
   birthdate: string;
-
 };
-

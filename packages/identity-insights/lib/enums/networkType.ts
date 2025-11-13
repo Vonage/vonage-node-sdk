@@ -3,7 +3,6 @@
  * number
  */
 export enum NetworkType {
-
   /**
    * Mobile Network Type.
    */
@@ -28,5 +27,4 @@ export enum NetworkType {
    * Virtual Network Type
    */
   VIRTUAL = 'virtual',
-
-};
+}

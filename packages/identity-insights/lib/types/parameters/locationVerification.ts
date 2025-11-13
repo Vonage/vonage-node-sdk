@@ -1,12 +1,9 @@
-
 export type locationVerificationType = {
-
   location: {
-
     /**
      * Must be set to CIRCLE
      */
-    type: "CIRCLE";
+    type: 'CIRCLE';
 
     /**
      * Expected accuracy for the verification in meters
@@ -17,7 +14,6 @@ export type locationVerificationType = {
      * Center of the location
      */
     center: {
-
       /**
        * Latitude (degrees)
        */
@@ -27,11 +23,6 @@ export type locationVerificationType = {
        * Longitude (degrees)
        */
       longitude: number;
-
     };
-
   };
-
 };
-
-
