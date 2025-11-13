@@ -126,7 +126,7 @@ export default [
         text: 'too many secrets',
         suggestions: [
           new RCSCreateCalendarEventSuggestion({
-            type: "create_calendar_event",
+            type: 'create_calendar_event',
             startTime: '2015-10-21T10:00:00Z',
             endTime: '2015-10-21T11:00:00Z',
             title: 'Sports Alamac',
