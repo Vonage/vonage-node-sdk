@@ -1,5 +1,6 @@
 import { MatchType } from './match.js';
 import { SimSwapType } from './simSwap.js';
+import { locationVerificationType } from './locationVerification.js';
 
 
 /**
@@ -26,29 +27,44 @@ export type IdentityInsightsParameters = {
   insights?: {
 
     /**
-     * Request the format insight.
+     * Verify whether the phone number is correctly structured
      */
     format?: Record<string, never>;
 
     /**
-     * Request the original_carrier insight
+     * Provide information about the carrier and network type originally associated with the phone number
      */
     originalCarrier?: Record<string, never>;
 
     /**
-     * Request the current_carrier insight
+     * Identify the mobile network operator that is currently assigned for the given phone number
      */
     currentCarrier?: Record<string, never>;
 
     /**
-     * Request the sim_swap insight
+     * Determine if the SIM card linked to the given phone number has recently changed
      */
     simSwap?: SimSwapType;
 
     /**
-     * Request the subscriber_match insight
+     * Verify the location of an end-user device within a specified area
+     */
+    locationVerification?: locationVerificationType;
+
+    /**
+     * Compare user data against the mobile network operator’s records.
      */
     subscriberMatch?: MatchType;
+
+    /**
+     * Check the roaming status and country on a mobile network
+     */
+    roaming?: Record<string, never>;
+
+    /**
+     * Check connectivity status
+     */
+    reachability?: Record<string, never>;
 
   };
 };

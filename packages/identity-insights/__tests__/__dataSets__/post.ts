@@ -3,6 +3,8 @@ import {
   IdentityInsightsResponse,
   IdentityInsightsParameters,
   IdentityInsightsType,
+  NetworkType,
+  Connectivity,
 } from '../../lib';
 
 const params = {
@@ -10,9 +12,13 @@ const params = {
   purpose: 'FraudPreventionAndDetection',
   insights: {
     format: {},
+    originalCarrier: {},
+    currentCarrier: {},
     simSwap: {
       period: 240
     },
+    roaming: {},
+    reachability: {},
   },
 } as IdentityInsightsParameters;
 
@@ -33,9 +39,47 @@ const identityInsights = {
         message: 'Success'
       }
     },
+    originalCarrier: {
+      name: 'Orange Espana, S.A. Unipersonal',
+      networkType: NetworkType.MOBILE,
+      countryCode: 'ES',
+      networkCode: '21403',
+      status: {
+        code: Status.OK,
+        message: 'Success'
+      }
+    },
+    currentCarrier: {
+      name: 'Orange Espana, S.A. Unipersonal',
+      networkType: NetworkType.MOBILE,
+      countryCode: 'ES',
+      networkCode: '21403',
+      status: {
+        code: Status.OK,
+        message: 'Success'
+      }
+    },
     simSwap: {
       latestSimSwapAt: '2024-07-08T09:30:27.504Z',
       isSwapped: true,
+      status: {
+        code: Status.OK,
+        message: 'Success'
+      }
+    },
+    roaming: {
+      latestStatusAt: '2025-10-11T08:23:23.456',
+      isRoaming: true,
+      countryCodes : [ "ES" ],
+      status: {
+        code: Status.OK,
+        message: 'Success'
+      }
+    },
+    reachability: {
+      latestStatusAt: '2025-10-11T08:23:23.456',
+      isReachable: true,
+      connectivity: [ Connectivity.DATA ],
       status: {
         code: Status.OK,
         message: 'Success'
@@ -64,6 +108,44 @@ const response = {
     sim_swap: {
       latest_sim_swap_at: '2024-07-08T09:30:27.504Z',
       is_swapped: true,
+      status: {
+        code: Status.OK,
+        message: 'Success'
+      }
+    },
+    originalCarrier: {
+      name: 'Orange Espana, S.A. Unipersonal',
+      networkType: NetworkType.MOBILE,
+      countryCode: 'ES',
+      networkCode: '21403',
+      status: {
+        code: Status.OK,
+        message: 'Success'
+      }
+    },
+    currentCarrier: {
+      name: 'Orange Espana, S.A. Unipersonal',
+      networkType: NetworkType.MOBILE,
+      countryCode: 'ES',
+      networkCode: '21403',
+      status: {
+        code: Status.OK,
+        message: 'Success'
+      }
+    },
+    roaming: {
+      latestStatusAt: '2025-10-11T08:23:23.456',
+      isRoaming: true,
+      countryCodes : [ "ES" ],
+      status: {
+        code: Status.OK,
+        message: 'Success'
+      }
+    },
+    reachability: {
+      latestStatusAt: '2025-10-11T08:23:23.456',
+      isReachable: true,
+      connectivity: [ Connectivity.DATA ],
       status: {
         code: Status.OK,
         message: 'Success'

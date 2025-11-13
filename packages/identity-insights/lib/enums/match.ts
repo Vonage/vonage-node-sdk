@@ -34,3 +34,12 @@ export enum Match {
   DATA_UNAVAILABLE = 'data_unavailable',
 
 }
+
+export enum MatchAddress {
+
+  /**
+   * The value provided matches with part of the address
+   */
+  INCLUDED_WITH_ADDRESS_MATCH = 'included_with_address_match',
+}
+
