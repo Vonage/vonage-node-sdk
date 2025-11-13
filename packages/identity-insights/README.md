@@ -77,6 +77,14 @@ const params = {
 const resp = await clientInsights.getIdentityInsights(params);
 ```
 
+## Debugging
+
+Run your script as follows:
+
+```bash
+DEBUG=vonage:server-client node your-script.js
+```
+
 ## Testing
 
 Run:
@@ -84,6 +92,31 @@ Run:
 ```bash
 npm run test
 ```
+
+## Insights Release Status
+
+The Identity Insights API supports different insights, and from time to time, we
+will add new channels or update the existing ones. Each insight follows our
+normal product development cycle, that is:
+
+Developer Preview -> Alpha -> Beta -> GA
+
+As a result, different insights within the API may be at different release
+stages at any given time. This table details the current release status of each
+insight implemented in this SDK:
+
+| Insight               |  API Release Status  |
+|-----------------------|:--------------------:|
+| Format                | Beta                 |
+| SIM Swap              | Beta                 |
+| Original Carrier      | Beta                 |
+| Current Carrier       | Beta                 |
+| Location Verification | Developer Preview    |
+| Subscriber Match      | Developer Preview    |
+| Roaming               | Developer Preview    |
+| Reachability          | Developer Preview    |
+
+> Note: All statuses prior to GA are subject to regular updates, which may include breaking changes.
 
 [signup]: https://dashboard.nexmo.com/sign-up?utm_source=DEV_REL&utm_medium=github&utm_campaign=node-server-sdk
 [license]: ../../LICENSE.txt

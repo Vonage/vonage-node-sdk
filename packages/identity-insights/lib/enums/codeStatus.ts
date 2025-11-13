@@ -48,3 +48,22 @@ export enum Status {
    */
   OK = 'ok',
 }
+
+export enum SubscriberMatchStatus {
+
+  /**
+   *  Operator requires idDocument to match any other attributes.
+   */
+  SUBSCRIBER_MATCH_ID_DOCUMENT_REQUIRED = 'subscriber_match.id_document_required',
+
+  /**
+   * Operator cannot match idDocument which is required to match any other attibutes.
+   */
+  SUBSCRIBER_MATCH_ID_DOCUMENT_MISMATCH = 'subscriber_match.id_document_mismatch',
+
+  /**
+   * Indicated parameter combination is invalid.
+   */
+  SUBSCRIBER_MATCH_INVALID_PARAM_COMBINATION = 'subscriber_match.invalid_param_combination',
+
+}

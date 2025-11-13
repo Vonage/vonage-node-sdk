@@ -1,5 +1,5 @@
-import { StatusType } from './status.js';
-import { Match } from '../enums/match.js';
+import { SubscriberMatchStatusType } from './status.js';
+import { Match, MatchAddress } from '../enums/match.js';
 
 /**
  * Represents the result of the subscriber match insights.
@@ -9,7 +9,7 @@ export type SubscriberMatch = {
   /**
    * The status of the insight call.
    */
-  status: StatusType;
+  status: SubscriberMatchStatusType;
 
 
   /**
@@ -18,12 +18,6 @@ export type SubscriberMatch = {
    */
   idDocumentMatch?: Match;
 
-
-  /**
-   * The complete name of the customer matches with the one on the
-   * Operator's system.
-   */
-  nameMatch?: Match;
 
   /**
    * The first name/given name of the customer matches with the one on the
@@ -47,32 +41,44 @@ export type SubscriberMatch = {
   /**
    * The street name of the customer matches with the one on the Operator's system.
    */
-  streetNameMatch?: Match;
+  streetNameMatch?: Match | MatchAddress | string;
+
 
   /**
    * The street number of the customer matches with the one on the Operator's system.
    */
-  streetNumberMatch?: Match;
+  streetNumberMatch?: Match | MatchAddress | string;
+
 
   /**
    * The postal code / zip code of the customer matches with the one on the Operator's system.
    */
-  postalCodeMatch?: Match;
+  postalCodeMatch?: Match | MatchAddress | string;
+
 
   /**
    * The locality of the customer's address matches with the one on the Operator's system.
    */
-  localityMatch?: Match;
+  localityMatch?: Match | MatchAddress | string;
+
+
+  /**
+   * The region of the customer's address matches with the one on the Operator's system.
+   */
+  regionMatch?: Match | MatchAddress | string;
+
 
   /**
    * The country of the customer's address matches with the one on the Operator's system.
    */
-  countryMatch?: Match;
+  countryMatch?: Match | MatchAddress | string;
+
 
   /**
    * The house number extension of the customer's address with the one on the Operator's system.
    */
-  houseNumberExtensionMatch?: Match;
+  houseNumberExtensionMatch?: Match | MatchAddress | string;
+
 
   /**
    * The birthdate of the customer matches with the one on the Operator's system.

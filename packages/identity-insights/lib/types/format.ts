@@ -1,7 +1,7 @@
 import { StatusType } from './status.js';
 
 /**
- * Represents the result of the current and original carrier insights.
+ * Represents the result of the format insight.
  */
 export type Format = {
 
