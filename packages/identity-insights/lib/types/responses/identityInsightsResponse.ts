@@ -17,5 +17,4 @@ export type IdentityInsightsResponse = {
    * The object containing all insight information.
    */
   insights: Insights;
-
 };

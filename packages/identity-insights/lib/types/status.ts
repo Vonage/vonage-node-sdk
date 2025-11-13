@@ -15,7 +15,6 @@ export type StatusType = {
   message: string;
 };
 
-
 /**
  * Represents the result of the subscriber match insight operation.
  */

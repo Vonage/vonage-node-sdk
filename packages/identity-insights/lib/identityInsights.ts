@@ -1,5 +1,9 @@
 import { Client, AuthenticationType } from '@vonage/server-client';
-import { IdentityInsightsType, IdentityInsightsParameters, IdentityInsightsResponse } from './types/index.js';
+import {
+  IdentityInsightsType,
+  IdentityInsightsParameters,
+  IdentityInsightsResponse,
+} from './types/index.js';
 
 /**
  * The Identity Insights API allows clients to request real-time information related
@@ -7,12 +11,10 @@ import { IdentityInsightsType, IdentityInsightsParameters, IdentityInsightsRespo
  * This class represents the client for retrieving phone insights.
  */
 export class IdentityInsights extends Client {
-
   /**
    * The authentication type used for this client (JWT).
    */
   protected authType = AuthenticationType.JWT;
-
 
   /**
    * Retrieve Identity Insights from a given phone number
@@ -22,15 +24,17 @@ export class IdentityInsights extends Client {
    * @return {IdentityInsightsType} A `IdentityInsightsType` containing the insights
    * requested.
    */
-  async getIdentityInsights (params: IdentityInsightsParameters): Promise<IdentityInsightsType> {
+  async getIdentityInsights(
+    params: IdentityInsightsParameters
+  ): Promise<IdentityInsightsType> {
     const resp = await this.sendPostRequest<IdentityInsightsResponse>(
       `${this.config.identityInsightsHost}/v0.1/identity-insights`,
-      params,
+      params
     );
 
     return Client.transformers.camelCaseObjectKeys(
       resp?.data,
-      true,
+      true
     ) as IdentityInsightsType;
   }
 }

@@ -11,7 +11,6 @@ import { Reachability } from './reachability.js';
  *
  */
 export type Insights = {
-
   /**
    * The result of the 'format' insight operation (optional).
    */
@@ -51,5 +50,4 @@ export type Insights = {
    * The result of the 'reachability' insight operation (optional).
    */
   reachability?: Reachability;
-
 };

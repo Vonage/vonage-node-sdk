@@ -2,13 +2,11 @@ import { MatchType } from './match.js';
 import { SimSwapType } from './simSwap.js';
 import { locationVerificationType } from './locationVerification.js';
 
-
 /**
  * Represents the parameters for makeing an identity insights call
  *
  */
 export type IdentityInsightsParameters = {
-
   /**
    * A single phone number that you need insight about in the E.164 format.
    * Don't use a leading + or 00 when entering a phone number, start with the country code, e.g., 447700900000.
@@ -25,7 +23,6 @@ export type IdentityInsightsParameters = {
    * The insight(s) you need. At least one insight must be requested.
    */
   insights?: {
-
     /**
      * Verify whether the phone number is correctly structured
      */
@@ -65,6 +62,5 @@ export type IdentityInsightsParameters = {
      * Check connectivity status
      */
     reachability?: Record<string, never>;
-
   };
 };

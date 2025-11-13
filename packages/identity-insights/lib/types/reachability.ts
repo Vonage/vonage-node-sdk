@@ -5,7 +5,6 @@ import { Connectivity } from '../enums/connectivity.js';
  * Represents the result of the reachability insights.
  */
 export type Reachability = {
-
   /**
    * The status of the insight call.
    */
@@ -27,5 +26,4 @@ export type Reachability = {
    * Only prresent if isReachable = True
    */
   connectivity?: Array<Connectivity>;
-
 };

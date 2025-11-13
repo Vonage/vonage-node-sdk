@@ -2,7 +2,6 @@
  * Enum representing the possible status values for an insight.
  */
 export enum Status {
-
   /**
    * The country or mobile network is not supported by available suppliers.
    */
@@ -50,7 +49,6 @@ export enum Status {
 }
 
 export enum SubscriberMatchStatus {
-
   /**
    *  Operator requires idDocument to match any other attributes.
    */
@@ -65,5 +63,4 @@ export enum SubscriberMatchStatus {
    * Indicated parameter combination is invalid.
    */
   SUBSCRIBER_MATCH_INVALID_PARAM_COMBINATION = 'subscriber_match.invalid_param_combination',
-
 }

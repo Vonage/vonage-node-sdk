@@ -2,7 +2,6 @@
  * Enum representing the result of the location verification request
  */
 export enum LocationVerified {
-
   /**
    * The network locates the device within the requested area,
    */
@@ -21,6 +20,5 @@ export enum LocationVerified {
   /**
    * The requested area partially match the area where the network locates the device.
    */
-  PARTIAL  = 'partial',
-
-};
+  PARTIAL = 'partial',
+}
