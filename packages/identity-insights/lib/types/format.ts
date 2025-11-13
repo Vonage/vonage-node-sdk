@@ -1,10 +1,9 @@
 import { StatusType } from './status.js';
 
 /**
- * Represents the result of the current and original carrier insights.
+ * Represents the result of the format insight.
  */
 export type Format = {
-
   /**
    * The status of the insight call.
    */
@@ -50,5 +49,4 @@ export type Format = {
    * Phone number format validation involves verifying the length and prefix details at various levels
    */
   isFormatValid?: boolean;
-
 };
