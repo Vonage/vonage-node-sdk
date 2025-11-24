@@ -65,8 +65,8 @@ export default [
         suggestions: [
           {
             type: RCSSuggestionType.CREATE_CALENDAR_EVENT,
-            start_time: '2015-10-21T10:00:00Z',
-            end_time: '2015-10-21T11:00:00Z',
+            start_time: '2015-10-15T10:00:00Z',
+            end_time: '2015-10-15T11:00:00Z',
             title: 'Sports Alamac',
             text: 'We gotta save your kids',
             postback_data: 'QmlmZidzIGhpbGwgdmFsbGV5IGNhc2lubw'
@@ -126,8 +126,8 @@ export default [
         text: 'too many secrets',
         suggestions: [
           new RCSCreateCalendarEventSuggestion({
-            startDate: '2015-10-15T10:00:00Z',
-            endDate: '2015-10-15T11:00:00Z',
+            startTime: '2015-10-15T10:00:00Z',
+            endTime: '2015-10-15T11:00:00Z',
             title: 'Sports Alamac',
             text: 'We gotta save your kids',
             postbackData: 'QmlmZidzIGhpbGwgdmFsbGV5IGNhc2lubw'
