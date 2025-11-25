@@ -28,5 +28,4 @@ export type Carrier = {
    * Mobile country codes (MCC) + Mobile network codes (MNC)
    */
   networkCode?: string;
-
 };
