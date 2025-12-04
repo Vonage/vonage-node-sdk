@@ -3,6 +3,8 @@ import {
   IdentityInsightsResponse,
   IdentityInsightsParameters,
   IdentityInsightsType,
+  NetworkType,
+  Connectivity,
 } from '../../lib';
 
 const params = {
@@ -10,9 +12,13 @@ const params = {
   purpose: 'FraudPreventionAndDetection',
   insights: {
     format: {},
+    originalCarrier: {},
+    currentCarrier: {},
     simSwap: {
-      period: 240
+      period: 240,
     },
+    roaming: {},
+    reachability: {},
   },
 } as IdentityInsightsParameters;
 
@@ -24,22 +30,60 @@ const identityInsights = {
       countryName: 'United States',
       countryPrefix: '1',
       offlineLocation: 'Georgia',
-      timeZones: [ 'America/New_York' ],
+      timeZones: ['America/New_York'],
       numberInternational: '+14040000000',
       numberNational: '(404) 000-0000',
       isFormatValid: true,
       status: {
         code: Status.OK,
-        message: 'Success'
-      }
+        message: 'Success',
+      },
+    },
+    originalCarrier: {
+      name: 'Orange Espana, S.A. Unipersonal',
+      networkType: NetworkType.MOBILE,
+      countryCode: 'ES',
+      networkCode: '21403',
+      status: {
+        code: Status.OK,
+        message: 'Success',
+      },
+    },
+    currentCarrier: {
+      name: 'Orange Espana, S.A. Unipersonal',
+      networkType: NetworkType.MOBILE,
+      countryCode: 'ES',
+      networkCode: '21403',
+      status: {
+        code: Status.OK,
+        message: 'Success',
+      },
     },
     simSwap: {
       latestSimSwapAt: '2024-07-08T09:30:27.504Z',
       isSwapped: true,
       status: {
         code: Status.OK,
-        message: 'Success'
-      }
+        message: 'Success',
+      },
+    },
+    roaming: {
+      latestStatusAt: '2025-10-11T08:23:23.456',
+      isRoaming: true,
+      countryCodes: ['ES'],
+      status: {
+        code: Status.OK,
+        message: 'Success',
+      },
+    },
+    reachability: {
+      latestStatusAt: '2025-10-11T08:23:23.456',
+      isReachable: true,
+      connectivity: [Connectivity.DATA],
+      status: {
+        code: Status.OK,
+        message: 'Success',
+      },
     },
   },
 } as IdentityInsightsType;
@@ -52,22 +96,60 @@ const response = {
       country_name: 'United States',
       country_prefix: '1',
       offline_location: 'Georgia',
-      time_zones: [ 'America/New_York' ],
+      time_zones: ['America/New_York'],
       number_international: '+14040000000',
       number_national: '(404) 000-0000',
       is_format_valid: true,
       status: {
         code: Status.OK,
-        message: 'Success'
-      }
+        message: 'Success',
+      },
     },
     sim_swap: {
       latest_sim_swap_at: '2024-07-08T09:30:27.504Z',
       is_swapped: true,
       status: {
         code: Status.OK,
-        message: 'Success'
-      }
+        message: 'Success',
+      },
+    },
+    originalCarrier: {
+      name: 'Orange Espana, S.A. Unipersonal',
+      networkType: NetworkType.MOBILE,
+      countryCode: 'ES',
+      networkCode: '21403',
+      status: {
+        code: Status.OK,
+        message: 'Success',
+      },
+    },
+    currentCarrier: {
+      name: 'Orange Espana, S.A. Unipersonal',
+      networkType: NetworkType.MOBILE,
+      countryCode: 'ES',
+      networkCode: '21403',
+      status: {
+        code: Status.OK,
+        message: 'Success',
+      },
+    },
+    roaming: {
+      latestStatusAt: '2025-10-11T08:23:23.456',
+      isRoaming: true,
+      countryCodes: ['ES'],
+      status: {
+        code: Status.OK,
+        message: 'Success',
+      },
+    },
+    reachability: {
+      latestStatusAt: '2025-10-11T08:23:23.456',
+      isReachable: true,
+      connectivity: [Connectivity.DATA],
+      status: {
+        code: Status.OK,
+        message: 'Success',
+      },
     },
   },
 } as IdentityInsightsResponse;

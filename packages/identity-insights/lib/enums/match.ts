@@ -2,7 +2,6 @@
  * Enum representing the possible status values for the subscriber match fields
  */
 export enum Match {
-
   /**
    * The value provided matches exactly.
    */
@@ -32,5 +31,11 @@ export enum Match {
    * There is no data held for the request attribute.
    */
   DATA_UNAVAILABLE = 'data_unavailable',
+}
 
+export enum MatchAddress {
+  /**
+   * The value provided matches with part of the address
+   */
+  INCLUDED_WITH_ADDRESS_MATCH = 'included_with_address_match',
 }
