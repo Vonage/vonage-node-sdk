@@ -2,8 +2,9 @@
 import globals from 'globals';
 import vonage from '@vonage/eslint-config';
 import packageJson from 'eslint-plugin-package-json';
+import { defineConfig } from 'eslint/config';
 
-export default [
+export default defineConfig([
   {
     languageOptions: {
       ecmaVersion: 2022,
@@ -20,6 +21,7 @@ export default [
   {
     ignores: ['scripts/**', 'packages/**/dist/**', 'coverage/**'],
   },
+  ...vonage.configs.base,
   ...vonage.configs.typescript,
   ...vonage.configs.jest,
   ...vonage.configs.node,
@@ -30,6 +32,7 @@ export default [
       }
     },
     rules: {
+      '@typescript-eslint/no-unused-expressions': 'off',
       // Leave this off. This rule cannot handle monorepos
       'n/no-missing-import': ['off'],
       'n/no-unsupported-features/es-builtins': [
@@ -57,4 +60,4 @@ export default [
       ],
     }
   },
-];
+]);

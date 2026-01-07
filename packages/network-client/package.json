@@ -51,7 +51,7 @@
     "@vonage/jwt": "1.12.1",
     "@vonage/server-client": "1.18.1",
     "@vonage/vetch": "1.9.1",
-    "debug": "4.4.1"
+    "debug": "4.4.3"
   },
   "engines": {
     "node": ">=20"

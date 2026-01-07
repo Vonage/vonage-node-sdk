@@ -58,7 +58,7 @@
     "@types/debug": "4.1.12",
     "@vonage/server-client": "1.18.1",
     "@vonage/vetch": "1.9.1",
-    "debug": "4.4.1",
+    "debug": "4.4.3",
     "ts-xor": "1.3.0"
   },
   "engines": {

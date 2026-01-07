@@ -55,13 +55,13 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "debug": "4.3.4",
-    "jsonwebtoken": "9.0.2",
-    "uuid": "9.0.1"
+    "debug": "4.4.3",
+    "jsonwebtoken": "9.0.3",
+    "uuid": "13.0.0"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "9.0.3",
-    "@types/uuid": "9.0.5"
+    "@types/jsonwebtoken": "9.0.10",
+    "@types/uuid": "11.0.0"
   },
   "engines": {
     "node": ">=20"
