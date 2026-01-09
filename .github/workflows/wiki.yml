@@ -1,0 +1,46 @@
+name: Build Wiki
+
+on:
+  workflow_run:
+    workflows:
+      - 'Release Action'
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  build-wiki-documentation:
+    name: Build Wiki Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131
+        with:
+          name: node-sdk
+
+      - name: Set up Node.js
+        uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5
+        with:
+          node-version: 20.x
+
+      - name: Create Documents
+        run: |
+          npm run compile
+          npm run typedoc
+          cd docs
+          ../scripts/adjustMarkdown.sh
+          node scripts/generateExample.mjs
+          mv docs/packages.md docs/HOME.md
+          mv docs/EXAMPLES.md .
+          rm -rf docs/index.md docs/docs.json
+
+      - name: Sync Wiki to Docs
+        uses: newrelic/wiki-sync-action@8fb7a9efe4e975bdb2977107fbed96fa0433db52
+        with:
+          source: docs
+          destination: wiki
+          token: ${{ secrets.WIKI_TOKEN }}
+          gitAuthorName: VonageDevRel
+          gitAuthorEmail: DevRel@vonage.com
+          branch: main
+

@@ -1,0 +1,63 @@
+name: Publish to NPM
+
+on:
+  release:
+    types:
+      - published
+      - edited
+
+permissions: read-all
+
+jobs:
+  publish-package:
+    runs-on: ubuntu-latest
+    name: Publish release ${{ github.event.release.name }} to NPM
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+
+      - name: Set up Node.js
+        uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5
+        with:
+          node-version: 20.x
+
+      - name: Install packages
+        run: |
+          npm install --ignore-scripts
+          npm install --ignore-scripts typescript
+
+      - name: Publish to NPM
+        run: ./scripts/publish.sh
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  notify-release:
+    runs-on: ubuntu-latest
+    name: Notify Release
+    strategy:
+      matrix:
+        url: [SLACK_WEBHOOK_ASK_DEVREL_URL, SLACK_WEBHOOK_DEVREL_TOOLING_URL, SLACK_WEBHOOK_DEVREL_PRIVATE_URL]
+    steps:
+      - name: Send to slack channels
+        uses: slackapi/slack-github-action@3493f18217f6e55d55ff3ea694dec41304e53e97
+        continue-on-error: true
+        with:
+          webhook: ${{ secrets[matrix.url]}}
+          webhook-type: incoming-webhook
+          errors: true
+          payload: |
+            blocks:
+              - type: "header"
+                text:
+                  type: "plain_text"
+                  text: ":initial_external_notification_sent: :NodeJS: Version ${{ github.event.release.name }} of the NodeJS SDK has been released"
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "${{ github.event.release.body }}"
+              - type: "divider"
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "You can view the full change log <${{github.event.release.html_url }}|here>"
