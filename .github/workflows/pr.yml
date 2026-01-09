@@ -8,10 +8,13 @@ on:
 permissions: read-all
 
 jobs:
-  validate-pr-title:
+  main:
+    name: Validate PR title
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     steps:
-      - name: PR Conventional Commit Validation
-        uses: ytanikin/pr-conventional-commits@05b6c51a991169e3ae3fad39cde73d6bae7285ec
-        with:
-          task_types: '["feat","fix","docs","test","build","refactor","perf","chore","revert"]'
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@71b07ef490c9e8ef772f64a62d41545ae5b9ef22
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
