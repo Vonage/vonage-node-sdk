@@ -1,4 +1,3 @@
-import { apiKey, apiSecret } from '../../../../testHelpers';
 import {
   VerifySearchResponse,
   VerifySearchErrorResponse,
@@ -9,8 +8,6 @@ import {
 } from '../../lib';
 
 const params = new URLSearchParams({
-  api_key: apiKey,
-  api_secret: apiSecret,
   request_id: 'abcdef0123456789abcdef0123456789',
 });
 

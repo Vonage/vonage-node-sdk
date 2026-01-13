@@ -16,6 +16,24 @@ export default [
     },
   },
   {
+    label: 'Transform to camel case with abbrevation',
+    transformFn: camelCaseObjectKeys,
+    original: {
+      foo_UUID_bar: 'fizz_buzz',
+      fizzBUZZ: 'baz_bat',
+      'baz- BAT': 'baz_bat',
+    },
+    parameters: [
+      false, // deep
+      false, // preserve
+    ],
+    expected: {
+      fooUuidBar: 'fizz_buzz',
+      fizzBuzz: 'baz_bat',
+      bazBat: 'baz_bat',
+    },
+  },
+  {
     label: 'Transform to camel has no effect',
     transformFn: camelCaseObjectKeys,
     original: {

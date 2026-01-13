@@ -18,7 +18,8 @@ import {
   VerificationParameters,
   PSD2Parameters,
 } from './types/index.js';
-import omit from 'lodash.omit';
+
+const { omit } = Client.transformers;
 
 /**
  * The Verify class provides methods for managing and performing verification processes using the Vonage Verify API.
@@ -288,7 +289,7 @@ export class Verify extends Client {
 
     const resp = await this.sendPostRequest<VerifyCheckResponse>(
       url,
-      Client.transformers.snakeCaseObjectKeys(omit(request, ['language'])),
+      Client.transformers.snakeCaseObjectKeys(omit(['language'], request)),
     );
 
     return Client.transformers.camelCaseObjectKeys(

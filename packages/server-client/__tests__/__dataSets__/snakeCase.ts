@@ -16,6 +16,22 @@ export default [
     },
   },
   {
+    label: 'Transform to snake case with Abbrevation',
+    transformFn: snakeCaseObjectKeys,
+    original: {
+      fooBarUUID: 'fizz_buzz',
+      'baz-Bat-UUID': 'fizz_buzz',
+    },
+    parameters: [
+      false, // deep
+      false, // preserve
+    ],
+    expected: {
+      foo_bar_uuid: 'fizz_buzz',
+      baz_bat_uuid: 'fizz_buzz',
+    },
+  },
+  {
     label: 'Transform to snake has no effect',
     transformFn: snakeCaseObjectKeys,
     original: {

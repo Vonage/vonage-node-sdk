@@ -1,6 +1,5 @@
-import { apiKey, apiSecret } from '../../../../testHelpers';
-import { 
-  Command, 
+import {
+  Command,
   CheckStatus,
   VerifyCancelResponse,
   VerifyControlErrorResponse,
@@ -15,8 +14,6 @@ export default [
       '/verify/control/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         request_id: 'abcdef0123456789abcdef0123456789',
         cmd: 'cancel',
       },
@@ -42,8 +39,6 @@ export default [
       '/verify/control/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         request_id: 'abcdef0123456789abcdef0123456789',
         cmd: 'cancel',
       },

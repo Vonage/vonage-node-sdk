@@ -60,8 +60,7 @@
     "uuid": "13.0.0"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "9.0.10",
-    "@types/uuid": "11.0.0"
+    "@types/jsonwebtoken": "9.0.10"
   },
   "engines": {
     "node": ">=20"

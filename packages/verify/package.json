@@ -59,11 +59,9 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@types/lodash.omit": "4.5.9",
     "@vonage/auth": "1.13.1",
     "@vonage/server-client": "1.18.1",
-    "@vonage/vetch": "1.9.1",
-    "lodash.omit": "4.5.0"
+    "@vonage/vetch": "1.9.1"
   },
   "engines": {
     "node": ">=20"
