@@ -157,7 +157,7 @@ const response = {
 export default [
   {
     label: 'retrieve identity insights',
-    requests: [['/v0.1/identity-insights', 'POST', params]],
+    requests: [['/identity-insights/v1/requests', 'POST', params]],
     responses: [[200, response]],
     clientMethod: 'getIdentityInsights',
     parameters: [params],

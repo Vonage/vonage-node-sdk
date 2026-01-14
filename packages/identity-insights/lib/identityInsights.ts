@@ -28,7 +28,7 @@ export class IdentityInsights extends Client {
     params: IdentityInsightsParameters
   ): Promise<IdentityInsightsType> {
     const resp = await this.sendPostRequest<IdentityInsightsResponse>(
-      `${this.config.identityInsightsHost}/v0.1/identity-insights`,
+      `${this.config.identityInsightsHost}/identity-insights/v1/requests`,
       params
     );
 

@@ -6,18 +6,20 @@
 
 This is the Vonage Identity Insights SDK for Node.js for use with [Vonage APIs](https://www.vonage.com/). To use it you will need a Vonage account. Sign up [for free at vonage.com][signup].
 
-For full API documentation refer to [developer.nexmo.com](https://developer.nexmo.com/).
+For full API documentation refer to [developer.vonage.com](https://developer.vonage.com/).
 
 * [Installation](#installation)
 * [Usage](#usage)
 * [Promises](#promises)
+* [Debugging](#debugging)
 * [Testing](#testing)
+* [Insights Release Status](#insights-release-status)
 
 ## Installation
 
 We recommend using this SDK as part of the overall [`@vonage/server-sdk` package](https://github.com/vonage/vonage-node-sdk). Please see the main package for installation.
 
-You can also use this SDK standalone if you only need access to just the Identity Insights API.
+If you only need the Identity Insights API specifically, you may install this package directly.
 
 ### With NPM
 
@@ -32,8 +34,6 @@ yarn add @vonage/identity-insights
 ```
 
 ## Usage
-
-Unlike the other SDK's this package is not include in the [Vonage Server SDK for Node.js](https://github.com/vonage/vonage-node-sdk)
 
 ```js
 import { Auth } from "@vonage/auth";
@@ -107,12 +107,12 @@ insight implemented in this SDK:
 
 | Insight               |  API Release Status  |
 |-----------------------|:--------------------:|
-| Format                | Beta                 |
-| SIM Swap              | Beta                 |
-| Original Carrier      | Beta                 |
-| Current Carrier       | Beta                 |
+| Format                | GA                   |
+| SIM Swap              | GA                   |
+| Original Carrier      | GA                   |
+| Current Carrier       | GA                   |
+| Subscriber Match      | Alpha                |
 | Location Verification | Developer Preview    |
-| Subscriber Match      | Developer Preview    |
 | Roaming               | Developer Preview    |
 | Reachability          | Developer Preview    |
 
