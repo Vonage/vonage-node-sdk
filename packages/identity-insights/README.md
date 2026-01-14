@@ -111,7 +111,7 @@ insight implemented in this SDK:
 | SIM Swap              | GA                   |
 | Original Carrier      | GA                   |
 | Current Carrier       | GA                   |
-| Subscriber Match      | Beta                 |
+| Subscriber Match      | Alpha                |
 | Location Verification | Developer Preview    |
 | Roaming               | Developer Preview    |
 | Reachability          | Developer Preview    |
