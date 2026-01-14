@@ -54,17 +54,9 @@
     "@vonage/auth": "1.13.1",
     "@vonage/vetch": "1.9.1",
     "debug": "4.4.3",
-    "lodash.camelcase": "4.3.0",
-    "lodash.isobject": "3.0.2",
-    "lodash.kebabcase": "4.1.1",
-    "lodash.snakecase": "4.1.1",
     "node-fetch": "3.3.2"
   },
   "devDependencies": {
-    "@types/lodash.camelcase": "4.3.9",
-    "@types/lodash.isobject": "3.0.9",
-    "@types/lodash.kebabcase": "4.1.9",
-    "@types/lodash.snakecase": "4.1.9",
     "@types/node-fetch": "2.6.13",
     "nock": "14.0.10"
   },

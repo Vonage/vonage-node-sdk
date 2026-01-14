@@ -6,8 +6,6 @@ import {
   TestResponse,
   TestRequest,
   TestTuple,
-  apiKey,
-  apiSecret,
   keyAuth,
   apiKeyAuth,
   validateApiKeyAuth,
@@ -56,20 +54,14 @@ const applicationsTest = requestTests.map((dataSet): TestTuple<AnyClient> => {
 
       // Add on query testing
       const url = new URL(`https://api.nexmo.com${path}`);
-      url.searchParams.set('api_key', apiKey);
-      url.searchParams.set('api_secret', apiSecret);
 
       const isForm = 'form' in test;
       const bodyParams = new URLSearchParams(body);
       const bodyWithAPIKeys = body ? {
         ...body as Record<string, string>,
-        api_key: apiKey,
-        api_secret: apiSecret,
       } : body;
 
       if (methodsThatHaveBodies.includes(method as string)) {
-        bodyParams.set('api_key', apiKey);
-        bodyParams.set('api_secret', apiSecret);
         bodyParams.sort();
       }
 
@@ -79,6 +71,9 @@ const applicationsTest = requestTests.map((dataSet): TestTuple<AnyClient> => {
           ...commonTest,
           client: new KeyAuthClient(apiKeyAuth),
           label: `${test.label} using a API Key/Secret Client`,
+          reqHeaders: {
+            authorization: validateApiKeyAuth,
+          },
           requests: [[
             path,
             method as unknown,
@@ -91,6 +86,9 @@ const applicationsTest = requestTests.map((dataSet): TestTuple<AnyClient> => {
           ...commonTest,
           client: new QueryAuthClient(apiKeyAuth),
           label: `${test.label} using a Query String Client`,
+          reqHeaders: {
+            authorization: validateApiKeyAuth,
+          },
           requests: [[
             `${url.pathname}${url.search}`,
             method as unknown,

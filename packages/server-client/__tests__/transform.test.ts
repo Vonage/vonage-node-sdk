@@ -1,6 +1,6 @@
 import { transfomTests } from './__dataSets__';
 import { Client } from '../lib';
-import { 
+import {
   ObjectToTransform,
   TransformedObject,
   PartialTransformFunction
@@ -33,9 +33,7 @@ describe.each(transfomTests)(
       }) => {
         const notMutated = Object.freeze(Object.assign({}, original));
         expect(transformFn.name in Client.transformers).toBeTruthy();
-        const results = transformFn(
-          original, 
-          ...parameters as [boolean, boolean]
+        const results = transformFn(original, ...parameters as [boolean, boolean]
         );
 
         expect(results).toEqual(expected);
@@ -53,8 +51,8 @@ describe('Omit Test', () => {
       fizz: 'buzz',
     };
 
-    expect(Client.transformers.omit(['foo'], original)).toEqual({fizz: 'buzz'});
+    expect(Client.transformers.omit(['foo'], original)).toEqual({ fizz: 'buzz' });
     // Ensure the original object is not mutated.
-    expect(original).toEqual({foo: 'bar', fizz: 'buzz'});
+    expect(original).toEqual({ foo: 'bar', fizz: 'buzz' });
   });
 });

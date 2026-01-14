@@ -1,4 +1,3 @@
-import { apiKey, apiSecret } from '../../../../testHelpers';
 import { VerifyCheckResponse, VerifyCheck } from '../../lib/types';
 
 export default [
@@ -8,8 +7,6 @@ export default [
       '/verify/check/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         request_id: 'abcdef0123456789abcdef0123456789',
         code: '1234',
       },

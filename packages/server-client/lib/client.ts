@@ -66,7 +66,7 @@ export class Client {
       apiHost: options?.apiHost || 'https://api.nexmo.com',
       videoHost: options?.videoHost || 'https://video.api.vonage.com',
       meetingsHost: options?.meetingsHost || 'https://api-eu.vonage.com',
-      identityInsightsHost: options?.identityInsightsHost|| 'https://api-eu.vonage.com',
+      identityInsightsHost: options?.identityInsightsHost || 'https://api-eu.vonage.com',
       responseType: options?.responseType || ResponseTypes.json,
       timeout: options?.timeout || null,
       appendUserAgent: options?.appendUserAgent || null,
@@ -123,43 +123,29 @@ export class Client {
   /**
    * Adds API key and secret to the request body.
    *
+   * @deprecated use addBasicAuthToRequest instead
    * @param {VetchOptions} request - The request options to which authentication needs to be added.
    * @return {VetchOptions} - The request options with the added authentication.
    */
   protected async addQueryKeySecretToRequestBody(
     request: VetchOptions,
   ): Promise<VetchOptions> {
-    if (typeof request.data === 'string') {
-      throw new Error('Cannot append auth parameters to body');
-    }
-
-    const authParams = await this.auth.getQueryParams({});
-    request.data = request.data ?? {};
-
-    // JSON as default
-    log('Adding parameters to body');
-    request.data = {
-      ...request.data,
-      ...authParams,
-    };
-    return request;
+    log('This method is deprecated. Use addBasicAuthToRequest instead');
+    return this.addBasicAuthToRequest(request);
   }
 
   /**
    * Adds API key and secret to the request.
    *
+   * @deprecated use addBasicAuthToRequest instead
    * @param {VetchOptions} request - The request options to which authentication needs to be added.
    * @return {VetchOptions} - The request options with the added authentication.
    */
   protected async addQueryKeySecretToRequest(
     request: VetchOptions,
   ): Promise<VetchOptions> {
-    log('adding parameters to query string');
-    request.params = {
-      ...(request.params ? request.params : {}),
-      ...(await this.auth.getQueryParams({})),
-    };
-    return request;
+    log('This method is deprecated. Use addBasicAuthToRequest instead');
+    return this.addBasicAuthToRequest(request);
   }
 
   /**
@@ -386,11 +372,10 @@ export class Client {
     }
 
     const url = new URL(request.url as string);
-    const params = new URLSearchParams(request.params);
 
     // copy params into the URL
-    for (const [param, value] of params.entries()) {
-      url.searchParams.append(param, value);
+    for (const [param, value] of Object.entries(request.params || {})) {
+      url.searchParams.append(param, `${value}`);
     }
 
     request.url = url.toString();
@@ -416,7 +401,10 @@ export class Client {
     }
 
     if (request.type === ContentType.FORM_URLENCODED) {
-      const requestParams = new URLSearchParams(request.data);
+      const requestParams = new URLSearchParams();
+      for (const [param, value] of Object.entries(request.data || {})) {
+        requestParams.append(param, `${value}`);
+      }
       requestParams.sort();
       return requestParams.toString();
     }

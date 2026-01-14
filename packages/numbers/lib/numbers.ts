@@ -1,6 +1,5 @@
 import { AuthenticationType, Client } from '@vonage/server-client';
 import { Feature, SearchPattern } from './enums/index.js';
-import omit from 'lodash.omit';
 import {
   NumbersAvailableList,
   NumbersOwnedList,
@@ -12,6 +11,8 @@ import {
   NumbersSearchFilter,
   NumbersUpdateParams,
 } from './types/index.js';
+
+const { omit } = Client.transformers;
 
 const buildSearch = ({
   endsWith,
@@ -227,12 +228,12 @@ export class Numbers extends Client {
     filter: NumbersSearchFilter,
   ): Promise<NumbersAvailableList> {
     omit(
+      ['starts_with', 'contains', 'ends_with', 'search_pattern'],
       Client.transformers.snakeCaseObjectKeys({
         ...filter,
         ...buildSearch(filter),
         country: filter.country,
       }),
-      ['starts_with', 'contains', 'ends_with', 'search_pattern'],
     );
     const resp = await this.sendGetRequest<NumbersAvailableList>(
       `${this.config.restHost}/number/search`,

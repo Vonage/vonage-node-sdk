@@ -1,4 +1,3 @@
-import { apiKey, apiSecret } from '../../../../testHelpers';
 import {
   CheckStatus,
   VerifyLanguages,
@@ -19,8 +18,6 @@ export default [
       '/verify/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         number: '12128675309',
         brand: 'My Brand',
       },
@@ -52,8 +49,6 @@ export default [
       '/verify/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         number: '12128675309',
         brand: 'My Brand',
         lg: VerifyLanguages.WELSH_UK,
@@ -90,8 +85,6 @@ export default [
       '/verify/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         brand: 'My Brand',
         number: '12128675309',
         country: 'us',
@@ -139,8 +132,6 @@ export default [
       '/verify/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         number: '12128675309',
         brand: 'My Brand',
       },
@@ -177,8 +168,6 @@ export default [
       '/verify/psd2/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         number: '12128675309',
         payee: 'My Payee',
         amount: 42.0,
@@ -216,8 +205,6 @@ export default [
       '/verify/psd2/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         number: '12128675309',
         payee: 'My Payee',
         amount: 42.0,
@@ -251,8 +238,6 @@ export default [
       '/verify/psd2/json',
       'POST',
       {
-        api_key: apiKey,
-        api_secret: apiSecret,
         number: '12128675309',
         payee: 'My Payee',
         amount: 42.0,
