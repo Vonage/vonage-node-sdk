@@ -3,7 +3,7 @@ import { VerifyWorkflows, VerifyLanguages } from '../enums/index.js';
 /**
  * Represents parameters for a verification request.
  */
-export interface VerificationParameters {
+export type VerificationParameters = {
   /**
    * The mobile or landline phone number to verify. Unless you are setting
    * country explicitly, this number must be in E.164 format.
