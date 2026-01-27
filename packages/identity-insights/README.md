@@ -49,11 +49,15 @@ const options = {};
 const clientInsights = new IdentityInsights(credentials, options);
 
 const params = {
-  phone_number: "14040000000",
+  phoneNumber: "14040000000",
+  purpose: "FraudPreventionAndDetection",
   insights: {
     format: {},
-    original_carrier: {},
-    current_carrier: {},
+    originalCarrier: {},
+    currentCarrier: {},
+    simSwap: {
+      period: 240
+    },
   },
 };
 
@@ -66,11 +70,15 @@ Most methods that interact with the Vonage API uses Promises. You can either res
 
 ```js
 const params = {
-  phone_number: "14040000000",
+  phoneNumber: "14040000000",
+  purpose: "FraudPreventionAndDetection",
   insights: {
     format: {},
-    original_carrier: {},
-    current_carrier: {},
+    originalCarrier: {},
+    currentCarrier: {},
+    simSwap: {
+      period: 240
+    },
   },
 };
 
