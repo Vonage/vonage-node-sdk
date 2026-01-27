@@ -8,13 +8,13 @@ import {
 } from '../../lib';
 
 const params = {
-  phoneNumber: '14040000000',
+  phone_number: '14040000000',
   purpose: 'FraudPreventionAndDetection',
   insights: {
     format: {},
-    originalCarrier: {},
-    currentCarrier: {},
-    simSwap: {
+    original_carrier: {},
+    current_carrier: {},
+    sim_swap: {
       period: 240,
     },
     roaming: {},
