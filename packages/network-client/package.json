@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/network-client",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Network API Client package",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/network-client#readme",
   "bugs": {
@@ -47,10 +47,10 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/auth": "1.13.1",
-    "@vonage/jwt": "1.12.1",
-    "@vonage/server-client": "1.18.1",
-    "@vonage/vetch": "1.9.1",
+    "@vonage/auth": "1.14.0",
+    "@vonage/jwt": "1.13.0",
+    "@vonage/server-client": "1.19.0",
+    "@vonage/vetch": "1.10.0",
     "debug": "4.4.3"
   },
   "engines": {

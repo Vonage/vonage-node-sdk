@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/network-number-verification",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "description": "Number Verfication for GNP",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/network-number-verification#readme",
   "bugs": {
@@ -47,7 +47,7 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/network-client": "1.5.1"
+    "@vonage/network-client": "1.6.0"
   },
   "engines": {
     "node": ">=20"

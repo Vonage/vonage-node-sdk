@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/pricing",
-  "version": "1.18.1",
+  "version": "1.19.0",
   "description": "Vonage API for pricing",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -51,9 +51,9 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/auth": "1.13.1",
-    "@vonage/server-client": "1.18.1",
-    "@vonage/vetch": "1.9.1"
+    "@vonage/auth": "1.14.0",
+    "@vonage/server-client": "1.19.0",
+    "@vonage/vetch": "1.10.0"
   },
   "devDependencies": {
     "nock": "14.0.10"
