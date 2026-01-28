@@ -354,4 +354,61 @@ export default [
       } as SMSParams,
     ],
   },
+  {
+    label: 'send message with number pool',
+    request: [
+      '/sms/json',
+      'POST',
+      {
+        'from': '12126875309',
+        'to': '14152739164',
+        'text': 'too many secrets',
+        'pool-id': 'abc123'
+
+      },
+    ],
+    response: [
+      200,
+      {
+        'message-count': 1,
+        messages: [
+          {
+            to: '14152739164',
+            'message-id': '986ebc8e-46de-4f80-88e4-21d4c5d0c0a6',
+            status: SMSStatus.SUCCESS,
+            'remaining-balance': '0.42',
+            'message-price': '0.84',
+            network: '123456',
+          } as SMSMessageResponse,
+        ],
+      } as SMSResponse,
+    ],
+    method: 'post',
+    clientMethod: 'send',
+    parameters: [
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        poolId: 'abc123',
+      } as SMSParams,
+    ],
+    expected: {
+      'message-count': 1,
+      messageCount: 1,
+      messages: [
+        {
+          to: '14152739164',
+          'message-id': '986ebc8e-46de-4f80-88e4-21d4c5d0c0a6',
+          messageId: '986ebc8e-46de-4f80-88e4-21d4c5d0c0a6',
+          status: SMSStatus.SUCCESS,
+          'remaining-balance': '0.42',
+          remainingBalance: '0.42',
+          'message-price': '0.84',
+          messagePrice: '0.84',
+          network: '123456',
+        } as SMSMessageResponse,
+      ],
+    } as SMSMessages,
+  }
 ];
