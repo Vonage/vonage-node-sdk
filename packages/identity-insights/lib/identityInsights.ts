@@ -27,9 +27,10 @@ export class IdentityInsights extends Client {
   async getIdentityInsights(
     params: IdentityInsightsParameters
   ): Promise<IdentityInsightsType> {
+
     const resp = await this.sendPostRequest<IdentityInsightsResponse>(
       `${this.config.identityInsightsHost}/identity-insights/v1/requests`,
-      params
+      Client.transformers.snakeCaseObjectKeys(params, true),
     );
 
     return Client.transformers.camelCaseObjectKeys(
