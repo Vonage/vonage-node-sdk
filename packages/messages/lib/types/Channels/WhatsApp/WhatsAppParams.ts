@@ -32,6 +32,8 @@ export type WhatsAppParams = {
   /**
    * Send via MM Lite API only this is valid for marketing template messages
    * only, and for Alpha release only
+   *
+   * @deprecated
    */
   category?: string;
 } & MessageParams;

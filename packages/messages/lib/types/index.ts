@@ -16,3 +16,4 @@ export * from './MessageVideoType';
 export * from './Requests/';
 export * from './Responses/';
 export * from './SendMessageParams';
+export * from './UpdateMessageParams';

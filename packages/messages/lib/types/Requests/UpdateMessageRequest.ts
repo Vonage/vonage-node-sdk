@@ -13,4 +13,19 @@ export type UpdateMessageRequest = {
    * message {@link https://developer.vonage.com/en/api/messages#UpdateMessage}.
    */
   status: UpdateMessageStatus | string;
+
+  typing_indicator?: {
+    /**
+     * Whether to show the replying indicator to the WhatsApp user.
+     */
+    show: boolean,
+
+    /**
+     * The type of indicator to the WhatsApp user. The replying indicator will
+     * be dismissed once you respond, or after 25 seconds, whichever comes
+     * first. To prevent a poor user experience, only display a replying
+     * indicator if you are going to respond.
+     */
+    type: 'text'
+  }
 }
