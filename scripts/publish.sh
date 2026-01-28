@@ -7,7 +7,7 @@ cd ./packages
 
 for package in $(ls); do
   echo "Puiblishing $pacakge"
-  (cd "$package" && npm run publish)
+  (cd "$package" && npm publish)
   echo "$package published"
 done
 
