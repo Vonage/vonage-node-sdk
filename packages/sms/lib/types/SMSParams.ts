@@ -104,4 +104,14 @@ export type SMSParams = {
    * accounts subscribed to Fraud Defender Premium.
    */
   trustedNumber?: boolean
+
+  /**
+   * The ID of the Number Pool to use as the sender of this message. If
+   * specified, a number from the pool will be used as the from number. The
+   * from parameter is still required even when specifying a pool-id and will
+   * be used as a fall-back if the number pool cannot be used.
+   *
+   * @see https://developer.vonage.com/en/numbers/number-pools-api/overview
+   */
+  poolId?: string;
 }
