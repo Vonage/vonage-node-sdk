@@ -6,6 +6,7 @@ import {
   MessageSuccessResponse,
   AnyChannel,
   MessageWithFailover,
+  UpdateMessageParams,
 } from './types/index.js';
 import debug from 'debug';
 import { UpdateMessageStatus } from './enums/UpdateMessageStatus.js';
@@ -115,9 +116,6 @@ export class Messages extends Client {
    *     applicationId: myAppId,
    *     privateKey: myPrivateKey
    *   },
-   *   {
-   *     apiHost: 'https://api-eu.vonage.com'
-   *   }
    * )
    *
    * await vonage.messages.updateMessage(messageId, UpdateMessageStatus.READ);
@@ -132,11 +130,23 @@ export class Messages extends Client {
   public async updateMessage(
     messageId: string,
     status: UpdateMessageStatus | string,
+    params: UpdateMessageParams,
   ): Promise<true> {
     // This endpoint returns a 202 so we don't need to parse the response
     await this.sendPatchRequest<MessageSuccessResponse>(
       `${this.config.apiHost}/v1/messages/${messageId}`,
-      { status: status },
+      {
+        status: status,
+        ...(params
+          ? {
+            replying_indicator: {
+              show: true,
+              type: params.typingIndicator
+            }
+          }
+          : {}
+        )
+      },
     );
     return true;
   }
