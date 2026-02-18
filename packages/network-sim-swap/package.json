@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/network-sim-swap",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A Network API client for checking if a SIM card was swapped recently for a phone number",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/network-sim-swap#readme",
   "bugs": {
