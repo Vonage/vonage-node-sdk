@@ -20,6 +20,8 @@ export class SMS extends AbstractTextMessage implements SMSParams {
    */
   public channel: Channels.SMS = Channels.SMS;
 
+  public trustedRecipient?: boolean;
+
   public sms?: SMSExtraParams;
 
   /**
@@ -100,5 +102,11 @@ export class SMS extends AbstractTextMessage implements SMSParams {
         entityId: params.sms?.entityId,
       }
       : undefined;
+
+
+
+    if (params.trustedRecipient) {
+      this.trustedRecipient = !!params.trustedRecipient;
+    }
   }
 }

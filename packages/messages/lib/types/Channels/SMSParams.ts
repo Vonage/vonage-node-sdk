@@ -20,6 +20,14 @@ export type SMSParams = {
    */
   ttl?: number;
 
+  /**
+   * Setting this parameter to true overrides, on a per-message basis, any
+   *  protections set up via Fraud Defender (Traffic Rules, SMS Burst Protection,
+   *  AIT Protection). This parameter only has any effect for accounts subscribed
+   *  to Fraud Defender Premium.
+   */
+  trustedRecipient?: boolean;
+
   sms?: SMSExtraParams;
 } & MessageParamsText;
 

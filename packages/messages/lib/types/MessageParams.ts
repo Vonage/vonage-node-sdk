@@ -45,4 +45,12 @@ export type MessageParams = {
    * application-level API version settings on a per-message basis.
    */
   webhookVersion?: 'v0.1' | 'v1';
+
+  /**
+   * Setting this parameter to true overrides, on a per-message basis, any
+   * protections set up via Fraud Defender (Traffic Rules, SMS Burst Protection,
+   * AIT Protection). This parameter only has any effect for accounts subscribed
+   * to Fraud Defender Premium.
+   */
+  trustedRecipient?: boolean;
 };

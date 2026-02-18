@@ -265,5 +265,41 @@ export default [
     expected: {
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
     } as MessageSuccess,
+  },
+  {
+    label: 'send message with trusted recipient',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'sms',
+        message_type: 'text',
+        trusted_recipient: true
+      },
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: Channels.SMS,
+        messageType: 'text',
+        trustedRecipient: true
+      },
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
   }
 ];
