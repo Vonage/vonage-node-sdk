@@ -1,8 +1,5 @@
 import {
   Status,
-  IdentityInsightsResponse,
-  IdentityInsightsParameters,
-  IdentityInsightsType,
   NetworkType,
   Connectivity,
 } from '../../lib';
@@ -20,7 +17,7 @@ const params = {
     roaming: {},
     reachability: {},
   },
-} as IdentityInsightsParameters;
+};
 
 const identityInsights = {
   requestId: '00000000-0000-0000-0000-000000000000',
@@ -86,7 +83,7 @@ const identityInsights = {
       },
     },
   },
-} as IdentityInsightsType;
+};
 
 const response = {
   request_id: '00000000-0000-0000-0000-000000000000',
@@ -152,7 +149,7 @@ const response = {
       },
     },
   },
-} as IdentityInsightsResponse;
+};
 
 export default [
   {
@@ -165,4 +162,27 @@ export default [
     error: false,
     expected: identityInsights,
   },
+  {
+    label: 'retrieve identity insights for sdk',
+    requests: [['/identity-insights/v1/requests', 'POST', params]],
+    responses: [[200, response]],
+    clientMethod: 'getIdentityInsights',
+    parameters: [{
+      phoneNumber: '14040000000',
+      purpose: 'FraudPreventionAndDetection',
+      insights: {
+        format: {},
+        originalCarrier: {},
+        currentCarrier: {},
+        simSwap: {
+          period: 240,
+        },
+        roaming: {},
+        reachability: {},
+      },
+    }],
+    generator: false,
+    error: false,
+    expected: identityInsights,
+  }
 ];
