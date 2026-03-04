@@ -5,6 +5,7 @@ import { TalkAction } from './TalkAction.js';
 import { StreamAction } from './StreamAction.js';
 import { InputAction } from './InputAction.js';
 import { NotifyAction } from './NotifyAction.js';
+import { WaitAction } from './WaitAction.js';
 
 /**
  * Represents a Nexmo Call Control Object (NCCO) action, which can be one of the following types:
@@ -15,6 +16,7 @@ import { NotifyAction } from './NotifyAction.js';
  * - RecordAction
  * - StreamAction
  * - TalkAction
+ * - WaitAction
  *
  * An NCCO action defines a specific action or behavior in a call flow, and these actions can be combined
  * to create complex call scenarios when constructing NCCOs.
@@ -26,4 +28,5 @@ export type NCCOAction =
   | NotifyAction
   | RecordAction
   | StreamAction
-  | TalkAction;
+  | TalkAction
+  | WaitAction;

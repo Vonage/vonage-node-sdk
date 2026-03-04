@@ -5,4 +5,5 @@ export * from './NCCOBuilder.js';
 export * from './Notify.js';
 export * from './Record.js';
 export * from './Talk.js';
+export * from './Wait.js';
 export * from './Stream.js';
