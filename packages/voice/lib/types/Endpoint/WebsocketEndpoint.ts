@@ -1,3 +1,5 @@
+import { WebsocketAuthorization } from './WebsocketAuthorization.js';
+
 /**
  * Represents a WebSocket endpoint, which can be used as a call destination.
  */
@@ -21,4 +23,10 @@ export type WebsocketEndpoint = {
    * Optional headers to include when connecting to the WebSocket endpoint.
    */
   headers?: Record<string, unknown>;
+
+  /**
+   * Optional configuration defining how the Authorization HTTP header is set
+   * in the WebSocket opening handshake.
+   */
+  authorization?: WebsocketAuthorization;
 };
