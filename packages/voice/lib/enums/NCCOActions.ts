@@ -36,4 +36,9 @@ export enum NCCOActions {
    * Play a text-to-speech message to the caller.
    */
   TALK = 'talk',
+
+  /**
+   * Pause execution of the NCCO for a specified number of seconds.
+   */
+  WAIT = 'wait',
 }

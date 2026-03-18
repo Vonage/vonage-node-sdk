@@ -69,6 +69,7 @@ export const callVBC = {
   conversationUUID: 'CON-00000000-0000-0000-0000-000000000002',
   to: {
     type: 'vbc',
+    extension: '1234',
   },
   from: {
     type: 'phone',

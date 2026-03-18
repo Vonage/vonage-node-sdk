@@ -6,4 +6,5 @@ export { Notify } from './classes/NCCO/Notify';
 export { Record } from './classes/NCCO/Record';
 export { Stream } from './classes/NCCO/Stream';
 export { Talk } from './classes/NCCO/Talk';
+export { Wait } from './classes/NCCO/Wait';
 

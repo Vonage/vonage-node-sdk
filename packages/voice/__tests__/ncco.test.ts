@@ -4,6 +4,7 @@ import {
 import { Conversation } from '../lib/classes/NCCO/Conversation';
 import { Input } from '../lib/classes/NCCO/Input';
 import { Talk } from '../lib/classes/NCCO/Talk';
+import { Wait } from '../lib/classes/NCCO/Wait';
 import { NCCOBuilder } from '../lib/classes/NCCO/NCCOBuilder';
 
 describe('voice', () => {
@@ -73,5 +74,47 @@ describe('voice', () => {
       name: 'Test Conversation',
       canHear: ['test'],
     });
+  });
+
+  test('wait will serialize with default timeout', async () => {
+    const wait = new Wait();
+
+    expect(wait.serializeToNCCO()).toEqual({
+      action: NCCOActions.WAIT,
+    });
+  });
+
+  test('wait will serialize with explicit timeout', async () => {
+    const wait = new Wait(0.5);
+
+    expect(wait.serializeToNCCO()).toEqual({
+      action: NCCOActions.WAIT,
+      timeout: 0.5,
+    });
+  });
+
+  test('wait can be used in an NCCO', async () => {
+    const expectedBody = [
+      {
+        action: 'talk',
+        text: 'Please hold',
+      },
+      {
+        action: 'wait',
+        timeout: 5,
+      },
+      {
+        action: 'talk',
+        text: 'Connecting you now',
+      },
+    ];
+
+    const ncco = new NCCOBuilder();
+    ncco
+      .addAction(new Talk('Please hold'))
+      .addAction(new Wait(5))
+      .addAction(new Talk('Connecting you now'));
+
+    expect(ncco.build()).toEqual(expectedBody);
   });
 });

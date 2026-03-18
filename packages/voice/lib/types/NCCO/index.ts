@@ -9,3 +9,4 @@ export * from './RecordAction.js';
 export * from './SpeechSettings.js';
 export * from './StreamAction.js';
 export * from './TalkAction.js';
+export * from './WaitAction.js';

@@ -8,7 +8,7 @@ export type VBCEndpoint = {
   type: 'vbc';
 
   /**
-   * An optional extension associated with the VBC endpoint. If provided, the call will be directed to this extension.
+   * The extension associated with the VBC endpoint. The call will be directed to this extension.
    */
-  extension?: string;
+  extension: string;
 };

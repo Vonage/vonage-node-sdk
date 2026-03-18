@@ -17,6 +17,17 @@ export type PhoneEndpoint = {
    */
   dtmfAnswer?: string;
 
+  /**
+   * STIR/SHAKEN Identity Header content for FCC-mandated call signing to the
+   * USA. Composed of the JWT (header, payload, and signature), an `info`
+   * parameter with a link for the certificate, the `alg` parameter indicating
+   * the encryption type, and the passport type (`ppt`) which should be
+   * `shaken`.
+   *
+   * @see {@link https://www.rfc-editor.org/rfc/rfc8225}
+   */
+  shaken?: string;
+
 //  onAnswer?: {
 //    /**
 //     * The URL serves an NCCO to execute in the number being connected to,

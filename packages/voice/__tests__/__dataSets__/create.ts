@@ -11,6 +11,7 @@ import {
   CallWithAnswerURL,
   CallWithNCCO,
   CreateCallResponse,
+  WebsocketAuthorization,
 } from '../../lib/types';
 import { callPhone } from '../common';
 
@@ -343,6 +344,254 @@ export default [
             type: 'phone',
             number: '19162255887',
             dtmfAnswer: '1234',
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
+  {
+    label: 'create a call with websocket endpoint using vonage authorization',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'websocket',
+              uri: 'wss://example.com/socket',
+              authorization: {
+                type: 'vonage',
+              } as WebsocketAuthorization,
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'websocket',
+            uri: 'wss://example.com/socket',
+            authorization: {
+              type: 'vonage',
+            } as WebsocketAuthorization,
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
+  {
+    label: 'create a call with websocket endpoint using custom authorization',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'websocket',
+              uri: 'wss://example.com/socket',
+              authorization: {
+                type: 'custom',
+                value: 'Bearer abc123',
+              } as WebsocketAuthorization,
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'websocket',
+            uri: 'wss://example.com/socket',
+            authorization: {
+              type: 'custom',
+              value: 'Bearer abc123',
+            } as WebsocketAuthorization,
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
+  {
+    label: 'create a call with phone endpoint using shaken header',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'phone',
+              number: '19162255887',
+              shaken: 'eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiJ9.payload.signature;info=<https://cert.example.com/cert.cer>;alg=ES256;ppt="shaken"',
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'phone',
+            number: '19162255887',
+            shaken: 'eyJhbGciOiJFUzI1NiIsInBwdCI6InNoYWtlbiJ9.payload.signature;info=<https://cert.example.com/cert.cer>;alg=ES256;ppt="shaken"',
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
+  {
+    label: 'create a call with vbc endpoint',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'vbc',
+              extension: '1234',
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'vbc',
+            extension: '1234',
           },
         ],
         from: {
