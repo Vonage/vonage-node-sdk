@@ -2,14 +2,281 @@
 icon: node-color
 id: vonage-node-sdk
 pkgName: Node SDK
-release: '2025-01-09'
+release: '2026-03-25'
 title: Vonage Node SDK
-version: 3.19.3
+version: 3.27.0
 ---
 
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+---
+
+## Vonage Node SDK v3.27.0 (2026-03-25)
+
+Additions for new Voice features.
+
+**Added**
+
+- Added support for 24k Audio
+- Supporting WebSocket authorization
+- Added types for the "Wait" NCCO action
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.26.3...@vonage/server-sdk@3.27.0)
+
+---
+
+## Vonage Node SDK v3.26.0 (2026-01-28)
+
+This release adds support for the Identity Insights API, RCS suggestions in the Messages API, and the next workflow support for the Verify API. The `getCaptionStatus` has been deprecated for the Video API. Third-party packages have been updated, along with the removal of `lodash`.
+
+**Added**
+
+- Support for the Identity Insights API
+- Support for `nextWorkflow` for Verify API
+- Support for RCS Suggestions for the Messages API
+
+**Changed**
+
+- Deprecated `getCaptionStatus` for the Video API
+
+**New Contributors**
+
+- [@alnacle](https://github.com/alnacle) made their first contribution in [#1030](https://github.com/Vonage/vonage-node-sdk/pull/1030)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.25.1...@vonage/server-sdk@3.26.0)
+
+---
+
+## Vonage Node SDK v3.25.1 (2025-09-22)
+
+This is a small fix to the voice package to add in missing NCCO classes from the export.
+
+**Fixed**
+
+- Voice package missing exports for NCCO
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.25.0...@vonage/server-sdk@3.25.1)
+
+---
+
+## Vonage Node SDK v3.25.0 (2025-09-16)
+
+This fixes a critical issue where ESM and CJS Modules are not loading.
+
+**Fixed**
+
+- Critical bug where ESM and CJS files were not built correctly.
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.24.1...@vonage/server-sdk@3.25.0)
+
+---
+
+## Vonage Node SDK v3.24.3 (2025-09-12)
+
+This addresses some mismatched version numbers.
+
+---
+
+## Vonage Node SDK v3.24.2 (2025-09-12)
+
+Improved ESM and CJS module builds, added RCS workflow, and fixed typo in `initiateSIPCall` method name in the Video SDK.
+
+**Build**
+
+- Updated TypeScript config for better ESM and CJS module output
+
+**Added**
+
+- RCS workflow support for Verify V2
+
+**Fixed**
+
+- Typo in `video.initiateSIPCall` (was incorrectly named `intiateSIPCall`)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.24.1...@vonage/server-sdk@3.24.2)
+
+---
+
+## Vonage Node SDK v3.24.1 (2025-08-18)
+
+Added a deprecation warning for `disconnectWebsocket`.
+
+**Added**
+
+- Deprecation warning for `disconnectWebsocket`
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.24.0...@vonage/server-sdk@3.24.1)
+
+---
+
+## Vonage Node SDK v3.23.0 (2025-08-15)
+
+This adds bidirectional support for WebSockets for the Video SDK.
+
+**Added**
+
+- Bidirectional support for WebSockets
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.22.5...@vonage/server-sdk@3.23.0)
+
+---
+
+## Vonage Node SDK v3.22.5 (2025-08-13)
+
+This release updates the transcription properties for the Video SDK.
+
+**Fixed**
+
+- Adjusted `BaseArchiveOptions` type, specifically removing `transcriptionProperties` from the nested type.
+
+**Documentation**
+
+- Fixed a typo in the README for the verify package.
+
+**New Contributors**
+
+- [@Mike-Zhylevych](https://github.com/Mike-Zhylevych) made their first contribution in [#1011](https://github.com/Vonage/vonage-node-sdk/pull/1011)
+- [@amdcavallaro](https://github.com/amdcavallaro) made their first contribution in [#1010](https://github.com/Vonage/vonage-node-sdk/pull/1010)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.22.4...@vonage/server-sdk@3.22.5)
+
+---
+
+## Vonage Node SDK v3.22.4 (2025-08-12)
+
+Minor fix for the server-client not appending the user agent to the request.
+
+**Fixed**
+
+- Server client now appends to the user-agent header
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.22.3...@vonage/server-sdk@3.22.4)
+
+---
+
+## Vonage Node SDK v3.22.3 (2025-08-07)
+
+A small fix that impacts TypeScript users, using a string for the message type instead of the channels enum.
+
+**Fixed**
+
+- Channel in messages now allows a string to be used along with the enum
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.22.2...@vonage/server-sdk@3.22.3)
+
+---
+
+## Vonage Node SDK v3.22.2 (2025-08-07)
+
+A small fix has been applied to the `Vonage` client for TypeScript.
+
+**Fixed**
+
+- For TypeScript, you can now pass in an Auth or Plain Object.
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.22.1...@vonage/server-sdk@3.22.2)
+
+---
+
+## Vonage Node SDK v3.22.1 (2025-07-15)
+
+Fixed an issue where the `MessageType` enum was not being exported.
+
+**Fixed**
+
+- Missing export for `MessageType` enum
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.22.0...@vonage/server-sdk@3.22.1)
+
+---
+
+## Vonage Node SDK v3.22.0 (2025-07-01)
+
+Introduced message failover support for improved delivery resilience.
+
+**Added**
+
+- Added message failover support to improve delivery reliability. [#994](https://github.com/Vonage/vonage-node-sdk/pull/994)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.21.2...@vonage/server-sdk@3.22.0)
+
+---
+
+## Vonage Node SDK v3.21.2 (2025-06-20)
+
+This release expands the language enum for Video Captions.
+
+**Added**
+
+- Add more language codes for Captions API [#993](https://github.com/Vonage/vonage-node-sdk/pull/993)
+
+**New Contributors**
+
+- [@behei-vonage](https://github.com/behei-vonage) made their first contribution in [#993](https://github.com/Vonage/vonage-node-sdk/pull/993)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.21.0...@vonage/server-sdk@3.21.2)
+
+---
+
+## Vonage Node SDK v3.21.0 (2025-04-22)
+
+This release adds Video quantization and post-call transcription to the Video Package.
+
+**Added**
+
+- Video Quantization and Post Call Transcription
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.20.1...@vonage/server-sdk@3.21.0)
+
+---
+
+## Vonage Node SDK v3.20.1 (2025-04-02)
+
+This release patches the number insights SDK to use basic authentication by default.
+
+**Changed**
+
+- Updated number insights to use basic auth.
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.20.0...@vonage/server-sdk@3.20.1)
+
+---
+
+## Vonage Node SDK v3.20.0 (2025-02-19)
+
+Updated media URL validation to accept only Vonage or Nexmo domains and fixed typos.
+
+**Added**
+
+- Updated media URL validation to ensure only Vonage or Nexmo domains are accepted. [#981](https://github.com/Vonage/vonage-node-sdk/pull/981)
+
+**Fixed**
+
+- Corrected minor typos. [#984](https://github.com/Vonage/vonage-node-sdk/pull/984)
+
+**New Contributors**
+
+- [@BeLi4L](https://github.com/BeLi4L) made their first contribution. [#984](https://github.com/Vonage/vonage-node-sdk/pull/984)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.19.4...@vonage/server-sdk@3.20.0)
+
+---
+
+## Vonage Node SDK v3.19.4 (2025-01-21)
+
+This release marks fraud detection for number-insights v2 as deprecated. For TypeScript, missing properties for NCCO objects have been added.
+
+**Fixed**
+
+- Missing `dtmfAnswer` and `onAnswer` properties [#979](https://github.com/Vonage/vonage-node-sdk/pull/979)
+
+**Changed**
+
+- Deprecated fraud detection and real-time-insights [#980](https://github.com/Vonage/vonage-node-sdk/pull/980)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.19.3...@vonage/server-sdk@3.19.4)
 
 ---
 
@@ -131,7 +398,40 @@ Fixed missing advanced machine detection mode.
 
 ---
 
-## Vonage Node SDK v3.14.0 (2024-06-06)
+## Vonage Node SDK v3.15.0 (2024-07-01)
+
+This release contains the addition of the `ttl` parameter to WhatsApp messages and introduces the new RCS Channel.
+
+**Added**
+
+- RCS channel
+
+**Changed**
+
+- `ttl` parameter is now added to WhatsApp channels
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.14.2...@vonage/server-sdk@3.15.0)
+
+---
+
+## Vonage Node SDK v3.14.2 (2024-06-20)
+
+Fixed incorrect types on `BalanceTransferParameters` and `SubAccountCreateParameters`.
+
+**Fixed**
+
+- Incorrect type on `BalanceTransferParameters`
+- Correct type on `SubAccountCreateParameters`
+
+**New Contributors**
+
+- [@froggy1014](https://github.com/froggy1014) made their first contribution in [#936](https://github.com/Vonage/vonage-node-sdk/pull/936)
+
+**Full Changelog** [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@3.14.1...@vonage/server-sdk@3.14.2)
+
+---
+
+## Vonage Node SDK v3.14.1 (2024-05-21)
 
 Version 3.14.1 of the Vonage Node SDK introduces fixes for private key path handling
 and updated endpoints for video stream management. It also adds new parameters for
@@ -892,6 +1192,119 @@ Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compa
 
 ---
 
+## Vonage Node SDK v2.10.11 (2022-03-10)
+
+This release fixes missing callback arguments and repairs signature handling.
+
+**Fixed**
+
+- Callback argument missing (#597)
+- Repair signatures, fix up tests, remove legacy querystring
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.10.9...v2.10.11)
+
+---
+
+## Vonage Node SDK v2.10.9 (2021-06-18)
+
+This release removes extraneous log output.
+
+**Fixed**
+
+- Remove extraneous log output.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.10.8...v2.10.9)
+
+---
+
+## Vonage Node SDK v2.10.8 (2021-04-23)
+
+This release moves querystring parameters in SMS to the JSON body.
+
+**Changed**
+
+- Move querystring params in SMS to the JSON body.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.10.6...v2.10.8)
+
+---
+
+## Vonage Node SDK v2.10.6 (2021-02-16)
+
+This release updates the main line branch tag with no functional changes.
+
+**Changed**
+
+- Updating main line branch tag. No changes.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.10.5...v2.10.6)
+
+---
+
+## Vonage Node SDK v2.10.5 (2021-01-08)
+
+This release fixes a new issue with host override.
+
+**Fixed**
+
+- Fix new issue with host override. (#432)
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.10.4...v2.10.5)
+
+---
+
+## Vonage Node SDK v2.10.4 (2020-11-10)
+
+This release fixes an issue with host override.
+
+**Fixed**
+
+- Fix issue with host override. (#400)
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.10.3...v2.10.4)
+
+---
+
+## Vonage Node SDK v2.10.3 (2020-11-05)
+
+A special thanks to all of the Hacktoberfest contributions. This release adds typings, URL override support, and dependency updates.
+
+**Added**
+
+- Added Yarn example in README.md (#400)
+- Added Number typings (#380)
+- Added Voice typings (#379)
+- Added Media typings (#376)
+- Added Number Insight typings (#373)
+
+**Updated**
+
+- Discriminating unions support for different message responses (#389)
+- Allow for Full URL Overrides in Constructor (#378)
+- Updated uuid-dependency for performance improvement (#375)
+- Various dependency bumps (#387, #385, #384)
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.10.2...v2.10.3)
+
+---
+
+## Vonage Node SDK v2.10.2 (2020-10-05)
+
+This release fixes various typos and type module name issues.
+
+**Fixed**
+
+- Fixed typos (#370, #369, #358, #357)
+- Fixed types module name (#355)
+
+**Updated**
+
+- Bump eslint-config-prettier from 6.11.0 to 6.12.0 (#350)
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.10.1...v2.10.2)
+
+---
+
 ## Vonage Node SDK v2.10.1
 
 This release includes the following update:
@@ -1030,6 +1443,123 @@ This release added support for signing requests
 - Added `Nexmo.generateSignature` method to verify signed messages.
 
 Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/@vonage/server-sdk@2.0.1...@vonage/server-sdk@2.4.2)
+
+---
+
+## Vonage Node SDK v2.4.0 (2018-09-27)
+
+This release adds support for the Secret Management API.
+
+**Added**
+
+- Support for the Secret Management API.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v.2.3.2...v2.4.0)
+
+---
+
+## Vonage Node SDK v2.3.2 (2018-06-19)
+
+This release fixes a response close callback issue.
+
+**Fixed**
+
+- Fix `response.on('close')` callback being triggered without an error.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v.2.3.0...v.2.3.2)
+
+---
+
+## Vonage Node SDK v2.3.0 (2018-06-01)
+
+This release adds support for the Redact API.
+
+**Added**
+
+- Support for Redact API.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.2.1...v.2.3.0)
+
+---
+
+## Vonage Node SDK v2.2.1 (2018-04-29)
+
+This release updates dependencies to fix a security vulnerability.
+
+**Fixed**
+
+- Updated dependencies to fix security vulnerability. (#179)
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.2.0...v2.2.1)
+
+---
+
+## Vonage Node SDK v2.2.0 (2018-01-24)
+
+This release adds support for the Media API.
+
+**Added**
+
+- Support for Media API.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.1.2...v2.2.0)
+
+---
+
+## Vonage Node SDK v2.1.2 (2018-01-11)
+
+This release adds HTTP timeout configuration and includes various refactoring and testing improvements.
+
+**Added**
+
+- Ability to set HTTP timeout.
+
+**Changed**
+
+- Refactored account related settings out of the `nexmo` singleton into their own class.
+- Added new test helpers for asserting that the correct URL gets called.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.1.1...v2.1.2)
+
+---
+
+## Vonage Node SDK v2.1.1 (2017-12-14)
+
+This release includes bug fixes, documentation updates, new features, and test improvements.
+
+**Fixed**
+
+- Prevent default headers being overwritten in `HTTPClient`. (#125)
+- Handle 204 status code as a success, not an error. (#155)
+- You can now change the port in HTTPClient (previously forced to use 443).
+
+**Added**
+
+- Search SMS messages. (#139)
+- Search SMS rejections. (#140)
+- Report conversion data to Nexmo (if enabled on your account). (#141)
+- Trigger an auto-reload top-up. (#169)
+
+**Documentation**
+
+- Add copy/paste example for Verify. (#127)
+- Private key can be provided inline. (#136)
+- Updating calls. (#153)
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.0.2...v2.1.1)
+
+---
+
+## Vonage Node SDK v2.0.2 (2017-07-17)
+
+This release removes SDK-level validation in favour of API-level validation.
+
+**Changed**
+
+- Remove SDK check for valid phone number, instead leaving this to the API.
+- Remove SDK check for valid application type, instead leaving this to the API.
+
+Full Changelog: [View on GitHub](https://github.com/Vonage/vonage-node-sdk/compare/v2.0.1...v2.0.2)
 
 ---
 
