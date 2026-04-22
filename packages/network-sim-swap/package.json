@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/network-sim-swap",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "A Network API client for checking if a SIM card was swapped recently for a phone number",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/network-sim-swap#readme",
   "bugs": {
@@ -21,6 +21,166 @@
   "type": "commonjs",
   "exports": {
     ".": {
+      "workerd": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "deno": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "bun": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "edge-light": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "netlify": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "fastly": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "react-native": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "react-server": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "electron": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "edge-routine": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "lagon": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "wasmer": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "moddable": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "arvancloud": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "azion": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
+      "kiesel": {
+        "import": {
+          "types": "./dist/esm/index.d.mts",
+          "default": "./dist/esm/index.mjs"
+        },
+        "require": {
+          "types": "./dist/cjs/index.d.ts",
+          "default": "./dist/cjs/index.js"
+        }
+      },
       "browser": "./dist/unsupportedBrowser.cjs",
       "import": {
         "types": "./dist/esm/index.d.mts",
@@ -47,8 +207,8 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/network-client": "1.6.4",
-    "@vonage/server-client": "1.19.3"
+    "@vonage/network-client": "1.6.5",
+    "@vonage/server-client": "1.19.4"
   },
   "engines": {
     "node": ">=20"
