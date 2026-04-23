@@ -217,7 +217,7 @@
   "dependencies": {
     "debug": "4.4.3",
     "jsonwebtoken": "9.0.3",
-    "uuid": "13.0.0"
+    "uuid": "14.0.0"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "9.0.10"
