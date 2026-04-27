@@ -14,25 +14,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131
-        with:
-          name: node-sdk
+      - name: Checkout code
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
 
       - name: Set up Node.js
         uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5
         with:
           node-version: 20.x
 
-      - name: Create Documents
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+
+      - name: Generate JSDoc documentation
         run: |
-          npm run compile
-          npm run typedoc
-          cd docs
-          ../scripts/adjustMarkdown.sh
+          npx jsdoc-to-markdown --files 'packages/*/lib/**/*.js' > docs/API.md
           node scripts/generateExample.mjs
-          mv docs/packages.md docs/HOME.md
-          mv docs/EXAMPLES.md .
-          rm -rf docs/index.md docs/docs.json
+          cp EXAMPLES.md docs/EXAMPLES.md
 
       - name: Sync Wiki to Docs
         uses: newrelic/wiki-sync-action@8fb7a9efe4e975bdb2977107fbed96fa0433db52

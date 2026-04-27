@@ -23,9 +23,24 @@ jobs:
           node-version: 20.x
 
       - name: Install packages
+        run: npm install --ignore-scripts
+
+      - name: Update CHANGELOG.md
         run: |
-          npm install --ignore-scripts
-          npm install --ignore-scripts typescript
+          DATE=$(date +%Y-%m-%d)
+          RELEASE_NAME="${{ github.event.release.name }}"
+          RELEASE_BODY="${{ github.event.release.body }}"
+          RELEASE_URL="${{ github.event.release.html_url }}"
+          # Prepend new release entry to CHANGELOG.md
+          {
+            echo "## ${RELEASE_NAME} (${DATE})"
+            echo ""
+            echo "${RELEASE_BODY}"
+            echo ""
+            echo "See full release notes: ${RELEASE_URL}"
+            echo ""
+            cat CHANGELOG.md
+          } > /tmp/CHANGELOG.new && mv /tmp/CHANGELOG.new CHANGELOG.md
 
       - name: Publish to NPM
         run: ./scripts/publish.sh

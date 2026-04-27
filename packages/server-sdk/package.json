@@ -205,10 +205,10 @@
   "scripts": {
     "build": "npm run clean && npm run build:esm && npm run build:cjs",
     "postbuild": "node ../../scripts/copyUnsupported.cjs && node -e \"const fs=require('node:fs'),p='dist/cjs/package.json';fs.mkdirSync('dist/cjs',{recursive:true});fs.writeFileSync(p,JSON.stringify({type:'commonjs'},null,2));\"",
-    "build:cjs": "tsup lib/** -d dist/cjs --dts --tsconfig tsconfig.tsup.json",
-    "build:esm": "tsup lib/** -d dist/esm --format=esm --dts --tsconfig tsconfig.tsup.json",
+    "build:cjs": "esbuild lib/*.js lib/**/*.js --platform=node --format=cjs --outdir=dist/cjs --out-extension:.js=.js",
+    "build:esm": "esbuild lib/*.js lib/**/*.js --platform=node --format=esm --outdir=dist/esm --out-extension:.js=.mjs",
     "check:pkg": "npx attw --pack .",
-    "clean": "rimraf dist tsconfig.tsbuildinfo"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@vonage/accounts": "1.19.4",
@@ -234,5 +234,6 @@
   "engineStrict": true,
   "publishConfig": {
     "directory": "dist"
-  }
+  },
+  "devDependencies": {}
 }

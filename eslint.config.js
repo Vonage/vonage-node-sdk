@@ -11,28 +11,24 @@ export default defineConfig([
       sourceType: 'module',
       globals: {
         ...globals.node,
-        ...globals.jest,
       }
     },
   },
   {
-    files: ['packages/*/lib/**/*.{ts,tsx}'],
+    files: ['packages/*/lib/**/*.js'],
   },
   {
     ignores: ['scripts/**', 'packages/**/dist/**', 'coverage/**'],
   },
   ...vonage.configs.base,
-  ...vonage.configs.typescript,
-  ...vonage.configs.jest,
   ...vonage.configs.node,
   {
     settings: {
       node: {
-        version: '>=18.0.0',
+        version: '>=20.0.0',
       }
     },
     rules: {
-      '@typescript-eslint/no-unused-expressions': 'off',
       // Leave this off. This rule cannot handle monorepos
       'n/no-missing-import': ['off'],
       'n/no-unsupported-features/es-builtins': [
@@ -49,7 +45,6 @@ export default defineConfig([
       'package-json/require-type': 'error',
       'package-json/require-engines': 'error',
       'package-json/require-files': 'error',
-      'package-json/require-types': 'error',
       'package-json/restrict-dependency-ranges': [
         'error',
         [
