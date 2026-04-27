@@ -46,7 +46,7 @@ export default [
         {
           text: 'I\'ll always dial the K for you',
           language: TTSLanguages.EN_US,
-          style: '0',
+          style: 0,
           premium: true,
           loop: 1,
           level: '0.4',
@@ -69,7 +69,7 @@ export default [
         action: NCCOActions.TALK,
         text: 'I\'ll always dial the K for you',
         language: TTSLanguages.EN_US,
-        style: '0',
+        style: 0,
         premium: true,
         loop: 1,
         level: '0.4',
@@ -302,7 +302,7 @@ export default [
                 action: NCCOActions.TALK,
                 text: 'I\'ll always dial the K for you',
                 language: TTSLanguages.EN_US,
-                style: '0',
+                style: 0,
                 premium: true,
                 loop: 1,
                 level: '0.4',
@@ -322,7 +322,7 @@ export default [
           action: NCCOActions.TALK,
           text: 'I\'ll always dial the K for you',
           language: 'en-US',
-          style: '0',
+          style: 0,
           premium: true,
           loop: 1,
           level: '0.4',
@@ -519,6 +519,55 @@ export default [
     responses: [[200]],
     clientMethod: 'subscribeDTMF',
     parameters: [callPhone.uuid, 'https://example.com/dtmf'],
+    generator: false,
+    error: false,
+    expected: undefined,
+  },
+  {
+    label: 'transfer call with NCCO with websocket endpoint content-type',
+    requests: [
+      [
+        `/v1/calls/${callPhone.uuid}`,
+        'PUT',
+        {
+          action: 'transfer',
+          destination: {
+            type: 'ncco',
+            ncco: [
+              {
+                action: NCCOActions.CONNECT,
+                endpoint: [
+                  {
+                    type: 'websocket',
+                    uri: 'wss://example.com/socket',
+                    'content-type': 'audio/l16;rate=16000',
+                    headers: { customer_id: 'ABC123' },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    ],
+    responses: [[204]],
+    clientMethod: 'transferCallWithNCCO',
+    parameters: [
+      callPhone.uuid,
+      [
+        {
+          action: NCCOActions.CONNECT,
+          endpoint: [
+            {
+              type: 'websocket',
+              uri: 'wss://example.com/socket',
+              contentType: 'audio/l16;rate=16000',
+              headers: { customer_id: 'ABC123' },
+            },
+          ],
+        },
+      ],
+    ],
     generator: false,
     error: false,
     expected: undefined,

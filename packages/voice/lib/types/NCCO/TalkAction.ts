@@ -38,9 +38,10 @@ export type TalkAction = {
   language?: TTSLanguages | string;
 
   /**
-   * (Optional) The style or type of voice to use for TTS speech. This can be a string representing the voice style.
+   * (Optional) The vocal style (vocal range, tessitura, and timbre) to use for TTS speech. This is
+   * an integer value that represents the style index for the selected language/voice.
    */
-  style?: string;
+  style?: number;
 
   /**
    * (Optional) If set to `true`, indicates that premium TTS should be used for the speech. Default is `false`.

@@ -610,4 +610,70 @@ export default [
       conversationUUID: callPhone.conversationUUID,
     } as CallResult,
   },
+  {
+    label: 'create a call with websocket endpoint using content-type',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'websocket',
+              uri: 'wss://example.com/socket',
+              'content-type': 'audio/l16;rate=16000',
+              headers: {
+                customer_id: 'ABC123',
+              },
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'websocket',
+            uri: 'wss://example.com/socket',
+            contentType: 'audio/l16;rate=16000',
+            headers: {
+              customer_id: 'ABC123',
+            },
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
 ];

@@ -13,6 +13,7 @@ import {
   OutboundCall,
   CallWithNCCO,
   SIPEndpoint,
+  WebsocketEndpoint,
   CallEndpoint,
 } from './types';
 
@@ -33,28 +34,38 @@ const apiCallsToCalls = (call: CallDetailResponse): CallDetail => {
   } as CallDetail;
 };
 
+const serializeEndpoint = (endpoint: CallEndpoint): CallEndpoint => {
+  switch (endpoint.type) {
+  case 'sip':
+    return {
+      type: 'sip',
+      uri: endpoint.uri,
+      headers: endpoint.headers,
+      standardHeaders: {
+        'User-to-User': Object.hasOwn(endpoint.standardHeaders || {}, 'User-to-User')
+          ? { ...endpoint.standardHeaders }['User-to-User']
+          : endpoint.standardHeaders?.userToUser,
+      },
+    } as SIPEndpoint;
+  case 'websocket':
+    return {
+      type: 'websocket',
+      uri: endpoint.uri,
+      'content-type': endpoint.contentType,
+      headers: endpoint.headers,
+      ...(endpoint.authorization ? { authorization: endpoint.authorization } : {}),
+    } as unknown as WebsocketEndpoint;
+  default:
+    return endpoint;
+  }
+};
+
 const NCCOToApiCalls = (ncco: Action[]): Array<Action> => ncco.map((action) => {
   switch (action.action) {
   case NCCOActions.CONNECT:
     return {
       ...action,
-      endpoint: (action.endpoint as Array<CallEndpoint>)?.map((endpoint) => {
-        switch (endpoint.type) {
-        case 'sip':
-          return {
-            type: 'sip',
-            uri: endpoint.uri,
-            headers: endpoint.headers,
-            standardHeaders: {
-              'User-to-User': Object.hasOwn(endpoint.standardHeaders || {} ,'User-to-User')
-                ? {...endpoint.standardHeaders}['User-to-User']
-                : endpoint.standardHeaders?.userToUser,
-            }
-          } as SIPEndpoint;
-        default:
-          return endpoint;
-        }
-      })
+      endpoint: (action.endpoint as Array<CallEndpoint>)?.map(serializeEndpoint),
     };
   default:
     return action;
@@ -284,6 +295,14 @@ export class Voice extends Client {
           standard_headers: {
             'User-to-User': endpoint.standardHeaders?.userToUser,
           }
+        };
+      case 'websocket':
+        return {
+          type: 'websocket',
+          uri: endpoint.uri,
+          'content-type': endpoint.contentType,
+          headers: endpoint.headers,
+          ...(endpoint.authorization ? { authorization: endpoint.authorization } : {}),
         };
       }
 
