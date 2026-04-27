@@ -212,12 +212,9 @@
   },
   "dependencies": {
     "@vonage/auth": "1.14.4",
-    "@vonage/vetch": "1.10.4",
-    "debug": "4.4.3",
-    "node-fetch": "3.3.2"
+    "debug": "4.4.3"
   },
   "devDependencies": {
-    "@types/node-fetch": "2.6.13",
     "nock": "14.0.10"
   },
   "engines": {

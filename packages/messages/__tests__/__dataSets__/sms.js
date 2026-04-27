@@ -1,0 +1,283 @@
+import { Channels, SMS } from '../../lib/index.js';
+import { MessageSuccess } from '../../lib/index.js';
+import { MessageParamsText, SMSMessageRequest } from '../../lib/index.js';
+
+export default [
+  {
+    label: 'send message',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'sms',
+        message_type: 'text',
+      },
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new SMS({
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+      }),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    }},
+  {
+    label: 'send message with extra params',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'sms',
+        message_type: 'text',
+        sms: {
+          encoding_type: 'unicode',
+          content_id: 'content id',
+          entity_id: 'entity id',
+        },
+      }: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new SMS({
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        sms: {
+          encodingType: 'unicode',
+          contentId: 'content id',
+          entityId: 'entity id',
+        },
+      }),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    }},
+  {
+    label: 'send message with client ref',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        client_ref: 'nsa-1',
+        channel: 'sms',
+        message_type: 'text',
+        webhook_url: 'https://example.com',
+        webhook_version: 'v1',
+      }: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new SMS({
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        clientRef: 'nsa-1',
+        webhookUrl: 'https://example.com',
+        webhookVersion: 'v1',
+      }),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    }},
+  {
+    label: 'send message with client ref',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        client_ref: 'nsa-1',
+        channel: 'sms',
+        message_type: 'text',
+      }: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new SMS({
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        clientRef: 'nsa-1',
+      }),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    }},
+  {
+    label: 'send message with old params',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        client_ref: 'nsa-1',
+        channel: 'sms',
+        message_type: 'text',
+      }: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new SMS('too many secrets', '14152739164', '12126875309', 'nsa-1'),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    }},
+  {
+    label: 'send message with error response',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'sms',
+        message_type: 'text',
+      }: [
+      401,
+      {
+        type: 'https://developer.nexmo.com/api-errors/#unathorized',
+        title: 'You did not provide correct credentials.',
+        detail: 'Check that you\'re using the correct credentials, and that your account has this feature enabled',
+        instance: 'bf0ca0bf927b3b52e3cb03217e1a1ddf',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new SMS({
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+      }),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    }: 'Request failed with status code 401',
+  },
+  {
+    label: 'send message with failover',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'sms',
+        message_type: 'text',
+        failover: [
+          {
+            from: '12126875309',
+            to: '14152739164',
+            text: 'too many secrets',
+            channel: 'sms',
+            message_type: 'text',
+          }
+        ]
+      },
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'text',
+        failover: [
+          {
+            from: '12126875309',
+            to: '14152739164',
+            text: 'too many secrets',
+            channel: 'sms',
+            messageType: 'text',
+          }
+        ]
+      },
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    }},
+  {
+    label: 'send message with trusted recipient',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'sms',
+        message_type: 'text',
+        trusted_recipient},
+    ],
+    response: [
+      200,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      {
+        from: '12126875309',
+        to: '14152739164',
+        text: 'too many secrets',
+        channel: 'text',
+        trustedRecipient},
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    }}
+];

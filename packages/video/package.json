@@ -218,7 +218,6 @@
     "@vonage/auth": "1.14.4",
     "@vonage/jwt": "1.13.4",
     "@vonage/server-client": "1.19.4",
-    "@vonage/vetch": "1.10.4"
   },
   "devDependencies": {
     "jsonwebtoken": "9.0.3",

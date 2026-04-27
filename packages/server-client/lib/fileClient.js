@@ -1,8 +1,7 @@
 import { Client } from './client.js';
-import { AuthenticationType } from './enums/index.js';
+import { AuthenticationType, HTTPMethods } from './enums/index.js';
+import { VetchError } from './errors/VetchError.js';
 import debug from 'debug';
-import { VetchError, HTTPMethods } from '@vonage/vetch';
-import fetch from 'node-fetch';
 import { createWriteStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 
@@ -34,7 +33,7 @@ export class FileClient extends Client {
     try {
       fileURL = new URL(file);
       log('Downloading file by URL');
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line no-unused-vars
     } catch (_) {
       log('Downloading file by ID');
       fileURL = new URL(`${this.config.apiHost}/v3/files/${file}`);

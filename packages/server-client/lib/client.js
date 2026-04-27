@@ -1,20 +1,12 @@
-import fetch from 'node-fetch';
 import { Auth } from '@vonage/auth';
-import {
-  ResponseTypes,
-
-  HTTPMethods,
-  ContentType,
-  VetchError } from
-'@vonage/vetch';
-import { AuthenticationType } from './enums/index.js';
+import { AuthenticationType, ContentType, HTTPMethods, ResponseTypes } from './enums/index.js';
+import { VetchError } from './errors/VetchError.js';
 import {
   camelCaseObjectKeys,
   kebabCaseObjectKeys,
   snakeCaseObjectKeys,
-  omit } from
-
-'./transformers.js';
+  omit,
+} from './transformers.js';
 import debug from 'debug';
 
 const log = debug('vonage:server-client');

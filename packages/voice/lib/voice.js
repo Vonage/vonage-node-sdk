@@ -1,6 +1,4 @@
-import { AuthenticationType, Client, FileClient } from '@vonage/server-client';
-
-import { ResponseTypes } from '@vonage/vetch';
+import { AuthenticationType, Client, FileClient, ResponseTypes } from '@vonage/server-client';
 import { NCCOActions } from './enums';
 /**
  * @typedef {Object} NCCODestination

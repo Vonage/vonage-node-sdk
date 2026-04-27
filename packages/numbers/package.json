@@ -217,7 +217,6 @@
   "dependencies": {
     "@vonage/auth": "1.14.4",
     "@vonage/server-client": "1.19.4",
-    "@vonage/vetch": "1.10.4"
   },
   "engines": {
     "node": ">=20"

@@ -221,7 +221,6 @@
   },
   "dependencies": {
     "@vonage/server-client": "1.19.4",
-    "@vonage/vetch": "1.10.4",
     "debug": "4.4.3"
   },
   "engines": {
