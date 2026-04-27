@@ -38,10 +38,11 @@ export type TalkAction = {
   language?: TTSLanguages | string;
 
   /**
-   * (Optional) The vocal style (vocal range, tessitura, and timbre) to use for TTS speech. This is
-   * an integer value that represents the style index for the selected language/voice.
+   * (Optional) The vocal style (vocal range, tessitura, and timbre) to use for TTS speech. The OAS
+   * spec defines this as an integer, but a string representation is also accepted for backwards
+   * compatibility.
    */
-  style?: number;
+  style?: number | string;
 
   /**
    * (Optional) If set to `true`, indicates that premium TTS should be used for the speech. Default is `false`.

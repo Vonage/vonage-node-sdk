@@ -40,9 +40,10 @@ export class Talk implements TalkAction, Serializable {
 
   /**
    * The speech style (optional). An integer representing the vocal range, tessitura,
-   * and timbre to use for the selected language/voice.
+   * and timbre to use for the selected language/voice. A string representation is also
+   * accepted for backwards compatibility.
    */
-  style?: number;
+  style?: number | string;
 
   /**
    * Indicates whether to use premium text-to-speech (optional).
@@ -57,7 +58,7 @@ export class Talk implements TalkAction, Serializable {
    * @param {number} [loop] - The number of times to loop the speech (optional).
    * @param {string} [level] - The audio level at which to play the speech (optional).
    * @param {TTSLanguages | string} [language] - The language for the text-to-speech synthesis (optional).
-   * @param {number} [style] - The speech style (optional).
+   * @param {number | string} [style] - The speech style (optional).
    * @param {boolean} [premium] - Indicates whether to use premium text-to-speech (optional).
    */
   constructor(
@@ -66,7 +67,7 @@ export class Talk implements TalkAction, Serializable {
     loop?: number,
     level?: string,
     language?: TTSLanguages | string,
-    style?: number,
+    style?: number | string,
     premium?: boolean,
   ) {
     this.text = text;
