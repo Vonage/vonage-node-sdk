@@ -1,0 +1,5 @@
+/**
+ * @typedef {Object} PricingResponse
+ */
+
+export {};

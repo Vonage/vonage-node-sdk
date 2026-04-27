@@ -1,0 +1,15 @@
+/**
+ * @typedef {Object} AnyCapability
+ */
+
+export * from './Application';
+export * from './ApplicationPageList';
+export * from './CapabilityBulk';
+export * from './CapabilityMeetings';
+export * from './CapabilityMessages';
+export * from './CapabilityRTC';
+export * from './CapabilityVerify';
+export * from './CapabilityVoice';
+export * from './CapabilityWebhook';
+export * from './ListApplicationParams';
+export * from './Response';export {};

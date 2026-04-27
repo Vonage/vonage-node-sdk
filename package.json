@@ -99,6 +99,8 @@
   "engineStrict": true,
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
+    "@babel/core": "7.29.0",
+    "@babel/plugin-transform-typescript": "7.28.6",
     "eslint": "9.39.2",
     "eslint-plugin-package-json": "0.88.1",
     "tsup": "8.5.1"

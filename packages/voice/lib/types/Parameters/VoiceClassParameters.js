@@ -1,0 +1,5 @@
+/**
+ * @typedef {Object} VoiceClassParameters
+ */
+
+export {};

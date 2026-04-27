@@ -1,0 +1,10 @@
+/**
+ * Represents parameters for sending various types of messages.
+ * This union type can be used to send messages across different platforms like
+ * Messenger, MMS, SMS, Viber, WhatsApp, etc.
+ * Use the corresponding Type for the specific message type you want to send.
+ *
+ * @typedef {Object} SendMessageParams
+ */
+
+export {};
