@@ -164,7 +164,8 @@ function simplifyTSType(raw) {
   if (t.endsWith('[]')) return `Array.<${simplifyTSType(t.slice(0, -2))}>`;
   t = t.replace(/\s*\|\s*(undefined|null)\b/g, '')
        .replace(/\b(undefined|null)\s*\|\s*/g, '').trim();
-  t = t.replace(/<[^>]*>/g, '').trim();
+  // Strip TypeScript generic type parameters (e.g. Array<string> → Array)
+  t = t.replace(/[<][^>]*[>]/g, '').trim();
   const MAP = {
     string: 'string', number: 'number', boolean: 'boolean',
     any: '*', unknown: '*', void: 'void', never: 'never',
@@ -203,8 +204,8 @@ function parseObjectTypeProps(body) {
       const m = propStr.match(/^([A-Za-z_$][A-Za-z0-9_$]*)(\??):\s*(.+)$/);
       if (m && !m[3].includes('(')) {
         const rawDesc = docToText(docAccum);
-        // Sanitize: remove any /* */ or /** markers that would break JSDoc
-        const safeDesc = rawDesc.replace(/\/\*/g, '/*').replace(/\*\//g, '*/');
+        // Break up any embedded block-comment markers to avoid breaking JSDoc
+        const safeDesc = rawDesc.replace(/\/\*/g, '/ *').replace(/\*\//g, '* /');
         props.push({
           name: m[1], optional: m[2] === '?',
           type: simplifyTSType(m[3]),
@@ -254,7 +255,7 @@ function collectTypedefs(src) {
     const afterClose = findClosing(src, openBrace);
     const body = '{' + src.slice(openBrace + 1, afterClose - 1) + '}';
     const { text: prevDoc } = extractPrecedingJsDoc(src, ifaceStart);
-    const name = m[2].replace(/<.*>/, '').trim();
+    const name = m[2].replace(/[<][^=\n]*[>]/, '').trim();
     typedefs.push(buildTypedefJsDoc(name, prevDoc, body));
   }
 
