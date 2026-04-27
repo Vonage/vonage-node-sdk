@@ -34,6 +34,14 @@ const apiCallsToCalls = (call: CallDetailResponse): CallDetail => {
   } as CallDetail;
 };
 
+const buildWebsocketEndpoint = (endpoint: WebsocketEndpoint) => ({
+  type: 'websocket' as const,
+  uri: endpoint.uri,
+  'content-type': endpoint.contentType,
+  headers: endpoint.headers,
+  ...(endpoint.authorization ? { authorization: endpoint.authorization } : {}),
+});
+
 const serializeEndpoint = (endpoint: CallEndpoint): CallEndpoint => {
   switch (endpoint.type) {
   case 'sip':
@@ -48,13 +56,7 @@ const serializeEndpoint = (endpoint: CallEndpoint): CallEndpoint => {
       },
     } as SIPEndpoint;
   case 'websocket':
-    return {
-      type: 'websocket',
-      uri: endpoint.uri,
-      'content-type': endpoint.contentType,
-      headers: endpoint.headers,
-      ...(endpoint.authorization ? { authorization: endpoint.authorization } : {}),
-    } as unknown as WebsocketEndpoint;
+    return buildWebsocketEndpoint(endpoint) as unknown as WebsocketEndpoint;
   default:
     return endpoint;
   }
@@ -297,13 +299,7 @@ export class Voice extends Client {
           }
         };
       case 'websocket':
-        return {
-          type: 'websocket',
-          uri: endpoint.uri,
-          'content-type': endpoint.contentType,
-          headers: endpoint.headers,
-          ...(endpoint.authorization ? { authorization: endpoint.authorization } : {}),
-        };
+        return buildWebsocketEndpoint(endpoint);
       }
 
       return endpoint;
