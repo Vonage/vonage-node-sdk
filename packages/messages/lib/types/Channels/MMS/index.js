@@ -29,4 +29,5 @@ export * from './MMSVideoParams.js';
  * along with any of the MMS-specific message parameters.
  *
  * @group MMS
- */export {};
+ */
+export {};

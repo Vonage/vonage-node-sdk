@@ -322,7 +322,11 @@ function preProcessEnums(src) {
     }
     out += '});\n';
 
-    reps.push({ from, to: afterClose, text: out });
+    // Consume trailing semicolon after closing brace (e.g. `enum Foo { };`)
+    let toIdx = afterClose;
+    while (toIdx < src.length && /[ \t]/.test(src[toIdx])) toIdx++;
+    if (src[toIdx] === ';') toIdx++;
+    reps.push({ from, to: toIdx, text: out });
   }
 
   let result = src;
@@ -407,6 +411,8 @@ function runBabel(src, filename) {
 function postProcess(code) {
   code = code.replace(/^export\s+type\s+[^\n]+\n?/gm, '');
   code = code.replace(/^type\s+[A-Za-z_$][^\n]*\n?/gm, '');
+  // Ensure export {}; is always on its own line (Babel retainLines may concatenate it)
+  code = code.replace(/([^\n])(export \{\};)/g, '$1\n$2');
   code = code.replace(/\n{3,}/g, '\n\n');
   code = code.replace(/[ \t]+$/gm, '');
   return code.trim() + '\n';

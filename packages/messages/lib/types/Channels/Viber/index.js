@@ -34,4 +34,5 @@ export * from './ViberVideoParams.js';
  * along with any of the Viber-specific message parameters or configurations.
  *
  * @group Viber
- */export {};
+ */
+export {};

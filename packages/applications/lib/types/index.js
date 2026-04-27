@@ -12,4 +12,5 @@ export * from './CapabilityVerify';
 export * from './CapabilityVoice';
 export * from './CapabilityWebhook';
 export * from './ListApplicationParams';
-export * from './Response';export {};
+export * from './Response';
+export {};

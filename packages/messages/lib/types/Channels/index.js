@@ -19,4 +19,5 @@ export * from './RCS/';
 /**
  * Represents a union type that can be any of the specific channel message
  * parameters or configurations, including Messenger, MMS, Viber, WhatsApp, or SMS.
- */export {};
+ */
+export {};

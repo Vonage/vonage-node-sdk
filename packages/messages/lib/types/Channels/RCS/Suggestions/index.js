@@ -9,4 +9,5 @@ export * from './RCSOpenURLWebviewSuggestionParams';
 export * from './RCSReplySuggestionParams';
 export * from './RCSShareLocationSuggestionParams';
 export * from './RCSSuggestionParams';
-export * from './RCSViewLocationSuggestionParams';export {};
+export * from './RCSViewLocationSuggestionParams';
+export {};

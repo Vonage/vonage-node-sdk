@@ -8,4 +8,5 @@ export * from './RCSFileParams';
 export * from './RCSImageParams';
 export * from './RCSTextParams';
 export * from './RCSVideoParams';
-export * from './Suggestions';export {};
+export * from './Suggestions';
+export {};

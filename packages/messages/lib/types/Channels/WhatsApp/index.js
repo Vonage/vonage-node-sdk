@@ -45,4 +45,5 @@ export * from './WhatAppReactionType.js';
  * configurations.
  *
  * @group WhatsApp
- */export {};
+ */
+export {};

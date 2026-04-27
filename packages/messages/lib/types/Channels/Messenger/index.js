@@ -32,4 +32,5 @@ export * from './MessengerVideoParams.js';
 /**
  * Represents a union type that includes the 'channel' property set to 'messenger'
  * along with any of the Messenger-specific message parameters or MessengerType.
- */export {};
+ */
+export {};
