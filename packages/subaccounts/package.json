@@ -30,137 +30,171 @@
     ".": {
       "workerd": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "deno": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "bun": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "edge-light": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "netlify": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "fastly": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "react-native": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "react-server": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "electron": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "edge-routine": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "lagon": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "wasmer": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "moddable": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "arvancloud": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "azion": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "kiesel": {
         "import": {
+          "types": "./dist/esm/index.d.mts",
           "default": "./dist/esm/index.mjs"
         },
         "require": {
+          "types": "./dist/cjs/index.d.ts",
           "default": "./dist/cjs/index.js"
         }
       },
       "browser": "./dist/unsupportedBrowser.cjs",
       "import": {
+        "types": "./dist/esm/index.d.mts",
         "default": "./dist/esm/index.mjs"
       },
       "require": {
+        "types": "./dist/cjs/index.d.ts",
         "default": "./dist/cjs/index.js"
       }
     }
@@ -172,12 +206,13 @@
     "dist"
   ],
   "scripts": {
-    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
     "postbuild": "node ../../scripts/copyUnsupported.cjs && node ../../scripts/fixEsmImports.cjs && node -e \"const fs=require('node:fs'),p='dist/cjs/package.json';fs.mkdirSync('dist/cjs',{recursive:true});fs.writeFileSync(p,JSON.stringify({type:'commonjs'},null,2));\"",
     "build:cjs": "esbuild lib/*.js lib/**/*.js --platform=node --format=cjs --outdir=dist/cjs --out-extension:.js=.js",
     "build:esm": "esbuild lib/*.js lib/**/*.js --platform=node --format=esm --outdir=dist/esm --out-extension:.js=.mjs",
     "check:pkg": "npx attw --pack .",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "build:types": "../../node_modules/.bin/tsc -p tsconfig.json"
   },
   "dependencies": {
     "@vonage/server-client": "1.19.4"

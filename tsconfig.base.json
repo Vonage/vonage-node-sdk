@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "strict": false,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "noEmit": false
+  }
+}
