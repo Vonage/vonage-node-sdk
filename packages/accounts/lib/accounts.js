@@ -53,7 +53,7 @@ export class Accounts extends Client {
     const response = await this.sendGetRequest(
       `${this.config.restHost}/account/get-balance`
     );
-    return response.data;
+    return Client.transformers.camelCaseObjectKeys(response.data);
   }
 
   /**
@@ -79,7 +79,7 @@ export class Accounts extends Client {
       `${this.config.restHost}/account/top-up`,
       { trx }
     );
-    return response.data;
+    return Client.transformers.camelCaseObjectKeys(response.data);
   }
 
   /**
@@ -108,8 +108,8 @@ export class Accounts extends Client {
   {
     const response = await this.sendFormSubmitRequest(
       `${this.config.restHost}/account/settings`,
-      callbacks
+      Client.transformers.kebabCaseObjectKeys(callbacks)
     );
-    return response.data;
+    return Client.transformers.camelCaseObjectKeys(response.data);
   }
 }

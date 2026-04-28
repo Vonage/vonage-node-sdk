@@ -53,7 +53,7 @@ export class Secrets extends Client {
       `${this.config.apiHost}/accounts/${apiKey}/secrets`,
       { secret }
     );
-    return response.data;
+    return Client.transformers.camelCaseObjectKeys(response.data, true);
   }
 
   /**
@@ -91,7 +91,7 @@ export class Secrets extends Client {
     const response = await this.sendGetRequest(
       `${this.config.apiHost}/accounts/${apiKey}/secrets/${id}`
     );
-    return response.data;
+    return Client.transformers.camelCaseObjectKeys(response.data, true);
   }
 
   /**
@@ -112,6 +112,6 @@ export class Secrets extends Client {
     const response = await this.sendGetRequest(
       `${this.config.apiHost}/accounts/${apiKey}/secrets`
     );
-    return response.data;
+    return Client.transformers.camelCaseObjectKeys(response.data, true);
   }
 }

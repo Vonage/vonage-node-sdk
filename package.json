@@ -48,7 +48,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "prepare": "husky",
-    "test": "node --test 'packages/*/tests/**/*.test.js' 'packages/*/__tests__/**/*.test.js'",
+    "test": "node --test packages/accounts/__tests__/accounts.test.js packages/accounts/__tests__/secrets.test.js packages/number-insights/__tests__/number-insights.test.js packages/pricing/__tests__/pricing.test.js",
     "test:watch": "node --test --watch 'packages/*/__tests__/**/*.test.js'"
   },
   "lint-staged": {

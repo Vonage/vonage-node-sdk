@@ -56,7 +56,7 @@ export class NumberInsights extends Client {
       `${this.config.apiHost}/ni/advanced/json`,
       params
     );
-    return resp.data;
+    return Client.transformers.camelCaseObjectKeys(resp.data, true);
   }
 
   /**
@@ -97,7 +97,7 @@ export class NumberInsights extends Client {
       `${this.config.apiHost}/ni/advanced/async/json`,
       params
     );
-    return resp.data;
+    return Client.transformers.camelCaseObjectKeys(resp.data, true);
   }
 
   /**
@@ -134,7 +134,7 @@ export class NumberInsights extends Client {
       `${this.config.apiHost}/ni/basic/json`,
       params
     );
-    return resp.data;
+    return Client.transformers.camelCaseObjectKeys(resp.data, true);
   }
 
   /**
@@ -171,6 +171,6 @@ export class NumberInsights extends Client {
       `${this.config.apiHost}/ni/standard/json`,
       params
     );
-    return resp.data;
+    return Client.transformers.camelCaseObjectKeys(resp.data, true);
   }
 }

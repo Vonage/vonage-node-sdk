@@ -49,10 +49,8 @@ describe('accounts', () => {
     const lookup = await client.topUpBalance(
       '8ef2447e69604f642ae59363aa5f781b',
     );
-    assert.deepEqual(lookup['error-code'], expectedResponse['error-code']);
-    assert.deepEqual(
-      lookup['error-code-label'],
-    , expectedResponse['error-code-label']);
+    assert.deepEqual(lookup.errorCode, expectedResponse['error-code']);
+    assert.deepEqual(lookup.errorCodeLabel, expectedResponse['error-code-label']);
   });
 
   test('update callbacks', async () => {
@@ -65,27 +63,32 @@ describe('accounts', () => {
     };
 
     const callbacks = {
-      drCallBackUrl: 'https://example.com/webhooks/delivery-receipt',
-      moCallBackUrl: 'https://example.com/webhooks/inbound-sms',
+      drCallbackUrl: 'https://example.com/webhooks/delivery-receipt',
+      moCallbackUrl: 'https://example.com/webhooks/inbound-sms',
     };
-    const queryString = new URLSearchParams(callbacks);
+
+    // After kebabCaseObjectKeys: { 'dr-callback-url': ..., 'mo-callback-url': ... }
+    const kebabCallbacks = {
+      'dr-callback-url': callbacks.drCallbackUrl,
+      'mo-callback-url': callbacks.moCallbackUrl,
+    };
+    const queryString = new URLSearchParams(kebabCallbacks);
     const re = new RegExp(queryString.toString(), 'g');
 
     nock('https://rest.nexmo.com', {
       reqheaders: {
         'authorization': 'Basic YWJjZDoxMjM0',
       }
-    } )
+    })
       .persist()
       .post('/account/settings', re)
       .reply(200, expectedResponse);
 
     const lookup = await client.updateAccountCallbacks(callbacks);
-    assert.deepEqual(
-      lookup['mo-callback-url'],
-    , expectedResponse['mo-callback-url']);
-    assert.deepEqual(
-      lookup['dr-callback-url'],
-    , expectedResponse['dr-callback-url']);
+    assert.deepEqual(lookup.moCallbackUrl, expectedResponse['mo-callback-url']);
+    assert.deepEqual(lookup.drCallbackUrl, expectedResponse['dr-callback-url']);
+    assert.deepEqual(lookup.maxOutboundRequest, expectedResponse['max-outbound-request']);
+    assert.deepEqual(lookup.maxInboundRequest, expectedResponse['max-inbound-request']);
+    assert.deepEqual(lookup.maxCallsPerSecond, expectedResponse['max-calls-per-second']);
   });
 });

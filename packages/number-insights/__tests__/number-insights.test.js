@@ -16,7 +16,7 @@ describe('number-insights', () => {
   });
 
   test('do a basic lookup', async () => {
-    const expectedResponse = {
+    const apiResponse = {
       status: 0,
       status_message: 'Success',
       request_id: 'aaaaaaaa-bbbb-cccc-dddd-0123456789ab',
@@ -32,30 +32,23 @@ describe('number-insights', () => {
       .persist()
       .get('/ni/basic/json')
       .basicAuth({user: 'abcd', pass: '1234'})
-      .query({
-        number})
-      .reply(200, expectedResponse);
+      .query({ number: '447700900000' })
+      .reply(200, apiResponse);
 
     const lookup = await client.basicLookup('447700900000');
-    assert.deepEqual(lookup.status, expectedResponse.status);
-    assert.deepEqual(lookup.status_message, expectedResponse.status_message);
-    assert.deepEqual(lookup.request_id, expectedResponse.request_id);
-    assert.deepEqual(lookup.international_format_number, 
-      expectedResponse.international_format_number
-    );
-    assert.deepEqual(lookup.national_format_number, 
-      expectedResponse.national_format_number
-    );
-    assert.deepEqual(lookup.country_code, expectedResponse.country_code);
-    assert.deepEqual(lookup.country_code_iso3, 
-      expectedResponse.country_code_iso3
-    );
-    assert.deepEqual(lookup.country_name, expectedResponse.country_name);
-    assert.deepEqual(lookup.country_prefix, expectedResponse.country_prefix);
+    assert.deepEqual(lookup.status, apiResponse.status);
+    assert.deepEqual(lookup.statusMessage, apiResponse.status_message);
+    assert.deepEqual(lookup.requestId, apiResponse.request_id);
+    assert.deepEqual(lookup.internationalFormatNumber, apiResponse.international_format_number);
+    assert.deepEqual(lookup.nationalFormatNumber, apiResponse.national_format_number);
+    assert.deepEqual(lookup.countryCode, apiResponse.country_code);
+    assert.deepEqual(lookup.countryCodeIso3, apiResponse.country_code_iso3);
+    assert.deepEqual(lookup.countryName, apiResponse.country_name);
+    assert.deepEqual(lookup.countryPrefix, apiResponse.country_prefix);
   });
 
   test('do a standard lookup', async () => {
-    const expectedResponse = {
+    const apiResponse = {
       status: 0,
       status_message: 'Success',
       request_id: 'aaaaaaaa-bbbb-cccc-dddd-0123456789ab',
@@ -97,43 +90,34 @@ describe('number-insights', () => {
       .persist()
       .get('/ni/standard/json')
       .basicAuth({user: 'abcd', pass: '1234'})
-      .query({
-        number})
-      .reply(200, expectedResponse);
+      .query({ number: '447700900000' })
+      .reply(200, apiResponse);
 
     const lookup = await client.standardLookup('447700900000');
-    assert.deepEqual(lookup.status, expectedResponse.status);
-    assert.deepEqual(lookup.status_message, expectedResponse.status_message);
-    assert.deepEqual(lookup.request_id, expectedResponse.request_id);
-    assert.deepEqual(lookup.international_format_number, 
-      expectedResponse.international_format_number
-    );
-    assert.deepEqual(lookup.national_format_number, 
-      expectedResponse.national_format_number
-    );
-    assert.deepEqual(lookup.country_code, expectedResponse.country_code);
-    assert.deepEqual(lookup.country_code_iso3, 
-      expectedResponse.country_code_iso3
-    );
-    assert.deepEqual(lookup.country_name, expectedResponse.country_name);
-    assert.deepEqual(lookup.country_prefix, expectedResponse.country_prefix);
-    assert.deepEqual(lookup.request_price, expectedResponse.request_price);
-    assert.deepEqual(lookup.refund_price, expectedResponse.refund_price);
-    assert.deepEqual(lookup.remaining_balance, 
-      expectedResponse.remaining_balance
-    );
-    assert.deepEqual(lookup.current_carrier, expectedResponse.current_carrier);
-    assert.deepEqual(lookup.original_carrier, expectedResponse.original_carrier);
-    assert.deepEqual(lookup.ported, expectedResponse.ported);
-    assert.deepEqual(lookup.caller_identity, expectedResponse.caller_identity);
-    assert.deepEqual(lookup.caller_name, expectedResponse.caller_name);
-    assert.deepEqual(lookup.last_name, expectedResponse.last_name);
-    assert.deepEqual(lookup.first_name, expectedResponse.first_name);
-    assert.deepEqual(lookup.caller_type, expectedResponse.caller_type);
+    assert.deepEqual(lookup.status, apiResponse.status);
+    assert.deepEqual(lookup.statusMessage, apiResponse.status_message);
+    assert.deepEqual(lookup.requestId, apiResponse.request_id);
+    assert.deepEqual(lookup.internationalFormatNumber, apiResponse.international_format_number);
+    assert.deepEqual(lookup.nationalFormatNumber, apiResponse.national_format_number);
+    assert.deepEqual(lookup.countryCode, apiResponse.country_code);
+    assert.deepEqual(lookup.countryCodeIso3, apiResponse.country_code_iso3);
+    assert.deepEqual(lookup.countryName, apiResponse.country_name);
+    assert.deepEqual(lookup.countryPrefix, apiResponse.country_prefix);
+    assert.deepEqual(lookup.requestPrice, apiResponse.request_price);
+    assert.deepEqual(lookup.refundPrice, apiResponse.refund_price);
+    assert.deepEqual(lookup.remainingBalance, apiResponse.remaining_balance);
+    assert.deepEqual(lookup.currentCarrier.networkCode, apiResponse.current_carrier.network_code);
+    assert.deepEqual(lookup.originalCarrier.networkCode, apiResponse.original_carrier.network_code);
+    assert.deepEqual(lookup.ported, apiResponse.ported);
+    assert.deepEqual(lookup.callerIdentity.callerType, apiResponse.caller_identity.caller_type);
+    assert.deepEqual(lookup.callerName, apiResponse.caller_name);
+    assert.deepEqual(lookup.lastName, apiResponse.last_name);
+    assert.deepEqual(lookup.firstName, apiResponse.first_name);
+    assert.deepEqual(lookup.callerType, apiResponse.caller_type);
   });
 
   test('do an advanced lookup', async () => {
-    const expectedResponse = {
+    const apiResponse = {
       status: 0,
       status_message: 'Success',
       request_id: 'aaaaaaaa-bbbb-cccc-dddd-0123456789ab',
@@ -185,47 +169,37 @@ describe('number-insights', () => {
       .persist()
       .get('/ni/advanced/json')
       .basicAuth({user: 'abcd', pass: '1234'})
-      .query({
-        number})
-      .reply(200, expectedResponse);
+      .query({ number: '447700900000' })
+      .reply(200, apiResponse);
 
     const lookup = await client.advancedLookup('447700900000');
-    assert.deepEqual(lookup.status, expectedResponse.status);
-    assert.deepEqual(lookup.status_message, expectedResponse.status_message);
-    assert.deepEqual(lookup.request_id, expectedResponse.request_id);
-    assert.deepEqual(lookup.international_format_number, 
-      expectedResponse.international_format_number
-    );
-    assert.deepEqual(lookup.national_format_number, 
-      expectedResponse.national_format_number
-    );
-    assert.deepEqual(lookup.country_code, expectedResponse.country_code);
-    assert.deepEqual(lookup.country_code_iso3, 
-      expectedResponse.country_code_iso3
-    );
-    assert.deepEqual(lookup.country_name, expectedResponse.country_name);
-    assert.deepEqual(lookup.country_prefix, expectedResponse.country_prefix);
-    assert.deepEqual(lookup.request_price, expectedResponse.request_price);
-    assert.deepEqual(lookup.refund_price, expectedResponse.refund_price);
-    assert.deepEqual(lookup.remaining_balance, 
-      expectedResponse.remaining_balance
-    );
-    assert.deepEqual(lookup.current_carrier, expectedResponse.current_carrier);
-    assert.deepEqual(lookup.original_carrier, expectedResponse.original_carrier);
-    assert.deepEqual(lookup.ported, expectedResponse.ported);
-    assert.deepEqual(lookup.caller_identity, expectedResponse.caller_identity);
-    assert.deepEqual(lookup.roaming, expectedResponse.roaming);
-    assert.deepEqual(lookup.lookup_outcome, expectedResponse.lookup_outcome);
-    assert.deepEqual(lookup.lookup_outcome_message, 
-      expectedResponse.lookup_outcome_message
-    );
-    assert.deepEqual(lookup.valid_number, expectedResponse.valid_number);
-    assert.deepEqual(lookup.reachable, expectedResponse.reachable);
-    assert.deepEqual(lookup.real_time_data, expectedResponse.real_time_data);
+    assert.deepEqual(lookup.status, apiResponse.status);
+    assert.deepEqual(lookup.statusMessage, apiResponse.status_message);
+    assert.deepEqual(lookup.requestId, apiResponse.request_id);
+    assert.deepEqual(lookup.internationalFormatNumber, apiResponse.international_format_number);
+    assert.deepEqual(lookup.nationalFormatNumber, apiResponse.national_format_number);
+    assert.deepEqual(lookup.countryCode, apiResponse.country_code);
+    assert.deepEqual(lookup.countryCodeIso3, apiResponse.country_code_iso3);
+    assert.deepEqual(lookup.countryName, apiResponse.country_name);
+    assert.deepEqual(lookup.countryPrefix, apiResponse.country_prefix);
+    assert.deepEqual(lookup.requestPrice, apiResponse.request_price);
+    assert.deepEqual(lookup.refundPrice, apiResponse.refund_price);
+    assert.deepEqual(lookup.remainingBalance, apiResponse.remaining_balance);
+    assert.deepEqual(lookup.currentCarrier.networkCode, apiResponse.current_carrier.network_code);
+    assert.deepEqual(lookup.originalCarrier.networkCode, apiResponse.original_carrier.network_code);
+    assert.deepEqual(lookup.ported, apiResponse.ported);
+    assert.deepEqual(lookup.callerIdentity.callerType, apiResponse.caller_identity.caller_type);
+    assert.deepEqual(lookup.roaming.status, apiResponse.roaming.status);
+    assert.deepEqual(lookup.roaming.roamingCountryCode, apiResponse.roaming.roaming_country_code);
+    assert.deepEqual(lookup.lookupOutcome, apiResponse.lookup_outcome);
+    assert.deepEqual(lookup.lookupOutcomeMessage, apiResponse.lookup_outcome_message);
+    assert.deepEqual(lookup.validNumber, apiResponse.valid_number);
+    assert.deepEqual(lookup.reachable, apiResponse.reachable);
+    assert.deepEqual(lookup.realTimeData.activeStatus, apiResponse.real_time_data.active_status);
   });
 
   test('do an async advanced lookup', async () => {
-    const expectedResponse = {
+    const apiResponse = {
       request_id: 'aaaaaaaa-bbbb-cccc-dddd-0123456789ab',
       number: '447700900000',
       remaining_balance: '1.23456789',
@@ -239,21 +213,20 @@ describe('number-insights', () => {
       .get('/ni/advanced/async/json')
       .basicAuth({user: 'abcd', pass: '1234'})
       .query({
-        number: 'https://test.com/lookup/handler',
+        number: '447700900000',
+        callback: 'https://test.com/lookup/handler',
       })
-      .reply(200, expectedResponse);
+      .reply(200, apiResponse);
 
     const lookup = await client.asyncAdvancedLookup(
       '447700900000',
       'https://test.com/lookup/handler'
     );
-    assert.deepEqual(lookup.status, expectedResponse.status);
-    assert.deepEqual(lookup.request_id, expectedResponse.request_id);
-    assert.deepEqual(lookup.number, expectedResponse.number);
-    assert.deepEqual(lookup.remaining_balance, 
-      expectedResponse.remaining_balance
-    );
-    assert.deepEqual(lookup.request_price, expectedResponse.request_price);
-    assert.deepEqual(lookup.error_text, expectedResponse.error_text);
+    assert.deepEqual(lookup.status, apiResponse.status);
+    assert.deepEqual(lookup.requestId, apiResponse.request_id);
+    assert.deepEqual(lookup.number, apiResponse.number);
+    assert.deepEqual(lookup.remainingBalance, apiResponse.remaining_balance);
+    assert.deepEqual(lookup.requestPrice, apiResponse.request_price);
+    assert.deepEqual(lookup.errorText, apiResponse.error_text);
   });
 });
