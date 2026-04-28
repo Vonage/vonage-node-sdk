@@ -302,7 +302,7 @@ export default [
                 action: NCCOActions.TALK,
                 text: 'I\'ll always dial the K for you',
                 language: TTSLanguages.EN_US,
-                style: '1',
+                style: '0',
                 premium: true,
                 loop: 1,
                 level: '0.4',
@@ -429,6 +429,24 @@ export default [
         ,
       ],
     ],
+    generator: false,
+    error: false,
+    expected: undefined,
+  },
+  {
+    label: 'unmute call',
+    requests: [
+      [
+        `/v1/calls/${callPhone.uuid}`,
+        'PUT',
+        {
+          action: 'unmute',
+        },
+      ],
+    ],
+    responses: [[204]],
+    clientMethod: 'unmuteCall',
+    parameters: [callPhone.uuid],
     generator: false,
     error: false,
     expected: undefined,
