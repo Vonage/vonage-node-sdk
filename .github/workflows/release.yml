@@ -25,6 +25,9 @@ jobs:
       - name: Install packages
         run: npm install --ignore-scripts
 
+      - name: Build ESM and CJS modules
+        run: npm run build --workspaces --if-present
+
       - name: Update CHANGELOG.md
         run: |
           DATE=$(date +%Y-%m-%d)

@@ -11,6 +11,5 @@ const srcDir = path.join(repoRoot, 'shared', 'unsupported');
 const outDir = path.resolve(process.cwd(), 'dist');
 
 copy(path.join(srcDir, 'unsupportedBrowser.cjs'), outDir);
-copy(path.join(srcDir, 'unsupportedBrowser.d.ts'), outDir);
 
 console.log('[unsupported] copied into', outDir);

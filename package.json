@@ -74,7 +74,9 @@
   },
   "engineStrict": true,
   "devDependencies": {
+    "esbuild": "0.25.0",
     "eslint": "9.39.2",
-    "eslint-plugin-package-json": "0.88.1"
+    "eslint-plugin-package-json": "0.88.1",
+    "rimraf": "6.1.3"
   }
 }
