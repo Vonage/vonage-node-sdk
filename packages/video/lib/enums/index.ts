@@ -1,5 +1,6 @@
 export * from './ArchiveOutputMode.js';
 export * from './AudioRate.js';
+export * from './AudioTransportType.js';
 export * from './CaptionStatus.js';
 export * from './ExperienceComposerResolution.js';
 export * from './LayoutType.js';

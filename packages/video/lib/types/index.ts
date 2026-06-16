@@ -1,4 +1,5 @@
 export * from './ArchiveLayout.js';
+export * from './AudioTransport.js';
 export * from './ArchiveMode.js';
 export * from './ArchiveOptions.js';
 export * from './ArchiveSearchFilter.js';
