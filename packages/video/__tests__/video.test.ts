@@ -14,6 +14,7 @@ import {
   SingleArchiveResponseWithTranscription,
   SingleArchiveResponseWithQuantizationParameter,
   MultiStreamLayoutResponse,
+  AudioRate,
 } from '../lib/index.js';
 
 
@@ -1387,5 +1388,38 @@ describe('video', () => {
 
     await client.disconnectWebsocket('CALLID');
     expect(nock.isDone()).toBeTruthy();
+  });
+
+  test('can connect to a websocket with 24K audio', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: {
+          uri: 'wss://mydomain.com/websocket/',
+          audioRate: AudioRate['24KHZ'],
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      {
+        uri: 'wss://mydomain.com/websocket/',
+        audioRate: AudioRate['24KHZ'],
+      }
+    );
+
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
   });
 });
