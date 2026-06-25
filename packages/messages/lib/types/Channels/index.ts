@@ -1,9 +1,10 @@
-import { AnyMessengerChannel } from './Messenger/';
-import { AnyMMSChannel } from './MMS/';
-import { AnyViberChannel } from './Viber/';
-import { AnyWhatsAppChannel } from './WhatsApp/';
-import { SMSChannel } from './SMSParams';
-import { AnyRCSChannel } from './RCS/';
+import { AnyMessengerChannel } from './Messenger/index.js';
+import { AnyMMSChannel } from './MMS/index.js';
+import { AnyViberChannel } from './Viber/index.js';
+import { AnyWhatsAppChannel } from './WhatsApp/index.js';
+import { SMSChannel } from './SMSParams.js';
+import { AnyRCSChannel } from './RCS/index.js';
+import { AnyEmailChannel } from './Email/index.js';
 
 export * from './Messenger/';
 export * from './MMS/';
@@ -22,7 +23,8 @@ export type AnyChannel =
   | AnyViberChannel
   | AnyWhatsAppChannel
   | SMSChannel
-  | AnyRCSChannel;
+  | AnyRCSChannel
+  | AnyEmailChannel;
 
 export type MessageWithFailover = {
   failover?: Array<AnyChannel>

@@ -5,4 +5,5 @@ export enum Channels {
   WHATSAPP = 'whatsapp',
   VIBER = 'viber_service',
   RCS = 'rcs',
+  EMAIL = 'email',
 }
