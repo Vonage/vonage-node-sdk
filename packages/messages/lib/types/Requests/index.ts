@@ -23,3 +23,6 @@ export * from './WhatsAppTemplateRequest.js';
 export * from './WhatsAppTextRequest.js';
 export * from './UpdateMessageRequest.js';
 export * from './WhatsAppReactionRequest.js';
+export * from './EmailTextRequest.js';
+export * from './EmailHTMLRequest.js';
+export * from './EmailContentRequest.js';

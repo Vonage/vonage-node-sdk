@@ -4,6 +4,7 @@ import messengerTests from './messenger';
 import viberTests from './viber';
 import whatsAppTests from './whatsApp';
 import RCSTests from './rcs';
+import emailTests from './email';
 
 export default [
   {
@@ -29,5 +30,9 @@ export default [
   {
     label: 'RCS',
     tests: RCSTests,
+  },
+  {
+    label: 'Email',
+    tests: emailTests,
   },
 ];

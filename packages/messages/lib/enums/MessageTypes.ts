@@ -10,4 +10,5 @@ export enum MessageTypes {
   TEMPLATE = 'template',
   STICKER = 'sticker',
   REACTION = 'reaction',
+  HTML = 'html',
 }
