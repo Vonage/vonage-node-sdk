@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/video",
-  "version": "1.27.4",
+  "version": "1.29.0",
   "description": "Package to interact with the Vonage Video API (Not OpenTok Compatible)",
   "keywords": [
     "vonage",
@@ -215,10 +215,10 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/auth": "1.14.4",
-    "@vonage/jwt": "1.13.4",
-    "@vonage/server-client": "1.19.4",
-    "@vonage/vetch": "1.10.4"
+    "@vonage/auth": "1.15.0",
+    "@vonage/jwt": "1.14.0",
+    "@vonage/server-client": "1.20.0",
+    "@vonage/vetch": "1.11.0"
   },
   "devDependencies": {
     "jsonwebtoken": "9.0.3",

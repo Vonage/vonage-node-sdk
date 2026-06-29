@@ -7,8 +7,6 @@ npm-debug.log
 .nyc
 coverage
 .nyc_output
-.idea
-.DS_Store
 .env
 .nexmo-app
 coverage.lcov
@@ -17,7 +15,6 @@ test
 typings
 packages/**/dist
 tsconfig.tsbuildinfo
-lerna-debug.log
 package-lock.json
 docs
 yarn.lock
