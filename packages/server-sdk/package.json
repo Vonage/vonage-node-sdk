@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/server-sdk",
-  "version": "3.26.5",
+  "version": "3.27.0",
   "description": "Node.js Client for the Vonage API Platform",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -211,22 +211,22 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/accounts": "1.19.4",
-    "@vonage/applications": "1.19.4",
-    "@vonage/auth": "1.14.4",
-    "@vonage/conversations": "1.13.5",
-    "@vonage/messages": "1.23.5",
-    "@vonage/number-insights": "1.19.4",
-    "@vonage/numbers": "1.21.4",
-    "@vonage/pricing": "1.19.4",
-    "@vonage/redact": "1.18.4",
-    "@vonage/server-client": "1.19.4",
-    "@vonage/sms": "1.20.5",
-    "@vonage/users": "1.13.4",
-    "@vonage/verify": "1.19.4",
-    "@vonage/verify2": "1.18.4",
-    "@vonage/video": "1.27.4",
-    "@vonage/voice": "1.20.4"
+    "@vonage/accounts": "1.20.0",
+    "@vonage/applications": "1.20.0",
+    "@vonage/auth": "1.15.0",
+    "@vonage/conversations": "1.14.0",
+    "@vonage/messages": "1.24.0",
+    "@vonage/number-insights": "1.20.0",
+    "@vonage/numbers": "1.22.0",
+    "@vonage/pricing": "1.20.0",
+    "@vonage/redact": "1.19.0",
+    "@vonage/server-client": "1.20.0",
+    "@vonage/sms": "1.21.0",
+    "@vonage/users": "1.14.0",
+    "@vonage/verify": "1.20.0",
+    "@vonage/verify2": "1.19.0",
+    "@vonage/video": "1.28.0",
+    "@vonage/voice": "1.21.0"
   },
   "engines": {
     "node": ">=20"
