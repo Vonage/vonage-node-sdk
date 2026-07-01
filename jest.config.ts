@@ -9,6 +9,7 @@ const presetConfig = createDefaultEsmPreset({
 const projectDefault = {
   testEnvironment: 'node',
   ...presetConfig,
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
     '@vonage/(.+)': '<rootDir>/packages/$1/lib',
@@ -145,6 +146,12 @@ const config = {
       ...projectDefault,
       displayName: 'REDACT',
       testMatch: ['<rootDir>/packages/redact/__tests__/**/*.test.ts'],
+      coveragePathIgnorePatterns: ['node_modules', '__tests__'],
+    },
+    {
+      ...projectDefault,
+      displayName: 'REPORTS',
+      testMatch: ['<rootDir>/packages/reports/__tests__/**/*.test.ts'],
       coveragePathIgnorePatterns: ['node_modules', '__tests__'],
     },
     {

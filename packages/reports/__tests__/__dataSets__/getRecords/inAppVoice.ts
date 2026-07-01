@@ -1,0 +1,63 @@
+import { ACCOUNT_ID, BASE_SYNC_RESPONSE } from '../common';
+
+export default [
+  {
+    label: 'get in-app voice records',
+    requests: [[
+      '/v2/reports/records?product=IN-APP-VOICE&account_id=testKey',
+      'GET',
+    ]],
+    responses: [[200,
+      {
+        ...BASE_SYNC_RESPONSE,
+        product: 'IN-APP-VOICE',
+        records: [{
+          account_id: ACCOUNT_ID,
+          id: 'appv-00000000-0000-0000-0000-000000000001',
+          application_id: 'app-00000000-0000-0000-0000-000000000001',
+          client_ref: 'in-app-client-ref',
+          conversation_id: 'conversation-00000001',
+          currency: 'USD',
+          date_end: '2024-01-08T00:01:00Z',
+          date_start: '2024-01-08T00:00:00Z',
+          duration: '60',
+          leg_id: 'leg-00000001',
+          price: '0.0150',
+          request_id: 'request-00000001',
+          status: 'completed',
+          total_price: '0.0150',
+          user_id: 'user-00000001',
+        }],
+      }]],
+    clientMethod: 'getRecords',
+    parameters: [{
+      product: 'IN-APP-VOICE',
+      accountId: ACCOUNT_ID,
+    }],
+    expected: {
+      links: BASE_SYNC_RESPONSE._links,
+      requestId: BASE_SYNC_RESPONSE.request_id,
+      requestStatus: 'SUCCESS',
+      receivedAt: '2024-01-01T00:00:00Z',
+      itemsCount: 1,
+      product: 'IN-APP-VOICE',
+      records: [{
+        accountId: ACCOUNT_ID,
+        id: 'appv-00000000-0000-0000-0000-000000000001',
+        applicationId: 'app-00000000-0000-0000-0000-000000000001',
+        clientRef: 'in-app-client-ref',
+        conversationId: 'conversation-00000001',
+        currency: 'USD',
+        dateEnd: '2024-01-08T00:01:00Z',
+        dateStart: '2024-01-08T00:00:00Z',
+        duration: '60',
+        legId: 'leg-00000001',
+        price: '0.0150',
+        requestId: 'request-00000001',
+        status: 'completed',
+        totalPrice: '0.0150',
+        userId: 'user-00000001',
+      }],
+    },
+  },
+];
