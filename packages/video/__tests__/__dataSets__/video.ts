@@ -1,4 +1,5 @@
 import {
+  ConnectionState,
   ExperienceComposerResolution,
   ExperienceComposerOptions,
   CaptionOptions,
@@ -63,6 +64,24 @@ const initiateSIPCallResponse = {
   id: 'abcd',
   connectionId: '1234',
   streamId: 'xyz',
+};
+
+const multiConnectionResponse = {
+  count: 2,
+  applicationId: 'abcd-1234',
+  sessionId: '2_MX4xMDBfjE0Mzc2NzY1NDgwMTJ-TjMzfn4',
+  items: [
+    {
+      connectionId: 'e9f8c166-6c67-440d-994a-04fb6dfed007',
+      connectionState: ConnectionState.CONNECTED,
+      createdAt: 1384221730000,
+    },
+    {
+      connectionId: 'b40ef09b-3811-4726-b508-e41a0f96c68f',
+      connectionState: ConnectionState.CONNECTING,
+      createdAt: 1384221750000,
+    },
+  ],
 };
 
 export default [
@@ -206,5 +225,17 @@ export default [
       initiateSIPCallOptions,
     ],
     expected: initiateSIPCallResponse,
+  },
+  {
+    label: 'List connections in a session',
+    request: [
+      '/v2/project/abcd-1234/session/2_MX4xMDBfjE0Mzc2NzY1NDgwMTJ-TjMzfn4/connection',
+      'GET',
+    ],
+    response: [200, multiConnectionResponse],
+    method: 'get',
+    clientMethod: 'listConnections',
+    parameters: ['2_MX4xMDBfjE0Mzc2NzY1NDgwMTJ-TjMzfn4'],
+    expected: multiConnectionResponse,
   },
 ];

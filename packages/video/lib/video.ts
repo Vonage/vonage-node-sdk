@@ -22,6 +22,7 @@ import {
   InitiateSIPCallRequest,
   MultiArchiveResponse,
   MultiBroadcastResponse,
+  MultiConnectionResponse,
   MultiExperienceComposerResponse,
   MultiStreamLayoutResponse,
   ProjectDetailsResponse,
@@ -663,6 +664,30 @@ export class Video extends Client {
     const resp = await this.sendGetRequest<MultiExperienceComposerResponse>(
       `${this.config.videoHost}/v2/project/${this.auth.applicationId}/render`,
       filter,
+    );
+    return resp.data;
+  }
+
+  /**
+   * Lists all connections in a Vonage Video session.
+   *
+   * @param {string} sessionId - The ID of the session for which to list connections.
+   * @return {Promise<MultiConnectionResponse>} A promise that resolves with the list of connections in the session.
+   * @throws {Error} If an error occurs while retrieving the connections or if the session does not exist.
+   *
+   * @example
+   * ```ts
+   * const connections = await videoClient.listConnections(SESSION_ID);
+   * for (const connection of connections.items) {
+   *   console.log(connection.connectionId);
+   * }
+   * ```
+   */
+  public async listConnections(
+    sessionId: string,
+  ): Promise<MultiConnectionResponse> {
+    const resp = await this.sendGetRequest<MultiConnectionResponse>(
+      `${this.config.videoHost}/v2/project/${this.auth.applicationId}/session/${sessionId}/connection`,
     );
     return resp.data;
   }
