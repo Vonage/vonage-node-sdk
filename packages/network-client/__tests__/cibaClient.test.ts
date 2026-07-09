@@ -2,10 +2,10 @@ import {
   NetworkClient,
   Purpose,
   Scope,
-} from '../lib';
-import { SDKTestCase, testPrivateKey } from '../../../testHelpers';
+} from '../lib/index.js';
+import { SDKTestCase, testPrivateKey } from '../../../testHelpers/index.js';
 import { AuthenticationType } from '@vonage/server-client';
-import { VonageTest } from '../../../testHelpers';
+import { VonageTest } from '../../../testHelpers/index.js';
 
 class CIBATestClient extends NetworkClient {
   protected authType?: AuthenticationType = AuthenticationType.CIBA;

@@ -6,12 +6,12 @@ import { SMSChannel } from './SMSParams.js';
 import { AnyRCSChannel } from './RCS/index.js';
 import { AnyEmailChannel } from './Email/index.js';
 
-export * from './Messenger/';
-export * from './MMS/';
-export * from './Viber/';
-export * from './WhatsApp/';
-export * from './SMSParams';
-export * from './RCS/';
+export * from './Messenger/index.js';
+export * from './MMS/index.js';
+export * from './Viber/index.js';
+export * from './WhatsApp/index.js';
+export * from './SMSParams.js';
+export * from './RCS/index.js';
 
 /**
  * Represents a union type that can be any of the specific channel message

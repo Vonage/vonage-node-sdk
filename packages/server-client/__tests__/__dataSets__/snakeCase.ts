@@ -1,4 +1,4 @@
-import { snakeCaseObjectKeys } from '../../lib';
+import { snakeCaseObjectKeys } from '../../lib/index.js';
 
 export default [
   {

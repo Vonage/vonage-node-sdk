@@ -2,14 +2,14 @@ import {
   SDKTestCase,
   keyAuth,
   validateBearerAuth,
-} from '../../../../testHelpers';
+} from '../../../../testHelpers/index.js';
 import {
   Verify2,
   Template,
   ListAllTemplatesResponse,
   TemplateResponse,
   TemplatePage,
-} from '../../lib/';
+} from '../../lib/index.js';
 
 export default [
   {

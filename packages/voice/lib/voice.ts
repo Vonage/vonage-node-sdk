@@ -14,10 +14,10 @@ import {
   CallWithNCCO,
   SIPEndpoint,
   CallEndpoint,
-} from './types';
+} from './types/index.js';
 
 import { ResponseTypes } from '@vonage/vetch';
-import { NCCOActions } from './enums';
+import { NCCOActions } from './enums/index.js';
 
 const apiCallsToCalls = (call: CallDetailResponse): CallDetail => {
   delete call._links;
@@ -46,8 +46,8 @@ const NCCOToApiCalls = (ncco: Action[]): Array<Action> => ncco.map((action) => {
             uri: endpoint.uri,
             headers: endpoint.headers,
             standardHeaders: {
-              'User-to-User': Object.hasOwn(endpoint.standardHeaders || {} ,'User-to-User')
-                ? {...endpoint.standardHeaders}['User-to-User']
+              'User-to-User': Object.hasOwn(endpoint.standardHeaders || {}, 'User-to-User')
+                ? { ...endpoint.standardHeaders }['User-to-User']
                 : endpoint.standardHeaders?.userToUser,
             }
           } as SIPEndpoint;
@@ -353,7 +353,7 @@ export class Voice extends Client {
   async subscribeDTMF(uuid: string, eventUrl: string): Promise<void> {
     await this.sendPutRequest<UpdateCallResponse>(
       `${this.config.apiHost}/v1/calls/${uuid}/input/dtmf`,
-      { event_url: [eventUrl]},
+      { event_url: [eventUrl] },
     );
   }
 

@@ -1,6 +1,6 @@
-import { NCCOActions, TTSLanguages } from '../../enums/';
-import { TalkAction } from '../../types/';
-import { Serializable } from '../../interfaces';
+import { NCCOActions, TTSLanguages } from '../../enums/index.js';
+import { TalkAction } from '../../types/index.js';
+import { Serializable } from '../../interfaces/index.js';
 
 /**
  * Represents a Talk action in a Nexmo Call Control Object (NCCO).

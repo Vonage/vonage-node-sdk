@@ -1,6 +1,6 @@
-import { UserResponse } from '../../lib';
+import { UserResponse } from '../../lib/index.js';
 
-import { BASE_URL, testUser, userToApi } from '../common';
+import { BASE_URL, testUser, userToApi } from '../common.js';
 
 const updateUser = userToApi(testUser);
 delete updateUser.id;

@@ -1,5 +1,5 @@
-import testDataSets from './__dataSets__/';
-import { Messages } from '../lib';
+import testDataSets from './__dataSets__/index.js';
+import { Messages } from '../lib/index.js';
 import {
   VonageTest,
   SDKTestCase,
@@ -7,7 +7,7 @@ import {
   TestRequest,
   testPrivateKey,
   TestTuple,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 // Convert the test data sets into SDK test cases
 const messageTests = testDataSets.map((dataSet): TestTuple<Messages> => {

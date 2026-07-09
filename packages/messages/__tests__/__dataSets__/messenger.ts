@@ -1,4 +1,4 @@
-import { MessengerCategory, MessengerTags } from '../../lib';
+import { MessengerCategory, MessengerTags } from '../../lib/index.js';
 import {
   MessengerAudio,
   MessengerImage,
@@ -17,13 +17,13 @@ import {
   MessengerVideoParams,
   MessengerFileRequest,
   MessengerFileParams,
-} from '../../lib';
+} from '../../lib/index.js';
 
-import { Audio } from '../../lib/classes/Messenger/Audio';
-import { File } from '../../lib/classes/Messenger/File';
-import { Image } from '../../lib/classes/Messenger/Image';
-import { Text } from '../../lib/classes/Messenger/Text';
-import { Video } from '../../lib/classes/Messenger/Video';
+import { Audio } from '../../lib/classes/Messenger/Audio.js';
+import { File } from '../../lib/classes/Messenger/File.js';
+import { Image } from '../../lib/classes/Messenger/Image.js';
+import { Text } from '../../lib/classes/Messenger/Text.js';
+import { Video } from '../../lib/classes/Messenger/Video.js';
 
 export default [
   {

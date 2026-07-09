@@ -5,7 +5,7 @@ import {
   IdentityInsightsType,
   NetworkType,
   Connectivity,
-} from '../../lib';
+} from '../../lib/index.js';
 
 const params = {
   phone_number: '14040000000',

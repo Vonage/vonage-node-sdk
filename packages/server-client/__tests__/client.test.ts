@@ -1,5 +1,5 @@
-import { Client, AuthenticationType } from '../lib';
-import { requestTests } from './__dataSets__';
+import { Client, AuthenticationType } from '../lib/index.js';
+import { requestTests } from './__dataSets__/index.js';
 import {
   VonageTest,
   SDKTestCase,
@@ -9,7 +9,7 @@ import {
   keyAuth,
   apiKeyAuth,
   validateApiKeyAuth,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 class JWTAuthClient extends Client {
   protected authType = AuthenticationType.JWT;

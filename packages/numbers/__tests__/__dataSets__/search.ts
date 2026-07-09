@@ -1,4 +1,4 @@
-import { Feature } from '../../lib/enums';
+import { Feature } from '../../lib/enums/index.js';
 const BASE_URL = 'https://rest.nexmo.com';
 const CLIENT_METHOD = 'getAvailableNumbers';
 

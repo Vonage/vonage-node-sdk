@@ -1,6 +1,6 @@
 import nock from 'nock';
-import { Secrets } from '../lib';
-import { validateApiKeyAuth, apiKeyAuth} from '../../../testHelpers';
+import { Secrets } from '../lib/index.js';
+import { validateApiKeyAuth, apiKeyAuth} from '../../../testHelpers/index.js';
 
 describe('secrets', () => {
   let client: Secrets;

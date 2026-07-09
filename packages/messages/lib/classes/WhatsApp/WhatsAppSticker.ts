@@ -1,11 +1,11 @@
-import { AbstractMessage } from '../AbstractMessage';
+import { AbstractMessage } from '../AbstractMessage.js';
 import {
   WhatsAppStickerParams,
   WhatsAppStickerIdType,
   WhatsAppStickerUrlType,
   WhatsAppContext,
-} from '../../types/';
-import { Channels, MessageTypes } from '../../enums/';
+} from '../../types/index.js';
+import { Channels, MessageTypes } from '../../enums/index.js';
 
 /**
  * Represents a sticker message for WhatsApp.

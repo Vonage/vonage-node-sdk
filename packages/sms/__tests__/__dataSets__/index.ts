@@ -1,4 +1,4 @@
-import smsTests from './sms';
+import smsTests from './sms.js';
 
 export default [
   {

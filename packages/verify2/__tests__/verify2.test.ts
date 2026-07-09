@@ -1,6 +1,6 @@
-import testDataSets from './__dataSets__';
+import testDataSets from './__dataSets__/index.js';
 import {
   VonageTest,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 VonageTest(testDataSets);

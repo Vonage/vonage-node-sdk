@@ -2,9 +2,9 @@ name: ESLint
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions: read-all
 
@@ -22,25 +22,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5
         with:
-          node-version: 20.x
+          node-version: 22.x
 
-      - name: Install ESLint
+      - name: Lint
         run: |
           npm install --ignore-scripts
-          npm install --ignore-scripts @microsoft/eslint-formatter-sarif@3.1.0
-
-      - name: Run ESLint
-        env:
-          SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
-        run: npm run lint --
-          --config eslint.config.js
-          --ext .js,.jsx,.ts,.tsx
-          --format @microsoft/eslint-formatter-sarif
-          --output-file eslint-results.sarif
-        continue-on-error: true
-
-      - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@b2951d2a1ed70de8ec57301118b487b35c13595a
-        with:
-          sarif_file: eslint-results.sarif
-          wait-for-processing: true
+          npm run lint

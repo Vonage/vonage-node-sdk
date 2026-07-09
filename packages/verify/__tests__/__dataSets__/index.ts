@@ -1,10 +1,10 @@
-import checkTests from './check';
-import cancelTests from './cancel';
-import searchTests from './search';
-import startTests from './start';
+import checkTests from './check.js';
+import cancelTests from './cancel.js';
+import searchTests from './search.js';
+import startTests from './start.js';
 import {
   validateApiKeyAuth,
-} from '../../../../testHelpers';
+} from '../../../../testHelpers/index.js';
 
 export default [
   {

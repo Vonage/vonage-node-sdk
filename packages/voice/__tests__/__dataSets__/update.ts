@@ -4,8 +4,8 @@ import {
   CallUpdateResult,
   TalkAction,
   PhoneEndpoint,
-} from '../../lib';
-import { callPhone } from '../common';
+} from '../../lib/index.js';
+import { callPhone } from '../common.js';
 
 export default [
   {

@@ -1,7 +1,7 @@
 import { Client } from '@vonage/server-client';
-import { ApplicationResponse } from '../../lib';
+import { ApplicationResponse } from '../../lib/index.js';
 
-import { BASE_URL, testApplication, capabilitiesToTest } from '../common';
+import { BASE_URL, testApplication, capabilitiesToTest } from '../common.js';
 
 const expectedApplication = JSON.parse(JSON.stringify(testApplication));
 

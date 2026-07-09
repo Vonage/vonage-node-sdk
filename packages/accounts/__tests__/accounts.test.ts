@@ -1,5 +1,5 @@
 import nock from 'nock';
-import { Accounts } from '../lib';
+import { Accounts } from '../lib/index.js';
 import { Auth } from '@vonage/auth';
 
 describe('accounts', () => {

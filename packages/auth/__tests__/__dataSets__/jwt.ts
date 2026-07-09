@@ -1,8 +1,8 @@
 import { jest } from '@jest/globals';
 import { tokenGenerate } from '@vonage/jwt';
-import { AuthParams } from '../../lib/types';
-import { applicationId, } from '../common';
-import { testPrivateKey, testPrivateKeyPath } from '../../../../testHelpers';
+import { AuthParams } from '../../lib/types/index.js';
+import { applicationId, } from '../common.js';
+import { testPrivateKey, testPrivateKeyPath } from '../../../../testHelpers/index.js';
 
 jest.useFakeTimers();
 jest.setSystemTime(10907902800000);

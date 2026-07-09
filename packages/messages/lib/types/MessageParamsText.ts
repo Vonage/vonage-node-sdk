@@ -1,5 +1,5 @@
-import { MessageTypes } from '../enums/MessageTypes';
-import { MessageParams } from './MessageParams';
+import { MessageTypes } from '../enums/MessageTypes.js';
+import { MessageParams } from './MessageParams.js';
 
 /**
  * Represents the parameters for a text message.

@@ -1,6 +1,6 @@
 import { Client } from '@vonage/server-client';
 
-import { BASE_URL, testApplication, capabilitiesToTest } from '../common';
+import { BASE_URL, testApplication, capabilitiesToTest } from '../common.js';
 
 export default [
   {

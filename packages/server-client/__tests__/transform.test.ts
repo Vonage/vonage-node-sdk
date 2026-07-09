@@ -1,10 +1,10 @@
-import { transfomTests } from './__dataSets__';
-import { Client } from '../lib';
+import { transfomTests } from './__dataSets__/index.js';
+import { Client } from '../lib/index.js';
 import {
   ObjectToTransform,
   TransformedObject,
   PartialTransformFunction
-} from '../lib/transformers';
+} from '../lib/transformers.js';
 
 
 type TransformTestCase = {

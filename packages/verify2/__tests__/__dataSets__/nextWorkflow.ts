@@ -3,10 +3,10 @@ import {
   SDKTestCase,
   keyAuth,
   validateBearerAuth,
-} from '../../../../testHelpers';
+} from '../../../../testHelpers/index.js';
 import {
   Verify2,
-} from '../../lib/';
+} from '../../lib/index.js';
 
 export default [
   {

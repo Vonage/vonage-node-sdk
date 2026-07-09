@@ -3,7 +3,7 @@ import {
   ExperienceComposerOptions,
   CaptionOptions,
   SIPCallOptions,
-} from '../../lib';
+} from '../../lib/index.js';
 
 const renderInformation = {
   id: '1248e7070b81464c9789f46ad10e7764',

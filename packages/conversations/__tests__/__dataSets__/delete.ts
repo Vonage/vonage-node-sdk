@@ -1,7 +1,7 @@
 import {
   conversationResponse,
   eventResponse,
-} from '../common';
+} from '../common.js';
 
 export default [
   {

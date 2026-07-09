@@ -1,8 +1,8 @@
-import requestTests from './verify';
-import checkTests from './check';
-import cancelTests from './cancel';
-import templateTests from './templates';
-import fragmentTests from './templateFragments';
+import requestTests from './verify.js';
+import checkTests from './check.js';
+import cancelTests from './cancel.js';
+import templateTests from './templates.js';
+import fragmentTests from './templateFragments.js';
 
 export default [
   {

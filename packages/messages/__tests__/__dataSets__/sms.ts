@@ -1,6 +1,6 @@
-import { Channels, SMS } from '../../lib';
-import { MessageSuccess } from '../../lib';
-import { MessageParamsText, SMSMessageRequest } from '../../lib';
+import { Channels, SMS } from '../../lib/index.js';
+import { MessageSuccess } from '../../lib/index.js';
+import { MessageParamsText, SMSMessageRequest } from '../../lib/index.js';
 
 export default [
   {

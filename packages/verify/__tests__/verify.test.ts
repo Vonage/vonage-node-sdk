@@ -1,5 +1,5 @@
-import { Verify } from '../lib';
-import testDataSets from './__dataSets__';
+import { Verify } from '../lib/index.js';
+import testDataSets from './__dataSets__/index.js';
 import {
   VonageTest,
   SDKTestCase,
@@ -7,7 +7,7 @@ import {
   TestRequest,
   TestTuple,
   apiKeyAuth,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 
 const verifyTest = testDataSets.map((dataSet): TestTuple<Verify> => {

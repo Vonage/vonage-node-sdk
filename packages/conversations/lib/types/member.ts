@@ -1,7 +1,7 @@
 import { UserType } from '@vonage/users';
-import { MemberState } from '../enums/';
-import { AnyChannel } from './anyChannel';
-import { AudioSettings } from './audioSettings';
+import { MemberState } from '../enums/index.js';
+import { AnyChannel } from './anyChannel.js';
+import { AudioSettings } from './audioSettings.js';
 
 /**
  * Type representing the joined initiator.

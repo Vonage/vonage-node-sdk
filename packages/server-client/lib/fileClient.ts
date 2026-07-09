@@ -2,7 +2,6 @@ import { Client } from './client.js';
 import { AuthenticationType } from './enums/index.js';
 import debug from 'debug';
 import { VetchError, HTTPMethods, VetchOptions } from '@vonage/vetch';
-import fetch from 'node-fetch';
 import { createWriteStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import { PipelineSource } from 'node:stream';

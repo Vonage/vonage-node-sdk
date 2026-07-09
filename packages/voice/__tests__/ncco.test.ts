@@ -1,11 +1,11 @@
 import {
   NCCOActions,
-} from '../lib';
-import { Conversation } from '../lib/classes/NCCO/Conversation';
-import { Input } from '../lib/classes/NCCO/Input';
-import { Talk } from '../lib/classes/NCCO/Talk';
-import { Wait } from '../lib/classes/NCCO/Wait';
-import { NCCOBuilder } from '../lib/classes/NCCO/NCCOBuilder';
+} from '../lib/index.js';
+import { Conversation } from '../lib/classes/NCCO/Conversation.js';
+import { Input } from '../lib/classes/NCCO/Input.js';
+import { Talk } from '../lib/classes/NCCO/Talk.js';
+import { Wait } from '../lib/classes/NCCO/Wait.js';
+import { NCCOBuilder } from '../lib/classes/NCCO/NCCOBuilder.js';
 
 describe('voice', () => {
   test('can add a single action', async () => {

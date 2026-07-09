@@ -7,7 +7,7 @@ import {
   CapabilityVoice,
   CapabilityMessages,
   AnyCapability,
-} from '../lib';
+} from '../lib/index.js';
 
 export const BASE_URL = 'https://api.nexmo.com/';
 

@@ -1,5 +1,5 @@
-import { Redact } from '../lib';
-import testDataSets from './__dataSets__';
+import { Redact } from '../lib/index.js';
+import testDataSets from './__dataSets__/index.js';
 
 import {
   VonageTest,
@@ -9,7 +9,7 @@ import {
   TestTuple,
   apiKeyAuth,
   validateApiKeyAuth,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 const applicationsTest = testDataSets.map((dataSet): TestTuple<Redact> => {
   const { label, tests } = dataSet;

@@ -1,4 +1,4 @@
-import { VerifyCheckResponse, VerifyCheck } from '../../lib/types';
+import { VerifyCheckResponse, VerifyCheck } from '../../lib/types/index.js';
 
 export default [
   {

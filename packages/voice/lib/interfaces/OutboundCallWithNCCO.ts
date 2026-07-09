@@ -1,4 +1,4 @@
-import { CallWithNCCO } from '../types';
+import { CallWithNCCO } from '../types/index.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

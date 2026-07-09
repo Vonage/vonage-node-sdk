@@ -1,4 +1,4 @@
-import redactTests from './redact';
+import redactTests from './redact.js';
 
 export default [
   {

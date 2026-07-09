@@ -8,7 +8,7 @@ import {
   SessionPageResponse,
   SessionPage,
   EventPageResponse,
-} from '../../lib';
+} from '../../lib/index.js';
 
 import {
   BASE_URL,
@@ -21,7 +21,7 @@ import {
   sessionUser,
   event,
   eventResponse,
-} from '../common';
+} from '../common.js';
 
 export default [
   {

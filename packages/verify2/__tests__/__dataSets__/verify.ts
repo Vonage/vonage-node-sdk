@@ -2,7 +2,7 @@ import {
   SDKTestCase,
   keyAuth,
   validateBearerAuth,
-} from '../../../../testHelpers';
+} from '../../../../testHelpers/index.js';
 import {
   Verify2,
   VerificationRequest,
@@ -17,7 +17,7 @@ import {
   VerifyLocale,
   Channels,
   SilentAuthChannel
-} from '../../lib';
+} from '../../lib/index.js';
 
 export default [
   {

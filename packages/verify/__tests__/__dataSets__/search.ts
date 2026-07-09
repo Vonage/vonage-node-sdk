@@ -5,7 +5,7 @@ import {
   SearchStatus,
   SearchCheckStatus,
   SearchEventTypes,
-} from '../../lib';
+} from '../../lib/index.js';
 
 const params = new URLSearchParams({
   request_id: 'abcdef0123456789abcdef0123456789',

@@ -1,6 +1,6 @@
-import { NCCOActions } from '../../enums/';
-import { ConversationAction } from '../../types/';
-import { Serializable } from '../../interfaces';
+import { NCCOActions } from '../../enums/index.js';
+import { ConversationAction } from '../../types/index.js';
+import { Serializable } from '../../interfaces/index.js';
 
 /**
  * Represents a Conversation action in the Nexmo Call Control Object (NCCO) for managing audio conferences.

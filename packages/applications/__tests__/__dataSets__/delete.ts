@@ -1,4 +1,4 @@
-import { testApplication } from '../common';
+import { testApplication } from '../common.js';
 
 export default [
   {

@@ -1,4 +1,4 @@
-import postTests from './post';
+import postTests from './post.js';
 
 export default [
   {

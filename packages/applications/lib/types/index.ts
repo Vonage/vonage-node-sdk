@@ -14,14 +14,14 @@ export type AnyCapability = CapabilityBulk |
   CapabilityVoice |
   CapabilityWebhook;
 
-export * from './Application';
-export * from './ApplicationPageList';
-export * from './CapabilityBulk';
-export * from './CapabilityMeetings';
-export * from './CapabilityMessages';
-export * from './CapabilityRTC';
-export * from './CapabilityVerify';
-export * from './CapabilityVoice';
-export * from './CapabilityWebhook';
-export * from './ListApplicationParams';
-export * from './Response';
+export * from './Application.js';
+export * from './ApplicationPageList.js';
+export * from './CapabilityBulk.js';
+export * from './CapabilityMeetings.js';
+export * from './CapabilityMessages.js';
+export * from './CapabilityRTC.js';
+export * from './CapabilityVerify.js';
+export * from './CapabilityVoice.js';
+export * from './CapabilityWebhook.js';
+export * from './ListApplicationParams.js';
+export * from './Response/index.js';

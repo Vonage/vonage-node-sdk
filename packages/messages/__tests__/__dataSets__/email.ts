@@ -10,7 +10,7 @@ import {
   EmailPriority,
   EmailSensitivity,
   EmailContentTypes,
-} from '../../lib';
+} from '../../lib/index.js';
 
 export default [
   {

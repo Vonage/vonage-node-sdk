@@ -1,11 +1,11 @@
-import { AbstractMessage } from '../AbstractMessage';
+import { AbstractMessage } from '../AbstractMessage.js';
 import {
   WhatsAppTemplateParams,
   WhatsAppPolicyType,
   WhatsAppTemplateType,
   WhatsAppContext,
-} from '../../types/';
-import { Channels, MessageTypes } from '../../enums/';
+} from '../../types/index.js';
+import { Channels, MessageTypes } from '../../enums/index.js';
 
 /**
  * Represents a template message for WhatsApp.

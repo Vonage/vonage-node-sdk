@@ -7,7 +7,7 @@ import {
   Label,
   RiskRecommendation,
   FraudScoreResponse,
-} from '../../lib';
+} from '../../lib/index.js';
 
 const params = {
   type: 'phone',

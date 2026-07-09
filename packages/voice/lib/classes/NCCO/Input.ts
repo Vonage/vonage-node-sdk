@@ -1,6 +1,6 @@
 import { NCCOActions } from '../../enums/index.js';
 import { InputAction, DTMFSettings, SpeechSettings } from '../../types/index.js';
-import { Serializable } from '../../interfaces';
+import { Serializable } from '../../interfaces/index.js';
 
 /**
  * Represents an Input action in the Nexmo Call Control Object (NCCO) for gathering user input.

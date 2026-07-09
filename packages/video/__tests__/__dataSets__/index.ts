@@ -1,4 +1,4 @@
-import videoTests from './video';
+import videoTests from './video.js';
 
 export default [
   {

@@ -13,7 +13,7 @@ import {
   Event,
   EventType,
   EventResponse,
-} from '../lib';
+} from '../lib/index.js';
 
 export const BASE_URL = 'https://api.nexmo.com/';
 

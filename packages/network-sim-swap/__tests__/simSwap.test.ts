@@ -2,9 +2,9 @@ import {
   Purpose,
   Scope,
 } from '@vonage/network-client';
-import { SIMSwap } from '../lib';
-import { SDKTestCase, testPrivateKey } from '../../../testHelpers';
-import { VonageTest } from '../../../testHelpers';
+import { SIMSwap } from '../lib/index.js';
+import { SDKTestCase, testPrivateKey } from '../../../testHelpers/index.js';
+import { VonageTest } from '../../../testHelpers/index.js';
 
 const testCases = [
   {

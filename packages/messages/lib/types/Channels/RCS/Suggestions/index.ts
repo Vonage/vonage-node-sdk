@@ -1,19 +1,19 @@
-import { RCSCreateCalendarEventSuggestionParams } from './RCSCreateCalendarEventSuggestionParams';
-import { RCSDialActionSuggestionParams } from './RCSDialActionSuggestionParams';
-import { RCSOpenURLSuggestionParams } from './RCSOpenURLSuggestionParams';
-import { RCSOpenURLWebviewSuggestionParams } from './RCSOpenURLWebviewSuggestionParams';
-import { RCSReplySuggestionParams } from './RCSReplySuggestionParams';
-import { RCSShareLocationSuggestionParams } from './RCSShareLocationSuggestionParams';
-import { RCSViewLocationSuggestionParams } from './RCSViewLocationSuggestionParams';
+import { RCSCreateCalendarEventSuggestionParams } from './RCSCreateCalendarEventSuggestionParams.js';
+import { RCSDialActionSuggestionParams } from './RCSDialActionSuggestionParams.js';
+import { RCSOpenURLSuggestionParams } from './RCSOpenURLSuggestionParams.js';
+import { RCSOpenURLWebviewSuggestionParams } from './RCSOpenURLWebviewSuggestionParams.js';
+import { RCSReplySuggestionParams } from './RCSReplySuggestionParams.js';
+import { RCSShareLocationSuggestionParams } from './RCSShareLocationSuggestionParams.js';
+import { RCSViewLocationSuggestionParams } from './RCSViewLocationSuggestionParams.js';
 
-export * from './RCSCreateCalendarEventSuggestionParams';
-export * from './RCSDialActionSuggestionParams';
-export * from './RCSOpenURLSuggestionParams';
-export * from './RCSOpenURLWebviewSuggestionParams';
-export * from './RCSReplySuggestionParams';
-export * from './RCSShareLocationSuggestionParams';
-export * from './RCSSuggestionParams';
-export * from './RCSViewLocationSuggestionParams';
+export * from './RCSCreateCalendarEventSuggestionParams.js';
+export * from './RCSDialActionSuggestionParams.js';
+export * from './RCSOpenURLSuggestionParams.js';
+export * from './RCSOpenURLWebviewSuggestionParams.js';
+export * from './RCSReplySuggestionParams.js';
+export * from './RCSShareLocationSuggestionParams.js';
+export * from './RCSSuggestionParams.js';
+export * from './RCSViewLocationSuggestionParams.js';
 
 export type AnyRCSSuggestion = RCSCreateCalendarEventSuggestionParams
   | RCSDialActionSuggestionParams

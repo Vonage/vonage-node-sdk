@@ -1,5 +1,5 @@
-import { MessageInterface } from './MessageInterface';
-import { MessageImageType } from '../types';
+import { MessageInterface } from './MessageInterface.js';
+import { MessageImageType } from '../types/index.js';
 
 /**
  * Represents a message interface for image attachments.

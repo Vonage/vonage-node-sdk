@@ -1,12 +1,12 @@
 import { jest } from '@jest/globals';
-import { Auth } from '../lib';
-import testDataSets from './__dataSets__';
+import { Auth } from '../lib/index.js';
+import testDataSets from './__dataSets__/index.js';
 
 import {
   VonageTest,
   SDKTestCase,
   TestTuple,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 
 jest.useFakeTimers();

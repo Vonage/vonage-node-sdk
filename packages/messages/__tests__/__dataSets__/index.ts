@@ -1,10 +1,10 @@
-import smsTests from './sms';
-import mmsTests from './mms';
-import messengerTests from './messenger';
-import viberTests from './viber';
-import whatsAppTests from './whatsApp';
-import RCSTests from './rcs';
-import emailTests from './email';
+import smsTests from './sms.js';
+import mmsTests from './mms.js';
+import messengerTests from './messenger.js';
+import viberTests from './viber.js';
+import whatsAppTests from './whatsApp.js';
+import RCSTests from './rcs.js';
+import emailTests from './email.js';
 
 export default [
   {

@@ -1,6 +1,6 @@
 import { Channels } from '@vonage/messages';
 import { CallDirection, CallStatus } from '@vonage/voice';
-import { LegStatus, ReasonCode } from '../enums';
+import { LegStatus, ReasonCode } from '../enums/index.js';
 
 export type LegState = {
   /**

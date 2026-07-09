@@ -1,4 +1,4 @@
-import { apiKey } from '../../../../testHelpers';
+import { apiKey } from '../../../../testHelpers/index.js';
 import { Client } from '@vonage/server-client';
 import {
   NumberTransfer,
@@ -10,7 +10,7 @@ import {
   CreditTransfer,
   CreditTransferParameters,
   CreditTransferListParameters,
-} from '../../lib';
+} from '../../lib/index.js';
 
 const API_KEY = apiKey;
 

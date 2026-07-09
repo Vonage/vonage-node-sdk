@@ -1,5 +1,4 @@
 import { VetchOptions } from '../types/index.js';
-import { Response } from 'node-fetch';
 
 /**
  * Class representing an error from a Vetch API request. Extends the built-in
@@ -22,7 +21,7 @@ export class VetchError extends Error {
    *
    * @param {string} message - The error message.
    * @param {VetchOptions} options - Configuration options for the API request.
-   * @param {VetchResponse} response - Configuration options for the API request.
+   * @param {Response} response - Configuration options for the API request.
    */
   constructor(message: string, options: VetchOptions, response?: Response) {
     super(message);

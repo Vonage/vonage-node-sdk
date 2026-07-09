@@ -1,9 +1,9 @@
-import { CreateConversationRequest } from '../../lib';
+import { CreateConversationRequest } from '../../lib/index.js';
 import {
   conversation,
   conversationToCreate,
   conversationResponse,
-} from '../common';
+} from '../common.js';
 
 export default [
   {

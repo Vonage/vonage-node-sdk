@@ -3,7 +3,7 @@ import {
   MediaItemResponse,
   MediaItemPageResponse,
   MediaParameters,
-} from '../../lib/types';
+} from '../../lib/types/index.js';
 
 export default [
   {

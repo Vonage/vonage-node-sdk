@@ -1,5 +1,5 @@
 import { Auth } from '@vonage/auth';
-import { Vonage } from '../lib';
+import { Vonage } from '../lib/index.js';
 
 describe('sdk', () => {
   test('client gets created', async () => {

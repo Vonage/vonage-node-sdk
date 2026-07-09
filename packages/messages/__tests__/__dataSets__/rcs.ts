@@ -16,7 +16,7 @@ import {
   RCSViewLocationSuggestion,
   Channels,
   RCSSuggestionType
-} from '../../lib';
+} from '../../lib/index.js';
 
 export default [
   {

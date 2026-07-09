@@ -1,4 +1,4 @@
-import { RCSSuggestionType } from '../../../../enums/';
+import { RCSSuggestionType } from '../../../../enums/index.js';
 
 export type RCSSuggestionParams = {
   /**

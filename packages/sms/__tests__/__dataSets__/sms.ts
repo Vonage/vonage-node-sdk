@@ -10,7 +10,7 @@ import {
   ErrorMessage,
   SMSMessages,
   SMSParams,
-} from '../../lib';
+} from '../../lib/index.js';
 
 export default [
   {

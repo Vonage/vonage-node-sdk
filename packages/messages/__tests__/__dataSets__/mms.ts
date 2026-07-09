@@ -12,12 +12,12 @@ import {
   MessageParamsImage,
   MessageParamsVcard,
   MessageParamsVideo,
-} from '../../lib';
+} from '../../lib/index.js';
 
-import { Audio } from '../../lib/classes/MMS/Audio';
-import { Image } from '../../lib/classes/MMS/Image';
-import { Video } from '../../lib/classes/MMS/Video';
-import { Vcard } from '../../lib/classes/MMS/Vcard';
+import { Audio } from '../../lib/classes/MMS/Audio.js';
+import { Image } from '../../lib/classes/MMS/Image.js';
+import { Video } from '../../lib/classes/MMS/Video.js';
+import { Vcard } from '../../lib/classes/MMS/Vcard.js';
 
 export default [
   {

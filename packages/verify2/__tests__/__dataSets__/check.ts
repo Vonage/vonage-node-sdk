@@ -1,10 +1,10 @@
-import { CheckCodeRequest, CheckRequestResponse } from '../../lib/types';
+import { CheckCodeRequest, CheckRequestResponse } from '../../lib/types/index.js';
 import {
   SDKTestCase,
   keyAuth,
   validateBearerAuth,
-} from '../../../../testHelpers';
-import { Verify2 } from '../../lib';
+} from '../../../../testHelpers/index.js';
+import { Verify2 } from '../../lib/index.js';
 
 export default [
   {

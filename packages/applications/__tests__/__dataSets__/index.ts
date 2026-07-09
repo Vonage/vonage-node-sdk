@@ -1,8 +1,8 @@
-import appTests from './get';
-import listTests from './list';
-import createTests from './create';
-import updateTests from './update';
-import deleteTests from './delete';
+import appTests from './get.js';
+import listTests from './list.js';
+import createTests from './create.js';
+import updateTests from './update.js';
+import deleteTests from './delete.js';
 
 export default [
   {

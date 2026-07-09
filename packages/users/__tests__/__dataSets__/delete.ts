@@ -1,4 +1,4 @@
-import { testUser } from '../common';
+import { testUser } from '../common.js';
 
 export default [
   {

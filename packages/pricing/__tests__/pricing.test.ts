@@ -1,6 +1,6 @@
 import { Auth } from '@vonage/auth';
 import nock from 'nock';
-import { ServiceType, Pricing } from '../lib';
+import { ServiceType, Pricing } from '../lib/index.js';
 
 const BASE_URL = 'https://rest.nexmo.com/'.replace(/\/+$/, '');
 

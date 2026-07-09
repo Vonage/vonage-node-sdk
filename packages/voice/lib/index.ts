@@ -1,10 +1,10 @@
-export * from './types/';
-export * from './enums/';
+export * from './types/index.js';
+export * from './enums/index.js';
 
-export * from './voice';
-export * from './ncco';
-export { OutboundCallWithNCCO } from './classes/OutboundCallWithNCCO';
+export * from './voice.js';
+export * from './ncco.js';
+export { OutboundCallWithNCCO } from './classes/OutboundCallWithNCCO.js';
 export { OutboundCallWithAnswerURL } from
-  './classes/OutboundCallWithAnswerURL';
+  './classes/OutboundCallWithAnswerURL.js';
 
 

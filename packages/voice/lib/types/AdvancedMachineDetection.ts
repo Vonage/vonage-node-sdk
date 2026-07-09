@@ -1,7 +1,7 @@
 import {
   MachineDetectionBehavior,
   AdvancedMachineDetectionMode,
-} from '../enums';
+} from '../enums/index.js';
 
 /**
  * Represents advanced settings for machine detection during a call, including

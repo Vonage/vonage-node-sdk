@@ -1,6 +1,6 @@
 import { Auth } from '@vonage/auth';
 import nock from 'nock';
-import { NumberInsights } from '../lib';
+import { NumberInsights } from '../lib/index.js';
 
 const BASE_URL = 'https://api.nexmo.com';
 

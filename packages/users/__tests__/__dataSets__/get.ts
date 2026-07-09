@@ -1,7 +1,7 @@
 import { Client } from '@vonage/server-client';
-import { UserResponse } from '../../lib';
+import { UserResponse } from '../../lib/index.js';
 
-import { BASE_URL, testUser } from '../common';
+import { BASE_URL, testUser } from '../common.js';
 
 
 const { websocket } = testUser.channels || {};

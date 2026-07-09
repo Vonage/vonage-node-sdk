@@ -1,7 +1,7 @@
-import { Channels } from '../../../enums/';
-import { MessageParamsText } from '../../MessageParamsText';
-import { RCSParams } from './RCSParams';
-import { AnyRCSSuggestion } from './Suggestions';
+import { Channels } from '../../../enums/index.js';
+import { MessageParamsText } from '../../MessageParamsText.js';
+import { RCSParams } from './RCSParams.js';
+import { AnyRCSSuggestion } from './Suggestions/index.js';
 
 /**
  * Represents the parameters for sending a text message using RCS.

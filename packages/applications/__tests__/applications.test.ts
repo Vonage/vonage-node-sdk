@@ -1,5 +1,5 @@
-import testDataSets from './__dataSets__/';
-import { Applications } from '../lib';
+import testDataSets from './__dataSets__/index.js';
+import { Applications } from '../lib/index.js';
 import {
   VonageTest,
   SDKTestCase,
@@ -8,7 +8,7 @@ import {
   TestTuple,
   apiKeyAuth,
   validateApiKeyAuth,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 const applicationsTest = testDataSets.map((dataSet): TestTuple<Applications> => {
   const { label, tests } = dataSet;

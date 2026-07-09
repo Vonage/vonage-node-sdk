@@ -27,6 +27,11 @@ const checkVersions = (versions) => (acc, [dependencyPackageName, actualDependen
 Object.entries(versions).forEach(([packageName, { packageJson }]) => {
   console.log(packageName)
 
+  if (!packageJson.dependencies) {
+    console.log('This package has no dependencies');
+    return;
+  }
+
   packageJson.dependencies = Object.entries(packageJson.dependencies)
     .reduce(checkVersions(versions), packageJson.dependencies);
 

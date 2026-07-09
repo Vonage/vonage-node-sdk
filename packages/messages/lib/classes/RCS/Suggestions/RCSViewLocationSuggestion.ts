@@ -1,6 +1,6 @@
-import { RCSViewLocationSuggestionParams } from '../../../types';
-import { RCSAbstractSuggestion } from './RCSAbstractSuggestion';
-import { RCSSuggestionType } from '../../../enums';
+import { RCSViewLocationSuggestionParams } from '../../../types/index.js';
+import { RCSAbstractSuggestion } from './RCSAbstractSuggestion.js';
+import { RCSSuggestionType } from '../../../enums/index.js';
 
 export class RCSViewLocationSuggestion
   extends RCSAbstractSuggestion

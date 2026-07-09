@@ -8,8 +8,8 @@ import {
   VerifyError,
   PSD2Parameters,
   VerificationParameters,
-} from '../../lib';
-import { PSD2, Verification } from '../../lib/classes';
+} from '../../lib/index.js';
+import { PSD2, Verification } from '../../lib/classes/index.js';
 
 export default [
   {

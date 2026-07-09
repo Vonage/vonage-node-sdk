@@ -3,9 +3,9 @@ name: Jest
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions: read-all
 
@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node: [20.x, 22.x, 24.x]
+        node: [22.x, 24.x, 26.x]
     steps:
       - name: Checkout code for ${{ matrix.node }}
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
@@ -31,7 +31,12 @@ jobs:
         # We have to install on all versions of node to ensure packages will
         # support those versions
       - name: Install packages
-        run: npm install --ignore-scripts
+        run: npm install --ignore-scripts --no-audit
+
+        # We only want to audit third-party packages that will be puslished
+        # So we exclude auditing dev packages
+      - name: Audit packages
+        run: npm audit --omit=dev --workspaces
 
       - name: Run Jest
         env:
@@ -40,7 +45,7 @@ jobs:
         run: npm run test -- --coverage --reporters=jest-junit
 
       - name: Build Typescript
-        run: npm run build
+        run: npm run build --workspaces
 
       - name: Run codecov
         uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de

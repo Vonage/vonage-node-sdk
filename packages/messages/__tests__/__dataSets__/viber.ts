@@ -16,11 +16,11 @@ import {
   ViberService,
   ViberAction,
   Channels,
-} from '../../lib';
+} from '../../lib/index.js';
 
-import { Image } from '../../lib/classes/Viber/Image';
-import { Text } from '../../lib/classes/Viber/Text';
-import { MessageCategory } from '../../lib/enums/Viber/MessageCategory';
+import { Image } from '../../lib/classes/Viber/Image.js';
+import { Text } from '../../lib/classes/Viber/Text.js';
+import { MessageCategory } from '../../lib/enums/Viber/MessageCategory.js';
 
 export default [
   {

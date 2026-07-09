@@ -1,4 +1,4 @@
-import { Channels, RCSCategory } from '../../../enums/';
+import { Channels, RCSCategory } from '../../../enums/index.js';
 
 export type RCSSettings = {
   /**

@@ -1,9 +1,9 @@
 import nock from 'nock';
-import { FileClient } from '../lib';
+import { FileClient } from '../lib/index.js';
 import { Auth } from '@vonage/auth';
 import { mkdirSync, readFileSync, existsSync } from 'fs';
 import { rm } from 'fs/promises';
-import { keyAuth } from '../../../testHelpers/';
+import { keyAuth } from '../../../testHelpers/index.js';
 
 const FILE_PATH = `${process.cwd()}/test-path`;
 

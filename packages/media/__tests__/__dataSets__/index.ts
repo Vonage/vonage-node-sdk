@@ -1,6 +1,6 @@
-import getTests from './get';
-import deleteTests from './delete';
-import putTests from './put';
+import getTests from './get.js';
+import deleteTests from './delete.js';
+import putTests from './put.js';
 
 export default [
   {

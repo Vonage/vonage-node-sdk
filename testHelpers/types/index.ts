@@ -1,2 +1,2 @@
-export * from './SDKTestCase';
-export * from './TestTuple';
+export * from './SDKTestCase.js';
+export * from './TestTuple.js';

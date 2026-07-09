@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5
         with:
-          node-version: 20.x
+          node-version: 22.x
 
       - name: Install packages
         run: |
@@ -37,7 +37,12 @@ jobs:
     name: Notify Release
     strategy:
       matrix:
-        url: [SLACK_WEBHOOK_ASK_DEVREL_URL, SLACK_WEBHOOK_DEVREL_TOOLING_URL, SLACK_WEBHOOK_DEVREL_PRIVATE_URL]
+        url:
+          [
+            SLACK_WEBHOOK_ASK_DEVREL_URL,
+            SLACK_WEBHOOK_DEVREL_TOOLING_URL,
+            SLACK_WEBHOOK_DEVREL_PRIVATE_URL,
+          ]
     steps:
       - name: Send to slack channels
         uses: slackapi/slack-github-action@3493f18217f6e55d55ff3ea694dec41304e53e97

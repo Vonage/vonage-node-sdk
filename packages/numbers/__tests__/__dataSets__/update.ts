@@ -1,4 +1,4 @@
-import { VoiceCallbackTypeEnum } from '../../lib';
+import { VoiceCallbackTypeEnum } from '../../lib/index.js';
 
 const BASE_URL = 'https://rest.nexmo.com';
 const CLIENT_METHOD = 'updateNumber';

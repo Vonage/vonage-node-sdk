@@ -1,6 +1,6 @@
-import { NCCOActions } from '../../enums/';
-import { WaitAction } from '../../types/';
-import { Serializable } from '../../interfaces';
+import { NCCOActions } from '../../enums/index.js';
+import { WaitAction } from '../../types/index.js';
+import { Serializable } from '../../interfaces/index.js';
 
 /**
  * Represents a Wait action in a Nexmo Call Control Object (NCCO).

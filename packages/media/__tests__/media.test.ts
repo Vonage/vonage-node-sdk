@@ -1,5 +1,5 @@
-import { Media } from '../lib';
-import testDataSets from './__dataSets__';
+import { Media } from '../lib/index.js';
+import testDataSets from './__dataSets__/index.js';
 import {
   VonageTest,
   SDKTestCase,
@@ -8,7 +8,7 @@ import {
   TestTuple,
   keyAuth,
   validateBearerAuth,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 const mediaTests = testDataSets.map((dataSet): TestTuple<Media> => {
   const { label, tests } = dataSet;

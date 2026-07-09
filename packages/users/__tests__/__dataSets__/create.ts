@@ -1,6 +1,6 @@
-import { UserResponse } from '../../lib';
+import { UserResponse } from '../../lib/index.js';
 
-import { BASE_URL, testUser, testUserOne, userToApi } from '../common';
+import { BASE_URL, testUser, testUserOne, userToApi } from '../common.js';
 
 const createUser = userToApi(testUser);
 delete createUser.id;

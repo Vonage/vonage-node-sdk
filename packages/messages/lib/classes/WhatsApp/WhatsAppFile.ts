@@ -1,6 +1,6 @@
-import { Channels } from '../../enums/';
-import { AbstractFileMessage } from '../AbstractFileMessage';
-import { WhatsAppFileParams, WhatsAppContext } from '../../types/';
+import { Channels } from '../../enums/index.js';
+import { AbstractFileMessage } from '../AbstractFileMessage.js';
+import { WhatsAppFileParams, WhatsAppContext } from '../../types/index.js';
 
 /**
  * Represents a file message for WhatsApp.

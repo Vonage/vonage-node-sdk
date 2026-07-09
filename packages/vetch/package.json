@@ -212,14 +212,11 @@
     "build:cjs": "tsup lib/** -d dist/cjs --dts --tsconfig tsconfig.tsup.json",
     "build:esm": "tsup lib/** -d dist/esm --format=esm --dts --tsconfig tsconfig.tsup.json",
     "check:pkg": "npx attw --pack .",
-    "clean": "rimraf dist tsconfig.tsbuildinfo"
-  },
-  "dependencies": {
-    "@types/node-fetch": "2.6.13",
-    "node-fetch": "3.3.2"
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "depcheck": "npx depcheck --ignore-dirs=dist"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "engineStrict": true
 }

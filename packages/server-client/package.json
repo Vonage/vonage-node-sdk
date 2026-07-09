@@ -208,20 +208,19 @@
     "build:cjs": "tsup lib/** -d dist/cjs --dts --tsconfig tsconfig.tsup.json",
     "build:esm": "tsup lib/** -d dist/esm --format=esm --dts --tsconfig tsconfig.tsup.json",
     "check:pkg": "npx attw --pack .",
-    "clean": "rimraf dist tsconfig.tsbuildinfo"
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "depcheck": "npx depcheck --ignore-dirs=dist"
   },
   "dependencies": {
-    "@vonage/auth": "1.15.0",
-    "@vonage/vetch": "1.11.0",
-    "debug": "4.4.3",
-    "node-fetch": "3.3.2"
+    "@vonage/auth": "1.16.0",
+    "@vonage/vetch": "1.12.0",
+    "debug": "4.4.3"
   },
   "devDependencies": {
-    "@types/node-fetch": "2.6.13",
-    "nock": "14.0.10"
+    "nock": "14.0.16"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "engineStrict": true,
   "publishConfig": {

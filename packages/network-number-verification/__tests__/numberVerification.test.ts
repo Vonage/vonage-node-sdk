@@ -1,8 +1,8 @@
-import { VonageTest } from '../../../testHelpers';
+import { VonageTest } from '../../../testHelpers/index.js';
 import {
   NumberVerificationClient,
-} from '../lib';
-import { SDKTestCase, testPrivateKey } from '../../../testHelpers';
+} from '../lib/index.js';
+import { SDKTestCase, testPrivateKey } from '../../../testHelpers/index.js';
 
 
 const testCases = [

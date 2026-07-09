@@ -5,7 +5,7 @@ import {
   VerifyControlErrorResponse,
   VerifyControl,
   VerifyControlError,
-} from '../../lib';
+} from '../../lib/index.js';
 
 export default [
   {

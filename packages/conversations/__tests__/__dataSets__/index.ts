@@ -1,8 +1,8 @@
-import postTests from './post';
-import getTests from './get';
-import putTests from './put';
-import deleteTests from './delete';
-import patchTests from './patch';
+import postTests from './post.js';
+import getTests from './get.js';
+import putTests from './put.js';
+import deleteTests from './delete.js';
+import patchTests from './patch.js';
 
 export default [
   {

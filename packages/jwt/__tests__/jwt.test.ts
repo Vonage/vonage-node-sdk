@@ -1,4 +1,4 @@
-import { tokenGenerate, verifySignature } from '../lib';
+import { tokenGenerate, verifySignature } from '../lib/index.js';
 import jwt from 'jsonwebtoken';
 import {
   MissingApplicationIdError,
@@ -6,8 +6,8 @@ import {
   InvalidPrivateKeyError,
   InvalidApplicationIdError,
   ACL,
-} from '../lib';
-import { testPrivateKey } from '../../../testHelpers';
+} from '../lib/index.js';
+import { testPrivateKey } from '../../../testHelpers/index.js';
 
 const applicationId = '12345';
 const ttl = 1800;

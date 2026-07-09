@@ -1,4 +1,4 @@
-import { SDKTestCase } from './SDKTestCase';
+import { SDKTestCase } from './SDKTestCase.js';
 
 /**
  * TestTuple is a tuple that contains the name of the test suite and an array of SDKTestCase objects.

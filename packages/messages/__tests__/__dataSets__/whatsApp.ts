@@ -33,15 +33,15 @@ import {
   WhatsAppReactionParams,
   WhatsAppReaction,
   Channels,
-} from '../../lib';
+} from '../../lib/index.js';
 
-import { Audio } from '../../lib/classes/WhatsApp/Audio';
-import { CustomMessage } from '../../lib/classes/WhatsApp/CustomMessage';
-import { File } from '../../lib/classes/WhatsApp/File';
-import { Image } from '../../lib/classes/WhatsApp/Image';
-import { TemplateMessage } from '../../lib/classes/WhatsApp/TemplateMessage';
-import { Text } from '../../lib/classes/WhatsApp/Text';
-import { Video } from '../../lib/classes/WhatsApp/Video';
+import { Audio } from '../../lib/classes/WhatsApp/Audio.js';
+import { CustomMessage } from '../../lib/classes/WhatsApp/CustomMessage.js';
+import { File } from '../../lib/classes/WhatsApp/File.js';
+import { Image } from '../../lib/classes/WhatsApp/Image.js';
+import { TemplateMessage } from '../../lib/classes/WhatsApp/TemplateMessage.js';
+import { Text } from '../../lib/classes/WhatsApp/Text.js';
+import { Video } from '../../lib/classes/WhatsApp/Video.js';
 
 export default [
   {

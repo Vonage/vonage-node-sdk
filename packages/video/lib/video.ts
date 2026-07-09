@@ -1,6 +1,6 @@
 import { tokenGenerate } from '@vonage/jwt';
 import { AuthenticationType, Client } from '@vonage/server-client';
-import { MediaMode } from './enums';
+import { MediaMode } from './enums/index.js';
 import {
   ArchiveLayout,
   ArchiveMode,
@@ -36,7 +36,7 @@ import {
   VideoResponse,
   WebSocketConfig,
   WebSocketConnectResponse,
-} from './types';
+} from './types/index.js';
 
 /**
  * Video Client for managing and interacting with video-related operations in your application.

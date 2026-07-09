@@ -1,7 +1,7 @@
-import callTests from './calls';
-import createTests from './create';
-import updateTests from './update';
-import deleteTests from './delete';
+import callTests from './calls.js';
+import createTests from './create.js';
+import updateTests from './update.js';
+import deleteTests from './delete.js';
 
 export default [
   {

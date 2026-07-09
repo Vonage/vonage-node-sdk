@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { decode } from 'jsonwebtoken';
 import { Auth } from '@vonage/auth';
-import testDataSets from './__dataSets__';
+import testDataSets from './__dataSets__/index.js';
 import { Jwt } from 'jsonwebtoken';
 
 import {
@@ -14,7 +14,7 @@ import {
   SingleArchiveResponseWithTranscription,
   SingleArchiveResponseWithQuantizationParameter,
   MultiStreamLayoutResponse,
-} from '../lib';
+} from '../lib/index.js';
 
 
 import {
@@ -26,7 +26,7 @@ import {
   keyAuth,
   validateBearerAuth,
   testPrivateKey,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 const BASE_URL = 'https://video.api.vonage.com/'.replace(/\/+$/, '');
 
 type jwtClaims = {

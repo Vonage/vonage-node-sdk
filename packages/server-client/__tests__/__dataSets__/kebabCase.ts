@@ -1,4 +1,4 @@
-import { kebabCaseObjectKeys } from '../../lib';
+import { kebabCaseObjectKeys } from '../../lib/index.js';
 
 export default [
   {

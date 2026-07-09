@@ -1,7 +1,7 @@
 import nock from 'nock';
 import { Client } from '@vonage/server-client';
 import { Auth } from '@vonage/auth';
-import { AuditEvent, AuditEventTypes, Audit } from '../lib';
+import { AuditEvent, AuditEventTypes, Audit } from '../lib/index.js';
 
 const BASE_URL = 'https://api.nexmo.com/';
 

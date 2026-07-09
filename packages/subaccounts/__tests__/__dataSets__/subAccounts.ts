@@ -1,4 +1,4 @@
-import { apiKey } from '../../../../testHelpers';
+import { apiKey } from '../../../../testHelpers/index.js';
 import { Client } from '@vonage/server-client';
 import {
   Account,
@@ -8,7 +8,7 @@ import {
   SubAccountModifyParameters,
   SubAccountResponse,
   SubAccountResponsePage,
-} from '../../lib/types';
+} from '../../lib/types/index.js';
 
 const primaryAccount = {
   apiKey: apiKey,

@@ -1,5 +1,5 @@
-import { Channels } from '../../..//enums/';
-import { MessageParams } from '../../MessageParams';
+import { Channels } from '../../..//enums/index.js';
+import { MessageParams } from '../../MessageParams.js';
 
 /**
  * A context used for quoting/replying/reacting to a specific message in a

@@ -4,7 +4,7 @@ import {
   CreateMemberRequest,
   CreateEventRequest,
   MemberState,
-} from '../../lib';
+} from '../../lib/index.js';
 import {
   conversation,
   conversationToCreate,
@@ -13,7 +13,7 @@ import {
   memberResponse,
   event,
   eventResponse,
-} from '../common';
+} from '../common.js';
 
 export default [
   {

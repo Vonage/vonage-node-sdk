@@ -1,10 +1,10 @@
-import { VonageTest } from '../../../testHelpers';
+import { VonageTest } from '../../../testHelpers/index.js';
 import {
   NetworkClient,
   Purpose,
   Scope,
-} from '../lib';
-import { SDKTestCase, testPrivateKey } from '../../../testHelpers';
+} from '../lib/index.js';
+import { SDKTestCase, testPrivateKey } from '../../../testHelpers/index.js';
 import { AuthenticationType } from '@vonage/server-client';
 
 class OAUTHTestClient extends NetworkClient {

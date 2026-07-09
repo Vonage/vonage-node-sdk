@@ -4,9 +4,9 @@ import {
   CallPageResponse,
   CallStatus,
   CallListFilter,
-} from '../../lib';
-import { callSip, callPhone, callWebsocket } from '../common';
-import { BASE_URL } from '../common';
+} from '../../lib/index.js';
+import { callSip, callPhone, callWebsocket } from '../common.js';
+import { BASE_URL } from '../common.js';
 
 export default [
   {

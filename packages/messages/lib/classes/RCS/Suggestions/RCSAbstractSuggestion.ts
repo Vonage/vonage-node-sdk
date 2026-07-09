@@ -1,5 +1,5 @@
-import { RCSSuggestionType } from '../../../enums';
-import { RCSSuggestionParams } from '../../../types';
+import { RCSSuggestionType } from '../../../enums/index.js';
+import { RCSSuggestionParams } from '../../../types/index.js';
 
 export abstract class RCSAbstractSuggestion implements RCSSuggestionParams {
   /**

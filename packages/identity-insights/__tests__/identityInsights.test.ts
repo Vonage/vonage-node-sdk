@@ -1,5 +1,5 @@
-import { IdentityInsights } from '../lib';
-import testDataSets from './__dataSets__';
+import { IdentityInsights } from '../lib/index.js';
+import testDataSets from './__dataSets__/index.js';
 
 import {
   VonageTest,
@@ -9,7 +9,7 @@ import {
   TestTuple,
   validateBearerAuth,
   keyAuth,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 const applicationsTest = testDataSets.map(
   (dataSet): TestTuple<IdentityInsights> => {

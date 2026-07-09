@@ -1,5 +1,5 @@
-import subAccountTests from './subAccounts';
-import transferTests from './transfers';
+import subAccountTests from './subAccounts.js';
+import transferTests from './transfers.js';
 
 export default [
   {

@@ -208,28 +208,29 @@
     "build:cjs": "tsup lib/** -d dist/cjs --dts --tsconfig tsconfig.tsup.json",
     "build:esm": "tsup lib/** -d dist/esm --format=esm --dts --tsconfig tsconfig.tsup.json",
     "check:pkg": "npx attw --pack .",
-    "clean": "rimraf dist tsconfig.tsbuildinfo"
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "depcheck": "npx depcheck --ignore-dirs=dist"
   },
   "dependencies": {
-    "@vonage/accounts": "1.20.0",
-    "@vonage/applications": "1.20.0",
-    "@vonage/auth": "1.15.0",
-    "@vonage/conversations": "1.14.0",
-    "@vonage/messages": "1.24.0",
-    "@vonage/number-insights": "1.20.0",
-    "@vonage/numbers": "1.22.0",
-    "@vonage/pricing": "1.20.0",
-    "@vonage/redact": "1.19.0",
-    "@vonage/server-client": "1.20.0",
-    "@vonage/sms": "1.21.0",
-    "@vonage/users": "1.14.0",
-    "@vonage/verify": "1.20.0",
-    "@vonage/verify2": "1.19.0",
-    "@vonage/video": "1.28.0",
-    "@vonage/voice": "1.21.0"
+    "@vonage/accounts": "1.21.0",
+    "@vonage/applications": "1.21.0",
+    "@vonage/auth": "1.16.0",
+    "@vonage/conversations": "1.15.0",
+    "@vonage/messages": "1.25.0",
+    "@vonage/number-insights": "1.21.0",
+    "@vonage/numbers": "1.23.0",
+    "@vonage/pricing": "1.21.0",
+    "@vonage/redact": "1.20.0",
+    "@vonage/server-client": "1.21.0",
+    "@vonage/sms": "1.22.0",
+    "@vonage/users": "1.15.0",
+    "@vonage/verify": "1.21.0",
+    "@vonage/verify2": "1.20.1",
+    "@vonage/video": "1.29.0",
+    "@vonage/voice": "1.22.0"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "engineStrict": true,
   "publishConfig": {

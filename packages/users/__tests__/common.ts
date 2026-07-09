@@ -1,5 +1,5 @@
 import { Client } from '@vonage/server-client';
-import { UserResponse, UserType, WebSocketChannelResponse } from '../lib';
+import { UserResponse, UserType, WebSocketChannelResponse } from '../lib/index.js';
 
 export const BASE_URL = 'https://api.nexmo.com/';
 

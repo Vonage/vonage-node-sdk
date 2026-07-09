@@ -1,4 +1,4 @@
-import { BASE_URL } from '../common';
+import { BASE_URL } from '../common.js';
 
 export default [
   {

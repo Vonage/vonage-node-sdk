@@ -1,4 +1,4 @@
-import { camelCaseObjectKeys } from '../../lib';
+import { camelCaseObjectKeys } from '../../lib/index.js';
 
 export default [
   {

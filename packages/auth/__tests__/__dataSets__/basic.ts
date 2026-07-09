@@ -4,8 +4,8 @@ import {
   InvalidApiKeyError,
   InvalidApiSecretError,
   AuthParams,
-} from '../../lib';
-import { apiKey, apiSecret } from '../common';
+} from '../../lib/index.js';
+import { apiKey, apiSecret } from '../common.js';
 
 export default [
   {

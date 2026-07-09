@@ -4,11 +4,11 @@ import {
   MissingSignatureError,
   AuthParams,
   SignedHashParams,
-} from '../../lib';
+} from '../../lib/index.js';
 import {
   apiKey,
   apiSecret,
-} from '../common';
+} from '../common.js';
 
 export default [
   {

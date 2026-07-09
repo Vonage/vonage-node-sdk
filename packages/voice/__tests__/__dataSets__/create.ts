@@ -5,15 +5,15 @@ import {
   HttpMethod,
   MachineDetectionBehavior,
   NCCOActions,
-} from '../../lib/enums';
+} from '../../lib/enums/index.js';
 import {
   CallResult,
   CallWithAnswerURL,
   CallWithNCCO,
   CreateCallResponse,
   WebsocketAuthorization,
-} from '../../lib/types';
-import { callPhone } from '../common';
+} from '../../lib/types/index.js';
+import { callPhone } from '../common.js';
 
 export default [
   {

@@ -1,6 +1,6 @@
-import { RCSCreateCalendarEventSuggestionParams } from '../../../types';
-import { RCSAbstractSuggestion } from './RCSAbstractSuggestion';
-import { RCSSuggestionType } from '../../../enums';
+import { RCSCreateCalendarEventSuggestionParams } from '../../../types/index.js';
+import { RCSAbstractSuggestion } from './RCSAbstractSuggestion.js';
+import { RCSSuggestionType } from '../../../enums/index.js';
 
 export class RCSCreateCalendarEventSuggestion
   extends RCSAbstractSuggestion

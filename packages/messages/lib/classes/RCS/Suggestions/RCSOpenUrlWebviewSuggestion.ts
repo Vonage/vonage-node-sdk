@@ -1,6 +1,6 @@
-import { RCSOpenURLWebviewSuggestionParams } from '../../../types';
-import { RCSAbstractSuggestion } from './RCSAbstractSuggestion';
-import { RCSSuggestionType } from '../../../enums';
+import { RCSOpenURLWebviewSuggestionParams } from '../../../types/index.js';
+import { RCSAbstractSuggestion } from './RCSAbstractSuggestion.js';
+import { RCSSuggestionType } from '../../../enums/index.js';
 
 export class RCSOpenURLWebviewSuggestion
   extends RCSAbstractSuggestion

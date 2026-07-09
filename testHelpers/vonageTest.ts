@@ -1,7 +1,7 @@
 /* eslint-disable jest/no-export */
 import nock from 'nock';
-import { SDKTestCase, TestTuple } from './types';
-import { getResults } from './getResults';
+import { SDKTestCase, TestTuple } from './types/index.js';
+import { getResults } from './getResults.js';
 
 /**
  * A Wrapper function to build out tests for Vonage SDKs
@@ -10,7 +10,7 @@ import { getResults } from './getResults';
  */
 export const VonageTest = <T>(testDataSets: TestTuple<T>[]) => {
   describe.each<TestTuple<T>>(testDataSets)('$name', ({ tests }) => {
-    afterEach(function () {
+    afterEach(function() {
       nock.cleanAll();
     });
 

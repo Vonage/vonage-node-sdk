@@ -1,5 +1,5 @@
-import { Numbers } from '../lib';
-import dataSet from './__dataSets__';
+import { Numbers } from '../lib/index.js';
+import dataSet from './__dataSets__/index.js';
 import { URL } from 'url';
 import {
   VonageTest,
@@ -8,7 +8,7 @@ import {
   TestRequest,
   TestTuple,
   apiKeyAuth,
-} from '../../../testHelpers';
+} from '../../../testHelpers/index.js';
 
 const applicationsTest = dataSet.map((dataSet): TestTuple<Numbers> => {
   const { label, tests } = dataSet;

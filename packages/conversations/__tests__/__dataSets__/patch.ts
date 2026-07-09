@@ -1,12 +1,12 @@
 import {
   UpdateMemberParameters,
   MemberState,
-} from '../../lib';
+} from '../../lib/index.js';
 import {
   conversationResponse,
   member,
   memberResponse,
-} from '../common';
+} from '../common.js';
 
 export default [
   {

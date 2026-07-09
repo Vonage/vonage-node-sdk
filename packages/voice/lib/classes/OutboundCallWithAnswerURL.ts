@@ -1,5 +1,5 @@
-import { CallEndpoint, PhoneEndpoint } from '../types';
-import { OutboundCall } from './OutboundCall';
+import { CallEndpoint, PhoneEndpoint } from '../types/index.js';
+import { OutboundCall } from './OutboundCall.js';
 import debug from 'debug';
 
 debug('@vonage/voice')(

@@ -1,5 +1,5 @@
-import { RCSSuggestionType } from '../../../../enums/';
-import { RCSSuggestionParams } from './RCSSuggestionParams';
+import { RCSSuggestionType } from '../../../../enums/index.js';
+import { RCSSuggestionParams } from './RCSSuggestionParams.js';
 
 export type RCSOpenURLSuggestionParams = RCSSuggestionParams & {
   type: RCSSuggestionType.OPEN_URL;

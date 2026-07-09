@@ -1,7 +1,7 @@
-import jwtTests from './jwt';
-import basicTests from './basic';
-import queryTests from './query';
-import signatureTests from './signature';
+import jwtTests from './jwt.js';
+import basicTests from './basic.js';
+import queryTests from './query.js';
+import signatureTests from './signature.js';
 
 export default [
   {

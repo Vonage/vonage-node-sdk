@@ -3,14 +3,14 @@ import {
   ApplicationResponse,
   Application,
   ApplicationPageResponse,
-} from '../../lib';
+} from '../../lib/index.js';
 
 import {
   BASE_URL,
   testApplication,
   testApplicationOne,
   testApplicationTwo,
-} from '../common';
+} from '../common.js';
 
 const appToApi = (application: Application): ApplicationResponse => ({
   ...Client.transformers.snakeCaseObjectKeys(application, true) as ApplicationResponse,

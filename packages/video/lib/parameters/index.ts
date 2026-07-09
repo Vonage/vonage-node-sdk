@@ -1,1 +1,1 @@
-export * from './VideoClassParameters';
+export * from './VideoClassParameters.js';

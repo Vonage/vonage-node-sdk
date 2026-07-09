@@ -1,5 +1,5 @@
-import { Serializable } from '../../interfaces';
-import { NCCOAction } from '../../types/';
+import { Serializable } from '../../interfaces/index.js';
+import { NCCOAction } from '../../types/index.js';
 
 /**
  * A builder class for creating Nexmo Call Control Objects (NCCOs).

@@ -1,10 +1,10 @@
-import { AbstractMessage } from '../AbstractMessage';
+import { AbstractMessage } from '../AbstractMessage.js';
 import {
   WhatsAppReactionParams,
   WhatsAppReactionType,
   WhatsAppContext,
-} from '../../types/';
-import { Channels, MessageTypes } from '../../enums/';
+} from '../../types/index.js';
+import { Channels, MessageTypes } from '../../enums/index.js';
 
 /**
  * Represents a reaction message for WhatsApp.

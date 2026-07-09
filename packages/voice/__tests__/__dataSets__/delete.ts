@@ -1,4 +1,4 @@
-import { callPhone } from '../common';
+import { callPhone } from '../common.js';
 
 export default [
   {

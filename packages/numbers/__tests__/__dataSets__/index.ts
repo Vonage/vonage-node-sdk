@@ -1,8 +1,8 @@
-import buyNumbers from './buyNumbers';
-import getOwnedNumbers from './getOwnedNumbers';
-import searchNumbers from './search';
-import cancelNumbers from './cancel';
-import updateNumbers from './update';
+import buyNumbers from './buyNumbers.js';
+import getOwnedNumbers from './getOwnedNumbers.js';
+import searchNumbers from './search.js';
+import cancelNumbers from './cancel.js';
+import updateNumbers from './update.js';
 
 export default [
   {

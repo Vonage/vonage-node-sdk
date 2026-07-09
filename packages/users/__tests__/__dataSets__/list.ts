@@ -4,7 +4,7 @@ import {
   UserPageResponse,
   UserListParameters,
   SortOrder,
-} from '../../lib';
+} from '../../lib/index.js';
 
 import {
   BASE_URL,
@@ -12,7 +12,7 @@ import {
   testUserOne,
   testUserTwo,
   userToApi,
-} from '../common';
+} from '../common.js';
 
 export default [
   {

@@ -1,12 +1,12 @@
-import camelCase from './camelCase';
-import snakeCase from './snakeCase';
-import kebabCase from './kebabCase';
+import camelCase from './camelCase.js';
+import snakeCase from './snakeCase.js';
+import kebabCase from './kebabCase.js';
 
-import getTests from './get';
-import postTests from './post';
-import putTests from './put';
-import patchTests from './patch';
-import deleteTests from './delete';
+import getTests from './get.js';
+import postTests from './post.js';
+import putTests from './put.js';
+import patchTests from './patch.js';
+import deleteTests from './delete.js';
 
 
 export const requestTests = [
