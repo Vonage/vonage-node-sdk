@@ -9,11 +9,13 @@ import {
   LayoutType,
   MediaMode,
   ArchiveMode,
+  AudioTransportType,
   SingleStreamLayoutResponse,
   SingleArchiveResponseWithMaxBitrate,
   SingleArchiveResponseWithTranscription,
   SingleArchiveResponseWithQuantizationParameter,
   MultiStreamLayoutResponse,
+  AudioRate,
 } from '../lib/index.js';
 
 
@@ -1374,6 +1376,128 @@ describe('video', () => {
     expect(resp.connectionId).toBe('CONNECTIONID');
   });
 
+  test('can connect to a websocket with audioTransport (binary)', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: {
+          uri: 'wss://mydomain.com/websocket/',
+          audioTransport: { transport: 'binary' },
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      {
+        uri: 'wss://mydomain.com/websocket/',
+        audioTransport: { transport: AudioTransportType.BINARY },
+      }
+    );
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
+  });
+
+  test('can connect to a websocket with audioTransport (json + encoding)', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: {
+          uri: 'wss://mydomain.com/websocket/',
+          audioTransport: {
+            transport: 'json',
+            encoding: 'base64',
+          },
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      {
+        uri: 'wss://mydomain.com/websocket/',
+        audioTransport: {
+          transport: AudioTransportType.JSON,
+          encoding: 'base64',
+        },
+      }
+    );
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
+  });
+
+  test('can connect to a websocket with full audioTransport config', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: {
+          uri: 'wss://mydomain.com/websocket/',
+          bidirectional: true,
+          audioTransport: {
+            transport: 'json',
+            encoding: 'base64',
+            audio_field: 'data',
+            receive_audio_field: 'inbound',
+            static_fields: {
+              foo_bar: 'baz',
+              fizzBuzz: 'bat',
+            }
+          },
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      {
+        uri: 'wss://mydomain.com/websocket/',
+        bidirectional: true,
+        audioTransport: {
+          transport: AudioTransportType.JSON,
+          encoding: 'base64',
+          audioField: 'data',
+          receiveAudioField: 'inbound',
+          staticFields: {
+            foo_bar: 'baz',
+            fizzBuzz: 'bat',
+          },
+        },
+      }
+    );
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
+  });
+
   test('can disconnect a websocket', async () => {
     nock(BASE_URL, {
       reqheaders: {
@@ -1387,5 +1511,38 @@ describe('video', () => {
 
     await client.disconnectWebsocket('CALLID');
     expect(nock.isDone()).toBeTruthy();
+  });
+
+  test('can connect to a websocket with 24K audio', async () => {
+    const token = client.generateClientToken('session-id');
+
+    nock(BASE_URL, {
+      reqheaders: {
+        Authorization: (value) =>
+          value.startsWith('Bearer ') && value.length > 10,
+      },
+    })
+      .persist()
+      .post('/v2/project/abcd-1234/connect', {
+        sessionId: '2_MX40NTMyODc3Mn5-fg',
+        token,
+        websocket: {
+          uri: 'wss://mydomain.com/websocket/',
+          audioRate: AudioRate['24KHZ'],
+        },
+      })
+      .reply(200, { id: 'CALLID', connectionId: 'CONNECTIONID' });
+
+    const resp = await client.connectToWebsocket(
+      '2_MX40NTMyODc3Mn5-fg',
+      token,
+      {
+        uri: 'wss://mydomain.com/websocket/',
+        audioRate: AudioRate['24KHZ'],
+      }
+    );
+
+    expect(resp.id).toBe('CALLID');
+    expect(resp.connectionId).toBe('CONNECTIONID');
   });
 });

@@ -165,10 +165,27 @@ export class Video extends Client {
     clientToken: string,
     config: WebSocketConfig,
   ): Promise<WebSocketConnectResponse> {
+    const { audioTransport, ...websocketRest } = config;
+
+    const websocket: Record<string, unknown> = { ...websocketRest };
+
+    if (audioTransport) {
+      websocket['audioTransport'] = {
+        ...Client.transformers.snakeCaseObjectKeys(
+          audioTransport as Record<string, unknown>,
+        ),
+
+        // static fields are user generated so we cannot adjust their fields
+        ...(audioTransport['staticFields']
+          ? { 'static_fields': audioTransport['staticFields'] }
+          : {}),
+      };
+    }
+
     const data = {
       sessionId,
       token: clientToken,
-      websocket: config,
+      websocket,
     };
 
     const resp = await this.sendPostRequest<WebSocketConnectResponse>(

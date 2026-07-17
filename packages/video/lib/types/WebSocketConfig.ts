@@ -1,4 +1,5 @@
 import { AudioRate } from '../enums/index.js';
+import { AudioTransport } from './AudioTransport.js';
 
 /**
  * Configuration options for establishing a WebSocket connection.
@@ -30,4 +31,10 @@ export type WebSocketConfig = {
    * Whether the WebSocket connection should be bidirectional. By default, this is false.
    */
   bidirectional?: boolean;
+
+  /**
+   * Configures how audio is serialized on the WebSocket wire.
+   * By default, audio is sent as raw binary PCM 16-bit frames.
+   */
+  audioTransport?: AudioTransport;
 }
