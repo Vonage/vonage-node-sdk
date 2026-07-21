@@ -1,0 +1,15 @@
+  {
+    "extends": "../../tsconfig.build.esm.base.json",
+    "compilerOptions": {
+      "rootDir": "lib",
+      "outDir": "dist/esm",
+      "paths": {}
+    },
+    "include": [
+      "lib/**/*"
+    ],
+    "exclude": [
+      "__tests__",
+      "dist"
+    ]
+  }
