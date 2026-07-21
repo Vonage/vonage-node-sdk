@@ -7,12 +7,18 @@ export type StatusType = {
   /**
    * The status of the insight.
    */
-  status: Status;
+  status: {
+    /**
+     * Code indicating the status of the request. This enum is extensible;
+     * clients must handle unknown values.
+     */
+    code: Status | string;
 
-  /**
-   * More detailed status description.
-   */
-  message: string;
+    /**
+     * More detailed status description.
+     */
+    message: string;
+  }
 };
 
 /**
@@ -23,10 +29,16 @@ export type SubscriberMatchStatusType = {
   /**
    * The status of the insight.
    */
-  status: Status | SubscriberMatchStatus | string;
+  status: {
+    /**
+     * Code indicating the status of the request. This enum is extensible;
+     * clients must handle unknown values.
+     */
+    code: Status | SubscriberMatchStatus | string;
 
-  /**
-   * More detailed status description.
-   */
-  message: string;
+    /**
+     * More detailed status description.
+     */
+    message: string;
+  }
 };
