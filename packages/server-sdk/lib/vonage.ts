@@ -6,6 +6,7 @@ import { Messages } from '@vonage/messages';
 import { NumberInsights } from '@vonage/number-insights';
 import { Numbers } from '@vonage/numbers';
 import { Pricing } from '@vonage/pricing';
+import { Reports } from '@vonage/reports';
 import { Redact } from '@vonage/redact';
 import { SMS } from '@vonage/sms';
 import { Users } from '@vonage/users';
@@ -63,6 +64,11 @@ export class Vonage {
    * Provides access to the Redact API.
    */
   public redact: Redact;
+
+  /**
+   * Provides access to the Reports API.
+   */
+  public reports: Reports;
 
   /**
    * Provides access to the Secrets API.
@@ -124,6 +130,7 @@ export class Vonage {
     this.numbers = new Numbers(this.credentials, this.options);
     this.pricing = new Pricing(this.credentials, this.options);
     this.redact = new Redact(this.credentials, this.options);
+    this.reports = new Reports(this.credentials, this.options);
     this.secrets = new Secrets(this.credentials, this.options);
     this.sms = new SMS(this.credentials, this.options);
     this.users = new Users(this.credentials, this.options);

@@ -27,6 +27,7 @@ const vonageWorkspacePackages = [
   '@vonage/numbers',
   '@vonage/pricing',
   '@vonage/redact',
+  '@vonage/reports',
   '@vonage/server-client',
   '@vonage/server-sdk',
   '@vonage/sms',

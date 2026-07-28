@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.build.types.base.json",
+  "compilerOptions": {
+    "rootDir": "lib",
+    "declarationDir": "dist/types",
+    "outDir": "dist/types",
+    "paths": {}
+  },
+  "include": [
+    "lib/**/*"
+  ],
+  "exclude": [
+    "__tests__",
+    "dist"
+  ]
+}
