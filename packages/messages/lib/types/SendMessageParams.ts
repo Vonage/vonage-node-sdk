@@ -4,6 +4,8 @@ import {
   AnyWhatsAppParams,
   AnyMMSParams,
   SMSParams,
+  AnyRCSParams,
+  AnyEmailParams
 } from './Channels/index.js';
 
 /**
@@ -17,4 +19,6 @@ export type SendMessageParams =
   AnyViberParams |
   AnyWhatsAppParams |
   AnyMMSParams |
+  AnyRCSParams |
+  AnyEmailParams |
   SMSParams

@@ -10,6 +10,7 @@ import {
 } from './types/index.js';
 import debug from 'debug';
 import { UpdateMessageStatus } from './enums/UpdateMessageStatus.js';
+import { messageRequestSerializer } from './MessageRequestSerializer.js';
 
 const log = debug('vonage:messages');
 
@@ -78,21 +79,15 @@ export class Messages extends Client {
   /**
    * Sends a message using the Vonage API.
    *
-   * @param {SendMessageParams} message - The message to be sent.
+   * @param {SendMessageParams | AnyChannel | MessageWithFailover} message - The message to be sent.
    * @return {Promise<MessageSuccess>} A promise that resolves to a success response with a message UUID.
    */
   public async send(
     message: SendMessageParams | AnyChannel | MessageWithFailover,
   ): Promise<MessageSuccess> {
-    const data = Client.transformers.snakeCaseObjectKeys(message, true);
-
-    if ('custom' in message) {
-      data.custom = message.custom;
-    }
-
     const resp = await this.sendPostRequest<MessageSuccessResponse>(
       `${this.config.apiHost}/v1/messages`,
-      data,
+      messageRequestSerializer(message),
     );
 
     return {
