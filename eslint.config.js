@@ -123,7 +123,7 @@ export default defineConfig([
     },
     rules: {
       '@stylistic/js/semi': ['error', 'always'],
-      'indent': ['error', 2],
+      'indent': ['error', 2, { SwitchCase: 1 }],
       'quotes': ['error', 'single'],
       '@stylistic/js/array-element-newline': ['error',
 

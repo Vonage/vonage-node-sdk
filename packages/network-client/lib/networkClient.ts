@@ -253,17 +253,17 @@ export class NetworkClient extends Client {
 
         // Provide some help
         switch (status) {
-        case 401:
-          error.message
+          case 401:
+            error.message
               = 'Invalid credentials. Please check that the application id and private key are correct. '
               + 'This could also mean that you have not setup the Network API correctly for your application .';
-          break;
+            break;
 
-        case 400:
-          error.message
+          case 400:
+            error.message
               = 'It appears you have not enabled the Network API for your account. '
               + 'Please contact your account manager to enable this feature. ';
-          break;
+            break;
         }
       }
 
@@ -328,17 +328,17 @@ export class NetworkClient extends Client {
 
         // Provide some help
         switch (status) {
-        case 401:
-          error.message
+          case 401:
+            error.message
               = 'Invalid credentials. Please check that the application id and private key are correct. '
               + 'This could also mean that you have not setup the Network API correctly for your application .';
-          break;
+            break;
 
-        case 400:
-          error.message
+          case 400:
+            error.message
               = 'It appears you have not enabled the Network API for your account. '
               + 'Please contact your account manager to enable this feature. ';
-          break;
+            break;
         }
       }
 
@@ -375,27 +375,27 @@ export class NetworkClient extends Client {
 
         // Provide some help
         switch (status) {
-        case 401:
-          error.message
+          case 401:
+            error.message
               = 'A 401 was returned when trying to get authorization. '
               + 'Some possible reasons for this:'
               + '- The application id or private key are invalid. '
               + '- You have not setup the Network API correctly for your application .';
-          break;
+            break;
 
-        case 400:
-          error.message
+          case 400:
+            error.message
               = 'It appears you have not enabled the Network API for your account. '
               + 'Please contact your account manager to enable this feature. ';
-          break;
+            break;
 
-        case 404:
-          error.message
+          case 404:
+            error.message
               = 'A 404 was returned when trying to get authorization. '
               + 'Some possible reasons for this:'
               + '- The network application is not setup correctly. '
               + '- The phone number is not associated with this network. ';
-          break;
+            break;
         }
       }
 

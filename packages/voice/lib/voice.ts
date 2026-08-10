@@ -35,29 +35,29 @@ const apiCallsToCalls = (call: CallDetailResponse): CallDetail => {
 
 const NCCOToApiCalls = (ncco: Action[]): Array<Action> => ncco.map((action) => {
   switch (action.action) {
-  case NCCOActions.CONNECT:
-    return {
-      ...action,
-      endpoint: (action.endpoint as Array<CallEndpoint>)?.map((endpoint) => {
-        switch (endpoint.type) {
-        case 'sip':
-          return {
-            type: 'sip',
-            uri: endpoint.uri,
-            headers: endpoint.headers,
-            standardHeaders: {
-              'User-to-User': Object.hasOwn(endpoint.standardHeaders || {}, 'User-to-User')
-                ? { ...endpoint.standardHeaders }['User-to-User']
-                : endpoint.standardHeaders?.userToUser,
-            }
-          } as SIPEndpoint;
-        default:
-          return endpoint;
-        }
-      })
-    };
-  default:
-    return action;
+    case NCCOActions.CONNECT:
+      return {
+        ...action,
+        endpoint: (action.endpoint as Array<CallEndpoint>)?.map((endpoint) => {
+          switch (endpoint.type) {
+            case 'sip':
+              return {
+                type: 'sip',
+                uri: endpoint.uri,
+                headers: endpoint.headers,
+                standardHeaders: {
+                  'User-to-User': Object.hasOwn(endpoint.standardHeaders || {}, 'User-to-User')
+                    ? { ...endpoint.standardHeaders }['User-to-User']
+                    : endpoint.standardHeaders?.userToUser,
+                }
+              } as SIPEndpoint;
+            default:
+              return endpoint;
+          }
+        })
+      };
+    default:
+      return action;
   }
 });
 
@@ -276,15 +276,15 @@ export class Voice extends Client {
 
     const to = call.to.map((endpoint) => {
       switch (endpoint.type) {
-      case 'sip':
-        return {
-          type: 'sip',
-          uri: endpoint.uri,
-          headers: endpoint.headers,
-          standard_headers: {
-            'User-to-User': endpoint.standardHeaders?.userToUser,
-          }
-        };
+        case 'sip':
+          return {
+            type: 'sip',
+            uri: endpoint.uri,
+            headers: endpoint.headers,
+            standard_headers: {
+              'User-to-User': endpoint.standardHeaders?.userToUser,
+            }
+          };
       }
 
       return endpoint;

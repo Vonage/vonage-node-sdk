@@ -162,24 +162,24 @@ export class SMS extends Client {
 
     let hash = '';
     switch (algorithm) {
-    case AlgorithmTypes.md5hash:
-      signedQuery += signatureSecret;
-      hash = crypto.createHash('md5').update(signedQuery).digest('hex');
-      break;
-    case AlgorithmTypes.md5hmac:
-    case AlgorithmTypes.sha1hmac:
-    case AlgorithmTypes.sha256hmac:
-    case AlgorithmTypes.sha512hmac:
-      hash = crypto
-        .createHmac(hashMap[algorithm], signatureSecret)
-        .update(signedQuery)
-        .digest('hex');
-      break;
+      case AlgorithmTypes.md5hash:
+        signedQuery += signatureSecret;
+        hash = crypto.createHash('md5').update(signedQuery).digest('hex');
+        break;
+      case AlgorithmTypes.md5hmac:
+      case AlgorithmTypes.sha1hmac:
+      case AlgorithmTypes.sha256hmac:
+      case AlgorithmTypes.sha512hmac:
+        hash = crypto
+          .createHmac(hashMap[algorithm], signatureSecret)
+          .update(signedQuery)
+          .digest('hex');
+        break;
 
-    default:
-      throw new Error(
-        `Unknown signature algorithm: ${algorithm}. Expected: md5hash, md5, sha1, sha256, or sha512`,
-      );
+      default:
+        throw new Error(
+          `Unknown signature algorithm: ${algorithm}. Expected: md5hash, md5, sha1, sha256, or sha512`,
+        );
     }
 
     return signature.toUpperCase() === hash.toUpperCase();
