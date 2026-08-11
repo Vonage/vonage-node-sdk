@@ -3,6 +3,7 @@ import {
   EmailPriority,
   EmailSensitivity
 } from '../../../enums/Email/index.js';
+import { EmailRecipient } from './EmailRecipient.js';
 
 /**
  * Represents the settings for an email message
@@ -37,4 +38,14 @@ export type EmailSettings = {
    * email is filtered and displayed by email clients.
    */
   sensitivity?: EmailSensitivity;
+
+  /**
+   * A list of recipients to be CC'd
+   */
+  cc?: Array<EmailRecipient>;
+
+  /**
+   * A list of recipients to be BCC'd
+   */
+  bcc?: Array<EmailRecipient>;
 }

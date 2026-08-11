@@ -18,3 +18,10 @@ export type AnyRCSChannel =
   | RCSImageParams
   | RCSTextParams
   | RCSVideoParams;
+
+export type AnyRCSParams =
+  | RCSCustomParams
+  | RCSFileParams
+  | RCSImageParams
+  | RCSTextParams
+  | RCSVideoParams;

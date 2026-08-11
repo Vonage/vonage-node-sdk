@@ -399,4 +399,124 @@ export default [
       messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
     } as MessageSuccess,
   },
+  {
+    label: 'send text email with cc and bcc',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: 'Vonage <no-reply@vonage.com>',
+        to: 'recipient@example.com',
+        channel: 'email',
+        message_type: 'text',
+        text: 'Hello from Vonage!',
+        email: {
+          subject: 'Greetings',
+          cc: [
+            {
+              name: 'James Holden',
+              address: 'j.holden@purnkleen.com',
+            },
+            {
+              name: 'Amos Burton',
+              address: 'a.burton@purnkleen.com',
+            },
+          ],
+          bcc: [
+            {
+              name: 'Namoi Nagata',
+              address: 'n.nagata@purnkleen.com',
+            },
+            {
+              name: 'Roberta Draper',
+              address: 'r.draper@mcrn.gov',
+            }
+          ]
+        },
+      } as EmailTextRequest,
+    ],
+    response: [
+      202,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new EmailText({
+        from: 'Vonage <no-reply@vonage.com>',
+        to: 'recipient@example.com',
+        text: 'Hello from Vonage!',
+        email: {
+          subject: 'Greetings',
+          cc: [
+            {
+              name: 'James Holden',
+              address: 'j.holden@purnkleen.com',
+            },
+            {
+              name: 'Amos Burton',
+              address: 'a.burton@purnkleen.com',
+            },
+          ],
+          bcc: [
+            {
+              name: 'Namoi Nagata',
+              address: 'n.nagata@purnkleen.com',
+            },
+            {
+              name: 'Roberta Draper',
+              address: 'r.draper@mcrn.gov',
+            }
+          ]
+        },
+      }),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
+  {
+    label: 'remove cc and bcc when given empty array',
+    request: [
+      '/v1/messages',
+      'POST',
+      {
+        from: 'Vonage <no-reply@vonage.com>',
+        to: 'recipient@example.com',
+        channel: 'email',
+        message_type: 'text',
+        text: 'Hello from Vonage!',
+        email: {
+          subject: 'Greetings',
+        },
+      } as EmailTextRequest,
+    ],
+    response: [
+      202,
+      {
+        message_uuid: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+      },
+    ],
+    method: 'POST',
+    clientMethod: 'send',
+    parameters: [
+      new EmailText({
+        from: 'Vonage <no-reply@vonage.com>',
+        to: 'recipient@example.com',
+        text: 'Hello from Vonage!',
+        email: {
+          subject: 'Greetings',
+          cc: [
+          ],
+          bcc: [
+          ]
+        },
+      }),
+    ],
+    expected: {
+      messageUUID: '1d4723b0-9134-4440-8cf0-e9f39ccb1c6a',
+    } as MessageSuccess,
+  },
 ];
