@@ -288,37 +288,37 @@ export class Auth implements AuthInterface {
       .replace(/(&|=)/gi, '_');
 
     switch (this.signature.algorithm) {
-    case AlgorithmTypes.md5hash:
-      returnParams.sig = createHash('md5')
-        .update(`${stringifiedParamsforSigning}${this.signature.secret}`)
-        .digest('hex');
-      break;
+      case AlgorithmTypes.md5hash:
+        returnParams.sig = createHash('md5')
+          .update(`${stringifiedParamsforSigning}${this.signature.secret}`)
+          .digest('hex');
+        break;
 
-    case AlgorithmTypes.md5hmac:
-      returnParams.sig = createHmac('md5', this.signature.secret)
-        .update(stringifiedParamsforSigning)
-        .digest('hex');
-      break;
+      case AlgorithmTypes.md5hmac:
+        returnParams.sig = createHmac('md5', this.signature.secret)
+          .update(stringifiedParamsforSigning)
+          .digest('hex');
+        break;
 
-    case AlgorithmTypes.sha1hmac:
-      returnParams.sig = createHmac('sha1', this.signature.secret)
-        .update(stringifiedParamsforSigning)
-        .digest('hex');
-      break;
+      case AlgorithmTypes.sha1hmac:
+        returnParams.sig = createHmac('sha1', this.signature.secret)
+          .update(stringifiedParamsforSigning)
+          .digest('hex');
+        break;
 
-    case AlgorithmTypes.sha256hmac:
-      returnParams.sig = createHmac('sha256', this.signature.secret)
-        .update(stringifiedParamsforSigning)
-        .digest('hex');
-      break;
+      case AlgorithmTypes.sha256hmac:
+        returnParams.sig = createHmac('sha256', this.signature.secret)
+          .update(stringifiedParamsforSigning)
+          .digest('hex');
+        break;
 
-    case AlgorithmTypes.sha512hmac:
-      returnParams.sig = createHmac('sha512', this.signature.secret)
-        .update(stringifiedParamsforSigning)
-        .digest('hex');
-      break;
-    default:
-      throw new InvalidSignatureAlgorithmError();
+      case AlgorithmTypes.sha512hmac:
+        returnParams.sig = createHmac('sha512', this.signature.secret)
+          .update(stringifiedParamsforSigning)
+          .digest('hex');
+        break;
+      default:
+        throw new InvalidSignatureAlgorithmError();
     }
 
     return returnParams;

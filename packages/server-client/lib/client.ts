@@ -105,17 +105,17 @@ export class Client {
     }
 
     switch (this.authType) {
-    case AuthenticationType.BASIC:
-      return this.addBasicAuthToRequest(request);
+      case AuthenticationType.BASIC:
+        return this.addBasicAuthToRequest(request);
 
-    case AuthenticationType.JWT:
-      return this.addJWTToRequest(request);
+      case AuthenticationType.JWT:
+        return this.addJWTToRequest(request);
 
-    case AuthenticationType.QUERY_KEY_SECRET:
-      return this.addQueryKeySecretToRequest(request);
+      case AuthenticationType.QUERY_KEY_SECRET:
+        return this.addQueryKeySecretToRequest(request);
 
-    default:
-      return this.addQueryKeySecretToRequestBody(request);
+      default:
+        return this.addQueryKeySecretToRequestBody(request);
     }
   }
 
@@ -355,12 +355,12 @@ export class Client {
     };
 
     switch (request.type) {
-    case ContentType.FORM_URLENCODED:
-      request.headers['content-type'] = ContentType.FORM_URLENCODED;
-      break;
-    case ContentType.JSON:
-      request.headers['content-type'] = ContentType.JSON;
-      break;
+      case ContentType.FORM_URLENCODED:
+        request.headers['content-type'] = ContentType.FORM_URLENCODED;
+        break;
+      case ContentType.JSON:
+        request.headers['content-type'] = ContentType.JSON;
+        break;
     }
 
     request = await this.addAuthenticationToRequest(request);
@@ -445,19 +445,19 @@ export class Client {
       const body = await response.text();
 
       switch (contentType) {
-      case ContentType.FORM_URLENCODED:
-        log('Decoding form data');
-        decoded = response.body
-          ? new URLSearchParams(body)
-          : '';
-        break;
-      case ContentType.JSON:
-        log('Decoding JSON');
-        decoded = JSON.parse(body);
-        break;
-      default:
-        log('Decoding text');
-        decoded = body;
+        case ContentType.FORM_URLENCODED:
+          log('Decoding form data');
+          decoded = response.body
+            ? new URLSearchParams(body)
+            : '';
+          break;
+        case ContentType.JSON:
+          log('Decoding JSON');
+          decoded = JSON.parse(body);
+          break;
+        default:
+          log('Decoding text');
+          decoded = body;
       }
     } catch (error) {
       log('Failed to decode body', error);
