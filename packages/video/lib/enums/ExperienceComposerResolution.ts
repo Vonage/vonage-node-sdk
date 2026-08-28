@@ -5,6 +5,11 @@ import { Resolution } from './Resolution.js';
  */
 export enum ExperienceComposerResolution {
   /**
+   * Full HD landscape resolution.
+   */
+  FHD_LANDSCAPE = Resolution.FHD_LANDSCAPE,
+
+  /**
    * Standard definition landscape resolution.
    */
   SD_LANDSCAPE = Resolution.SD_LANDSCAPE,
