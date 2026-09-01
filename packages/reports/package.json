@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/reports",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "The Reports API enables you to request a report of activity for your Vonage account.",
   "keywords": [
     "vonage",
@@ -220,8 +220,8 @@
     "clean": "rimraf dist tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@vonage/server-client": "1.22.0",
-    "@vonage/vetch": "1.13.0"
+    "@vonage/server-client": "1.23.0",
+    "@vonage/vetch": "1.14.0"
   },
   "engines": {
     "node": ">=20"

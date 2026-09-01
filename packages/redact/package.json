@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/redact",
-  "version": "1.21.0",
+  "version": "1.22.0",
   "description": "Delete data from the Vonage platform.",
   "homepage": "https://github.com/vonage/vonage-node-sdk/tree/main/packages/redact#readme",
   "bugs": {
@@ -212,7 +212,7 @@
     "depcheck": "npx depcheck --ignore-dirs=dist"
   },
   "dependencies": {
-    "@vonage/server-client": "1.22.0"
+    "@vonage/server-client": "1.23.0"
   },
   "engines": {
     "node": ">=22"
