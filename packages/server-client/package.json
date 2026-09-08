@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/server-client",
-  "version": "1.23.0",
+  "version": "1.23.1",
   "description": "The Vonage Server Client provides core functionalities for interacting with Vonage APIs, ensuring a standardized response regardless of the underlying HTTP adapter.",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -212,8 +212,8 @@
     "depcheck": "npx depcheck --ignore-dirs=dist"
   },
   "dependencies": {
-    "@vonage/auth": "1.18.0",
-    "@vonage/vetch": "1.14.0",
+    "@vonage/auth": "1.18.1",
+    "@vonage/vetch": "1.14.1",
     "debug": "4.4.3"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/accounts",
-  "version": "1.23.0",
+  "version": "1.23.1",
   "description": "Vonage Account Management API",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -212,10 +212,10 @@
     "depcheck": "npx depcheck --ignore-dirs=dist"
   },
   "dependencies": {
-    "@vonage/server-client": "1.23.0"
+    "@vonage/server-client": "1.23.1"
   },
   "devDependencies": {
-    "@vonage/auth": "1.18.0",
+    "@vonage/auth": "1.18.1",
     "nock": "14.0.16"
   },
   "engines": {
