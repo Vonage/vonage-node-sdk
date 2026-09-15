@@ -50,7 +50,7 @@ export enum Status {
   /**
    * All Insight attributes are available and included in the response.
    */
-  OK = 'OK',
+  OK = 'ok',
 }
 
 export enum SubscriberMatchStatus {
