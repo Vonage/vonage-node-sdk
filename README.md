@@ -101,44 +101,29 @@ The following is a list of Vonage APIs and whether the Node Server SDK provides 
 
 | API                   |  API Release Status  | Supported? |
 |-----------------------|:--------------------:|:----------:|
-| Account API           | General Availability |     ✅      |
-| Alerts API            | General Availability |     ✅      |
-| Application API       | General Availability |     ✅      |
-| Audit API             |         Beta         |     ✅      |
-| Conversation API      | General Availability |     ✅      |
-| Dispatch API          |         Beta         |     ❌      |
-| External Accounts API |         Beta         |     ❌      |
-| Media API             |         Beta         |     ✅      |
-| Messages API          | General Availability |     ✅      |
-| Meetings API          |      Deprecated      |     ✅      |
-| Number Insight V2 API |         Beta         |     ✅      |
-| Number Insights API   | General Availability |     ✅      |
-| Number Management API | General Availability |     ✅      |
-| Pricing API           | General Availability |     ✅      |
-| Proactive Connect API |      Deprecated      |     ✅      |
-| Redact API            |  Developer Preview   |     ✅      |
-| Reports API           |         Beta         |     ✅      |
-| SMS API               | General Availability |     ✅      |
-| Sub Accounts          |         Beta         |     ✅      |
-| Users                 | General Availability |     ✅      |
-| Verify API            | General Availability |     ✅      |
-| Verify v2 API         | General Availability |     ✅      |
-| Video API             | General Availability |     ✅      |
-| Voice API             | General Availability |     ✅      |
-
-### Network APIS
-
-The following Network APIs are supported however they are opt-in.
-
-| API                   | Supported? |
-|-----------------------|:----------:|
-| Number Verification   |     ✅     |
-| SIM Swap              |     ✅     |
-
-#### Network API references
-
-* [Number Verification](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/network-number-verification/README.md)
-* [SIM Swap](https://github.com/Vonage/vonage-node-sdk/blob/3.x/packages/network-sim-swap/README.md)
+| Account API           | General Availability |     ✅     |
+| Alerts API            | General Availability |     ✅     |
+| Application API       | General Availability |     ✅     |
+| Audit API             |         Beta         |     ✅     |
+| Conversation API      | General Availability |     ✅     |
+| Dispatch API          |         Beta         |     ❌     |
+| External Accounts API |         Beta         |     ❌     |
+| Media API             |         Beta         |     ✅     |
+| Messages API          | General Availability |     ✅     |
+| Meetings API          |      Deprecated      |     ✅     |
+| Number Insight V2 API |      Deprecated      |     ✅     |
+| Number Insights API   |      Deprecated      |     ✅     |
+| Number Management API |      Deprecated      |     ✅     |
+| Pricing API           | General Availability |     ✅     |
+| Redact API            |  Developer Preview   |     ✅     |
+| Reports API           |         Beta         |     ✅     |
+| SMS API               | General Availability |     ✅     |
+| Sub Accounts          |         Beta         |     ✅     |
+| Users                 | General Availability |     ✅     |
+| Verify API            | General Availability |     ✅     |
+| Verify v2 API         | General Availability |     ✅     |
+| Video API             | General Availability |     ✅     |
+| Voice API             | General Availability |     ✅     |
 
 ### V2 Migrations
 
