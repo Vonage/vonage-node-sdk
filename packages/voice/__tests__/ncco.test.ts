@@ -122,24 +122,13 @@ describe('voice', () => {
   });
 
   test('connect will serialize advanced machine detection', async () => {
-    const connect = new Connect(
-      { type: 'phone', number: '14155550100' },
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      {
-        behavior: MachineDetectionBehavior.CONTINUE,
-        mode: AdvancedMachineDetectionMode.DEFAULT,
-        beepTimeout: 60,
-        callScreener: true,
-      },
-    );
+    const connect = new Connect({ type: 'phone', number: '14155550100' });
+    connect.advancedMachineDetection = {
+      behavior: MachineDetectionBehavior.CONTINUE,
+      mode: AdvancedMachineDetectionMode.DEFAULT,
+      beepTimeout: 60,
+      callScreener: true,
+    };
 
     expect(connect.serializeToNCCO()).toStrictEqual({
       action: NCCOActions.CONNECT,
