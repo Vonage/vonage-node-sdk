@@ -1,6 +1,9 @@
 import {
+  AdvancedMachineDetectionMode,
+  MachineDetectionBehavior,
   NCCOActions,
 } from '../lib/index.js';
+import { Connect } from '../lib/classes/NCCO/Connect.js';
 import { Conversation } from '../lib/classes/NCCO/Conversation.js';
 import { Input } from '../lib/classes/NCCO/Input.js';
 import { Talk } from '../lib/classes/NCCO/Talk.js';
@@ -116,5 +119,46 @@ describe('voice', () => {
       .addAction(new Talk('Connecting you now'));
 
     expect(ncco.build()).toEqual(expectedBody);
+  });
+
+  test('connect will serialize advanced machine detection', async () => {
+    const connect = new Connect(
+      { type: 'phone', number: '14155550100' },
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      {
+        behavior: MachineDetectionBehavior.CONTINUE,
+        mode: AdvancedMachineDetectionMode.DEFAULT,
+        beepTimeout: 60,
+        callScreener: true,
+      },
+    );
+
+    expect(connect.serializeToNCCO()).toStrictEqual({
+      action: NCCOActions.CONNECT,
+      endpoint: [{ type: 'phone', number: '14155550100' }],
+      advancedMachineDetection: {
+        behavior: 'continue',
+        mode: 'default',
+        beepTimeout: 60,
+        callScreener: true,
+      },
+    });
+  });
+
+  test('connect will not serialize advanced machine detection when not set', async () => {
+    const connect = new Connect({ type: 'phone', number: '14155550100' });
+
+    expect(connect.serializeToNCCO()).toStrictEqual({
+      action: NCCOActions.CONNECT,
+      endpoint: [{ type: 'phone', number: '14155550100' }],
+    });
   });
 });
