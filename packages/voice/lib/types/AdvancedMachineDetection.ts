@@ -23,4 +23,9 @@ export type AdvancedMachineDetection = {
    * machine detection.
    */
   beepTimeout?: number;
+
+  /**
+   * (Optional) Enables call screener detection and navigation.
+   */
+  callScreener?: boolean;
 };

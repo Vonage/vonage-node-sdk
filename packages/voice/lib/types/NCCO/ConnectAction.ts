@@ -4,6 +4,7 @@ import {
   MachineDetection,
   ConnectEventType
 } from '../../enums/index.js';
+import { AdvancedMachineDetection } from '../AdvancedMachineDetection.js';
 
 /**
  * Represents a Nexmo Call Control Object (NCCO) action for connecting a call to one or more endpoints.
@@ -52,6 +53,9 @@ export type ConnectAction = {
    * - "hangup": Hang up the call if a machine is detected.
    */
   machineDetection?: MachineDetection;
+
+  /** Advanced machine detection settings. Overrides `machineDetection` when both are set. */
+  advancedMachineDetection?: AdvancedMachineDetection;
 
   /** The HTTP method to use when making requests to the `eventUrl`. Default is "POST". */
   eventMethod?: string;
