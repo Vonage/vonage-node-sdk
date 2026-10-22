@@ -1,0 +1,254 @@
+name: Publish Node SDK Changelog
+
+on:
+  workflow_run:
+    workflows:
+      - Publish to NPM
+    types:
+      - completed
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: node-sdk-changelog
+  cancel-in-progress: false
+
+jobs:
+  publish-changelog:
+    name: Publish Node SDK changelog
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout developer portal content
+        uses: actions/checkout@v6
+        with:
+          repository: vonage-technology/developer-portal-content
+          ref: main
+          token: ${{ secrets.API_DASHBOARD_GH_TOKEN }}
+          path: portal-content
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.x"
+          package-manager-cache: false
+
+      - name: Generate Node SDK changelog file
+        id: changelog
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          PORTAL_DIRECTORY: portal-content
+        run: |
+          node --input-type=module <<'EOF'
+          import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+          import path from 'node:path';
+
+          const repository = process.env.REPOSITORY;
+          const headSha = process.env.HEAD_SHA;
+          const token = process.env.GH_TOKEN;
+          const portalDirectory = process.env.PORTAL_DIRECTORY;
+          const apiBase = `https://api.github.com/repos/${repository}`;
+
+          const api = async (endpoint) => {
+            const response = await fetch(`${apiBase}${endpoint}`, {
+              headers: {
+                Accept: 'application/vnd.github+json',
+                Authorization: `Bearer ${token}`,
+                'X-GitHub-Api-Version': '2022-11-28',
+              },
+            });
+
+            if (!response.ok) {
+              throw new Error(`GitHub API ${response.status}: ${await response.text()}`);
+            }
+
+            return response.json();
+          };
+
+          const releases = await api('/releases?per_page=100');
+          const currentRelease = releases.find((release) => release.target_commitish === headSha && !release.draft);
+
+          if (!currentRelease) {
+            console.log(`No GitHub release found for publish commit ${headSha}; skipping changelog.`);
+            await appendFile(process.env.GITHUB_OUTPUT, 'release-found=false\n');
+            process.exit(0);
+          }
+
+          const previousRelease = releases
+            .filter((release) => (
+              !release.draft &&
+              !release.prerelease &&
+              release.tag_name !== currentRelease.tag_name &&
+              release.published_at &&
+              release.published_at < currentRelease.published_at
+            ))
+            .sort((left, right) => right.published_at.localeCompare(left.published_at))[0];
+
+          if (!previousRelease) {
+            throw new Error(`No previous GitHub release found for ${currentRelease.tag_name}`);
+          }
+
+          const version = currentRelease.tag_name.replace(/^v/, '');
+          if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(version)) {
+            throw new Error(`Release tag is not a supported semantic version: ${currentRelease.tag_name}`);
+          }
+
+          const comparison = await api(
+            `/compare/${encodeURIComponent(previousRelease.tag_name)}...${encodeURIComponent(currentRelease.tag_name)}`,
+          );
+
+          const categoryFor = (commit) => {
+            const subject = commit.commit.message.split('\n', 1)[0].trim();
+
+            const conventionalCommit = subject.match(
+              /^([A-Za-z-]+)(?:\(([^)]+)\))?(!)?:\s*(.+)$/,
+            );
+
+            const breaking = Boolean(conventionalCommit?.[3]) || /BREAKING[ -]CHANGE\s*:/i.test(commit.commit.message);
+            const type = breaking ? 'breaking' : conventionalCommit?.[1]?.toLowerCase();
+
+            switch (type) {
+              case 'feat':
+              case 'feature':
+                return 'Added';
+              case 'fix':
+              case 'bugfix':
+                return 'Fixed';
+              case 'deprecated':
+              case 'deprecate':
+                return 'Deprecated';
+              case 'security':
+                return 'Security';
+              case 'breaking':
+                return 'Breaking Changes';
+              default:
+                return 'Changed';
+            }
+          };
+
+          const entries = [];
+          for (const commit of comparison.commits) {
+            const subject = commit.commit.message.split('\n', 1)[0].trim();
+            const conventionalCommit = subject.match(
+              /^([A-Za-z-]+)(?:\(([^)]+)\))?(!)?:\s*(.+)$/,
+            );
+            const description = (conventionalCommit?.[4] || subject).replace(/[.]$/, '');
+            const pullRequests = await api(`/commits/${commit.sha}/pulls`);
+            const pullRequest = pullRequests[0];
+            const reference = pullRequest
+              ? `[#${pullRequest.number}](${pullRequest.html_url})`
+              : '[commit ' + commit.sha.slice(0, 7) + '](' + commit.html_url + ')';
+
+            entries.push({
+              category: categoryFor(commit),
+              text: `${description} ${reference}`,
+            });
+          }
+
+          const sections = [
+            'Added',
+            'Changed',
+            'Deprecated',
+            'Fixed',
+            'Security',
+            'Breaking changes',
+          ];
+
+          const grouped = Object.fromEntries(sections.map((section) => [section, []]));
+          for (const entry of entries) grouped[entry.category].push(entry.text);
+
+          const highlights = entries
+            .filter(({ category }) => ['Added', 'Fixed', 'Breaking changes'].includes(category))
+            .slice(0, 3);
+
+          const date = currentRelease.published_at.slice(0, 10);
+          const formattedDate = new Intl.DateTimeFormat('en-US', {
+            day: 'numeric',
+            month: 'short',
+            timeZone: 'UTC',
+            year: 'numeric',
+          }).format(new Date(`${date}T00:00:00Z`));
+
+          const summary = entries.length
+            ? `This release includes ${entries.length} change${entries.length === 1 ? '' : 's'} across the Node SDK.`
+            : 'This release contains updates to the Node SDK.';
+
+          const sectionMarkdown = (section) => [
+            `## ${section}`,
+            '',
+            ...(grouped[section].length
+              ? grouped[section].map((entry) => `- ${entry}`)
+              : ['No changes in this release.']),
+
+          ].join('\n');
+
+          const comparisonUrl = `https://github.com/${repository}/compare/${previousRelease.tag_name}...${currentRelease.tag_name}`;
+          const metaDescription = `Vonage Node SDK version ${version} (${formattedDate}): View release notes, new features, bug fixes, and breaking changes.`;
+
+          const content = [
+            '---',
+            'type: changelog',
+            'category: server-sdk',
+            'platform: node',
+            `version: ${version}`,
+            `date: ${date}`,
+            'title: Vonage Node SDK',
+            'icon: node-color',
+            `metaTitle: Vonage Node SDK v${version} Changelog | Vonage API Documentation`,
+            `metaDescription: '${metaDescription}'`,
+            '---',
+            '',
+            `# ${version} - ${date}`,
+            '',
+            summary,
+            '',
+            '## Release highlights',
+            '',
+            ...(highlights.length
+              ? highlights.map((entry) => `- ${entry.text}`)
+              : ['No highlights in this release.']),
+            '',
+            ...sections.flatMap((section) => [sectionMarkdown(section), '']),
+            `**Full Changelog** [View on GitHub](${comparisonUrl})`,
+            '',
+          ].join('\n');
+
+          const relativePath = `content/changelog-feed/en/server-sdk/node/${version}.md`;
+          const filePath = path.join(portalDirectory, relativePath);
+          await mkdir(path.dirname(filePath), { recursive: true });
+
+          try {
+            const existing = await readFile(filePath, 'utf8');
+            if (existing !== content) {
+              throw new Error(`Existing changelog differs: ${relativePath}`);
+            }
+            console.log(`Changelog already up to date: ${relativePath}`);
+          } catch (error) {
+            if (error.code !== 'ENOENT') throw error;
+            await writeFile(filePath, content, 'utf8');
+            console.log(`Created changelog: ${relativePath}`);
+          }
+
+          await appendFile(process.env.GITHUB_OUTPUT, `release-found=true\nversion=${version}\npath=${relativePath}\n`);
+          EOF
+
+      - name: Open portal changelog pull request
+        if: ${{ steps.changelog.outputs.release-found == 'true' }}
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.API_DASHBOARD_GH_TOKEN }}
+          path: portal-content
+          base: main
+          branch: automation/node-sdk-changelog-${{ steps.changelog.outputs.version }}
+          delete-branch: true
+          commit-message: "docs(changelog): add Node SDK ${{ steps.changelog.outputs.version }} release notes"
+          title: "docs(changelog): add Node SDK ${{ steps.changelog.outputs.version }} release notes"
+          body: |
+            Adds the Node SDK ${{ steps.changelog.outputs.version }} changelog entry to the developer portal.
+
+            This pull request was created automatically after the npm publish workflow completed successfully.
