@@ -1,68 +1,141 @@
 name: Publish to NPM
 
 on:
-  release:
-    types:
-      - published
-      - edited
+  push:
+    branches:
+      - main
 
-permissions: read-all
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact version to publish (for example, 3.31.0)
+        required: true
+        type: string
+
+permissions:
+  id-token: write
+  contents: write
 
 jobs:
   publish-package:
     runs-on: ubuntu-latest
-    name: Publish release ${{ github.event.release.name }} to NPM
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
-
-      - name: Set up Node.js
-        uses: actions/setup-node@65d868f8d4d85d7d4abb7de0875cde3fcc8798f5
+      - name: Checkout repo
+        uses: actions/checkout@v6
         with:
-          node-version: 22.x
+          fetch-depth: 0
 
-      - name: Install packages
-        run: |
-          npm install --ignore-scripts
-          npm install --ignore-scripts typescript
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.x"
+          package-manager-cache: false
 
-      - name: Publish to NPM
-        run: ./scripts/publish.sh
+      - name: Setup npm for trusted publishing
+        run: npm install --global npm@11.5.1
+
+      - name: Install npm packages
+        run: npm install --ignore-scripts
+
+      - name: Determine conventional commit version
+        id: conventional-version
+        uses: jveldboom/action-conventional-versioning@v1
+        with:
+          github-token: ${{ github.token }}
+
+      - name: Set package versions
+        id: release-version
+        shell: bash
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+          MANUAL_VERSION: ${{ inputs.version }}
+          BUMP: ${{ steps.conventional-version.outputs.bump }}
+          PREVIOUS_TAG: ${{ steps.conventional-version.outputs.previous-version-with-prefix }}
+        run: |
+          set -euo pipefail
 
-  notify-release:
-    runs-on: ubuntu-latest
-    name: Notify Release
-    strategy:
-      matrix:
-        url:
-          [
-            SLACK_WEBHOOK_ASK_DEVREL_URL,
-            SLACK_WEBHOOK_DEVREL_TOOLING_URL,
-            SLACK_WEBHOOK_DEVREL_PRIVATE_URL,
-          ]
-    steps:
-      - name: Send to slack channels
-        uses: slackapi/slack-github-action@3493f18217f6e55d55ff3ea694dec41304e53e97
-        continue-on-error: true
-        with:
-          webhook: ${{ secrets[matrix.url]}}
-          webhook-type: incoming-webhook
-          errors: true
-          payload: |
-            blocks:
-              - type: "header"
-                text:
-                  type: "plain_text"
-                  text: ":initial_external_notification_sent: :NodeJS: Version ${{ github.event.release.name }} of the NodeJS SDK has been released"
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "${{ github.event.release.body }}"
-              - type: "divider"
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "You can view the full change log <${{github.event.release.html_url }}|here>"
+          if [[ "$EVENT_NAME" == "workflow_dispatch" ]]; then
+            if [[ -z "$MANUAL_VERSION" ]]; then
+              echo "The version input is required." >&2
+              exit 1
+            fi
+
+            npm version "$MANUAL_VERSION" --workspaces --no-git-tag-version
+          else
+            if [[ -z "$PREVIOUS_TAG" ]] || ! git rev-parse "$PREVIOUS_TAG" >/dev/null 2>&1; then
+              echo "Unable to find the previous release tag: $PREVIOUS_TAG" >&2
+              exit 1
+            fi
+
+            commit_messages=$(git log "$PREVIOUS_TAG..HEAD" --format=%B)
+            if ! grep -Eiq '^(fix|feat)(\([^)]*\))?!?:|^[a-z]+(\([^)]*\))?!:|^BREAKING[ -]CHANGE:' <<< "$commit_messages"; then
+              echo "No fix, feat, or breaking Conventional Commit was found; skipping release."
+              echo "should-release=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            npm version "$BUMP" --workspaces --no-git-tag-version
+          fi
+
+          node --input-type=module <<'EOF'
+          import { readFile } from 'node:fs/promises';
+          import { appendFile } from 'node:fs/promises';
+
+          const packageJson = JSON.parse(
+            await readFile('packages/server-sdk/package.json', 'utf8'),
+          );
+
+          await appendFile(
+            process.env.GITHUB_OUTPUT,
+            `version=${packageJson.version}\nshould-release=true\n`,
+          );
+          EOF
+
+      - name: Fix workspace dependency versions
+        if: ${{ steps.release-version.outputs.should-release == 'true' }}
+        run: node ./scripts/fixVersions.js
+
+      - name: Build packages
+        if: ${{ steps.release-version.outputs.should-release == 'true' }}
+        run: npm run build --workspaces
+
+      - name: Publish packages
+        if: ${{ steps.release-version.outputs.should-release == 'true' }}
+        run: npm publish --workspaces
+
+      - name: Push tag to GitHub
+        if: ${{ steps.release-version.outputs.should-release == 'true' }}
+        run: git push origin tag "$RELEASE_VERSION"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ steps.release-version.outputs.version }}
+
+      - name: Create GitHub release
+        if: ${{ steps.release-version.outputs.should-release == 'true' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ steps.release-version.outputs.version }}
+          RELEASE_SHA: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          node --input-type=module > release-payload.json <<'EOF'
+          const payload = {
+            tag_name: `v${process.env.RELEASE_VERSION}`,
+            target_commitish: process.env.RELEASE_SHA,
+            name: process.env.RELEASE_VERSION,
+            generate_release_notes: true,
+          };
+          process.stdout.write(JSON.stringify(payload));
+          EOF
+
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --url "https://api.github.com/repos/$REPOSITORY/releases" \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --header "Content-Type: application/json" \
+            --data-binary @release-payload.json
