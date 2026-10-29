@@ -610,4 +610,144 @@ export default [
       conversationUUID: callPhone.conversationUUID,
     } as CallResult,
   },
+  {
+    label: 'create a call with call screener',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'phone',
+              number: '19162255887',
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+          advanced_machine_detection: {
+            behavior: MachineDetectionBehavior.CONTINUE,
+            mode: AdvancedMachineDetectionMode.DEFAULT,
+            beep_timeout: 60,
+            call_screener: true,
+          },
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'phone',
+            number: '19162255887',
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+        advancedMachineDetection: {
+          behavior: MachineDetectionBehavior.CONTINUE,
+          mode: AdvancedMachineDetectionMode.DEFAULT,
+          beepTimeout: 60,
+          callScreener: true,
+        },
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
+  {
+    label: 'create a call with call screener disabled',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'phone',
+              number: '19162255887',
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+          advanced_machine_detection: {
+            behavior: MachineDetectionBehavior.CONTINUE,
+            mode: AdvancedMachineDetectionMode.DEFAULT,
+            beep_timeout: 60,
+            call_screener: false,
+          },
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'phone',
+            number: '19162255887',
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+        advancedMachineDetection: {
+          behavior: MachineDetectionBehavior.CONTINUE,
+          mode: AdvancedMachineDetectionMode.DEFAULT,
+          beepTimeout: 60,
+          callScreener: false,
+        },
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
 ];

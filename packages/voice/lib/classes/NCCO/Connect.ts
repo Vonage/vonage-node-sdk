@@ -3,7 +3,7 @@ import {
   ConnectEventType,
   NCCOActions
 } from '../../enums/index.js';
-import { CallEndpoint, ConnectAction } from '../../types/index.js';
+import { AdvancedMachineDetection, CallEndpoint, ConnectAction } from '../../types/index.js';
 import { Serializable } from '../../interfaces/index.js';
 
 /**
@@ -88,6 +88,13 @@ export class Connect implements ConnectAction, Serializable {
   ringbackTone?: string;
 
   /**
+   * Advanced machine detection settings. Overrides `machineDetection` when both are set.
+   *
+   * @param {AdvancedMachineDetection} advancedMachineDetection - The advanced machine detection settings.
+   */
+  advancedMachineDetection?: AdvancedMachineDetection;
+
+  /**
    * Create a new Connect instance.
    *
    * @param {CallEndpoint} endpoint - An array of CallEndpoint objects representing the endpoints to connect to in the call.
@@ -100,6 +107,7 @@ export class Connect implements ConnectAction, Serializable {
    * @param {string} eventUrl - An array of event URLs.
    * @param {string} eventMethod - The HTTP method used for event callbacks.
    * @param {string} ringbackTone - The URL of the ringback tone audio file.
+   * @param {AdvancedMachineDetection} advancedMachineDetection - The advanced machine detection settings.
    */
 
   constructor(
@@ -113,6 +121,7 @@ export class Connect implements ConnectAction, Serializable {
     eventUrl?: string,
     eventMethod?: string,
     ringbackTone?: string,
+    advancedMachineDetection?: AdvancedMachineDetection,
   ) {
     this.endpoint = [endpoint];
 
@@ -142,6 +151,9 @@ export class Connect implements ConnectAction, Serializable {
     }
     if (ringbackTone) {
       this.ringbackTone = ringbackTone;
+    }
+    if (advancedMachineDetection) {
+      this.advancedMachineDetection = advancedMachineDetection;
     }
   }
 
@@ -182,6 +194,9 @@ export class Connect implements ConnectAction, Serializable {
     }
     if (this.ringbackTone) {
       data.ringbackTone = this.ringbackTone;
+    }
+    if (this.advancedMachineDetection) {
+      data.advancedMachineDetection = this.advancedMachineDetection;
     }
 
     return data;
