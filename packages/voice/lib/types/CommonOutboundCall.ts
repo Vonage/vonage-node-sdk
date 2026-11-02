@@ -42,4 +42,10 @@ export type CommonOutboundCall = Omit<CommonCallFields, 'to'> & {
    * The HTTP method to use when sending events to the specified event URLs.
    */
   eventMethod?: HttpMethod;
+
+  /**
+   * When true, the started webhook event will include the additional CPS fields: cps_region_usage, cps_global_usage,
+   * and cps_limit. When false (or omitted), the started event is sent without these fields
+   */
+  returnCpsOnStarted?: boolean
 };
