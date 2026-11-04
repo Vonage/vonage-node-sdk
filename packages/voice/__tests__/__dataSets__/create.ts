@@ -610,4 +610,124 @@ export default [
       conversationUUID: callPhone.conversationUUID,
     } as CallResult,
   },
+  {
+    label: 'create a call with return CPS enabled',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'vbc',
+              extension: '1234',
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+          return_cps_on_started: true,
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'vbc',
+            extension: '1234',
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+        returnCpsOnStarted: true,
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
+  {
+    label: 'create a call with return CPS disabled',
+    requests: [
+      [
+        '/v1/calls',
+        'POST',
+        {
+          to: [
+            {
+              type: 'vbc',
+              extension: '1234',
+            },
+          ],
+          from: {
+            type: 'phone',
+            number: '14152739164',
+          },
+          answer_url: ['https://example.com/answer'],
+          return_cps_on_started: false,
+        },
+      ],
+    ],
+    responses: [
+      [
+        201,
+        {
+          uuid: callPhone.uuid,
+          status: CallStatus.STARTED,
+          direction: CallDirection.OUTBOUND,
+          conversation_uuid: callPhone.conversationUUID,
+        } as CreateCallResponse,
+      ],
+    ],
+    clientMethod: 'createOutboundCall',
+    parameters: [
+      {
+        answerUrl: ['https://example.com/answer'],
+        to: [
+          {
+            type: 'vbc',
+            extension: '1234',
+          },
+        ],
+        from: {
+          type: 'phone',
+          number: '14152739164',
+        },
+        returnCpsOnStarted: false,
+      } as CallWithAnswerURL,
+    ],
+    generator: false,
+    error: false,
+    expected: {
+      uuid: callPhone.uuid,
+      status: CallStatus.STARTED,
+      direction: CallDirection.OUTBOUND,
+      conversation_uuid: callPhone.conversationUUID,
+      conversationUUID: callPhone.conversationUUID,
+    } as CallResult,
+  },
 ];
