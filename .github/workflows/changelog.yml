@@ -1,11 +1,6 @@
 name: Publish Node SDK Changelog
 
-on:
-  workflow_run:
-    workflows:
-      - Publish to NPM
-    types:
-      - completed
+on: workflow_dispatch
 
 permissions:
   contents: read

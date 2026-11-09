@@ -213,7 +213,8 @@
     "build:esm": "tsup lib/** -d dist/esm --format=esm --dts --tsconfig tsconfig.tsup.json",
     "check:pkg": "npx attw --pack .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "depcheck": "npx depcheck --ignore-dirs=dist"
+    "depcheck": "npx depcheck --ignore-dirs=dist",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "@vonage/auth": "1.18.1",

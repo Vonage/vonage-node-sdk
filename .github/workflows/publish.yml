@@ -1,0 +1,75 @@
+name: Publish to NPM
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  publish-package:
+    if: ${{ startsWith(github.event.head_commit.message, 'chore(publish):') }}
+    name: Publish all packages to NPM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+
+      - name: Install npm packages
+        run: npm install --ignore-scripts
+
+      - name: Publish Package
+        run: NPM_CONFIG_PROVENANCE=false npm publish --workspaces
+  create-release:
+    name: Create release
+    runs-on: ubuntu-latest
+    needs: publish-package
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22.x"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Create GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_SHA: ${{ github.sha }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          node --input-type=module > release-payload.json <<'EOF'
+          import data from './packages/server-sdk/package.json' with {type: 'json'}
+
+          const payload = {
+            tag_name: `v${data.version}`,
+            target_commitish: process.env.RELEASE_SHA,
+            name: data.version,
+            generate_release_notes: true,
+          };
+          process.stdout.write(JSON.stringify(payload));
+          EOF
+
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --url "https://api.github.com/repos/$REPOSITORY/releases" \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --header "Content-Type: application/json" \
+            --data-binary @release-payload.json
