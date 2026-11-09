@@ -28,35 +28,33 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           package-manager-cache: false
 
-      - name: Install JQ
-        uses: sergeysova/jq-action@v2
-        with:
-          cmd: jq '.version' packages/server-sdk/package.json
-
       - name: Create GitHub release
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_VERSION: ${{ steps.release-version.outputs.version }}
           RELEASE_SHA: ${{ github.sha }}
           REPOSITORY: ${{ github.repository }}
         run: |
           node --input-type=module > release-payload.json <<'EOF'
+          import data from './packages/server-sdk/package.json' with {type: 'json'}
+
           const payload = {
             tag_name: `v${process.env.RELEASE_VERSION}`,
             target_commitish: process.env.RELEASE_SHA,
-            name: process.env.RELEASE_VERSION,
+            name: data.version,
             generate_release_notes: true,
           };
           process.stdout.write(JSON.stringify(payload));
           EOF
 
+          cat release-payload.json
+
           curl --fail-with-body --silent --show-error \
             --request POST \
             --url "https://api.github.com/repos/$REPOSITORY/releases" \
-            --header "Accept: application/vnd.github+json" \
-            --header "Authorization: Bearer $GH_TOKEN" \
-            --header "X-GitHub-Api-Version: 2022-11-28" \
-            --header "Content-Type: application/json" \
+            --H "Accept: application/vnd.github+json" \
+            --H "Authorization: Bearer $GH_TOKEN" \
+            --H "X-GitHub-Api-Version: 2022-11-28" \
+            --H "Content-Type: application/json" \
             --data-binary @release-payload.json
 
