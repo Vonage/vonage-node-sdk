@@ -29,10 +29,9 @@ jobs:
           package-manager-cache: false
 
       - name: Install JQ
-        uses: actions/install-jq-action
-
-      - name: Test jq
-        run: jq '.version' packages/server-sdk/package.json
+        uses: sergeysova/jq-action@v2
+        with:
+          cmd: jq '.version' packages/server-sdk/package.json
 
       - name: Create GitHub release
         shell: bash
