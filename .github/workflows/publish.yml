@@ -1,0 +1,32 @@
+name: Publish to NPM
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  publish-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+
+      - name: Install npm packages
+        run: npm install --ignore-scripts
+
+      - name: Build packages
+        run: npm run build --workspaces
+
+      - name: Publish Package
+        run: npm publish --no-provance --workspaces
+

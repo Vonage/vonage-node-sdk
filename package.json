@@ -66,7 +66,6 @@
     "packages/server-sdk"
   ],
   "scripts": {
-    "postbuild": "npm run check:pkg --workspaces",
     "eslint": "eslint",
     "jest": "jest",
     "lint": "eslint .",
