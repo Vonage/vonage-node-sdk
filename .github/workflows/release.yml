@@ -12,7 +12,8 @@ permissions:
   contents: write
 
 jobs:
-  publish-package:
+  create-release:
+    name: Create release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -27,11 +28,11 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           package-manager-cache: false
 
-      - name: Install npm packages
-        run: npm install --ignore-scripts
+      - name: Install JQ
+        uses: actions/install-jq-action
 
-      - name: Build packages
-        run: npm run build --workspaces
+      - name: Test jq
+        run: jq '.version' packages/server-sdk/package.json
 
       - name: Create GitHub release
         shell: bash
