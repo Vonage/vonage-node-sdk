@@ -217,7 +217,8 @@
     "build:cjs": "tsup lib/** -d dist/cjs --dts --tsconfig tsconfig.tsup.json",
     "build:esm": "tsup lib/** -d dist/esm --format=esm --dts --tsconfig tsconfig.tsup.json",
     "check:pkg": "npx attw --pack .",
-    "clean": "rimraf dist tsconfig.tsbuildinfo"
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "@vonage/server-client": "1.23.1",
