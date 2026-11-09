@@ -47,14 +47,12 @@ jobs:
           process.stdout.write(JSON.stringify(payload));
           EOF
 
-          cat release-payload.json
-
           curl --fail-with-body --silent --show-error \
             --request POST \
             --url "https://api.github.com/repos/$REPOSITORY/releases" \
-            --H "Accept: application/vnd.github+json" \
-            --H "Authorization: Bearer $GH_TOKEN" \
-            --H "X-GitHub-Api-Version: 2022-11-28" \
-            --H "Content-Type: application/json" \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --header "Content-Type: application/json" \
             --data-binary @release-payload.json
 
