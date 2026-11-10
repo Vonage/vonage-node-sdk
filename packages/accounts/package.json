@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@vonage/accounts",
-  "version": "1.24.0",
+  "version": "1.24.1",
   "description": "Vonage Account Management API",
   "homepage": "https://developer.vonage.com",
   "bugs": {
@@ -213,10 +213,10 @@
     "prepublish": "npm run build"
   },
   "dependencies": {
-    "@vonage/server-client": "1.24.0"
+    "@vonage/server-client": "1.24.1"
   },
   "devDependencies": {
-    "@vonage/auth": "1.19.0",
+    "@vonage/auth": "1.19.1",
     "nock": "14.0.16"
   },
   "engines": {
