@@ -27,8 +27,12 @@ jobs:
       - name: Install npm packages
         run: npm install --ignore-scripts
 
+      - name: Building packages
+        run: npm build --workspaces
+
       - name: Publish Package
         run: NPM_CONFIG_PROVENANCE=false npm publish --workspaces
+
   create-release:
     name: Create release
     runs-on: ubuntu-latest
