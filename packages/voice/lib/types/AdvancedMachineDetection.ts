@@ -23,4 +23,12 @@ export type AdvancedMachineDetection = {
    * machine detection.
    */
   beepTimeout?: number;
+
+  /**
+   * (Optional) Enables call screener detection and navigation. With this flag
+   * set, additional events will be sent, such as "promt_end" and
+   * "prompt_end_timeout", that allows the application to interact with the
+   * recipient's virtual call screener assistant.
+   */
+  callScreener?: boolean;
 };

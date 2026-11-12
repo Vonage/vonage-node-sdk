@@ -33,7 +33,18 @@ export type CreateCallRequest = {
      * The beep timeout setting for advanced machine detection.
      */
     beep_timeout?: number;
-  } & Omit<AdvancedMachineDetection, 'beepTimeout'>;
+
+    /**
+     * The call screener setting for advanced machine detection enables
+     * sending additional events allowing interaction with the recipient's
+     * virtual call screener assistant. 
+     */
+    call_screener?: boolean;
+  } & Omit<
+    AdvancedMachineDetection,
+    | 'beepTimeout'
+    | 'callScreener'
+  >;
 
   /**
    * The length timer setting for the call.
